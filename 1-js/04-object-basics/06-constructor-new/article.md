@@ -27,7 +27,7 @@ alert(user.name); // Jack
 alert(user.isAdmin); // false
 ```
 
-When a function is executed as `new User(...)`, it does the following steps:
+When a function is executed with `new`, it does the following steps:
 
 1. A new empty object is created and assigned to `this`.
 2. The function body executes. Usually it modifies `this`, adds new properties to it.
@@ -51,7 +51,7 @@ function User(name) {
 }
 ```
 
-So the result of `new User("Jack")` is the same object as:
+So `let user = new User("Jack")` gives the same result as:
 
 ```js
 let user = {
