@@ -1,10 +1,10 @@
-# Cookies, document.cookie
+# কুকিস, document.cookie
 
-Cookies are small strings of data that are stored directly in the browser. They are a part of HTTP protocol, defined by [RFC 6265](https://tools.ietf.org/html/rfc6265) specification.
+কুকি হলো অল্প কিছু স্ট্রিং ডেটার সমষ্টি যা সরাসরি ব্রাউজারে সংরক্ষিত থাকে। কুকি HTTP প্রটোকলের অংশ, যা [RFC 6265](https://tools.ietf.org/html/rfc6265) দ্বারা সংজ্ঞায়িত।
 
 Cookies are usually set by a web-server using response `Set-Cookie` HTTP-header. Then the browser automatically adds them to (almost) every request to the same domain using `Cookie` HTTP-header.
 
-One of the most widespread use cases is authentication:
+যে কোনো ডেটা সংরক্ষন করার জন্য কুকি ব্যবহার করা যেতে পারে। তবে এর মাঝে অথেনটিকেশন হচ্ছে একটি বহুল ব্যবহৃত জায়গা:
 
 1. Upon sign in, the server uses `Set-Cookie` HTTP-header in the response to set a cookie with a unique "session identifier".
 2. Next time when the request is set to the same domain, the browser sends the cookie over the net using `Cookie` HTTP-header.
@@ -14,7 +14,7 @@ We can also access cookies from the browser, using `document.cookie` property.
 
 There are many tricky things about cookies and their options. In this chapter we'll cover them in detail.
 
-## Reading from document.cookie
+## document.cookie থেকে পড়া
 
 ```online
 Does your browser store any cookies from this site? Let's see:
@@ -37,7 +37,7 @@ To find a particular cookie, we can split `document.cookie` by `; `, and then fi
 
 We leave it as an exercise for the reader. Also, at the end of the chapter you'll find helper functions to manipulate cookies.
 
-## Writing to document.cookie
+## document.cookie তে লেখা 
 
 We can write to `document.cookie`. But it's not a data property, it's an accessor (getter/setter). An assignment to it is treated specially.
 
