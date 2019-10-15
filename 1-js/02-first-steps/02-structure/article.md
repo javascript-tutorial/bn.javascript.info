@@ -1,44 +1,44 @@
-# Code structure
+# কোডের গঠন
 
-The first thing we'll study is the building blocks of code.
+প্রথমেই আমরা শিখে নিব কোড লিখতে কি কি লাগে।
 
-## Statements
+## স্টেটমেন্ট
 
-Statements are syntax constructs and commands that perform actions.
+স্টেটমেন্ট হল কর্ম সম্পাদনের জন্য নির্দেশনা দেয়ার উপায়।
 
-We've already seen a statement, `alert('Hello, world!')`, which shows the message "Hello, world!".
+আমরা ইতিমধ্যেই একটি স্টেটমেন্ট দেখেছি, `alert('হ্যালো, ওয়ার্ল্ড!')`, যা এই বার্তাটি দেখায় - "হ্যালো, ওয়ার্ল্ড!".
 
-We can have as many statements in our code as we want. Statements can be separated with a semicolon.
+আমাদের যতগুলি ইচ্ছা ততগুলি স্টেটমেন্ট আমাদের কোডে রাখতে পারি। প্রতিটি স্টেটমেন্টকে আমরা সেমিকোলন দিয়ে আলাদা করে রাখতে পারি।
 
-For example, here we split "Hello World" into two alerts:
-
-```js run no-beautify
-alert('Hello'); alert('World');
-```
-
-Usually, statements are written on separate lines to make the code more readable:
+যেমন, এখানে আমরা "হ্যালো ওয়ার্ল্ড" - কে দুটি আলাদা alert এ দেখাচ্ছিঃ
 
 ```js run no-beautify
-alert('Hello');
-alert('World');
+alert('হ্যালো'); alert('ওয়ার্ল্ড');
 ```
 
-## Semicolons [#semicolon]
-
-A semicolon may be omitted in most cases when a line break exists.
-
-This would also work:
+সাধারণত, স্টেটমেন্টগুলোকে বোঝার সুবিধার্থে আলাদা লাইনে লেখা হয়ঃ
 
 ```js run no-beautify
-alert('Hello')
-alert('World')
+alert('হ্যালো');
+alert('ওয়ার্ল্ড');
 ```
 
-Here, JavaScript interprets the line break as an "implicit" semicolon. This is called an [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+## সেমিকোলন [#semicolon]
 
-**In most cases, a newline implies a semicolon. But "in most cases" does not mean "always"!**
+অধিকাংশ ক্ষেত্রে লাইনের শেষে সেমিকোলনকে ঊহ্য রাখা যায়।
 
-There are cases when a newline does not mean a semicolon. For example:
+যেমন এটাও কাজ করবেঃ
+
+```js run no-beautify
+alert('হ্যালো')
+alert('ওয়ার্ল্ড')
+```
+
+এখানে, জাভাস্ক্রিপ্ট লাইনের শেষে একটি "ঊহ্য" সেমিকোলন আছে বলে ধরে নেয়। এটাকে বলা হয় [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+
+**অধিকাংশ সময়, নতুন লাইন মানেই একটি সেমিকোলন। কিন্তু "অধিকাংশ সময়" মানে "সবসময়" নয়!**
+
+কিছু ক্ষেত্রে নতুন লাইন মানেই সেমিকোলন নয়। যেমনঃ
 
 ```js run no-beautify
 alert(3 +
@@ -46,114 +46,114 @@ alert(3 +
 + 2);
 ```
 
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so the semicolon is not required. And in this case that works as intended.
+উপরের কোডের আউটপুট `6` কারণ জাভাস্ক্রিপ্ট এখানে সেমিকোলন ব্যবহার করবে না। এটি খুবই স্পষ্ট বোঝা যাচ্ছে, যেহেতু লাইন `"+"` দিয়ে শেষ হয়েছে, সেহেতু এটি একটি "অসম্পূর্ণ এক্সপ্রেশন", সুতরাং সেমিকোলনের প্রয়োজন নেই। এবং এই ক্ষেত্রে কোডটি যেভাবে কাজ করা উচিত সেভাবেই কাজ করছে।
 
-**But there are situations where JavaScript "fails" to assume a semicolon where it is really needed.**
+**কিন্তু কিছু পরিস্থিতিতে জাভাস্ক্রিপ্ট যেখানে সেমিকোলন অবশ্যই প্রয়োজন, তা বুঝে নিতে ব্যর্থ হয়।**
 
-Errors which occur in such cases are quite hard to find and fix.
+এরকম কারণে যেসব এরর তৈরি হয় তা খুঁজে বের করা এবং ঠিক করা বেশ কঠিন।
 
-````smart header="An example of an error"
-If you're curious to see a concrete example of such an error, check this code out:
+````smart header="এররের একটি উদাহরণ"
+আপনি যদি এধরণের এররের একটি উদাহরণ দেখতে আগ্রহী হন, তাহলে এই কোডটি দেখুনঃ
 
 ```js run
 [1, 2].forEach(alert)
 ```
 
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of the code: it shows `1` then `2`.
+`[]` এবং `forEach` এর মানে কি তা এখনই চিন্তা করার দরকার নেই। আমরা পরবর্তীতে তাদের নিয়ে জানব। আপাতত, শুধু মনে রাখুন এই কোডের আউটপুটঃ প্রথমে `1` এবং এরপর `2`।
 
-Now, let's add an `alert` before the code and *not* finish it with a semicolon:
+এবার, কোডের শুরুতে একটি `alert` বসাই এবং সেমিকোলন ছাড়াই লাইনটি শেষ করিঃ
 
 ```js run no-beautify
-alert("There will be an error")
+alert("একটি এরর তৈরি হবে")
 
 [1, 2].forEach(alert)
 ```
 
-Now if we run the code, only the first `alert` is shown and then we have an error!
+এখন যদি আমরা কোডটি রান করি, শুধুমাত্র শুরুর `alert` টি দেখায় এবং এরপর আমরা একটি এরর পাই!
 
-But everything is fine again if we add a semicolon after `alert`:
+কিন্তু আমরা যদি `alert` এর পর একটি সেমিকোলন দেই, তাহলে সব ঠিকঠাক কাজ করেঃ
 ```js run
-alert("All fine now");
+alert("সবকিছু ঠিক আছে");
 
-[1, 2].forEach(alert)  
+[1, 2].forEach(alert)
 ```
 
-Now we have the "All fine now" message followed by `1` and `2`.
+এখন আমরা "সবকিছু ঠিক আছে" বার্তাটি এবং তার সাথে `1` ও `2` পাই।
 
 
-The error in the no-semicolon variant occurs because JavaScript does not assume a semicolon before square brackets `[...]`.
+সেমিকোলন ছাড়া কোডে এরর হয়েছে তার কারণ জাভাস্ক্রিপ্ট তৃতীয় বন্ধনীর `[...]` আগে সেমিকোলন হবে তা অনুমান করতে পারে নি।
 
-So, because the semicolon is not auto-inserted, the code in the first example is treated as a single statement. Here's how the engine sees it:
+সুতরাং, যেহেতু সেমিকোলন স্বয়ংক্রিয়ভাবে বসানো হয়নি, তাই প্রথম উদাহরণের কোড পুরোটাই একটি স্টেটমেন্ট হিসেবে গণ্য করা হয়েছে। জাভাস্ক্রিপ্ট ইঞ্জিন কোডটাকে এভাবে দেখছেঃ
 
 ```js run no-beautify
-alert("There will be an error")[1, 2].forEach(alert)
+alert("একটি এরর তৈরি হবে")[1, 2].forEach(alert)
 ```
 
-But it should be two separate statements, not one. Such a merging in this case is just wrong, hence the error. This can happen in other situations.
+কিন্তু এখানে একটি নয়, দুটো আলাদা স্টেটমেন্ট হবে। এভাবে একটি লাইনে যোগ করে ফেলাটা পুরোপুরি ভুল, তাই এররটি তৈরি হয়েছে। এমনটা আরও অনেক পরিস্থিতিতে হতে পারে।
 ````
 
-We recommend putting semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
+আমরা স্টেটমেন্টের শেষে সেমিকোলন দিতে পরামর্শ দেই, এমনকি যদি স্টেটমেন্টগুলো আলাদা লাইনেও হয়ে থাকে। এই রুলটি কমিউনিটিতে ব্যাপকভাবে গ্রহণ করা হয়েছে। আরও একবার এভাবে বলা যায় -- অধিকাংশ সময় সেমিকোলন ঊহ্য রাখা **সম্ভব**। কিন্তু এটি ব্যবহার করা নিরাপদ -- বিশেষ করে শিক্ষানবিশ/অনভিজ্ঞদের জন্য।
 
-## Comments
+## কমেন্ট/মন্তব্য
 
-As time goes on, programs become more and more complex. It becomes necessary to add *comments* which describe what the code does and why.
+সময়ের সাথে সাথে প্রোগ্রামগুলো অধিক থেকে অধিকতর জটিল হতে থাকে। *কমেন্ট/মন্তব্য* লিখার মাধ্যমে কোড কি কাজ করে এবং কেন করে তা প্রয়োজনীয় হয়ে দাঁড়ায়।
 
-Comments can be put into any place of a script. They don't affect its execution because the engine simply ignores them.
+কমেন্ট স্ক্রিপ্টের যেকোনো জায়গায় লেখা যায়। কমেন্ট কোড এক্সিকিউশনে কোন প্রভাব ফেলে না কারণ জাভাস্ক্রিপ্ট ইঞ্জিন কমেন্টগুলো উপেক্ষা করে।
 
-**One-line comments start with two forward slash characters `//`.**
+**এক-লাইনের কমেন্টগুলো দুটি ফরওয়ার্ড স্লাশ ক্যারেক্টার `//` দিয়ে শুরু হয়।**
 
-The rest of the line is a comment. It may occupy a full line of its own or follow a statement.
+লাইনের পরবর্তী অংশ একটি কমেন্ট। কমেন্ট নিজেই পুরো একটি লাইন নিয়ে নিতে পারে বা একটি স্টেটমেন্টের পরে বসতে পারে।
 
-Like here:
+যেমনটা এখানেঃ
 ```js run
-// This comment occupies a line of its own
-alert('Hello');
+// এই কমেন্টটি নিজেই পুরো লাইন নিয়ে নিয়েছে
+alert('হ্যালো');
 
-alert('World'); // This comment follows the statement
+alert('ওয়ার্ল্ড'); // এই কমেন্টটি স্টেটমেন্টের পরে বসেছে
 ```
 
-**Multiline comments start with a forward slash and an asterisk <code>/&#42;</code> and end with an asterisk and a forward slash <code>&#42;/</code>.**
+**একাধিক লাইনের কমেন্টগুলো একটি ফরওয়ার্ড স্লাশ ও একটি তারকাচিহ্ন <code>/&#42;</code> দিয়ে শুরু হয় এবং একটি তারকাচিহ্ন ও একটি ফরওয়ার্ড স্লাশ <code>&#42;/</code> দিয়ে শেষ হয়।**
 
-Like this:
+যেমনটা এখানেঃ
 
 ```js run
-/* An example with two messages.
-This is a multiline comment.
+/* দুটো বার্তার একটি উদাহরণ
+এটি একটি একাধিক লাইনের কমেন্ট
 */
-alert('Hello');
-alert('World');
+alert('হ্যালো');
+alert('ওয়ার্ল্ড');
 ```
 
-The content of comments is ignored, so if we put code inside <code>/&#42; ... &#42;/</code>, it won't execute.
+কমেন্টের বিষয়বস্তু উপেক্ষা করা হয়, তাই আমরা যদি <code>/&#42; ... &#42;/</code> এর ভেতরে কোড লিখি, তা কাজ করবে না।
 
-Sometimes it can be handy to temporarily disable a part of code:
+মাঝে মাঝে কোডের কিছু অংশ সাময়িকভাবে অচল করার জন্য কমেন্ট খুব কাজে আসেঃ
 
 ```js run
-/* Commenting out the code
-alert('Hello');
+/* কোডকে কমেন্ট করা হচ্ছে
+alert('হ্যালো');
 */
-alert('World');
+alert('ওয়ার্ল্ড');
 ```
 
-```smart header="Use hotkeys!"
-In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl`.
+```smart header="হট-কী ব্যবহার করুন"
+অধিকাংশ এডিটরে, কোডের কোন অংশ কমেন্ট করতে, এক লাইনের কমেন্টের জন্য `key:Ctrl+/` হট-কী এবং একাধিক লাইনের কমেন্টের জন্য `key:Ctrl+Shift+/` হট-কী ব্যবহার করা হয় (কোডের অংশটি সিলেক্ট করে হট-কী প্রেস করা হয়)। ম্যাকের জন্য `key:Ctrl` এর পরিবর্তে `key:Cmd` ব্যবহার করে চেষ্টা করে দেখুন।
 ```
 
-````warn header="Nested comments are not supported!"
-There may not be `/*...*/` inside another `/*...*/`.
+````warn header="জাভাস্ক্রিপ্ট নেস্টেড কমেন্ট সাপোর্ট করে না!"
+একটি `/*...*/` এর ভেতর আরেকটি `/*...*/` থাকবে না।
 
-Such code will die with an error:
+এধরণের কোড একটি এরর দিয়ে বন্ধ হয়ে যাবে।
 
 ```js run no-beautify
 /*
-  /* nested comment ?!? */
+  /* নেস্টেড কমেন্ট ?!? */
 */
-alert( 'World' );
+alert('ওয়ার্ল্ড');
 ```
 ````
 
-Please, don't hesitate to comment your code.
+দয়া করে কোডে কমেন্ট লিখতে ইতস্ততঃ করবেন না।
 
-Comments increase the overall code footprint, but that's not a problem at all. There are many tools which minify code before publishing to a production server. They remove comments, so they don't appear in the working scripts. Therefore, comments do not have negative effects on production at all.
+যদিও কমেন্ট সম্পূর্ণ কোডকে ভারী করে, কিন্তু তা কোন সমস্যাই না। প্রোডাকশন সার্ভারে কোড পাবলিশ করার আগে কোড মিনিফাই করার জন্য অনেক টুল রয়েছে। এসব টুল কমেন্ট মুছে দেয়, তাই কমেন্টগুলো পাবলিশ করা কোডে থাকে না। সুতরাং, প্রোডাকশন এনভাইরনমেন্টে কমেন্টের কোন খারাপ প্রভাব নেই।
 
-Later in the tutorial there will be a chapter <info:code-quality> that also explains how to write better comments.
+এই টিউটোরিয়ালে পরবর্তীতে একটি অধ্যায় <info:code-quality> থাকবে, যা কিভাবে ভালো কমেন্ট লিখতে হয় তা নিয়ে আলোচনা করবে।
