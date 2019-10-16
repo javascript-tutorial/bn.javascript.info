@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Type conversions
+# টাইপ রূপান্তর
 
-What are results of these expressions?
+এক্সপ্রেশনগুলির ফলাফল কী হবে?
 
 ```js no-beautify
 "" + 1 + 0
@@ -24,4 +24,4 @@ undefined + 1
 " \t \n" - 2
 ```
 
-Think well, write down and then compare with the answer.
+ভালো করে ভাবুন, লিখে রাখুন এবং আমদের উত্তরের সাথে মিলিয়ে দেখুন।
