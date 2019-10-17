@@ -1,8 +1,8 @@
-The HTML code:
+এইচটিএমএল কোড:
 
 [html src="index.html"]
 
-For the file `alert.js` in the same folder:
+একই ফোল্ডারের `alert.js` ফাইল এর জন্যঃ 
 
 [js src="alert.js"]
 

@@ -1,9 +1,9 @@
-importance: 5
+গুরুত্ব: ৫
 
 ---
 
-# Show an alert with an external script
+# একটি alert দেখাও বাহ্যিক স্ক্রিপ্ট দিয়ে
 
-Take the solution of the previous task <info:task/hello-alert>. Modify it by extracting the script content into an external file `alert.js`, residing in the same folder.
+পূর্ববর্তী কাজের সমাধানটি নাও। <info:task/hello-alert>. একই ফোল্ডারে একটি বাহ্যিক ফাইল `alert.js এ কোডটি রাখো।
 
-Open the page, ensure that the alert works.
+পেজটি খুলো এবং, নিশ্চিত করো যে alert টি কাজ করছে।
