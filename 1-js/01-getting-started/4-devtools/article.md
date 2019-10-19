@@ -1,64 +1,64 @@
-# Developer console
+# ডেভেলপার কনসোল
 
-Code is prone to errors. You will quite likely make errors... Oh, what am I talking about? You are *absolutely* going to make errors, at least if you're a human, not a [robot](https://en.wikipedia.org/wiki/Bender_(Futurama)).
+কোড ভুলপ্রবণ। কোড করতে গিয়ে আপনি খুব সম্ভবত কিছু ভুল করবেন... নাহ, কি বলি? *অবশ্যই* ভুল করবেন। অন্তত আপনি যদি [রোবট](https://en.wikipedia.org/wiki/Bender_(Futurama)) না হয়ে মানুষ হয়ে থাকেন।
 
-But in the browser, users don't see errors by default. So, if something goes wrong in the script, we won't see what's broken and can't fix it.
+কিন্তু ব্যবহারকারীরা ব্রাউজারে ডিফল্টভাবে ভুল বা এরর দেখে না। তাই স্ক্রিপ্টে কোনকিছু ঠিকমত না হলে আমারা জানব না সমস্যাটা কোথায়, আর সেটা ঠিকও করতে পারব না।
 
-To see errors and get a lot of other useful information about scripts, "developer tools" have been embedded in browsers.
+ভুল দেখতে ও স্ক্রিপ্টের বিভিন্ন দরকারী তথ্য পেতে ব্রাউজারগুলোতে 'ডেভেলপার টুলস' সংযুক্ত করে দেয়া হয়েছে।
 
-Most developers lean towards Chrome or Firefox for development because those browsers have the best developer tools. Other browsers also provide developer tools, sometimes with special features, but are usually playing "catch-up" to Chrome or Firefox. So most developers have a "favorite" browser and switch to others if a problem is browser-specific.
+ডেভেলপমেন্টের জন্য বেশিরভাগ ডেভেলপাররা ক্রোম কিংবা ফায়ারফক্সের দিকে ঝোঁকে, কারণ এদের ডেভেলপার টুলগুলো সবচেয়ে ভাল। অন্য ব্রাউজারগুলোও ডেভেলপার টুল দেয়, অনেকসময় বাড়তি সুবিধাসহ। কিন্তু তারা মূলত ক্রোম অথবা ফায়ারফক্সের পর্যায়ে যাওয়ার চেষ্টাই করছে। বেশিরভাগ ডেভেলপারেরই ডেভেলপমেন্টের জন্য একটা 'প্রিয়' ব্রাউজার থাকে, নির্দিষ্ট ব্রাউজারের সাথে জড়িত কোন সমস্যা দেখা দিলে তখন অন্যগুলোতে যায়।
 
-Developer tools are potent; they have many features. To start, we'll learn how to open them, look at errors, and run JavaScript commands.
+ডেভেলপার টুলগুলো বেশ কার্যকর; এগুলোতে অনেক ফিচার থাকে। শুরুতে আমরা শিখব এগুলো কিভাবে খুলতে হয়, কিভাবে ভুল দেখতে হয় আর কিভাবে সেগুলোতে জাভাস্ক্রিপ্ট কমান্ড চালানো যায়।
 
-## Google Chrome
+## গুগল ক্রোম
 
-Open the page [bug.html](bug.html).
+[bug.html](bug.html) পেজটি খুলুন।
 
-There's an error in the JavaScript code on it. It's hidden from a regular visitor's eyes, so let's open developer tools to see it.
+এর জাভাস্ক্রিপ্টে একটি ভুল আছে। একজন সাধারণ ব্যবহারকারী সেটা দেখবে না। তাই সেটা দেখার জন্য ডেভেলপার টুল খোলা যাক।
 
-Press `key:F12` or, if you're on Mac, then `key:Cmd+Opt+J`.
+`key:F12` চাপুন, অথবা ম্যাকে হলে `key:Cmd+Opt+J`।
 
-The developer tools will open on the Console tab by default.
+ডিফল্টভাবে ডেভেলপার টুলটি কনসোল ট্যাবে খুলবে।
 
-It looks somewhat like this:
+দেখতে অনেকটা এমন হবে:
 
 ![chrome](chrome.png)
 
-The exact look of developer tools depends on your version of Chrome. It changes from time to time but should be similar.
+দেখতে ঠিক কেমন হবে সেটা আপনার ক্রোম ভার্সনের উপর নির্ভর করবে। এটা প্রায়ই বদলায়। তবে কিছুটা এমনই হওয়ার কথা।
 
-- Here we can see the red-colored error message. In this case, the script contains an unknown "lalala" command.
-- On the right, there is a clickable link to the source `bug.html:12` with the line number where the error has occurred.
+- এখানে এরর মেসেজটি লাল রঙে দেখতে পাচ্ছেন। এক্ষেত্রে স্ক্রিপ্টটিতে একটি অজানা "lalala" কমান্ড আছে।
+- ডানে `bug.html:12` সোর্সটির একটি ক্লিক-উপযোগী লিঙ্ক আছে, যে লাইনে ভুলটি হয়েছে সেই লাইন নাম্বার সহ।
 
-Below the error message, there is a blue `>` symbol. It marks a "command line" where we can type JavaScript commands. Press `key:Enter` to run them (`key:Shift+Enter` to input multi-line commands).
+এরর মেসেজটির নিচে নীল একটি `>` চিহ্ন আছে। এটি একটি "কমান্ড লাইন" নির্দেশ করে, যেখানে আপনি জাভাস্ক্রিপ্ট কমান্ড টাইপ করতে পারবেন। কমান্ডগুলো চালাতে `key:Enter` চাপুন। (মাল্টিলাইন কমান্ড দিতে  `key:Shift+Enter` চাপতে হবে)
 
-Now we can see errors, and that's enough for a start. We'll come back to developer tools later and cover debugging more in-depth in the chapter <info:debugging-chrome>.
+এখন আমরা এরর দেখতে পাচ্ছি। আপাতত এইটুকুই চলবে। সামনে ডেভেলপার টুল আবার আসবে। <info:debugging-chrome> অধ্যায়ে ডিবাগিং নিয়ে গভীর আলোচনা হবে।
 
 
-## Firefox, Edge, and others
+## ফায়ারফক্স, এডজ্ ও অন্যান্য
 
-Most other browsers use `key:F12` to open developer tools.
+অন্য বেশিরভাগ ব্রাউজার ডেভেলপার টুলস খোলার জন্য `key:F12` ব্যবহার করে।
 
-The look & feel of them is quite similar. Once you know how to use one of these tools (you can start with Chrome), you can easily switch to another.
+সেগুলো দেখতেও কাছাকাছি। যেকোন একটা একবার ব্যবহার করতে শিখে গেলে (ক্রোম দিয়ে শুরু করা যেতে পারে) পরে সহজেই অন্যগুলোতে যাওয়া যায়।
 
-## Safari
+## সাফারি
 
-Safari (Mac browser, not supported by Windows/Linux) is a little bit special here. We need to enable the "Develop menu" first.
+সাফারি (ম্যাকের ব্রাউজার, উইন্ডোজ/লিনাক্সে সাপোর্ট করে না) এখানে একটু অন্যরকম। প্রথমে আমাদের "Develop menu" সক্রিয় করতে হবে।
 
-Open Preferences and go to the "Advanced" pane. There's a checkbox at the bottom:
+Preferences খুলে "Advanced" প্যানে যান. নিচের দিকে একটি চেকবক্স আছে:
 
 ![safari](safari.png)
 
-Now `key:Cmd+Opt+C` can toggle the console. Also, note that the new top menu item named "Develop" has appeared. It has many commands and options.
+এখন `key:Cmd+Opt+C` দিয়ে কনসোল টোগল করা যাব। আর খেয়াল করুন, "Develop" নামে টপ মেনুতে নতুন একটা আইটেম এসেছে। এটাতে অনেক কমান্ড ও অপশন আছে।
 
 ```smart header="Multi-line input"
-Usually, when we put a line of code into the console, and then press `key:Enter`, it executes.
+সাধারণভাবে যখন আপনি কনসোলে এক লাইন কোড দিয়ে `key:Enter` চাপেন, সেটা এক্সিকিউট হয়ে যায়।
 
-To insert multiple lines, press `key:Shift+Enter`. This way one can enter long fragments of JavaScript code.
+একাধিক লাইন দিতে `key:Shift+Enter` চাপতে হয়। এভাবে বড় বড় জাভাস্ক্রিপ্ট কোড ইনপুট দেয়া যায়।
 ```
 
-## Summary
+## সারাংশ
 
-- Developer tools allow us to see errors, run commands, examine variables, and much more.
-- They can be opened with `key:F12` for most browsers on Windows. Chrome for Mac needs `key:Cmd+Opt+J`, Safari: `key:Cmd+Opt+C` (need to enable first).
+- ডেভেলপার টুল আমাদের অনেককিছু করতে দেয়, যোমন কমান্ড চালানো, ভ্যারিয়েবল পরীক্ষা করা ইত্যাদি।
+- উইন্ডোজে বেশিরভাগ ব্রাউজারে `key:F12` চেপে এগুলো খোলা যায়। ম্যাকের ক্রোমে `key:Cmd+Opt+J`, সাফারিতে: `key:Cmd+Opt+C` (প্রথমে সক্রিয় করে নিতে হয়)।
 
-Now we have the environment ready. In the next section, we'll get down to JavaScript.
+এখন আমাদের পরিবেশ তৈরী। পরবর্তী অধ্যায়ে আমরা পুরোপুরি জাভাস্ক্রিপ্টে ঢুকে যাব।
