@@ -1,46 +1,46 @@
-# Code editors
+# কোড এডিটরঃ
 
-A code editor is the place where programmers spend most of their time.
+একজন প্রোগ্রামার তার জীবনের বড় একটা সময় কাঁটায় কোড এডিটরের সাথে।
 
-There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.
+প্রধানত দুই প্রকারের কোড এডিটর রয়েছে। IDE ও লাইটওয়েট এডিটর সমূহ। প্রায় অনেকেই একটি IDE ও একটি লাইটওয়েট এডিটর ব্যবহার করে থাকেন।
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a "whole project." As the name suggests, it's not just an editor, but a full-scale "development environment."
+[IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) বলতে মুলত বুঝায় যে - (একটি সমন্বিত ডেভেলপমেন্ট পরিবেশ) যার সাথে একটি পাওয়ারফুল এডিটরও থাকে, যাতে অনেক অনেক কার্যকারী ফিচারসমূহ থাকে। যেগুলো একজন ডেভেলপারের জন্য একটি পূর্ণ প্রোজেক্ট সম্পূর্ণ করতে অনেক সহায়তা করে। নাম থেকে যা বুঝা যায় তা হল এটি শুধুমাত্র একটি এডিটর নয়, বরং একটি প্রোজেক্ট করার জন্য স্বয়ংসম্পূর্ণ ডেভেলপমেন্ট পরিবেশ।
 
-An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like [git](https://git-scm.com/)), a testing environment, and other "project-level" stuff.
+একটি IDE একটি সম্পূর্ণ প্রোজেক্ট কে লোড করতে পারে, যাতে অনেক অনেক ফাইল থাকতে পারে। ইহা ফাইল গুলো নেভিগেট করতে সাহায্য করবে এবং অটোকমপ্লিট সাজেসন দিবে পুরো প্রোজেক্টের উপর ধারণা করে, শুধু মাত্র ওপেন করা ফাইলের উপর ধারণা করে নয়। এটি একটি ভার্শন কন্ট্রোল সিস্টেমের (যেমনঃ [গিট](https://git-scm.com/) সাথে সমন্বিত ভাবে কাজ করবে। এতে একটি টেস্টিং পরিবেশ থাকবে। এছাড়াও একটি প্রোজেক্ট সম্পূর্ণ করতে প্রয়োজনীয় অন্যান্য সুবিধা সমূহ থাকবে।
 
-If you haven't selected an IDE yet, consider the following options:
+আপনি যদি এখনো কোন IDE নির্বাচন না করে থাকেন, তবে নিচের যেকোন একটি ব্যবহার করে দেখতে পারেনঃ
 
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
-- [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, paid).
+- [Visual Studio Code](https://code.visualstudio.com/) (এটি ক্রস প্ল্যাটফর্ম ও সম্পূর্ণ ফ্রি)
+- [WebStorm](http://www.jetbrains.com/webstorm/) (এটিও ক্রস প্ল্যাটফর্ম তবে পেইড)
 
-For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code". "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. It's also good at JavaScript. There's also a free version [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+উইন্ডোজ ব্যবহার কারীদের জন্য "Visual Studio" নামের আরও একটি IDE রয়েছে, তবে "Visual Studio Code" র সাথে কনফিউজ হওয়ার দরকার নাই। এটি সম্পূর্ণ আলাদা একটি IDE, যদিও দুইটাই মাইক্রোসফট এর ডেভেলপ করা। "Visual Studio" একটি পেইড ও উইন্ডোজ ফ্রেন্ডলি এডিটর, এটি সবচেয়ে ভালো কাজ করে ডট নেট প্ল্যাটফর্মে। এটি জাভাস্ক্রিপ্ট এর জন্যও ভালো কাজ করে। একটি ফ্রি কমিউনিটি ভার্শনও আছে [Visual Studio Community](https://www.visualstudio.com/vs/community/) নামে।
 
-Many IDEs are paid, but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+বেশির ভাগ IDE সমূহ পেইড, তবে তাদের প্রায় সবার ট্রায়াল ভার্শন রয়েছে। এসবের মূল্যও একজন কোয়ালিফাইড ডেভেলপারের বেতনের তুলনায় খুবই নগণ্য। সুতরাং আপনার যেটা ভালো লাগে সেটা পছন্দ করতে পারেন।
 
-## Lightweight editors
+## লাইটওয়েট এডিটর সমূহ
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+"লাইটওয়েট এডিটর সমূহ" IDE গুলোর মত এতটা পাওয়ারফুল নয়। তবে অনেক ফাস্ট, এলিগেনট ও সিম্পল হয়ে থাকে।
 
-They are mainly used to open and edit a file instantly.
+প্রধানত দ্রুত কোন ফাইল ওপেন ও এডিট করার ক্ষেত্রে এসব এডিটর ব্যবহার করা হয়ে থাকে।
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+লাইটওয়েট এডিটর সমূহের সাথে IDE গুলোর প্রধান পার্থক্য হল যে, IDE গুলো ব্যবহার করা হয় প্রোজেক্ট লেভেলের কাজে। সুতরাং এগুলো শুরুতেই অনেক বেশি ডাটা লোড করে, প্রোজেক্টের গঠন পর্যবেক্ষণ করে ইত্যাদি। এদিক থেকে লাইটওয়েট এডিটর অনেক বেশি দ্রুততর হয়ে থাকে শুধুমাত্র একটি ফাইলে কাজ করার ক্ষেত্রে।
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
+কাজের ক্ষেত্রে, লাইটওয়েট এডিটর সমূহের জন্য অনেক অনেক প্লাগিনস রয়েছে - ডিরেক্টরি লেভেল সিনট্যাক্স এনালাইজার থেকে শুরু করে অটোকমপ্লিট সহ নানান কাজ খুব সহজেই করা যায় এসব প্লাগিনস ব্যবহার করে। সুতরাং একটি লাইটওয়েট এডিটর ও IDE এর মধ্যে তেমন বিশাল কোন সীমারেখা নাই।
 
-The following options deserve your attention:
+নিচের লিংক গুলো আপনার মনোযোগ আকর্ষণ করবেঃ
 
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
-- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+- [Atom](https://atom.io/) (এটি ক্রস প্ল্যাটফর্ম ও সম্পূর্ণ ফ্রি)।
+- [Visual Studio Code](https://code.visualstudio.com/) (এটি ক্রস প্ল্যাটফর্ম ও সম্পূর্ণ ফ্রি)।
+- [Sublime Text](http://www.sublimetext.com) (এটি ক্রস প্ল্যাটফর্ম ও কিছু ক্ষেত্রে ফ্রি)।
+- [Notepad++](https://notepad-plus-plus.org/) (উইন্ডোজ, ফ্রি)।
+- [Vim](http://www.vim.org/) এবং [Emacs](https://www.gnu.org/software/emacs/) ও অসাধারণ এডিটর, যদি আপনি এদের সঠিক ব্যবহার করতে জানেন।
 
-## Let's not argue
+## চলুন ঝগড়া বাদ দিয়ে কিছু কথা বলিঃ
 
-The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.
+উপরে উল্লেখিত এডিটর সমূহ আমি অথবা আমার বন্ধু যাদের আমি ভালো ডেভেলপার মনে করি, তারা অনেক দিন যাবৎ বেশ স্বাচ্ছন্দ্যে ব্যবহার করছে।
 
-There are other great editors in our big world. Please choose the one you like the most.
+আমাদের এই বৃহৎ পৃথিবীতে আরও অনেক ভালো ভালো এডিটর আছে। আপনি আপনার পছন্দ অনুযায়ী যেকোন একটা ব্যবহার করতে পারেন।
 
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+একটি এডিটর বাছাই করা অনেক সময় আপনার প্রোজেক্ট, পূর্ব-অভিজ্ঞতা, কাজের স্বাচ্ছন্দ্য এসবের উপর নির্ভর করে।
