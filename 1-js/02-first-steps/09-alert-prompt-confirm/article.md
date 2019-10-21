@@ -1,42 +1,41 @@
-# Interaction: alert, prompt, confirm
+# ইন্টারেকশন: alert, prompt, confirm
 
-In this part of the tutorial we cover JavaScript language "as is", without environment-specific tweaks.
+টিউটোরিয়ালের এই পর্যায়ে আমরা কোনো বিশেষ পরিবেশ সমন্বয় ছাড়া জাভাস্ক্রিপ্ট দেখবো।
 
-But we'll still be using the browser as our demo environment, so we should know at least a few of its user-interface functions. In this chapter, we'll get familiar with the browser functions `alert`, `prompt` and `confirm`.
+কিন্তু আমরা এখনো ব্রাউজার ব্যবহার করবো আমাদের ডেমো পরিবেশ হিসেবে, এখন আমাদের জানা উচিত এর কিছু ব্যবহারকারী ইন্টারফেস ফাংশন সম্পর্কে। এই চ্যাপ্টারে আমরা পরিচিত হবো ব্রাউজার ফাংশন `alert`, `prompt` and `confirm` এর সাথে।
 
 ## alert
 
-Syntax:
+গঠন:
 
 ```js
-alert(message);
+alert(বার্তা);
 ```
 
-This shows a message and pauses script execution until the user presses "OK".
+এটি একটি বার্তা প্রদর্শন করে বাকি স্ক্রিপ্ট আটকে রাখে ব্যবহারকারী OK প্রেস করার আগপর্যন্ত।
 
-For example:
+যেমন:
 
 ```js run
-alert("Hello");
+alert("ওহে");
 ```
-
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc. until they have dealt with the window. In this case -- until they press "OK".
+বার্তা সহ ছোট উইন্ডোকে *মডাল উইন্ডো* বলে। মডাল মানে হলো, ব্যবহারকারী যতক্ষণ না এই উইন্ডো এর কাজ না করছেন ততক্ষন বাকি পেজ এর কোনো কাজ করে পারবেন না, অন্য কোনো বোতাম চাপতে পারবেন না ইত্যাদি। এইক্ষেত্রে, --যতক্ষণ না তিনি OK চাপছেন।
 
 ## prompt
 
-The function `prompt` accepts two arguments:
+এই `prompt` ফাংশন দুটি আর্গুমেন্ট নেয়।
 
 ```js no-beautify
-result = prompt(title, [default]);
+result = prompt(শিরোনাম, [default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/Cancel.
+এটি একটি মডাল উইন্ডো দেখায় একটি বার্তা, একটি ইনপুট ফিল্ড এবং বোতাম OK/Cancel.
 
-`title`
-: The text to show the visitor.
+`শিরোনাম`
+: যে বার্তা ব্যবহারকারীকে দেখতে চান। 
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: একটি ঐচ্ছিক পেরামিটার, এর প্রাথমিক মান ইনপুট ফিল্ড হতে প্রাপ্ত মান।
 
 The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key.
 
