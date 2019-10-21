@@ -1,9 +1,9 @@
-importance: 4
+গুরুত্ব: ৪
 
 ---
 
-# A simple page
+# একটি সহজ পৃষ্ঠা
 
-Create a web-page that asks for a name and outputs it.
+একটি ওয়েব পেজ তৈরী করুন, যেটা একটি নাম জিজ্ঞেস করবে এবং নামটি দেখাবে। 
 
-[demo]
+[উদাহরণ]
