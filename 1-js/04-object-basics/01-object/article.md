@@ -97,7 +97,7 @@ let user = {
 একাধিক শব্দের প্রোপার্টি গুলোকে ডট দিয়ে এক্সেস করা যায় নাঃ
 
 ```js run
-// this would give a syntax error
+// এটি একটি সিনট্যাক্স এরর দেখাবে
 user.likes birds = true
 ```
 
@@ -732,19 +732,19 @@ Additional operators:
 - To check if a property with the given key exists: `"key" in obj`.
 - To iterate over an object: `for (let key in obj)` loop.
 
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object. All operations via copied references (like adding/removing properties) are performed on the same single object.
+অবজেক্টকে রেফারেন্সের মাধ্যমে এসাইন বা কপি করা হয়। In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object. All operations via copied references (like adding/removing properties) are performed on the same single object.
 
-To make a "real copy" (a clone) we can use `Object.assign` or  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+"আসলেই কপি" (ক্লোন) করার জন্য আমরা `Object.assign` অথবা  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) ব্যবহার করতে পারি।
 
-What we've studied in this chapter is called a "plain object", or just `Object`.
+আমরা এই অধ্যায়ে যা জেনেছি তাকে "প্লেইন অবজেক্ট", বা শুধু  or `Object` বলা হয়।
 
-There are many other kinds of objects in JavaScript:
+জাভাস্ক্রিপ্টে অনেক অন্যান্য অবজেক্ট রয়েছেঃ
 
-- `Array` to store ordered data collections,
-- `Date` to store the information about the date and time,
-- `Error` to store the information about an error.
-- ...And so on.
+- `Array` ডাটা কালেকশন সংরক্ষণের জন্য,
+- `Date` তারিখ ও সময় সংক্রান্ত তথ্য সংরক্ষণের জন্য,
+- `Error` এরর সম্পর্কিত তথ্য সংরক্ষণের জন্য,
+- ...ইত্যাদি।
 
-They have their special features that we'll study later. Sometimes people say something like "Array type" or "Date type", but formally they are not types of their own, but belong to a single "object" data type. And they extend it in various ways.
+তাদের কিছু বিশেষ বৈশিষ্ট্য আছে যা আমরা পরে জানব। মাঝে মাঝে অনেকে "Array type" বা "Date type" বলে, কিন্তু এসব নিজেরা কোন আলাদা টাইপ না, এগুলো সব "অবজেক্ট" ডাটা টাইপ। এবং তাদের নানা ভাবে বর্ধিত করা হয়েছে।
 
-Objects in JavaScript are very powerful. Here we've just scratched the surface of a topic that is really huge. We'll be closely working with objects and learning more about them in further parts of the tutorial.
+জাভাস্ক্রিপ্ট এ অবজেক্ট খুবই পাওয়ারফুল। আমরা অনেক বড় একটি বিষয় সংক্ষিপ্তভাবে আলোচনা করেছি। আমরা অবজেক্ট নিয়ে প্রচুর কাজ করব এবং এই টিউটেরিয়ালের অন্যান্য অংশে অবজেক্ট সম্পর্কে আরও জানব।
