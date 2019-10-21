@@ -37,16 +37,16 @@ result = prompt(শিরোনাম, [default]);
 `default`
 : একটি ঐচ্ছিক পেরামিটার, এর প্রাথমিক মান ইনপুট ফিল্ড হতে প্রাপ্ত মান।
 
-The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key.
+ব্যবহারকারী চাইলে ইনপুট ফিল্ডে কিছু টাইপ করে OK চাপতে পারে। অথবা চাইলে ইনপুট টি বাতিল করতে পারে Cancel চেপে অথবা `key:Esc` চেপে। 
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+`prompt` ফাংশন ইনপুট ফিল্ড এর লেখা রিটার্ন করে অথবা `null` রিটার্ন করে যদি ইনপুট বাতিল করা হয়।
 
-For instance:
+যেমন:
 
 ```js run
-let age = prompt('How old are you?', 100);
+let age = prompt('তোমার বয়স কত?', 100);
 
-alert(`You are ${age} years old!`); // You are 100 years old!
+alert(`তোমার বয়স ${age} বছর!`); // তোমার বয়স ১০০ বছর!
 ```
 
 ````warn header="In IE: always supply a `default`"
