@@ -101,9 +101,9 @@ let user = {
 user.likes birds = true
 ```
 
-That's because the dot requires the key to be a valid variable identifier. That is: no spaces and other limitations.
+এটার কারণ, ডট নোটেশন ব্যবহার করার জন্য key - কে একটি ভেরিয়েবল আইডেন্টিফায়ার হতে হবে। যার জন্য এতে কোন স্পেস থাকতে পারবে না এবং আরও অন্যান্য নিয়ম রয়েছে।
 
-There's an alternative "square bracket notation" that works with any string:
+তৃতীয় বন্ধনী ব্যবহার করে আরেকটি পদ্ধতি রয়েছে, যা যেকোনো স্ট্রিং এ কাজ করেঃ
 
 ```js run
 let user = {};
@@ -118,9 +118,9 @@ alert(user["likes birds"]); // true
 delete user["likes birds"];
 ```
 
-Now everything is fine. Please note that the string inside the brackets is properly quoted (any type of quotes will do).
+এখন সবকিছু কাজ করে। বন্ধনীর ভেতর স্ট্রিংটি ঠিকমত উদ্ধৃতি চিহ্নের ভেতর রয়েছে (যেকোনো উদ্ধৃতি চিহ্ন কাজ করবে)।
 
-Square brackets also provide a way to obtain the property name as the result of any expression -- as opposed to a literal string -- like from a variable as follows:
+লিটারেল স্ট্রিং এর বিপরীতে তৃতীয় বন্ধনী ব্যবহারের পদ্ধতিটি এক্সপ্রেশনের রেসাল্টকে ব্যবহার করে প্রোপার্টির নাম বের করার সুযোগ দেয় -- যেমনটা নিচের ভেরিয়েবল থেকেঃ
 
 ```js
 let key = "likes birds";
@@ -129,9 +129,9 @@ let key = "likes birds";
 user[key] = true;
 ```
 
-Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+এখানে, `key` ভেরিয়েবলটি রান-টাইমে ক্যালকুলেট করে বা ইউজারের ইনপুট এর উপর ভিত্তি করে তৈরি হতে পারে। এবং পরে আমরা এটাকে প্রোপার্টি এক্সেস করার জন্য ব্যবহার করতে পারি। এটি প্রোগ্রাম করার সময় খুব ভাল স্বাধীনতা দেয়।
 
-For instance:
+যেমনঃ
 
 ```js run
 let user = {
@@ -141,11 +141,11 @@ let user = {
 
 let key = prompt("What do you want to know about the user?", "name");
 
-// access by variable
+// ভেরিয়েবলের মাধ্যমে এক্সেস করা হচ্ছে
 alert( user[key] ); // John (if enter "name")
 ```
 
-The dot notation cannot be used in a similar way:
+ডট নোটেশনকে একই ভাবে ব্যবহার করা যায় নাঃ
 
 ```js run
 let user = {
@@ -154,43 +154,43 @@ let user = {
 };
 
 let key = "name";
-alert( user.key ) // undefined
+alert( user.key ) // আনডিফাইন্ড
 ```
 
-### Computed properties
+### কম্পুটেড প্রোপার্টি
 
-We can use square brackets in an object literal. That's called *computed properties*.
+আমরা অবজেক্ট লিটারেলে তৃতীয় বন্ধনী ব্যবহার করতে পারি। একে বলে *কম্পিউটেড প্রোপার্টি*।
 
-For instance:
+উদাহরণস্বরূপঃ
 
 ```js run
 let fruit = prompt("Which fruit to buy?", "apple");
 
 let bag = {
 *!*
-  [fruit]: 5, // the name of the property is taken from the variable fruit
+  [fruit]: 5, // প্রোপার্টির নাম fruit ভেরিয়েবল থেকে নেয়া হয়েছে
 */!*
 };
 
 alert( bag.apple ); // 5 if fruit="apple"
 ```
 
-The meaning of a computed property is simple: `[fruit]` means that the property name should be taken from `fruit`.
+কম্পিউটেড প্রোপার্টির মানে খুবই সহজঃ `[fruit]` মানে প্রোপার্টির নামটি `fruit` ভেরিয়েবল থেকে নেয়া হবে।
 
-So, if a visitor enters `"apple"`, `bag` will become `{apple: 5}`.
+সুতরাং, যদি ভিজিটর `"apple"` লিখে, `bag` হয়ে যাবে `{apple: 5}`।
 
-Essentially, that works the same as:
+মূলত, নিচের কোডটিও একই কাজ করেঃ
 ```js run
 let fruit = prompt("Which fruit to buy?", "apple");
 let bag = {};
 
-// take property name from the fruit variable
+// প্রোপার্টির নাম fruit ভেরিয়েবল থেকে নাও
 bag[fruit] = 5;
 ```
 
-...But looks nicer.
+...কিন্তু আগেরটি দেখতে সুন্দর।
 
-We can use more complex expressions inside square brackets:
+আমরা তৃতীয় বন্ধনীর ভেতরে আরও জটিল এক্সপ্রেশন ব্যবহার করতে পারিঃ
 
 ```js
 let fruit = 'apple';
@@ -199,16 +199,16 @@ let bag = {
 };
 ```
 
-Square brackets are much more powerful than the dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+তৃতীয় বন্ধনী ডট নোটেশনের চাইতে অনেক বেশী পশক্তিশালী। কিন্তু তাদের লেখাটা একটু কষ্টকর।
 
-So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
+সুতরাং অধিকাংশ সময়, যখন প্রোপার্টির নাম সহজ এবং আগে থেকেই জানা, ডট নোটেশন ব্যবহৃত হয়। এবং যদি আমাদের জটিল কিছু করতে হয়, তখন আমরা তৃতীয় বন্ধনী ব্যবহার করি।
 
 
 
-````smart header="Reserved words are allowed as property names"
-A variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+````smart header="সংরক্ষিত শব্দগুলো প্রোপার্টির নাম হিসেবে ব্যবহার করা যায়"
+ভেরিয়েবল এর নাম ভাষা কর্তৃক সংরক্ষিত শব্দ, যেমন "for", "let", "return" ইত্যাদি হতে পারবে না।
 
-But for an object property, there's no such restriction. Any name is fine:
+কিন্তু অবজেক্টের প্রোপার্টির জন্য তেমন কোন বাধ্যবাধকতা নেই। যেকোনো নাম ব্যবহার করা যায়ঃ
 
 ```js run
 let obj = {
@@ -220,7 +220,7 @@ let obj = {
 alert( obj.for + obj.let + obj.return );  // 6
 ```
 
-Basically, any name is allowed, but there's a special one: `"__proto__"` that gets special treatment for historical reasons. For instance, we can't set it to a non-object value:
+মূলত, যেকোনো নাম ব্যবহার করা যায়, কিন্তু একটি বিশেষ নাম আছেঃ `"__proto__"` যেটি ঐতিহাসিক কারণে বিশেষভাবে ব্যবহৃত হয়। যেমন, আমরা এটি অবজেক্ট নয় এমন কোন ভ্যালুতে ব্যবহার করে পারি নাঃ
 
 ```js run
 let obj = {};
@@ -228,30 +228,30 @@ obj.__proto__ = 5;
 alert(obj.__proto__); // [object Object], didn't work as intended
 ```
 
-As we see from the code, the assignment to a primitive `5` is ignored.
+যেমনটি আমরা কোডে দেখতে পাচ্ছি, প্রিমিটিভ `5` এর সাথে সংযুক্তিটি উপেক্ষা করা হয়েছে।
 
-That can become a source of bugs and even vulnerabilities if we intend to store arbitrary key-value pairs in an object, and allow a visitor to specify the keys.
+যদি আমরা ইচ্ছামত কী ভ্যালু একটি অবজেক্টে রাখতে যাই, এবং ভিজিটরদের কী প্রদান করতে দিতে দেই, তাহলে এটির কারণে অনেক বাগ এবং এমনকি ভলনারেবিলিটির উৎস তৈরি হতে পারে।
 
-In that case the visitor may choose `__proto__` as the key, and the assignment logic will be ruined (as shown above).
+এরকম ক্ষেত্রে ভিজিটর `__proto__` কে কী হিসেবে দিয়ে দিতে পারে, এবং এসাইনমেন্ট এর লজিকটা নষ্ট হয়ে যেতে পারে (যেমনটা উপড়ে দেখানো হয়েছে)।
 
-There is a way to make objects treat `__proto__` as a regular property, which we'll cover later, but first we need to know more about objects.
+অবজেক্টকে `__proto__` কে সাধারণ প্রোপার্টি হিসেবে গণ্য করতে বাধ্য করা যায়, যা আমরা পরে দেখব, কিন্তু তার আগে আমাদের অবজেক্ট সম্পর্কে আরও জানতে হবে।
 
-There's also another data structure [Map](info:map-set), that we'll learn in the chapter <info:map-set>, which supports arbitrary keys.
+[Map](info:map-set) নামে আরও একটি ডাটাস্ট্রাকচার রয়েছে, যেটি সম্পর্কে আমরা <info:map-set> অধ্যায়ে জানব, যা যেকোনো কী গ্রহণ করে।
 ````
 
 
-## Property value shorthand
+## প্রোপার্টি ভ্যালু সর্টহ্যান্ড
 
-In real code we often use existing variables as values for property names.
+প্রায়সময় আমরা বর্তমানে বিদ্যমান ভেরিয়েবলগুলোকে প্রোপার্টি নামের ভ্যালু হিসেবে ব্যবহার করি।
 
-For instance:
+যেমনঃ
 
 ```js run
 function makeUser(name, age) {
   return {
     name: name,
     age: age
-    // ...other properties
+    // ...অন্যান্য প্রোপার্টি
   };
 }
 
@@ -259,9 +259,9 @@ let user = makeUser("John", 30);
 alert(user.name); // John
 ```
 
-In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there's a special *property value shorthand* to make it shorter.
+উপরের উদাহরণে, প্রোপার্টি এবং ভেরিয়েবলের নাম একই। এই ব্যবহারটি এত বেশী হয়ে থাকে যে একটি বিশেষ *প্রোপার্টি ভ্যালু সর্টহ্যান্ড* আছে এটিকে ছোট করে লিখার জন্য।
 
-Instead of `name:name` we can just write `name`, like this:
+`name:name` এর পরিবর্তে আমরা সরাসরি `name` লিখতে পারি, এরকম ভাবেঃ
 
 ```js
 function makeUser(name, age) {
@@ -275,7 +275,7 @@ function makeUser(name, age) {
 }
 ```
 
-We can use both normal properties and shorthands in the same object:
+আমরা একই অবজেক্টে একই সাথে সাধারণ প্রোপার্টি এবং সর্টহ্যান্ড ব্যবহার করতে পারিঃ
 
 ```js
 let user = {
@@ -286,28 +286,28 @@ let user = {
 
 ## Existence check
 
-A notable objects feature is that it's possible to access any property. There will be no error if the property doesn't exist! Accessing a non-existing property just returns `undefined`. It provides a very common way to test whether the property exists -- to get it and compare vs undefined:
+অবজেক্টের একটি উল্লেখযোগ্য ফিচার হল এর যেকোনো প্রোপার্টিকে এক্সেস করা যায়। যদি প্রোপার্টি না থাকে তাহলে কোন এরর হয় না! অবজেক্টে নেই এমন প্রোপার্টিকে এক্সেস করলে শুধু `undefined` রিটার্ন করে। প্রোপার্টি আছে কিনা নেই পরীক্ষার জন্য এটি একটি সাধারণ উপায় দেয় -- যা হল আনডিফাইন্ড এর সাথে তুলনা করাঃ
 
 ```js run
 let user = {};
 
-alert( user.noSuchProperty === undefined ); // true means "no such property"
+alert( user.noSuchProperty === undefined ); // true মানে "এরকম কোন প্রোপার্টি নেই"
 ```
 
-There also exists a special operator `"in"` to check for the existence of a property.
+একটি বিশেষ অপারেটর `"in"` ও রয়েছে প্রোপার্টি আছে কিনা পরীক্ষা করার জন্য।
 
-The syntax is:
+সিনট্যাক্সঃ
 ```js
 "key" in object
 ```
 
-For instance:
+যেমনঃ
 
 ```js run
 let user = { name: "John", age: 30 };
 
-alert( "age" in user ); // true, user.age exists
-alert( "blabla" in user ); // false, user.blabla doesn't exist
+alert( "age" in user ); // true, user.age আছে
+alert( "blabla" in user ); // false, user.blabla নেই
 ```
 
 Please note that on the left side of `in` there must be a *property name*. That's usually a quoted string.
