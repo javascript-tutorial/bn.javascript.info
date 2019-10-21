@@ -62,7 +62,7 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
-To remove a property, we can use `delete` operator:
+কোন একটা প্রোপার্টিকে মুছে দিতে আমরা `delete` অপারেটরটি ব্যবহার করতে পারিঃ
 
 ```js
 delete user.age;
@@ -70,31 +70,31 @@ delete user.age;
 
 ![user object 3](object-user-delete.svg)
 
-We can also use multiword property names, but then they must be quoted:
+আমরা প্রোপার্টির নাম হিসেবে একাধিক শব্দও ব্যবহার করতে পারি, তবে সেক্ষেত্রে শব্দগুলো উদ্ধৃতি চিহ্নের ভেতর রাখতে হবেঃ
 
 ```js
 let user = {
   name: "John",
   age: 30,
-  "likes birds": true  // multiword property name must be quoted
+  "likes birds": true  // একাধিক শব্দের প্রোপার্টির নাম অবশ্যই উদ্ধৃতি চিহ্নের ভেতর রাখতে হবে
 };
 ```
 
 ![](object-user-props.svg)
 
 
-The last property in the list may end with a comma:
+শেষ প্রোপার্টিটি একটি কমা দিয়ে শেষ হতে পারেঃ
 ```js
 let user = {
   name: "John",
   age: 30*!*,*/!*
 }
 ```
-That is called a "trailing" or "hanging" comma. Makes it easier to add/remove/move around properties, because all lines become alike.
+একে বলা হয় "ট্রেইলিং" বা "হ্যাঙ্গিং" কমা। এটি এড/রিমুভ এবং পরিবর্তন করা সহজ করে, কারণ সবগুলো লাইন দেখতে একই রকম হয়।
 
-## Square brackets
+## তৃতীয় বন্ধনী
 
-For multiword properties, the dot access doesn't work:
+একাধিক শব্দের প্রোপার্টি গুলোকে ডট দিয়ে এক্সেস করা যায় নাঃ
 
 ```js run
 // this would give a syntax error
