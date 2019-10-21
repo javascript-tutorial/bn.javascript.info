@@ -53,86 +53,85 @@ showMessage();
 
 কোনো ফাংশনের ভিতরে ডিক্লিয়ার করা ভ্যারিয়েবল শুধুমাত্র সেই ফাংশনের ভিতরেই এক্সেস করা সম্ভব।
 
-For example:
+যেমনঃ
 
 ```js run
 function showMessage() {
-*!*
-  let message = "Hello, I'm JavaScript!"; // local variable
-*/!*
-
-  alert( message );
+  *!*
+  let message = "Hello, I'm JavaScript!"; // লোকাল ভ্যারিয়েবল
+  */!*
+  alert(message);
 }
 
-showMessage(); // Hello, I'm JavaScript!
+showMessage(); // এইটা Hello, I'm JavaScript! এলার্ট দিবে
 
-alert( message ); // <-- Error! The variable is local to the function
+alert(message); // <-- Error! এখানে meesage ভ্যারিয়েবলকে এক্সেস করা সম্ভব না।
 ```
 
-## Outer variables
+## আউটার ভ্যারিয়েবল
 
-A function can access an outer variable as well, for example:
+কোনো ফাংশন নিজের ব্লকের বাইরের ভ্যারিয়েবলও এক্সেস করতে পারে। যেমনঃ
 
 ```js run no-beautify
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Rahim';
 
 function showMessage() {
   let message = 'Hello, ' + *!*userName*/!*;
   alert(message);
 }
 
-showMessage(); // Hello, John
+showMessage(); // Hello, Rahim
 ```
 
-The function has full access to the outer variable. It can modify it as well.
+ফাংশনের যে আউটার ভ্যারিয়েবলের শুধু এক্সেস আছে তাই না, ফাংশন আউটার ভ্যারিয়েবলের মানও পরিবর্তন করতে পারে।
 
-For instance:
+যেমনঃ
 
 ```js run
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Rahim';
 
 function showMessage() {
-  *!*userName*/!* = "Bob"; // (1) changed the outer variable
+  *!*userName*/!* = "Karim"; // (১) আউটার ভ্যারিয়েবলের মান পরিবর্তন করা হয়েছে
 
   let message = 'Hello, ' + *!*userName*/!*;
   alert(message);
 }
 
-alert( userName ); // *!*John*/!* before the function call
+alert( userName ); // ফাংশন কল করার আগে *!*Rahim*/!* এলার্ট দিবে
 
 showMessage();
 
-alert( userName ); // *!*Bob*/!*, the value was modified by the function
+alert( userName ); // *!*Karim*/!* এলার্ট দিবে। কারণ, ভ্যারিয়েবলের মান ফাবগশনের মধ্যে পরিবর্তন করা হয়েছে
 ```
 
-The outer variable is only used if there's no local one.
+যদি কোনো লোকাল ভ্যারিয়েবল না থাকে, সেক্ষেত্রেই কেবল আউটার ভ্যারিয়েবল ব্যবহার করা হয়।
 
-If a same-named variable is declared inside the function then it _shadows_ the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
+যদি একই নামে লোকাল ও আউটার ভ্যারিয়েবল ডিক্লিয়ার করা হয়, তাহলে প্রোগ্রাম আউটার ভ্যারিয়েবলকে কম গুরুত্ব দেয়। যেমন, নিচের কোডে `userName` নামে ভ্যারিয়েবল নেওয়া হয়েছে। প্রোগ্রাম আউটার ভ্যারিয়েবলকে এড়িয়ে গেছে।
 
 ```js run
-let userName = 'John';
+let userName = 'Rahim';
 
 function showMessage() {
 *!*
-  let userName = "Bob"; // declare a local variable
+  let userName = "Karim"; // লোকাল ভ্যারিয়েবল declare করা হয়েছে ও initialize করা হয়েছে
 */!*
 
-  let message = 'Hello, ' + userName; // *!*Bob*/!*
+  let message = 'Hello, ' + userName; // *!*Karim*/!*
   alert(message);
 }
 
-// the function will create and use its own userName
+// ফাংশন তার লোকাল ভ্যারিয়েবল রিটার্ণ করবে
 showMessage();
 
-alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
+alert( userName ); // *!*Rahim*/!*, অপরিবর্তনীয়, ফাংশন আউটার ভ্যারিয়েবল এড়িয়ে গেছে
 ```
 
 ```smart header="Global variables"
-Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
+ফাংশনের বাইরে declare করা কোনো ভ্যারিয়েবলকে *গ্লোবাল* ভ্যারিয়েবলও বলা হয়।
 
-Global variables are visible from any function (unless shadowed by locals).
+গ্লোবাল ভ্যারিয়েবল যে কোনো জায়গা থেকে এক্সেস করা যায় (যদি না ফাংশনে লোকাল ভ্যারিয়েবল একই নামে থাকে)।
 
-It's a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+গ্লোবাল ভ্যারিয়েবল যত কম ব্যবহার ও ডিক্লিয়ার করা যায় ততই ভালো। বর্তমান সময়ের বেশিরভাগ প্রোগ্রামে গ্লোবাল ভ্যারিয়েবল খুব কম অথবা একদমই নাই। বেশিরভাগ ভ্যারিয়েবল স্ব স্ব ফাংশনেই ডিক্লিয়ার করা হয়। মাঝে মাঝে যদিও গ্লোবাল ভ্যারিয়েবল project-level ডাটা ধরে রাখতে ব্যবহার করা হয়।
 ```
 
 ## Parameters
