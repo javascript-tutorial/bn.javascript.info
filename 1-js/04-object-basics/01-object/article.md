@@ -11,50 +11,50 @@
 
 ![](object.svg)
 
-An empty object ("empty cabinet") can be created using one of two syntaxes:
+একটি খালি অবজেক্ট ("খালি কেবিনেট"), এ দুটি সিনট্যাক্সের যেকোনো একটি দিয়ে তৈরি করা যায়ঃ
 
 ```js
-let user = new Object(); // "object constructor" syntax
-let user = {};  // "object literal" syntax
+let user = new Object(); // "অবজেক্ট কন্সট্রাক্টর" সিনট্যাক্স
+let user = {};  // "অবজেক্ট লিটারেল" সিনট্যাক্স
 ```
 
 ![](object-user-empty.svg)
 
-Usually, the figure brackets `{...}` are used. That declaration is called an *object literal*.
+অবজেক্ট তৈরিতে সচরাচর দ্বিতীয় বন্ধনী `{...}` ব্যবহৃত হয়। এধরণের ডিক্লারেশনকে বলে "অবজেক্ট লিটারেল"।
 
-## Literals and properties
+## লিটারেল এবং প্রোপার্টি
 
-We can immediately put some properties into `{...}` as "key: value" pairs:
+আমরা একই সঙ্গে কিছু প্রোপার্টি "key: value" জোড়ায় `{...}` এর ভেতর দিয়ে দিতে পারিঃ
 
 ```js
-let user = {     // an object
-  name: "John",  // by key "name" store value "John"
-  age: 30        // by key "age" store value 30
+let user = {     // একটি অবজেক্ট
+  name: "John",  // "name" key তে "John" ভ্যালুটি সংরক্ষণ করা হয়েছে
+  age: 30        // "age" key তে 30 ভ্যালুটি সংরক্ষণ করা হয়েছে
 };
 ```
 
-A property has a key (also known as "name" or "identifier") before the colon `":"` and a value to the right of it.
+কোলনের `":"` আগে প্রোপার্টির key ("নাম" অথবা "আইডেন্টিফায়ার" ও বলা হয়) থাকে এবং এর ডানে একটি ভ্যালু থাকে।
 
-In the `user` object, there are two properties:
+`user` অবজেক্টে দুটো প্রপার্টি আছেঃ
 
-1. The first property has the name `"name"` and the value `"John"`.
-2. The second one has the name `"age"` and the value `30`.
+1. প্রথম প্রোপার্টির কী হল `"name"` এবং ভ্যালু `"John"`।
+2. দ্বিতীয় প্রোপার্টির নাম হল `"age"` এবং ভ্যালু `30`।
 
-The resulting `user` object can be imagined as a cabinet with two signed files labeled "name" and "age".
+`user` কে এভাবে কল্পনা করা যায়, একটি ফাইলের কেবিনেট যেখানে "name" এবং "age" লেবেলের দুটি সাইন করা ফাইল আছে।
 
 ![user object](object-user.svg)
 
-We can add, remove and read files from it any time.
+আমরা যেকোনো সময় ফাইল যুক্ত করা, মুছে দেয়া বা পড়তে পারি।
 
-Property values are accessible using the dot notation:
+প্রোপার্টির ভ্যালুগুলো ডট নোটেশন দিয়ে এক্সেস করা যায়ঃ
 
 ```js
-// get property values of the object:
+// অবজেক্ট থেকে প্রোপার্টি ভ্যালু গুলো নেয়া হচ্ছেঃ
 alert( user.name ); // John
 alert( user.age ); // 30
 ```
 
-The value can be of any type. Let's add a boolean one:
+ভ্যালুগুলো যেকোনো টাইপের হতে পারে। একটি বুলিয়ান প্রোপার্টি যুক্ত করা যাকঃ
 
 ```js
 user.isAdmin = true;
