@@ -49,60 +49,60 @@ let age = prompt('তোমার বয়স কত?', 100);
 alert(`তোমার বয়স ${age} বছর!`); // তোমার বয়স ১০০ বছর!
 ```
 
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
+````warn header="ইন্টারনেট এক্সপ্লোরার এ সব সময় `default` দিয়ে দিন"
+দ্বিতীয় পেরামিটারটি ঐচ্ছিক কিন্তু যদি আমরা এটি না দেই তাহলে ইন্টারনেট এক্সপ্লোরার লেখাটিকে প্রম্পটের মধ্যে `"undefined"` সেট করে দিবে। 
 
-Run this code in Internet Explorer to see:
+এই কোডটা ইন্টারনেট এক্সপ্লোরারে রান করে দেখো:
 
 ```js run
-let test = prompt("Test");
+let test = prompt("পরীক্ষা");
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+তাই, প্রমপ্টকে ইন্টারনেট এক্সপ্লোরারে সুন্দর দেখানোর জন্য আমরা সুপারিশ করছি সবসময় দ্বিতীয় আর্গুমেন্টটি দেয়ার জন্য। 
 
 ```js run
-let test = prompt("Test", ''); // <-- for IE
+let test = prompt("পরীক্ষা", ''); // <-- ইন্টারনেট এক্সপ্লোরারের জন্য। 
 ```
 ````
 
 ## confirm
 
-The syntax:
+গঠন:
 
 ```js
-result = confirm(question);
+result = confirm(প্রশ্ন);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and Cancel.
+`confirm` ফাংশন একটি মডাল দেখায় একটি `প্রশ্ন` এবং দুইটি বোতাম OK & Cancel সহ। 
 
-The result is `true` if OK is pressed and `false` otherwise.
+ফলাফল `true` যদি Ok চাপা হয়, অন্যথায় `false`.
 
-For example:
+যেমন:
 
 ```js run
-let isBoss = confirm("Are you the boss?");
+let isBoss = confirm("আপনি কি মালিক?");
 
-alert( isBoss ); // true if OK is pressed
+alert( isBoss ); // true যদি Ok চেপে থাকেন। 
 ```
 
-## Summary
+## সারমর্ম
 
-We covered 3 browser-specific functions to interact with visitors:
+আমরা আজকে ব্যবহারকারীদের সাথে মতবিনিময় করার জন্য ব্রাউজার-নির্দিষ্ট তিনটি ফাংশন সম্পর্কে জানলাম।
 
 `alert`
-: shows a message.
+: একটি বার্তা দেখায়। 
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if Cancel button or `key:Esc` is clicked, `null`.
+: একটি বার্তা দেখায় যাতে ব্যবহারকারী কিছু লেখা দিতে পারে। এটি লেখাটি রিটার্ন করে অথবা Cancel বা `key:Esc` চাপ দিলে `null` রিটার্ন করে। 
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "Cancel". It returns `true` for OK and `false` for Cancel/`key:Esc`.
+: একটি বার্তা দেখায় এবং ব্যবহারকারীর জন্য অপেক্ষা করে বোতাম ছাপার জন্য। যদি Ok  চাপা হয় তাহলে `true` রিটার্ন করে। আর Cancel/`key:Esc` চাপলে `false` রিটার্ন করে। 
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+এই সব পদ্ধতি-ই মডাল। তারা স্ক্রিপ্ট চালানো বন্ধ রাখে এবং ব্যবহারকারীকে অন্যকিছু করতে দেয় না, যতক্ষণ না এই মডাল বাতিল করা না হচ্ছে।
 
-There are two limitations shared by all the methods above:
+উপরে উল্লিখিত পদ্ধতি গুলোতে দুইটি সীমাবদ্ধতা আছে:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+১. মডাল উইন্ডো প্রদর্শন এর স্থান নির্দেশিত হয় ব্রাউজার দ্বারা। সাধারণত এটি মাঝখানে হয়।
+২. মডাল এর ডিজাইনও ব্রাউজারের উপর নির্ভর করে।  আমরা চাইলে এটি বদলাতে পারি না। 
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+এটিই হলো সরলতার দাম। অবশ্য আরো অনেক পদ্ধতি আছে আরো সুন্দর ও সমৃদ্ধ উইন্ডো তৈরী করে ব্যবহারকারীর সাথে মতবিনিময় করার। কিন্তু সরলতা যদি কোনো ব্যাপার না হয়ে থাকে তাহলে এই পদ্ধতি গুলো কাজে লাগাতে পারেন। 
