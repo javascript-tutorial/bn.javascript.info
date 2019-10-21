@@ -134,14 +134,14 @@ alert( userName ); // *!*Rahim*/!*, অপরিবর্তনীয়, ফাং
 গ্লোবাল ভ্যারিয়েবল যত কম ব্যবহার ও ডিক্লিয়ার করা যায় ততই ভালো। বর্তমান সময়ের বেশিরভাগ প্রোগ্রামে গ্লোবাল ভ্যারিয়েবল খুব কম অথবা একদমই নাই। বেশিরভাগ ভ্যারিয়েবল স্ব স্ব ফাংশনেই ডিক্লিয়ার করা হয়। মাঝে মাঝে যদিও গ্লোবাল ভ্যারিয়েবল project-level ডাটা ধরে রাখতে ব্যবহার করা হয়।
 ```
 
-## Parameters
+## প্যারামিটার
 
-We can pass arbitrary data to functions using parameters (also called _function arguments_) .
+আমরা প্রয়োজনীয় ডাটা প্যারামিটার এর মাধ্যমে কোনো ফাংশনে ব্যবহার করতে পারি। (এদেরকে _ফাংশন আর্গুমেন্টস_ ও বলা হয়)।
 
-In the example below, the function has two parameters: `from` and `text`.
+নিচের উদাহরণে দুইটা প্যারামিটার আছে। একটা `from` এবং অন্যটা `text`।
 
 ```js run
-function showMessage(*!*from, text*/!*) { // arguments: from, text
+function showMessage(*!*from, text*/!*) { // আর্গুমেন্টসঃ from, text
   alert(from + ': ' + text);
 }
 
@@ -151,15 +151,15 @@ showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 */!*
 ```
 
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
+যখন ফাংশন লাইন `(*)` এবং `(**)` কল করে, ভ্যালুগুলো `from` এবং `text` এ এসাইন হয়। পরবর্তিতে প্রয়োজনানুসারে ফাংশন তাদেরকে ব্যবহার করে।
 
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
+আরেকটা উদাহরণ দেখা যাকঃ ভ্যারিয়েবল `from` ফাংশনে ডিক্লিয়ার করলাম। নোটঃ ফাংশন `from` কে পরিবর্তন করে, কিন্তু এই পরিবর্তন বাইরে কোথাও দেখা যাবে না। কারণ, ফাংশন সবসময় ভ্যাল্যুর একটা কপি নিজের কাছে রেখে দিবে।
 
 ```js run
 function showMessage(from, text) {
 
 *!*
-  from = '*' + from + '*'; // make "from" look nicer
+  from = '*' + from + '*'; // "from" কে দেখতে সুন্দর লাগছে না এখন?
 */!*
 
   alert( from + ': ' + text );
@@ -169,7 +169,7 @@ let from = "Ann";
 
 showMessage(from, "Hello"); // *Ann*: Hello
 
-// the value of "from" is the same, the function modified a local copy
+// "from" এর ভেল্যু একই, ফাংশন শুধু লোকাল কপিকে মোডিফাই করেছে
 alert( from ); // Ann
 ```
 
