@@ -459,28 +459,28 @@ for (let code in codes) {
 
 এখন যেভাবে কাজ করা উচিত সেভাবেই কাজ করছে।
 
-## Copying by reference
+## রেফারেন্সের মাধ্যমে কপি করা
 
-One of the fundamental differences of objects vs primitives is that they are stored and copied "by reference".
+অবজেক্ট আর প্রিমিটিভ এর মধ্যে একটি মৌলিক পার্থক্য হল, অবজেক্ট রেফারেন্সের ("by reference") মাধ্যমে সংরক্ষণ এবং কপি করা হয়।
 
-Primitive values: strings, numbers, booleans -- are assigned/copied "as a whole value".
+প্রিমিটিভ ভ্যালুগুলোঃ স্ট্রিং, নাম্বার, বুলিয়ান -- এসব সংরক্ষণ এবং কপি হয়ে থাকে সম্পূর্ণ/সরাসরি ভ্যালু হিসেবে।
 
-For instance:
+উদাহরণঃ
 
 ```js
 let message = "Hello!";
 let phrase = message;
 ```
 
-As a result we have two independent variables, each one is storing the string `"Hello!"`.
+এর ফলে, আমাদের কাছে দুটি স্বাধীন ভেরিয়েবল আছে, যাদের প্রত্যেকে `"Hello!"` স্ট্রিংটি সংরক্ষণ করে।
 
 ![](variable-copy-value.svg)
 
-Objects are not like that.
+অবজেক্টগুলো এই রকম না।
 
-**A variable stores not the object itself, but its "address in memory", in other words "a reference" to it.**
+**ভেরিয়েবল সরাসরি অবজেক্টকে সংরক্ষণ করে না, অবজেক্টের "মেমোরি এড্রেস", বা অবজেক্টের "রেফারেন্স" সংরক্ষণ করে।**
 
-Here's the picture for the object:
+এখানে অবজেক্টটির গঠনের ছবি দেয়া হলঃ
 
 ```js
 let user = {
@@ -490,25 +490,25 @@ let user = {
 
 ![](variable-contains-reference.svg)
 
-Here, the object is stored somewhere in memory. And the variable `user` has a "reference" to it.
+এখানে, অবজেক্টটি মেমোরিতে কোথাও সংরক্ষিত রয়েছে। এবং `user` ভেরিয়েবলের কাছে এই অবজেক্টের "রেফারেন্স" রয়েছে।
 
-**When an object variable is copied -- the reference is copied, the object is not duplicated.**
+**যখন একটি অবজেক্ট ভেরিয়েবলকে কপি করা হয় -- রেফারেন্সটি কপি হয়। অবজেক্টটি দ্বিতীয়বার তৈরি হয় না।**
 
-If we imagine an object as a cabinet, then a variable is a key to it. Copying a variable duplicates the key, but not the cabinet itself.
+অবজেক্টকে যদি কেবিনেট ধরি, তাহলে ভেরিয়েবলের কাছে এর চাবি থাকে। ভেরিয়েবল কপি করা মানে চাবি কপি করা, পুরো কেবিনেটকে কপি করা নয়।
 
-For instance:
+উদাহরণস্বরূপঃ
 
 ```js no-beautify
 let user = { name: "John" };
 
-let admin = user; // copy the reference
+let admin = user; // রেফারেন্স কপি হচ্ছে
 ```
 
-Now we have two variables, each one with the reference to the same object:
+এখন আমাদের কাছে দুটি ভেরিয়েবল আছে, প্রত্যেকের কাছে একই অবজেক্টের রেফারেন্স আছেঃ
 
 ![](variable-copy-reference.svg)
 
-We can use any variable to access the cabinet and modify its contents:
+আমরা যেকোনো ভেরিয়েবল ব্যবহার করে কেবিনেটকে এক্সেস এবং এর কন্টেন্টকে মডিফাই করতে পারিঃ
 
 ```js run
 let user = { name: 'John' };
@@ -516,13 +516,13 @@ let user = { name: 'John' };
 let admin = user;
 
 *!*
-admin.name = 'Pete'; // changed by the "admin" reference
+admin.name = 'Pete'; // "admin" রেফারেন্সের মাধ্যমে পরিবর্তন করা হচ্ছে
 */!*
 
-alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
+alert(*!*user.name*/!*); // 'Pete', "user" রেফারেন্সের মাধ্যমে পরিবর্তনটা দেখা হচ্ছে
 ```
 
-The example above demonstrates that there is only one object. As if we had a cabinet with two keys and used one of them (`admin`) to get into it. Then, if we later use the other key (`user`) we would see changes.
+উপরের উদাহরণটি প্রমাণ করে যে শুধু একটিই অবজেক্ট রয়েছে। অনেকটা যেন আমাদের কাছে একই কেবিনেটের দুইটা চাবি আছে এবং একটা চাবি (`admin`) ব্যবহার করা হয়েছে কেবিনেট খুলার জন্য। এরপর, আমরা যদি অন্য চাবি (`user`) ব্যবহার করি, আমরা কি পরিবর্তন হয়েছে তা দেখতে পাই।
 
 ### Comparison by reference
 
