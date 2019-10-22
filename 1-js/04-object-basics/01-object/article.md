@@ -321,40 +321,40 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, key থেকে নামটি নিয়ে, ওই নামে প্রোপার্টি আছে কিনা দেখা হচ্ছে
 ```
 
-````smart header="Using \"in\" for properties that store `undefined`"
-Usually, the strict comparison `"=== undefined"` check the property existance just fine. But there's a special case when it fails, but `"in"` works correctly.
+````smart header="`undefined` প্রোপার্টির ক্ষেত্রে \"in\" এর ব্যবহার"
+সাধারণত, `"=== undefined"` এভাবে প্রোপার্টি আছে কিনা পরীক্ষা করা ঠিকঠাক কাজ করে, কিছু বিশেষ ক্ষেত্রে এটি ভুল ফলাফল দেয়, কিন্তু `"in"` অপারেটর ঠিকমত কাজ করে।
 
-It's when an object property exists, but stores `undefined`:
+এটি ঘটে যখন অবজেক্টের প্রোপার্টি আছে কিন্তু তা `undefined` ঃ
 
 ```js run
 let obj = {
   test: undefined
 };
 
-alert( obj.test ); // it's undefined, so - no such property?
+alert( obj.test ); // এটি undefined, তাই - প্রোপার্টি নেই?
 
-alert( "test" in obj ); // true, the property does exist!
+alert( "test" in obj ); // true, প্রোপার্টি আছে!
 ```
 
 
-In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+উপরের কোডে, `obj.test` এই প্রোপার্টি কিন্তু টেকনিক্যালি অবজেক্টে আছে। সুতরাং `in` অপারেটর ঠিকভাবে কাজ করছে।
 
-Situations like this happen very rarely, because `undefined` is usually not assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+এধরেন পরিস্থিতি কিছুটা বিরল, কারণ `undefined` আসলে এসাইন করা হয় না। আমরা বেশীরভাগ সময় "অজানা" বা "খালি" বুঝাতে `null` ব্যবহার করি। তাই `in` অপারেটরের ব্যবহার কদাচিৎ দেখা যায়।
 ````
 
-## The "for..in" loop
+## "for..in" লুপ
 
-To walk over all keys of an object, there exists a special form of the loop: `for..in`. This is a completely different thing from the `for(;;)` construct that we studied before.
+অবজেক্টের সবগুলো কী এর উপর ভিজিট করার জন্য একটি বিশেষ ধরণের লুপ আছেঃ `for..in`। এটি `for(;;)` এর চাইতে পুরোপুরি আলাদা, যেটি আমরা পূর্বে দেখেছি।
 
-The syntax:
+সিনট্যাক্সঃ
 
 ```js
 for (key in object) {
-  // executes the body for each key among object properties
+  // অবজেক্টের প্রতিটি কী এর জন্য এই বডিটি এক্সিকিউট হবে
 }
 ```
 
-For instance, let's output all properties of `user`:
+যেমন, `user` এর সব প্রোপার্টি বের করা যাকঃ
 
 ```js run
 let user = {
@@ -371,18 +371,18 @@ for (let key in user) {
 }
 ```
 
-Note that all "for" constructs allow us to declare the looping variable inside the loop, like `let key` here.
+উল্লেখ্য, সব "for" লুপ কন্সট্রাক্ট, লুপের মধ্যে লুপিং ভেরিয়েবল ঘোষণা করতে দেয়, যেমন এখানে `let key`।
 
-Also, we could use another variable name here instead of `key`. For instance, `"for (let prop in obj)"` is also widely used.
+এছাড়াও, আমরা এখানে `key` এর পরিবর্তে অন্য ভেরিয়েবলও ব্যবহার করতে পারব। উদাহরণস্বরূপ, `"for (let prop in obj)"` এটিও ব্যপকভাবে ব্যবহৃত হয়।
 
 
-### Ordered like an object
+### অবজেক্ট এ প্রোপার্টির অর্ডার
 
-Are objects ordered? In other words, if we loop over an object, do we get all properties in the same order they were added? Can we rely on this?
+আমরা যদি অবজেক্টের উপর লুপ চালাই, আমরা কি সবগুলো প্রোপার্টি একই ভাবে সাজানো পাবো যেভাবে আমরা সংযুক্ত করেছি? আমরা কি এই বিষয়ে ভরসা রাখতে পারি?
 
-The short answer is: "ordered in a special fashion": integer properties are sorted, others appear in creation order. The details follow.
+সংক্ষেপে বললেঃ "বিশেষ ভাবে সাজানো" ঃ  যেসব প্রোপার্টি ইন্টেজার সেসব ক্রমানুসারে সাজানো, অন্যেরা তৈরি করার সময় যে অর্ডারে ছিল সেই অর্ডারে সাজানো পাওয়া যাবে। বিস্তারিত নিচে।
 
-As an example, let's consider an object with the phone codes:
+উদাহরণ হিসেবে, ধরি ফোন কোডের একটি অবজেক্টঃ
 
 ```js run
 let codes = {
@@ -400,19 +400,19 @@ for (let code in codes) {
 */!*
 ```
 
-The object may be used to suggest a list of options to the user. If we're making a site mainly for German audience then we probably want `49` to be the first.
+এই অবজেক্টটি হয়তো ইউজারকে একটি অপশনের লিস্ট দেখানোর জন্য ব্যবহার করা হবে। যদি সাইটটি মূলত জার্মান ইউজারদের জন্য হয়, তাহলে আমরা চাইব `49` যেন প্রথমেই থাকে।
 
-But if we run the code, we see a totally different picture:
+কিন্তু কোড রান করলে আমরা পুরোপুরি অন্যরকম অবস্থা দেখিঃ
 
 - USA (1) goes first
 - then Switzerland (41) and so on.
 
-The phone codes go in the ascending sorted order, because they are integers. So we see `1, 41, 44, 49`.
+ফোন কোডগুলো ঊর্ধ্বগামী (ascending) ক্রমে সাজানো, কারণ তারা ইন্টিজার। তাই আমরা পাই `1, 41, 44, 49`।
 
-````smart header="Integer properties? What's that?"
-The "integer property" term here means a string that can be converted to-and-from an integer without a change.
+````smart header="ইন্টিজার প্রোপার্টি?"
+"ইন্টিজার প্রোপার্টি" হল একটি স্ট্রিং যেটি ইন্টিজার (পূর্ণসংখ্যা) থেকে বা ইন্টিজারে কোন পরিবর্তন ছাড়াই পরিবর্তন করা যায়।
 
-So, "49" is an integer property name, because when it's transformed to an integer number and back, it's still the same. But "+49" and "1.2" are not:
+তাই, "49" একটি ইন্টিজার প্রোপার্টির নাম, কারণ যখন এটিকে ইন্টিজারে পরিবর্তন এবং ইন্টিজার থকে স্ট্রিং এ পরিবর্তন করা হয় এটি একই থাকে। কিন্তু "+49" এবং "1.2" ইন্টিজার নয়ঃ
 
 ```js run
 // Math.trunc is a built-in function that removes the decimal part
@@ -422,7 +422,7 @@ alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integ
 ```
 ````
 
-...On the other hand, if the keys are non-integer, then they are listed in the creation order, for instance:
+...অপরদিকে, যদি কী ইন্টিজার না হয়, তাহলে তারা তৈরির সময় যে ক্রমে ছিল সেভাবেই থাকবে, যেমনঃ
 
 ```js run
 let user = {
@@ -432,16 +432,16 @@ let user = {
 user.age = 25; // add one more
 
 *!*
-// non-integer properties are listed in the creation order
+// যদি কী ইন্টিজার না হয়, তাহলে তারা তৈরির সময় যে ক্রমে ছিল সেভাবেই থাকবে
 */!*
 for (let prop in user) {
   alert( prop ); // name, surname, age
 }
 ```
 
-So, to fix the issue with the phone codes, we can "cheat" by making the codes non-integer. Adding a plus `"+"` sign before each code is enough.
+তাই, ফোন কোডের ইস্যু ঠিক করতে আমরা একটু "ধূর্ততার" সাহায্য নিতে পারি। প্রতিটি কোডের আগে `"+"` চিহ্ন ব্যবহার করে তাদের নন-ইন্টিজার করে দেয়াই যথেষ্ট।
 
-Like this:
+এভাবেঃ
 
 ```js run
 let codes = {
@@ -457,7 +457,7 @@ for (let code in codes) {
 }
 ```
 
-Now it works as intended.
+এখন যেভাবে কাজ করা উচিত সেভাবেই কাজ করছে।
 
 ## Copying by reference
 
