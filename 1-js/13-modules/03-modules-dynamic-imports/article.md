@@ -1,48 +1,49 @@
 # Dynamic imports
 
-Export and import statements that we covered in previous chapters are called "static". The syntax is very simple and strict.
+আগের অধ্যায়ে আমরা ইমপোর্ট এবং এক্সপোর্ট নিয়ে আলোচনা করেছি যাদের "static" বলা হয়। যার সিনট্যাক্স খুবই সাধারন। 
 
-First, we can't dynamically generate any parameters of `import`.
+প্রথমত, `import` এর কোন প্যারামিটার ডাইনামিক ভাবে আমরা জেনারেট করতে পারি না। 
 
-The module path must be a primitive string, can't be a function call. This won't work:
+মডিউলের পাথ অবশ্যই প্রিমিটিভ স্ট্রিং হতে হবে, ফাংশন কল হওয়া যাবে না। এটি কাজ করবে নাঃ 
 
 ```js
-import ... from *!*getModuleName()*/!*; // Error, only from "string" is allowed
+import ... from *!*getModuleName()*/!*; // এরর, শুধুমাত্র "string" প্রযোজ্য 
 ```
 
-Second, we can't import conditionally or at run-time:
+দ্বিতীয়ত, আমরা কন্ডিশনালি অথবা রান-টাইমে ইমপোর্ট করতে পারবো না।
 
 ```js
 if(...) {
-  import ...; // Error, not allowed!
+  import ...; // এরর, এটি প্রযোজ্য নয়।
 }
 
 {
-  import ...; // Error, we can't put import in any block
+  import ...; // এরর, আমারা কোন ব্লকের মধ্যে ইমপোর্ট রাখতে পারি না। 
 }
 ```
 
-That's because `import`/`export` aim to provide a backbone for the code structure. That's a good thing, as code structure can be analyzed, modules can be gathered and bundled into one file by special tools, unused exports can be removed ("tree-shaken"). That's possible only because the structure of imports/exports is simple and fixed.
+তার কারন `import`/`export` এর উদ্দেশ্য হচ্ছে কোডের গঠনে মেরুদন্ডের ন্যায় কাজ করা। এটি একটি ভালো দিক, কোডের গঠন বিশ্লেষণ করে দেখা যায়, একটি বিশেষ টুলের দ্বারা মডিউল গুলোকে ফাইলে একসাথে রাখা যায়, অব্যবহৃত এক্সপোর্ট গুলো রিমুভ("tree-shaken") করা যায়. `imports/exports` এর সাধারন গঠনের কারনেই এটি সম্ভব হয়।
 
-But how can we import a module dynamically, on-demand?
+কিন্তু, প্রয়োজনে একটি মডিউলকে কিভাবে আমরা ডাইনামিকালি ইমপোর্ট করতে পারি? 
 
-## The import() expression
+## import() এক্সপ্রেশন 
 
-The `import(module)` expression loads the module and returns a promise that resolves into a module object that contains all its exports. It can be called from any place in the code.
+`import(module)` এক্সপ্রেশনটি মডিউলকে লোড করে এবং একটি প্রমিস রিটার্ন করে যা একটি মডিউল অবজেক্টের মধ্যে রিসল্ভ হয়ে থাকে এবং এতে সমস্ত এক্সপোর্ট গুলো থাকে। 
 
-We can use it dynamically in any place of the code, for instance:
+আমরা কোডের যে কোন জায়গায় এটি ডাইনামিকালি ব্যবহার করতে পারি, যেমনঃ 
+
 
 ```js
-let modulePath = prompt("Which module to load?");
+let modulePath = prompt("কোন মডিউলটি লোড করতে চান?");
 
 import(modulePath)
   .then(obj => <module object>)
-  .catch(err => <loading error, e.g. if no such module>)
+  .catch(err => <loading error, e.g. যদি কোন মডিউল না থাকে>)
 ```
 
-Or, we could use `let module = await import(modulePath)` if inside an async function.
+অথবা, যদি এটি একটি `async` ফাংশনের ভিতর হয়ে থাকে তবে  `let module = await import(modulePath)` ব্যবহার করতে পারি। 
 
-For instance, if we have the following module `say.js`:
+যেমন, আমাদের যদি নিম্নলিখিত মডিউল থাকে `say.js`: 
 
 ```js
 // 📁 say.js
@@ -55,7 +56,7 @@ export function bye() {
 }
 ```
 
-...Then dynamic import can be like this:
+...তবে ডাইনামিক ইমপোর্টটি হতে পারেঃ 
 
 ```js
 let {hi, bye} = await import('./say.js');
@@ -64,12 +65,12 @@ hi();
 bye();
 ```
 
-Or, if `say.js` has the default export:
+অথবা, যদি `say.js` এর ডিফল্ট এক্সপোর্ট থাকেঃ 
 
 ```js
 // 📁 say.js
 export default function() {
-  alert("Module loaded (export default)!");
+  alert("মডিউল লোড হয়েছে (export default)!");
 }
 ```
 
