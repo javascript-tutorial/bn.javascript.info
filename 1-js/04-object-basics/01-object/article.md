@@ -551,7 +551,7 @@ alert( a == b ); // false
 
 `obj1 > obj2` এ রকম তুলনা বা প্রিমিটিভের সাথে তুলনা `obj == 5` এর সময় অবজেক্ট প্রিমিটিভে রূপান্তরিত হয়। আমরা শীঘ্রই অবজেক্ট কিভাবে রূপান্তর হয় তা জানব, কিন্তু সত্যি বলতে, এরকম তুলনা বাস্তবে খুবই কম প্রয়োজন হয় এবং সাধারণত কোডে ভুলের কারণে হয়ে থাকে।
 
-### কন্সটেন্ট / ধ্রুবক অবজেক্ট
+### কন্সটেন্ট/ধ্রুবক অবজেক্ট
 
 `const` দিয়ে ঘোষণা করা অবজেক্ট পরিবর্তিত *হতে পারে*।
 
@@ -588,17 +588,17 @@ user = {
 
 ...কিন্তু আমরা যদি অবজেক্টের প্রোপার্টিকে ধ্রুবক হিসেবে রাখতে চাই? যাতে `user.age = 25` এটা এরর দেয়। এটা করাও সম্ভব। আমরা <info:property-descriptors> অধ্যায়ে তা দেখব।
 
-## Cloning and merging, Object.assign
+## ক্লোন এবং মার্জ করা, Object.assign
 
-So, copying an object variable creates one more reference to the same object.
+অবজেক্টের ভেরিয়েবল কপি করা মানে, একই অবজেক্টের আরেকটি রেফারেন্স তৈরি করা।
 
-But what if we need to duplicate an object? Create an independent copy, a clone?
+কিন্তু আমরা যদি অবজেক্টের প্রতিলিপি/ডুপ্লিকেট তৈরি করতে চাই? একটি সম্পূর্ণ আলাদা কপি তৈরি করতে চাই?
 
-That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. Actually, that's rarely needed. Copying by reference is good most of the time.
+অবশ্যই করা যাবে, কিন্তু প্রক্রিয়াটি একটু জটিল, কারণ জাভাস্ক্রিপ্টে এ কাজের জন্য কোন বিল্ড-ইন মেথড নেই। আসলে এটি কদাচিৎ প্রয়োজন হয়। রেফারেন্স দিয়ে কপি করাই বেশিরভাগ কাজের জন্য যথেষ্ট।
 
-But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+কিন্তু আমরা যদি আসলেই এটা করতে চাই, তাহলে আমাদের একটি নতুন অবজেক্ট তৈরি করতে হবে এবং আগের অবজেক্টের স্ট্রাকচার/গঠন নতুন অবজেক্টে কপি করতে হবে। এটা করতে আগের অবজেক্টের প্রতিটি প্রোপার্টিকে প্রিমিটিভ স্তর থেকে নতুন অবজেক্টে কপি করতে হবে।
 
-Like this:
+এভাবেঃ
 
 ```js run
 let user = {
@@ -607,32 +607,32 @@ let user = {
 };
 
 *!*
-let clone = {}; // the new empty object
+let clone = {}; // নতুন খালি অবজেক্ট
 
-// let's copy all user properties into it
+// user এর সব প্রোপার্টি নতুন অবজেক্টে কপি করা যাক
 for (let key in user) {
   clone[key] = user[key];
 }
 */!*
 
-// now clone is a fully independent clone
-clone.name = "Pete"; // changed the data in it
+// এখন clone হচ্ছে পুরো আলাদা একটি অবজেক্ট
+clone.name = "Pete"; // এটির ডাটা পরিবর্তন করা হচ্ছে
 
-alert( user.name ); // still John in the original object
+alert( user.name ); // এখনও আগের অবজেক্টের ভ্যালু John
 ```
 
-Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
+এ কাজের জন্য আমরা [Object.assign](mdn:js/Object/assign) মেথডটাও ব্যবহার করতে পারি।
 
-The syntax is:
+সিনট্যাক্সঃ
 
 ```js
 Object.assign(dest, [src1, src2, src3...])
 ```
 
-- Arguments `dest`, and `src1, ..., srcN` (can be as many as needed) are objects.
-- It copies the properties of all objects `src1, ..., srcN` into `dest`. In other words, properties of all arguments starting from the 2nd are copied into the 1st. Then it returns `dest`.
+- `dest`, এবং `src1, ..., srcN` আর্গুমেন্টগুলো (যতগুলো ইচ্ছা হতে পারে) হল অবজেক্ট।
+-  এটি  `src1, ..., srcN` অবজেক্টগুলোর প্রোপার্টি `dest` অবজেক্টে কপি করে। অন্যভাবে বললে, দ্বিতীয় আর্গুমেন্ট থেকে শুরু করে সব আর্গুমেন্ট এর প্রোপার্টিগুলো প্রথম আর্গুমেন্টে কপি হবে। তারপরত এটি `dest` কে রিটার্ন করে।
 
-For instance, we can use it to merge several objects into one:
+যেমন, আমরা এটিকে একাধিক অবজেক্টকে মার্জ করার জন্য ব্যবহার করতে পারিঃ
 ```js
 let user = { name: "John" };
 
@@ -640,14 +640,14 @@ let permissions1 = { canView: true };
 let permissions2 = { canEdit: true };
 
 *!*
-// copies all properties from permissions1 and permissions2 into user
+// permissions1 এবং permissions2 অবজেক্টদ্বয় থেকে সকল প্রোপার্টি user এ কপি করা হচ্ছে
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// now user = { name: "John", canView: true, canEdit: true }
+// এখন user = { name: "John", canView: true, canEdit: true }
 ```
 
-If the receiving object (`user`) already has the same named property, it will be overwritten:
+যদি শেষোক্ত অবজেক্টে (`user`) একই নামে প্রোপার্টি আগে থেকেই থেকে থাকে, সেটি ওভাররাইড হয়ে যাবেঃ
 
 ```js
 let user = { name: "John" };
@@ -658,7 +658,7 @@ Object.assign(user, { name: "Pete", isAdmin: true });
 // now user = { name: "Pete", isAdmin: true }
 ```
 
-We also can use `Object.assign` to replace the loop for simple cloning:
+সাধারণ ক্লোনিং এর ক্ষেত্রে আমরা লুপ এর পরিবর্তে `Object.assign` কে ব্যবহার করতে পারিঃ
 
 ```js
 let user = {
@@ -671,9 +671,9 @@ let clone = Object.assign({}, user);
 */!*
 ```
 
-It copies all properties of `user` into the empty object and returns it. Actually, the same as the loop, but shorter.
+এটি `user` এর সকল প্রোপার্টিকে খালি অবজেক্টে কপি করে এবং রিটার্ন করে। আসলে, এটি লুপের মতই, কিন্তু ছোট করে লেখা যায়।
 
-Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
+এতক্ষণ পর্যন্ত আমরা ধরে নিয়েছি `user` এর সব প্রোপার্টিগুলো প্রিমিটিভ। কিন্তু প্রোপার্টিতে অন্য অবজেক্টের রেফারেন্স থাকতে পারে। তাদের কিভাবে কপি করা যায়?
 
 Like this:
 ```js run
@@ -688,7 +688,7 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
+এখন `clone.sizes = user.sizes` এভাবে কপি করা যথেষ্ট না, কারণ `user.sizes` একটি অবজেক্ট, এটির রেফারেন্স কপি হবে। সুতরাং `clone` এবং `user` এর size প্রোপার্টি একই অবজেক্ট হবেঃ
 
 Like this:
 ```js run
@@ -702,37 +702,37 @@ let user = {
 
 let clone = Object.assign({}, user);
 
-alert( user.sizes === clone.sizes ); // true, same object
+alert( user.sizes === clone.sizes ); // true, একই অবজেক্ট
 
 // user and clone share sizes
-user.sizes.width++;       // change a property from one place
-alert(clone.sizes.width); // 51, see the result from the other one
+user.sizes.width++;       // একজায়গায় প্রোপার্টিকে পরিবর্তন করা হচ্ছে
+alert(clone.sizes.width); // 51, অন্য জায়গায় পরিবর্তিত হয়ে গেছে
 ```
 
-To fix that, we should use the cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
+এটা ঠিক করার জন্য, আমাদের ক্লোন করার জন্য একটি লুপ চালাতে হবে, যেটি প্রতিটি `user[key]` ভ্যালুকে পরীক্ষা করে দেখবে - এটি অবজেক্ট কিনা, তারপর অবজেক্ট হলে সেই অবজেক্টের স্ট্রাকচারও কপি করা হবে। এটাকে বলে "ডিপ ক্লোনিং"।
 
-There's a standard algorithm for deep cloning that handles the case above and more complex cases, called the [Structured cloning algorithm](https://html.spec.whatwg.org/multipage/structured-data.html#safe-passing-of-structured-data). In order not to reinvent the wheel, we can use a working implementation of it from the JavaScript library [lodash](https://lodash.com), the method is called [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+একটি স্ট্যান্ডার্ড এলগরিদম আছে যা উপরে বর্ণিত ডিপ ক্লোনিং এর কেসটি এবং আরও অনেক জটিল কেস হ্যান্ডেল করে, যাকে বলা হয় [স্ট্যান্ডার্ড ক্লোনিং এলগরিদম](https://html.spec.whatwg.org/multipage/structured-data.html#safe-passing-of-structured-data)। বার বার একই কাজটি না করার জন্য আমরা এর একটি ইমপ্লিমেন্টেশন ব্যবহার করতে পারি এই লাইব্রেরী থেকে - [lodash](https://lodash.com), মেথডটির নাম [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
 
 
 
-## Summary
+## সারাংশ
 
-Objects are associative arrays with several special features.
+অবজেক্ট হল কিছু বিশেষ ফিচার যুক্ত এসোসিয়েটিভ অ্যারে।
 
-They store properties (key-value pairs), where:
-- Property keys must be strings or symbols (usually strings).
-- Values can be of any type.
+তারা কিছু প্রোপার্টি সংরক্ষণ করে (key-value pairs), যেখানেঃ
+- প্রোপার্টির কী অবশ্যই স্ট্রিং বা সিম্বল হতে হবে (সাধারণত স্ট্রিং)।
+- ভ্যালু যেকোনো টাইপের হতে পারে।
 
-To access a property, we can use:
-- The dot notation: `obj.property`.
-- Square brackets notation `obj["property"]`. Square brackets allow to take the key from a variable, like `obj[varWithKey]`.
+একটি প্রোপার্টিকে এক্সেস করতে আমরা ব্যবহার করিঃ
+- ডট নোটেশনঃ `obj.property`.
+- তৃতীয় বন্ধনী `obj["property"]`। তৃতীয় বন্ধনী নোটেশন আমাদের ভেরিয়েবল থেকে কী ব্যবহার করতে দেয়, এভাবে `obj[varWithKey]`।
 
-Additional operators:
-- To delete a property: `delete obj.prop`.
-- To check if a property with the given key exists: `"key" in obj`.
-- To iterate over an object: `for (let key in obj)` loop.
+অন্যান্য অপারেটরসমূহঃ
+- প্রোপার্টি মুছে দিতেঃ `delete obj.prop`।
+- নির্দিষ্ট কী এর কোন প্রোপার্টি আছে কিনা পরীক্ষা করতেঃ `"key" in obj`।
+- অবজেক্টের উপর ইটারেট বা প্রতিটি কী বের করতেঃ  `for (let key in obj)` লুপ ব্যবহার করা হয়।
 
-অবজেক্টকে রেফারেন্সের মাধ্যমে এসাইন বা কপি করা হয়। In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object. All operations via copied references (like adding/removing properties) are performed on the same single object.
+অবজেক্টকে রেফারেন্সের মাধ্যমে এসাইন বা কপি করা হয়। অন্যভাবে বললে, ভেরিয়েবল "অবজেক্ট ভ্যালু" রাখে না, কিন্তু ভ্যালুর "রেফারেন্স" (মেমোরি এড্রেস) রাখে। সুতরাং এরকম ভেরিয়েবল কপি করা বা ফাংশন আর্গুমেন্টে পাঠালে রেফারেন্সটা কপি হয়, অব্জেক্টা নয়। কপি করা রেফারেন্সের মাধ্যমে করা সকল অপারেশন (যেমন প্রোপার্টি এড/রিমুভ করা) মূল অবজেক্টেই হয়।
 
 "আসলেই কপি" (ক্লোন) করার জন্য আমরা `Object.assign` অথবা  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) ব্যবহার করতে পারি।
 
