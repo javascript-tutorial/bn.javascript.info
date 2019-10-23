@@ -524,32 +524,32 @@ alert(*!*user.name*/!*); // 'Pete', "user" রেফারেন্সের ম
 
 উপরের উদাহরণটি প্রমাণ করে যে শুধু একটিই অবজেক্ট রয়েছে। অনেকটা যেন আমাদের কাছে একই কেবিনেটের দুইটা চাবি আছে এবং একটা চাবি (`admin`) ব্যবহার করা হয়েছে কেবিনেট খুলার জন্য। এরপর, আমরা যদি অন্য চাবি (`user`) ব্যবহার করি, আমরা কি পরিবর্তন হয়েছে তা দেখতে পাই।
 
-### Comparison by reference
+### রেফারেন্সের সাহায্যে তুলনা
 
-The equality `==` and strict equality `===` operators for objects work exactly the same.
+ইকুয়ালিটি `==` and স্ট্রিক্ট ইকুয়ালিটি `===` অপারেটর অবজেক্টের জন্য একই ভাবে কাজ করে।
 
-**Two objects are equal only if they are the same object.**
+**দুটি অবজেক্ট ইকুয়াল বা সমান হবে শুধুমাত্র তারা যদি একই অবজেক্ট হয়ে থাকে।**
 
-For instance, if two variables reference the same object, they are equal:
+যেমন, যদি দুটি ভেরিয়েবলের রেফারেন্স একই অবজেক্টকে পয়েন্ট করে, তাহলে তারা সমানঃ
 
 ```js run
 let a = {};
 let b = a; // copy the reference
 
-alert( a == b ); // true, both variables reference the same object
+alert( a == b ); // true, দুটি ভেরিয়েবলে একই অবজেক্টের পয়েন্ট রাখা আছে
 alert( a === b ); // true
 ```
 
-And here two independent objects are not equal, even though both are empty:
+এবং এখানে দুটি আলাদা অবজেক্ট দেখানো হচ্ছে যারা সমান না, যদিও দুটিই খালি অবজেক্ট।
 
 ```js run
 let a = {};
-let b = {}; // two independent objects
+let b = {}; // দুটি আলাদা অবজেক্ট
 
 alert( a == b ); // false
 ```
 
-For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are necessary very rarely and usually are a result of a coding mistake.
+`obj1 > obj2` এ রকম তুলনা বা প্রিমিটিভের সাথে তুলনা `obj == 5` এর সময় অবজেক্ট প্রিমিটিভে রূপান্তরিত হয়। আমরা শীঘ্রই অবজেক্ট কিভাবে রূপান্তর হয় তা জানব, কিন্তু সত্যি বলতে, এরকম তুলনা বাস্তবে খুবই কম প্রয়োজন হয় এবং সাধারণত কোডে ভুলের কারণে হয়ে থাকে।
 
 ### Const object
 
