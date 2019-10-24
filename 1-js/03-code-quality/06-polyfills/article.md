@@ -1,15 +1,15 @@
 
-# Polyfills
+# পলিফিল (Polyfills)
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+জাভাস্ক্রিপ্ট ভাষাটি ধীরে ধীরে উন্নত হচ্ছে। নিয়মিত নতুন নতুন প্রস্তাবনা আসছে, সেগুলো বিশ্লেষণ করা হচ্ছে এবং, যদি যোগ্য বলে বিবেচিত হয় তাহলে এই তালিকাতে <https://tc39.github.io/ecma262/> নিবন্ধিত হচ্ছে, এবং তারপর [স্পেসিফিকেশন](http://www.ecma-international.org/publications/standards/Ecma-262.htm) এ উন্নীত হচ্ছে।
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+জাভাস্ক্রিপ্টের পেছনে যে দলটি কাজ করছে তারা তাদের মত বিবেচনা করছে কোনটিকে আগে বাস্তবায়ন করা দরকার। তারা হয়তো সিদ্ধান্ত নিতে পারে, যেগুলো খসড়া তালিকাভুক্ত সেগুলো আগে করার এবং যেগুলো ইতিমধ্যে স্পেসিফিকেশনে আছে সেগুলো পরে করার, কারণ সেগুলো কম আকর্ষণীয় বা করা কঠিন।
 
-So it's quite common for an engine to implement only the part of the standard.
+তাই প্রায়শ ইঞ্জিনগুলো স্ট্যান্ডার্ড এর শুধু আংশিক বাস্তবায়ন করে।
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+ভাষার কোন কোন বৈশিষ্ট্য বর্তমানে সমর্থিত সেটি জানার একটি ভাল পেইজ হল এটি <https://kangax.github.io/compat-table/es6/> (এটি অনেক বড়, আমাদের এখনও অনেককিছুই জানতে হবে)।
 
-## Babel
+## ব্যাবেল (Babel)
 
 When we use modern features of the language, some engines may fail to support such code. Just as said, not all features are implemented everywhere.
 
