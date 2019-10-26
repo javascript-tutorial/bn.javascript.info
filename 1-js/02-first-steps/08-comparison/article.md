@@ -33,7 +33,7 @@ alert(result); // true
 
 কোনো স্ট্রিং ছোট বা বড় কিনা তা তুলনা করার জন্য জাভাস্ক্রিপ্ট "অভিধান" বা "আভিধানিক" ক্রম ব্যবহার করে।
 
-অর্থাৎ, strings are compared letter-by-letter.
+অর্থাৎ, স্ট্রিং তুলনা করা হয় একটি অক্ষরের পর আরেকটি অক্ষরের সাথে।
 
 উদাহরণস্বরূপ:
 
@@ -136,32 +136,32 @@ alert(0 === false); // false, কারণ টাইপ আলাদা।
 
 যথাযথ সমতার অপারেটরে `(===)` একটু বেশি লিখতে হয় তবে এটি আসলেই কি ঘটছে বুঝতে সাহায্য করে এবং ভুল হওয়ার সম্ভাবনা কমায়।
 
-## Comparison with null and undefined
+## Null এবং Undefined এর সাথে তুলনা।
 
-There's a non-intuitive behavior when `null` or `undefined` are compared to other values.
+`null` এবং `undefined` এর সাথে অন্য ভ্যালু এর তুলনা করলে ধারণাতীত ঘটনা ঘটে।
 
-For a strict equality check `===`
-: These values are different, because each of them is a different type.
+যথাযথ সমতা নির্ণয়ে `===`
+: তাদের মান ভিন্ন কারণ তারা ভিন্ন টাইপের।
 
     ```js run
     alert( null === undefined ); // false
     ```
 
-For a non-strict check `==`
-: There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
+সাধারণ সমতা নির্ণয়ে `==`
+: এখানে একটি বিশেষ নিয়ম আছে। তারা একে অপরের সমান (`==` এর হিসেবে) কিন্তু অন্য কিছুর সমান সমান নয়।
 
     ```js run
     alert( null == undefined ); // true
     ```
 
-For maths and other comparisons `< > <= >=`
-: `null/undefined` are converted to numbers: `null` becomes `0`, while `undefined` becomes `NaN`.
+গণিতের অন্য সকল তুলনার ক্ষেত্রে `< > <= >=`
+: `null/undefined` রূপান্তরিত হয় সংখ্যায়: `null` রূপান্তরিত হয় `0`, while `undefined` রূপান্তরিত হয় `NaN`.
 
-Now let's see some funny things that happen when we apply these rules. And, what's more important, how to not fall into a trap with them.
+এখন চলুন কিছু মজার ঘটনা দেখি, ঘটনাগুলো ঘটে যখন এই নিয়মগুলো প্রয়োগ করা হয়। গুরুত্বপূর্ণ হলো, কিভাবে এই সকল ফাঁদে না পড়া যায়।
 
-### Strange result: null vs 0
+### অদ্ভুদ ফলাফল: null vs 0
 
-Let's compare `null` with a zero:
+চলুন, `null` এর সাথে শূন্য এর তুলনা করি।
 
 ```js run
 alert(null > 0); // (1) false
@@ -169,15 +169,15 @@ alert(null == 0); // (2) false
 alert(null >= 0); // (3) *!*true*/!*
 ```
 
-Mathematically, that's strange. The last result states that "`null` is greater than or equal to zero", so in one of the comparisons above it must be `true`, but they are both false.
+গাণিতিক ভাবে, এটি অদ্ভুত। শেষের তুলনার ফলাফল হলো "`null` শূন্য এর থেকে বড় বা সমান।", উপরের দুটি তুলনার মধ্যে যে কোনো একটিকে অবশ্যই `true` হতে হবে। কিন্তু তাদের মধ্যে দুটি `false`।
 
-The reason is that an equality check `==` and comparisons `> < >= <=` work differently. Comparisons convert `null` to a number, treating it as `0`. That's why (3) `null >= 0` is true and (1) `null > 0` is false.
+এর কারণ হলো, সমতা নির্ণয় `==` এবং `> < >= <=` তুলনা দুটি ভিন্ন ভাবে কাজ করে। তুলনা করার সময় `null` কে সংখ্যায় রূপান্তরিত করে, সংখ্যাটিকে `0` ধরা হয়। এ জন্যই, (3) `null >= 0` ঠিক বা true। (1) `null > 0` ভুল বা false।
 
-On the other hand, the equality check `==` for `undefined` and `null` is defined such that, without any conversions, they equal each other and don't equal anything else. That's why (2) `null == 0` is false.
+অন্য দিকে, সমতা নির্ণয়ের (`==`) ক্ষেত্রে, `undefined` এবং `null` নির্দিষ্ট থাকে অন্য কোন কিছুতে রূপান্তরিত করা হয় না। তারা একে অপরের সমান কিন্তু অন্য কিছুর সমান সমান নয়। এ জন্যই, (2) `null == 0` ভুল বা false।
 
-### An incomparable undefined
+### undefined তুলনার অযোগ্য।
 
-The value `undefined` shouldn't be compared to other values:
+`undefined` কে অন্য কোন ভ্যালু এর সাথে তুলনা করা উচিত না।
 
 ```js run
 alert(undefined > 0); // false (1)
@@ -185,25 +185,25 @@ alert(undefined < 0); // false (2)
 alert(undefined == 0); // false (3)
 ```
 
-Why does it dislike zero so much? Always false!
+কেন এটি শূন্য কে এতো অপছন্দ করে? সব সময় ভুল বা false!
 
-We get these results because:
+আমরা ওই সকল ফলাফল পাচ্ছি তার কারণটি হলো:
 
-- Comparisons `(1)` and `(2)` return `false` because `undefined` gets converted to `NaN` and `NaN` is a special numeric value which returns `false` for all comparisons.
-- The equality check `(3)` returns `false` because `undefined` only equals `null`, `undefined`, and no other value.
+- তুলনা `(1)` এবং `(2)` ভুল বা false রিটার্ন করে কারণ `undefined` রূপান্তরিত হয় `NaN` এ। `NaN` একটি বিশেষ ধরণের সংখ্যামান যেটি যেকোনো তুলনায় false বা ভুল রিটার্ন করে।
+- সমতা নির্ণয়ে `(3)` ভুল বা false রিটার্ন করছে কারণ `undefined` একমাত্র `null`, `undefined` এর সমান। অন্য কোনো কিছুর নয়।
 
-### Evade problems
+### সমস্যা এড়ানো
 
-Why did we go over these examples? Should we remember these peculiarities all the time? Well, not really. Actually, these tricky things will gradually become familiar over time, but there's a solid way to evade problems with them:
+কেন আমরা ওই সকল উদাহরণ দেখলাম? আমরা কি ওই গুলো সবসময় মনে রাখতে পারবো? আসলে, পারবো না। প্রকৃতপক্ষে, এই অন্যরকম জিনিসগুলি ধীরে ধীরে সময়ের সাথে পরিচিত হয়ে উঠবে তবে এ সমস্যাগুলি থেকে বাঁচার একটি উত্তম উপায় রয়েছে:
 
-Just treat any comparison with `undefined/null` except the strict equality `===` with exceptional care.
+যে কোনো ধরনের তুলনা করতে যথাযথ সমতা `===` ব্যবহার করুন শুধু মাত্র `undefined/null` ক্ষেত্রে নয়।
 
-Don't use comparisons `>= > < <=` with a variable which may be `null/undefined`, unless you're really sure of what you're doing. If a variable can have these values, check for them separately.
+কখনোই কোন ভ্যারিয়েবল এর সাথে অন্য কিছুর তুলনা (`>= > < <=`) করবেন না। যেই ভ্যারিয়েবলের মান `null/undefined` হতে পারে বা হওয়ার সম্ভাবনা থাকে। যদি হওয়ার সম্ভাবনা থাকে তবে সেগুলোকে আলাদা ভাবে যাচাই করে নিতে হবে।
 
-## Summary
+## সারাংশ
 
-- Comparison operators return a boolean value.
-- Strings are compared letter-by-letter in the "dictionary" order.
-- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
-- The values `null` and `undefined` equal `==` each other and do not equal any other value.
-- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+- তুলনা করার অপারেটর একটি মান বা ভ্যালু রিটার্ন করে।
+- স্ট্রিং তুলনা করা হয় একটি অক্ষরের পর আরেকটি অক্ষরের সাথে। "আভিধানিক" ক্রম অনুসারে।
+- যখন দুটি ভিন্ন টাইপের মান বা ভ্যালু এর সাথে তুলনা করা হয় তখন তাদেরকে সংখ্যায় রূপান্তরিত করা হয়। (যথাযথ সমতার `===` ক্ষেত্রে সংখ্যায় রূপান্তর করা হয় না।)
+- `null` এবং `undefined` একে অপরের সমান (`==`)। কিন্তু অন্য কোনো কিছুর সমান নয়।
+- সাবধান! যখন বৃহত্তম ও ক্ষুদ্রতম নির্ণয় করবেন কোনো ভ্যারিয়েবলের সাথে তুলনা করে। যেই ভ্যারিয়েবলের মান `null/undefined` হতে পারে। সেই ভ্যারিয়েবল কে আলাদাভাবে `null/undefined` কিনা যাচাই করা ভালো অনুশীলন।
