@@ -1,10 +1,10 @@
-importance: 5
+গুরুত্বঃ ৫
 
 ---
 
-# Constant objects?
+# ধ্রুবক / কন্সটেন্ট অবজেক্ট?
 
-Is it possible to change an object declared with `const`? What do you think?
+`const` দিয়ে ডিক্লেয়ার করা অবজেক্ট কি পরিবর্তন করা সম্ভব? আপনার কি ধারণা?
 
 ```js
 const user = {
@@ -12,7 +12,7 @@ const user = {
 };
 
 *!*
-// does it work?
+// এটা কাজ করে?
 user.name = "Pete";
 */!*
 ```

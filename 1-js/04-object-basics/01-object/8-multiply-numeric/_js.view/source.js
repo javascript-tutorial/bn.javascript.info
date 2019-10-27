@@ -6,12 +6,11 @@ let menu = {
 
 
 function multiplyNumeric(obj) {
-  
-  /* your code */
+
+  /* আপনার কোড এখানে লিখুন */
 
 }
 
 multiplyNumeric(menu);
 
 alert( "menu width=" + menu.width + " height=" + menu.height + " title=" + menu.title );
-
