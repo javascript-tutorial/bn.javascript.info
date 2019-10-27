@@ -17,10 +17,10 @@ undefined + 1 = NaN // (6)
 " \t \n" - 2 = -2 // (7)
 ```
 
-1. The addition with a string `"" + 1` converts `1` to a string: `"" + 1 = "1"`, and then we have `"1" + 0`, the same rule is applied.
-2. The subtraction `-` (like most math operations) only works with numbers, it converts an empty string `""` to `0`.
-3. The addition with a string appends the number `5` to the string.
-4. The subtraction always converts to numbers, so it makes `"  -9  "` a number `-9` (ignoring spaces around it).
-5. `null` becomes `0` after the numeric conversion.
-6. `undefined` becomes `NaN` after the numeric conversion.
-7. Space characters, are trimmed off string start and end when a string is converted to a number. Here the whole string consists of space characters, such as `\t`, `\n` and a "regular" space between them. So, similarly to an empty string, it becomes `0`.
+1. কোন স্ট্রিংয়ের সাথে যোগের ক্ষেত্রে `"" + 1` তে `1` রূপান্তর হয়ে `"" + 1 = "1"` হয়। তাই এখানে পায় `"1" + 0`, এক্ষেত্রেও একই নিয়ম প্রযোজ্য।
+2. বিয়োগ `-` (প্রায় অন্যসব অপারেটরের মতই) শুধুমাত্র সংখ্যা নিয়ে কাজ করে, এটি ফাঁকা স্ট্রিংকে শূন্য তে রূপান্তর করে নেয় `""` থেকে `0` হবে।
+3. স্ট্রিং সংযুক্তকরণ নীতি অনুসারে `5` স্ট্রিংয়ে রূপান্তর হবে।
+4. বিয়োগের সময় স্ট্রিং সবসময় সংখ্যায় রূপান্তর হয়, তাই এক্ষেত্রে `"  -9  "` সংখ্যা `-9` তে পরিবর্তন হয় (এখানে স্পেসগুলিকে উপেক্ষা করে )
+5. `null` হবে `0` সংখ্যায় রুপান্তরের পর।
+6. `undefined` হয়ে যায় `NaN` সংখ্যায় রূপান্তর করা হলে।
+7. স্পেসসমূহ বাদ দেয়া হয় সংখ্যায় রুপান্তর করলে, এখানে পুরো স্ট্রিংটাই বিভিন্ন স্পেসে তৈরি, যেমনঃ `\t`, `\n` এবং তাদের মাঝের "রেগুলার" স্পেসসমূহ। সুতরাং এটি ফাঁকা স্ট্রিংয়ের মতই, যা শুন্যতে (`0`) রুপান্তর হয়।
