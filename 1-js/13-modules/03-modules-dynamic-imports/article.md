@@ -38,7 +38,7 @@ let modulePath = prompt("কোন মডিউলটি লোড করতে 
 
 import(modulePath)
   .then(obj => <module object>)
-  .catch(err => <loading এরর, যদি কোন মডিউল না থাকে>)
+  .catch(err => <loading error, e.g. যদি কোন মডিউল না থাকে>)
 ```
 
 অথবা, যদি এটি একটি `async` ফাংশনের ভিতর হয়ে থাকে তবে  `let module = await import(modulePath)` ব্যবহার করতে পারি। 
@@ -74,26 +74,26 @@ export default function() {
 }
 ```
 
-...তারপর এটাকে এক্সেস করার জন্য আমরা মডিউল অব্জেক্টের `default` প্রপার্টি ব্যাবহার করতে পারি। 
+...Then, in order to access it, we can use `default` property of the module object:
 
 ```js
 let obj = await import('./say.js');
 let say = obj.default;
-// অথাবা, এক লাইনে: let {default: say} = await import('./say.js');
+// or, in one line: let {default: say} = await import('./say.js');
 
 say();
 ```
 
-এখানে সম্পূর্ণ উদাহারনটি রয়েছেঃ
+Here's the full example:
 
 [codetabs src="say" current="index.html"]
 
 ```smart
-রেগুলার স্ক্রিপ্টে ডাইনামিক ইমপোর্ট কাজ করে, তার জন্য `script type="module" প্রয়োজন হয় না। 
+Dynamic imports work in regular scripts, they don't require `script type="module"`.
 ```
 
 ```smart
-যদিও `import()` দেখতে ফাংশন কলের মতো, কিন্তু এটি একটি (`super()` মতো) বিশেষ সিন্টেক্স যার জন্য "parentheses" ব্যবহার করতে হয়। 
+Although `import()` looks like a function call, it's a special syntax that just happens to use parentheses (similar to `super()`).
 
-তাই আমারা `import` কে কোন ভেরিয়েবলে কপি অথবা `call/apply` করা যায় না। 
+So we can't copy `import` to a variable or use `call/apply` with it. That's not a function.
 ```
