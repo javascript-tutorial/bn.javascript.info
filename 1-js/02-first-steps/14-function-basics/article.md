@@ -173,19 +173,19 @@ showMessage(from, "Hello"); // *Ann*: Hello
 alert( from ); // Ann
 ```
 
-## Default values
+## ডিফল্ট ভ্যালু
 
-If a parameter is not provided, then its value becomes `undefined`.
+যদি কোনো প্যারামিটার এর মান দেওয়া না থাকে, তাহলে সেটার ভ্যালু `undefined` ধরে নেওয়া হয়।
 
-For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
+তাই একাধিক প্যারামিটারের ক্ষেত্রে `showMessage(from, text)` একটা আর্গুমেন্ট দিলেও প্রোগ্রাম চলবে। যেমনঃ
 
 ```js
 showMessage('Ann');
 ```
 
-That's not an error. Such a call would output `"Ann: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
+এইখানে কোনো ভুল নেই। এমন ফাংশন কল `"Ann: undefined"` রিটার্ন করবে। এখানে `text` প্যারামিটারের মান বলে দেওয়া হয় নাই। তাই `text === undefined` ধরে নিবে প্রোগ্রাম।
 
-If we want to use a "default" `text` in this case, then we can specify it after `=`:
+যদি কোনো মান সেট না হলে ডিফল্টভাবে একটা মান ধরে নিয়ে প্রোগ্রাম চালাতে চাই, তাহলে প্যারামিটারেই মানটা এসাইন করে দিতে পারবো। যেমনঃ
 
 ```js run
 function showMessage(from, *!*text = "no text given"*/!*) {
@@ -195,27 +195,27 @@ function showMessage(from, *!*text = "no text given"*/!*) {
 showMessage("Ann"); // Ann: no text given
 ```
 
-Now if the `text` parameter is not passed, it will get the value `"no text given"`
+এখানে যদি `text` প্যারামিটারের মান ইউজার না দেয়, তাহলে ডিফল্টভাবে `"no text given"` সেট হয়ে থাকবে।
 
-Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
+এখানে `"no text given"` একটা স্ট্রিং। কিন্তু আমরা চাইলে এখানে যে কোনো কিছু ব্যবহার করতে পারি। এমনকি জটিল লজিক্যাল অপারেশনও। যদি প্যারামিটার মিসিং থাকে তাহলে বাই ডিফল্ট সেই অপারেশন কাজ করবে। যেমনঃ
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
-  // anotherFunction() only executed if no text given
-  // its result becomes the value of text
+  // anotherFunction() কেবলমাত্র তখনই চলবে যখন কোনো প্যারামিটার ভ্যালু দেওয়া হবে না।
+  // যদি দেওয়া হয়, তাহলে এই ফাংশন রিপ্লেস হয়ে ইউজার প্রদত্ত ভ্যালু সেট হয়ে যাবে।
 }
 ```
 
 ```smart header="Evaluation of default parameters"
-In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter.
+জাভাস্ক্রিপ্টে কোনো প্যারামিটারের বিপরীতে কোনো মান সেট করে না দিলে প্যারামিটারে ডিফল্টভাবে এসাইন করা মান কল হবে যতবার পুরো ফাংশন কল করা হবে।
 
-In the example above, `anotherFunction()` is called every time `showMessage()` is called without the `text` parameter.
+উপরের উদাহরণ টেনে বলা যায়, `anotherFunction()` ততবার কল হবে যতবার `showMessage()` কল করা হবে `text` প্যারামিটারের মান দেওয়া ছাড়াই।
 ```
 
 ````smart header="Default parameters old-style"
-Old editions of JavaScript did not support default parameters. So there are alternative ways to support them, that you can find mostly in the old scripts.
+জাভাস্ক্রিপ্টের আগের ভার্সনগুলো ডিফল্ট প্যারামিটার সাপোর্ট করে না। কিন্তু অন্যভাবে কাজ চালিয়ে নেওয়া যায়।
 
-For instance, an explicit check for being `undefined`:
+যেমন, `undefined` এর মান পরিবর্তন করেঃ
 
 ```js
 function showMessage(from, text) {
@@ -233,7 +233,7 @@ function showMessage(from, text) {
 
 ```js
 function showMessage(from, text) {
-  // if text is falsy then text gets the "default" value
+  // যদি `text` এর মান না দেওয়া হয় তাহলে "default" ভ্যালু সেট করে নিবে
   text = text || 'no text given';
   ...
 }
