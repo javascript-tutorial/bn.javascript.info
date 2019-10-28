@@ -402,15 +402,15 @@ checkPermission(..) // পারমিশন চেক করে, true/false র
 এগুলো এক্সেপশন। বেশিরভাগ সময় ফাংশন নাম অর্থপূর্ন ও বিস্তারিত হওয়া উচিৎ।
 ```
 
-## Functions == Comments
+## ফাংশন == কমেন্টস
 
-Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
+ফাংশন ছোট হওয়া উচিৎ ও একটা নির্দিষ্ট কাজ করা উচিৎ। যদি কোনো ফাংশন বড় কাজ করে থাকে, তাহলে তাকে ছোট ছোট অংশে ভাগ করে ফেলা জরুরি। মাঝে মাঝে এই ব্যাপারটা বিরক্তিকর লাগতে পারে, কিন্তু অবশ্যই ভবিষ্যতের জন্য অত্যন্ত ভালো অভ্যাস।
 
-A separate function is not only easier to test and debug -- its very existence is a great comment!
+ছোট ছোট ফাংশন যে টেস্ট ও ডিবাগ করতে সুবিধাজনক তা-ই শুধু না, বরং -- এটা প্রোগ্রামকে অর্থপূর্ন কমেন্টের কাজে সাহায্য করে থাকে!
 
-For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
+উদাহরণস্বরূপ, দুইটা ফাংশন `showPrimes(n)` এর পার্থক্য নিচে দেখানো হলো। প্রতিটা-ই [মৌলিক সংখ্যা](https://en.wikipedia.org/wiki/Prime_number) রিটার্ন করে `n` অব্ধি।
 
-The first variant uses a label:
+প্রথমটা একবারে কাজ করেঃ
 
 ```js
 function showPrimes(n) {
@@ -424,7 +424,7 @@ function showPrimes(n) {
 }
 ```
 
-The second variant uses an additional function `isPrime(n)` to test for primality:
+পরেরটা নতুন ফাংশন `isPrime(n)` কল করে মৌলিক সংখ্যা চেক করার জন্যঃ
 
 ```js
 function showPrimes(n) {
@@ -444,9 +444,9 @@ function isPrime(n) {
 }
 ```
 
-The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as _self-describing_.
+দ্বিতীয়টা বুঝতে সুবিধাজনক, তাই না? ভিতরের ফাংশন (`isPrime`) দেখে এর কাজ বুঝে যাওয়া যায়। মাঝে মাঝে প্রোগ্রামাররা এইধরনের কোডকে _স্ব-বর্ণনাকারী (সেলফ-ডেস্ক্রাইবিং)_ বলে থাকে।
 
-So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
+এর মানে ফাংশন তৈরি করা যেতে পারে যদি আমরা পরে ব্যাবহার না করতে চাই তবুও। সেটা কোডকে সাজাতে ও বুঝতে সাহায্য করে।
 
 ## Summary
 
