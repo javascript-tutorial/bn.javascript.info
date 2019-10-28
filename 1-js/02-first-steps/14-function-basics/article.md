@@ -341,7 +341,7 @@ return*!*;*/!*
 
 তাই স্বাভাবিকভাবেই পুরো প্রোগ্রাম ফাঁকা (undefined) রিটার্ন করবে।
 
-If we want the returned expression to wrap across multiple lines, we should start it at the same line as `return`. Or at least put the opening parentheses there as follows:
+যদি বড় কোনো এক্সপ্রেশন রিটার্ন করা লাগে তাহলে একই লাইনে লেখা জরুরি। অথবা প্রথম বন্ধনীর ভিতরে লিখতে হবে পুরো এক্সপ্রেশন। যেমনঃ
 
 ```js
 return (
@@ -353,53 +353,53 @@ return (
 And it will work just as we expect it to.
 `````
 
-## Naming a function [#function-naming]
+## ফাংশনের নামকরণ [#function-naming]
 
-Functions are actions. So their name is usually a verb. It should be brief, as accurate as possible and describe what the function does, so that someone reading the code gets an indication of what the function does.
+প্রতিটা ফাংশন হলো এক একটা এ্যাকশন। তাই তাদের নাম "ক্রিয়া" বাচক হওয়া যুক্তিযুক্ত। একই সাথে বিস্তারিত ও অর্থপূর্ণ হওয়া অত্যন্ত জরুরি যেন প্রোগ্রামার (নিজেও) শুধু নাম দেখে বুঝে নিতে পারে পুরো ফাংশন কোন ধরনের কাজ করছে।
 
-It is a widespread practice to start a function with a verbal prefix which vaguely describes the action. There must be an agreement within the team on the meaning of the prefixes.
+এটাই সবচেয়ে যুক্তিযুক্ত যে ফাংশনের নাম "ক্রিয়া বাচক" শব্দ দিয়ে শুরু করা। যখন কোনো টিমে কাজ করা হবে, তখন সবার মধ্যে একটা এগ্রিমেন্ট করে ফাংশনের নামের প্যাটার্ণ নির্ধারণ করা উচিৎ।
 
-For instance, functions that start with `"show"` usually show something.
+উদাহরণস্বরূপ, যে ফাংশন `"show"` দিয়ে শুরু হয় তা স্বাভাবিকভাবেই কিছু দেখাবে বলে ধরে নেওয়া যেতে পারে।
 
-Function starting with...
+যদি ফাংশন নিম্নোক্ত শব্দ দিয়ে শুরু হয় তাহলে...
 
-- `"get…"` -- return a value,
-- `"calc…"` -- calculate something,
-- `"create…"` -- create something,
-- `"check…"` -- check something and return a boolean, etc.
+- `"get…"` -- কোনো ভ্যালু রিটার্ন করে,
+- `"calc…"` -- কোনো ধরনের ক্যালকুলেশন করে থাকে,
+- `"create…"` -- কিছু তৈরি করে,
+- `"check…"` -- কোনো কিছু কম্পেয়ার করে বা বুলিয়ান টাইপের কিছু রিটার্ন করে।
 
-Examples of such names:
+কিছু নামের উদাহরণ দেখা যাকঃ
 
 ```js no-beautify
-showMessage(..)     // shows a message
-getAge(..)          // returns the age (gets it somehow)
-calcSum(..)         // calculates a sum and returns the result
-createForm(..)      // creates a form (and usually returns it)
-checkPermission(..) // checks a permission, returns true/false
+showMessage(..)     // কোনো ম্যাসেজ দেখায়
+getAge(..)          // বয়স রিটার্ন করে
+calcSum(..)         // যোগ করে
+createForm(..)      // কোনো ফর্ম তৈরি করে (সাধারণত রিটার্ন করে)
+checkPermission(..) // পারমিশন চেক করে, true/false রিটার্ন করে
 ```
 
-With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
+ফাংশন যে ধরনের শব্দ দিয়ে শুরু হয় তা একনজরে বুঝিয়ে দেয় কী ধরনের ভ্যালু সেখান থেকে পাওয়া যেতে পারে।
 
 ```smart header="One function -- one action"
-A function should do exactly what is suggested by its name, no more.
+কোনো ফাংশনের নামে ও কাজে সম্পূর্নভাবে মিল থাকা লাগবে।
 
-Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
+দুইটা কাজ অবশ্যই আলাদা আলাদা দুইটা ফাংশন দিয়ে করা যুক্তিযুক্ত। যদি দুইটাকে এক হয়ে একটা নির্দিষ্ট কাজ করা লাগে তাহলে তৃতীয় কোনো ফাংশনে তাদের কল করে কাজ করাটা অর্থপূর্ণ।
 
-A few examples of breaking this rule:
+এই নিয়ম ভাঙ্গলে যে জটিলতা হতে পারে তার উদাহরণঃ
 
-- `getAge` -- would be bad if it shows an `alert` with the age (should only get).
-- `createForm` -- would be bad if it modifies the document, adding a form to it (should only create it and return).
-- `checkPermission` -- would be bad if it displays the `access granted/denied` message (should only perform the check and return the result).
+- `getAge` -- এটা খুব বাজে প্র্যাকটিস হবে যদি বয়স রিটার্ণ করে তা `alert` দেখায়। (শুধুই রিটার্ন করা উচিৎ ছিলো)
+- `createForm` -- এইধরনের নামযুক্ত ফাংশন কোনো ডকুমেন্ট মডিফাই করা অযৌক্তিক, এমনকি কোনো কিছুতে কোনো ফর্ম এ্যাড করাও (শুধুই ফর্ম বানিয়ে রিটার্ন করে দেওয়া অব্ধিই এর কাজ চলা উচিৎ)
+- `checkPermission` -- যদি এই ফাংশন `access granted/denied` ম্যাসেজ দেখায় তাহলে অযৌক্তিক হবে। (শুধুই পারমিশন চেক করে রিটার্ন করা উচিৎ)
 
-These examples assume common meanings of prefixes. You and your team are free to agree on other meanings, but usually they're not much different. In any case, you should have a firm understanding of what a prefix means, what a prefixed function can and cannot do. All same-prefixed functions should obey the rules. And the team should share the knowledge.
+এই উদাহরণ থেকে ফাংশনের নামেরর সূচনা শব্দ কেমন হওয়া উচিৎ সম্পর্কে ধারণা পাওয়া যায়। আপনি ও আপনার টিম মিলে নিজেরা কোনো নিয়ম বানাতে পারেন, কিন্তু খুব বেশি পার্থক্য হয়তো হবে না। একটা সূচনা শব্দ ফাংশনের অনেক কিছুই বলে দিতে পারে। প্রতিটা একই ধরনের সূচনা শব্দ একই ধরনের কাজ করবে।
 ```
 
 ```smart header="Ultrashort function names"
-Functions that are used *very often* sometimes have ultrashort names.
+যে ফাংশনগুলো *খুব বেশি* কল করা হয়, তাকে মাঝে মাঝে স্পেশাল কিছু সূচনা নাম দেওয়া হয়ে থাকে।
 
-For example, the [jQuery](http://jquery.com) framework defines a function with `$`. The [Lodash](http://lodash.com/) library has its core function named `_`.
+যেমন, [jQuery](http://jquery.com) ফ্রেমওয়ার্ক `$` দিয়ে শুরু করে তাদের ফাংশন নাম। আবার [Lodash](http://lodash.com/) লাইব্রেরি `_` দিয়ে শুরু করে।
 
-These are exceptions. Generally functions names should be concise and descriptive.
+এগুলো এক্সেপশন। বেশিরভাগ সময় ফাংশন নাম অর্থপূর্ন ও বিস্তারিত হওয়া উচিৎ।
 ```
 
 ## Functions == Comments
