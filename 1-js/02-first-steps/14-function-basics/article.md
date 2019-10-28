@@ -242,11 +242,11 @@ function showMessage(from, text) {
 
 ````
 
-## Returning a value
+## ভ্যালু রিটার্ন করা
 
-A function can return a value back into the calling code as the result.
+ফাংশন যে কোনো ভ্যালু রিটার্ন করতে পারে।
 
-The simplest example would be a function that sums two values:
+যেমন, দুইটা ভ্যালু যোগ করতে তাদের যোগফল রিটার্ন করাঃ
 
 ```js run no-beautify
 function sum(a, b) {
@@ -257,9 +257,9 @@ let result = sum(1, 2);
 alert( result ); // 3
 ```
 
-The directive `return` can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to `result` above).
+`return` কীওয়ার্ড একটা ফাংশনের যে কোনো স্থানে ব্যবহার করা যেতে পারে। যখনই ফাংশন `return` খুঁজে পাবে, সাথে সাথে সেই ফাংশনের কাজ করা বন্ধ করে দিবে। এবং রেজাল্ট রিটার্ন করবে। (উপরে `result` এ রাখা হয়েছে রিটার্ন ভ্যালু)।
 
-There may be many occurrences of `return` in a single function. For instance:
+একটা ফাংশনে অনেক `return` কীওয়ার্ড থাকতে পারে। উদাহরণস্বরূপঃ
 
 ```js run
 function checkAge(age) {
@@ -283,9 +283,9 @@ if ( checkAge(age) ) {
 }
 ```
 
-It is possible to use `return` without a value. That causes the function to exit immediately.
+এমনকি `return` ইউজ করা যেতে পারে কোনো রকম ভ্যালু রিটার্ন করা ছাড়াই। এতে করে ফাংশন সাথে সাথেই থেমে যাবে।
 
-For example:
+যেমনঃ
 
 ```js
 function showMovie(age) {
@@ -300,10 +300,10 @@ function showMovie(age) {
 }
 ```
 
-In the code above, if `checkAge(age)` returns `false`, then `showMovie` won't proceed to the `alert`.
+উপরের প্রোগ্রামে, যদি `checkAge(age)` রিটার্ন করে `false`, তাহলে `showMovie` কখনোই `alert` অব্ধি যাবে না।
 
 ``smart header="A function with an empty `return` or without it returns `undefined`"
-If a function does not return a value, it is the same as if it returns `undefined`:
+যদি কোনো ফাংশন কোনো ভ্যালু রিটার্ন না করে, তাহলে `undefined` রিটার্ন করবে।
 
 ```js run
 function doNothing() {
@@ -313,7 +313,7 @@ function doNothing() {
 alert(doNothing() === undefined); // true
 ```
 
-An empty `return` is also the same as `return undefined`:
+কোনো ফাঁকা `return` একদমই একই রকম আচরণ করে যেমন `return undefined` করে।
 
 ```js run
 function doNothing() {
@@ -326,20 +326,20 @@ alert(doNothing() === undefined); // true
 `````
 
 ````warn header="Never add a newline between `return` and the value"
-For a long expression in `return`, it might be tempting to put it on a separate line, like this:
+যদি কোনো বড় এক্সপ্রেশন `return` করা লাগে সেক্ষেত্রে হয়তো পরের লাইনে লেখার প্রবণতা তৈরি হতে পারে। যেমনঃ
 
 ```js
 return
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
-That doesn't work, because JavaScript assumes a semicolon after `return`. That'll work the same as:
+কিন্তু এভাবে কাজ করবে না, কারণ জাভাস্ক্রিপ্ট ধরে নিবে `return` এর পরে সেমিকোলন আছে। (জাভাস্ক্রিপ্ট কিন্তু সেমিকোলন বাদেও কাজ করে। সেক্ষেত্রে প্রতিটা লাইনের শেষে সেমিকোলন ধরে নেয় ডিফল্টভাবে। একারণেই রিটার্নের পরে পরের লাইনে চলে গেলে সেমিকোলন করে নিয়ে কাজ করবে ফাংশন।) এটা সেক্ষেত্রে এইভাবে কাজ করবেঃ
 
 ```js
 return*!*;*/!*
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
 
-So, it effectively becomes an empty return.
+তাই স্বাভাবিকভাবেই পুরো প্রোগ্রাম ফাঁকা (undefined) রিটার্ন করবে।
 
 If we want the returned expression to wrap across multiple lines, we should start it at the same line as `return`. Or at least put the opening parentheses there as follows:
 
