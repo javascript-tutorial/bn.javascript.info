@@ -448,9 +448,9 @@ function isPrime(n) {
 
 এর মানে ফাংশন তৈরি করা যেতে পারে যদি আমরা পরে ব্যাবহার না করতে চাই তবুও। সেটা কোডকে সাজাতে ও বুঝতে সাহায্য করে।
 
-## Summary
+## সারসংক্ষেপ
 
-A function declaration looks like this:
+ফাংশন এই ফরমেটে তৈরি করা হয়ঃ
 
 ```js
 function name(parameters, delimited, by, comma) {
@@ -458,18 +458,18 @@ function name(parameters, delimited, by, comma) {
 }
 ```
 
-- Values passed to a function as parameters are copied to its local variables.
-- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
-- A function can return a value. If it doesn't, then its result is `undefined`.
+- প্যারামিটারে এসাইন করা ভ্যালু ফাংশনে লোকাল ভ্যারিয়েবলের মতো কাজ করে।
+- ফাংশন বাইরের ভ্যারিয়েবল এক্সেস করতে পারে, কিন্তু ফাংশনের ভিতরে থাকা কোনো ভ্যারিয়েবল (লোকাল ভ্যারিয়েবল) বাইরে থেকে এক্সেস করা যায় না।
+- ফাংশন ভ্যালু রিটার্ন করতে পারে। যদি ভ্যালু রিটার্ন না করে তাহলে ফাংশন রিটার্ন ভ্যালু হিসেবে `undefined` রিটার্ন করে।
 
-To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
+কোডকে অর্থপূর্ন ও গোছালো রাখতে লোকাল ভ্যারিয়েবল ইউজ করা উচিৎ, গ্লোবাল ভ্যারিয়েবল ইউজ না করে।
 
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side-effect.
+বাইরের ভ্যারিয়েবল মডিফাই করে ও কোনো প্যারামিটার না রেখে ফাংশন ইউজ করার চেয়ে প্যারামিটারসহ ফাংশন নিয়ে কাজ করা অনেক বেশি অর্থপূর্ন ও সহজ।
 
-Function naming:
+ফাংশন নামকরণঃ
 
-- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
-- A function is an action, so function names are usually verbal.
-- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
+- কোনো ফাংশনের নাম দেখেই তার কাজ বুঝে যাওয়া উচিৎ আর এমনভাবেই ফাংশনের নামকরণ করা দরকারি।
+- প্রতিটা ফাংশন একটা কাজ, তাই ফাংশনের নাম অবশ্যই "ক্রিয়াবাচক" হতে হবে।
+- ফাংশনের নামে সূচনা শব্দ `create…`, `show…`, `get…`, `check…` অনেক জনপ্রিয়। এমন ধরনের শব্দ ব্যবহার করা উচিৎ ফাংশন কী করে তা বুঝাতে।
 
-Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.
+ফাংশন হলো কোনো প্রোগ্রামের প্রধান ভিত্তি। এখানে আমরা স্ট্র্যাকচার নিয়ে বেসিক শেষ করেছি। এখন আমরা ফাংশন বানাতে পারি ও ইউজ করতে পারি। এটা শুধুই শুরু। আমরা অনেকবার ফাংশনের কাছে ফিরে আসবো এটা নিয়ে আরো গভীরে জানার জন্য।
