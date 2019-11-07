@@ -16,7 +16,7 @@
 
 ```js
 function showMessage() {
-  alert('Hello everyone!');
+  alert( 'Hello everyone!' );
 }
 ```
 
@@ -57,15 +57,16 @@ showMessage();
 
 ```js run
 function showMessage() {
-  *!*
+*!*
   let message = "Hello, I'm JavaScript!"; // লোকাল ভ্যারিয়েবল
-  */!*
-  alert(message);
+*/!*
+
+  alert( message );
 }
 
 showMessage(); // এইটা Hello, I'm JavaScript! এলার্ট দিবে
 
-alert(message); // <-- Error! এখানে meesage ভ্যারিয়েবলকে এক্সেস করা সম্ভব না।
+alert( message ); // <-- Error! এখানে meesage ভ্যারিয়েবলকে এক্সেস করা সম্ভব না।
 ```
 
 ## আউটার ভ্যারিয়েবল
@@ -155,6 +156,7 @@ showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 
 আরেকটা উদাহরণ দেখা যাকঃ ভ্যারিয়েবল `from` ফাংশনে ডিক্লিয়ার করলাম। নোটঃ ফাংশন `from` কে পরিবর্তন করে, কিন্তু এই পরিবর্তন বাইরে কোথাও দেখা যাবে না। কারণ, ফাংশন সবসময় ভ্যাল্যুর একটা কপি নিজের কাছে রেখে দিবে।
 
+
 ```js run
 function showMessage(from, text) {
 
@@ -180,7 +182,7 @@ alert( from ); // Ann
 তাই একাধিক প্যারামিটারের ক্ষেত্রে `showMessage(from, text)` একটা আর্গুমেন্ট দিলেও প্রোগ্রাম চলবে। যেমনঃ
 
 ```js
-showMessage('Ann');
+showMessage("Ann");
 ```
 
 এইখানে কোনো ভুল নেই। এমন ফাংশন কল `"Ann: undefined"` রিটার্ন করবে। এখানে `text` প্যারামিটারের মান বলে দেওয়া হয় নাই। তাই `text === undefined` ধরে নিবে প্রোগ্রাম।
@@ -241,6 +243,7 @@ function showMessage(from, text) {
 
 
 ````
+
 
 ## ভ্যালু রিটার্ন করা
 
@@ -306,9 +309,7 @@ function showMovie(age) {
 যদি কোনো ফাংশন কোনো ভ্যালু রিটার্ন না করে, তাহলে `undefined` রিটার্ন করবে।
 
 ```js run
-function doNothing() {
-  /* empty */
-}
+function doNothing() { /* empty */ }
 
 alert(doNothing() === undefined); // true
 ```
@@ -322,7 +323,6 @@ function doNothing() {
 
 alert(doNothing() === undefined); // true
 ```
-
 `````
 
 ````warn header="Never add a newline between `return` and the value"
@@ -415,6 +415,7 @@ checkPermission(..) // পারমিশন চেক করে, true/false র
 ```js
 function showPrimes(n) {
   nextPrime: for (let i = 2; i < n; i++) {
+
     for (let j = 2; j < i; j++) {
       if (i % j == 0) continue nextPrime;
     }

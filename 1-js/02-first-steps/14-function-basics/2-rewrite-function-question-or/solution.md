@@ -2,7 +2,7 @@
 
 ```js
 function checkAge(age) {
-  return age > 18 ? true : confirm('Did parents allow you?');
+  return (age > 18) ? true : confirm('Did parents allow you?');
 }
 ```
 
@@ -10,7 +10,7 @@ OR `||` ব্যবহার করে (সবচেয়ে ছোট):
 
 ```js
 function checkAge(age) {
-  return age > 18 || confirm('Did parents allow you?');
+  return (age > 18) || confirm('Did parents allow you?');
 }
 ```
 
