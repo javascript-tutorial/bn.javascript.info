@@ -146,23 +146,23 @@ if (
     }
     ```
 
-    একটি বাড়তি লাইন এখানে কোডকে আরও পড়ার উপযোগী করেছে। There should not be more than nine lines of code without a vertical indentation.
+    একটি বাড়তি লাইন এখানে কোডকে আরও পড়ার উপযোগী করেছে। উল্লম্ব ইন্ডেন্ট ছাড়া ৯ লাইনের বেশী কোড থাকা উচিৎ নয়।
 
-### Semicolons
+### সেমিকোলন
 
-A semicolon should be present after each statement, even if it could possibly be skipped.
+একটি সেমিকোলন থাকা উচিৎ প্রতিটি স্টেট্মেন্টের শেষে, যদিও এটা বাদও দেয়া যায়।
 
-There are languages where a semicolon is truly optional and it is rarely used. In JavaScript, though, there are cases where a line break is not interpreted as a semicolon, leaving the code vulnerable to errors. See more about that in the chapter <info:structure#semicolon>.
+কিছু প্রোগ্রামিং ভাষায় সত্যিই সেমিকোলন মূখ্য নয় এবং কম ব্যাবহার হয়। যদিও জাভাস্ক্রিপ্টে কিছু সময় লাইনের শেষকে সেমিকোলন হিসেবে ধরা হয় না, এটি কোডে পরে এরর করে দিতে পারে। এব্যাপারে আরও জানতেঃ <info:structure#semicolon>.
 
-If you're an experienced JavaScript programmer, you may choose a no-semicolon code style like [StandardJS](https://standardjs.com/). Otherwise, it's best to use semicolons to avoid possible pitfalls. The majority of developers put semicolons.
+আপনি জাভাস্ক্রিপ্টে দক্ষ হলে, সেমিকোলন ছাড়া স্টাইল পছন্দ করতে পারেন [StandardJS](https://standardjs.com/). অন্যথায়,ফাঁদে পরতে না চাইলে সেমিকোলন দেয়াই শ্রেয়। বেশিরভাগ ডেভ্লপারই এটি দেয়। 
 
-### Nesting Levels
+### নেস্টিং লেভেল
 
-Try to avoid nesting code too many levels deep.
+বেশি গভীর নেস্টিং কোড লিখা থেকে বিরত থাকুন।
 
-For example, in the loop, it's sometimes a good idea to use the [`continue`](info:while-for#continue) directive to avoid extra nesting.
+যথা, লুপে, বাড়তি নেস্টিং বাদ দিতে [`continue`](info:while-for#continue) ডিরেক্টিভ ব্যাবহার করা ভালো
 
-For example, instead of adding a nested `if` conditional like this:
+যেমন, নিচের মত একটা নেস্টিং `if` যোগ করা  থেকে:
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -172,7 +172,7 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-We can write:
+আমরা লিখতে পারি:
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -181,11 +181,11 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-A similar thing can be done with `if/else` and `return`.
+একই জিনিস করা যাবে  `if/else` ও `return` এর সাথে
 
-For example, two constructs below are identical.
+উদাহারণ হিসেবে, নিচে অনুরুপ ২টি কন্সট্রাক্টর
 
-Option 1:
+অপশন ১:
 
 ```js
 function pow(x, n) {
@@ -203,7 +203,7 @@ function pow(x, n) {
 }
 ```
 
-Option 2:
+অপশন ২:
 
 ```js
 function pow(x, n) {
@@ -222,13 +222,13 @@ function pow(x, n) {
 }
 ```
 
-The second one is more readable because the "special case" of `n < 0` is handled early on. Once the check is done we can move on to the "main" code flow without the need for additional nesting.
+২য় টি বেশী পাঠযোগ্য কারণ "বিশেষ কেস" `n < 0` আগেই বিবেচনা করা হচ্ছে, একবার দেখা শেষ হলে আমরা পরের "আসল" কোডে যেতে পারি, কোন বাড়তি নেস্টিং ছাড়াই।
 
-## Function Placement
+## ফাংশন স্থাননির্ণয়
 
-If you are writing several "helper" functions and the code that uses them, there are three ways to organize the functions.
+যদি আমরা একধিক "হেল্পার" ফাংশন লিখি ও কোডে ব্যাবহার করি, ৩টি পন্থা আছে ফাংশনসমূহকে বিন্যস্ত করার।
 
-1. Declare the functions *above* the code that uses them:
+1. কোডে ব্যাবহারের আগেই ফাংশন "উপরে" নির্ধারণ করুন:
 
     ```js
     // *!*function declarations*/!*
@@ -249,7 +249,7 @@ If you are writing several "helper" functions and the code that uses them, there
     setHandler(elem);
     walkAround();
     ```
-2. Code first, then functions
+2. আগে কোড পরে ফাংশনঃ
 
     ```js
     // *!*the code which uses the functions*/!*
@@ -270,21 +270,21 @@ If you are writing several "helper" functions and the code that uses them, there
       ...
     }
     ```
-3. Mixed: a function is declared where it's first used.
+3. মিশ্রণঃ কোডে প্রথমে ব্যাবহারের আগে নির্ধারণ করুন
 
-Most of time, the second variant is preferred.
+প্রায়শই ২য় পন্থাটিই ব্যাবহার হয়।
 
-That's because when reading code, we first want to know *what it does*. If the code goes first, then it becomes clear from the start. Then, maybe we won't need to read the functions at all, especially if their names are descriptive of what they actually do.
+এর কারন যখন এটি পড়া হয়, আমরা আগে থেকে জানতে চাই *এটি কি করে*। আগে কোড করলে, শুরু থেকেই এটা বুঝা যায়। তখন হয়ত, আমরা আর ফাংশন পড়ার দরকারও হয় না। বিশেষত, যদি ফাংশ্নের নাম তার কাজ সম্পর্কে যথেষ্ট বিস্তারিত হয়।
 
-## Style Guides
+## স্টাইল গাইড 
 
-A style guide contains general rules about "how to write" code, e.g. which quotes to use, how many spaces to indent, the maximal line length, etc. A lot of minor things.
+স্টাইল গাইড "কিভাবে কোড লিখতে হয়" এমন রীতি নিয়ে গঠিত, যেমনঃ কোন কোট ব্যাবহার করতে হবে, কতগুলি স্পেসে ইন্ডেন্ট, সর্বোচ্চ লাইন লেন্থ, ইত্যাদি সহ অনেক গৌণ বিষয়।
 
-When all members of a team use the same style guide, the code looks uniform, regardless of which team member wrote it.
+যখন একটি টিমের সবাই একই গাইড মেনে চলে, তা যতজন সদস্যাই লিখুক না কেন, কোড অভিন্ন মনে হয়।
 
-Of course, a team can always write their own style guide, but usually there's no need to. There are many existing guides to choose from.
+অবশ্যই একটা টীম নিজের মত গাইড লিখতে পারে,কিন্তু তার তেমন দরকার নেই। অনেক গাইড আছে বেছে নেয়ার জন্য।
 
-Some popular choices:
+কিছু জনপ্রিয় নীতি:
 
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
@@ -292,32 +292,32 @@ Some popular choices:
 - [StandardJS](https://standardjs.com/)
 - (plus many more)
 
-If you're a novice developer, start with the cheat sheet at the beginning of this chapter. Then you can browse other style guides to pick up more ideas and decide which one you like best.
+আপনি নতুন ডেভেলপার হলে, অধ্যায়ের আরম্ভে দেয়া সাজেশ্ন থেকে শুরু করতে পারেন। তারপর আপনি এই গাইডগুলো থেকে দেখে নিয়ে একটা পছন্দ করে নিতে পারেন।
 
-## Automated Linters
+## স্বয়ংক্রিয় লিন্টারস
 
-Linters are tools that can automatically check the style of your code and make improving suggestions.
+লিন্টারস এমন টুল যা স্বয়ংক্রিয়ভাবে কোড স্টাইল চেক করে সাজেশন দেয়।
 
-The great thing about them is that style-checking can also find some bugs, like typos in variable or function names. Because of this feature, using a linter is recommended even if you don't want to stick to one particular "code style".
+মজার ব্যাপার হল স্টাইল চেক অনেক সময় বাগ পেতে সাহায্য করে, যেমন ভ্যারিএবল টাইপ  বা ফাংশনের নাম. এই ফিচারটির জন্য, লিন্টারস ব্যাবহারে উৎসাহ দেয়া হয়, এমনকি যদি আপনি একটি "কোডিং স্টাইলে" আজীবন থাকতে নাও চান।
 
-Here are some well-known linting tools:
+এখনে কিছু পরিচিত লিন্টারস টুলঃ
 
 - [JSLint](http://www.jslint.com/) -- one of the first linters.
 - [JSHint](http://www.jshint.com/) -- more settings than JSLint.
 - [ESLint](http://eslint.org/) -- probably the newest one.
 
-All of them can do the job. The author uses [ESLint](http://eslint.org/).
+সবগুলিই তাদের কাজ ভালো করে। লেখন ব্যাবহার করেঃ [ESLint](http://eslint.org/).
 
-Most linters are integrated with many popular editors: just enable the plugin in the editor and configure the style.
+অনেক কোড এডিটরে এটা আগে থেকেই থাকে: শুধুমাত্র প্লাগইন এনেবল করে কোড স্টাইল কনফিগার করলেই হয়।
 
-For instance, for ESLint you should do the following:
+যেমন ESLint এর জন্য দেখতে পারেনঃ
 
-1. Install [Node.js](https://nodejs.org/).
-2. Install ESLint with the command `npm install -g eslint` (npm is a JavaScript package installer).
-3. Create a config file named `.eslintrc` in the root of your JavaScript project (in the folder that contains all your files).
-4. Install/enable the plugin for your editor that integrates with ESLint. The majority of editors have one.
+1. ইন্সটল [Node.js](https://nodejs.org/).
+2. ইন্সটল ESLint এই কমান্ড দিয়ে `npm install -g eslint` (npm is a JavaScript package installer).
+3. একটি কনফিগ ফাইল বানান `.eslintrc` জাভাস্ক্রিপ্টের রুটে প্রজেক্ট (যে ফোল্ডার সব ফাইল রাখছে).
+4. ইন্সটল/এনেবল সেই প্লাগইন যা আপনার এডিটরে ESLint যোগ করবে। সিংহভাগ এডিটরে এটা আছে।
 
-Here's an example of an `.eslintrc` file:
+একটি উদাহারণ `.eslintrc` ফাইল:
 
 ```js
 {
@@ -334,16 +334,16 @@ Here's an example of an `.eslintrc` file:
 }
 ```
 
-Here the directive `"extends"` denotes that the configuration is based on the "eslint:recommended" set of settings. After that, we specify our own.
+এখানে ডিরেক্টিভ `"extends"` মানে সেটিংসে কনফিগারেশনটির বেস "eslint:recommended" সেট করা. এরপর, আমরা আমাদেরটা নির্দিষ্ট করে দেই।
 
-It is also possible to download style rule sets from the web and extend them instead. See <http://eslint.org/docs/user-guide/getting-started> for more details about installation.
+অয়েব থেকে স্টাইল রুলস ডাউনলোড করে এক্সটেন্ডও করা যায়। আরও জানতে দেখুন <http://eslint.org/docs/user-guide/getting-started> 
 
-Also certain IDEs have built-in linting, which is convenient but not as customizable as ESLint.
+এছাড়া কিছু IDE তে লিন্টারস বিল্ট-ইন থাকে,যেটা সুবিধাজনক কিন্তু ESLint মত চাহিদা মত পরিবর্তন করতে পারি না।
 
-## Summary
+## সারসংক্ষেপ 
 
-All syntax rules described in this chapter (and in the style guides referenced) aim to increase the readability of your code. All of them are debatable.
+সব সিনট্যাক্স রুলস বর্ননা করা হয়েছে (স্টাইল গাইডও তুলে ধরা হয়েছে) নিজ থেকেই কোডের পাঠযোগ্যতা বাড়ান। প্রায় সবই বিতর্কিত। 
 
-When we think about writing "better" code, the questions we should ask ourselves are: "What makes the code more readable and easier to understand?" and "What can help us avoid errors?" These are the main things to keep in mind when choosing and debating code styles.
+যখন আমরা আরও "ভালো কোড" লিখার কথা ভাবি, আমাদের নিজেদের জিজ্ঞাসা করা উচিৎ: "কোনটি কোদকে আরও সহজ ও পাঠযোগ্য করে তোলে??" ও "কোনটা আমাদের এরর এড়াতে সাহায্য করবে?" এইদিকগুলো মাথায় রাখতে হবে যখন কোড স্টাইল বেছে নিব ও তার পক্ষে যুক্তি দিবো।
 
-Reading popular style guides will allow you to keep up to date with the latest ideas about code style trends and best practices.
+কোডিং স্টাইল গাইড নিয়ে পড়লে আপনি সময়ের সাথে তাল মিলিয়ে, কোডিং স্টাইলের ট্রেন্ড ও সবচেয়ে ভালো অনুশীলন নিয়ে নতুন ধারনাগুলো সম্বন্ধে জানতে পারবেন।
