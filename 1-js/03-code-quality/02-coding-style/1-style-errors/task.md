@@ -1,10 +1,10 @@
-importance: 4
+গুরুত্ব: ৪
 
 ---
 
-# Bad style
+# বাজে স্টাইল
 
-What's wrong with the code style below?
+নিচের কোডে কি সমস্যা আছে?
 
 ```js no-beautify
 function pow(x,n)
@@ -25,4 +25,4 @@ else
 }
 ```
 
-Fix it.
+ঠিক করুন।
