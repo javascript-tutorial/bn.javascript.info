@@ -2,15 +2,14 @@ importance: 1
 
 ---
 
-# Function min(a, b)
+# min(a, b) ফাংশন
 
-Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
+একটা ফাংশন লিখুন `min(a,b)` যা সবচেয়ে ছোট ভ্যালু রিটার্ন করবে `a` ও `b` এর মধ্যে থেকে।
 
-For instance:
+উদাহরণস্বরূপঃ
 
 ```js
-min(2, 5) == 2
-min(3, -1) == -1
-min(1, 1) == 1
+min(2, 5) == 2;
+min(3, -1) == -1;
+min(1, 1) == 1;
 ```
-

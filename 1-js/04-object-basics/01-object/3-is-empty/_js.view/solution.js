@@ -1,6 +1,6 @@
 function isEmpty(obj) {
   for (let key in obj) {
-    // if the loop has started, there is a property
+    // যদি লুপ শুরু হয় তাহলে অবজেক্টে প্রোপার্টি আছে
     return false;
   }
   return true;

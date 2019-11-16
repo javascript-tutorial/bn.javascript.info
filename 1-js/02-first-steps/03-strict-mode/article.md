@@ -1,85 +1,85 @@
-# The modern mode, "use strict"
+# আধুনিক মোড, "use strict"
 
-For a long time, JavaScript evolved without compatibility issues. New features were added to the language while old functionality didn't change.
+অনেক লম্বা সময় ধরে কোন কম্প্যাটিবিলিটি ইস্যু ছাড়াই জাভাস্ক্রিপ্টের পর্যায়ক্রমিক উন্নতি হয়েছে। ভাষাটিতে নতুন নতুন ফিচার যোগ করা হত, পুরনো ফাংশনালিটি বদলাত না।
 
-That had the benefit of never breaking existing code. But the downside was that any mistake or an imperfect decision made by JavaScript's creators got stuck in the language forever.
+এর একটি সুবিধা ছিল যে, কখনোই পুরনো কোড নস্ট হত না, মানে পুরনো কোডও নতুন জাভাস্ক্রিপ্ট ভার্সনে চলত। তবে অসুবিধা হল জাভাস্ক্রিপ্টের উদ্ভাবকদের করা কোন ভুল বা ত্রুটিপূর্ণ সিদ্ধান্ত চিরতরে ভাষাটিতে থেকে যেত।
 
-This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most such modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`.
+২০০৯ সালে ECMAScript 5 (ES5) আসার আগ পর্যন্ত এভাবেই চলছিল। ES5 ভাষাটিতে নতুন কিছু ফিচার যোগ করার পাশাপাশি পুরনো কিছু ফিচারও পরিবর্তন করে। পুরনো কোড সচল রাখতে এই পরিবর্তনগুলোর বেশিরভাগই ডিফল্টভাবে বন্ধ রাখা হয়। একটি বিশেষ নির্দেশক `"use strict"` ব্যবহার করে এগুলো আলাদাভাবে সক্রিয় করতে হয়।
 
 ## "use strict"
 
-The directive looks like a string: `"use strict"` or `'use strict'`. When it is located at the top of a script, the whole script works the "modern" way.
+নির্দেশকটি দেখতে স্ট্রিং এর মত: `"use strict"` অথবা `'use strict'`। যখন কোন স্ক্রিপ্টের সবার উপরে এটা থাকে, পুরো স্ক্রিপ্টটি 'আধুনিকভাবে' কাজ করে।
 
-For example:
+উদাহরণ:
 
 ```js
 "use strict";
 
-// this code works the modern way
+// এই কোডটি আধুনিকভাবে কাজ করবে
 ...
 ```
 
-We will learn functions (a way to group commands) soon. Looking ahead, let's note that `"use strict"` can be put at the beginning of the function body instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+শিঘ্রই আমরা ফাংশন (কমান্ড গ্রুপ করার একটি উপায়) শিখব। একটু এগিয়ে গিয়ে নোট করে নেয়া যাক, `"use strict"` কোন ফাংশনের বডির শুরুতেও দেয়া যায়। এতে করে শুধু ঐ ফাংশনে স্ট্রিক্ট মোড সক্রিয় হয়। তবে সাধারণত পুরো স্ক্রিপ্টের জন্যই স্ট্রিক্ট মোড ব্যবহার করা হয়।
 
 
-````warn header="Ensure that \"use strict\" is at the top"
-Please make sure that `"use strict"` is at the top of your scripts, otherwise strict mode may not be enabled.
+````warn header="\"use strict\" সবার শুরুতে থাকতে হবে"
+নিশ্চিত করুন যেন `"use strict"` আপনার স্ক্রিপ্টগুলোর একেবারে সবার উপরে থাকে। নাহলে স্ট্রিক্ট মোড নাও সক্রিয় হতে পারে।
 
-Strict mode isn't enabled here:
+এখানে স্ট্রিক্ট মোড সক্রিয় হয়নি:
 
 ```js no-strict
 alert("some code");
-// "use strict" below is ignored--it must be at the top
+// নিচের "use strict" উপেক্ষা করা হবে--এটি সবার উপরে থাকতে হবে
 
 "use strict";
 
-// strict mode is not activated
+// স্ট্রিক্ট মোড সক্রিয় হয়নি
 ```
 
-Only comments may appear above `"use strict"`.
+`"use strict"` এর উপরে শুধুমাত্র কমেন্ট থাকতে পারবে।
 ````
 
-```warn header="There's no way to cancel `use strict`"
-There is no directive like `"no use strict"` that reverts the engine to old behavior.
+```warn header="`use strict` বাতিল করার কোন উপায় নেই"
+`"no use strict"`-র মত কোন নির্দেশক নেই যা ইন্জিনটিকে পুরনো চরিত্রে ফিরিয়ে নেবে।
 
-Once we enter strict mode, there's no return.
+একবার স্ট্রিক্ট মোডে ঢুকে গেলে আর ফিরে যাওয়ার কোন সুযোগ থাকে না।
 ```
 
-## Browser console
+## ব্রাউজার কনসোল
 
-For the future, when you use a browser console to test features, please note that it doesn't `use strict` by default.
+ভবিষ্যতে আপনি যখন ব্রাউজার কনসোলে কোন ফিচার পরীক্ষা করতে যাবেন, মনে রাখবেন ডিফল্টভাবে সেটা স্ট্রিক্ট মোডে থাকে না।
 
-Sometimes, when `use strict` makes a difference, you'll get incorrect results.
+কখনো কখনো যখন `use strict`-এ পার্থক্য হয়, আপনি ভুল ফলাফল পাবেন।
 
-You can try to press `key:Shift+Enter` to input multiple lines, and put `use strict` on top, like this:
+একাধিক লাইন দেয়ার জন্য `key:Shift+Enter` চেপে সবার উপরে `use strict` দিয়ে দেখতে পারেন, এভাবে:
 
 ```js
-'use strict'; <Shift+Enter for a newline>
-//  ...your code
-<Enter to run>
+'use strict'; <নতুন লাইনের জন্য Shift+Enter>
+//  ...আপনার কোড
+<চালানোর জন্য Enter>
 ```
 
-It works in most browsers, namely Firefox and Chrome.
+বেশিরভাগ ব্রাউজার যেমন ক্রোম, ফায়ারফক্সে এটা কাজ করে।
 
-If it doesn't, the most reliable way to ensure `use strict` would be to input the code into console like this:
+যদি কাজ না করে তাহলে `use strict` নিশ্চিত করার সবচেয়ে নির্ভরযোগ্য উপায় হল কোডটাকে কনসোলে এভাবে ইনপুট দেয়া:
 
 ```js
 (function() {
   'use strict';
 
-  // ...your code...
+  // ...আপনার কোড...
 })()
 ```
 
-## Always "use strict"
+## সবসময় "use strict" করুন
 
-We have yet to cover the differences between strict mode and the "default" mode.
+আমাদের এখনো স্ট্রিক্ট মোড আর "ডিফল্ট" মোডের পার্থক্য আলোচনা করা বাকি রয়ে গেছে।
 
-In the next chapters, as we learn language features, we'll note the differences between the strict and default modes. Luckily, there aren't many and they actually make our lives better.
+পরবর্তী অধ্যাগুলোতে যখন আমরা ভাষার ফিচারগুলো শিখব তখন স্ট্রিক্ট মোড আর ডিফল্ট মোডের পার্থক্যগুলো দেখতে পাব। সৌভাগ্যবশত খুব বেশি পার্থক্য নেই। আর যা আছে সেগুলো আসলে আমাদের জীবন সুন্দর করে।
 
-For now, it's enough to know about it in general:
+আপাতত এ ব্যাপারে সাধাণভাবে জানা যথেষ্ট:
 
-1. The `"use strict"` directive switches the engine to the "modern" mode, changing the behavior of some built-in features. We'll see the details later in the tutorial.
-2. Strict mode is enabled by placing `"use strict"` at the top of a script or function. Several language features, like "classes" and "modules", enable strict mode automatically.
-3. Strict mode is supported by all modern browsers.
-4. We recommended always starting scripts with `"use strict"`. All examples in this tutorial assume strict mode unless (very rarely) specified otherwise.
+১. `"use strict"` নির্দেশকটি বিল্ট-ইন ফিচারগুলোর চরিত্র বদলে ইন্জিনকে "আধুনিক" মোডে নিয়ে যায়। পরবর্তীতে আমরা এর বিস্তারিত দেখব।
+২. একটি স্ক্রিপ্ট কিংবা ফাংশনের সবার উপরে `"use strict"` দিয়ে স্ট্রিক্ট মোড সক্রিয় করা যায়। ভাষার কিছু ফিচার, যেমন "classes" এবং "modules" স্বয়ংক্রিয়ভাবে স্ট্রিক্ট মোড সক্রিয় করে। 
+৩. সব মর্ডান ব্রাউজারই স্ট্রিক্ট মোড সমর্থন করে।
+৪. আমরা পরামর্শ দিয়েছি সব সময় `"use strict"` দিয়ে স্ক্রিপ্ট শুরু করতে। এই টিউটোরিয়ালের সকল উদাহরণ ধরে নেয় যে স্ট্রিক্ট মোড চালু আছে, যদিনা অন্যথা (খুবই বিরল) উল্লেখ করে দেয়া থাকে।

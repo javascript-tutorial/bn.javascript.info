@@ -1,12 +1,12 @@
-importance: 5
+গুরুত্বঃ ৫
 
 ---
 
-# Check for emptiness
+# খালি কিনা পরীক্ষা করুন
 
-Write the function `isEmpty(obj)` which returns `true` if the object has no properties, `false` otherwise.
+একটি ফাংশন `isEmpty(obj)` লিখুন যেটি `true` রিটার্ন করে যদি অবজেক্টে কোন প্রোপার্টি না থাকে, অন্যথায় `false` রিটার্ন করুন।
 
-Should work like that:
+কোডটি এভাবে কাজ করা উচিতঃ
 
 ```js
 let schedule = {};
@@ -17,4 +17,3 @@ schedule["8:30"] = "get up";
 
 alert( isEmpty(schedule) ); // false
 ```
-

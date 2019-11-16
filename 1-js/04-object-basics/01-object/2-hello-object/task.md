@@ -1,14 +1,13 @@
-importance: 5
+গুরুত্বঃ ৫
 
 ---
 
-# Hello, object
+# হ্যালো, অবজেক্ট
 
-Write the code, one line for each action:
+নিন্মে বর্ণিত প্রতিটি একশনের জন্য এক একটি লাইনে কোড লিখুনঃ
 
-1. Create an empty object `user`.
-2. Add the property `name` with the value `John`.
-3. Add the property `surname` with the value `Smith`.
-4. Change the value of the `name` to `Pete`.
-5. Remove the property `name` from the object.
-
+1. `user` নামে একটি খালি অবজেক্ট তৈরি করুন।
+2. `name` নামে একটি প্রোপার্টি `John` ভ্যালু সহ সংযুক্ত করুন।
+3. `surname` নামে একটি প্রোপার্টি `Smith` ভ্যালু সহ সংযুক্ত করুন।
+4. `name` নামের প্রোপার্টির ভ্যালু পরিবর্তন করে `Pete` রাখুন।
+5. `name` নামের প্রোপার্টিটি অবজেক্ট থেকে মুছে দিন।

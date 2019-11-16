@@ -1,95 +1,95 @@
-# Comparisons
+# তুলনা
 
-We know many comparison operators from maths:
+আমরা গণিতের অনেক তুলনা করার অপারেটর সম্পর্কে জানি:
 
-- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
-- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
-- Equals: `a == b` (please note the double equals sign `=`. A single symbol `a = b` would mean an assignment).
-- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as an assignment with an exclamation sign before it: <code>a != b</code>.
+- বৃহত্তম / ক্ষুদ্রতম: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- বৃহত্তম / ক্ষুদ্রতম অথবা সমান: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- সমান: `a == b` (মনে রাখবেন, দুইটি সমান চিহ্ন `=`। একটি সমান চিহ্ন এসাইনমেন্ট বুঝায় `a = b`।)
+- সমান নয়: গণিতে সমান নয় কে লেখা হয় <code>&ne;</code> ভাবে। কিন্তু জাভাস্ক্রিপ্টে সমান চিহ্নের আগে বিস্ময়সূচক চিহ্ন দিয়ে লেখা হয়: <code>a != b</code>।
 
-## Boolean is the result
+## বুলিয়ান ফলাফল
 
-Like all other operators, a comparison returns a value. In this case, the value is a boolean.
+অন্য সকল অপারেটরের মতো তুলনা করার অপারেটর একটি মান রিটার্ন করে। এক্ষেত্রে মানটি হবে বুলিয়ান।
 
-- `true` -- means "yes", "correct" or "the truth".
-- `false` -- means "no", "wrong" or "not the truth".
+- `true` -- মানে "হ্যাঁ", "ঠিক" অথবা "সত্য"।
+- `false` -- মানে "না", "ভুল" অথবা "মিথ্যা"।
 
-For example:
-
-```js run
-alert( 2 > 1 );  // true (correct)
-alert( 2 == 1 ); // false (wrong)
-alert( 2 != 1 ); // true (correct)
-```
-
-A comparison result can be assigned to a variable, just like any value:
+উদাহরণস্বরূপ:
 
 ```js run
-let result = 5 > 4; // assign the result of the comparison
-alert( result ); // true
+alert(2 > 1); // true (ঠিক)
+alert(2 == 1); // false (ভুল)
+alert(2 != 1); // true (ঠিক)
 ```
 
-## String comparison
-
-To see whether a string is greater than another, JavaScript uses the so-called "dictionary" or "lexicographical" order.
-
-In other words, strings are compared letter-by-letter.
-
-For example:
+কোনো তুলনার ভ্যালুকে যেকোনো ভ্যারিয়েবলে এসাইন করা যাবে। অন্য সকল ভ্যালুর মতো:
 
 ```js run
-alert( 'Z' > 'A' ); // true
-alert( 'Glow' > 'Glee' ); // true
-alert( 'Bee' > 'Be' ); // true
+let result = 5 > 4; // তুলনার মানকে এসাইন করা হয়েছে
+alert(result); // true
 ```
 
-The algorithm to compare two strings is simple:
+## স্ট্রিং এর তুলনা
 
-1. Compare the first character of both strings.
-2. If the first character from the first string is greater (or less) than the other string's, then the first string is greater (or less) than the second. We're done.
-3. Otherwise, if both strings' first characters are the same, compare the second characters the same way.
-4. Repeat until the end of either string.
-5. If both strings end at the same length, then they are equal. Otherwise, the longer string is greater.
+কোনো স্ট্রিং ছোট বা বড় কিনা তা তুলনা করার জন্য জাভাস্ক্রিপ্ট "অভিধান" বা "আভিধানিক" ক্রম ব্যবহার করে।
 
-In the examples above, the comparison `'Z' > 'A'` gets to a result at the first step while the strings `"Glow"` and `"Glee"` are compared character-by-character:
+অর্থাৎ, স্ট্রিং তুলনা করা হয় একটি অক্ষরের পর আরেকটি অক্ষরের সাথে।
 
-1. `G` is the same as `G`.
-2. `l` is the same as `l`.
-3. `o` is greater than `e`. Stop here. The first string is greater.
-
-```smart header="Not a real dictionary, but Unicode order"
-The comparison algorithm given above is roughly equivalent to the one used in dictionaries or phone books, but it's not exactly the same.
-
-For instance, case matters. A capital letter `"A"` is not equal to the lowercase `"a"`. Which one is greater? The lowercase `"a"`. Why? Because the lowercase character has a greater index in the internal encoding table JavaScript uses (Unicode). We'll get back to specific details and consequences of this in the chapter <info:string>.
-```
-
-## Comparison of different types
-
-When comparing values of different types, JavaScript converts the values to numbers.
-
-For example:
+উদাহরণস্বরূপ:
 
 ```js run
-alert( '2' > 1 ); // true, string '2' becomes a number 2
-alert( '01' == 1 ); // true, string '01' becomes a number 1
+alert("Z" > "A"); // true
+alert("Glow" > "Glee"); // true
+alert("Bee" > "Be"); // true
 ```
 
-For boolean values, `true` becomes `1` and `false` becomes `0`.
+দুটি স্ট্রিং তুলনা করার অ্যালগরিদম খুব সহজ:
 
-For example:
+1. উভয় স্ট্রিং এর প্রথম অক্ষর দুটির তুলনা করতে হবে।
+2. যদি প্রথম স্ট্রিং এর প্রথম অক্ষরটি দ্বিতীয়টির প্রথম অক্ষরের থেকে বড় হয়, তবে প্রথম স্ট্রিংটি দ্বিতীয়টির থেকে বড়। তুলনা করা শেষ।
+3. অন্যথায়, যদি উভয় স্ট্রিংয়ের প্রথম অক্ষর দুটি একই হয়, তবে উভয় স্ট্রিংয়ের দ্বিতীয় অক্ষর দুটিকে একই ভাবে তুলনা করতে হবে।
+4. যেকোনো একটি স্ট্রিংয়ের শেষ পর্যন্ত উপেরের নিয়মে তুলনা করতে হবে।
+5. যদি উভয় স্ট্রিং এর দৈর্ঘ্য সমান হয়, তবে স্ট্রিং দুটি সমান। অন্যথায়, বেশি দৈর্ঘ্যের স্ট্রিংটি বড়।
+
+উপরের উদাহরণে,`'Z' > 'A'` এই তুলনার প্রথম ধাপেই ফলাফল পাওয়া যায়। অন্যদিকে, এই `"Glow"` এবং `"Glee"` স্ট্রিং দুটি অক্ষরের পর অক্ষর তুলনা করা হয়েছে।
+
+1. `G` আর `G` একই বা সমান।
+2. `l` আর `l` একই বা সমান।
+3. `o` এর থেকে `e` বড়। তুলনা করা এখানে শেষ। প্রথম স্ট্রিং টি বৃহত্তম।
+
+```smart header="বাস্তব অভিধান নয়, কিন্তু ইউনিকোড ক্রম"
+উপরে উল্লেখ করা এলগোরিদমটি প্রায় একই রকম যেই এলগোরিদমটি অভিধানগুলোতে বা ফোন বুককে ব্যবহার করা হয়। তবে এটি সম্পূর্ণ এক নয়।
+
+উদাহরণস্বরূপ, বড় ও ছোট হাতের অক্ষরের উপর নির্ভরশীল।  বড় হাতের `"A"` আর ছোট হাতের `"a"` সমান নয়। তাহলে কোনটি বড়? ছোট হাতের `"a"`। কেন? কারণ ছোট হাতের অক্ষর এনকোডিং এর জন্য জাভাস্ক্রিপ্ট ইউনিকোড ব্যবহার করে।  যেই ইউনিকোড নম্বর বড় হাতের অক্ষরের  থেকে বড়। আমরা এই সম্পর্কে বিস্তারিত আলোচনা করবো <info:স্ট্রিং> অধ্যায়ে।
+```
+
+## ভিন্ন ধরণের মানের মধ্যে তুলনা
+
+যখন দুটি ভিন্ন ধরনের মানের মধ্যে তুলনা করা হয় তখন জাভাস্ক্রিপ্ট এই মানকে সংখ্যায় রূপান্তর করে।
+
+উদাহরণস্বরূপ:
 
 ```js run
-alert( true == 1 ); // true
-alert( false == 0 ); // true
+alert("2" > 1); // true, স্ট্রিং '2' সংখ্যায় রূপান্তরিত হয়ে 2 হয়েছে।
+alert("01" == 1); // true, স্ট্রিং '01' সংখ্যায় রূপান্তরিত হয়ে 1 হয়েছে।
 ```
 
-````smart header="A funny consequence"
-It is possible that at the same time:
+বুলিয়ান মানের জন্য `true` হয় `1` আর `false` হয় `0`।
 
-- Two values are equal.
-- One of them is `true` as a boolean and the other one is `false` as a boolean.
+উদাহরণস্বরূপ:
 
-For example:
+```js run
+alert(true == 1); // true
+alert(false == 0); // true
+```
+
+````smart header="একটি মজার ঘটনা"
+এটি একই সাথে সম্ভব:
+
+- দুটি মান সমান।
+- তাদের মধ্য বুলিয়ান মান হিসেবে একটি `true` আর অন্যটি `false`।
+
+উদাহরণস্বরূপ:
 
 ```js run
 let a = 0;
@@ -101,109 +101,109 @@ alert( Boolean(b) ); // true
 alert(a == b); // true!
 ```
 
-From JavaScript's standpoint, this result is quite normal. An equality check converts values using the numeric conversion (hence `"0"` becomes `0`), while the explicit `Boolean` conversion uses another set of rules.
+জাভাস্ক্রিপ্টের দৃর্ষ্টিকোণ থেকে, এটি একটি স্বাভাবিক বিষয়। সমতা নির্নয় করার জন্য মানকে সংখ্যায় রূপান্তরিত করা হয়(তাই `"0"` রূপান্তরিত হয়েছে `0` তে)। কোনো মানকে নিদির্ষ্টভাবে `বুলিয়ান` মানে(ভ্যালু তে) রূপান্তরিত করতে ভিন্ন ধরণের নিয়ম অনুসরণ করা হয়।
 ````
 
-## Strict equality
+## যথাযথ সমতা
 
-A regular equality check `==` has a problem. It cannot differentiate `0` from `false`:
-
-```js run
-alert( 0 == false ); // true
-```
-
-The same thing happens with an empty string:
+সাধারণভাবে সমতা নির্ণয়ে `==` একটি সমস্যা আছে। এভাবে `0` এবং `false` কে আলাদা করতে পারে না।
 
 ```js run
-alert( '' == false ); // true
+alert(0 == false); // true
 ```
 
-This happens because operands of different types are converted to numbers by the equality operator `==`. An empty string, just like `false`, becomes a zero.
-
-What to do if we'd like to differentiate `0` from `false`?
-
-**A strict equality operator `===` checks the equality without type conversion.**
-
-In other words, if `a` and `b` are of different types, then `a === b` immediately returns `false` without an attempt to convert them.
-
-Let's try it:
+একই ঘটনা ঘটে ফাঁকা স্ট্রিং এর ক্ষেত্রে।
 
 ```js run
-alert( 0 === false ); // false, because the types are different
+alert("" == false); // true
 ```
 
-There is also a "strict non-equality" operator `!==` analogous to `!=`.
+এটি ঘটে কারণ, `==` অপারেটর ভিন্ন ধরণের অপারেন্ড গুলোকে সংখ্যায় রূপান্তরিত করে। একটি ফাঁকা স্ট্রিং `false` এর মতো, তাই এটি শূন্য তে রূপান্তরিত হয়।
 
-The strict equality operator is a bit longer to write, but makes it obvious what's going on and leaves less room for errors.
+যদি আমরা `0` আর `false` কে আলাদা করতে চাই তবে কি করতে পারি?
 
-## Comparison with null and undefined
+**যথাযথ সমতা অপারেটর `===` সমতা নির্ণয় করে ভ্যালু বা মানের টাইপ পরিবর্তন না করে।**
 
-There's a non-intuitive behavior when `null` or `undefined` are compared to other values.
+অন্যভাবে, যদি `a` এবং `b` ভিন্ন টাইপ বা ধরণের হয় তবে `a === b` তাৎক্ষণিকভাবে `false` রিটার্ন করবে তাদের টাইপ পরিবর্তন করার চেষ্টা ছাড়াই।
 
-For a strict equality check `===`
-: These values are different, because each of them is a different type.
+চেষ্টা করা দেখা যাক।
+
+```js run
+alert(0 === false); // false, কারণ টাইপ আলাদা।
+```
+
+এছাড়াও যথাযথ সমতা নয় `!==` অপারেটর আছে `!=` এর মতো।
+
+যথাযথ সমতার অপারেটরে `(===)` একটু বেশি লিখতে হয় তবে এটি আসলেই কি ঘটছে বুঝতে সাহায্য করে এবং ভুল হওয়ার সম্ভাবনা কমায়।
+
+## Null এবং Undefined এর সাথে তুলনা।
+
+`null` এবং `undefined` এর সাথে অন্য ভ্যালু এর তুলনা করলে ধারণাতীত ঘটনা ঘটে।
+
+যথাযথ সমতা নির্ণয়ে `===`
+: তাদের মান ভিন্ন কারণ তারা ভিন্ন টাইপের।
 
     ```js run
     alert( null === undefined ); // false
     ```
 
-For a non-strict check `==`
-: There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
+সাধারণ সমতা নির্ণয়ে `==`
+: এখানে একটি বিশেষ নিয়ম আছে। তারা একে অপরের সমান (`==` এর হিসেবে) কিন্তু অন্য কিছুর সমান নয়।
 
     ```js run
     alert( null == undefined ); // true
     ```
 
-For maths and other comparisons `< > <= >=`
-: `null/undefined` are converted to numbers: `null` becomes `0`, while `undefined` becomes `NaN`.
+গণিতের অন্য সকল তুলনার ক্ষেত্রে `< > <= >=`
+: `null/undefined` রূপান্তরিত হয় সংখ্যায়: `null` রূপান্তরিত হয় `0`, আর `undefined` রূপান্তরিত হয় `NaN` এ।
 
-Now let's see some funny things that happen when we apply these rules. And, what's more important, how to not fall into a trap with them.
+এখন চলুন কিছু মজার ঘটনা দেখি, ঘটনাগুলো ঘটে যখন এই নিয়মগুলো প্রয়োগ করা হয়। গুরুত্বপূর্ণ হলো, কিভাবে এই সকল ফাঁদে না পড়া যায়।
 
-### Strange result: null vs 0
+### অদ্ভুত ফলাফল: null vs 0
 
-Let's compare `null` with a zero:
-
-```js run
-alert( null > 0 );  // (1) false
-alert( null == 0 ); // (2) false
-alert( null >= 0 ); // (3) *!*true*/!*
-```
-
-Mathematically, that's strange. The last result states that "`null` is greater than or equal to zero", so in one of the comparisons above it must be `true`, but they are both false.
-
-The reason is that an equality check `==` and comparisons `> < >= <=` work differently. Comparisons convert `null` to a number, treating it as `0`. That's why (3) `null >= 0` is true and (1) `null > 0` is false.
-
-On the other hand, the equality check `==` for `undefined` and `null` is defined such that, without any conversions, they equal each other and don't equal anything else. That's why (2) `null == 0` is false.
-
-### An incomparable undefined
-
-The value `undefined` shouldn't be compared to other values:
+চলুন, `null` এর সাথে শূন্য এর তুলনা করি।
 
 ```js run
-alert( undefined > 0 ); // false (1)
-alert( undefined < 0 ); // false (2)
-alert( undefined == 0 ); // false (3)
+alert(null > 0); // (1) false
+alert(null == 0); // (2) false
+alert(null >= 0); // (3) *!*true*/!*
 ```
 
-Why does it dislike zero so much? Always false!
+গাণিতিক ভাবে, এটি অদ্ভুত। শেষের তুলনার ফলাফল হলো "`null` শূন্য এর থেকে বড় বা সমান।", উপরের দুটি তুলনার মধ্যে যেকোনো একটিকে অবশ্যই `true` হতে হবে। কিন্তু তাদের মধ্যে দুটি `false`।
 
-We get these results because:
+এর কারণ হলো, সমতা নির্ণয় `==` এবং `> < >= <=` তুলনা দুটি ভিন্ন ভাবে কাজ করে। তুলনা করার সময় `null` কে সংখ্যায় রূপান্তরিত করে, সংখ্যাটিকে `0` ধরা হয়। এজন্যই, (3) `null >= 0` ঠিক বা true। (1) `null > 0` ভুল বা false।
 
-- Comparisons `(1)` and `(2)` return `false` because `undefined` gets converted to `NaN` and `NaN` is a special numeric value which returns `false` for all comparisons.
-- The equality check `(3)` returns `false` because `undefined` only equals `null`, `undefined`, and no other value.
+অন্য দিকে, সমতা নির্ণয়ের (`==`) ক্ষেত্রে, `undefined` এবং `null` নির্দিষ্ট থাকে অন্য কোন কিছুতে রূপান্তরিত করা হয় না। তারা একে অপরের সমান কিন্তু অন্য কিছুর সমান সমান নয়। এ জন্যই, (2) `null == 0` ভুল বা false।
 
-### Evade problems
+### undefined তুলনার অযোগ্য।
 
-Why did we go over these examples? Should we remember these peculiarities all the time? Well, not really. Actually, these tricky things will gradually become familiar over time, but there's a solid way to evade problems with them:
+`undefined` কে অন্য কোন ভ্যালু এর সাথে তুলনা করা উচিত না।
 
-Just treat any comparison with `undefined/null` except the strict equality `===` with exceptional care.
+```js run
+alert(undefined > 0); // false (1)
+alert(undefined < 0); // false (2)
+alert(undefined == 0); // false (3)
+```
 
-Don't use comparisons `>= > < <=` with a variable which may be `null/undefined`, unless you're really sure of what you're doing. If a variable can have these values, check for them separately.
+কেন এটি শূন্য কে এতো অপছন্দ করে? সব সময় ভুল বা false!
 
-## Summary
+আমরা ঐ সকল ফলাফল পাচ্ছি তার কারণটি হলো:
 
-- Comparison operators return a boolean value.
-- Strings are compared letter-by-letter in the "dictionary" order.
-- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
-- The values `null` and `undefined` equal `==` each other and do not equal any other value.
-- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+- তুলনা `(1)` এবং `(2)` ভুল বা false রিটার্ন করে কারণ `undefined` রূপান্তরিত হয় `NaN` এ। `NaN` একটি বিশেষ ধরণের সংখ্যামান যেটি যেকোনো তুলনায় false বা ভুল রিটার্ন করে।
+- সমতা নির্ণয়ে `(3)` ভুল বা false রিটার্ন করছে কারণ `undefined` একমাত্র `null`, `undefined` এর সমান। অন্য কোনো কিছুর নয়।
+
+### সমস্যা এড়ানো
+
+কেন আমরা ওই সকল উদাহরণ দেখলাম? আমরা কি ওই গুলো সবসময় মনে রাখতে পারবো? আসলে, পারবো না। প্রকৃতপক্ষে, এই ব্যতিক্রম জিনিসগুলি ধীরে ধীরে সময়ের সাথে পরিচিত হয়ে উঠবে। তবে এ সমস্যাগুলি থেকে বাঁচার একটি উত্তম উপায় রয়েছে:
+
+যেকোনো ধরনের তুলনা করতে যথাযথ সমতা `===` ব্যবহার করুন শুধু মাত্র `undefined/null` ক্ষেত্রে নয়।
+
+কখনোই কোন ভ্যারিয়েবল এর সাথে অন্য কিছুর তুলনা (`>= > < <=`) করবেন না। যেই ভ্যারিয়েবলের মান `null/undefined` হতে পারে বা হওয়ার সম্ভাবনা থাকে। যদি হওয়ার সম্ভাবনা থাকে তবে সেগুলোকে আলাদা ভাবে যাচাই করে নিতে হবে।
+
+## সারাংশ
+
+- তুলনা করার অপারেটর একটি ভ্যালু রিটার্ন করে।
+- স্ট্রিং তুলনা করা হয় একটি অক্ষরের পর আরেকটি অক্ষরের সাথে। "আভিধানিক" ক্রম অনুসারে।
+- যখন দুটি ভিন্ন টাইপের ভ্যালু এর সাথে তুলনা করা হয় তখন তাদেরকে সংখ্যায় রূপান্তরিত করা হয়। (যথাযথ সমতার `===` ক্ষেত্রে সংখ্যায় রূপান্তর করা হয় না।)
+- `null` এবং `undefined` একে অপরের সমান (`==`)। কিন্তু অন্য কোনো কিছুর সমান নয়।
+- সাবধান! যখন বৃহত্তম ও ক্ষুদ্রতম নির্ণয় করবেন কোনো ভ্যারিয়েবলের সাথে তুলনা করে। যেই ভ্যারিয়েবলের মান `null/undefined` হতে পারে, সেই ভ্যারিয়েবলকে আলাদাভাবে `null/undefined` কিনা তা যাচাই করে নেওয়া ভালো অনুশীলন।

@@ -1,15 +1,15 @@
-importance: 3
+গুরুত্বঃ ৩
 
 ---
 
-# Multiply numeric properties by 2
+# যেসব প্রোপার্টি ভ্যালু একটি সংখ্যা তাদের `2` দিয়ে গুন করুন
 
-Create a function `multiplyNumeric(obj)` that multiplies all numeric properties of `obj` by `2`.
+একটি ফাংশন `multiplyNumeric(obj)` লিখুন যেটি `obj` এর সব সংখ্যাভিত্তিক/numeric প্রোপার্টিগুলো কে `2` দিয়ে গুন করে।
 
-For instance:
+উদাহরণস্বরূপঃ
 
 ```js
-// before the call
+// কল করার আগে
 let menu = {
   width: 200,
   height: 300,
@@ -18,7 +18,7 @@ let menu = {
 
 multiplyNumeric(menu);
 
-// after the call
+// কল করার পর
 menu = {
   width: 400,
   height: 600,
@@ -26,8 +26,6 @@ menu = {
 };
 ```
 
-Please note that `multiplyNumeric` does not need to return anything. It should modify the object in-place.
+মনে রাখবেন `multiplyNumeric` এর কিছুই রিটার্ন করার দরকার নেই। এটা শুধুই অবজেক্টকে ইন-প্লেস পরিবর্তন করবে।
 
-P.S. Use `typeof` to check for a number here.
-
-
+পুনশ্চঃ `typeof` ব্যবহার করে নাম্বার কিনা পরীক্ষা করুন।

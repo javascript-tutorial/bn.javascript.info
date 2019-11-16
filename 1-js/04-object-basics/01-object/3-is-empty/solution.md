@@ -1,1 +1,1 @@
-Just loop over the object and `return false` immediately if there's at least one property.
+অবজেক্টের উপর লুপ চালান এবং যদি কোন প্রোপার্টি পাওয়া যায় সাথে সাথে `return false` করুন।
