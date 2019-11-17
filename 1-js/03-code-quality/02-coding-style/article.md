@@ -1,12 +1,12 @@
-# Coding Style
+# কোডিং স্টাইল
 
-Our code must be as clean and easy to read as possible.
+আমাদের কোড যতটুকু সম্ভব পড়ার জন্য পরিচ্ছন্ন ও সহজ রাখতে হবে।
 
-That is actually the art of programming -- to take a complex task and code it in a way that is both correct and human-readable. A good code style greatly assists in that.  
+একটি জটিল কাজ নিয়ে এমনভাবে কোড করা যা একাধারে সঠিক ও মানুষের জন্য পাঠযোগ্য -- এটাই প্রোগ্রামিংয়ের আর্ট । একটি ভালো কোডিং স্টাইল এতে অনেকটাই সহযোগিতা করে । 
 
-## Syntax
+## শব্দবিন্যাস ( সিনট্যাক্স )
 
-Here is a cheat sheet with some suggested rules (see below for more details):
+এখানে কিছু সাজেশন দেয়া হল (বিস্তারিত নিচে দেয়া দেখুন):
 
 ![](code-style.svg)
 <!--
@@ -34,57 +34,58 @@ if (n < 0) {
 
 -->
 
-Now let's discuss the rules and reasons for them in detail.
+এখন চলুন কিছু নিয়ম ও তার কারণ সম্বন্ধে জেনে নেইঃ
 
 ```warn header="There are no \"you must\" rules"
-Nothing is set in stone here. These are style preferences, not religious dogmas.
+এখনে পাথরে খোদাই করে লিছু বলা নেই। এগুলো কোডিং স্টাইলের পছন্দ মাত্র, কোন ধর্মীয় মতবাদ নয়।
 ```
 
-### Curly Braces
+### দ্বিতীয় বন্ধনী
 
-In most JavaScript projects curly braces are written in "Egyptian" style with the opening brace on the same line as the corresponding keyword -- not on a new line. There should also be a space before the opening bracket, like this:
+বেশিরভাগ জাভাস্ক্রিপ্ট প্রজেক্টেই দ্বিতীয় বন্ধনীগুলোকে "মিশরীয়" কায়দায় লেখা হয় যাতে শুরুর বন্ধনীটি অনুরূপ কিওয়ার্ডের সাথে একই লাইনে থাকে -- নতুন লাইনে নয়। তবে শুরুর বন্ধনীটি আগে একটি ফাঁকা স্পেস থাকা উচিৎ।
+কিছুটা এমন ঃ 
 
 ```js
 if (condition) {
-  // do this
-  // ...and that
-  // ...and that
+  // কিছু কোড
+  // ...আরও কিছু কোড
+  // ...আরও কিছু কোড
 }
 ```
 
-A single-line construct, such as `if (condition) doSomething()`, is an important edge case. Should we use braces at all?
+একটি একলাইনের কনস্ট্রাকটর, যেমন `if (condition) doSomething()`, একটি গুরুত্বপূর্ণ কেইস। এখানে কি বন্ধনী দেয়া উচিৎ ?
 
-Here are the annotated variants so you can judge their readability for yourself:
+এখানে বিভিন্ন টীকা যুক্ত করা হলো যাতে আপনি নিজেই পঠনযোগ্যতা যাচাই করতে পারেনঃ
 
-1. 😠 Beginners sometimes do that. Bad! Curly braces are not needed:
+1. 😠অনভিজ্ঞরা প্রায়ই এটা করে। বাজে! এখানে ২য় বন্ধনির দরকার নেই:
     ```js
     if (n < 0) *!*{*/!*alert(`Power ${n} is not supported`);*!*}*/!*
     ```
-2. 😠 Split to a separate line without braces. Never do that, easy to make an error when adding new lines:
+2. 😠 দ্বিতীয় বন্ধনী ছাড়াই নতুন লাইনে চলে যাওয়া। কখনই এটা করবেন না, নতুন লাইন করতে গেলে ভুলের সম্বাবনা বেড়ে যায়:
     ```js
     if (n < 0)
       alert(`Power ${n} is not supported`);
     ```
-3. 😏 One line without braces - acceptable, if it's short:
+3. 😏 দ্বিতীয় বন্ধনী ছাড়াই একলাইনের কোড - কোড ছোট হলে, গ্রহণযোগ্য:
     ```js
     if (n < 0) alert(`Power ${n} is not supported`);
     ```
-4. 😃 The best variant:
+4. 😃 সবচেয়ে ভালো পন্থা:
     ```js
     if (n < 0) {
       alert(`Power ${n} is not supported`);
     }
     ```
 
-For a very brief code, one line is allowed, e.g. `if (cond) return null`. But a code block (the last variant) is usually more readable.
+সংক্ষিপ্ত কোডের জন্য একলাইনে লিখা গ্রহণযোগ্য, যথাঃ `if (cond) return null`. কিন্তু একটা কোড ব্লক (সবশেষে যেটা দেখলাম) সাধারণত বেশী পাঠযোগ্য।
 
-### Line Length
+### লাইনের দৈর্ঘ্য
 
-No one likes to read a long horizontal line of code. It's best practice to split them.
+কেউই লম্বা অনুভূমিক লাইন পড়তে পছন্দ করে না। একে ভাগ করে দেয়াই উত্তম।
 
-For example:
+উদাহারণস্বরুপ:
 ```js
-// backtick quotes ` allow to split the string into multiple lines
+// ব্যাকটিক কোট ` এর সাহায্যে একটা স্ট্রিংকে ভাগ করা যায়
 let str = `
   Ecma International's TC39 is a group of JavaScript developers,
   implementers, academics, and more, collaborating with the community
@@ -92,7 +93,7 @@ let str = `
 `;
 ```
 
-And, for `if` statements:
+এবং  `if` স্টেট্মেন্টগুলোয় :
 
 ```js
 if (
@@ -104,23 +105,23 @@ if (
 }
 ```
 
-The maximum line length should be agreed upon at the team-level. It's usually 80 or 120 characters.
+লাইনের দৈর্ঘ্য নিজেদের টিমের সাথে অলোচনা করে নেয়া উচিৎ। সাধারণত এটা ৮০ থেকে ১২০ অক্ষরের হয়।
 
-### Indents
+### ইন্ডেন্ট (খাঁজ)
 
-There are two types of indents:
+ইন্ডেন্ট ২ ধরণের হয়:
 
-- **Horizontal indents: 2 or 4 spaces.**
+- **আনুভুমিক ইন্ডেন্ট: ২ অথবা ৪ টি স্পেস**
 
-    A horizontal indentation is made using either 2 or 4 spaces or the horizontal tab symbol (key `key:Tab`). Which one to choose is an old holy war. Spaces are more common nowadays.
+    একটি আনুভুমিক ইন্ডেন্ট ২ থেকে ৪ টি স্পেস নিয়ে গঠিত অথবা আনুভুমিক ট্যাব চিহ্ন (কী `key:Tab`)। কোনটা ভাল একটি বিতর্কের বিষয়। যদিও স্পেসের ব্যাবহার এখন বেশি।
 
-    One advantage of spaces over tabs is that spaces allow more flexible configurations of indents than the tab symbol.
+    ইন্ডেন্টশনের ক্ষেত্রে ট্যাব চিহ্ন থেকে স্পেস ব্যাবহারের একটি বাড়তি সুবিধা হল এর বেশি ফ্ল্যাক্সিবল কনফিগারেশনের 
 
-    For instance, we can align the arguments with the opening bracket, like this:
+    যেমন, এভাবে আমরা আর্গুমেন্টগুলোকে  শুরুর ব্যাকেটের সাথে লম্বভাবে রাখতে পারি :
 
     ```js no-beautify
     show(parameters,
-         aligned, // 5 spaces padding at the left  
+         aligned, // বামপাশে ৫টি স্পেস দেয়া
          one,
          after,
          another
@@ -129,9 +130,9 @@ There are two types of indents:
     }
     ```
 
-- **Vertical indents: empty lines for splitting code into logical blocks.**
+- **উল্লম্ব ইন্ডেন্ট : কোডকে লজিকাল ব্লকে ভাগ করতে ফাঁকা লাইন**
 
-    Even a single function can often be divided into logical blocks. In the example below, the initialization of variables, the main loop and returning the result are split vertically:
+    এমনকি শুধুমাত্র একটা ফাংশনকে কয়েকটি লজিকাল ব্লকে ভাগ করা যেতে পারে। নিচে উদাহারনে, চলক নির্ধারণ করতে, প্রধান লুপ ও তার ফলাফল রিটার্নকে একাধিক উল্লম্ব খণ্ডে ভাগ করা হয়েছে:
 
     ```js
     function pow(x, n) {
@@ -145,23 +146,23 @@ There are two types of indents:
     }
     ```
 
-    Insert an extra newline where it helps to make the code more readable. There should not be more than nine lines of code without a vertical indentation.
+    একটি বাড়তি লাইন এখানে কোডকে আরও পড়ার উপযোগী করেছে। উল্লম্ব ইন্ডেন্ট ছাড়া ৯ লাইনের বেশী কোড থাকা উচিৎ নয়।
 
-### Semicolons
+### সেমিকোলন
 
-A semicolon should be present after each statement, even if it could possibly be skipped.
+একটি সেমিকোলন থাকা উচিৎ প্রতিটি স্টেট্মেন্টের শেষে, যদিও এটা বাদও দেয়া যায়।
 
-There are languages where a semicolon is truly optional and it is rarely used. In JavaScript, though, there are cases where a line break is not interpreted as a semicolon, leaving the code vulnerable to errors. See more about that in the chapter <info:structure#semicolon>.
+কিছু প্রোগ্রামিং ভাষায় সত্যিই সেমিকোলন মূখ্য নয় এবং কম ব্যাবহার হয়। যদিও জাভাস্ক্রিপ্টে কিছু সময় লাইনের শেষকে সেমিকোলন হিসেবে ধরা হয় না, এটি কোডে পরে এরর করে দিতে পারে। এব্যাপারে আরও জানতেঃ <info:structure#semicolon>.
 
-If you're an experienced JavaScript programmer, you may choose a no-semicolon code style like [StandardJS](https://standardjs.com/). Otherwise, it's best to use semicolons to avoid possible pitfalls. The majority of developers put semicolons.
+আপনি জাভাস্ক্রিপ্টে দক্ষ হলে, সেমিকোলন ছাড়া স্টাইল পছন্দ করতে পারেন [StandardJS](https://standardjs.com/). অন্যথায়,ফাঁদে পরতে না চাইলে সেমিকোলন দেয়াই শ্রেয়। বেশিরভাগ ডেভ্লপারই এটি দেয়। 
 
-### Nesting Levels
+### নেস্টিং লেভেল
 
-Try to avoid nesting code too many levels deep.
+বেশি গভীর নেস্টিং কোড লিখা থেকে বিরত থাকুন।
 
-For example, in the loop, it's sometimes a good idea to use the [`continue`](info:while-for#continue) directive to avoid extra nesting.
+যথা, লুপে, বাড়তি নেস্টিং বাদ দিতে [`continue`](info:while-for#continue) ডিরেক্টিভ ব্যাবহার করা ভালো
 
-For example, instead of adding a nested `if` conditional like this:
+যেমন, নিচের মত একটা নেস্টিং `if` যোগ করা  থেকে:
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -171,7 +172,7 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-We can write:
+আমরা লিখতে পারি:
 
 ```js
 for (let i = 0; i < 10; i++) {
@@ -180,11 +181,11 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-A similar thing can be done with `if/else` and `return`.
+একই জিনিস করা যাবে  `if/else` ও `return` এর সাথে
 
-For example, two constructs below are identical.
+উদাহারণ হিসেবে, নিচে অনুরুপ ২টি কন্সট্রাক্টর
 
-Option 1:
+অপশন ১:
 
 ```js
 function pow(x, n) {
@@ -202,7 +203,7 @@ function pow(x, n) {
 }
 ```
 
-Option 2:
+অপশন ২:
 
 ```js
 function pow(x, n) {
@@ -221,13 +222,13 @@ function pow(x, n) {
 }
 ```
 
-The second one is more readable because the "special case" of `n < 0` is handled early on. Once the check is done we can move on to the "main" code flow without the need for additional nesting.
+২য় টি বেশী পাঠযোগ্য কারণ "বিশেষ কেস" `n < 0` আগেই বিবেচনা করা হচ্ছে, একবার দেখা শেষ হলে আমরা পরের "আসল" কোডে যেতে পারি, কোন বাড়তি নেস্টিং ছাড়াই।
 
-## Function Placement
+## ফাংশন স্থাননির্ণয়
 
-If you are writing several "helper" functions and the code that uses them, there are three ways to organize the functions.
+যদি আমরা একধিক "হেল্পার" ফাংশন লিখি ও কোডে ব্যাবহার করি, ৩টি পন্থা আছে ফাংশনসমূহকে বিন্যস্ত করার।
 
-1. Declare the functions *above* the code that uses them:
+1. কোডে ব্যাবহারের আগেই ফাংশন "উপরে" নির্ধারণ করুন:
 
     ```js
     // *!*function declarations*/!*
@@ -248,7 +249,7 @@ If you are writing several "helper" functions and the code that uses them, there
     setHandler(elem);
     walkAround();
     ```
-2. Code first, then functions
+2. আগে কোড পরে ফাংশনঃ
 
     ```js
     // *!*the code which uses the functions*/!*
@@ -269,21 +270,21 @@ If you are writing several "helper" functions and the code that uses them, there
       ...
     }
     ```
-3. Mixed: a function is declared where it's first used.
+3. মিশ্রণঃ কোডে প্রথমে ব্যাবহারের আগে নির্ধারণ করুন
 
-Most of time, the second variant is preferred.
+প্রায়শই ২য় পন্থাটিই ব্যাবহার হয়।
 
-That's because when reading code, we first want to know *what it does*. If the code goes first, then it becomes clear from the start. Then, maybe we won't need to read the functions at all, especially if their names are descriptive of what they actually do.
+এর কারন যখন এটি পড়া হয়, আমরা আগে থেকে জানতে চাই *এটি কি করে*। আগে কোড করলে, শুরু থেকেই এটা বুঝা যায়। তখন হয়ত, আমরা আর ফাংশন পড়ার দরকারও হয় না। বিশেষত, যদি ফাংশ্নের নাম তার কাজ সম্পর্কে যথেষ্ট বিস্তারিত হয়।
 
-## Style Guides
+## স্টাইল গাইড 
 
-A style guide contains general rules about "how to write" code, e.g. which quotes to use, how many spaces to indent, the maximal line length, etc. A lot of minor things.
+স্টাইল গাইড "কিভাবে কোড লিখতে হয়" এমন রীতি নিয়ে গঠিত, যেমনঃ কোন কোট ব্যাবহার করতে হবে, কতগুলি স্পেসে ইন্ডেন্ট, সর্বোচ্চ লাইন লেন্থ, ইত্যাদি সহ অনেক গৌণ বিষয়।
 
-When all members of a team use the same style guide, the code looks uniform, regardless of which team member wrote it.
+যখন একটি টিমের সবাই একই গাইড মেনে চলে, তা যতজন সদস্যাই লিখুক না কেন, কোড অভিন্ন মনে হয়।
 
-Of course, a team can always write their own style guide, but usually there's no need to. There are many existing guides to choose from.
+অবশ্যই একটা টীম নিজের মত গাইড লিখতে পারে,কিন্তু তার তেমন দরকার নেই। অনেক গাইড আছে বেছে নেয়ার জন্য।
 
-Some popular choices:
+কিছু জনপ্রিয় নীতি:
 
 - [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
@@ -291,32 +292,32 @@ Some popular choices:
 - [StandardJS](https://standardjs.com/)
 - (plus many more)
 
-If you're a novice developer, start with the cheat sheet at the beginning of this chapter. Then you can browse other style guides to pick up more ideas and decide which one you like best.
+আপনি নতুন ডেভেলপার হলে, অধ্যায়ের আরম্ভে দেয়া সাজেশ্ন থেকে শুরু করতে পারেন। তারপর আপনি এই গাইডগুলো থেকে দেখে নিয়ে একটা পছন্দ করে নিতে পারেন।
 
-## Automated Linters
+## স্বয়ংক্রিয় লিন্টারস
 
-Linters are tools that can automatically check the style of your code and make improving suggestions.
+লিন্টারস এমন টুল যা স্বয়ংক্রিয়ভাবে কোড স্টাইল চেক করে সাজেশন দেয়।
 
-The great thing about them is that style-checking can also find some bugs, like typos in variable or function names. Because of this feature, using a linter is recommended even if you don't want to stick to one particular "code style".
+মজার ব্যাপার হল স্টাইল চেক অনেক সময় বাগ পেতে সাহায্য করে, যেমন ভ্যারিএবল টাইপ  বা ফাংশনের নাম. এই ফিচারটির জন্য, লিন্টারস ব্যাবহারে উৎসাহ দেয়া হয়, এমনকি যদি আপনি একটি "কোডিং স্টাইলে" আজীবন থাকতে নাও চান।
 
-Here are some well-known linting tools:
+এখনে কিছু পরিচিত লিন্টারস টুলঃ
 
 - [JSLint](http://www.jslint.com/) -- one of the first linters.
 - [JSHint](http://www.jshint.com/) -- more settings than JSLint.
 - [ESLint](http://eslint.org/) -- probably the newest one.
 
-All of them can do the job. The author uses [ESLint](http://eslint.org/).
+সবগুলিই তাদের কাজ ভালো করে। লেখন ব্যাবহার করেঃ [ESLint](http://eslint.org/).
 
-Most linters are integrated with many popular editors: just enable the plugin in the editor and configure the style.
+অনেক কোড এডিটরে এটা আগে থেকেই থাকে: শুধুমাত্র প্লাগইন এনেবল করে কোড স্টাইল কনফিগার করলেই হয়।
 
-For instance, for ESLint you should do the following:
+যেমন ESLint এর জন্য দেখতে পারেনঃ
 
-1. Install [Node.js](https://nodejs.org/).
-2. Install ESLint with the command `npm install -g eslint` (npm is a JavaScript package installer).
-3. Create a config file named `.eslintrc` in the root of your JavaScript project (in the folder that contains all your files).
-4. Install/enable the plugin for your editor that integrates with ESLint. The majority of editors have one.
+1. ইন্সটল [Node.js](https://nodejs.org/).
+2. ইন্সটল ESLint এই কমান্ড দিয়ে `npm install -g eslint` (npm is a JavaScript package installer).
+3. একটি কনফিগ ফাইল বানান `.eslintrc` জাভাস্ক্রিপ্টের রুটে প্রজেক্ট (যে ফোল্ডার সব ফাইল রাখছে).
+4. ইন্সটল/এনেবল সেই প্লাগইন যা আপনার এডিটরে ESLint যোগ করবে। সিংহভাগ এডিটরে এটা আছে।
 
-Here's an example of an `.eslintrc` file:
+একটি উদাহারণ `.eslintrc` ফাইল:
 
 ```js
 {
@@ -333,16 +334,16 @@ Here's an example of an `.eslintrc` file:
 }
 ```
 
-Here the directive `"extends"` denotes that the configuration is based on the "eslint:recommended" set of settings. After that, we specify our own.
+এখানে ডিরেক্টিভ `"extends"` মানে সেটিংসে কনফিগারেশনটির বেস "eslint:recommended" সেট করা. এরপর, আমরা আমাদেরটা নির্দিষ্ট করে দেই।
 
-It is also possible to download style rule sets from the web and extend them instead. See <http://eslint.org/docs/user-guide/getting-started> for more details about installation.
+অয়েব থেকে স্টাইল রুলস ডাউনলোড করে এক্সটেন্ডও করা যায়। আরও জানতে দেখুন <http://eslint.org/docs/user-guide/getting-started> 
 
-Also certain IDEs have built-in linting, which is convenient but not as customizable as ESLint.
+এছাড়া কিছু IDE তে লিন্টারস বিল্ট-ইন থাকে,যেটা সুবিধাজনক কিন্তু ESLint মত চাহিদা মত পরিবর্তন করতে পারি না।
 
-## Summary
+## সারসংক্ষেপ 
 
-All syntax rules described in this chapter (and in the style guides referenced) aim to increase the readability of your code. All of them are debatable.
+সব সিনট্যাক্স রুলস বর্ননা করা হয়েছে (স্টাইল গাইডও তুলে ধরা হয়েছে) নিজ থেকেই কোডের পাঠযোগ্যতা বাড়ান। প্রায় সবই বিতর্কিত। 
 
-When we think about writing "better" code, the questions we should ask ourselves are: "What makes the code more readable and easier to understand?" and "What can help us avoid errors?" These are the main things to keep in mind when choosing and debating code styles.
+যখন আমরা আরও "ভালো কোড" লিখার কথা ভাবি, আমাদের নিজেদের জিজ্ঞাসা করা উচিৎ: "কোনটি কোদকে আরও সহজ ও পাঠযোগ্য করে তোলে??" ও "কোনটা আমাদের এরর এড়াতে সাহায্য করবে?" এইদিকগুলো মাথায় রাখতে হবে যখন কোড স্টাইল বেছে নিব ও তার পক্ষে যুক্তি দিবো।
 
-Reading popular style guides will allow you to keep up to date with the latest ideas about code style trends and best practices.
+কোডিং স্টাইল গাইড নিয়ে পড়লে আপনি সময়ের সাথে তাল মিলিয়ে, কোডিং স্টাইলের ট্রেন্ড ও সবচেয়ে ভালো অনুশীলন নিয়ে নতুন ধারনাগুলো সম্বন্ধে জানতে পারবেন।
