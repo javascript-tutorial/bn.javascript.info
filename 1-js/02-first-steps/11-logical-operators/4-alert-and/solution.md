@@ -1,10 +1,11 @@
 The answer: `1`, and then `undefined`.
+উত্তর: `1`, এবং তারপর `undefined` ।
 
 ```js run
 alert( alert(1) && alert(2) );
 ```
 
-The call to `alert` returns `undefined` (it just shows a message, so there's no meaningful return).
+`alert` কল `undefined` দেখায় (এটি কেবল একটি বার্তা দেখায়, যাতে কোনও অর্থবহ রিটার্ন নেই)।
 
-Because of that, `&&` evaluates the left operand (outputs `1`), and immediately stops, because `undefined` is a falsy value. And `&&` looks for a falsy value and returns it, so it's done.
+কারণ, `&&` বাম প্রতীক মূল্যায়ন করে (আউটপুট `1`), এবং সঙ্গে সঙ্গে থেমে যায়, কারণ `undefined` একটি মিথ্যা মান. এবং `&&` একটি মিথ্যা মান খুঁজছে এবং এটি প্রদান করে, তাই এটি সম্পন্ন হয়েছে.
 
