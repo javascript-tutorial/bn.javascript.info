@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# What is the result of AND'ed alerts?
+# AND এলার্ট এর ফলাফল কি?
 
-What will this code show?
+নিচের কোড টির আউটপুট কি হবে?
 
 ```js
 alert( alert(1) && alert(2) );
