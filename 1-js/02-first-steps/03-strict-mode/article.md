@@ -42,7 +42,11 @@ alert("some code");
 ```warn header="`use strict` বাতিল করার কোন উপায় নেই"
 `"no use strict"`-র মত কোন নির্দেশক নেই যা ইন্জিনটিকে পুরনো চরিত্রে ফিরিয়ে নেবে।
 
+<<<<<<< HEAD
 একবার স্ট্রিক্ট মোডে ঢুকে গেলে আর ফিরে যাওয়ার কোন সুযোগ থাকে না।
+=======
+Once we enter strict mode, there's no going back.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 ```
 
 ## ব্রাউজার কনসোল

@@ -19,7 +19,11 @@
 
 আসলে, ব্যাবেলের দুটি অংশ আছেঃ
 
+<<<<<<< HEAD
 1. প্রথমত, ট্রান্সপাইলার প্রোগ্রামটি, যেটি কোডকে পুনরায় লিখে। ডেভেলপার তার নিজের কম্পিউটারে এটি রান করে। এটি কোডকে পুরাতন স্ট্যান্ডার্ড এ পরিবর্তন করে। এবং তারপর কোডটি ইউজারদের জন্য ওয়েবসাইটে প্রেরণ করা হয়। আধুনিক প্রজেক্ট বিল্ড সিস্টেম যেমন [ওয়েবপ্যাক](http://webpack.github.io/) প্রতিবার কোড লেখার সাথে সাথে ট্রান্সপাইলারকে স্বয়ংক্রিয়ভাবে রান করে, তাই ডেভেলপমেন্টের সময় এটিকে ইন্টিগ্রেট করা সহজ হয়।
+=======
+1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build systems like [webpack](http://webpack.github.io/) provide means to run transpiler automatically on every code change, so that it's very easy to integrate into development process.
+>>>>>>> 47d186598add3a0ea759615596a12e277ce8fb5a
 
 2. দ্বিতীয়ত, পলিফিল।
 
