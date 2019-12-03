@@ -1,6 +1,6 @@
-The answer: the first and the third will execute.
+উত্তর: প্রথম এবং তৃতীয়টি কার্যকর করা হবে।
 
-Details:
+বিস্তারিত:
 
 ```js run
 // Runs.
