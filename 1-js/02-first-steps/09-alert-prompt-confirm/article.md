@@ -1,109 +1,108 @@
-# Interaction: alert, prompt, confirm
+# ইন্টারেকশন: alert, prompt, confirm
 
-In this part of the tutorial we cover JavaScript language "as is", without environment-specific tweaks.
+টিউটোরিয়ালের এই পর্যায়ে আমরা কোনো বিশেষ পরিবেশ সমন্বয় ছাড়া জাভাস্ক্রিপ্ট দেখবো।
 
-But we'll still be using the browser as our demo environment, so we should know at least a few of its user-interface functions. In this chapter, we'll get familiar with the browser functions `alert`, `prompt` and `confirm`.
+কিন্তু আমরা এখনো ব্রাউজার ব্যবহার করবো আমাদের ডেমো পরিবেশ হিসেবে, এখন আমাদের জানা উচিত এর কিছু ব্যবহারকারী ইন্টারফেস ফাংশন সম্পর্কে। এই চ্যাপ্টারে আমরা পরিচিত হবো ব্রাউজার ফাংশন `alert`, `prompt` এবং `confirm` এর সাথে।
 
 ## alert
 
-Syntax:
+গঠন:
 
 ```js
 alert(message);
 ```
 
-This shows a message and pauses script execution until the user presses "OK".
+এটি একটি বার্তা প্রদর্শন করে বাকি স্ক্রিপ্ট আটকে রাখে ব্যবহারকারী OK প্রেস করার আগ পর্যন্ত।
 
-For example:
+যেমন:
 
 ```js run
-alert("Hello");
+alert("হ্যালো");
 ```
 
-The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc. until they have dealt with the window. In this case -- until they press "OK".
+বার্তা সহ ছোট উইন্ডোকে *মডাল উইন্ডো* বলে। মডাল মানে হলো, ব্যবহারকারী যতক্ষণ না এই উইন্ডো এর কাজ না করছেন ততক্ষন বাকি পেজ এর কোনো কাজ করতে পারবেন না, অন্য কোনো বাটন চাপতে পারবেন না ইত্যাদি। এইক্ষেত্রে, --যতক্ষণ না তিনি OK চাপছেন।
 
 ## prompt
 
-The function `prompt` accepts two arguments:
+এই `prompt` ফাংশন দুটি আর্গুমেন্ট নেয়।
 
 ```js no-beautify
 result = prompt(title, [default]);
 ```
 
-It shows a modal window with a text message, an input field for the visitor, and the buttons OK/CANCEL.
+এটি একটি মডাল উইন্ডো, যা একটি বার্তা, একটি ইনপুট ফিল্ড এবং OK/Cancel বাটন দেখায়।
 
 `title`
-: The text to show the visitor.
+: যে বার্তা ব্যবহারকারীকে দেখাতে চান। 
 
 `default`
-: An optional second parameter, the initial value for the input field.
+: এটি একটি ঐচ্ছিক প্যারামিটার, এর প্রাথমিক মান ইনপুট ফিল্ড হতে প্রাপ্ত মান।
 
-The visitor may type something in the prompt input field and press OK. Or they can cancel the input by pressing CANCEL or hitting the `key:Esc` key.
+ব্যবহারকারী চাইলে ইনপুট ফিল্ডে কিছু টাইপ করে OK চাপতে পারে। অথবা চাইলে ইনপুট টি বাতিল করতে পারে Cancel চেপে অথবা `key:Esc` চেপে। 
 
-The call to `prompt` returns the text from the input field or `null` if the input was canceled.
+`prompt` ফাংশন ইনপুট ফিল্ড এর লেখা রিটার্ন করে অথবা `null` রিটার্ন করে যদি ইনপুট বাতিল করা হয়।
 
-For instance:
-
-```js run
-let age = prompt('How old are you?', 100);
-
-alert(`You are ${age} years old!`); // You are 100 years old!
-```
-
-````warn header="In IE: always supply a `default`"
-The second parameter is optional, but if we don't supply it, Internet Explorer will insert the text `"undefined"` into the prompt.
-
-Run this code in Internet Explorer to see:
+যেমন:
 
 ```js run
-let test = prompt("Test");
+let age = prompt('তোমার বয়স কত?', 100);
+
+alert(`তোমার বয়স ${age} বছর!`); // তোমার বয়স ১০০ বছর!
 ```
 
-So, for prompts to look good in IE, we recommend always providing the second argument:
+````warn header="ইন্টারনেট এক্সপ্লোরার এ সব সময় `default` দিয়ে দিন"
+দ্বিতীয় প্যারামিটারটি ঐচ্ছিক কিন্তু যদি আমরা এটি না দেই তাহলে ইন্টারনেট এক্সপ্লোরার লেখাটিকে প্রম্পটের মধ্যে `"undefined"` সেট করে দিবে।
+
+এই কোডটা ইন্টারনেট এক্সপ্লোরারে রান করে দেখুন:
 
 ```js run
-let test = prompt("Test", ''); // <-- for IE
+let test = prompt("পরীক্ষা");
 ```
-````
+
+তাই, প্রমপ্টকে ইন্টারনেট এক্সপ্লোরারে সুন্দর দেখানোর জন্য আমরা সুপারিশ করছি সবসময় দ্বিতীয় আর্গুমেন্টটি দেয়ার জন্য। 
+
+```js run
+let test = prompt("পরীক্ষা", ''); // <-- ইন্টারনেট এক্সপ্লোরারের জন্য। 
+```
 
 ## confirm
 
-The syntax:
+গঠন:
 
 ```js
 result = confirm(question);
 ```
 
-The function `confirm` shows a modal window with a `question` and two buttons: OK and CANCEL.
+`confirm` ফাংশন একটি মডাল, একটি দেখায় যেখানে একটি `question` এবং দুইটি OK ও Cancel বাটন আছে।
 
-The result is `true` if OK is pressed and `false` otherwise.
+যদি Ok চাপা হয় তাহলে ফলাফল `true`, অন্যথায় `false` হয়ে থাকে।
 
-For example:
+যেমন:
 
 ```js run
-let isBoss = confirm("Are you the boss?");
+let isBoss = confirm("আপনি কি বস?");
 
-alert( isBoss ); // true if OK is pressed
+alert( isBoss ); // true যদি Ok চেপে থাকেন। 
 ```
 
-## Summary
+## সারমর্ম
 
-We covered 3 browser-specific functions to interact with visitors:
+আমরা আজকে ব্যবহারকারীদের সাথে মতবিনিময় করার জন্য ব্রাউজার-নির্দিষ্ট তিনটি ফাংশন সম্পর্কে জানলাম।
 
 `alert`
-: shows a message.
+: একটি বার্তা দেখায়। 
 
 `prompt`
-: shows a message asking the user to input text. It returns the text or, if CANCEL or `key:Esc` is clicked, `null`.
+: একটি বার্তা দেখায় যাতে ব্যবহারকারী কিছু `input`দিতে পারে। এটি `input` টিকে স্ট্রিং হিসেবে রিটার্ন করে অথবা `Cancel` বা `key:Esc` চাপ দিলে `null` রিটার্ন করে।
 
 `confirm`
-: shows a message and waits for the user to press "OK" or "CANCEL". It returns `true` for OK and `false` for CANCEL/`key:Esc`.
+: একটি বার্তা দেখায় এবং ব্যবহারকারীর নির্দেশের অপেক্ষা করে। যদি Ok চাপা হয় তাহলে `true` রিটার্ন করে। আর Cancel/`key:Esc` চাপলে `false` রিটার্ন করে।
 
-All these methods are modal: they pause script execution and don't allow the visitor to interact with the rest of the page until the window has been dismissed.
+এই সব পদ্ধতি-ই মডাল। তারা স্ক্রিপ্ট চালানো বন্ধ রাখে এবং ব্যবহারকারীকে অন্যকিছু করতে দেয় না, যতক্ষণ না এই মডাল বাতিল করা না হচ্ছে।
 
-There are two limitations shared by all the methods above:
+উপরে উল্লিখিত পদ্ধতি গুলোতে দুইটি সীমাবদ্ধতা আছে:
 
-1. The exact location of the modal window is determined by the browser. Usually, it's in the center.
-2. The exact look of the window also depends on the browser. We can't modify it.
+১. মডাল উইন্ডো প্রদর্শন এর স্থান নির্দেশিত হয় ব্রাউজার দ্বারা। সাধারণত এটি মাঝখানে হয়।
+২. মডাল এর ডিজাইনও ব্রাউজারের উপর নির্ভর করে।  আমরা চাইলে এটি বদলাতে পারি না। 
 
-That is the price for simplicity. There are other ways to show nicer windows and richer interaction with the visitor, but if "bells and whistles" do not matter much, these methods work just fine.
+ব্যবহারকারীর সাথে মতবিনিময় করার এটিই সবচেয়ে সহজ উপায় তাই কিছুতো ছাড় দিতেই হবে। তবে যদি খুব বেশি সমস্যা না থাকে আপনি এগুলো ব্যবহার করতে পারেন। অবশ্য আরো অনেক পদ্ধতি আছে আরো সুন্দর ও সমৃদ্ধ উইন্ডো তৈরী করে ব্যবহারকারীর সাথে মতবিনিময় করার।

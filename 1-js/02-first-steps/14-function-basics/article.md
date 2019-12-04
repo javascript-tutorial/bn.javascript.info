@@ -1,18 +1,18 @@
-# Functions
+# ফাংশন
 
-Quite often we need to perform a similar action in many places of the script.
+একই প্রোজেক্টে এক রকমের কাজ আমাদের করা লাগতে পারে।
 
-For example, we need to show a nice-looking message when a visitor logs in, logs out and maybe somewhere else.
+যেমন ধরুন, একটা মজাদার ম্যাসেজ দেখাতে হবে ইউজারকে, যখন লগ ইন করবে, লগ আউট করবে, বা অন্য কোনো জায়গায়।
 
-Functions are the main "building blocks" of the program. They allow the code to be called many times without repetition.
+ফাংশন হলো সেট অফ প্রোগ্রাম বা কিছু রিলেটেড কোডের সমষ্টি যা কোনো নির্দিষ্ট কাজ করতে পারে বার বার, প্রোজেক্টে লেখা পুরো কোডের সামগ্রিক স্ট্র্যাকচার ঠিক রেখে।
 
-We've already seen examples of built-in functions, like `alert(message)`, `prompt(message, default)` and `confirm(question)`. But we can create functions of our own as well.
+আমরা ইতোমধ্যে জাভাস্ক্রিপ্টের নিজস্ব কিছু ফাংশনের ব্যাবহার দেখেছি। যেমনঃ `alert(message)`, `prompt(message, default)` and `confirm(question)`। কিন্তু আমরা নিজেরাই এমন ফাংশন বানাতে পারি!
 
-## Function Declaration
+## ফাংশন ডিক্লিয়ার করা
 
-To create a function we can use a *function declaration*.
+পরিপূর্ণ ফাংশন বানাতে প্রথমে আমাদের ফাংশনের একটা প্রোটোটাইপ বা ডেমো বানাতে হবে।
 
-It looks like this:
+যা দেখতে হবে এমনঃ
 
 ```js
 function showMessage() {
@@ -20,13 +20,17 @@ function showMessage() {
 }
 ```
 
-The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (empty in the example above) and finally the code of the function, also named "the function body", between curly braces.
+ফাংশন বানাতে প্রথমের `function` কীওয়ার্ডটা লিখে বুঝিয়ে দিতে হবে জাভাস্ক্রিপ্ট ইঞ্জিনকে যা এখন আমরা যা লিখতে যাচ্ছি তা একসাথে একটা কাজ সমাধান করতে যাচ্ছে। এরপরে _ফাংশনের নাম_ লিখে ফাংশনকে যে কোনো জায়গা থেকে ডাকার ব্যবস্থা করতে হবে। এরপর দুই প্রথম ব্রাকেটের মাঝে কিছু জিনিস দিতে হবে প্রয়োজন অনুসারে, যেটাকে বলে _প্যারামিটার_ (প্যারামিটার যে দিতেই হবে তার বাধ্যবাধকতা নেই। যেমন উপরের উদাহরণে দেওয়া হয় নাই। যদি প্যারামিটার লাগে তাহলে কমা দিয়ে আলাদা করে হয় প্যারামিটারগুলো। একটা ফাংশনে একাধিক প্যারামিটার থাকতে পারে।) সবশেষে দুই সেকেন্ড ব্রাকেটের মাঝে কোড লিখতে হয়, যা কিনা কোনো নির্দিষ্ট কাজ করতে সাহায্য করবে। এই অংশকে বলা হয় _ফাংশন বডি_।
 
-![](function_basics.png)
+```js
+function name(parameters) {
+  ...body...
+}
+```
 
-Our new function can be called by its name: `showMessage()`.
+কোনো ফাংশনকে কল করতে সেই ফাংশনকে তার নাম ধরে এইভাবে ডাকা লাগেঃ `showMessage()`।
 
-For instance:
+যেমনঃ
 
 ```js run
 function showMessage() {
@@ -39,106 +43,106 @@ showMessage();
 */!*
 ```
 
-The call `showMessage()` executes the code of the function. Here we will see the message two times.
+এখানে আমরা `showMessage()` কে দুইবার ডেকেছি। আমাদের ফাংশনের কাজ একবার Hello everyone! লিখে এলার্ট দেওয়া। তাই দুইবার ডাকলে আমরা দুইবার এলার্ট দেখতে পাবো।
 
-This example clearly demonstrates one of the main purposes of functions: to avoid code duplication.
+এই উদাহরণ একটা বিষয়কে স্পষ্ট করে, তাহলো- একই কোডের বহুব্যবহার (রিপিট) এড়ানো।
 
-If we ever need to change the message or the way it is shown, it's enough to modify the code in one place: the function which outputs it.
+যদি আমাদের কখনো ম্যাসেজ পরিবর্তন করা লাগে তাহলে আমাদের কাজ শুধু ফাংশনের ভিতরের কোডটুকু পরিবর্তন করে দিলেই হয়ে যাবে।
 
-## Local variables
+## লোকাল ভ্যারিয়েবল
 
-A variable declared inside a function is only visible inside that function.
+কোনো ফাংশনের ভিতরে ডিক্লিয়ার করা ভ্যারিয়েবল শুধুমাত্র সেই ফাংশনের ভিতরেই এক্সেস করা সম্ভব।
 
-For example:
+যেমনঃ
 
 ```js run
 function showMessage() {
 *!*
-  let message = "Hello, I'm JavaScript!"; // local variable
+  let message = "Hello, I'm JavaScript!"; // লোকাল ভ্যারিয়েবল
 */!*
 
   alert( message );
 }
 
-showMessage(); // Hello, I'm JavaScript!
+showMessage(); // এইটা Hello, I'm JavaScript! এলার্ট দিবে
 
-alert( message ); // <-- Error! The variable is local to the function
+alert( message ); // <-- Error! এখানে meesage ভ্যারিয়েবলকে এক্সেস করা সম্ভব না।
 ```
 
-## Outer variables
+## আউটার ভ্যারিয়েবল
 
-A function can access an outer variable as well, for example:
+কোনো ফাংশন নিজের ব্লকের বাইরের ভ্যারিয়েবলও এক্সেস করতে পারে। যেমনঃ
 
 ```js run no-beautify
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Rahim';
 
 function showMessage() {
   let message = 'Hello, ' + *!*userName*/!*;
   alert(message);
 }
 
-showMessage(); // Hello, John
+showMessage(); // Hello, Rahim
 ```
 
-The function has full access to the outer variable. It can modify it as well.
+ফাংশনের যে আউটার ভ্যারিয়েবলের শুধু এক্সেস আছে তাই না, ফাংশন আউটার ভ্যারিয়েবলের মানও পরিবর্তন করতে পারে।
 
-For instance:
+যেমনঃ
 
 ```js run
-let *!*userName*/!* = 'John';
+let *!*userName*/!* = 'Rahim';
 
 function showMessage() {
-  *!*userName*/!* = "Bob"; // (1) changed the outer variable
+  *!*userName*/!* = "Karim"; // (১) আউটার ভ্যারিয়েবলের মান পরিবর্তন করা হয়েছে
 
   let message = 'Hello, ' + *!*userName*/!*;
   alert(message);
 }
 
-alert( userName ); // *!*John*/!* before the function call
+alert( userName ); // ফাংশন কল করার আগে *!*Rahim*/!* এলার্ট দিবে
 
 showMessage();
 
-alert( userName ); // *!*Bob*/!*, the value was modified by the function
+alert( userName ); // *!*Karim*/!* এলার্ট দিবে। কারণ, ভ্যারিয়েবলের মান ফাবগশনের মধ্যে পরিবর্তন করা হয়েছে
 ```
 
-The outer variable is only used if there's no local one.
+যদি কোনো লোকাল ভ্যারিয়েবল না থাকে, সেক্ষেত্রেই কেবল আউটার ভ্যারিয়েবল ব্যবহার করা হয়।
 
-If a same-named variable is declared inside the function then it *shadows* the outer one. For instance, in the code below the function uses the local `userName`. The outer one is ignored:
+যদি একই নামে লোকাল ও আউটার ভ্যারিয়েবল ডিক্লিয়ার করা হয়, তাহলে প্রোগ্রাম আউটার ভ্যারিয়েবলকে কম গুরুত্ব দেয়। যেমন, নিচের কোডে `userName` নামে ভ্যারিয়েবল নেওয়া হয়েছে। প্রোগ্রাম আউটার ভ্যারিয়েবলকে এড়িয়ে গেছে।
 
 ```js run
-let userName = 'John';
+let userName = 'Rahim';
 
 function showMessage() {
 *!*
-  let userName = "Bob"; // declare a local variable
+  let userName = "Karim"; // লোকাল ভ্যারিয়েবল declare করা হয়েছে ও initialize করা হয়েছে
 */!*
 
-  let message = 'Hello, ' + userName; // *!*Bob*/!*
+  let message = 'Hello, ' + userName; // *!*Karim*/!*
   alert(message);
 }
 
-// the function will create and use its own userName
+// ফাংশন তার লোকাল ভ্যারিয়েবল রিটার্ণ করবে
 showMessage();
 
-alert( userName ); // *!*John*/!*, unchanged, the function did not access the outer variable
+alert( userName ); // *!*Rahim*/!*, অপরিবর্তনীয়, ফাংশন আউটার ভ্যারিয়েবল এড়িয়ে গেছে
 ```
 
 ```smart header="Global variables"
-Variables declared outside of any function, such as the outer `userName` in the code above, are called *global*.
+ফাংশনের বাইরে declare করা কোনো ভ্যারিয়েবলকে *গ্লোবাল* ভ্যারিয়েবলও বলা হয়।
 
-Global variables are visible from any function (unless shadowed by locals).
+গ্লোবাল ভ্যারিয়েবল যে কোনো জায়গা থেকে এক্সেস করা যায় (যদি না ফাংশনে লোকাল ভ্যারিয়েবল একই নামে থাকে)।
 
-It's a good practice to minimize the use of global variables. Modern code has few or no globals. Most variables reside in their functions. Sometimes though, they can be useful to store project-level data.
+গ্লোবাল ভ্যারিয়েবল যত কম ব্যবহার ও ডিক্লিয়ার করা যায় ততই ভালো। বর্তমান সময়ের বেশিরভাগ প্রোগ্রামে গ্লোবাল ভ্যারিয়েবল খুব কম অথবা একদমই নাই। বেশিরভাগ ভ্যারিয়েবল স্ব স্ব ফাংশনেই ডিক্লিয়ার করা হয়। মাঝে মাঝে যদিও গ্লোবাল ভ্যারিয়েবল project-level ডাটা ধরে রাখতে ব্যবহার করা হয়।
 ```
 
-## Parameters
+## প্যারামিটার
 
-We can pass arbitrary data to functions using parameters (also called *function arguments*) .
+আমরা প্রয়োজনীয় ডাটা প্যারামিটার এর মাধ্যমে কোনো ফাংশনে ব্যবহার করতে পারি। (এদেরকে _ফাংশন আর্গুমেন্টস_ ও বলা হয়)।
 
-In the example below, the function has two parameters: `from` and `text`.
+নিচের উদাহরণে দুইটা প্যারামিটার আছে। একটা `from` এবং অন্যটা `text`।
 
 ```js run
-function showMessage(*!*from, text*/!*) { // arguments: from, text
+function showMessage(*!*from, text*/!*) { // আর্গুমেন্টসঃ from, text
   alert(from + ': ' + text);
 }
 
@@ -148,16 +152,16 @@ showMessage('Ann', "What's up?"); // Ann: What's up? (**)
 */!*
 ```
 
-When the function is called in lines `(*)` and `(**)`, the given values are copied to local variables `from` and `text`. Then the function uses them.
+যখন ফাংশন লাইন `(*)` এবং `(**)` কল করে, ভ্যালুগুলো `from` এবং `text` এ এসাইন হয়। পরবর্তিতে প্রয়োজনানুসারে ফাংশন তাদেরকে ব্যবহার করে।
 
-Here's one more example: we have a variable `from` and pass it to the function. Please note: the function changes `from`, but the change is not seen outside, because a function always gets a copy of the value:
+আরেকটা উদাহরণ দেখা যাকঃ ভ্যারিয়েবল `from` ফাংশনে ডিক্লিয়ার করলাম। নোটঃ ফাংশন `from` কে পরিবর্তন করে, কিন্তু এই পরিবর্তন বাইরে কোথাও দেখা যাবে না। কারণ, ফাংশন সবসময় ভ্যাল্যুর একটা কপি নিজের কাছে রেখে দিবে।
 
 
 ```js run
 function showMessage(from, text) {
 
 *!*
-  from = '*' + from + '*'; // make "from" look nicer
+  from = '*' + from + '*'; // "from" কে দেখতে সুন্দর লাগছে না এখন?
 */!*
 
   alert( from + ': ' + text );
@@ -167,23 +171,23 @@ let from = "Ann";
 
 showMessage(from, "Hello"); // *Ann*: Hello
 
-// the value of "from" is the same, the function modified a local copy
+// "from" এর ভেল্যু একই, ফাংশন শুধু লোকাল কপিকে মোডিফাই করেছে
 alert( from ); // Ann
 ```
 
-## Default values
+## ডিফল্ট ভ্যালু
 
-If a parameter is not provided, then its value becomes `undefined`.
+যদি কোনো প্যারামিটার এর মান দেওয়া না থাকে, তাহলে সেটার ভ্যালু `undefined` ধরে নেওয়া হয়।
 
-For instance, the aforementioned function `showMessage(from, text)` can be called with a single argument:
+তাই একাধিক প্যারামিটারের ক্ষেত্রে `showMessage(from, text)` একটা আর্গুমেন্ট দিলেও প্রোগ্রাম চলবে। যেমনঃ
 
 ```js
 showMessage("Ann");
 ```
 
-That's not an error. Such a call would output `"Ann: undefined"`. There's no `text`, so it's assumed that `text === undefined`.
+এইখানে কোনো ভুল নেই। এমন ফাংশন কল `"Ann: undefined"` রিটার্ন করবে। এখানে `text` প্যারামিটারের মান বলে দেওয়া হয় নাই। তাই `text === undefined` ধরে নিবে প্রোগ্রাম।
 
-If we want to use a "default" `text` in this case, then we can specify it after `=`:
+যদি কোনো মান সেট না হলে ডিফল্টভাবে একটা মান ধরে নিয়ে প্রোগ্রাম চালাতে চাই, তাহলে প্যারামিটারেই মানটা এসাইন করে দিতে পারবো। যেমনঃ
 
 ```js run
 function showMessage(from, *!*text = "no text given"*/!*) {
@@ -193,28 +197,27 @@ function showMessage(from, *!*text = "no text given"*/!*) {
 showMessage("Ann"); // Ann: no text given
 ```
 
-Now if the `text` parameter is not passed, it will get the value `"no text given"`
+এখানে যদি `text` প্যারামিটারের মান ইউজার না দেয়, তাহলে ডিফল্টভাবে `"no text given"` সেট হয়ে থাকবে।
 
-Here `"no text given"` is a string, but it can be a more complex expression, which is only evaluated and assigned if the parameter is missing. So, this is also possible:
+এখানে `"no text given"` একটা স্ট্রিং। কিন্তু আমরা চাইলে এখানে যে কোনো কিছু ব্যবহার করতে পারি। এমনকি জটিল লজিক্যাল অপারেশনও। যদি প্যারামিটার মিসিং থাকে তাহলে বাই ডিফল্ট সেই অপারেশন কাজ করবে। যেমনঃ
 
 ```js run
 function showMessage(from, text = anotherFunction()) {
-  // anotherFunction() only executed if no text given
-  // its result becomes the value of text
+  // anotherFunction() কেবলমাত্র তখনই চলবে যখন কোনো প্যারামিটার ভ্যালু দেওয়া হবে না।
+  // যদি দেওয়া হয়, তাহলে এই ফাংশন রিপ্লেস হয়ে ইউজার প্রদত্ত ভ্যালু সেট হয়ে যাবে।
 }
 ```
 
 ```smart header="Evaluation of default parameters"
+জাভাস্ক্রিপ্টে কোনো প্যারামিটারের বিপরীতে কোনো মান সেট করে না দিলে প্যারামিটারে ডিফল্টভাবে এসাইন করা মান কল হবে যতবার পুরো ফাংশন কল করা হবে।
 
-In JavaScript, a default parameter is evaluated every time the function is called without the respective parameter. In the example above, `anotherFunction()` is called every time `showMessage()` is called without the `text` parameter. This is in contrast to some other languages like Python, where any default parameters are evaluated only once during the initial interpretation.
-
+উপরের উদাহরণ টেনে বলা যায়, `anotherFunction()` ততবার কল হবে যতবার `showMessage()` কল করা হবে `text` প্যারামিটারের মান দেওয়া ছাড়াই।
 ```
 
-
 ````smart header="Default parameters old-style"
-Old editions of JavaScript did not support default parameters. So there are alternative ways to support them, that you can find mostly in the old scripts.
+জাভাস্ক্রিপ্টের আগের ভার্সনগুলো ডিফল্ট প্যারামিটার সাপোর্ট করে না। কিন্তু অন্যভাবে কাজ চালিয়ে নেওয়া যায়।
 
-For instance, an explicit check for being `undefined`:
+যেমন, `undefined` এর মান পরিবর্তন করেঃ
 
 ```js
 function showMessage(from, text) {
@@ -232,7 +235,7 @@ function showMessage(from, text) {
 
 ```js
 function showMessage(from, text) {
-  // if text is falsy then text gets the "default" value
+  // যদি `text` এর মান না দেওয়া হয় তাহলে "default" ভ্যালু সেট করে নিবে
   text = text || 'no text given';
   ...
 }
@@ -242,11 +245,11 @@ function showMessage(from, text) {
 ````
 
 
-## Returning a value
+## ভ্যালু রিটার্ন করা
 
-A function can return a value back into the calling code as the result.
+ফাংশন যে কোনো ভ্যালু রিটার্ন করতে পারে।
 
-The simplest example would be a function that sums two values:
+যেমন, দুইটা ভ্যালু যোগ করতে তাদের যোগফল রিটার্ন করাঃ
 
 ```js run no-beautify
 function sum(a, b) {
@@ -257,9 +260,9 @@ let result = sum(1, 2);
 alert( result ); // 3
 ```
 
-The directive `return` can be in any place of the function. When the execution reaches it, the function stops, and the value is returned to the calling code (assigned to `result` above).
+`return` কীওয়ার্ড একটা ফাংশনের যে কোনো স্থানে ব্যবহার করা যেতে পারে। যখনই ফাংশন `return` খুঁজে পাবে, সাথে সাথে সেই ফাংশনের কাজ করা বন্ধ করে দিবে। এবং রেজাল্ট রিটার্ন করবে। (উপরে `result` এ রাখা হয়েছে রিটার্ন ভ্যালু)।
 
-There may be many occurrences of `return` in a single function. For instance:
+একটা ফাংশনে অনেক `return` কীওয়ার্ড থাকতে পারে। উদাহরণস্বরূপঃ
 
 ```js run
 function checkAge(age) {
@@ -283,9 +286,9 @@ if ( checkAge(age) ) {
 }
 ```
 
-It is possible to use `return` without a value. That causes the function to exit immediately.
+এমনকি `return` ইউজ করা যেতে পারে কোনো রকম ভ্যালু রিটার্ন করা ছাড়াই। এতে করে ফাংশন সাথে সাথেই থেমে যাবে।
 
-For example:
+যেমনঃ
 
 ```js
 function showMovie(age) {
@@ -300,102 +303,114 @@ function showMovie(age) {
 }
 ```
 
-In the code above, if `checkAge(age)` returns `false`, then `showMovie` won't proceed to the `alert`.
+উপরের প্রোগ্রামে, যদি `checkAge(age)` রিটার্ন করে `false`, তাহলে `showMovie` কখনোই `alert` অব্ধি যাবে না।
 
-````smart header="A function with an empty `return` or without it returns `undefined`"
-If a function does not return a value, it is the same as if it returns `undefined`:
+``smart header="A function with an empty `return` or without it returns `undefined`"
+যদি কোনো ফাংশন কোনো ভ্যালু রিটার্ন না করে, তাহলে `undefined` রিটার্ন করবে।
 
 ```js run
 function doNothing() { /* empty */ }
 
-alert( doNothing() === undefined ); // true
+alert(doNothing() === undefined); // true
 ```
 
-An empty `return` is also the same as `return undefined`:
+কোনো ফাঁকা `return` একদমই একই রকম আচরণ করে যেমন `return undefined` করে।
 
 ```js run
 function doNothing() {
   return;
 }
 
-alert( doNothing() === undefined ); // true
+alert(doNothing() === undefined); // true
 ```
-````
+`````
 
 ````warn header="Never add a newline between `return` and the value"
-For a long expression in `return`, it might be tempting to put it on a separate line, like this:
+যদি কোনো বড় এক্সপ্রেশন `return` করা লাগে সেক্ষেত্রে হয়তো পরের লাইনে লেখার প্রবণতা তৈরি হতে পারে। যেমনঃ
 
 ```js
 return
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
-That doesn't work, because JavaScript assumes a semicolon after `return`. That'll work the same as:
+কিন্তু এভাবে কাজ করবে না, কারণ জাভাস্ক্রিপ্ট ধরে নিবে `return` এর পরে সেমিকোলন আছে। (জাভাস্ক্রিপ্ট কিন্তু সেমিকোলন বাদেও কাজ করে। সেক্ষেত্রে প্রতিটা লাইনের শেষে সেমিকোলন ধরে নেয় ডিফল্টভাবে। একারণেই রিটার্নের পরে পরের লাইনে চলে গেলে সেমিকোলন করে নিয়ে কাজ করবে ফাংশন।) এটা সেক্ষেত্রে এইভাবে কাজ করবেঃ
 
 ```js
 return*!*;*/!*
  (some + long + expression + or + whatever * f(a) + f(b))
 ```
-So, it effectively becomes an empty return. We should put the value on the same line instead.
-````
 
-## Naming a function [#function-naming]
+তাই স্বাভাবিকভাবেই পুরো প্রোগ্রাম ফাঁকা (undefined) রিটার্ন করবে।
 
-Functions are actions. So their name is usually a verb. It should be brief, as accurate as possible and describe what the function does, so that someone reading the code gets an indication of what the function does.
+যদি বড় কোনো এক্সপ্রেশন রিটার্ন করা লাগে তাহলে একই লাইনে লেখা জরুরি। অথবা প্রথম বন্ধনীর ভিতরে লিখতে হবে পুরো এক্সপ্রেশন। যেমনঃ
 
-It is a widespread practice to start a function with a verbal prefix which vaguely describes the action. There must be an agreement within the team on the meaning of the prefixes.
+```js
+return (
+  some + long + expression
+  + or +
+  whatever * f(a) + f(b)
+  )
+```
+And it will work just as we expect it to.
+`````
 
-For instance, functions that start with `"show"` usually show something.
+## ফাংশনের নামকরণ [#function-naming]
 
-Function starting with...
+প্রতিটা ফাংশন হলো এক একটা এ্যাকশন। তাই তাদের নাম "ক্রিয়া" বাচক হওয়া যুক্তিযুক্ত। একই সাথে বিস্তারিত ও অর্থপূর্ণ হওয়া অত্যন্ত জরুরি যেন প্রোগ্রামার (নিজেও) শুধু নাম দেখে বুঝে নিতে পারে পুরো ফাংশন কোন ধরনের কাজ করছে।
 
-- `"get…"` -- return a value,
-- `"calc…"` -- calculate something,
-- `"create…"` -- create something,
-- `"check…"` -- check something and return a boolean, etc.
+এটাই সবচেয়ে যুক্তিযুক্ত যে ফাংশনের নাম "ক্রিয়া বাচক" শব্দ দিয়ে শুরু করা। যখন কোনো টিমে কাজ করা হবে, তখন সবার মধ্যে একটা এগ্রিমেন্ট করে ফাংশনের নামের প্যাটার্ণ নির্ধারণ করা উচিৎ।
 
-Examples of such names:
+উদাহরণস্বরূপ, যে ফাংশন `"show"` দিয়ে শুরু হয় তা স্বাভাবিকভাবেই কিছু দেখাবে বলে ধরে নেওয়া যেতে পারে।
+
+যদি ফাংশন নিম্নোক্ত শব্দ দিয়ে শুরু হয় তাহলে...
+
+- `"get…"` -- কোনো ভ্যালু রিটার্ন করে,
+- `"calc…"` -- কোনো ধরনের ক্যালকুলেশন করে থাকে,
+- `"create…"` -- কিছু তৈরি করে,
+- `"check…"` -- কোনো কিছু কম্পেয়ার করে বা বুলিয়ান টাইপের কিছু রিটার্ন করে।
+
+কিছু নামের উদাহরণ দেখা যাকঃ
 
 ```js no-beautify
-showMessage(..)     // shows a message
-getAge(..)          // returns the age (gets it somehow)
-calcSum(..)         // calculates a sum and returns the result
-createForm(..)      // creates a form (and usually returns it)
-checkPermission(..) // checks a permission, returns true/false
+showMessage(..)     // কোনো ম্যাসেজ দেখায়
+getAge(..)          // বয়স রিটার্ন করে
+calcSum(..)         // যোগ করে
+createForm(..)      // কোনো ফর্ম তৈরি করে (সাধারণত রিটার্ন করে)
+checkPermission(..) // পারমিশন চেক করে, true/false রিটার্ন করে
 ```
 
-With prefixes in place, a glance at a function name gives an understanding what kind of work it does and what kind of value it returns.
+ফাংশন যে ধরনের শব্দ দিয়ে শুরু হয় তা একনজরে বুঝিয়ে দেয় কী ধরনের ভ্যালু সেখান থেকে পাওয়া যেতে পারে।
 
 ```smart header="One function -- one action"
-A function should do exactly what is suggested by its name, no more.
+কোনো ফাংশনের নামে ও কাজে সম্পূর্নভাবে মিল থাকা লাগবে।
 
-Two independent actions usually deserve two functions, even if they are usually called together (in that case we can make a 3rd function that calls those two).
+দুইটা কাজ অবশ্যই আলাদা আলাদা দুইটা ফাংশন দিয়ে করা যুক্তিযুক্ত। যদি দুইটাকে এক হয়ে একটা নির্দিষ্ট কাজ করা লাগে তাহলে তৃতীয় কোনো ফাংশনে তাদের কল করে কাজ করাটা অর্থপূর্ণ।
 
-A few examples of breaking this rule:
+এই নিয়ম ভাঙ্গলে যে জটিলতা হতে পারে তার উদাহরণঃ
 
-- `getAge` -- would be bad if it shows an `alert` with the age (should only get).
-- `createForm` -- would be bad if it modifies the document, adding a form to it (should only create it and return).
-- `checkPermission` -- would be bad if it displays the `access granted/denied` message (should only perform the check and return the result).
+- `getAge` -- এটা খুব বাজে প্র্যাকটিস হবে যদি বয়স রিটার্ণ করে তা `alert` দেখায়। (শুধুই রিটার্ন করা উচিৎ ছিলো)
+- `createForm` -- এইধরনের নামযুক্ত ফাংশন কোনো ডকুমেন্ট মডিফাই করা অযৌক্তিক, এমনকি কোনো কিছুতে কোনো ফর্ম এ্যাড করাও (শুধুই ফর্ম বানিয়ে রিটার্ন করে দেওয়া অব্ধিই এর কাজ চলা উচিৎ)
+- `checkPermission` -- যদি এই ফাংশন `access granted/denied` ম্যাসেজ দেখায় তাহলে অযৌক্তিক হবে। (শুধুই পারমিশন চেক করে রিটার্ন করা উচিৎ)
 
-These examples assume common meanings of prefixes. You and your team are free to agree on other meanings, but usually they're not much different. In any case, you should have a firm understanding of what a prefix means, what a prefixed function can and cannot do. All same-prefixed functions should obey the rules. And the team should share the knowledge.
+এই উদাহরণ থেকে ফাংশনের নামেরর সূচনা শব্দ কেমন হওয়া উচিৎ সম্পর্কে ধারণা পাওয়া যায়। আপনি ও আপনার টিম মিলে নিজেরা কোনো নিয়ম বানাতে পারেন, কিন্তু খুব বেশি পার্থক্য হয়তো হবে না। একটা সূচনা শব্দ ফাংশনের অনেক কিছুই বলে দিতে পারে। প্রতিটা একই ধরনের সূচনা শব্দ একই ধরনের কাজ করবে।
 ```
 
 ```smart header="Ultrashort function names"
-Functions that are used *very often* sometimes have ultrashort names.
+যে ফাংশনগুলো *খুব বেশি* কল করা হয়, তাকে মাঝে মাঝে স্পেশাল কিছু সূচনা নাম দেওয়া হয়ে থাকে।
 
-For example, the [jQuery](http://jquery.com) framework defines a function with `$`. The [Lodash](http://lodash.com/) library has its core function named `_`.
+যেমন, [jQuery](http://jquery.com) ফ্রেমওয়ার্ক `$` দিয়ে শুরু করে তাদের ফাংশন নাম। আবার [Lodash](http://lodash.com/) লাইব্রেরি `_` দিয়ে শুরু করে।
 
-These are exceptions. Generally functions names should be concise and descriptive.
+এগুলো এক্সেপশন। বেশিরভাগ সময় ফাংশন নাম অর্থপূর্ন ও বিস্তারিত হওয়া উচিৎ।
 ```
 
-## Functions == Comments
+## ফাংশন == কমেন্টস
 
-Functions should be short and do exactly one thing. If that thing is big, maybe it's worth it to split the function into a few smaller functions. Sometimes following this rule may not be that easy, but it's definitely a good thing.
+ফাংশন ছোট হওয়া উচিৎ ও একটা নির্দিষ্ট কাজ করা উচিৎ। যদি কোনো ফাংশন বড় কাজ করে থাকে, তাহলে তাকে ছোট ছোট অংশে ভাগ করে ফেলা জরুরি। মাঝে মাঝে এই ব্যাপারটা বিরক্তিকর লাগতে পারে, কিন্তু অবশ্যই ভবিষ্যতের জন্য অত্যন্ত ভালো অভ্যাস।
 
-A separate function is not only easier to test and debug -- its very existence is a great comment!
+ছোট ছোট ফাংশন যে টেস্ট ও ডিবাগ করতে সুবিধাজনক তা-ই শুধু না, বরং -- এটা প্রোগ্রামকে অর্থপূর্ন কমেন্টের কাজে সাহায্য করে থাকে!
 
-For instance, compare the two functions `showPrimes(n)` below. Each one outputs [prime numbers](https://en.wikipedia.org/wiki/Prime_number) up to `n`.
+উদাহরণস্বরূপ, দুইটা ফাংশন `showPrimes(n)` এর পার্থক্য নিচে দেখানো হলো। প্রতিটা-ই [মৌলিক সংখ্যা](https://en.wikipedia.org/wiki/Prime_number) রিটার্ন করে `n` অব্ধি।
 
-The first variant uses a label:
+প্রথমটা একবারে কাজ করেঃ
 
 ```js
 function showPrimes(n) {
@@ -405,12 +420,12 @@ function showPrimes(n) {
       if (i % j == 0) continue nextPrime;
     }
 
-    alert( i ); // a prime
+    alert(i); // a prime
   }
 }
 ```
 
-The second variant uses an additional function `isPrime(n)` to test for primality:
+পরেরটা নতুন ফাংশন `isPrime(n)` কল করে মৌলিক সংখ্যা চেক করার জন্যঃ
 
 ```js
 function showPrimes(n) {
@@ -430,13 +445,13 @@ function isPrime(n) {
 }
 ```
 
-The second variant is easier to understand, isn't it? Instead of the code piece we see a name of the action (`isPrime`). Sometimes people refer to such code as *self-describing*.
+দ্বিতীয়টা বুঝতে সুবিধাজনক, তাই না? ভিতরের ফাংশন (`isPrime`) দেখে এর কাজ বুঝে যাওয়া যায়। মাঝে মাঝে প্রোগ্রামাররা এইধরনের কোডকে _স্ব-বর্ণনাকারী (সেলফ-ডেস্ক্রাইবিং)_ বলে থাকে।
 
-So, functions can be created even if we don't intend to reuse them. They structure the code and make it readable.
+এর মানে ফাংশন তৈরি করা যেতে পারে যদি আমরা পরে ব্যাবহার না করতে চাই তবুও। সেটা কোডকে সাজাতে ও বুঝতে সাহায্য করে।
 
-## Summary
+## সারসংক্ষেপ
 
-A function declaration looks like this:
+ফাংশন এই ফরমেটে তৈরি করা হয়ঃ
 
 ```js
 function name(parameters, delimited, by, comma) {
@@ -444,18 +459,18 @@ function name(parameters, delimited, by, comma) {
 }
 ```
 
-- Values passed to a function as parameters are copied to its local variables.
-- A function may access outer variables. But it works only from inside out. The code outside of the function doesn't see its local variables.
-- A function can return a value. If it doesn't, then its result is `undefined`.
+- প্যারামিটারে এসাইন করা ভ্যালু ফাংশনে লোকাল ভ্যারিয়েবলের মতো কাজ করে।
+- ফাংশন বাইরের ভ্যারিয়েবল এক্সেস করতে পারে, কিন্তু ফাংশনের ভিতরে থাকা কোনো ভ্যারিয়েবল (লোকাল ভ্যারিয়েবল) বাইরে থেকে এক্সেস করা যায় না।
+- ফাংশন ভ্যালু রিটার্ন করতে পারে। যদি ভ্যালু রিটার্ন না করে তাহলে ফাংশন রিটার্ন ভ্যালু হিসেবে `undefined` রিটার্ন করে।
 
-To make the code clean and easy to understand, it's recommended to use mainly local variables and parameters in the function, not outer variables.
+কোডকে অর্থপূর্ন ও গোছালো রাখতে লোকাল ভ্যারিয়েবল ইউজ করা উচিৎ, গ্লোবাল ভ্যারিয়েবল ইউজ না করে।
 
-It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side-effect.
+বাইরের ভ্যারিয়েবল মডিফাই করে ও কোনো প্যারামিটার না রেখে ফাংশন ইউজ করার চেয়ে প্যারামিটারসহ ফাংশন নিয়ে কাজ করা অনেক বেশি অর্থপূর্ন ও সহজ।
 
-Function naming:
+ফাংশন নামকরণঃ
 
-- A name should clearly describe what the function does. When we see a function call in the code, a good name instantly gives us an understanding what it does and returns.
-- A function is an action, so function names are usually verbal.
-- There exist many well-known function prefixes like `create…`, `show…`, `get…`, `check…` and so on. Use them to hint what a function does.
+- কোনো ফাংশনের নাম দেখেই তার কাজ বুঝে যাওয়া উচিৎ আর এমনভাবেই ফাংশনের নামকরণ করা দরকারি।
+- প্রতিটা ফাংশন একটা কাজ, তাই ফাংশনের নাম অবশ্যই "ক্রিয়াবাচক" হতে হবে।
+- ফাংশনের নামে সূচনা শব্দ `create…`, `show…`, `get…`, `check…` অনেক জনপ্রিয়। এমন ধরনের শব্দ ব্যবহার করা উচিৎ ফাংশন কী করে তা বুঝাতে।
 
-Functions are the main building blocks of scripts. Now we've covered the basics, so we actually can start creating and using them. But that's only the beginning of the path. We are going to return to them many times, going more deeply into their advanced features.
+ফাংশন হলো কোনো প্রোগ্রামের প্রধান ভিত্তি। এখানে আমরা স্ট্র্যাকচার নিয়ে বেসিক শেষ করেছি। এখন আমরা ফাংশন বানাতে পারি ও ইউজ করতে পারি। এটা শুধুই শুরু। আমরা অনেকবার ফাংশনের কাছে ফিরে আসবো এটা নিয়ে আরো গভীরে জানার জন্য।

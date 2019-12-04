@@ -1,10 +1,10 @@
-importance: 5
+গুরুত্বঃ ৫
 
 ---
 
-# Sum object properties
+# অবজেক্টের প্রোপার্টিগুলো যোগ করা
 
-We have an object storing salaries of our team:
+আমাদের অবজেক্টে আমাদের টিমের সবার বেতন রাখা আছেঃ
 
 ```js
 let salaries = {
@@ -14,6 +14,6 @@ let salaries = {
 }
 ```
 
-Write the code to sum all salaries and store in the variable `sum`. Should be `390` in the example above.
+সব বেতনের যোগফল বের করে `sum` ভেরিয়েবলে রাখার কোড লিখুন। উপরের উদাহরণের যোগফল `390` হওয়া উচিত।
 
-If `salaries` is empty, then the result must be `0`.
+যদি `salaries` খালি হয়, তাহলে ফলাফল `0` হতে হবে।

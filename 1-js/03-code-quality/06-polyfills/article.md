@@ -1,54 +1,52 @@
 
-# Polyfills
+# পলিফিল (Polyfills)
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+জাভাস্ক্রিপ্ট ভাষাটি ধীরে ধীরে উন্নত হচ্ছে। নিয়মিত নতুন নতুন প্রস্তাবনা আসছে, সেগুলো বিশ্লেষণ করা হচ্ছে এবং, যদি যোগ্য বলে বিবেচিত হয় তাহলে এই তালিকাতে <https://tc39.github.io/ecma262/> নিবন্ধিত হচ্ছে, এবং তারপর [স্পেসিফিকেশন](http://www.ecma-international.org/publications/standards/Ecma-262.htm) এ উন্নীত হচ্ছে।
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+জাভাস্ক্রিপ্টের পেছনে যে দলটি কাজ করছে তারা তাদের মত বিবেচনা করছে কোনটিকে আগে বাস্তবায়ন করা দরকার। তারা হয়তো সিদ্ধান্ত নিতে পারে, যেগুলো খসড়া তালিকাভুক্ত সেগুলো আগে করার এবং যেগুলো ইতিমধ্যে স্পেসিফিকেশনে আছে সেগুলো পরে করার, কারণ সেগুলো কম আকর্ষণীয় বা করা কঠিন।
 
-So it's quite common for an engine to implement only the part of the standard.
+তাই প্রায়শ ইঞ্জিনগুলো স্ট্যান্ডার্ড এর শুধু আংশিক বাস্তবায়ন করে।
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+ভাষার কোন কোন বৈশিষ্ট্য বর্তমানে সমর্থিত সেটি জানার একটি ভাল পেইজ হল এটি <https://kangax.github.io/compat-table/es6/> (এটি অনেক বড়, আমাদের এখনও অনেককিছুই জানতে হবে)।
 
-## Babel
+## ব্যাবেল (Babel)
 
-When we use modern features of the language, some engines may fail to support such code. Just as said, not all features are implemented everywhere.
+যখন আমরা ভাষার আধুনিক ফিচারগুলো ব্যবহার করি, কিছু ইঞ্জিন হয়তো এধরণের কোড সমর্থন করবে না। যেমনটা কিচ্ছুক্ষণ আগে বলেছি, সব ফিচার সব যায়গায় সমর্থিত নয়।
 
-Here Babel comes to the rescue.
+এখানে ব্যাবেল আমাদের সাহায্য করতে পারে।
 
-[Babel](https://babeljs.io) is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). It rewrites modern JavaScript code into the previous standard.
+[ব্যাবেল](https://babeljs.io) একটি [ট্রান্সপাইলার](https://en.wikipedia.org/wiki/Source-to-source_compiler)। এটি আধুনিক জাভাস্ক্রিপ্ট কোডকে পুরাতন স্ট্যান্ডার্ড এ পুনরায় লিখে দেয়।
 
-Actually, there are two parts in Babel:
+আসলে, ব্যাবেলের দুটি অংশ আছেঃ
 
-1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build system like [webpack](http://webpack.github.io/) provide means to run transpiler automatically on every code change, so that very easy to integrate into development process.
+1. প্রথমত, ট্রান্সপাইলার প্রোগ্রামটি, যেটি কোডকে পুনরায় লিখে। ডেভেলপার তার নিজের কম্পিউটারে এটি রান করে। এটি কোডকে পুরাতন স্ট্যান্ডার্ড এ পরিবর্তন করে। এবং তারপর কোডটি ইউজারদের জন্য ওয়েবসাইটে প্রেরণ করা হয়। আধুনিক প্রজেক্ট বিল্ড সিস্টেম যেমন [ওয়েবপ্যাক](http://webpack.github.io/) প্রতিবার কোড লেখার সাথে সাথে ট্রান্সপাইলারকে স্বয়ংক্রিয়ভাবে রান করে, তাই ডেভেলপমেন্টের সময় এটিকে ইন্টিগ্রেট করা সহজ হয়।
 
-2. Second, the polyfill.
+2. দ্বিতীয়ত, পলিফিল।
 
-    New language features may include new built-in functions and syntax constructs.
-    The transpiler rewrites the code, transforming syntax constructs into older ones. But as for new built-in functions, we need to implement them. JavaScript is a highly dynamic language, scripts may add/modify any functions, so that they behave according to the modern standard.
+    ভাষার নতুন ফিচারে হয়তো নতুন কোন বিল্ড-ইন ফাংশন এবং সিনট্যাক্স কন্সট্রাক্ট থাকতে পারে। ট্রান্সপাইলার কোড পুনরায় লিখার সময়, সিনট্যাক্স কন্সট্রাক্টকে পুরাতন সিনট্যাক্সে পরিবর্তন করে। কিন্তু নতুন বিল্ড-ইন ফাংশনের ক্ষেত্রে, আমাদের সেগুলো ইমপ্লিমেন্ট করতে হবে। জাভাস্ক্রিপ্ট অত্যন্ত ডাইনামিক ভাষা, যেকোনো ফাংশনকে আধুনিক স্ট্যান্ডার্ডের মত আচরণ করানোর জন্য স্ক্রিপ্ট তাদের এড/মডিফাই করতে পারে।
+    যে স্ক্রিপ্টটি নতুন ফাংশনকে আপডেট/এড করে থাকে তাকে "পলিফিল" বলা হয়। কারণ এটি "fills in" বা দূরত্বটি দূর করে এবং পুরাতন স্ট্যান্ডার্ড এ নেই এমন ইমপ্লিমেন্টেশন প্রদান করে।
 
-    A script that updates/adds new functions is called "polyfill". It "fills in" the gap and adds missing implementations.
+    দুটি মজার পলিফিল হলঃ
+    - [core js](https://github.com/zloirock/core-js) অনেককিছুই সমর্থন করে, শুধু যেটা প্রয়োজন সেটা ব্যবহার করা যায়। that supports a lot, allows to include only needed features.
+    - [polyfill.io](http://polyfill.io) ফিচার এবং ইউজারের ব্রাউজারের উপর ভিতটি করে পলিফিলের স্ক্রিপ্ট প্রদান করার একটি সার্ভিস।
 
-    Two interesting polyfills are:
-    - [babel polyfill](https://babeljs.io/docs/usage/polyfill/) that supports a lot, but is big.
-    - [polyfill.io](http://polyfill.io) service that allows to load/construct polyfills on-demand, depending on the features we need.
+তাই, যদি আমরা ভাষার আধুনিক ফিচার ব্যবহার করতে চাই, তাহলে আমাদের একটি ট্রান্সপাইলার এবং পলিফিল ব্যবহার করতে হবে।
 
-So, if we're going to use modern language features, a transpiler and a polyfill are necessary.
-
-## Examples in the tutorial
+## এই টিউটেরিয়ালের উদাহরণসমূহ
 
 
 ````online
-Most examples are runnable at-place, like this:
+অধিকাংশ উদাহরণ যেখানে আছে সেখানেই রান করা যাবে, যেমনঃ
 
 ```js run
 alert('Press the "Play" button in the upper-right corner to run');
 ```
 
-Examples that use modern JS will work only if your browser supports it.
+যেসব উদাহরণে আধুনিক জাভাস্ক্রিপ্ট ব্যবহার করা হয়েছে সেগুলো শুধু আপনার ব্রাউজার সমর্থন করলেই রান করা যাবে।
 ````
 
 ```offline
-As you're reading the offline version, in PDF examples are not runnable. In EPUB some of them can run.
+এমনি যদি অফলাইন ভার্সনটি ব্যবহার করেন, পিডিএফ এর উদাহরণগুলো রান করা যাবে না। EPUB এ কিছু উদাহরণ রান করা যাবে।
 ```
 
-Google Chrome is usually the most up-to-date with language features, good to run bleeding-edge demos without any transpilers, but other modern browsers also work fine.
+গুগল ক্রোম সাধারণত ভাষার ফিচারগুলোর সাথে সবচাইতে বেশী আপ-টু-ডেট থাকে, এটি ব্লিডিং-এজ ডেমোগুলো ট্রান্সপাইলার ছাড়াই রান করার জন্য খুবই ভালো, কিন্তু যেকোনো আধুনিক ব্রাউজারই ভালভাবেই কাজ করবে।

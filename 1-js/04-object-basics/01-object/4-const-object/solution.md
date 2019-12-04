@@ -1,8 +1,8 @@
-Sure, it works, no problem.
+অবশ্যই, কোন সমস্যা ছাড়াই কাজ করে।
 
-The `const` only protects the variable itself from changing. 
+`const` শুধুমাত্র ওই ভেরিয়েবলকে পরিবর্তন থেকে রক্ষা করে।
 
-In other words, `user` stores a reference to the object. And it can't be changed. But the content of the object can.
+অন্যভাবে বললে, `user` অবজেক্টটির একটি রেফারেন্স সংরক্ষণ করে। এবং রেফারেন্স পরিবর্তন করা যাবে না। কিন্তু অবজেক্টের কন্টেন্ট পরিবর্তন করা যাবে।
 
 ```js run
 const user = {
@@ -10,10 +10,10 @@ const user = {
 };
 
 *!*
-// works
+// কাজ করে
 user.name = "Pete";
 */!*
 
-// error
+// এরর
 user = 123;
 ```

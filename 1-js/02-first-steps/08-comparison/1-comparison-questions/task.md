@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Comparisons
+# তুলনা
 
-What will be the result for these expressions?
+নিচের লাইন গুলোর ফলাফল কী হবে?
 
 ```js no-beautify
 5 > 4
@@ -15,4 +15,3 @@ undefined === null
 null == "\n0\n"
 null === +"\n0\n"
 ```
-

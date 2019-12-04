@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Show an alert with an external script
+# বাহিরের একটি স্ক্রিপ্ট দিয়ে একটি এলার্ট দেখাও
 
-Take the solution of the previous task <info:task/hello-alert>. Modify it by extracting the script content into an external file `alert.js`, residing in the same folder.
+পূর্ববর্তী কাজের সমাধানটি নাও। <info:task/hello-alert>. একই ফোল্ডারে একটি আলাদা `alert.js ফাইলে কোডটি রাখো।
 
-Open the page, ensure that the alert works.
+পেজটি খুলো এবং, নিশ্চিত করো এলার্ট টি কাজ করছে।

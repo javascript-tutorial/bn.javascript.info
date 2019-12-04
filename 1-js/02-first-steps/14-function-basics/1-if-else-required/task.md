@@ -2,11 +2,11 @@ importance: 4
 
 ---
 
-# Is "else" required?
+# "else" কি দরকারি?
 
-The following function returns `true` if the parameter `age` is greater than `18`.
+নিচের ফাংশন `true` রিটার্ন করে যদি প্যারামিটার `age` `18` এর চেয়ে বড় হয়।
 
-Otherwise it asks for a confirmation and returns its result:
+নতুবা এটা কনফার্মেশন চায় ও ভ্যালু রিটার্ন করে।
 
 ```js
 function checkAge(age) {
@@ -21,7 +21,7 @@ function checkAge(age) {
 }
 ```
 
-Will the function work differently if `else` is removed?
+`else` না থাকলে কি ফাংশন আগের মতো কাজ করবে?
 
 ```js
 function checkAge(age) {
@@ -35,4 +35,4 @@ function checkAge(age) {
 }
 ```
 
-Is there any difference in the behavior of these two variants?
+দুই ফাংশনের মধ্যে কোনো কাজের পার্থক্য আছে কি?

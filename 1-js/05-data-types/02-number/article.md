@@ -1,8 +1,12 @@
 # Numbers
 
-All numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers".
+In modern JavaScript, there are two types of numbers:
 
-Let's recap and expand upon what we currently know about them.
+1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
+
+2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+
+So here we'll talk about regular numbers. Let's expand our knowledge of them.
 
 ## More ways to write a number
 
@@ -29,14 +33,13 @@ In other words, `"e"` multiplies the number by `1` with the given zeroes count.
 1.23e6 = 1.23 * 1000000
 ```
 
-
 Now let's write something very small. Say, 1 microsecond (one millionth of a second):
 
 ```js
 let ms = 0.000001;
 ```
 
-Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could say:
+Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could say the same as:
 
 ```js
 let ms = 1e-6; // six zeroes to the left from 1
@@ -201,7 +204,7 @@ Strange! What is it then if not `0.3`?
 alert( 0.1 + 0.2 ); // 0.30000000000000004
 ```
 
-Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their chart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+Ouch! There are more consequences than an incorrect comparison here. Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
 
 But why does this happen?
 
@@ -213,7 +216,7 @@ So, division by powers `10` is guaranteed to work well in the decimal system, bu
 
 There's just no way to store *exactly 0.1* or *exactly 0.2* using the binary system, just like there is no way to store one-third as a decimal fraction.
 
-The numeric format IEEE-754 solves this by rounding to the nearest possible number. These rounding rules normally don't allow us to see that "tiny precision loss", so the number shows up as `0.3`. But beware, the loss still exists.
+The numeric format IEEE-754 solves this by rounding to the nearest possible number. These rounding rules normally don't allow us to see that "tiny precision loss", but it exists.
 
 We can see this in action:
 ```js run
@@ -271,12 +274,10 @@ JavaScript doesn't trigger an error in such events. It does its best to fit the 
 ```smart header="Two zeroes"
 Another funny consequence of the internal representation of numbers is the existence of two zeroes: `0` and `-0`.
 
-That's because a sign is represented by a single bit, so every number can be positive or negative, including a zero.
+That's because a sign is represented by a single bit, so it can be set or not set for any number including a zero.
 
 In most cases the distinction is unnoticeable, because operators are suited to treat them as the same.
 ```
-
-
 
 ## Tests: isFinite and isNaN
 
@@ -409,15 +410,15 @@ There are more functions and constants in `Math` object, including trigonometry,
 
 ## Summary
 
-To write big numbers:
+To write numbers with many zeroes:
 
-- Append `"e"` with the zeroes count to the number. Like: `123e6` is `123` with 6 zeroes.
-- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. That's for one-millionth or such.
+- Append `"e"` with the zeroes count to the number. Like: `123e6` is the same as `123` with 6 zeroes `123000000`.
+- A negative number after `"e"` causes the number to be divided by 1 with given zeroes. E.g. `123e-6` means `0.000123` (`123` millionth).
 
 For different numeral systems:
 
 - Can write numbers directly in hex (`0x`), octal (`0o`) and binary (`0b`) systems
-- `parseInt(str, base)` parses an integer from any numeral system with base: `2 ≤ base ≤ 36`.
+- `parseInt(str, base)` parses the string `str` into an integer in numeral system with given `base`, `2 ≤ base ≤ 36`.
 - `num.toString(base)` converts a number to a string in the numeral system with the given `base`.
 
 For converting values like `12pt` and `100px` to a number:

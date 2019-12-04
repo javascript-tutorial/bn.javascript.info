@@ -1,111 +1,111 @@
-# Type Conversions
+# টাইপ রূপান্তর
 
-Most of the time, operators and functions automatically convert the values given to them to the right type. 
+বেশীরভাগ সময়, অপারেটর ও ফাংশন সমুহ নিজে থেকেই তাদের কাছে দেয়া ভ্যালুগুলো রূপান্তর করে থাকে। 
 
-For example, `alert` automatically converts any value to a string to show it. Mathematical operations convert values to numbers.
+উদাহারণ হিসাবে , `alert` নিজে থেকেই ভ্যালুকে স্ট্রিংয়ে রূপান্তর করে নেয়। অন্যদিকে, গানিতিক অপারেটরগুলি ভ্যালুকে সংখ্যায় রূপান্তর করে। 
 
-There are also cases when we need to explicitly convert a value to the expected type.
+যদিও কিছু কিছু ক্ষেত্রে আমাদেরকেই ভ্যালুগুলোকে নিজেদের মত করে রূপান্তর করে নিতে হয়। 
 
-```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. Instead, we'll study primitives first. Later, after we learn about objects, we'll see how object conversion works in the chapter <info:object-toprimitive>.
+```smart header="এখনো অবজেক্টসমূহ নিয়ে আলোচনা হয় নি"
+এই অধ্যায়ে, আমরা অবজেক্ট নয় বরং, প্রিমিটিভ বিষয়গূলো জানবো। পরবর্তিতে, অবজেক্টের ধারণা পেলে, আমরা অবজেক্ট রূপান্তর নিয়ে আলোচনা করবো। <info:object-toprimitive>.
 ```
 
-## ToString
+## স্ট্রিং রূপান্তর 
 
-String conversion happens when we need the string form of a value.
+কোন ভ্যালু থেকে স্ট্রিং দরকার হলে স্ট্রিং রূপান্তর করা হয়। 
 
-For example, `alert(value)` does it to show the value.
+উদাহরণ স্বরূপ, `alert(value)` ভ্যালুটিকে স্ট্রিংয়ে রুপান্তর করে নেয়।
 
-We can also call the `String(value)` function to convert a value to a string:
+আমরা একে `String(value)` ফাংশন ব্যবহার করেও স্ট্রিংয়ে রুপান্তর করতে পারিঃ
 
 ```js run
 let value = true;
-alert(typeof value); // boolean
+alert(typeof value); // বুলিয়ান
 
 *!*
-value = String(value); // now value is a string "true"
-alert(typeof value); // string
+value = String(value); // এখন ভ্যালুটি একটি স্ট্রিং "true"
+alert(typeof value); // স্ট্রিং
 */!*
 ```
 
-String conversion is mostly obvious. A `false` becomes `"false"`, `null` becomes `"null"`, etc.
+প্রায় সব স্ট্রিং রুপান্তর সুস্পষ্ট। এখানে, `false` হয়ে যায় `"false"`, `null` হয়ে যায় `"null"`, ইত্যাদি।
 
-## ToNumber
+## সংখ্যা রূপান্তর 
 
-Numeric conversion happens in mathematical functions and expressions automatically.
+গানিতিক ফাংশন এবং এক্সপ্রেশনের ক্ষেত্রে সংখ্যায় রুপান্তর  নিজে থেকেই হয়ে থাকে।
 
-For example, when division `/` is applied to non-numbers:
+যেমন, ভাগের `/` সময় দুটি স্ট্রিং:
 
 ```js run
-alert( "6" / "2" ); // 3, strings are converted to numbers
+alert( "6" / "2" ); // 3, স্ট্রিংয়ের সংখ্যায় বদলে যাওয়া
 ```
 
-We can use the `Number(value)` function to explicitly convert a `value` to a number:
+আমরা `Number(value)` ব্যাবহার করেও স্পষ্ট করে `value` কে সংখ্যায় রূপান্তর করতে পারি:
 
 ```js run
 let str = "123";
-alert(typeof str); // string
+alert(typeof str); // স্ট্রিং
 
-let num = Number(str); // becomes a number 123
+let num = Number(str); // সংখ্যায় 123 হয়ে গেছে
 
-alert(typeof num); // number
+alert(typeof num); // সংখ্যা
 ```
 
-Explicit conversion is usually required when we read a value from a string-based source like a text form but expect a number to be entered.
+স্পট করে এই রুপান্তরের পন্থাটি তখনই কাজে লাগে, যখন এমন কোন সোর্স থেকে ভ্যালু পাই, যা স্ট্রিং দেয় অথচ যেটাকে কোন সংখ্যায় দেয়ার কথা, যেমন ঃ টেক্সট ফর্ম ।
 
-If the string is not a valid number, the result of such a conversion is `NaN`. For instance:
+যদি স্টীং কোন ভ্যালিড সংখ্যা না হয়, তবে তা `NaN` হয়ে যায়। যথা:
 
 ```js run
 let age = Number("an arbitrary string instead of a number");
 
-alert(age); // NaN, conversion failed
+alert(age); // NaN, রূপান্তর হয়নি
 ```
 
-Numeric conversion rules:
+সংখ্যা রুপান্তরের নিয়ম:
 
-| Value |  Becomes... |
+| ভ্যালু | পরিবর্তিত রুপ... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
-|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
-| `string` | Whitespaces from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+|<code>true&nbsp;ও&nbsp;false</code> | `1` ও `0` |
+| `string` | স্ট্রিংয়ের শুরু ও শেষের স্পেস থেকে তা মুছে ফেলা হয়। বাকিটা ফাঁকা স্ট্রিং হলে, তা `0` হবে। নাহয় নাম্বারগুলি স্ট্রিং থেকে নেয়া হয়। এরর হলে `NaN` আসে। |
 
 Examples:
 
 ```js run
 alert( Number("   123   ") ); // 123
-alert( Number("123z") );      // NaN (error reading a number at "z")
+alert( Number("123z") );      // NaN ("z" এর সংখ্যা রুপান্তরে এরর)
 alert( Number(true) );        // 1
 alert( Number(false) );       // 0
 ```
 
-Please note that `null` and `undefined` behave differently here: `null` becomes zero while `undefined` becomes `NaN`.
+এখানে জেনে রাখি `null` ও `undefined` এক্ষেত্রে ভিন্ন আচরণ করে: `null` হয়ে যাবে শূন্য আর `undefined` হবে `NaN`.
 
-````smart header="Addition '+' concatenates strings"
-Almost all mathematical operations convert values to numbers. A notable exception is addition `+`. If one of the added values is a string, the other one is also converted to a string.
+````smart header="যোগ '+' স্ট্রিংসমূহকে একীভুত করে"
+প্রায় সব গানিতিক অপারেটর ভ্যালুকে সংখ্যায় রূপান্তর করে নেয়। তবে উল্লেখযোগ্য একটি ব্যতিক্রম হলো যোগ `+`, যদি এর দুপাশের একটি ভ্যালুও স্ট্রিং হয় তবে অপরটিও স্ট্রিং হয়ে যাবে
 
-Then, it concatenates (joins) them:
+তখন এটি স্ট্রিংগুলাকে যুক্ত করে ফেলে:
 
 ```js run
-alert( 1 + '2' ); // '12' (string to the right)
-alert( '1' + 2 ); // '12' (string to the left)
+alert( 1 + '2' ); // '12' (ডানপাশে স্ট্রিং)
+alert( '1' + 2 ); // '12' (বামপাশে স্ট্রিং)
 ```
 
-This only happens when at least one of the arguments is a string. Otherwise, values are converted to numbers.
+এটা তখনই হয় যদি অন্তত একটি আর্গুমেন্ট স্ট্রিং থাকে, নাহয় তা সংখ্যায় রুপান্তরিত হয়ে যাবে।
 ````
 
-## ToBoolean
+## বুলিয়ান রূপান্তর
 
-Boolean conversion is the simplest one.
+বুলিয়ানের রূপান্তর সবচেয়ে সহজতম।
 
-It happens in logical operations (later we'll meet condition tests and other similar things) but can also be performed explicitly with a call to `Boolean(value)`.
+এটি লজিকাল এক্সপ্রেশনের ক্ষেত্রে হয় (পরবর্তিতে কণ্ডিশনাল টেস্ট সহ অন্যগুলি দেখবো) তবে এটি সুস্পট করেও রূপান্তর করা যায় `Boolean(value)`.
 
-The conversion rule:
+রূপান্তর নীতি:
 
-- Values that are intuitively "empty", like `0`, an empty string, `null`, `undefined`, and `NaN`, become `false`.
-- Other values become `true`.
+- ফাঁকা ভ্যালু, যেমনঃ `0`, ফাঁকা স্ট্রিং, `null`, `undefined`, ও `NaN`, হবে `false`.
+- অন্যসব হয়ে যায় `true`.
 
-For instance:
+এক্ষেত্রে:
 
 ```js run
 alert( Boolean(1) ); // true
@@ -116,45 +116,44 @@ alert( Boolean("") ); // false
 ```
 
 ````warn header="Please note: the string with zero `\"0\"` is `true`"
-Some languages (namely PHP) treat `"0"` as `false`. But in JavaScript, a non-empty string is always `true`.
+কিছু প্রোগ্রামিং ভাষায় (PHP) তে `"0"` কে `false` ধরে, কিন্তু জাভাস্ক্রিপ্ট, স্ট্রিং ফাঁকা না হলে `true` ধরে নেয়।
 
 ```js run
 alert( Boolean("0") ); // true
-alert( Boolean(" ") ); // spaces, also true (any non-empty string is true)
+alert( Boolean(" ") ); // স্পেস, এটাও true (স্ট্রিং ফাঁকা না হলেই true)
 ```
 ````
 
+## সারসংক্ষেপ
 
-## Summary
+বহুল ব্যাবহৃত ৩টি রূপান্তরসমূহ হচ্ছে  স্ট্রিং ,সংখ্যায় এবং বুলিয়ানে রুপান্তর।
 
-The three most widely used type conversions are to string, to number, and to boolean.
+**`স্ট্রিংয়ে রূপান্তর`** -- আউটপুট দেখতে হলে হয়। অথবা `String(value)` দিয়ে করা যায়। প্রায় সব মৌলিক ভ্যালুর জন্য এটা খুব স্পষ্ট।
 
-**`ToString`** -- Occurs when we output something. Can be performed with `String(value)`. The conversion to string is usually obvious for primitive values.
+**`সংখ্যায় রূপান্তর`** -- গানিতিক অপারেশনে হয়। `Number(value)` দিয়েও করতে পারি।
 
-**`ToNumber`** -- Occurs in math operations. Can be performed with `Number(value)`.
+ রূপান্তর নীতি:
 
-The conversion follows the rules:
-
-| Value |  Becomes... |
+| ভ্যালু |  বদলে যায়... |
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
-| `string` | The string is read "as is", whitespaces from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+| `string` | স্ট্রিংয়ে যা তাই আসে, স্ট্রিংয়ের শুরু ও শেষের স্পেস থেকে তা মুছে ফেলা হয়। বাকিটা ফাঁকা স্ট্রিং হলে, তা `0` হবে। নাহয় নাম্বারগুলি স্ট্রিং থেকে নেয়া হয়। এরর হলে `NaN` আসে। |
 
-**`ToBoolean`** -- Occurs in logical operations. Can be performed with `Boolean(value)`.
+**`বুলিয়ানে রূপান্তর`** -- লজিকাল অপারেশনে হয়। আবার  `Boolean(value)` দিয়েও করা যায।
 
 Follows the rules:
 
-| Value |  Becomes... |
+| ভ্যালু |  বদলে যায়... |
 |-------|-------------|
 |`0`, `null`, `undefined`, `NaN`, `""` |`false`|
-|any other value| `true` |
+|অন্য যেকোন ভ্যালু| `true` |
 
 
-Most of these rules are easy to understand and memorize. The notable exceptions where people usually make mistakes are:
+প্রায় সব নীতিই বুঝা অ মনে রাখা সোজা। তবে কিছু কমন ভুল হলো:
 
-- `undefined` is `NaN` as a number, not `0`.
-- `"0"` and space-only strings like `"   "` are true as a boolean.
+- `undefined` হয় `NaN` সংখ্যা হিসাব করলে, `0` নয়
+- `"0"` ও স্পেস  `"   "` বুলিয়ানে true
 
-Objects aren't covered here. We'll return to them later in the chapter <info:object-toprimitive> that is devoted exclusively to objects after we learn more basic things about JavaScript.
+অবজেক্ট এখানে কভার করা হয় নি। আমরা এখানে আবার আসবো। <info:object-toprimitive> এটা শুধুই অব্জেক্টের জন্য যখন আমরা আরো ভালো করে জাভাস্ক্রিপ্ট শিখে ফেলবো.

@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Function pow(x,n)
+# pow(x,n) ফাংশন
 
-Write a function `pow(x,n)` that returns `x` in power `n`. Or, in other words, multiplies `x` by itself `n` times and returns the result.
+একটা ফাংশন লিখুন `pow(x,n)` যা ভ্যালু রিটার্ন করে `x` এর পাওয়ার `n` ধরে। অন্যভাবে, `x` কে `n` বার গুণ করে ফলাফল রিটার্ন করে।
 
 ```js
 pow(3, 2) = 3 * 3 = 9
@@ -12,8 +12,8 @@ pow(3, 3) = 3 * 3 * 3 = 27
 pow(1, 100) = 1 * 1 * ...* 1 = 1
 ```
 
-Create a web-page that prompts for `x` and `n`, and then shows the result of `pow(x,n)`.
+একটা ওয়েব পেইজ বানান যেখান থেকে ইউজারের কাছ থেকে `x` ও `n` নেওয়া যাবে, সেখান থেকে `pow(x,n)` এর ভ্যালু রিটার্ন করুন।
 
 [demo]
 
-P.S. In this task the function should support only natural values of `n`: integers up from `1`.
+নোটঃ এই ক্ষেত্রে `n` এর মান স্বাভাবিক হওয়া উচিৎ: ইন্টিজার `1` বা তার বেশি।

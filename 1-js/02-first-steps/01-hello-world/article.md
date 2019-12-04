@@ -1,17 +1,17 @@
-# Hello, world!
+# হ্যালো, বিশ্ব!
 
-This part of the tutorial is about core JavaScript, the language itself. Later on, you'll learn about Node.js and other platforms that use it.
+এই টিউটোরিয়াল অংশটি মুলত জাভাস্ক্রিপ্ট প্রোগ্রামিং ভাষার মূল বিষয় সমূহ নিয়ে।
 
-But we need a working environment to run our scripts and, since this book is online, the browser is a good choice. We'll keep the amount of browser-specific commands (like `alert`) to a minimum so that you don't spend time on them if you plan to concentrate on another environment (like Node.js). We'll focus on JavaScript in the browser in the [next part](/ui) of the tutorial.
+কিন্তু আমাদের স্ক্রিপ্টগুলো চালানোর জন্য একটি কাজের পরিবেশ দরকার এবং যেহেতু এই বইটি অনলাইনে রয়েছে, তাই ব্রাউজার একটি ভাল পছন্দ হবে। আমরা ব্রাউজার-নির্দিষ্ট কমান্ড গুলো (যেমনঃ `এলার্ট`) সর্বনিম্ন পরিমান রাখবো যাতে করে এতে আপনাদের সময় নষ্ট না হয়, যদি আপনারা অন্য পরিবেশে মনোনিবেশ করার পরিকল্পনা করে থাকেন(যেমনঃ Node.js)। আমরা এই টিউটরিয়ালের [পরবর্তী অংশে](/ui) ব্রাউজারে জাভাস্ক্রিপ্ট উপর গুরুত্ব দিব। 
 
-So first, let's see how we attach a script to a webpage. For server-side environments (like Node.js), you can execute the script with a command like `"node my.js"`.
+তাই প্রথমে, চলুন আমরা দেখি কিভাবে ওয়েবপেজে একটি স্ক্রিপ্ট সংযুক্ত করে। সার্ভার-সাইড পরিবেশ গুলোর জন্য (যেমনঃ Node.js), আপনি একটা কমান্ড দিয়ে  স্ক্রিপ্ট চালাতে পারবেন `"node my.js"` এর মত করে। 
 
 
-## The "script" tag
+## "script" ট্যাগ
 
-JavaScript programs can be inserted into any part of an HTML document with the help of the `<script>` tag.
+জাভাস্ক্রিপ্ট এর কার্যক্রম গুলো এইচটিএমএল ডকুমেন্টের যেকোনো অংশে রাখা যেতে পারে `<script>` ট্যাগের সাহায্য নিয়ে। 
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run height=100
 <!DOCTYPE HTML>
@@ -19,15 +19,15 @@ For instance:
 
 <body>
 
-  <p>Before the script...</p>
+  <p>স্ক্রিপ্টের আগে...</p>
 
 *!*
   <script>
-    alert( 'Hello, world!' );
+    alert( 'হ্যালো, বিশ্ব!' );
   </script>
 */!*
 
-  <p>...After the script.</p>
+  <p>...স্ক্রিপ্টের পরে.</p>
 
 </body>
 
@@ -35,55 +35,53 @@ For instance:
 ```
 
 ```online
-You can run the example by clicking the "Play" button in the right-top corner of the box above.
+বক্সের উপরের ডান পাশের মাথায় "প্লে" বাটনের ক্লিক করে আপনি উদাহরণটি চালিয়ে দেখতে পারেন।
 ```
 
-The `<script>` tag contains JavaScript code which is automatically executed when the browser processes the tag.
+`<script>` ট্যাগটি জাভাস্ক্রিপ্ট কোড ধারন করে  যেটাকে স্বয়ংক্রিয়ভাবে কার্যকর করা হয় যখন ব্রাউজার ট্যাগটি প্রসেস করে। 
 
 
-## Modern markup
+## আধুনিক মার্কআপ
 
-The `<script>` tag has a few attributes that are rarely used nowadays but can still be found in old code:
+`<script>` ট্যাগে কয়েকটি এট্রিবিউট রয়েছে যেটা আজকাল খুব কম ব্যবহার করা হয় কিন্তু কিছু পুরনো কোডে এখনও এইগুলো পাওয়া যেতে পারে:
 
-The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard, HTML5, totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial.
+`type` এট্রিবিউট: <code>&lt;script <u>type</u>=...&gt;</code>
+: পুরানো এইচটিএমএল স্ট্যান্ডার্ড, এইচটিএমএল ৪ এ একটি স্ক্রিপ্টে `type` এট্রিবিউটটি থাকা আবশ্যক ছিল।  সাধারনত এটা ছিল `type="text/javascript"`। এটি আর প্রয়োজন হয় না। আরও বলতে গেলে, আধুনিক এইচটিএমএল স্ট্যান্ডার্ড এ পুরোপুরিভাবে এট্রিবিউটসের অর্থই বদলে দিয়েছে। এখন, এটা জাভাস্ক্রিপ্ট মডিউলস এর জন্য ব্যবহার করা যেতে পারে। কিন্তু এটা একটি অ্যাডভান্সড বিষয়, আমরা মডিউলস সম্পর্কে টিউটরিয়ালের অন্য অংশে কথা বলব।
 
-The `language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>
-: This attribute was meant to show the language of the script. This attribute no longer makes sense because JavaScript is the default language. There is no need to use it.
+`language` এট্রিবিউট: <code>&lt;script <u>language</u>=...&gt;</code>
+: এই এট্রিবিউটটি স্ক্রিপ্টের ভাষা দেখানোর জন্য বুঝানো হয়েছে।  এই এট্রিবিউটটি দিয়ে এখন আর কিছু হয় না কারন জাভাস্ক্রিপ্টই এখন ডিফল্ট ভাষা। এটা ব্যবহার করার এখন আর প্রয়োজন নেই।
 
-Comments before and after scripts.
-: In really ancient books and guides, you may find comments inside `<script>` tags, like this:
+স্ক্রিপ্টগুলির আগে এবং পরে মন্তব্যগুলিঃ 
+সত্যিই পুরনো বই এবং গাইডগুলিতে, আপনারা হয়তো `<script>` ট্যাগগুলোর মধ্যে মন্তব্যগুলি পেতে পারেন, এটার মতঃ
 
     ```html no-beautify
     <script type="text/javascript"><!--
         ...
     //--></script>
     ```
+    
+    আধুনিক জাভাস্ক্রিপ্টে এই কৌশলটি আর ব্যবহার করা হয় না। এই মন্তব্যগুলি জাভাস্ক্রিপ্ট কোডগুলো কে লুকিয়ে রাখে পুরনো ব্রাউজার গুলো থেকে যারা জানে না কিভাবে `<script>` ট্যাগকে প্রসেস করতে হয়।
+    যেহেতু গত 15 বছরে প্রকাশিত ব্রাউজারগুলিতে এই সমস্যাটি নেই, এই জাতীয় মন্তব্য আপনাকে অনেক পুরানো কোড সনাক্ত করতে সহায়তা করতে পারে।
 
-    This trick isn't used in modern JavaScript. These comments hid JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+## এক্সটার্নাল স্ক্রিপ্ট
 
+যদি আমাদের অনেক জাভাস্ক্রিপ্ট কোড থাকে, তাহলে আমরা এইগুলোকে আলাদা ফাইলে রাখতে পারি।
 
-## External scripts
-
-If we have a lot of JavaScript code, we can put it into a separate file.
-
-Script files are attached to HTML with the `src` attribute:
+স্ক্রিপ্ট ফাইল গুলো এইচটিএমএল এ সংযুক্ত করা হয় `src` এট্রিবিউট দিয়েঃ 
 
 ```html
 <script src="/path/to/script.js"></script>
 ```
 
-Here, `/path/to/script.js` is an absolute path to the script file (from the site root).
+এখানে, `/path/to/script.js` এই পথটি হয় সাইট এর মূল থেকে স্ক্রিপ্টের জন্য একটি সঠিক পথ। বর্তমান পৃষ্ঠা থেকে যে কেউ আপেক্ষিক পথ সরবরাহ করতে পারে. উদাহরণস্বরূপ, `src="script.js"` এই `"script.js"` ফাইল দিয়ে বর্তমান ফোল্ডার থেকে বুঝায়। 
 
-You can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
-
-We can give a full URL as well. For instance:
+আমরা পুরো URL টিও দিতে পারি। উদাহরণস্বরূপ:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
 ```
 
-To attach several scripts, use multiple tags:
+একাধিক ট্যাগ ব্যবহার করে, একাধিক স্ক্রিপ্টগুলো সংযুক্ত করতে পারিঃ
 
 ```html
 <script src="/js/script1.js"></script>
@@ -92,19 +90,19 @@ To attach several scripts, use multiple tags:
 ```
 
 ```smart
-As a rule, only the simplest scripts are put into HTML. More complex ones reside in separate files.
+বেশিরভাগ ক্ষেত্রেই, শুধু মাত্র সহজ স্ক্রিপ্ট গুলোই এইচটিএমএল এর মধ্যে রাখা হয় এবং অনেক জটিল গুলোকে আলাদা ফাইলে রাখা হয়।
 
-The benefit of a separate file is that the browser will download it and store it in its [cache](https://en.wikipedia.org/wiki/Web_cache).
+বিভিন্ন ফাইলে রাখার সুবিধাগুলো হল, ব্রাউজার এটাকে ডাউনলোড করে রাখবে এবং [cache](https://en.wikipedia.org/wiki/Web_cache) হিসেবে রেখে দিবে।
 
-Other pages that reference the same script will take it from the cache instead of downloading it, so the file is actually downloaded only once.
+অন্যান্য পেইজ যা একই স্ক্রিপ্টকেই উল্লেখ করে এটি ডাউনলোড করার পরিবর্তে এটি ক্যাশে থেকে নেবে, সুতরাং ফাইলটি শুধু মাত্র একবারই ডাউনলোড করা হবে।
 
-That reduces traffic and makes pages faster.
+যা ট্রাফিক কমায় এবং পেজকে অনেক দ্রুততর করে।
 ```
 
-````warn header="If `src` is set, the script content is ignored."
-A single `<script>` tag can't have both the `src` attribute and code inside.
+````warn header="যদি `src` সেট করা হয়, তাহলে স্ক্রিপ্টের ভিতরের কন্টেন্ট গুলো উপেক্ষিত হবে।"
+একটি একক `<script>` ট্যাগে কখনই একাধিক `src` এট্রিবিউট এবং ভিতরে কোড থাকতে পারে না।
 
-This won't work:
+এটা কাজ করবে না:
 
 ```html
 <script *!*src*/!*="file.js">
@@ -112,9 +110,9 @@ This won't work:
 </script>
 ```
 
-We must choose either an external `<script src="…">` or a regular `<script>` with code.
+আমাদের অবশই বাছাই করতে হবে হয় বহিরাগত `<script src="…">` অথবা স্বাভাবিক `<script>` ট্যাগ এর ভেতরে কোড।
 
-The example above can be split into two scripts to work:
+উপরের উদাহরণটি কাজ করাতে দুইটি স্ক্রিপ্টে বিভক্ত করা যেতে পারে।
 
 ```html
 <script src="file.js"></script>
@@ -124,11 +122,11 @@ The example above can be split into two scripts to work:
 ```
 ````
 
-## Summary
+## সারাংশ
 
-- We can use a `<script>` tag to add JavaScript code to a page.
-- The `type` and `language` attributes are not required.
-- A script in an external file can be inserted with `<script src="path/to/script.js"></script>`.
+- আমরা একটি পেজে জাভাস্ক্রিপ্ট যোগ করতে `<script>` ট্যাগ ব্যবহার করতে পারি ।
+- `type` এবং `language` এট্রিবিউটসের এখন আর প্রয়োজন নেই।
+- আলাদা ফাইলের স্ক্রিপ্টগুলো `<script src="path/to/script.js"></script>` এইভাবে রাখা যেতে পারে।
 
 
-There is much more to learn about browser scripts and their interaction with the webpage. But let's keep in mind that this part of the tutorial is devoted to the JavaScript language, so we shouldn't distract ourselves with browser-specific implementations of it. We'll be using the browser as a way to run JavaScript, which is very convenient for online reading, but only one of many.
+ব্রাউজার স্ক্রিপ্ট এবং ওয়েবপেজের সাথে এদের ইন্টারেকশন সম্পর্কে অনেক কিছু শেখার আছে। তবে, মাথায় রাখা উচিত যে টিউটোরিয়ালটির এই অংশটি উৎসর্গ করা হয় জাভাস্ক্রিপ্ট ভাষার প্রতি, তাই এটির ব্রাউজার-নির্দিষ্ট বাস্তবায়ন দেখে আমাদের নিজেদেরকে বিভ্রান্ত করা উচিত হবে না। আমরা ব্রাউজার শুধু জাভাস্ক্রিপ্ট চালানোর জন্য ব্যবহার করবো, যেটা অনলাইনে পড়ার জন্য সহজ। কিন্তু এটি অনেকগুলি উপায়ের মধ্যে একটি।

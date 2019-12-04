@@ -1,23 +1,23 @@
 
-# The old "var"
+# পুরাতন "var"
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+অধ্যায়ের প্রথম দিকে আমরা উল্লেখ করেছিলাম [variables](info:variables) কে তিন ভাবে ঘোষণা করা যায়।
 
-1. `let`
-2. `const`
-3. `var`
+১। `let`
+২। `const`
+৩। `var`
 
-`let` and `const` behave exactly the same way in terms of Lexical Environments.
+লেক্সিকাল এনভায়রনমেন্টের ক্ষেত্রে `let` এবং `const` ঠিক একইভাবে আচরণ করে।
 
-But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+কিন্তু `var` সম্পূর্ণ ভিন্ন, যা খুব পুরানো কাল থেকেই উদ্ভূত হয়েছিল। এটি সাধারণত আধুনিক স্ক্রিপ্টগুলিতে ব্যবহৃত হয় না তবে এটি পুরানো স্ক্রিপ্টগুলিতে সচরাচর দেখা যাবে।
 
-If you don't plan on meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
+আপনি যদি এই জাতীয় স্ক্রিপ্টগুলি সম্পর্কে জানার পরিকল্পনা না করেন তবে আপনি এই অধ্যায়টি এড়িয়ে যেতে পারেন, তবে তা আপনাকে পরে সমস্যায় ফেলতে পারে।
 
-From the first sight, `var` behaves similar to `let`. That is, declares a variable:
+প্রথমদিকে দেখতে var ও let এর আচরণ একই রকম মনে হবে। সেটা হলো একটি ভেরিয়েবল ঘোষণা করাঃ
 
 ```js run
 function sayHi() {
-  var phrase = "Hello"; // local variable, "var" instead of "let"
+  var phrase = "Hello"; // লোকাল ভেরিয়েবল, "let" এর পরিবর্তে "var"
 
   alert(phrase); // Hello
 }
@@ -27,39 +27,39 @@ sayHi();
 alert(phrase); // Error, phrase is not defined
 ```
 
-...But here are the differences.
+...তবে এখানে পার্থক্য রয়েছে।
 
-## "var" has no block scope
+# "var" এর কোন ব্লক স্কোপ নেই।
 
-`var` variables are either function-wide or global, they are visible through blocks.
+যে সকল ভেরিয়েবল "var" দ্বারা ঘোষণা হয়, তারা হয় ফাংশন-ওয়াইড অথবা গ্লোবাল হয়ে থাকে।
 
-For instance:
-
-```js run
-if (true) {
-  var test = true; // use "var" instead of "let"
-}
-
-*!*
-alert(test); // true, the variable lives after if
-*/!*
-```
-
-`var` ignores code blocks, so we've got a global variable `test`.
-
-If we used `let test` instead of `var test`, then the variable would only be visible inside `if`:
+এই ক্ষেত্রেঃ
 
 ```js run
 if (true) {
-  let test = true; // use "let"
+  var test = true; // "let" এর পরিবর্তে "var"
 }
 
 *!*
-alert(test); // Error: test is not defined
+alert(test); // true, "if" ব্লকের বাইরেও এটি বিদ্যমান। 
 */!*
 ```
 
-The same thing for loops: `var` cannot be block- or loop-local:
+`var` কোড ব্লকগুলিকে উপেক্ষা করার সাথে সাথে আমরা একটি গ্লোবাল `test` ভেরিয়েবল পেয়েছি.
+
+যদি আমরা `var test` এর পরিবর্তে `let test` ব্যবহার করি, তবে ভেরিয়েবলটি কেবল `if` ব্লকের মধ্যে সীমাবদ্ধ থাকবেঃ 
+
+```js run
+if (true) {
+  let test = true; // "let" এর ব্যবহার 
+}
+
+*!*
+alert(test); // এরর: test নির্ধারণ করা নেই
+*/!*
+```
+
+লুপের ক্ষেত্রেও একই রকমঃ  `var` লুপ অথবা ব্লকের লোকাল হতে পারে নাঃ 
 
 ```js
 for (var i = 0; i < 10; i++) {
@@ -67,11 +67,11 @@ for (var i = 0; i < 10; i++) {
 }
 
 *!*
-alert(i); // 10, "i" is visible after loop, it's a global variable
+alert(i); // 10, "i" লুপের পরেও বিদ্যমান, এটি একটি গ্লোবাল ভেরিয়েবল। 
 */!*
 ```
 
-If a code block is inside a function, then `var` becomes a function-level variable:
+যদি কোন কোড ব্লক ফাংশনের ভিতরে থাকে, সেক্ষেত্রে `var` ফাংশন লেভেল ভেরিয়েবল হয়ে যায়। 
 
 ```js run
 function sayHi() {
@@ -79,22 +79,22 @@ function sayHi() {
     var phrase = "Hello";
   }
 
-  alert(phrase); // works
+  alert(phrase); // কাজ করবে 
 }
 
 sayHi();
-alert(phrase); // Error: phrase is not defined (Check the Developer Console)
+alert(phrase); // এরর: phrase নির্ধারণ করা নেই (ডেভলপার কনসোল চেক করুন)
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
+আমারা যেটা দেখলাম, `var` - `if`, `for` অথবা অন্য ব্লক ভেদ করে বাইরে আসতে পারে। তার কারন অনেক আগে জাভাস্ক্রিপ্টে কোন লেক্সিকাল এনভাইরমেন্ট ছিল না। এবং `var` তারই একটি অংশ।
 
-## "var" declarations are processed at the function start
+## "var" ফাংশনের শুরুতেই ঘোষিত হয়।
 
-`var` declarations are processed when the function starts (or script starts for globals).
+ফাংশনের শুরুতেই `var` ঘোষিত হয়ে যায়(অথবা স্ক্রিপ্ট গ্লোবালের জন্য শুরু হয়)
 
-In other words, `var` variables are defined from the beginning of the function, no matter where the definition is (assuming that the definition is not in the nested function).
+অন্যভাবে বলা যায়, `var` ভেরিয়্যবল গুলো ফাংশনের শুরুতেই ঘোষিত হয়, সেটাকে যেখানেই সংজ্ঞায়িত করা হোক না কেন(ধরে নিলাম এটি কোন নেস্টেড ফাংশনের মধ্যে নয়)। 
 
-So this code:
+তাহলেঃ 
 
 ```js run
 function sayHi() {
@@ -109,7 +109,7 @@ function sayHi() {
 sayHi();
 ```
 
-...Is technically the same as this (moved `var phrase` above):
+...টেকনিক্যালি এটির মতোই(`var phrase` উপরে স্থানান্তরিত করে দেয়)ঃ 
 
 ```js run
 function sayHi() {
@@ -124,7 +124,7 @@ function sayHi() {
 sayHi();
 ```
 
-...Or even as this (remember, code blocks are ignored):
+...অথবা এটির মতো(কোড ব্লকগুলি উপেক্ষা করা হয়েছে)  
 
 ```js run
 function sayHi() {
@@ -141,13 +141,13 @@ function sayHi() {
 sayHi();
 ```
 
-People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
+লোকেরা এ জাতীয় আচরণকে "hoisting" নামেও অভিহিত করে, কারণ সমস্ত var ফাংশনের শীর্ষে "hoisting" হয়।
 
-So in the example above, `if (false)` branch never executes, but that doesn't matter. The `var` inside it is processed in the beginning of the function, so at the moment of `(*)` the variable exists.
+সুতরাং উপরের উদাহরণে, `if(false)` কখনও কার্যকর হয় না, কিন্তু এতে কোন সমস্যা নেই। ফাংশনের শুরুতে এর অভ্যন্তরের `var` প্রসেস হয়ে যায়, সুতরং `(*)` মুহূর্তে ভেরিয়েবলটি বিদ্যমান থাকে। 
 
-**Declarations are hoisted, but assignments are not.**
+**ডিকলারেশন গুলো "hoisted" হলেও, কিন্তু "assignment" হয় না**
 
-That's better to demonstrate with an example, like this:
+একটি উদাহরণ দিয়ে দিয়ে দেখা যাক, যেমনঃ 
 
 ```js run
 function sayHi() {
@@ -161,40 +161,40 @@ function sayHi() {
 sayHi();
 ```
 
-The line `var phrase = "Hello"` has two actions in it:
+`var phrase` = "Hello" লাইনটির মধ্যে দুটি কাজ রয়েছেঃ 
 
-1. Variable declaration `var`
-2. Variable assignment `=`.
+১। ভেরিয়েবল ঘোষণা `var`
+২। ভেরিয়াবল আসাইনমেন্ট `=`।
 
-The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
+ফাংশন এক্সিকিউশনের শুরুতেই ডিক্লেয়ার করা হয়ে থাকে ("hoisted"),তবে অ্যাসাইনমেন্টটি সর্বদা যেখানে প্রদর্শিত হবে সেখানে কাজ করে। সুতরাং কোডটি মূলত এই ভাবে কাজ করে:
 
 ```js run
 function sayHi() {
 *!*
-  var phrase; // declaration works at the start...
+  var phrase; // ভেরিয়েবল ডিক্লেয়ার শুরুতেই কাজ করে ...
 */!*
 
   alert(phrase); // undefined
 
 *!*
-  phrase = "Hello"; // ...assignment - when the execution reaches it.
+  phrase = "Hello"; // ...অ্যাসাইনমেন্ট - যখন এক্সিকিউশন এখানে পৌঁছায়।
 */!*
 }
 
 sayHi();
 ```
 
-Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
+কারন সকল var ফাংশনের শুরুতেই ডিক্লেয়ার করা হয়, আমরা ওই ফাংশন স্কোপের যে কোন জায়গায় থেকে ভেরিয়েবল সমূহ কে ব্যবহার করতে পারি। কিন্তু অ্যাসাইনমেন্টের আগ পর্যন্ত ভেরিয়েবল গুলো আনডিফাইন অবস্থায় থাকে।
 
-In both examples above `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+উপরের দুটি উদাহরণে `alert` কোন এরর ছাড়াই চলে, কারন ভেরিয়েবল `phrase` বিদ্যমান রয়েছে। তবে এর মান এখনও নির্ধারিত হয়নি, সুতরাং এটি আনডিফাইন দেখায়। 
 
-## Summary
+## সারাংশ
 
-There are two main differences of `var` compared to `let/const`:
+এখানে দুটি প্রধান পার্থক্য রয়েছে `var` এবং `let/const` এর মধ্যেঃ 
 
-1. `var` variables have no block scope, they are visible minimum at the function level.
-2. `var` declarations are processed at function start (script start for globals).
+১। `var` ভেরিয়েবলের কোন ব্লক স্কোপ নেই, এগুলি সর্বনিম্ন ফাংশন লেভেল পর্যন্ত বিদ্যমান থাকে। 
+২। ফাংশনের শুরুতেই `var` ঘোষিত হয়ে যায়(স্ক্রিপ্ট গ্লোবালের জন্য শুরু হয়)।
 
-There's one more minor difference related to the global object, we'll cover that in the next chapter.
+গ্লোবাল অবজেক্টের সাথে সম্পর্কিত আরও একটি ছোটখাটো পার্থক্য রয়েছে, আমরা পরবর্তী অধ্যায়ে এটি আলোচনা করব।
 
-These differences make `var` worse than `let` most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+এই পার্থক্যগুলি `var` কে বেশিরভাগ সময় `let` এর চেয়ে খারাপ করে তোলে। ব্লক-লেভেলের ভেরিয়েবলগুলি একটি দুর্দান্ত জিনিস। এই জন্য `let` এর স্ট্যান্ডার্ড চালু হয় অনেক আগে, এবং ভেরিয়েবল ঘোষণার জন্য এখন এটি একটি প্রধান উপায় (`const` সহ)।
