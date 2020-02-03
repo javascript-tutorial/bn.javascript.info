@@ -140,7 +140,7 @@ for(let value of generator) {
 }
 ```
 
-As generators are iterable, we can call all related functionality, e.g. the spread operator `...`:
+As generators are iterable, we can call all related functionality, e.g. the spread syntax `...`:
 
 ```js run
 function* generateSequence() {
@@ -154,7 +154,7 @@ let sequence = [0, ...generateSequence()];
 alert(sequence); // 0, 1, 2, 3
 ```
 
-In the code above, `...generateSequence()` turns the iterable generator object into an array of items (read more about the spread operator in the chapter [](info:rest-parameters-spread-operator#spread-operator))
+In the code above, `...generateSequence()` turns the iterable generator object into an array of items (read more about the spread syntax in the chapter [](info:rest-parameters-spread#spread-syntax))
 
 ## Using generators for iterables
 
@@ -347,7 +347,7 @@ generator.next(4); // --> pass the result into the generator
 2. Then, as shown at the picture above, the result of `yield` gets into the `question` variable in the calling code.
 3. On `generator.next(4)`, the generator resumes, and `4` gets in as the result: `let result = 4`.
 
-Please note, the outer code does not have to immediately call`next(4)`. It may take time. That's not a problem: the generator will wait.
+Please note, the outer code does not have to immediately call `next(4)`. It may take time. That's not a problem: the generator will wait.
 
 For instance:
 

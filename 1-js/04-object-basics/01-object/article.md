@@ -321,8 +321,13 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, key থেকে নামটি নিয়ে, ওই নামে প্রোপার্টি আছে কিনা দেখা হচ্ছে
 ```
 
+<<<<<<< HEAD
 ````smart header="`undefined` প্রোপার্টির ক্ষেত্রে \"in\" এর ব্যবহার"
 সাধারণত, `"=== undefined"` এভাবে প্রোপার্টি আছে কিনা পরীক্ষা করা ঠিকঠাক কাজ করে, কিছু বিশেষ ক্ষেত্রে এটি ভুল ফলাফল দেয়, কিন্তু `"in"` অপারেটর ঠিকমত কাজ করে।
+=======
+````smart header="Using \"in\" for properties that store `undefined`"
+Usually, the strict comparison `"=== undefined"` check the property existence just fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> d10b50ae7f67d91606a751926cb06aa06f10c1b4
 
 এটি ঘটে যখন অবজেক্টের প্রোপার্টি আছে কিন্তু তা অলরেডি `undefined` হয়ে আছেঃ
 
