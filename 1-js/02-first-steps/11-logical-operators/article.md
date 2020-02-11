@@ -1,24 +1,24 @@
 # Logical operators
 
-There are three logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT).
+জাভাস্ক্রিপ্টে তিনটি লজিক্যাল অপারেটর রয়েছে: `||` (OR), `&&` (AND), `!` (NOT).
 
-Although they are called "logical", they can be applied to values of any type, not only boolean. Their result can also be of any type.
+যদিও তাদের "লজিক্যাল" বলা হয়, সেগুলি কেবল বুলিয়ান নয়, যে কোনও ধরণের মানগুলিতে প্রয়োগ করা যেতে পারে। তাদের ফলাফলও যে কোনও ধরণের হতে পারে।
 
-Let's see the details.
+আসুন বিস্তারিত দেখি।
 
 ## || (OR)
 
-The "OR" operator is represented with two vertical line symbols:
+"OR" অপারেটরটি দুটি উল্লম্ব লাইন চিহ্ন সহ উপস্থাপিত হয়:
 
 ```js
 result = a || b;
 ```
 
-In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are `true`, it returns `true`, otherwise it returns `false`.
+ক্লাসিকাল প্রোগ্রামিংয়ে, লজিক্যাল OR বোঝানো হয় কেবল বুলিয়ান মানগুলি চালিত করার জন্য। যদি এর কোন যুক্তি থাকে `true`, এটি দেখাবে `true`, নতুবা এটি দেখাবে `false`.
 
-In JavaScript, the operator is a little bit trickier and more powerful. But first, let's see what happens with boolean values.
+জাভাস্ক্রিপ্টে অপারেটরটি কিছুটা কৌতুকপূর্ণ এবং আরও শক্তিশালী। তবে প্রথমে, আসুন দেখি বুলিয়ান মানগুলির সাথে কী ঘটে।
 
-There are four possible logical combinations:
+এখানে চারটি সম্ভাব্য যৌক্তিক সমন্বয় রয়েছে:
 
 ```js run
 alert( true || true );   // true
@@ -27,11 +27,11 @@ alert( true || false );  // true
 alert( false || false ); // false
 ```
 
-As we can see, the result is always `true` except for the case when both operands are `false`.
+যেমনটি আমরা দেখতে পাচ্ছি, ফলাফলটি সর্বদা `true` ক্ষেত্রে বাদে সর্বদা উভয় `true` হয় অথবা যখন উভয় অপারেশন `false` থাকে।
 
-If an operand is not a boolean, it's converted to a boolean for the evaluation.
+যদি কোনও অপারেন্ড বুলিয়ান না হয় তবে তা মূল্যায়নের জন্য বুলিয়ানে রূপান্তরিত হয়।
 
-For instance, the number `1` is treated as `true`, the number `0` as `false`:
+উদাহরণস্বরূপ, `1` সংখ্যাটিকে `true` হিসাবে গণ্য করা হয়, `0` সংখ্যাটিকে `false` হিসাবে ধরা হয়:
 
 ```js run
 if (1 || 0) { // works just like if( true || false )
@@ -39,9 +39,9 @@ if (1 || 0) { // works just like if( true || false )
 }
 ```
 
-Most of the time, OR `||` is used in an `if` statement to test if *any* of the given conditions is `true`.
+অধিকাংশ সময়, OR `||` একটি `if` বিবৃতিতে ব্যবহৃত হয় পরীক্ষা যদি *any* প্রদত্ত শর্তগুলির মধ্যে `true` হয়।
 
-For example:
+উদাহরণ স্বরূপ:
 
 ```js run
 let hour = 9;
@@ -53,7 +53,7 @@ if (hour < 10 || hour > 18) {
 }
 ```
 
-We can pass more conditions:
+আমরা আরও শর্তগুলি পাস করতে পারি:
 
 ```js run
 let hour = 12;
@@ -66,27 +66,27 @@ if (hour < 10 || hour > 18 || isWeekend) {
 
 ## OR "||" finds the first truthy value
 
-The logic described above is somewhat classical. Now, let's bring in the "extra" features of JavaScript.
+উপরে বর্ণিত যুক্তি কিছুটা ক্লাসিকাল। এখন, জাভাস্ক্রিপ্টের "অতিরিক্ত" বৈশিষ্ট্যগুলি নিয়ে আসি।
 
-The extended algorithm works as follows.
+বর্ধিত অ্যালগরিদম নিম্নলিখিত হিসাবে কাজ করে।
 
-Given multiple OR'ed values:
+একাধিক OR'এর মান দেওয়া হয়েছে:
 
 ```js
 result = value1 || value2 || value3;
 ```
 
-The OR `||` operator does the following:
+OR `||` অপারেটর নিম্নলিখিতটি করে:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to boolean. If the result is `true`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were `false`), returns the last operand.
+- বাম থেকে ডানে অপারেশনগুলির মূল্যায়ন করে।
+- প্রতিটি অপারেন্ডের জন্য, এটিকে বুলিয়ান রূপান্তর করে। যদি ফলাফলটি `true` হয়, থামে এবং সেই অপারেন্ডের মূল মানটি প্রদান করে।
+- যদি সমস্ত অপারেটর মূল্যায়ন করা হয় (যেমন সমস্তগুলি `false` ছিল), সর্বশেষ অপারেন্ডটি প্রদান করে।
 
-A value is returned in its original form, without the conversion.
+কোনও মান রূপান্তর ছাড়াই মূল আকারে ফিরে আসে।
 
-In other words, a chain of OR `"||"` returns the first truthy value or the last one if no truthy value is found.
+অন্য কথায়, OR `" || "` এর একটি শৃঙ্খলা truthy মান না পাওয়া গেলে প্রথম truthy মান বা শেষটি প্রদান করে।
 
-For instance:
+এই ক্ষেত্রে:
 
 ```js run
 alert( 1 || 0 ); // 1 (1 is truthy)
@@ -97,13 +97,13 @@ alert( null || 0 || 1 ); // 1 (the first truthy value)
 alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
 ```
 
-This leads to some interesting usage compared to a "pure, classical, boolean-only OR".
+এটি "pure, classical, boolean-only OR" এর তুলনায় কিছু আকর্ষণীয় ব্যবহারের দিকে নিয়ে যায়।
 
-1. **Getting the first truthy value from a list of variables or expressions.**
+1. **ভেরিয়েবল বা এক্সপ্রেশনগুলির একটি তালিকা থেকে প্রথম truthy মান পাওয়া।**
 
-    Imagine we have a list of variables which can either contain data or be `null/undefined`. How can we find the first one with data?
+    কল্পনা করুন যে আমাদের ভেরিয়েবলের একটি তালিকা রয়েছে যা হয় তথ্য ধারণ করতে পারে বা `null/undefined`। আমরা ডেটা সহ প্রথমটি কীভাবে খুঁজে পাব?
 
-    We can use OR `||`:
+    আমরা OR ব্যবহার করতে পারি `||`:
 
     ```js run
     let currentUser = null;
@@ -116,14 +116,14 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     alert( name ); // selects "John" – the first truthy value
     ```
 
-    If both `currentUser` and `defaultUser` were falsy, `"unnamed"` would be the result.
-2. **Short-circuit evaluation.**
+    যদি `currentUser` এবং `defaultUser` উভয়ই মিথ্যা হয়ে থাকে তবে, `"unnamed"` ফলাফল হবে।
+2. **শর্ট সার্কিট মূল্যায়ন।**
 
-    Operands can be not only values, but arbitrary expressions. OR evaluates and tests them from left to right. The evaluation stops when a truthy value is reached, and the value is returned. This process is called "a short-circuit evaluation" because it goes as short as possible from left to right.
+    অপারেন্ডগুলি কেবল মানগুলিই নয়, স্বেচ্ছাসেবী অভিব্যক্তি হতে পারে। বা তাদের বাম থেকে ডানে মূল্যায়ন করে এবং পরীক্ষা করে। সত্যবাদী মান পৌঁছালে মূল্যায়ন বন্ধ হয়ে যায় এবং মানটি ফিরে আসে। এই প্রক্রিয়াটিকে "একটি সংক্ষিপ্ত-সার্কিট মূল্যায়ন" বলা হয় কারণ এটি বাম থেকে ডানে যতটা সম্ভব সংক্ষিপ্ত হয়ে যায়।
 
-    This is clearly seen when the expression given as the second argument has a side effect like a variable assignment.
+    দ্বিতীয় আর্গুমেন্ট হিসাবে দেওয়া এক্সপ্রেশনটির একটি ভেরিয়েবল অ্যাসাইনমেন্টের মতো পার্শ্ব প্রতিক্রিয়া থাকলে এটি স্পষ্টভাবে দেখা যায়।
 
-    In the example below, `x` does not get assigned:
+    নীচের উদাহরণে, `x` নির্ধারিত হয় না:
 
     ```js run no-beautify
     let x;
@@ -133,7 +133,7 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     alert(x); // undefined, because (x = 1) not evaluated
     ```
 
-    If, instead, the first argument is `false`, `||` evaluates the second one, thus running the assignment:
+    পরিবর্তে, যদি প্রথম যুক্তিটি হল `false`, `|| one দ্বিতীয়টির মূল্যায়ন করে, সুতরাং এই নিয়োগটি চালাবেন:
 
     ```js run no-beautify
     let x;
@@ -143,21 +143,21 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     alert(x); // 1
     ```
 
-    An assignment is a simple case. There may be side effects, that won't show up if the evaluation doesn't reach them.
+    একটি অ্যাসাইনমেন্ট একটি সহজ কেস। পার্শ্ব প্রতিক্রিয়া থাকতে পারে, মূল্যায়ন যদি না পৌঁছে যায় তবে তা প্রদর্শিত হবে না।
 
-    As we can see, such a use case is a "shorter way of doing `if`". The first operand is converted to boolean. If it's false, the second one is evaluated.
+    আমরা দেখতে পাচ্ছি, এরকম ব্যবহারের কেসটি "`if`" করার ছোট উপায়। প্রথম অপারেন্ড বুলেয়ানে রূপান্তরিত হয়। যদি এটি মিথ্যা হয় তবে দ্বিতীয়টি মূল্যায়ন করা হয়।
 
-    Most of time, it's better to use a "regular" `if` to keep the code easy to understand, but sometimes this can be handy.
+    বেশিরভাগ সময়, কোডটি সহজেই বোঝার জন্য "নিয়মিত" `if` ব্যবহার করা আরও ভাল তবে কখনও কখনও এটি কার্যকরও হতে পারে।
 
 ## && (AND)
 
-The AND operator is represented with two ampersands `&&`:
+অ্যান্ড অপারেটরটি দুটি এম্পারস্যান্ডের সাথে প্রতিনিধিত্ব করে `&&`:
 
 ```js
 result = a && b;
 ```
 
-In classical programming, AND returns `true` if both operands are truthy and `false` otherwise:
+ক্লাসিকাল প্রোগ্রামিংয়ে, এবং উভয় অপারেন্ড truthy এবং অন্যথায় `মিথ্যা` যদি সত্য হয় - ফেরত দেয়:
 
 ```js run
 alert( true && true );   // true
@@ -166,7 +166,7 @@ alert( true && false );  // false
 alert( false && false ); // false
 ```
 
-An example with `if`:
+`If` এর সাথে একটি উদাহরণ:
 
 ```js run
 let hour = 12;
@@ -177,7 +177,7 @@ if (hour == 12 && minute == 30) {
 }
 ```
 
-Just as with OR, any value is allowed as an operand of AND:
+ঠিক যেমন OR এর সাথে, কোনও মান AND এর অপারেন্ড হিসাবে অনুমোদিত:
 
 ```js run
 if (1 && 0) { // evaluated as true && false
@@ -188,23 +188,23 @@ if (1 && 0) { // evaluated as true && false
 
 ## AND "&&" finds the first falsy value
 
-Given multiple AND'ed values:
+একাধিক AND'এর মান দেওয়া:
 
 ```js
 result = value1 && value2 && value3;
 ```
 
-The AND `&&` operator does the following:
+AND `&&` অপারেটর নিম্নলিখিতগুলি করে:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to a boolean. If the result is `false`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were truthy), returns the last operand.
+- বাম থেকে ডানে অপারেশনগুলির মূল্যায়ন করে।
+- প্রতিটি অপারেন্ডের জন্য, এটিকে বুলিয়ান রূপান্তরিত করে। যদি ফলাফলটি `false` হয় তবে থামিয়ে দেয় এবং সেই অপারেন্ডের মূল মানটি দেয়।
+- যদি সমস্ত অপারেন্ডের মূল্যায়ন করা হয় (যেমন সমস্ত truthy ছিল), সর্বশেষ অপারেন্ডটি ফেরত দেয়।
 
-In other words, AND returns the first falsy value or the last value if none were found.
+অন্য কথায়, এবং যদি কোনওটি না পাওয়া যায় তবে প্রথম মিথ্যা মান বা শেষ মানটি প্রদান করে।
 
-The rules above are similar to OR. The difference is that AND returns the first *falsy* value while OR returns the first *truthy* one.
+উপরের নিয়মগুলি OR এর মতো। পার্থক্যটি হল এবং প্রথম *falsy* মান প্রদান করে বা OR প্রথম *truthy* দেয়।
 
-Examples:
+উদাহরণ:
 
 ```js run
 // if the first operand is truthy,
@@ -218,27 +218,27 @@ alert( null && 5 ); // null
 alert( 0 && "no matter what" ); // 0
 ```
 
-We can also pass several values in a row. See how the first falsy one is returned:
+আমরা একটি সারিতে বেশ কয়েকটি মান পাস করতে পারি। প্রথম falsy কীভাবে ফিরে আসে দেখুন:
 
 ```js run
 alert( 1 && 2 && null && 3 ); // null
 ```
 
-When all values are truthy, the last value is returned:
+সমস্ত মান truthy হলে শেষ মানটি ফিরে আসে:
 
 ```js run
 alert( 1 && 2 && 3 ); // 3, the last one
 ```
 
 ````smart header="Precedence of AND `&&` is higher than OR `||`"
-The precedence of AND `&&` operator is higher than OR `||`.
+এবং `&&` অপারেটরের অগ্রাধিকার OR `||` এর চেয়ে বেশি।
 
-So the code `a && b || c && d` is essentially the same as if the `&&` expressions were in parentheses: `(a && b) || (c && d)`.
-````
+সুতরাং কোড `a && b || c && d` মূলত একই হিসাবে যদি `&&` এক্সপ্রেশনগুলি প্রথম বন্ধনে ছিল: `(a && b) || (c && d)`।````
 
-Just like OR, the AND `&&` operator can sometimes replace `if`.
 
-For instance:
+ঠিক যেমন OR, এবং AND && অপারেটর কখনও কখনও `if` প্রতিস্থাপন করতে পারে।
+
+এই ক্ষেত্রে:
 
 ```js run
 let x = 1;
@@ -246,9 +246,9 @@ let x = 1;
 (x > 0) && alert( 'Greater than zero!' );
 ```
 
-The action in the right part of `&&` would execute only if the evaluation reaches it. That is, only if `(x > 0)` is true.
+কেবল ডান অংশের ক্রিয়াটি `&&` এর তখনই চালিত হবে যদি মূল্যায়ন পৌছে যায়। এটি কেবলমাত্র যদি `(x> 0)` সত্য হয়।
 
-So we basically have an analogue for:
+সুতরাং আমাদের কাছে মূলত এর জন্য একটি অনুরূপ উদাহরণ রয়েছে:
 
 ```js run
 let x = 1;
@@ -258,46 +258,46 @@ if (x > 0) {
 }
 ```
 
-The variant with `&&` appears shorter. But `if` is more obvious and tends to be a little bit more readable.
+সংক্ষিপ্ত প্রদর্শিত হয় `&&` এর সঙ্গে ভিন্ন। তবে `if` আরও সুস্পষ্ট এবং কিছুটা বেশি পাঠযোগ্য।
 
-So we recommend using every construct for its purpose: use `if` if we want if and use `&&` if we want AND.
+সুতরাং আমরা প্রতিটি নির্মাণকে এর লক্ষ্যে ব্যবহার করার পরামর্শ দিচ্ছি: আমরা চাইলে `if` ব্যবহার করি এবং যদি আমরা চাইলে `&&` ব্যবহার করি।
 
 ## ! (NOT)
 
-The boolean NOT operator is represented with an exclamation sign `!`.
+বুলিয়ান `NOT` অপারেটরকে বিস্মৃত চিহ্ন হিসাবে উপস্থাপন করা হয় `!`।
 
-The syntax is pretty simple:
+বাক্য গঠনটি বেশ সহজ:
 
 ```js
 result = !value;
 ```
 
-The operator accepts a single argument and does the following:
+অপারেটর একটি একক যুক্তি গ্রহণ করে এবং নিম্নলিখিতটি করে:
 
-1. Converts the operand to boolean type: `true/false`.
-2. Returns the inverse value.
+1. অপারেন্ডকে বুলিয়ান ধরণে রূপান্তর করে: `true/false`.
+2. বিপরীত মান প্রদান করে।
 
-For instance:
+এই ক্ষেত্রে:
 
 ```js run
 alert( !true ); // false
 alert( !0 ); // true
 ```
 
-A double NOT `!!` is sometimes used for converting a value to boolean type:
+একটি ডাবল NOT `!!` কখনও কখনও বুলিয়ান ধরণের মান রূপান্তর করার জন্য ব্যবহৃত হয়:
 
 ```js run
 alert( !!"non-empty string" ); // true
 alert( !!null ); // false
 ```
 
-That is, the first NOT converts the value to boolean and returns the inverse, and the second NOT inverses it again. In the end, we have a plain value-to-boolean conversion.
+অর্থাত্‍, প্রথমটি NOT বুলিয়ানকে রূপান্তর করে এবং বিপরীতটি দেয় এবং দ্বিতীয়টি এটি আবার বিপরীত হয় না। শেষ পর্যন্ত, আমাদের কাছে বুলিয়ান রূপান্তর রয়েছে।
 
-There's a little more verbose way to do the same thing -- a built-in `Boolean` function:
+একই জিনিসটি করার জন্য আরও কিছু শব্দবহুল উপায় রয়েছে - একটি অন্তর্নির্মিত `Boolean` ফাংশন:
 
 ```js run
 alert( Boolean("non-empty string") ); // true
 alert( Boolean(null) ); // false
 ```
 
-The precedence of NOT `!` is the highest of all logical operators, so it always executes first, before `&&` or `||`.
+NOT `!` এর নজির সমস্ত লজিকাল অপারেটরগুলির মধ্যে সর্বোচ্চ, সুতরাং এটি সর্বদা প্রথম `&&` অথবা `||` এর আগে কার্যকর করে।
