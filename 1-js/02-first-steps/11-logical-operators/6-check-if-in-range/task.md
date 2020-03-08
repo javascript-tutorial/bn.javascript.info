@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range between
+# নির্দিষ্ট পরিসীমার মধ্যে পরীক্ষা করুন
 
-Write an "if" condition to check that `age` is between `14` and `90` inclusively.
+একটি "if" কন্ডিশন লেখো যেখানে `age` `14` এবং `90` এর অন্তর্ভুক্ত কিনা।
 
-"Inclusively" means that `age` can reach the edges `14` or `90`.
+"Inclusively" এর অর্থ বুঝায় `age` `14` অথবা `90` প্রান্তে পৌঁছতে পারে।

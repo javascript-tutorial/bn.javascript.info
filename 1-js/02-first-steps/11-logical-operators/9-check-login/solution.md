@@ -22,4 +22,4 @@ if (userName == 'Admin') {
 }
 ```
 
-Note the vertical indents inside the `if` blocks. They are technically not required, but make the code more readable.
+If ব্লকের ভিতরে উল্লম্ব ইনডেন্টগুলি নোট করুন। এগুলি প্রযুক্তিগতভাবে প্রয়োজন হয় না, তবে কোডটি আরও পাঠযোগ্য হয়।

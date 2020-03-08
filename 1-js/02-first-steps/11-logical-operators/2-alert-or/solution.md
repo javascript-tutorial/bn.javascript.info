@@ -1,13 +1,13 @@
-The answer: first `1`, then `2`.
+উত্তর প্রথমে ১ তারপর ২ ।
 
 ```js run
 alert( alert(1) || 2 || alert(3) );
 ```
 
-The call to `alert` does not return a value. Or, in other words, it returns `undefined`.
+alert কল করলে কোন মান রিটার্ন করে না. অথবা, এক কথায় undefined দেখায়।
 
-1. The first OR `||` evaluates it's left operand `alert(1)`. That shows the first message with `1`.
-2. The `alert` returns `undefined`, so OR goes on to the second operand searching for a truthy value.
-3. The second operand `2` is truthy, so the execution is halted, `2` is returned and then shown by the outer alert.
+১। OR || অপারেশনে প্রথমে বাম দিক থেকে মূল্যায়ন করা হয়। সেজন্য এখানে প্রথম ফলাফল দেখায় 1।
+২। `alert` দেখায় `undefined`, অথবা সত্য মানটির সন্ধানে দ্বিতীয় প্রতীকে যায়।
+৩। দ্বিতীয় প্রতীক `2` সত্য হয়, সুতরাং এক্সিকিউশন স্থগিত, `2` ফিরে আসে এবং তারপরে বাইরের সতর্কতা দ্বারা দেখানো হয়। 
 
-There will be no `3`, because the evaluation does not reach `alert(3)`.
+কোনও `3` থাকবে না, কারণ মূল্যায়ন `alert(3)` তে পৌঁছায় না।

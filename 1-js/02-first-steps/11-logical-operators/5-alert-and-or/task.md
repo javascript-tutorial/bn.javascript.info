@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The result of OR AND OR
+# OR AND OR এর ফলাফল
 
-What will the result be?
+নিচের কোডটির আউটপুট কি হবে?
 
 ```js
 alert( null || 2 && 3 || 4 );

@@ -1,4 +1,4 @@
-The answer is `2`, that's the first truthy value.
+প্রথম সত্য মানের জন্য উত্তর ২ হবে।
 
 ```js run
 alert( null || 2 || undefined );

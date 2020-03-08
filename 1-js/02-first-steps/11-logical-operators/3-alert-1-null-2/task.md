@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What is the result of AND?
+# AND এর ফলাফল কি?
 
-What is this code going to show?
+নিচের কোডটির আউটপুট কি হবে?
 
 ```js
 alert( 1 && null && 2 );

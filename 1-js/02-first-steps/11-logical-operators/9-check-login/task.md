@@ -2,24 +2,24 @@ importance: 3
 
 ---
 
-# Check the login
+# লগইন চেক করুন
 
-Write the code which asks for a login with `prompt`.
+কোডটি লিখুন যা prompt দিয়ে লগিনের জন্য জিজ্ঞাসা করে। 
 
-If the visitor enters `"Admin"`, then `prompt` for a password, if the input is an empty line or `key:Esc` -- show "Canceled", if it's another string -- then show "I don't know you".
+যদি ভিজিটর Admin প্রবেশ করে, তবে একটি পাসওয়ার্ডের জন্য prompt করুন, যদি ইনপুটটি খালি লাইন হয় বা key:Esc - যদি এটি অন্য স্ট্রিং থাকে - তবে I don't know you দেখাবে।
 
-The password is checked as follows:
+পাসওয়ার্ডটি নিম্নলিখিত হিসাবে পরীক্ষা করা হয়েছে:
 
-- If it equals "TheMaster", then show "Welcome!",
-- Another string -- show "Wrong password",
-- For an empty string or cancelled input, show "Canceled"
+- যদি এটি "TheMaster" এর সমান হয়, তবে "Welcome!" দেখাবে,
+- অন্য স্ট্রিং"Wrong password" দেখাবে,
+- খালি স্ট্রিং বা বাতিল ইনপুটটির জন্য, "Cancelled" দেখাবে
 
-The schema:
+উদাহরণ:
 
-![](ifelse_task.svg)
+![](ifelse_task.png)
 
-Please use nested `if` blocks. Mind the overall readability of the code.
+নেস্টেড if ব্লক ব্যবহার করুন। কোড সামগ্রিক পঠনযোগ্যতা হবে।
 
-Hint:  passing an empty input to a prompt returns an empty string `''`. Pressing `key:ESC` during a prompt returns `null`.
+ইঙ্গিত: প্রম্পটে একটি খালি ইনপুট পাস করা একটি খালি স্ট্রিং দেয় ''। null প্রম্পট রিটার্ণ এর সময় key:ESC প্রেস করুন।
 
 [demo]

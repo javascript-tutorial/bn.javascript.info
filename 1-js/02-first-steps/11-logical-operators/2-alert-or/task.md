@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# What's the result of OR'ed alerts?
+# OR এলার্ট এর ফলাফল কি?
 
-What will the code below output?
+নিচের কোডটির আউটপুট কি হবে?
 
 ```js
 alert( alert(1) || 2 || alert(3) );

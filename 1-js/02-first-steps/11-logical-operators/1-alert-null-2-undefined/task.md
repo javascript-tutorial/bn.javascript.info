@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What's the result of OR?
+# OR এর ফলাফল কি?
 
-What is the code below going to output?
+নিচের কোডটির আউটপুট কি হবে?
 
 ```js
 alert( null || 2 || undefined );

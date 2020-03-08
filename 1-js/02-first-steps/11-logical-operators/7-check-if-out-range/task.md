@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range outside
+# নির্দিষ্ট পরিসীমার মধ্যে পরীক্ষা করুন
 
-Write an `if` condition to check that `age` is NOT between 14 and 90 inclusively.
+একটি "if" কন্ডিশন লেখো যেখানে `age` `14` এবং `90` এর অন্তর্ভুক্ত নয়। 
 
-Create two variants: the first one using NOT `!`, the second one -- without it.
+দুটি রূপ তৈরি করুন: প্রথমটি NOT! `ব্যবহার করে, দ্বিতীয়টি -- এটি ছাড়াই।

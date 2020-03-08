@@ -1,16 +1,16 @@
-The answer: `3`.
+উত্তর: 3 ।
 
 ```js run
 alert( null || 2 && 3 || 4 );
 ```
 
-The precedence of AND `&&` is higher than `||`, so it executes first.
+এর প্রাধান্য AND `&&` এর চেয়ে বেশি `||`, সুতরাং এটি প্রথম চালায়।
 
-The result of `2 && 3 = 3`, so the expression becomes:
+`2 && 3 = 3` এর ফলাফল, তাই প্রকাশ হয়ে যায়:
 
 ```
 null || 3 || 4
 ```
 
-Now the result is the first truthy value: `3`.
+এখন, প্রথম সত্য মানের ফলাফল: `3`।
 
