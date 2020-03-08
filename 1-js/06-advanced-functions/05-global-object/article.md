@@ -1,87 +1,87 @@
 
-# Global object
+# গ্লোবাল অবজেক্ট 
 
-The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.
+গ্লোবাল অবজেক্টটি ভেরিয়েবলস্‌ এবং ফাংশনস্‌ প্রোভাইড করে যা, যে কোনও জায়গায় উপলব্ধ। ডিফল্টভাবে, সেগুলো ল্যাঙ্গুইজ বা ইনভার্মেন্টের মধ্যে তৈরি হয়। 
 
-In a browser it is named `window`, for Node.js it is `global`, for other environments it may have another name.
+ব্রাউজারে এটিকে `window` বলা হয়, নোড জেএসে `global` বলা হয়, এছাড়া অন্যান্য ইনভার্মেন্টে পৃথক নাম থাকতে পারে। 
 
-Recently, `globalThis` was added to the language, as a standardized name for a global object, that should be supported across all environments. In some browsers, namely non-Chromium Edge, `globalThis` is not yet supported, but can be easily polyfilled.
+সম্প্রতি, গ্লোবাল অবজেক্টের আদর্শায়িত নামের জন্য ল্যাঙ্গুইজে `globalThis` এড করা হয়েছে, যা সমস্ত ইনভার্মেন্টে সাপোর্ট করার কথা। কিছু ব্রাউজার, যেমন নন-ক্রোমিয়াম এজ, এখনও `globalThis` সাপোর্ট করে না, তবে সহজে পলিফিল করা যাবে।
 
-We'll use `window` here, assuming that our environment is a browser. If your script may run in other environments, it's better to use `globalThis` instead.
+আমরা এখানে `window` ব্যবহার করব, ধরে নিচ্ছি আমাদের ইনভার্মেন্ট হল ব্রাউজার। আপনার স্ক্রিপ্ট যদি অন্যান্য ইনভার্মেন্টে রান হয়, তাহলে `globalThis` ব্যবহার করাই ভাল। 
 
-All properties of the global object can be accessed directly:
+গ্লোবাল অবজেক্টের সব প্রপার্টি সরাসরি এক্সেস করা যায়ঃ
 
 ```js run
 alert("Hello");
-// is the same as
+// একই ভাবে
 window.alert("Hello");
 ```
 
-In a browser, global functions and variables declared with `var` (not `let/const`!) become the property of the global object:
+ব্রাউজারে, গ্লোবাল ফাংশন এবং ভেরিয়েবল `var` দিয়ে (`let/const` নয়) ডিক্লেয়ার করা হয় এবং সেটি গ্লোবাল অবজেক্টের প্রপার্টি হয়ে যায়ঃ 
 
 ```js run untrusted refresh
 var gVar = 5;
 
-alert(window.gVar); // 5 (became a property of the global object)
+alert(window.gVar); // ৫ (গ্লোবাল অবজেক্টের প্রপার্টি হয়ে গিয়েছে )
 ```
 
-Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such thing doesn't happen.
+দয়া করে এটির উপর নির্ভর করবেন না! এই বিহেবিয়ার কম্পাটিবিলিটির জন্য রাখা হয়েছে। আধুনিক স্ক্রিপ্টস [JavaScript modules](info:modules) ব্যবহার করে, যাতে এমনটা না হয়। 
 
-If we used `let` instead, such thing wouldn't happen:
+এর পরিবর্তে আমরা যদি `let` ব্যবহার করতাম, তাহলে এ জাতীয় ঘটনা ঘটত নাঃ  
 
 ```js run untrusted refresh
 let gLet = 5;
 
-alert(window.gLet); // undefined (doesn't become a property of the global object)
+alert(window.gLet); // undefined (গ্লোবাল অবজেক্টের প্রপার্টি হয়ে যায়নি )
 ```
 
-If a value is so important that you'd like to make it available globally, write it directly as a property:
+যদি কোনও মান এত গুরুত্বপূর্ণ হয় যে আপনি এটি গ্লোবালি এভেইলাবল করতে চান, তাহলে তা সরাসরি প্রপার্টি হিসেবে লিখে দিতে পারেনঃ 
 
 ```js run
 *!*
-// make current user information global, to let all scripts access it
+// কারেন্ট ইউজারের তথ্য গ্লোবাল করা হয়েছে, যাতে সকল স্ক্রিপ্টে এক্সেস করা যায় 
 window.currentUser = {
   name: "John"
 };
 */!*
 
-// somewhere else in code
+// কোডের অন্য কোথাও
 alert(currentUser.name);  // John
 
-// or, if we have a local variable with the name "currentUser"
-// get it from window explicitly (safe!)
+// অথবা, আমাদের "currentUser" নামে যদি কোন লোকাল ভেরিয়েবল থাকে 
+// তাহলে সরাসরি window থেকে নেয়া যাবে (নিরাপদ!)
 alert(window.currentUser.name); // John
 ```
 
-That said, using global variables is generally discouraged. There should be as few global variables as possible. The code design where a function gets "input" variables and produces certain "outcome" is clearer, less prone to errors and easier to test than if it uses outer or global variables.
+গ্লোবাল ভেরিয়েবলগুলি ব্যবহার করা সাধারণত নিরুৎসাহিত করা হয়। যতটা সম্ভব কম গ্লোবাল ভেরিয়েবল থাকা উচিত। যে কোড ডিজাইনে ফাংশন "ইনপুট" ভেরিয়েবল নেয় এবং কিছু নির্দিষ্ট আউটপুট তৈরি করে তা গ্লোবাল ভেরিয়েবলের তুলনায় পরিষ্কার, কম ত্রুটি প্রবণ এবং সহজে টেস্ট করা যায়। 
 
-## Using for polyfills
+## পলিফিলসে্‌র জন্য ব্যবহার 
 
-We use the global object to test for support of modern language features.
+আধুনিক ল্যাঙ্গুইজ সাপোর্ট টেস্টের জন্য আমরা গ্লোবাল অবজেক্ট ব্যবহার করে থাকি।
 
-For instance, test if a built-in `Promise` object exists (it doesn't in really old browsers):
+উদাহরণসরূপ, বিল্ডইন `Promise` অবজেক্ট আছে কিনা তা টেস্ট করা (পুরানো ব্রাউজারগুলিতে নেই):
 ```js run
 if (!window.Promise) {
   alert("Your browser is really old!");
 }
 ```
 
-If there's none (say, we're in an old browser), we can create "polyfills": add functions that are not supported by the environment, but exist in the modern standard.
+যদি না থাকে তাহলে আমরা "পলিফিলস্‌‌" তৈরি করতে পারিঃ ইনভার্মেন্টে নেই কিন্তু মর্ডান স্ট্যান্ডার্ডে আছে, এমন ফাংশন ইনভার্মেন্টে এড করা। 
 
 ```js run
 if (!window.Promise) {
-  window.Promise = ... // custom implementation of the modern language feature
+  window.Promise = ... // মর্ডান ল্যাঙ্গুইজ ফিচারের কাস্টম ইমপ্লিমেন্টেশন 
 }
 ```
 
-## Summary
+## সারাংশ
 
-- The global object holds variables that should be available everywhere.
+- গ্লোবাল অবজেক্টে যে ভেরিয়েবলগুলি থাকে তা সর্বত্র আভাইলাবল।
 
-    That includes JavaScript built-ins, such as `Array` and environment-specific values, such as `window.innerHeight` -- the window height in the browser.
-- The global object has a universal name `globalThis`.
+    এতে জাভাস্ক্রিপ্টের বিল্ডইন ফিচার অন্তর্ভুক্ত থাকে, যেমনঃ `Array` এবং ইনভার্মেন্ট এস্পেসিফিক ভ্যালু, `window.innerHeight` -- ব্রাউজারের উইন্ডো হাইট। 
+- গ্লোবাল অবজেক্টির সার্বজনীন নাম হল `globalThis`।
 
-    ...But more often is referred by "old-school" environment-specific names, such as `window` (browser) and `global` (Node.js). As `globalThis` is a recent proposal, it's not supported in non-Chromium Edge (but can be polyfilled).
-- We should store values in the global object only if they're truly global for our project. And keep their number at minimum.
-- In-browser, unless we're using [modules](info:modules), global functions and variables declared with `var` become a property of the global object.
-- To make our code future-proof and easier to understand, we should access properties of the global object directly, as `window.x`.
+    তবে এখনও বিভিন্ন ইনভার্মেন্টের পুরনো নামেই বেশি ডাকা হয়, যেমনঃ `window` (ব্রাউজার) এবং `global` (নোড জেএস)। `globalThis` হচ্ছে সাম্প্রতিক প্রস্তাব, এটি নন-ক্রোমিয়ামে সাপোর্ট করে না (তবে পলিফিল করা যাবে)। 
+- প্রজেক্টের কোন ভ্যালু যদি গ্লোবাল রাখার প্রয়োজন হয়, শুধুমাত্র সেই ভ্যালুগুলি গ্লোবাল অবজেক্টে ষ্টোর করতে হবে। এবং তার সংখ্যা কম রাখার চেষ্টা করতে হবে। 
+- ব্রাউজারে [modules](info:modules) ইউজ না করলে গ্লোবাল ফাংশন এবং ভ্যারিয়েবল `var` দিয়ে ডিক্লেয়ার করা হয়, যা গ্লোবাল অবজেক্টের প্রপার্টি হিসেবে এড হয়ে যায়।
+- ভবিষ্যতের কম্প্যাটিবিলিটি এবং সহজবদ্ধ করার জন্য গ্লোবাল প্রপার্টিগুলি সরাসরি এক্সেস করা উচিত, যেমনঃ `window.x`
