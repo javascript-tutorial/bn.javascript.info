@@ -94,7 +94,11 @@ alert("একটি এরর তৈরি হবে")[1, 2].forEach(alert)
 
 আমরা স্টেটমেন্টের শেষে সেমিকোলন দিতে পরামর্শ দেই, এমনকি যদি স্টেটমেন্টগুলো আলাদা লাইনেও হয়ে থাকে। এই রুলটি কমিউনিটিতে ব্যাপকভাবে গ্রহণ করা হয়েছে। আরও একবার এভাবে বলা যায় -- অধিকাংশ সময় সেমিকোলন ঊহ্য রাখা **সম্ভব**। কিন্তু এটি ব্যবহার করা নিরাপদ -- বিশেষ করে শিক্ষানবিশ/অনভিজ্ঞদের জন্য।
 
+<<<<<<< HEAD
 ## কমেন্ট/মন্তব্য
+=======
+## Comments [#code-comments]
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 সময়ের সাথে সাথে প্রোগ্রামগুলো অধিক থেকে অধিকতর জটিল হতে থাকে। *কমেন্ট/মন্তব্য* লিখার মাধ্যমে কোড কি কাজ করে এবং কেন করে তা প্রয়োজনীয় হয়ে দাঁড়ায়।
 
@@ -135,8 +139,13 @@ alert('হ্যালো');
 alert('ওয়ার্ল্ড');
 ```
 
+<<<<<<< HEAD
 ```smart header="হট-কী ব্যবহার করুন"
 অধিকাংশ এডিটরে, কোডের কোন অংশ কমেন্ট করতে, এক লাইনের কমেন্টের জন্য `key:Ctrl+/` হট-কী এবং একাধিক লাইনের কমেন্টের জন্য `key:Ctrl+Shift+/` হট-কী ব্যবহার করা হয় (কোডের অংশটি সিলেক্ট করে হট-কী প্রেস করা হয়)। ম্যাকের জন্য `key:Ctrl` এর পরিবর্তে `key:Cmd` ব্যবহার করে চেষ্টা করে দেখুন।
+=======
+```smart header="Use hotkeys!"
+In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 ```
 
 ````warn header="জাভাস্ক্রিপ্ট নেস্টেড কমেন্ট সাপোর্ট করে না!"

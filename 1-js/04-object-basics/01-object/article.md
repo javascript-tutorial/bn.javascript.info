@@ -1,7 +1,11 @@
 
 # অবজেক্ট
 
+<<<<<<< HEAD
 <info:types> অধ্যায়ে আমরা জেনেছি, জাভাস্ক্রিপ্টে সাতটি ডাটা টাইপ রয়েছে। তাদের মধ্যে ছয়টিকে বলা হয় "প্রিমিটিভ", কারণ তাদের ভ্যালুতে শুধু একটি জিনিসই (হোক তা স্ট্রিং, নাম্বার বা অন্য যেকোনো কিছু) থেকে থাকে।
+=======
+As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 অন্যদিকে, বিভিন্ন ধরনের ডাটার কালেকশন ও একটু জটিল ধরনের জিনিস রাখার জন্য অবজেক্ট ব্যবহৃত হয়। জাভাস্ক্রিপ্টের প্রতিটি বিষয়ে অবজেক্টের আধিক্য এবং প্রভাব বিদ্যমান। সুতরাং অন্য কিছু নিয়ে গভীরে জানার আগে আমাদের অবশ্যই অবজেক্ট সম্পর্কে জানতে হবে।
 
@@ -101,7 +105,13 @@ let user = {
 user.likes birds = true
 ```
 
+<<<<<<< HEAD
 এটার কারণ, ডট নোটেশন ব্যবহার করার জন্য key - কে একটি ভেরিয়েবল আইডেন্টিফায়ার হতে হবে। যার জন্য এতে কোন স্পেস থাকতে পারবে না এবং আরও অন্যান্য নিয়ম রয়েছে।
+=======
+JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+
+The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` и `_` are allowed).
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 তৃতীয় বন্ধনী ব্যবহার করে আরেকটি পদ্ধতি রয়েছে, যা যেকোনো স্ট্রিং এ কাজ করেঃ
 
@@ -203,6 +213,7 @@ let bag = {
 
 সুতরাং অধিকাংশ সময়, যখন প্রোপার্টির নাম সহজ এবং আগে থেকেই জানা, ডট নোটেশন ব্যবহৃত হয়। এবং যদি আমাদের জটিল কিছু করতে হয়, তখন আমরা তৃতীয় বন্ধনী ব্যবহার করি।
 
+<<<<<<< HEAD
 
 
 ````smart header="সংরক্ষিত শব্দগুলো প্রোপার্টির নাম হিসেবে ব্যবহার করা যায়"
@@ -241,6 +252,9 @@ alert(obj.__proto__); // [object Object], didn't work as intended
 
 
 ## প্রোপার্টি ভ্যালু সর্টহ্যান্ড
+=======
+## Property value shorthand
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 প্রায়সময় আমরা বর্তমানে বিদ্যমান ভেরিয়েবলগুলোকে প্রোপার্টি নামের ভ্যালু হিসেবে ব্যবহার করি।
 
@@ -284,7 +298,67 @@ let user = {
 };
 ```
 
+<<<<<<< HEAD
 ## প্রোপার্টি আছে কিনা পরীক্ষা করা
+=======
+## Property names limitations
+
+Property names (keys) must be either strings or symbols (a special type for identifiers, to be covered later).
+
+Other types are automatically converted to strings.
+
+For instance, a number `0` becomes a string `"0"` when used as a property key:
+
+```js run
+let obj = {
+  0: "test" // same as "0": "test"
+};
+
+// both alerts access the same property (the number 0 is converted to string "0")
+alert( obj["0"] ); // test
+alert( obj[0] ); // test (same property)
+```
+
+**Reserved words are allowed as property names.**
+
+As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction. Any name is fine:
+
+```js run
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+
+We can use any string as a key, but there's a special property named `__proto__` that gets special treatment for historical reasons.
+
+For instance, we can't set it to a non-object value:
+
+```js run
+let obj = {};
+obj.__proto__ = 5; // assign a number
+alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+```
+
+As we see from the code, the assignment to a primitive `5` is ignored.
+
+The nature of `__proto__` will be revealed in detail later in the chapter [](info:prototype-inheritance).
+
+As for now, it's important to know that such behavior of `__proto__` can become a source of bugs and even vulnerabilities if we intend to store user-provided keys in an object.
+
+The problem is that a visitor may choose `__proto__` as the key, and the assignment logic will be ruined (as shown above).
+
+There are two workarounds for the problem:
+1. Modify the object's behavior to treat `__proto__` as a regular property. We'll learn how to do it in the chapter [](info:prototype-methods).
+2. Using [Map](info:map-set) data structure which supports arbitrary keys. We'll learn it in the chapter <info:map-set>.
+
+## Property existence test, "in" operator
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 অবজেক্টের একটি উল্লেখযোগ্য ফিচার হল এর যেকোনো প্রোপার্টিকে এক্সেস করা যায়। যদি প্রোপার্টি না থাকে তাহলে কোন এরর হয় না। বরং অবজেক্টে নেই এমন প্রোপার্টিকে এক্সেস করলে `undefined` রিটার্ন করে। প্রোপার্টি আছে কি নেই পরীক্ষার জন্য সাধারনত - আনডিফাইন্ড এর সাথে তুলনা করা হয়ে থাকেঃ
 
@@ -321,8 +395,13 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, key থেকে নামটি নিয়ে, ওই নামে প্রোপার্টি আছে কিনা দেখা হচ্ছে
 ```
 
+<<<<<<< HEAD
 ````smart header="`undefined` প্রোপার্টির ক্ষেত্রে \"in\" এর ব্যবহার"
 সাধারণত, `"=== undefined"` এভাবে প্রোপার্টি আছে কিনা পরীক্ষা করা ঠিকঠাক কাজ করে, কিছু বিশেষ ক্ষেত্রে এটি ভুল ফলাফল দেয়, কিন্তু `"in"` অপারেটর ঠিকমত কাজ করে।
+=======
+````smart header="Using \"in\" for properties that store `undefined`"
+Usually, the strict comparison `"=== undefined"` check the property existence just fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> fcfef6a07842ed56144e04a80c3a24de049a952a
 
 এটি ঘটে যখন অবজেক্টের প্রোপার্টি আছে কিন্তু তা অলরেডি `undefined` হয়ে আছেঃ
 
