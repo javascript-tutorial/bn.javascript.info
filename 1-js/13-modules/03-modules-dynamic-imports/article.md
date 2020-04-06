@@ -94,5 +94,9 @@ say();
 ```smart
 যদিও `import()` দেখতে ফাংশন কলের মতো, কিন্তু এটি একটি (`super()` মতো) বিশেষ সিন্টেক্স যার জন্য "parentheses" ব্যবহার করতে হয়। `).
 
+<<<<<<< HEAD
 তাই আমারা `import` কে কোন ভেরিয়েবলে কপি অথবা `call/apply` করতে পারি না।
+=======
+So we can't copy `import` to a variable or use `call/apply` with it. It's not a function.
+>>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 ```
