@@ -1,3 +1,3 @@
-# An introduction
+# ভূমিকা
 
-About the JavaScript language and the environment to develop with it.
+জাভাস্ক্রিপ্ট ভাষা (ল্যাঙ্গুয়েজ) এবং এটি ডেভলপ করার পরিবেশ সম্পর্কে ধারণা অর্জন।
