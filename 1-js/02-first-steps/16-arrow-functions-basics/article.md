@@ -43,7 +43,7 @@ alert( sum(1, 2) ); // 3
     ```js run
     *!*
     let double = n => n * 2;
-    // এটা বলেতে গেলে let double = function(n) { return n * 2 } অন্যরূপ।  
+    // এটা বলেতে গেলে let double = function(n) { return n * 2 } অন্যরূপ।  
     */!*
 
     alert( double(3) ); // 6
