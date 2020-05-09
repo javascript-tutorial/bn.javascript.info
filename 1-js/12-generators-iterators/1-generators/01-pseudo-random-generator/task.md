@@ -1,29 +1,29 @@
 
-# Pseudo-random generator
+# সুডো-র‍্যান্ডম জেনারেটর
 
-There are many areas where we need random data.
+এমন অনেক ক্ষেত্র আছে যেখানে আমাদের র‍্যান্ডম ডাটা জেনারেট করা লাগে।
 
-One of them is testing. We may need random data: text, numbers, etc. to test things out well.
+এর মধ্যে একটি হল টেস্টিং। টেস্ট করার জন্য আমাদের প্রয়োজন হতে পারে র‍্যান্ডম ডাটাঃ টেক্সট, নাম্বার ইত্যাদি।
 
-In JavaScript, we could use `Math.random()`. But if something goes wrong, we'd like to be able to repeat the test, using exactly the same data.
+জাভাস্ক্রিপ্টে আমরা `Math.random()` ব্যবহার করতে পারি। কিন্ত যদি আমরা কোন ভুল করে ফেলি এবং টেস্ট আবার একই ডাটা দিয়ে রিপিট করতে চাই। 
 
-For that, so called "seeded pseudo-random generators" are used. They take a "seed", the first value, and then generate the next ones using a formula so that the same seed yields the same sequence, and hence the whole flow is easily reproducible. We only need to remember the seed to repeat it.
+এজন্য আমরা "সিডেড সুডো-র‍্যান্ডম জেনারেটর" ব্যবহার করব। এটি প্রথম ভ্যালুতে একটি "সিড" নেই, এবং পরে আরো একটি জেনারেট করে একটি সূত্রের মাধ্যমে এর ফলে ইয়েল্ডের সিড এবং সিক্যুয়েন্স একই হয় এবং এর হলে পুরো প্রসেসটি সহজেই পুনরায় গঠন করা যায়। আমাদের এটি পুরায় করার জন্য শুধু সিডের মানটি মনে রাখতে হবে।
 
-An example of such formula, that generates somewhat uniformly distributed values:
+এ জাতীয় সূত্রে একটি উদাহরণ, জেনারেটরটি অনেকটা নিম্নোক্ত মান তৈরি করে:
 
 ```
 next = previous * 16807 % 2147483647
 ```
 
-If we use `1` as the seed, the values will be:
+যদি আমরা সিড `1` ব্যবহার করি, মানগুলো হবে:
 1. `16807`
 2. `282475249`
 3. `1622650073`
-4. ...and so on...
+4. ...এভাবে চলতে থাকবে...
 
-The task is to create a generator function `pseudoRandom(seed)` that takes `seed` and creates the generator with this formula.
-
-Usage example:
+আপনার টাস্কটি হল একট জেনারেটর ফাংশন `pseudoRandom(seed)` তৈরি করুন যা একটি `seed` নেয়
+এবং জেনারেটরটি উপরের ফর্মুলা অনুযায়ী তৈরি করুন।
+উদাহরণ:
 
 ```js
 let generator = pseudoRandom(1);
