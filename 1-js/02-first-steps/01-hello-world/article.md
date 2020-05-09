@@ -45,13 +45,8 @@
 
 `<script>` ট্যাগে কয়েকটি এট্রিবিউট রয়েছে যেটা আজকাল খুব কম ব্যবহার করা হয় কিন্তু কিছু পুরনো কোডে এখনও এইগুলো পাওয়া যেতে পারে:
 
-<<<<<<< HEAD
 `type` এট্রিবিউট: <code>&lt;script <u>type</u>=...&gt;</code>
 : পুরানো এইচটিএমএল স্ট্যান্ডার্ড, এইচটিএমএল ৪ এ একটি স্ক্রিপ্টে `type` এট্রিবিউটটি থাকা আবশ্যক ছিল।  সাধারনত এটা ছিল `type="text/javascript"`। এটি আর প্রয়োজন হয় না। আরও বলতে গেলে, আধুনিক এইচটিএমএল স্ট্যান্ডার্ড এ পুরোপুরিভাবে এট্রিবিউটসের অর্থই বদলে দিয়েছে। এখন, এটা জাভাস্ক্রিপ্ট মডিউলস এর জন্য ব্যবহার করা যেতে পারে। কিন্তু এটা একটি অ্যাডভান্সড বিষয়, আমরা মডিউলস সম্পর্কে টিউটরিয়ালের অন্য অংশে কথা বলব।
-=======
-The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 `language` এট্রিবিউট: <code>&lt;script <u>language</u>=...&gt;</code>
 : এই এট্রিবিউটটি স্ক্রিপ্টের ভাষা দেখানোর জন্য বুঝানো হয়েছে।  এই এট্রিবিউটটি দিয়ে এখন আর কিছু হয় না কারন জাভাস্ক্রিপ্টই এখন ডিফল্ট ভাষা। এটা ব্যবহার করার এখন আর প্রয়োজন নেই।

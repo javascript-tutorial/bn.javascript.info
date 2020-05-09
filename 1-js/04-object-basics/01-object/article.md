@@ -1,11 +1,7 @@
 
 # অবজেক্ট
 
-<<<<<<< HEAD
-<info:types> অধ্যায়ে আমরা জেনেছি, জাভাস্ক্রিপ্টে সাতটি ডাটা টাইপ রয়েছে। তাদের মধ্যে ছয়টিকে বলা হয় "প্রিমিটিভ", কারণ তাদের ভ্যালুতে শুধু একটি জিনিসই (হোক তা স্ট্রিং, নাম্বার বা অন্য যেকোনো কিছু) থেকে থাকে।
-=======
-As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
+<info:types> অধ্যায়ে আমরা জেনেছি, জাভাস্ক্রিপ্টে আটটি ডাটা টাইপ রয়েছে। তাদের মধ্যে সাতটিকে বলা হয় "প্রিমিটিভ", কারণ তাদের ভ্যালুতে শুধু একটি জিনিসই (হোক তা স্ট্রিং, নাম্বার বা অন্য যেকোনো কিছু) থেকে থাকে।
 
 অন্যদিকে, বিভিন্ন ধরনের ডাটার কালেকশন ও একটু জটিল ধরনের জিনিস রাখার জন্য অবজেক্ট ব্যবহৃত হয়। জাভাস্ক্রিপ্টের প্রতিটি বিষয়ে অবজেক্টের আধিক্য এবং প্রভাব বিদ্যমান। সুতরাং অন্য কিছু নিয়ে গভীরে জানার আগে আমাদের অবশ্যই অবজেক্ট সম্পর্কে জানতে হবে।
 
@@ -105,14 +101,9 @@ let user = {
 user.likes birds = true
 ```
 
-<<<<<<< HEAD
-এটার কারণ, ডট নোটেশন ব্যবহার করার জন্য key - কে একটি ভেরিয়েবল আইডেন্টিফায়ার হতে হবে। যার জন্য এতে কোন স্পেস থাকতে পারবে না এবং আরও অন্যান্য নিয়ম রয়েছে।
-=======
-JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
+জাভাস্ক্রিপ্ট এটি বুঝে না। এটি মনে করে আমরা `user.likes` কে এড্রেস করেছি, এবং সিনট্যাক্স এরর দেয় যখন অসঙ্গত `birds` দেখতে পায়।
 
-The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_` are allowed).
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
-
+এটার কারণ, ডট নোটেশন ব্যবহার করার জন্য key - কে একটি ভেরিয়েবল আইডেন্টিফায়ার হতে হবে। যার জন্য এতে কোন স্পেস থাকতে পারবে না, কোন সংখ্যা দিয়ে শুরু হতে পারবে না এবং স্পেশাল ক্যারেক্টার থাকবে না (`$` এবং `_` দেয়া যাবে)
 তৃতীয় বন্ধনী ব্যবহার করে আরেকটি পদ্ধতি রয়েছে, যা যেকোনো স্ট্রিং এ কাজ করেঃ
 
 ```js run
@@ -213,7 +204,6 @@ let bag = {
 
 সুতরাং অধিকাংশ সময়, যখন প্রোপার্টির নাম সহজ এবং আগে থেকেই জানা, ডট নোটেশন ব্যবহৃত হয়। এবং যদি আমাদের জটিল কিছু করতে হয়, তখন আমরা তৃতীয় বন্ধনী ব্যবহার করি।
 
-<<<<<<< HEAD
 
 
 ````smart header="সংরক্ষিত শব্দগুলো প্রোপার্টির নাম হিসেবে ব্যবহার করা যায়"
@@ -252,9 +242,6 @@ alert(obj.__proto__); // [object Object], didn't work as intended
 
 
 ## প্রোপার্টি ভ্যালু সর্টহ্যান্ড
-=======
-## Property value shorthand
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 প্রায়সময় আমরা বর্তমানে বিদ্যমান ভেরিয়েবলগুলোকে প্রোপার্টি নামের ভ্যালু হিসেবে ব্যবহার করি।
 
@@ -264,13 +251,8 @@ alert(obj.__proto__); // [object Object], didn't work as intended
 function makeUser(name, age) {
   return {
     name: name,
-<<<<<<< HEAD
-    age: age
-    // ...অন্যান্য প্রোপার্টি
-=======
     age: age,
-    // ...other properties
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
+    // ...অন্যান্য প্রোপার্টি
   };
 }
 
@@ -303,9 +285,6 @@ let user = {
 };
 ```
 
-<<<<<<< HEAD
-## প্রোপার্টি আছে কিনা পরীক্ষা করা
-=======
 ## Property names limitations
 
 Property names (keys) must be either strings or symbols (a special type for identifiers, to be covered later).
@@ -362,8 +341,7 @@ There are two workarounds for the problem:
 1. Modify the object's behavior to treat `__proto__` as a regular property. We'll learn how to do it in the chapter [](info:prototype-methods).
 2. Using [Map](info:map-set) data structure which supports arbitrary keys. We'll learn it in the chapter <info:map-set>.
 
-## Property existence test, "in" operator
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
+## প্রোপার্টি আছে কিনা পরীক্ষা করা। "in" অপারেটর।
 
 অবজেক্টের একটি উল্লেখযোগ্য ফিচার হল এর যেকোনো প্রোপার্টিকে এক্সেস করা যায়। যদি প্রোপার্টি না থাকে তাহলে কোন এরর হয় না। বরং অবজেক্টে নেই এমন প্রোপার্টিকে এক্সেস করলে `undefined` রিটার্ন করে। প্রোপার্টি আছে কি নেই পরীক্ষার জন্য সাধারনত - আনডিফাইন্ড এর সাথে তুলনা করা হয়ে থাকেঃ
 
@@ -400,13 +378,8 @@ let key = "age";
 alert( *!*key*/!* in user ); // true, key থেকে নামটি নিয়ে, ওই নামে প্রোপার্টি আছে কিনা দেখা হচ্ছে
 ```
 
-<<<<<<< HEAD
-````smart header="`undefined` প্রোপার্টির ক্ষেত্রে \"in\" এর ব্যবহার"
-সাধারণত, `"=== undefined"` এভাবে প্রোপার্টি আছে কিনা পরীক্ষা করা ঠিকঠাক কাজ করে, কিছু বিশেষ ক্ষেত্রে এটি ভুল ফলাফল দেয়, কিন্তু `"in"` অপারেটর ঠিকমত কাজ করে।
-=======
 ````smart header="Using \"in\" for properties that store `undefined`"
-Usually, the strict comparison `"=== undefined"` check the property existence just fine. But there's a special case when it fails, but `"in"` works correctly.
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
+সাধারণত, `"=== undefined"` এভাবে প্রোপার্টি আছে কিনা পরীক্ষা করা ঠিকঠাক কাজ করে, কিছু বিশেষ ক্ষেত্রে এটি ভুল ফলাফল দেয়, কিন্তু `"in"` অপারেটর ঠিকমত কাজ করে।
 
 এটি ঘটে যখন অবজেক্টের প্রোপার্টি আছে কিন্তু তা অলরেডি `undefined` হয়ে আছেঃ
 

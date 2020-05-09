@@ -1,17 +1,13 @@
 
 # পুরাতন "var"
 
-<<<<<<< HEAD
-অধ্যায়ের প্রথম দিকে আমরা উল্লেখ করেছিলাম [variables](info:variables) কে তিন ভাবে ঘোষণা করা যায়।
-=======
 ```smart header="This article is for understanding old scripts"
-The information in this article is useful for understanding old scripts.
+এই আর্টিকেল এর তথ্য গুলি পুরাতন স্ক্রিপ্ট বোঝার জন্য সাহায্য করবে।
 
-That's not how we write a new code.
+এভাবে আমরা নতুন কোড লিখি না।
 ```
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
+অধ্যায়ের প্রথম দিকে আমরা উল্লেখ করেছিলাম [variables](info:variables) কে তিন ভাবে ঘোষণা করা যায়।
 
 ১। `let`
 ২। `const`
@@ -157,11 +153,7 @@ sayHi();
 
 **ডিকলারেশন গুলো "hoisted" হলেও, কিন্তু "assignment" হয় না**
 
-<<<<<<< HEAD
 একটি উদাহরণ দিয়ে দিয়ে দেখা যাক, যেমনঃ 
-=======
-That's best demonstrated with an example:
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 ```js run
 function sayHi() {
@@ -202,9 +194,6 @@ sayHi();
 
 উপরের দুটি উদাহরণে `alert` কোন এরর ছাড়াই চলে, কারন ভেরিয়েবল `phrase` বিদ্যমান রয়েছে। তবে এর মান এখনও নির্ধারিত হয়নি, সুতরাং এটি আনডিফাইন দেখায়। 
 
-<<<<<<< HEAD
-## সারাংশ
-=======
 ### IIFE
 
 As in the past there was only `var`, and it has no block-level visibility, programmers invented a way to emulate it. What they did was called "immediately-invoked function expressions" (abbreviated as IIFE).
@@ -273,18 +262,13 @@ There exist other ways besides parentheses to tell JavaScript that we mean a Fun
 
 In all the above cases we declare a Function Expression and run it immediately. Let's note again: nowadays there's no reason to write such code.
 
-## Summary
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
+## সারাংশ
 
 এখানে দুটি প্রধান পার্থক্য রয়েছে `var` এবং `let/const` এর মধ্যেঃ 
 
 ১। `var` ভেরিয়েবলের কোন ব্লক স্কোপ নেই, এগুলি সর্বনিম্ন ফাংশন লেভেল পর্যন্ত বিদ্যমান থাকে। 
 ২। ফাংশনের শুরুতেই `var` ঘোষিত হয়ে যায়(স্ক্রিপ্ট গ্লোবালের জন্য শুরু হয়)।
 
-<<<<<<< HEAD
 গ্লোবাল অবজেক্টের সাথে সম্পর্কিত আরও একটি ছোটখাটো পার্থক্য রয়েছে, আমরা পরবর্তী অধ্যায়ে এটি আলোচনা করব।
-=======
-There's one more very minor difference related to the global object, that we'll cover in the next chapter.
->>>>>>> c89ddc5d92195e08e2c32e30526fdb755fec4622
 
 এই পার্থক্যগুলি `var` কে বেশিরভাগ সময় `let` এর চেয়ে খারাপ করে তোলে। ব্লক-লেভেলের ভেরিয়েবলগুলি একটি দুর্দান্ত জিনিস। এই জন্য `let` এর স্ট্যান্ডার্ড চালু হয় অনেক আগে, এবং ভেরিয়েবল ঘোষণার জন্য এখন এটি একটি প্রধান উপায় (`const` সহ)।
