@@ -31,7 +31,7 @@ function* generateSequence() {
   return 3;
 }
 
-// "জেনারেটর ফাংশন" তৈরী করে "জেনারেটর অবজেক্ট"
+// "জেনারেটর ফাংশন" তৈরি করে "জেনারেটর অবজেক্ট"
 let generator = generateSequence();
 *!*
 alert(generator); // [object Generator]
