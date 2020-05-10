@@ -1,6 +1,6 @@
 # Unicode: flag "u" and class \p{...}
 
-JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoding with 2 bytes, but that allows to represent at most 65536 characters.
+JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoded with 2 bytes, but that allows to represent at most 65536 characters.
 
 That range is not big enough to encode all possible characters, that's why some rare characters are encoded with 4 bytes, for instance like `𝒳` (mathematical X) or `😄` (a smile), some hieroglyphs and so on.
 
@@ -34,7 +34,7 @@ Unlike strings, regular expressions have flag `pattern:u` that fixes such proble
 ## Unicode properties \p{...}
 
 ```warn header="Not supported in Firefox and Edge"
-Despite being a part of the standard since 2018, unicode proeprties are not supported in Firefox ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1361876)) and Edge ([bug](https://github.com/Microsoft/ChakraCore/issues/2969)).
+Despite being a part of the standard since 2018, unicode properties are not supported in Firefox ([bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1361876)) and Edge ([bug](https://github.com/Microsoft/ChakraCore/issues/2969)).
 
 There's [XRegExp](http://xregexp.com) library that provides "extended" regular expressions with cross-browser support for unicode properties.
 ```
