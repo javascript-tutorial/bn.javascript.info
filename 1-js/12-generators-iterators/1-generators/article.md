@@ -70,7 +70,7 @@ alert(JSON.stringify(one)); // {value: 1, done: false}
 
 ![](generateSequence-2.svg)
 
-চলুন আবার `generator.next()` কে কল করি। আবার কোড এক্সিকিউশন চালু হয় এবং রিটার্ন করে পরবর্তী `yield`:
+চলুন আবার `generator.next()` কে কল করি। আবার কোড সম্পাদন চালু হয় এবং রিটার্ন করে পরবর্তী `yield`:
 
 ```js
 let two = generator.next();
