@@ -284,7 +284,7 @@ for(let code of generatePasswordCodes()) {
 alert(str); // 0..9A..Za..z
 ```
 
-The `yield*` directive *delegates* the execution to another generator. This term means that `yield* gen` iterates over the generator `gen` and transparently forwards its yields outside. As if the values were yielded by the outer generator.
+`yield*` ডিরেক্টিভটি দ্বারা *নির্দেশ করে* এটি অন্য একটি জেনারেটরের এক্সিকিউশন। `yield* gen` এটি দ্বারা বুঝায় জেনারেটরটি `gen` ইটারেটযোগ্য এবং আমরা সহজেই ইয়েল্ডটির মান অন্য আরেকটি আউটার জেনারেটরের মাধ্যমে পেতে পারি। 
 
 উপরের রেজাল্ট একই থাকবে যদি আমরা নেস্টেড জেনারেটরে ইনলাইন কোড করিঃ
 
