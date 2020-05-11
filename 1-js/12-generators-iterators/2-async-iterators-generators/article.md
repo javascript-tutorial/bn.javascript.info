@@ -209,7 +209,7 @@ let range = {
 }
 ```
 
-A common practice for `Symbol.iterator` is to return a generator, rather than a plain object with `next` as in the example before.
+`Symbol.iterator` এর মাধ্যমে জেনারেটর রিটার্নের জন্য এর একটি কমন প্রাকটিস হল আগের উদাহরণের মত `next` এর মাধ্যমে অবজেক্ট রিটার্ন করা।
 
 চলুন এই অধ্যায়ের [](info:generators) উদাহরনটি আবার কল করিঃ
 
