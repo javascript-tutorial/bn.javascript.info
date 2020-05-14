@@ -2,7 +2,7 @@
 
 টেক্সটে কোনকিছু খোঁজা অথবা রিপ্লেস করার একটি পাওয়ারফুল মাধ্যম হল রেগুলার এক্সপ্রেশন।
 
-জাভাস্ক্রীপ্টে এটি [RegExp](mdn:js/RegExp) অবজেক্টের অধীনে আছে এবং স্ট্রিং এর মেথডগুলোর মধ্যে এদের ব্যবহার করতে পারি।
+জাভাস্ক্রিপ্টে এটি [RegExp](mdn:js/RegExp) অবজেক্টের অধীনে আছে এবং স্ট্রিং এর মেথডগুলোর মধ্যে এদের ব্যবহার করতে পারি।
 
 ## রেগুলার এক্সপ্রেশনস
 
@@ -23,13 +23,13 @@ regexp = /pattern/; // ফ্ল্যাগ ছাড়া
 regexp = /pattern/gmi; // ফ্ল্যাগ সহ g,m and i (এগুলো সম্পর্কে সামনেই জানতে পারব)
 ```
 
-স্ল্যাস `pattern:/.../` ব্যবহারের মাধ্যমে জাভাস্ক্রীপ্ট ইঞ্জিন বুঝতে পারে এটি একটি রেগুলার এক্সপ্রেশন। যেভাবে `""` অথবা `''` দ্বারা স্ট্রীং কে চিনতে পারে।
+স্ল্যাস `pattern:/.../` ব্যবহারের মাধ্যমে জাভাস্ক্রিপ্ট ইঞ্জিন বুঝতে পারে এটি একটি রেগুলার এক্সপ্রেশন। যেভাবে `""` অথবা `''` দ্বারা স্ট্রিং কে চিনতে পারে।
 
 উভয়ক্ষেত্রে `regexp` বিল্টইন `RegExp` ক্লাস এর ইনস্ট্যান্স হিসেবে তৈরি হয়।
 
 এই দুই সিনট্যাক্সের মূল পার্থক্য হল `/.../` এখানে ডাইনামিক্যালি কোন ভেরিয়েবল (যেমনঃ টেমপ্লেট লিটারেলস স্ট্রিং `${...}`) ব্যবহার করতে পারবেন না। এটি পুরোপুরি স্ট্যাটিক।
 
-Slashes are used when we know the regular expression at the code writing time -- and that's the most common situation. While `new RegExp`, is more often used when we need to create a regexp "on the fly" from a dynamically generated string. For instance:
+বেশিরভাগ ক্ষেত্রে কোড লিখার সময় যখন আমরা রেগুলার এক্সপ্রেশনটি জানি তখন স্ল্যাস ব্যবহার করি। আর `new RegExp` ব্যবহার করি যখন আমাদের প্যাটার্ন জেনারেট করতে হয় ডাইনামিক্যালি। উদাহরণস্বরুপঃ
 
 ```js
 let tag = prompt("আপনি কোন ট্যাগটি খুঁজতে চাচ্ছেন?", "h2");
@@ -59,13 +59,13 @@ let regexp = new RegExp(`<${tag}>`); // এটি /<h2>/ এর মত যদি
 : ফুল ইউনিকোর্ড সাপোর্ট এনাবল করে। ফ্ল্যাগটি সঠিকভাবে সারোগেটজোড় কে প্রসেসিংয়ের সাপোর্ট দেয়। আরো জানতে পারবেন এই অধ্যায়ে <info:regexp-unicode>।
 
 `pattern:y`
-: "Sticky" মোডঃ searching at the exact position in the text  (বিস্তারিত এই অধ্যায়ে <info:regexp-sticky>)
+: "Sticky" মোডঃ সার্চিং এর সময় টেক্সটে এক্স্যাক্ট পজিশনটি জানা যায় (বিস্তারিত এই অধ্যায়ে <info:regexp-sticky>)
 
 ```smart header="কালারস"
-From here on the color scheme is:
+এখানে কালার স্কিমটা হলঃ
 
 - regexp -- `pattern:red`
-- string (where we search) -- `subject:blue`
+- string (যেখানে আমরা সার্চ করি) -- `subject:blue`
 - result -- `match:green`
 ```
 
@@ -98,11 +98,11 @@ From here on the color scheme is:
     alert( result.index );  // 0 (প্রাপ্ত মিলের পজিশন)
     alert( result.input );  // We will, we will rock you (source string)
     ```
-    The array may have other indexes, besides `0` if a part of the regular expression is enclosed in parentheses. We'll cover that in the chapter  <info:regexp-groups>.
+    `0` এর পাশাপাশি অ্যারের অন্যান্য ইনডেক্সও থাকতে পারে যদি এক্সপ্রেশনটিতে প্রথম বন্ধনী থাকে। আমরা এই অধ্যায়ে এসম্পর্কে বিস্তারিত জানতে পারব  <info:regexp-groups>।
 
 3. এবং, সর্বশেষে যদি কোন মিল খুঁজে পাওয়া না যায় `null` রিটার্ন করবে (এটি `pattern:g` ফ্ল্যাগের উপর নির্ভর করে না)।
 
-    একটি গুরুত্বপূর্ন ব্যাপার খেয়াল রাখা উচিত। যদি কোন মিল খুঁজে পাওয়া না গেলে এম্পটি স্ট্রিং এর বদলে `null` রিটার্ন করে। এজন্য এম্পটি চেকিংয়ের জন্য ভুলভাবে চেকিংয়ের জন্য এরর পেতে পারেন, যেমনঃ
+    একটি গুরুত্বপূর্ন ব্যাপার খেয়াল রাখা উচিত। কোন মিল খুঁজে পাওয়া না গেলে এম্পটি স্ট্রিং এর বদলে `null` রিটার্ন করে। এজন্য এম্পটি চেকিংয়ের জন্য ভুলভাবে চেকিংয়ের জন্য এরর পেতে পারেন, যেমনঃ
 
     ```js run
     let matches = "JavaScript".match(/HTML/); // = null
@@ -135,15 +135,17 @@ alert( "We will, we will".replace(/we/i, "I") ); // I will, we will
 // g ফ্ল্যাগ সহ
 alert( "We will, we will".replace(/we/ig, "I") ); // I will, I will
 ```
+
 দ্বিতীয় আর্গুমেন্টে `replacement` স্ট্রিংটি পাস করা হয়। মিল খুঁজে পাওয়া অংশগুলো `replacement` এর সাথে ব্যবহার করতে আমরা কিছু স্পেশাল ক্যারেক্টার সংযুক্ত করতে পারি। 
+
 | সিম্বলস | রিপ্লসমেন্ট স্ট্রিংয়ে সংগঠিত অ্যাকশন |
 |--------|--------|
 |`$&`|পুরো মিলটিকে সংযুক্ত করে|
-|<code>$&#096;</code>|inserts a part of the string before the match|
-|`$'`|inserts a part of the string after the match|
-|`$n`|if `n` is a 1-2 digit number, then it inserts the contents of n-th parentheses, more about it in the chapter <info:regexp-groups>|
-|`$<name>`|inserts the contents of the parentheses with the given `name`, more about it in the chapter <info:regexp-groups>|
-|`$$`|inserts character `$` |
+|<code>$&#096;</code>|মিলের আগ পর্যন্ত স্ট্রিংকেও সংযুক্ত করে|
+|`$'`|মিলের পরের স্ট্রিংকেও সংযুক্ত করে|
+|`$n`|যদি `n` ১-২ ডিজিটের নাম্বার হয়, আমরা বন্ধনী দ্বারা পাওয়া মানগুলোকে `$n` সংযুক্ত করতে পারি, বিস্তারিত এই অধ্যায়ে <info:regexp-groups>|
+|`$<name>`|আমরা বন্ধনী দ্বারা পাওয়া মানগুলোকে `name` সংযুক্ত করতে পারি,বিস্তারিত এই অধ্যায়ে <info:regexp-groups>|
+|`$$`|`$` ক্যারাক্টারটি সংযুক্ত করতে|
 
 `pattern:$&` এর একটি উদাহরণঃ
 
@@ -166,11 +168,10 @@ alert( regexp.test(str) ); // true
 
 মেথডগুলো সম্পর্কে বিস্তারিত আমরা এই অধ্যায়ে জানব <info:regexp-methods>.
 
-
 ## সারাংশ
 
 - রেগুলার এক্সপ্রেশন গঠিত হয় প্যাটার্ন এবং অপশনাল ফ্ল্যাগের সমন্বয়েঃ `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`।
-- Without flags and special symbols  (that we'll study later), the search by a regexp is the same as a substring search.
+- ফ্ল্যাগ এবং স্পেশাল সিম্বল ছাড়া (পরবর্তীতে জানব) regexp এর সার্চ substring সার্চ এর মত কাজ করে.
 - `str.match(regexp)` মেথডটি `pattern:g` ফ্ল্যাগের জন্য প্যাটার্নের সাথে সকল মিল খুঁজে, অন্যথায় শুধু প্রথম মিলটি খুঁজে। 
 - `str.replace(regexp, replacement)` মেথডটি `regexp` দ্বারা প্রাপ্ত সব মিলকে `replacement` করে `pattern:g` ফ্ল্যাগের জন্য, অন্যথায় শুধু প্রথম মিলটিকে রিপ্লেস করে। 
 - `regexp.test(str)` মেথডটি অন্তত একটি মিল খুঁজে পেলে `true` রিটার্ন করে, অন্যথায় `false` রিটার্ন করে।
