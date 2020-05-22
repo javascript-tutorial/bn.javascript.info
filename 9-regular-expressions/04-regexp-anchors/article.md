@@ -1,34 +1,34 @@
-# Anchors: string start ^ and end $
+# অ্যাঙ্করস: স্ট্রিংয়ের শুরু ^ এবং শেষ $
 
-The caret `pattern:^` and dollar `pattern:$` characters have special meaning in a regexp. They are called "anchors".
+রেগুলার এক্সপ্রেশনে ক্যারেট চিহ্ন `pattern:^` এবং ডলার চিহ্ন `pattern:$` এর বিশেষ অর্থ আছে। এদের বলা হয় "অ্যাঙ্করস"।
 
-The caret `pattern:^` matches at the beginning of the text, and the dollar `pattern:$` -- at the end.
+ক্যারেট চিহ্ন `pattern:^` বাক্যের শুরুতে এবং ডলার চিহ্ন `pattern:$` বাক্যের শেষে মিল খুঁজে।
 
-For instance, let's test if the text starts with `Mary`:
+উদাহরণস্বরূপ, চলুন বাক্যটি `Mary` দিয়ে শুরু হয়েছে কিনা দেখি:
 
 ```js run
 let str1 = "Mary had a little lamb";
 alert( /^Mary/.test(str1) ); // true
 ```
 
-The pattern `pattern:^Mary` means: "string start and then Mary".
+প্যাটার্ন `pattern:^Mary` দ্বারা বুঝায়: "স্ট্রিংয়ের শুরু Mary দিয়ে"।
 
-Similar to this, we can test if the string ends with `snow` using `pattern:snow$`:
+অনুরূপভাবে, আমরা বাক্যটি `snow` দ্বারা শেষ কিনা যাচাই করতে পারি এভাবে `pattern:snow$`:
 
 ```js run
 let str1 = "it's fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 
-In these particular cases we could use string methods `startsWith/endsWith` instead. Regular expressions should be used for more complex tests.
+বিশেষক্ষেত্রে স্ট্রিংয়ের শুরু এবং শেষ চেক করতে `startsWith/endsWith` মেথডদ্বয় ব্যবহার করতে পারি। এই ধরণের জটিল টেস্ট কেসের জন্য আমাদের রেগুলার এক্সপ্রেশন ব্যবহার করা উচিত।
 
-## Testing for a full match
+## পুরো মিলের টেস্টিং
 
-Both anchors together `pattern:^...$` are often used to test whether or not a string fully matches the pattern. For instance, to check if the user input is in the right format.
+উভয় অ্যাঙ্কর `pattern:^...$` প্রায় সময় ব্যবহার করা হয় কোন স্ট্রিং পুরো মিলেছে কিনা তা যাচাই করতে। উদাহরণস্বরূপ, ইউজারের ইনপুট প্যাটার্নটি সঠিকভাবে আছে কিনা তা যাচাই করতে।
 
-Let's check whether or not a string is a time in `12:34` format. That is: two digits, then a colon, and then another two digits.
+চলুন আমরা একটি সময়ের ফরম্যাট `12:34` এভাবে আছে কিনা যাচাই করি। প্রথমে দুটি ডিজিট তারপর একটি কোলন তারপর আবার দুটি ডিজিট।
 
-In regular expressions language that's `pattern:\d\d:\d\d`:
+রেগুলার এক্সপ্রেশনে এটি এভাবে লিখা হয় `pattern:\d\d:\d\d`:
 
 ```js run
 let goodInput = "12:34";
@@ -39,14 +39,14 @@ alert( regexp.test(goodInput) ); // true
 alert( regexp.test(badInput) ); // false
 ```
 
-Here the match for `pattern:\d\d:\d\d` must start exactly after the beginning of the text `pattern:^`, and the end `pattern:$` must immediately follow.
+এখানে উপরোক্ত মিলের জন্য `pattern:\d\d:\d\d` এর শুরু আমাদের অবশ্যই `pattern:^` দিয়ে করতে হবে এবং `pattern:$` দ্বারা শেষ করতে হবে।
 
-The whole string must be exactly in this format. If there's any deviation or an extra character, the result is `false`.
+পুরো স্ট্রিংটি অবশ্যই এই ফরম্যাটে হতে হবে। যদি কোন ভুল ফরম্যাট বা অন্য কোন অতিরিক্ত ক্যারাক্টার থাকে তাহলে রেজাল্ট `false` হবে।
 
-Anchors behave differently if flag `pattern:m` is present. We'll see that in the next article.
+যদি `pattern:m` ফ্ল্যাগ থাকে তাহলে এর রেজাল্ট অন্যরকম হয়। পরবর্তী আর্টিকেলে আমরা এটি দেখব।
 
-```smart header="Anchors have \"zero width\""
-Anchors `pattern:^` and `pattern:$` are tests. They have zero width.
+```smart header="অ্যাঙ্করগুলো জিরো উইডথ\""
+অ্যাঙ্কর `pattern:^` এবং `pattern:$` টেস্টের সময় জিরো উইডথ।
 
-In other words, they do not match a character, but rather force the regexp engine to check the condition (text start/end).
+অন্য অর্থে বলা যায়, এরা কোন ক্যারাক্টারের সাথে মিলে না কিন্তু এর সাহায্যে রেগুলার এক্সপ্রেশনে (টেক্সটের শুরু/শেষ) যাচাই করতে পারি।
 ```
