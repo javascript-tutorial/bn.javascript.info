@@ -1,3 +1,3 @@
 # Regexp ^$
 
-Which string matches the pattern `pattern:^$`?
+কোন স্ট্রিংটি প্যাটার্নটির `pattern:^$` সাথে মিলবে?

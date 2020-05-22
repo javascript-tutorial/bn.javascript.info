@@ -1,5 +1,5 @@
-An empty string is the only match: it starts and immediately finishes.
+শুধু এম্পটি স্ট্রিং মিলবে: কেননা এটি শুরু হয়ে অবিলম্বে শেষ হয়ে যায়।
 
-The task once again demonstrates that anchors are not characters, but tests.
+টাস্কটি দেখায় যে অ্যাঙ্করগুলো ক্যারাক্টার নয়, তবে টেস্ট।
 
-The string is empty `""`. The engine first matches the `pattern:^` (input start), yes it's there, and then immediately the end `pattern:$`, it's here too. So there's a match.
+এম্পটি স্ট্রিং `""`। Regexp ইঞ্জিন প্রথমে `pattern:^` (ইনপুটের শুরুতে) মিলটি  খুঁজে, হ্যাঁ এটি মিলে, তারপর এর শেষও খুঁজে  `pattern:$`, এটিও মিলে। তাই শুধু খালি স্ট্রিংয়ের সাথে প্যাটার্নটি মিলে।
