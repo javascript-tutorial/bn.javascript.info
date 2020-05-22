@@ -1,14 +1,14 @@
-# Multiline mode of anchors ^ $, flag "m"
+# মাল্টিলাইনে মোডে অ্যাঙ্কর ^ $ ও ফ্ল্যাগ "m"
 
-The multiline mode is enabled by the flag `pattern:m`.
+`pattern:m` ফ্ল্যাগের মাধ্যমে মাল্টিলাইন মোড এনাবল হয়।
 
-It only affects the behavior of `pattern:^` and `pattern:$`.
+এটি কেবলমাত্র `pattern:^` এবং `pattern:$` এর বিহেভিয়ারকে প্রভাবিত করে।
 
-In the multiline mode they match not only at the beginning and the end of the string, but also at start/end of line.
+মাল্টিলাইন মোডে এটি কেবল স্ট্রিং এর শুরু এবং শেষে মিল খুঁজে না, লাইনের শুরু ও শেষে-ও মিল খুঁজে।
 
-## Searching at line start ^
+## ক্যারেট চিহ্ন ^ লাইনের শুরুতে সার্চ করে
 
-In the example below the text has multiple lines. The pattern `pattern:/^\d/gm` takes a digit from the beginning of each line:
+যেমন নিম্নোক্ত টেক্সটে মাল্টিপল লাইন আছে। প্যাটার্নটি `pattern:/^\d/gm` প্রতি লাইনের শুরুর অঙ্কটি নিবে:
 
 ```js run
 let str = `1st place: Winnie
@@ -20,7 +20,7 @@ alert( str.match(/^\d/gm) ); // 1, 2, 3
 */!*
 ```
 
-Without the flag `pattern:m` only the first digit is matched:
+`pattern:m` ফ্ল্যাগটি ছাড়া কেবলমাত্র প্রথম অঙ্কটি মিলবে:
 
 ```js run
 let str = `1st place: Winnie
@@ -32,19 +32,19 @@ alert( str.match(/^\d/g) ); // 1
 */!*
 ```
 
-That's because by default a caret `pattern:^` only matches at the beginning of the text, and in the multiline mode -- at the start of any line.
+কেননা ক্যারেট চিহ্ন `pattern:^` ডিফল্টভাবে কেবলমাত্র টেক্সটের শুরুতে মিল খুঁজে, এবং মাল্টিলাইন মোডে -- এটি যেকোন লাইনের শুরুতে মিল খুঁজে।
 
 ```smart
-"Start of a line" formally means "immediately after a line break": the test  `pattern:^` in multiline mode matches at all positions preceeded by a newline character `\n`.
+"লাইনের শুরু" দিয়ে বুঝায় "লাইন ব্রেকের পরপর": মাল্টিলাইন মোডে `pattern:^` লাইনের শুরু হতে নিউলাইন ক্যারাক্টারের `\n` আগ পর্যন্ত মিলে।
 
-And at the text start.
+এবং টেক্সটের শুরু হতে।
 ```
 
-## Searching at line end $
+## ডলার চিহ্ন $ লাইনের শেষে সার্চ করে
 
-The dollar sign `pattern:$` behaves similarly.
+ডলার চিহ্নও `pattern:$` একই ধরণের আচরণ করে।
 
-The regular expression `pattern:\d$` finds the last digit in every line
+`pattern:\d$` রেগুলার এক্সপ্রেশনটি প্রতি লাইনের শেষ অঙ্কটি খুঁজবে
 
 ```js run
 let str = `Winnie: 1
@@ -54,21 +54,21 @@ Eeyore: 3`;
 alert( str.match(/\d$/gm) ); // 1,2,3
 ```
 
-Without the flag `m`, the dollar `pattern:$` would only match the end of the whole text, so only the very last digit would be found.
+`m` ফ্ল্যাগ ছাড়া, ডলার চিহ্ন `pattern:$` কেবলমাত্র টেক্সটের শেষে মিল খুঁজে, সুতরাং আমরা শুধু শেষের অঙ্কটি পাব।
 
 ```smart
-"End of a line" formally means "immediately before a line break": the test  `pattern:$` in multiline mode matches at all positions succeeded by a newline character `\n`.
+"লাইনের শেষ" দিয়ে বুঝায় "লাইন ব্রেকের পূর্বপর্যন্ত": মাল্টিলাইন মোডে `pattern:$` নিউলাইন ক্যারাক্টারের `\n` আগ হতে শুরু করে নতুন নিউলাইন অথবা টেক্সটের শুরু পর্যন্ত মিল খুঁজে।
 
-And at the text end.
+এবং টেক্সটের শেষ হতে।
 ```
 
-## Searching for \n instead of ^ $
+## ^ $ এর পরিবর্তে \n দিয়ে সার্চিং
 
-To find a newline, we can use not only anchors `pattern:^` and `pattern:$`, but also the newline character `\n`.
+নতুন লাইন শুরু হয়েছে কিনা তা কেবল `pattern:^` এবং `pattern:$` দিয়ে জানা ছাড়াও আমরা `\n` ক্যারাক্টারও ব্যবহার করে জানতে পারি।
 
-What's the difference? Let's see an example.
+চলুন একটা উদাহরণের মাধ্যমে পার্থক্য বুঝার চেষ্টা করি।
 
-Here we search for `pattern:\d\n` instead of `pattern:\d$`:
+এখানে আমরা `pattern:\d$` এর পরিবর্তে `pattern:\d\n` খুঁজি:
 
 ```js run
 let str = `Winnie: 1
@@ -78,10 +78,10 @@ Eeyore: 3`;
 alert( str.match(/\d\n/gm) ); // 1\n,2\n
 ```
 
-As we can see, there are 2 matches instead of 3.
+এখানে আমরা দেখতে পাচ্ছি। ৩ টা মিলের বদলে ২ টি মিল।
 
-That's because there's no newline after `subject:3` (there's text end though, so it matches `pattern:$`).
+কেননা `subject:3` এর পর কোন নিউলাইন নেই (যদি টেক্সট শেষও হয়ে যায়, `pattern:$` ব্যবহার করলে আমরা `subject:3`-ও পেতাম)।
 
-Another difference: now every match includes a newline character `match:\n`. Unlike the anchors `pattern:^` `pattern:$`, that only test the condition (start/end of a line), `\n` is a character, so it becomes a part of the result.
+আরেকটি পার্থক্য: এখন পাওয়া প্রতিটি মিলে একটি নিউলাইন `match:\n` ক্যারাক্টারও অন্তর্ভুক্ত। অ্যাঙ্কর প্যাটার্নগুলো `pattern:^` `pattern:$` কেবল লাইনের শুরু আর শেষের কন্ডিশন চেক করে, যেহেতু `\n` ও একটি ক্যারাক্টার, এটিও রেজাল্টের একটি অংশ হয়ে যায়।
 
-So, a `\n` in the pattern is used when we need newline characters in the result, while anchors are used to find something at the beginning/end of a line.
+সুতরাং, আমাদের রেজাল্টে যদি নিউলাইন ক্যারাক্টার প্রয়োজন হয় আমরা প্যাটার্নে `\n` ব্যবহার করি, অন্যথায় লাইনের শুরুতে/শেষে কিছু খুঁজতে অ্যাঙ্কর ব্যবহার করি।
