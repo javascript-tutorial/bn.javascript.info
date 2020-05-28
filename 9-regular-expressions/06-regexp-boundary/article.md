@@ -1,33 +1,33 @@
-# Word boundary: \b
+# ওয়ার্ড বাউন্ডারি: \b
 
-A word boundary `pattern:\b` is a test, just like `pattern:^` and `pattern:$`.
+`pattern:\b` ওয়ার্ড বাউন্ডারি, `pattern:^` এবং `pattern:$` এর মত এক ধরণের চেকিং ক্যারাক্টার।
 
-When the regexp engine (program module that implements searching for regexps) comes across `pattern:\b`, it checks that the position in the string is a word boundary.
+যখন রেগুলার এক্সপ্রেশন ইঞ্জিন (প্রোগ্রাম মডিউল যা রেজেক্স সার্চিং ইমপ্লিমেন্ট করে) `pattern:\b` প্যাটার্নটি দেখে, এটি স্ট্রিংটির জন্য ওয়ার্ড বাউন্ডারির আছে কিনা চেক করে।
 
-There are three different positions that qualify as word boundaries:
+ওয়ার্ড বাউন্ডারির ৩ টি শর্ত রয়েছে:
 
-- At string start, if the first string character is a word character `pattern:\w`.
-- Between two characters in the string, where one is a word character `pattern:\w` and the other is not.
-- At string end, if the last string character is a word character `pattern:\w`.
+- যদি স্ট্রিংয়ের শুরুতে প্রথম ক্যারাক্টারটি ওয়ার্ড ক্যারাক্টার `pattern:\w` হয়।
+- স্ট্রিংয়ে দুটি ক্যারাক্টারের বাউন্ডারির এক পাশে `pattern:\w` ক্যারাক্টার থাকবে এবং অন্য পাশে `pattern:\w` ক্যারাক্টার থাকবে না।
+- যদি ওয়ার্ড বাউন্ডারির শেষ ক্যারাক্টারটি ওয়ার্ড ক্যারাক্টার `pattern:\w` হয়।
 
-For instance, regexp `pattern:\bJava\b` will be found in `subject:Hello, Java!`, where `subject:Java` is a standalone word, but not in `subject:Hello, JavaScript!`.
+উদাহরণস্বরূপ, `subject:Hello, Java!` এর মধ্যে রেগুলার এক্সপ্রেশন `pattern:\bJava\b` পাওয়া যাবে যেখানে `subject:Java` হল একটি একক শব্দ, কিন্তু `subject:Hello, JavaScript!` এর মধ্যে পাওয়া যাবে না।
 
 ```js run
 alert( "Hello, Java!".match(/\bJava\b/) ); // Java
 alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
 ```
 
-In the string `subject:Hello, Java!` following positions correspond to `pattern:\b`:
+`subject:Hello, Java!` স্ট্রিংয়ের মধ্যে, নিম্নলিখিত `pattern:\b` প্যাটার্নের সাথে মিলে:
 
 ![](hello-java-boundaries.svg)
 
-So, it matches the pattern `pattern:\bHello\b`, because:
+সুতরাং, এটি এই প্যাটার্নের সাথেও মিলবে `pattern:\bHello\b`,কেননা:
 
-1. At the beginning of the string matches the first test `pattern:\b`.
-2. Then matches the word `pattern:Hello`.
-3. Then the test `pattern:\b` matches again, as we're between `subject:o` and a space.
+1. শুরুতে এটি স্ট্রিংয়ের প্রথম চেকিংয়ের `pattern:\b` সাথে মিলে।
+2. তারপর শব্দটির `pattern:Hello` সাথে মিলে।
+3. তারপর আবার `pattern:\b` এর সাথে মিলে, যেহেতু `subject:o` এর পর একটি স্পেস আছে।
 
-The pattern `pattern:\bJava\b` would also match. But not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character `pattern:\w`, so there's no word boundary after it).
+এভাবে `pattern:\bJava\b` এটিও মিলে। কিন্তু `pattern:\bHell\b` মিলবে না (কেননা `l` এর পর কোন ওয়ার্ড বাউন্ডারি নেই) এবং `Java!\b` মিলবেনা (কেননা আশ্চর্যবোধক চিহ্ন কোন ওয়ার্ডলি ক্যারাক্টার `pattern:\w` না, সুতরাং এর পরেও কোন ওয়ার্ড বাউন্ডারি নেই)।
 
 ```js run
 alert( "Hello, Java!".match(/\bHello\b/) ); // Hello
@@ -36,17 +36,17 @@ alert( "Hello, Java!".match(/\bHell\b/) );  // null (no match)
 alert( "Hello, Java!".match(/\bJava!\b/) ); // null (no match)
 ```
 
-We can use `pattern:\b` not only with words, but with digits as well.
+আমরা প্যাটার্ন `pattern:\b` শুধু শব্দ চেকিংয়ের জন্য ব্যবহার করতে পারি এমন না, আমরা ডিজিটও ব্যবহার করতে পারি।
 
-For example, the pattern `pattern:\b\d\d\b` looks for standalone 2-digit numbers. In other words, it looks for 2-digit numbers that are surrounded by characters different from `pattern:\w`, such as spaces or punctuation (or text start/end).
+যেমন, `pattern:\b\d\d\b` প্যাটার্নটি দুই অঙ্কের একটি সংখ্যা খুঁজবে। অন্য অর্থে বলা যায় দুই অঙ্কের সংখ্যা খুঁজবে যা `pattern:\w` ছাড়া অন্যান্য ক্যারাক্টার যেমন স্পেস অথবা বিরাম চিহ্ন (টেক্সটের শুরুতে বা শেষে) দ্বারা আবদ্ধ থাকবে।
 
 ```js run
 alert( "1 23 456 78".match(/\b\d\d\b/g) ); // 23,78
 alert( "12,34,56".match(/\b\d\d\b/g) ); // 12,34,56
 ```
 
-```warn header="Word boundary `pattern:\b` doesn't work for non-latin alphabets"
-The word boundary test `pattern:\b` checks that there should be `pattern:\w` on the one side from the position and "not `pattern:\w`" - on the other side.
+```warn header="ওয়ার্ড বাউন্ডারি `pattern:\b` লাতিন ব্যতীত অন্য বর্ণের জন্য কাজ করবে না"
+ওয়ার্ড বাউন্ডারি টেস্ট `pattern:\b` চেক করে বাউন্ডারির এক পাশে `pattern:\w` ক্যারাক্টার থাকবে এবং অন্য পাশে "`pattern:\w` ক্যারাক্টার থাকবে না"।
 
-But `pattern:\w` means a latin letter `a-z` (or a digit or an underscore), so the test doesn't work for other characters, e.g. cyrillic letters or hieroglyphs.
+এখানে `pattern:\w` মানে লাতিন বর্ণ `a-z` (অথবা যেকোন অঙ্ক অথবা আন্ডারস্কোর), তাই টেস্ট অন্যান্য ভাষার জন্য কাজ করবে না, যেমন: সিরিলিক বা হায়ারোগ্লিফস অক্ষর।
 ```
