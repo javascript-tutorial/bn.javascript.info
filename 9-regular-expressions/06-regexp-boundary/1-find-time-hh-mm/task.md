@@ -1,9 +1,9 @@
-# Find the time
+# সময় খুঁজা
 
-The time has a format: `hours:minutes`. Both hours and minutes has two digits, like `09:00`.
+সময়ের একটি ফরম্যাট হল: `hours:minutes`. ঘন্টা এবং মিনিট উভয় দুই অঙ্কের হয়, যেমন `09:00`।
 
-Make a regexp to find time in the string: `subject:Breakfast at 09:00 in the room 123:456.`
+স্ট্রিংটি হতে সময় খুঁজে বের করার একটি রেগুলার এক্সপ্রেশন প্যাটার্ন লিখুন: `subject:Breakfast at 09:00 in the room 123:456.`
 
-P.S. In this task there's no need to check time correctness yet, so `25:99` can also be a valid result.
+বি.দ্র: আপনার সময়ের ভ্যালিডেশন নিয়ে চিন্তিত হওয়ার কিছু নেই, `25:99`-ও সঠিক রেজাল্ট হতে পারে।
 
-P.P.S. The regexp shouldn't match `123:456`.
+তবে `123:456` এই ধরণের সংখ্যার জন্য সঠিক হবে না।
