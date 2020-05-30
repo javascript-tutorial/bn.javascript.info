@@ -1,16 +1,17 @@
-# Arrow functions, the basics
+# এ্যারো ফাংশনের মূল বিষয়াবলি
 
-There's another very simple and concise syntax for creating functions, that's often better than Function Expressions.
+এটা ফাংশন তৈরির আরেকটা খুব সহজ এবং সংক্ষিপ্ত কিন্তু খুবই কার্যকরী একটি রূপ, প্রায়ই দেখা যায়, সাধারণ যে ফাংশন আছে তার থেকে এটা ভাল।
 
-It's called "arrow functions", because it looks like this:
+
+একে "এ্যারো ফাংশন" বলা হয় কারণ এটা দেখতে অনেকটা এই রকমঃ
 
 ```js
 let func = (arg1, arg2, ...argN) => expression
 ```
 
-...This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+এখানে `func` নামে একটা ফাংশন তৈরি করা হয়েছে যা `arg1..argN` আর্গুমেন্ট হিসেবে নিচ্ছে, তারপর ডানপাশের `expression` টি সম্পাদন করে তার যে রেজাল্ট হয় সেটা রিটার্ন করছে।
 
-In other words, it's the shorter version of:
+অন্যথায় বলতে গেলে, এটা নিম্নোক্ত কোডটির সংক্ষিপ্ত রূপ।
 
 ```js
 let func = function(arg1, arg2, ...argN) {
@@ -18,12 +19,12 @@ let func = function(arg1, arg2, ...argN) {
 };
 ```
 
-Let's see a concrete example:
+চলুন, একটা বাস্তবিক উদাহরণ দেখা যাকঃ
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
+/* এই এ্যারো ফাংশনটা নিচের কোডটির সংক্ষিপ্ত রূপঃ
 
 let sum = function(a, b) {
   return a + b;
@@ -33,60 +34,60 @@ let sum = function(a, b) {
 alert( sum(1, 2) ); // 3
 ```
 
-As you can, see `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+এখানে আপনি যেমনটি দেখতে পাচ্ছেন, `(a, b) => a + b` ফাংশনটি দুইটা আর্গুমেন্ট নিচ্ছে যথাক্রমে `a` ও `b` এবং সম্পাদনের সময় এটি `a + b` এক্সপ্রেশনটির মান নির্ণয় করছে এবং তার রেজাল্টটি রিটার্ন করছে। 
 
-- If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
+- যদি আমাদের কেবল একটি মাত্র আর্গুমেন্ট থাকে তাহলে প্যারামিটারগুলোর দুই পাশে যে প্যারেন্থেসিস বা প্রথম বন্ধনী থাকে সেটি না দিলেও চলে, যেটা কোডটাকে আরও সংক্ষিপ্ত করে নিয়ে আসে। 
 
-    For example:
+    উদাহরণ স্বরূপঃ
 
     ```js run
     *!*
     let double = n => n * 2;
-    // roughly the same as: let double = function(n) { return n * 2 }
+    // এটা বলেতে গেলে let double = function(n) { return n * 2 } এর একটি অন্যরূপ।  
     */!*
 
     alert( double(3) ); // 6
     ```
 
-- If there are no arguments, parentheses will be empty (but they should be present):
+- যদি ফাংশনের কোন আর্গুমেন্ট না থাকে তাহলে প্যারেন্থেসিস বা প্রথম বন্ধনীদ্বয় খালি থাকবে (কিন্তু তারা উপস্থিত থাকবে)  
 
     ```js run
-    let sayHi = () => alert("Hello!");
+    let sayHi = () => alert("হ্যালো!");
 
     sayHi();
     ```
 
-Arrow functions can be used in the same way as Function Expressions.
+এ্যারো ফাংশন, ফাংশন এক্সপ্রেশনের মত একই ভাবে ব্যবহার করা যায়। 
 
-For instance, to dynamically create a function:
+এই ক্ষেত্রে, ডাইন্যামিকভাবে একটা ফাংশন তৈরি করতে গেলেঃ 
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("আপনার বয়স কত?", 18);
 
 let welcome = (age < 18) ?
-  () => alert('Hello') :
-  () => alert("Greetings!");
+  () => alert('হ্যালো') :
+  () => alert("অভিবাদন!");
 
 welcome();
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+এ্যারো ফাংশন হয়ত শুরুর দিকে কিছুটা অন্য রকম এবং খুব একটা পাঠযোগ্য নাও লাগতে পারে, কিন্তু আমাদের এই মনোভাব খুব তাড়াতাড়ি বদলে যাবে যেহেতু খুব দ্রুতই আমরা এর গঠনের সাথে অভ্যস্থ হয়ে যাব।
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+এটা এক লাইনের কাজের জন্য খুবই সুবিধাজনক যখন আমরা খুব বেশি একটা লিখতে চাই না। 
 
-## Multiline arrow functions
+## অনেক লাইনের এ্যারো ফাংশন
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+উপড়ের উদাহরণগুলোতে (`=>`) এই চিহ্নের বাম পাশে আর্গুমেন্ট সমূহ নিয়েছে এবং তাদের সাহায্যে ডান পাশের এক্সপ্রেশনটির মান নির্ধারন করেছে।
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
+কিন্তু কখনো সখনো আমাদের এর থেকে কিছুটা বেশি জটিল কাজ করতে হয়, যেমন একের অধিক এক্সপ্রেশন অথবা স্টেটমেন্ট সম্পাদন করা। এটাও সম্ভব, কিন্তু তার জন্য তাদের কার্লি ব্র্যাসেস বা দ্বিতীয় বন্ধনীর ভিতরে লিখতে হবে। তারপর সেখানে একটা সাধারন `return` ব্যবহার করতে হবে।
 
-Like this:
+অনেকটা এইরকমঃ
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // এই কার্লি ব্র্যাসটা শুরু করে একটা বহুলাইন ফাংশনের।
   let result = a + b;
 *!*
-  return result; // if we use curly braces, then we need an explicit "return" 
+  return result; // যদি আমরা কার্লি ব্র্যাসেস ব্যবহার করি, তাহলে আমাদের আলাদাকরে একটা "return" ব্যবহার করা লাগবে। 
 */!*
 };
 
@@ -94,18 +95,19 @@ alert( sum(1, 2) ); // 3
 ```
 
 ```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all!
+এখানে আমরা এ্যারো ফাংশনের "সংক্ষিপ্ত রূপের" প্রশংসা করলাম। কিন্তু এইটাই এর সবকিছু নয়! 
 
-Arrow functions have other interesting features.
+এ্যারো ফাংশনের আরও খুব মজার মজার অন্যান্য ফিচার রয়েছে।
 
-To study them in-depth, we first need to get to know some other aspects of JavaScript, so we'll return to arrow functions later in the chapter <info:arrow-functions>.
+এদের আরও গভীর ভাবে জানতে হলে প্রথমে আমাদের জাভাস্ক্রিপ্টের কিছু অন্যান্য বিষয়াবলি সম্পর্কে জানতে হবে। সুতরাং পরবর্তিতে আমরা <info:arrow-functions> এই চ্যাপ্টারে এ্যারো ফাংশন নিয়ে ফিরে আসব।
 
-For now, we can already use arrow functions for one-line actions and callbacks.
+তো এখন পর্যন্ত দেখতে গেলে, আমরা এ্যারো ফাংশন ব্যবহার করে এক লাইনের কোন কাজ এবং কলব্যাক সম্পাদন করতে পারি। 
 ```
 
 ## Summary
+## মূলকথা
 
-Arrow functions are handy for one-liners. They come in two flavors:
+এ্যারো ফাংশন এক লাইনের কাজের জন্য খুব সুবিধাজনক। এটা দুই প্রকার হতে পারেঃ 
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. কোন কার্লি ব্র্যাসেস ছাড়াঃ `(...args) => expression` -- ডান পাশের অংশটা একটা এক্সপ্রেশন এবং ফাংশনটি এই এক্সপ্রেশনের মান নির্ণয় করে এবং সেটা রিটার্ন করে।
+2. কার্লি ব্র্যাসেস সহঃ `(...args) => { body }` -- বন্ধনীসমূহ ফাংশনের ভিতরে একের অধিক স্ট্যাটমেন্ট লিখতে দিচ্ছে, কিন্তু আমাদের কোন কিছু রিটার্ন করার জন্য আলাদা করে `return` ব্যবহার করতে হবে।

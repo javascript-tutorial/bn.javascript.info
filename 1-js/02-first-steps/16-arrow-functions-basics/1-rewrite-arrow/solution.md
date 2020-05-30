@@ -6,12 +6,12 @@ function ask(question, yes, no) {
 }
 
 ask(
-  "Do you agree?",
+  "আপনি কি রাজি?",
 *!*
-  () => alert("You agreed."),
-  () => alert("You canceled the execution.")
+  () => alert("আপনি রাজি হয়েছেন।"),
+  () => alert("আপনি কাজটি বাতিল করেছেন।")
 */!*
 );
 ```
 
-Looks short and clean, right?
+দেখতে ছোট এবং ঝকঝকে লাগছে, তাই না?

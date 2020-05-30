@@ -1,7 +1,7 @@
 
-# Rewrite with arrow functions
+# এ্যারো ফাংশন দিয়ে পুনরায় লিখা
 
-Replace Function Expressions with arrow functions in the code below:
+নিচের কোডের ফাংশন এক্সপ্রেশনটি এ্যারো ফাংশন দিয়ে পরিবর্তন করুনঃ 
 
 ```js run
 function ask(question, yes, no) {
@@ -10,8 +10,8 @@ function ask(question, yes, no) {
 }
 
 ask(
-  "Do you agree?",
-  function() { alert("You agreed."); },
-  function() { alert("You canceled the execution."); }
+  "আপনি কি রাজি?",
+  function() { alert("আপনি রাজি হয়েছেন।"); },
+  function() { alert("আপনি কাজটি বাতিল করেছেন।"); }
 );
 ```
