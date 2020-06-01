@@ -214,36 +214,61 @@ function showMessage(from, text = anotherFunction()) {
 উপরের উদাহরণ টেনে বলা যায়, `anotherFunction()` ততবার কল হবে যতবার `showMessage()` কল করা হবে `text` প্যারামিটারের মান দেওয়া ছাড়াই।
 ```
 
+<<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 ````smart header="Default parameters old-style"
 জাভাস্ক্রিপ্টের আগের ভার্সনগুলো ডিফল্ট প্যারামিটার সাপোর্ট করে না। কিন্তু অন্যভাবে কাজ চালিয়ে নেওয়া যায়।
 
 যেমন, `undefined` এর মান পরিবর্তন করেঃ
+=======
+### Alternative default parameters
 
-```js
-function showMessage(from, text) {
+Sometimes it makes sense to set default values for parameters not in the function declaration, but at a later stage, during its execution.
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74:1-js/02-first-steps/15-function-basics/article.md
+
+To check for an omitted parameter, we can compare it with `undefined`:
+
+```js run
+function showMessage(text) {
 *!*
   if (text === undefined) {
-    text = 'no text given';
+    text = 'empty message';
   }
 */!*
 
-  alert( from + ": " + text );
+  alert(text);
 }
+
+showMessage(); // empty message
 ```
 
-...Or the `||` operator:
+...Or we could use the `||` operator:
 
 ```js
+<<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 function showMessage(from, text) {
   // যদি `text` এর মান না দেওয়া হয় তাহলে "default" ভ্যালু সেট করে নিবে
   text = text || 'no text given';
+=======
+// if text parameter is omitted or "" is passed, set it to 'empty'
+function showMessage(text) {
+  text = text || 'empty';
+>>>>>>> 69e44506c3e9dac74c282be37b55ba7ff122ae74:1-js/02-first-steps/15-function-basics/article.md
   ...
 }
 ```
 
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when falsy values, such as `0`, are considered regular:
 
-````
+```js run
+// if there's no "count" parameter, show "unknown"
+function showCount(count) {
+  alert(count ?? "unknown");
+}
 
+showCount(0); // 0
+showCount(null); // unknown
+showCount(); // unknown
+```
 
 ## ভ্যালু রিটার্ন করা
 
