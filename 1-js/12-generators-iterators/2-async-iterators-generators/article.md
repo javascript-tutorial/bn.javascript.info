@@ -1,36 +1,36 @@
 
-# Async iterators and generators
+# অ্যাসিঙ্ক ইটারেটর এবং জেনারেটর
 
-Asynchronous iterators allow us to iterate over data that comes asynchronously, on-demand. Like, for instance, when we download something chunk-by-chunk over a network. And asynchronous generators make it even more convenient.
+অ্যাসিঙ্ক্রোনাসলি আসা ডাটাগুলোকে অ্যাসিঙ্ক্রোনাস ইটারেটরের সাহায্যে আমরা আমাদের চাহিদা মত ইটারেট করতে পারি। উদাহরণস্বরূপ, যখন আমরা নেটওয়ার্কের মাধ্যমে ছোট ছোট অংশ ডাউনলোড করি। এটি অ্যাসিঙ্ক্রোনাস জেনারেটরের সাহায্যে আরো সহজে করা যায়।
 
-Let's see a simple example first, to grasp the syntax, and then review a real-life use case.
+চলুন প্রথমে একটি উদাহরণ দেখি, সিনট্যাক্সগুলো বুঝার চেষ্টা করি এবং পরে একটি বাস্তবিক ব্যবহার দেখব।
 
-## Async iterators
+## অ্যাসিঙ্ক ইটারেটর
 
-Asynchronous iterators are similar to regular iterators, with a few syntactic differences.
+অ্যাসিঙ্ক্রোনাস ইটারেটর অনেকটা সাধারণ ইটারেটরের মত, শুধু কিছু সিনট্যাক্সের পার্থক্য আছে।
 
-A "regular" iterable object, as described in the chapter <info:iterable>, looks like this:
+একটি "সাধারণ" ইটারেবল অবজেক্ট, যা আমরা এই অধ্যায়ে জানতে পারি <info:iterable>, দেখতে অনেকটা এমনঃ
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  // for..of calls this method once in the very beginning
+  // for..of range কে কল করা হলে সবার শুরুতে এই মেথডটি এক্সিকিউট হবে
 *!*
   [Symbol.iterator]() {
 */!*
-    // ...it returns the iterator object:
-    // onward, for..of works only with that object,
-    // asking it for next values using next()
+    // ...এটি রিটার্ন করে ইটারেটর অবজেক্ট:
+    // পরবর্তীতে, for..of শুধু অবজেক্টির সাথে কাজ করে এবং এর মাধ্যমে আমরা মান গুলো জানতে পারি
+    // পরবর্তী মানটি next() এর মাধ্যমে জানা যায়
     return {
       current: this.from,
       last: this.to,
 
-      // next() is called on each iteration by the for..of loop
+      // for..of লুপের প্রতিবার ইটারেশনে next() কল হয় 
 *!*
       next() { // (2)
-        // it should return the value as an object {done:.., value :...}
+        // এটি রিটার্ন করবে একটি অবজেক্ট {done:.., value :...}
 */!*
         if (this.current <= this.last) {
           return { done: false, value: this.current++ };
@@ -43,44 +43,43 @@ let range = {
 };
 
 for(let value of range) {
-  alert(value); // 1 then 2, then 3, then 4, then 5
+  alert(value); // 1 তারপর 2, তারপর 3, তারপর 4, তারপর 5
 }
 ```
+যদি আপনি সাধারণ ইটারেটর নিয়ে আরো বিস্তারিত জানতে চান দয়া করে এটি দেখুন [ইটারেবল চ্যাপ্টার](info:iterable)।
 
-If necessary, please refer to the [chapter about iterables](info:iterable) for details about regular iterators.
+অ্যাসিঙ্ক্রোনাসলি ইটারেটরেবল অবজেক্ট তৈরি করতে:
+1. আমাদের `Symbol.iterator` এর পরিবর্তে `Symbol.asyncIterator` ব্যবহার করা লাগবে।
+2. `next()` অবশ্যই একটি প্রমিস রিটার্ন করবে।
+3. এইধরনের অবজেক্ট ইটারেট করতে, আমরা ব্যবহার করব `for await (let item of iterable)` লুপ।
 
-To make the object iterable asynchronously:
-1. We need to use `Symbol.asyncIterator` instead of `Symbol.iterator`.
-2. `next()` should return a promise.
-3. To iterate over such an object, we should use a `for await (let item of iterable)` loop.
-
-Let's make an iterable `range` object, like the one before, but now it will return values asynchronously, one per second:
+চলুন আগেরটির মত একটি ইটারেটরেবল `range` অবজেক্ট তৈরি করি কিন্তু এটি অ্যাসিঙ্ক্রোনাসলি প্রতি সেকেন্ডে একটি মান রিটার্ন করবেঃ
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  // for await..of calls this method once in the very beginning
+  // for await..of কে কল করা হলে সবার শুরুতে এই মেথডটি এক্সিকিউট হবে
 *!*
   [Symbol.asyncIterator]() { // (1)
 */!*
-    // ...it returns the iterator object:
-    // onward, for await..of works only with that object,
-    // asking it for next values using next()
+    // ...এটি রিটার্ন করে ইটারেটর অবজেক্ট:
+    // পরবর্তীতে, for await..of শুধু অবজেক্টির সাথে কাজ করে এবং এর মাধ্যমে আমরা মান গুলো জানতে পারি
+    // পরবর্তী মানটি next() এর মাধ্যমে জানা যায়
     return {
       current: this.from,
       last: this.to,
 
-      // next() is called on each iteration by the for await..of loop
+      //for await..of লুপের প্রতিবার ইটারেশনে next() কল হয় 
 *!*
       async next() { // (2)
-        // it should return the value as an object {done:.., value :...}
-        // (automatically wrapped into a promise by async)
+        // এটি রিটার্ন করবে একটি অবজেক্ট {done:.., value :...}
+        // (স্বয়ংক্রিয়ভাবে এটি অ্যাসিঙ্ক এর মাধ্যমে একটি প্রমিসে র‍্যাপ হয়)
 */!*
 
 *!*
-        // can use await inside, do async stuff:
+        // অ্যাসিঙ্ক কাজগুলো আমরা এওয়েট এর ভিতর করতে পারিঃ
         await new Promise(resolve => setTimeout(resolve, 1000)); // (3)
 */!*
 
@@ -105,37 +104,39 @@ let range = {
 })()
 ```
 
-As we can see, the structure is similar to regular iterators:
+আমরা দেখতে পাচ্ছি এটির স্ট্রাকচার অনেকটা সাধারণ ইটারেটরের মতঃ
 
-1. To make an object asynchronously iterable, it must have a method `Symbol.asyncIterator` `(1)`.
-2. This method must return the object with `next()` method returning a promise `(2)`.
-3. The `next()` method doesn't have to be `async`, it may be a regular method returning a promise, but `async` allows us to use `await`, so that's convenient. Here we just delay for a second `(3)`.
-4. To iterate, we use `for await(let value of range)` `(4)`, namely add "await" after "for". It calls `range[Symbol.asyncIterator]()` once, and then its `next()` for values.
+1. একটি অ্যাসিঙ্ক্রোনাসলি ইটারেটরেবল অবজেক্ট তৈরি করতে `Symbol.asyncIterator` `(1)` মেথডটি অবশ্যই লাগবে।
+2. মেথডটি `next()` মেথডে একটি প্রমিস এর মাধ্যমে অবজেক্টটি রিটার্ন করে `(2)`।
+3. The `next()` method doesn't have to be `async`, it may be a regular method returning a promise, but `async` allows to use `await`, so that's convenient. Here we just delay for a second `(3)`।
+4. ইটারেটের জন্য আমরা `for await(let value of range)` `(4)` ব্যবহার করি, লুপে "for" এর পর "await" ব্যবহার করুন। এটি প্রথমে কল করে `range[Symbol.asyncIterator]()` কে এবং পরে মানের জন্য `next()` কে।
 
-Here's a small cheatsheet:
+ছোট একটি চিটশিট:
 
-|       | Iterators | Async iterators |
+|       | ইটারেটর | অ্যাসিঙ্ক ইটারেটর |
 |-------|-----------|-----------------|
-| Object method to provide iterator | `Symbol.iterator` | `Symbol.asyncIterator` |
-| `next()` return value is              | any value         | `Promise`  |
-| to loop, use                          | `for..of`         | `for await..of` |
+| ইটারেটরে প্রদত্ত অবজেক্ট মেথড | `Symbol.iterator` | `Symbol.asyncIterator` |
+| `next()` এর রিটার্নকৃত মান              | যেকোন মান         | `Promise`  |
+| ব্যবহৃত লুপ                          | `for..of`         | `for await..of` |
 
-````warn header="The spread syntax `...` doesn't work asynchronously"
-Features that require regular, synchronous iterators, don't work with asynchronous ones.
 
-For instance, a spread syntax won't work:
+````warn header="স্প্রেড অপারেটর `...` অ্যাসিঙ্ক্রোনাসলি কাজ করে না"
+এটি সিঙ্ক্রোনাস ইটারেটরের একটি ফিচার, অ্যাসিঙ্ক্রোনাসের সাথে কাজ করে না।
+
+
+উদাহরণস্বরূপ, এখানে স্প্রেড অপারেটর কাজ করবে নাঃ
 ```js
 alert( [...range] ); // Error, no Symbol.iterator
 ```
 
-That's natural, as it expects to find `Symbol.iterator`, same as `for..of` without `await`. Not `Symbol.asyncIterator`.
+এটিই স্বাভাবিক কেননা এটি `Symbol.iterator` কে খুঁজে `for..of` এর মত `Symbol.asyncIterator` কে না।
 ````
 
-## Async generators
+## অ্যাসিঙ্ক জেনারেটর
 
-As we already know, JavaScript also supports generators, and they are iterable.
+ইতোমধ্যে আমরা জানি জাভাস্ক্রিপ্ট জেনারেটর সাপোর্ট করে যা ইটারেবল।
 
-Let's recall a sequence generator from the chapter [](info:generators). It generates a sequence of values from `start` to `end`:
+চলুন একটি সিক্যুয়েন্স জেনারেটরকে কল করি যা এই অধ্যায়ে [](info:generators) জেনেছিলাম। এটি একটি সিক্যুয়েন্স মান তৈরি করে `start` হতে `end` পর্যন্তঃ
 
 ```js run
 function* generateSequence(start, end) {
@@ -145,15 +146,15 @@ function* generateSequence(start, end) {
 }
 
 for(let value of generateSequence(1, 5)) {
-  alert(value); // 1, then 2, then 3, then 4, then 5
+  alert(value); // 1, তারপর 2, তারপর 3, তারপর 4, তারপর 5
 }
 ```
 
-In regular generators we can't use `await`. All values must come synchronously: there's no place for delay in `for..of`, it's a synchronous construct.
+সাধারণ জেনারেটরে আমরা `await` ব্যবহার করতে পারি না। সকল মান সিঙ্ক্রোনাসলি আসেঃ এখানে `for..of` এ কোন লাইনে এ ডিলে হয় না, এটি একটি সিঙ্ক্রোনাস কন্সট্রাক্ট।
 
-But what if we need to use `await` in the generator body? To perform network requests, for instance.
+কিন্ত যদি আমরা জেনারেটর বডিতে `await` ব্যবহার করি কি হবে? যেমন নেটওয়ার্ক রিকুয়েস্টের সাথে কাজ করার জন্য।
 
-No problem, just prepend it with `async`, like this:
+কোন সমস্যা নেই, আমরা এভাবে `async` কে প্রিপেন্ড করে নিতে পারিঃ
 
 ```js run
 *!*async*/!* function* generateSequence(start, end) {
@@ -161,7 +162,7 @@ No problem, just prepend it with `async`, like this:
   for (let i = start; i <= end; i++) {
 
 *!*
-    // yay, can use await!
+    // হুররে, আমরা এওয়েট ব্যবহার করতে পারছি!
     await new Promise(resolve => setTimeout(resolve, 1000));
 */!*
 
@@ -174,27 +175,27 @@ No problem, just prepend it with `async`, like this:
 
   let generator = generateSequence(1, 5);
   for *!*await*/!* (let value of generator) {
-    alert(value); // 1, then 2, then 3, then 4, then 5
+    alert(value); // 1, তারপর 2, তারপর 3, তারপর 4, তারপর 5
   }
 
 })();
 ```
 
-Now we have the async generator, iterable with `for await...of`.
+এখন আমাদের অ্যাসিঙ্ক জেনারেটর আছে যা `for await...of` এর দ্বারা ইটারেটবল।
 
-It's indeed very simple. We add the `async` keyword, and the generator now can use `await` inside of it, rely on promises and other async functions.
+এটি খুব সহজ, আমরা একটি `async` যুক্ত করি এবং জেনারেটরের মধ্যে প্রমিস অথবা অন্যান্য অ্যাসিঙ্ক ফাংশনের এর উপর ভিত্তি করে `await` ব্যবহার করতে পারি।
 
-Technically, another difference of an async generator is that its `generator.next()` method is now asynchronous also, it returns promises.
+টেকনিক্যালি, অ্যাসিঙ্ক জেনারেটরের আরেকটি পার্থক্য হল এখন `generator.next()` এই মেথডটিও অ্যাসিঙ্ক্রোনাস, যা একটি প্রমিস রিটার্ন করে।
 
-In a regular generator we'd use `result = generator.next()` to get values. In an async generator, we should add `await`, like this:
+সাধারণ জেনারেটরে আমরা মান এভাবে পাই `result = generator.next()`. কিন্তু অ্যাসিঙ্ক জেনারেটরে মান পেতে আমাদের `await` যুক্ত করতে হবে, এভাবেঃ
 
 ```js
 result = await generator.next(); // result = {value: ..., done: true/false}
 ```
 
-## Async iterables
+## অ্যাসিঙ্ক ইটারেটবল।
 
-As we already know, to make an object iterable, we should add `Symbol.iterator` to it.
+ইতোমধ্যে আমরা জেনেছি ইটারেবল অবজেক্ট তৈরি করতে আমাদের `Symbol.iterator` যুক্ত করতে হয়।
 
 ```js
 let range = {
@@ -202,22 +203,22 @@ let range = {
   to: 5,
 *!*
   [Symbol.iterator]() {
-    return <object with next to make range iterable>
+    return <next মেথডের সাহায্যে একটি ইটারেবল range তৈরি করি>
   }
 */!*
 }
 ```
 
-A common practice for `Symbol.iterator` is to return a generator, rather than a plain object with `next` as in the example before.
+`Symbol.iterator` এর মাধ্যমে জেনারেটর রিটার্নের জন্য এর একটি কমন প্রাকটিস হল আগের উদাহরণের মত `next` এর মাধ্যমে অবজেক্ট রিটার্ন করা।
 
-Let's recall an example from the chapter [](info:generators):
+চলুন এই অধ্যায়ের [](info:generators) উদাহরনটি আবার কল করিঃ
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  *[Symbol.iterator]() { // a shorthand for [Symbol.iterator]: function*()
+  *[Symbol.iterator]() { // [Symbol.iterator]: function*() এর সংক্ষিপ্তরূপ
     for(let value = this.from; value <= this.to; value++) {
       yield value;
     }
@@ -225,13 +226,13 @@ let range = {
 };
 
 for(let value of range) {
-  alert(value); // 1, then 2, then 3, then 4, then 5
+  alert(value); // 1, তারপর 2, তারপর 3, তারপর 4, তারপর 5
 }
 ```
 
-Here a custom object `range` is iterable, and the generator `*[Symbol.iterator]` implements the logic for listing values.
+এখানে `range` কাস্টম অবজেক্টটি একটি ইটারেবল, এবং `*[Symbol.iterator]` জেনারেটরটি দ্বারা মানগুলো দেখাতে লজিক প্রয়োগ করি।
 
-If we'd like to add async actions into the generator, then we should replace `Symbol.iterator` with async `Symbol.asyncIterator`:
+যদি আমরা জেনারেটরে অ্যাসিঙ্ক অ্যাকশন যুক্ত করতে চাই আমাদের `Symbol.iterator` এর পরিবর্তে async `Symbol.asyncIterator` ব্যবহার করতে হবেঃ
 
 ```js run
 let range = {
@@ -243,7 +244,7 @@ let range = {
 */!*
     for(let value = this.from; value <= this.to; value++) {
 
-      // make a pause between values, wait for something  
+      // দুটি মানের মধ্যেবর্তী কিছুক্ষণের জন্য অপেক্ষা করবে 
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       yield value;
@@ -254,39 +255,39 @@ let range = {
 (async () => {
 
   for *!*await*/!* (let value of range) {
-    alert(value); // 1, then 2, then 3, then 4, then 5
+    alert(value); // 1, তারপর 2, তারপর 3, তারপর 4, তারপর 5
   }
 
 })();
 ```
 
-Now values come with a delay of 1 second between them.
+এখন মানগুলো ১ সেকেন্ড পর পর আসবে।
 
-## Real-life example
+## একটি বাস্তবিক উদাহরণ
 
-So far we've seen simple examples, to gain basic understanding. Now let's review a real-life use case.
+এ পর্যন্ত আমরা কিছু সাধারন উদাহরণ এর সাহায্যে বেসিক ব্যাপারগুলো দেখলাম। চলুন এখন আমরা একটি বাস্তবিক ব্যবহার দেখি।
 
-There are many online services that deliver paginated data. For instance, when we need a list of users, a request returns a pre-defined count (e.g. 100 users) - "one page", and provides a URL to the next page.
+অনলাইনে অনেক সার্ভিস আছে যারা পেজিনেটেড ডাটা সরবরাহ করে। উদাহরণস্বরূপ, যখন আমাদের ইউজারদের একটি লিস্ট দরকার হয় এটি "এক পেজের" জন্য একটি রিকুয়েস্টে প্রি-ডিফাইন্ড (যেমনঃ ১০০ জন ইউজারের) ডাটা রিটার্ন করে , এবং পরবর্তী পেজে যাওয়ার জন্য একটি URL প্রদান করে।
 
-This pattern is very common. It's not about users, but just about anything. For instance, GitHub allows us to retrieve commits in the same, paginated fashion:
+এটি একটি কমন প্যাটার্ন। এটি শুধু ইউজারের জন্য না যেকোন ধরনের লিস্টের জন্য হতে পারে। উদাহরণস্বরূপ, গিটহাব হতে আমরা পেজিনেটেড উপায়ে কমিট নিয়ে আসতে পারিঃ
 
-- We should make a request to URL in the form `https://api.github.com/repos/<repo>/commits`.
-- It responds with a JSON of 30 commits, and also provides a link to the next page in the `Link` header.
-- Then we can use that link for the next request, to get more commits, and so on.
+- এই জন্য আমাদের এই `https://api.github.com/repos/<repo>/commits` URL এ একটি রিকুয়েস্ট করা লাগবে।
+- এটি জেসন ফরম্যাটে ৩০ টি কমিট রেসপন্ড করে, এবং পরবর্তী পেজে যাওয়ার জন্য `Link` হেডারের মাধ্যমে একটি লিঙ্ক প্রদান করে।
+- তারপর আমরা পরবর্তী কমিটগুলোর জন্য লিঙ্কটির মাধ্যমে আরো রিকুয়েস্ট পাঠাতে পারি, এভাবে চলতে থাকবে।
 
-But we'd like to have a simpler API: an iterable object with commits, so that we could go over them like this:
+এখন আমরা একটি সিম্পল API চাই: যেটি কমিটগুলোর একটি ইটারেবল অবজেক্ট হয়, তো আমরা এভাবে করতে পারিঃ
 
 ```js
-let repo = 'javascript-tutorial/en.javascript.info'; // GitHub repository to get commits from
+let repo = 'javascript-tutorial/en.javascript.info'; // যে গিটহাব রিপোজেটরী থেকে কমিট নিয়ে আসব
 
 for await (let commit of fetchCommits(repo)) {
-  // process commit
+  // কমিটগুলো প্রসেস করি
 }
 ```
 
-We'd like to make a function `fetchCommits(repo)` that gets commits for us, making requests whenever needed. And let it care about all pagination stuff. For us it'll be a simple `for await..of`.
+আমরা কমিট নিয়ে আসার জন্য একটি `fetchCommits(repo)` ফাংশন তৈরি করি, যা প্রয়োজনমত রিকুয়েস্ট তৈরি করে। এবং পেজিনেশনের সকল ব্যাপার এটির মাধ্যমে নিয়ন্ত্রিত হয়। এটি একটি সিম্পল `for await..of`।
 
-With async generators that's pretty easy to implement:
+অ্যাসিঙ্ক জেনারেটরের মাধ্যমে আমরা সহজেই এটি তৈরি করতে পারিঃ
 
 ```js
 async function* fetchCommits(repo) {
@@ -294,30 +295,31 @@ async function* fetchCommits(repo) {
 
   while (url) {
     const response = await fetch(url, { // (1)
-      headers: {'User-Agent': 'Our script'}, // github requires user-agent header
+      headers: {'User-Agent': 'Our script'}, // গিটহাবে User-Agent হেডার দরকার
     });
 
-    const body = await response.json(); // (2) response is JSON (array of commits)
+    const body = await response.json(); // (2) রেস্পন্স করবে জেসন (কমিটের অ্যারেসমূহ)
 
-    // (3) the URL of the next page is in the headers, extract it
+    // (3) পরবর্তী পেজের URL টি হেডার থেকে এক্সট্রাক্ট করি
     let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/);
     nextPage = nextPage && nextPage[1];
 
     url = nextPage;
 
-    for(let commit of body) { // (4) yield commits one by one, until the page ends
+    for(let commit of body) { // (4) কমিটগুলো একটির পর একটি আসবে পেজ শেষ না হওয়া পর্যন্ত
       yield commit;
     }
   }
 }
 ```
 
-1. We use the browser [fetch](info:fetch) method to download from a remote URL. It allows us to supply authorization and other headers if needed -- here GitHub requires `User-Agent`.
-2. The fetch result is parsed as JSON. That's again a `fetch`-specific method.
-3. We should get the next page URL from the `Link` header of the response. It has a special format, so we use a regexp for that. The next page URL may look like `https://api.github.com/repositories/93253246/commits?page=2`. It's generated by GitHub itself.
-4. Then we yield all commits received, and when they finish, the next `while(url)` iteration will trigger, making one more request.
 
-An example of use (shows commit authors in console):
+1. আমরা রিমোট URL থেকে কিছু ডাউনলোডের জন্য ব্রাউজারের [fetch](info:fetch) মেথডটি ব্যবহার করতে পারি। এটির মাধ্যমে আমরা অথোরাইজেশন এবং অন্যান্য হেডার পাস করতে পারি -- গিটহাব API এ রিকুয়েস্টের জন্য আমাদের `User-Agent` হেডারটি পাঠানো প্রয়োজন
+2. `fetch` এর মাধ্যমে আমরা একটি জেসন অবজেক্ট পাই, যা `fetch`এর একটি নির্দিষ্ট মেথড।
+3. আমরা পরবর্তী পেজের URL টি রেস্পন্সের `Link` হেডার হতে পাই।  এটি একটি স্পেশাল ফরম্যাটে থাকে তাই আমরা রেগুলার এক্সপ্রেশন  ব্যবহারের এর মাধ্যমে পরবর্তী পেজের লিঙ্কটি পায়। পরবর্তী পেজের URL টি দেখতে এমন হয় `https://api.github.com/repositories/93253246/commits?page=2`। এটি গিটহাবের মাধ্যমে জেনারেট হয়।
+4. তারপর আমরা `yield` এর মাধ্যমে কমিট গুলো রিসিভ করি এবং যখন এটি শেষ হয়, `while(url)` লুপ আবার রান হয় এবং এর ফলে আরো রিকুয়েস্ট জেনারেট হয়। 
+
+উদাহরণস্বরূপ (কনসোলে কমিটের অথরের নাম দেখায়):
 
 ```js run
 (async () => {
@@ -328,7 +330,7 @@ An example of use (shows commit authors in console):
 
     console.log(commit.author.login);
 
-    if (++count == 100) { // let's stop at 100 commits
+    if (++count == 100) { // ১০০ কমিট আসার পর লুপ থেমে যায়
       break;
     }
   }
@@ -336,28 +338,30 @@ An example of use (shows commit authors in console):
 })();
 ```
 
-That's just what we wanted. The internal mechanics of paginated requests is invisible from the outside. For us it's just an async generator that returns commits.
+এটি আমাদের চাহিদামত কাজ করে। এখানে পেজিনেশেনের পুরো ব্যাপারটা ইন্টারনালি সংগঠিত হয় এবং অ্যাসিঙ্ক জেনারেটর আমাদের কমিটগুলো রিটার্ন করে।
 
-## Summary
+## সারাংশ
 
-Regular iterators and generators work fine with the data that doesn't take time to generate.
+সাধারণ ইটারেটর এবং জেনারেটর গুলো সিঙ্ক্রোনাস ডাটার সাথে ভালোভাবেই কাজ করে।
 
-When we expect the data to come asynchronously, with delays, their async counterparts can be used, and `for await..of` instead of `for..of`.
+যখন আমাদের ডাটা গুলো অ্যাসিঙ্ক্রোনাসলি আসে তখন আমাদের `async` ব্যবহার করা উচিত এবং `for..of` এর বদলে `for await..of` ব্যবহার করতে হবে।
 
-Syntax differences between async and regular iterators:
+অ্যাসিঙ্ক এবং সাধারণ ইটারেটরের মধ্যে সিনট্যাক্সের পার্থক্য:
 
-|       | Iterable | Async Iterable |
+|       | ইটারেবল | অ্যাসিঙ্ক ইটারেবল |
 |-------|-----------|-----------------|
-| Method to provide iterator | `Symbol.iterator` | `Symbol.asyncIterator` |
-| `next()` return value is          | `{value:…, done: true/false}`         | `Promise` that resolves to `{value:…, done: true/false}`  |
+| ইটারেটরে ব্যবহৃত মেথড | `Symbol.iterator` | `Symbol.asyncIterator` |
+| `next()` এর রিটার্ন ভ্যালু          | `{value:…, done: true/false}`         | `Promise` এর `resolve` রিটার্ন করে `{value:…, done: true/false}`  |
 
-Syntax differences between async and regular generators:
+অ্যাসিঙ্ক এবং সাধারণ জেনারেটরের মধ্যে সিনট্যাক্সের পার্থক্যঃ
 
-|       | Generators | Async generators |
+|       | জেনারেটর | অ্যাসিঙ্ক জেনারেটর |
 |-------|-----------|-----------------|
-| Declaration | `function*` | `async function*` |
-| `next()` return value is          | `{value:…, done: true/false}`         | `Promise` that resolves to `{value:…, done: true/false}`  |
+| ডিক্লেয়ার করার নিয়ম | `function*` | `async function*` |
+| `next()` এর রিটার্ন ভ্যালু          | `{value:…, done: true/false}`         | `Promise` এর `resolve` রিটার্ন করে `{value:…, done: true/false}`  |
 
-In web-development we often meet streams of data, when it flows chunk-by-chunk. For instance, downloading or uploading a big file.
+ওয়েব ডেভলাপমেন্টে আমাদের প্রায়শই ছোট ছোট করে ডাটা স্ট্রীমের দরকার হয়। উদাহরনস্বরূন, একটি বড় ফাইল ডাউনলোড বা আপলোডের জন্য।
 
-We can use async generators to process such data. It's also noteworthy that in some environments, like in browsers, there's also another API called Streams, that provides special interfaces to work with such streams, to transform the data and to pass it from one stream to another (e.g. download from one place and immediately send elsewhere).
+
+আমরা এই ধরনের ডাটার জন্য অ্যাসিঙ্ক জেনারেটর ব্যবহার করতে পারি। বিঃদ্রঃ কিছু এনভাইরনমেন্টে যেমন ব্রাউজারে একটি Streams API আছে, এটি ডাটাকে এক স্ট্রীম থেকে অন্য স্ট্রীমে পাঠাতে একটি বিশেষ ইন্টারফেস দেয় (যেমনঃ এক জায়গা হতে ডাউনলোড করে সাথে সাথে অন্য আরেক জায়গায় পাঠানো)।
+
