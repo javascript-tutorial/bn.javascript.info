@@ -1,15 +1,32 @@
 # তুলনা
 
+<<<<<<< HEAD:1-js/02-first-steps/08-comparison/article.md
 আমরা গণিতের অনেক তুলনা করার অপারেটর সম্পর্কে জানি:
 
 - বৃহত্তম / ক্ষুদ্রতম: <code>a &gt; b</code>, <code>a &lt; b</code>.
 - বৃহত্তম / ক্ষুদ্রতম অথবা সমান: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
 - সমান: `a == b` (মনে রাখবেন, দুইটি সমান চিহ্ন `=`। একটি সমান চিহ্ন এসাইনমেন্ট বুঝায় `a = b`।)
 - সমান নয়: গণিতে সমান নয় কে লেখা হয় <code>&ne;</code> ভাবে। কিন্তু জাভাস্ক্রিপ্টে সমান চিহ্নের আগে বিস্ময়সূচক চিহ্ন দিয়ে লেখা হয়: <code>a != b</code>।
+=======
+We know many comparison operators from maths.
+
+In JavaScript they are written like this:
+
+- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- Equals: `a == b`, please note the double equality sign `=` means the equality test, while a single one `a = b` means an assignment.
+- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+
+In this article we'll learn more about different types of comparisons, how JavaScript makes them, including important peculiarities.
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6:1-js/02-first-steps/09-comparison/article.md
 
 ## বুলিয়ান ফলাফল
 
+<<<<<<< HEAD:1-js/02-first-steps/08-comparison/article.md
 অন্য সকল অপারেটরের মতো তুলনা করার অপারেটর একটি মান রিটার্ন করে। এক্ষেত্রে মানটি হবে বুলিয়ান।
+=======
+All comparison operators return a boolean value:
+>>>>>>> b52aa942a8e9b75ba8a65124c22593171e273bb6:1-js/02-first-steps/09-comparison/article.md
 
 - `true` -- মানে "হ্যাঁ", "ঠিক" অথবা "সত্য"।
 - `false` -- মানে "না", "ভুল" অথবা "মিথ্যা"।
