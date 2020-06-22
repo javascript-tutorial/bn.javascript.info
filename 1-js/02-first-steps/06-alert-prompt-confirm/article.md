@@ -1,5 +1,6 @@
 # ইন্টারেকশন: alert, prompt, confirm
 
+<<<<<<< HEAD:1-js/02-first-steps/09-alert-prompt-confirm/article.md
 টিউটোরিয়ালের এই পর্যায়ে আমরা কোনো বিশেষ পরিবেশ সমন্বয় ছাড়া জাভাস্ক্রিপ্ট দেখবো।
 
 কিন্তু আমরা এখনো ব্রাউজার ব্যবহার করবো আমাদের ডেমো পরিবেশ হিসেবে, এখন আমাদের জানা উচিত এর কিছু ব্যবহারকারী ইন্টারফেস ফাংশন সম্পর্কে। এই চ্যাপ্টারে আমরা পরিচিত হবো ব্রাউজার ফাংশন `alert`, `prompt` এবং `confirm` এর সাথে।
@@ -13,6 +14,13 @@ alert(message);
 ```
 
 এটি একটি বার্তা প্রদর্শন করে বাকি স্ক্রিপ্ট আটকে রাখে ব্যবহারকারী OK প্রেস করার আগ পর্যন্ত।
+=======
+As we'll be using the browser as our demo environment, let's see a couple of functions to interact with the user: `alert`, `prompt` and `confirm`.
+
+## alert
+
+This one we've seen already. It shows a message and waits for the user to presses "OK".
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa:1-js/02-first-steps/06-alert-prompt-confirm/article.md
 
 যেমন:
 
@@ -20,7 +28,11 @@ alert(message);
 alert("হ্যালো");
 ```
 
+<<<<<<< HEAD:1-js/02-first-steps/09-alert-prompt-confirm/article.md
 বার্তা সহ ছোট উইন্ডোকে *মডাল উইন্ডো* বলে। মডাল মানে হলো, ব্যবহারকারী যতক্ষণ না এই উইন্ডো এর কাজ না করছেন ততক্ষন বাকি পেজ এর কোনো কাজ করতে পারবেন না, অন্য কোনো বাটন চাপতে পারবেন না ইত্যাদি। এইক্ষেত্রে, --যতক্ষণ না তিনি OK চাপছেন।
+=======
+The mini-window with the message is called a *modal window*. The word "modal" means that the visitor can't interact with the rest of the page, press other buttons, etc, until they have dealt with the window. In this case -- until they press "OK".
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa:1-js/02-first-steps/06-alert-prompt-confirm/article.md
 
 ## prompt
 
@@ -38,7 +50,15 @@ result = prompt(title, [default]);
 `default`
 : এটি একটি ঐচ্ছিক প্যারামিটার, এর প্রাথমিক মান ইনপুট ফিল্ড হতে প্রাপ্ত মান।
 
+<<<<<<< HEAD:1-js/02-first-steps/09-alert-prompt-confirm/article.md
 ব্যবহারকারী চাইলে ইনপুট ফিল্ডে কিছু টাইপ করে OK চাপতে পারে। অথবা চাইলে ইনপুট টি বাতিল করতে পারে Cancel চেপে অথবা `key:Esc` চেপে। 
+=======
+```smart header="The square brackets in syntax `[...]`"
+The square brackets around `default` in the syntax above denote that the parameter as optional, not required.
+```
+
+The visitor can type something in the prompt input field and press OK. Then we get that text in the `result`. Or they can cancel the input by pressing Cancel or hitting the `key:Esc` key, then we get `null` as the `result`.
+>>>>>>> e4e6a50b5762dd5dc4c0f0c58f870c64be39dcfa:1-js/02-first-steps/06-alert-prompt-confirm/article.md
 
 `prompt` ফাংশন ইনপুট ফিল্ড এর লেখা রিটার্ন করে অথবা `null` রিটার্ন করে যদি ইনপুট বাতিল করা হয়।
 
