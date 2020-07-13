@@ -1,15 +1,34 @@
 # তুলনা
 
+<<<<<<< HEAD:1-js/02-first-steps/08-comparison/article.md
 আমরা গণিতের অনেক তুলনা করার অপারেটর সম্পর্কে জানি:
 
 - বৃহত্তম / ক্ষুদ্রতম: <code>a &gt; b</code>, <code>a &lt; b</code>.
 - বৃহত্তম / ক্ষুদ্রতম অথবা সমান: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
 - সমান: `a == b` (মনে রাখবেন, দুইটি সমান চিহ্ন `=`। একটি সমান চিহ্ন এসাইনমেন্ট বুঝায় `a = b`।)
 - সমান নয়: গণিতে সমান নয় কে লেখা হয় <code>&ne;</code> ভাবে। কিন্তু জাভাস্ক্রিপ্টে সমান চিহ্নের আগে বিস্ময়সূচক চিহ্ন দিয়ে লেখা হয়: <code>a != b</code>।
+=======
+We know many comparison operators from maths.
+
+In JavaScript they are written like this:
+
+- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
+- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+
+In this article we'll learn more about different types of comparisons, how JavaScript makes them, including important peculiarities. 
+
+At the end you'll find a good recipe to avoid "javascript quirks"-related issues.
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439:1-js/02-first-steps/09-comparison/article.md
 
 ## বুলিয়ান ফলাফল
 
+<<<<<<< HEAD:1-js/02-first-steps/08-comparison/article.md
 অন্য সকল অপারেটরের মতো তুলনা করার অপারেটর একটি মান রিটার্ন করে। এক্ষেত্রে মানটি হবে বুলিয়ান।
+=======
+All comparison operators return a boolean value:
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439:1-js/02-first-steps/09-comparison/article.md
 
 - `true` -- মানে "হ্যাঁ", "ঠিক" অথবা "সত্য"।
 - `false` -- মানে "না", "ভুল" অথবা "মিথ্যা"।
@@ -192,6 +211,7 @@ alert(undefined == 0); // false (3)
 - তুলনা `(1)` এবং `(2)` ভুল বা false রিটার্ন করে কারণ `undefined` রূপান্তরিত হয় `NaN` এ। `NaN` একটি বিশেষ ধরণের সংখ্যামান যেটি যেকোনো তুলনায় false বা ভুল রিটার্ন করে।
 - সমতা নির্ণয়ে `(3)` ভুল বা false রিটার্ন করছে কারণ `undefined` একমাত্র `null`, `undefined` এর সমান। অন্য কোনো কিছুর নয়।
 
+<<<<<<< HEAD:1-js/02-first-steps/08-comparison/article.md
 ### সমস্যা এড়ানো
 
 কেন আমরা ওই সকল উদাহরণ দেখলাম? আমরা কি ওই গুলো সবসময় মনে রাখতে পারবো? আসলে, পারবো না। প্রকৃতপক্ষে, এই ব্যতিক্রম জিনিসগুলি ধীরে ধীরে সময়ের সাথে পরিচিত হয়ে উঠবে। তবে এ সমস্যাগুলি থেকে বাঁচার একটি উত্তম উপায় রয়েছে:
@@ -199,6 +219,14 @@ alert(undefined == 0); // false (3)
 যেকোনো ধরনের তুলনা করতে যথাযথ সমতা `===` ব্যবহার করুন শুধু মাত্র `undefined/null` ক্ষেত্রে নয়।
 
 কখনোই কোন ভ্যারিয়েবল এর সাথে অন্য কিছুর তুলনা (`>= > < <=`) করবেন না। যেই ভ্যারিয়েবলের মান `null/undefined` হতে পারে বা হওয়ার সম্ভাবনা থাকে। যদি হওয়ার সম্ভাবনা থাকে তবে সেগুলোকে আলাদা ভাবে যাচাই করে নিতে হবে।
+=======
+### Avoid problems
+
+Why did we go over these examples? Should we remember these peculiarities all the time? Well, not really. Actually, these tricky things will gradually become familiar over time, but there's a solid way to avoid problems with them:
+
+- Treat any comparison with `undefined/null` except the strict equality `===` with exceptional care.
+- Don't use comparisons `>= > < <=` with a variable which may be `null/undefined`, unless you're really sure of what you're doing. If a variable can have these values, check for them separately.
+>>>>>>> c3a11c85e54153ebb137b5541b1d1f751c804439:1-js/02-first-steps/09-comparison/article.md
 
 ## সারাংশ
 
