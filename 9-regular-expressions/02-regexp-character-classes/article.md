@@ -145,7 +145,7 @@ alert( "A\nB".match(/A.B/) ); // null (no match)
 alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
 ```
 
-````warn header="ফায়ারফক্স, আই ই, এজ এ কাজ করে না"
+````warn header=" Firefox, IE, Edge এ কাজ করে না"
 বর্তমানে যেসব ব্রাউজারে সাপোর্ট করে তা চেক করুন <https://caniuse.com/#search=dotall>। এই লিখাটি লিখার সময় এটি ফায়ারফক্স, আই ই, এজ এ কাজ করে না।
 
 সৌভাগ্যক্রমে, অন্য একটি উপায় আছে, যা সব জায়গায় কাজ করে।
