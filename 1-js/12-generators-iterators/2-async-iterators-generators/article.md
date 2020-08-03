@@ -302,7 +302,7 @@ async function* fetchCommits(repo) {
 
     // (3) পরবর্তী পেজের URL টি হেডার থেকে এক্সট্রাক্ট করি
     let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/);
-    nextPage = nextPage && nextPage[1];
+    nextPage = nextPage?.[1];
 
     url = nextPage;
 
