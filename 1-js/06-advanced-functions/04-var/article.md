@@ -13,6 +13,7 @@
 ২। `const`
 ৩। `var`
 
+<<<<<<< HEAD
 লেক্সিকাল এনভায়রনমেন্টের ক্ষেত্রে `let` এবং `const` ঠিক একইভাবে আচরণ করে।
 
 কিন্তু `var` সম্পূর্ণ ভিন্ন, যা খুব পুরানো কাল থেকেই উদ্ভূত হয়েছিল। এটি সাধারণত আধুনিক স্ক্রিপ্টগুলিতে ব্যবহৃত হয় না তবে এটি পুরানো স্ক্রিপ্টগুলিতে সচরাচর দেখা যাবে।
@@ -27,13 +28,24 @@ function sayHi() {
 
   alert(phrase); // Hello
 }
+=======
+The `var` declaration is similar to `let`. Most of the time we can replace `let` by `var` or vice-versa and expect things to work:
 
-sayHi();
-
-alert(phrase); // Error, phrase is not defined
+```js run
+var message = "Hi";
+alert(message); // Hi
 ```
+>>>>>>> fbf443e414097e5a3a41dd1273ef9a4a3230e72c
 
+But internally `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+
+If you don't plan on meeting such scripts you may even skip this chapter or postpone it.
+
+<<<<<<< HEAD
 ...তবে এখানে পার্থক্য রয়েছে।
+=======
+On the other hand, it's important to understand differences when migrating old scripts from `var` to `let`, to avoid odd errors.
+>>>>>>> fbf443e414097e5a3a41dd1273ef9a4a3230e72c
 
 # "var" এর কোন ব্লক স্কোপ নেই।
 
@@ -94,7 +106,31 @@ alert(phrase); // এরর: phrase নির্ধারণ করা নেই
 
 আমারা যেটা দেখলাম, `var` - `if`, `for` অথবা অন্য ব্লক ভেদ করে বাইরে আসতে পারে। তার কারন অনেক আগে জাভাস্ক্রিপ্টে কোন লেক্সিকাল এনভাইরমেন্ট ছিল না। এবং `var` তারই একটি অংশ।
 
+<<<<<<< HEAD
 ## "var" ফাংশনের শুরুতেই ঘোষিত হয়।
+=======
+## "var" tolerates redeclarations
+
+If we declare the same variable with `let` twice in the same scope, that's an error:
+
+```js run
+let user;
+let user; // SyntaxError: 'user' has already been declared
+```
+
+With `var`, we can redeclare a variable any number of times. If we use `var` with an already-declared variable, it's just ignored:
+
+```js run
+var user = "Pete";
+
+var user = "John"; // this "var" does nothing (already declared)
+// ...it doesn't trigger an error
+
+alert(user); // John
+```
+
+## "var" variables can be declared below their use
+>>>>>>> fbf443e414097e5a3a41dd1273ef9a4a3230e72c
 
 ফাংশনের শুরুতেই `var` ঘোষিত হয়ে যায়(অথবা স্ক্রিপ্ট গ্লোবালের জন্য শুরু হয়)
 
