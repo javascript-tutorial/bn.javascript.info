@@ -1,11 +1,15 @@
 
-# Variable scope
+# Variable scope, closure
 
-JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created dynamically, passed as an argument to another function and called from a totally different place of code later.
+JavaScript is a very function-oriented language. It gives us a lot of freedom. A function can be created at any moment, passed as an argument to another function, and then called from a totally different place of code later.
 
-We already know that a function can access variables outside of it.
+We already know that a function can access variables outside of it ("outer" variables).
 
-Now let's expand our knowledge to include more complex scenarios.
+But what happens if outer variables change since a function is created? Will the function get newer values or the old ones?
+
+And what if a function is passed along as a parameter and called from another place of code, will it get access to outer variables at the new place?
+
+Let's expand our knowledge to understand these scenarios and more complex ones.
 
 ```smart header="We'll talk about `let/const` variables here"
 In JavaScript, there are 3 ways to declare a variable: `let`, `const` (the modern ones), and `var` (the remnant of the past).
@@ -183,7 +187,7 @@ Rectangles on the right-hand side demonstrate how the global Lexical Environment
 
 1. When the script starts, the Lexical Environment is pre-populated with all declared variables.
     - Initially, they are in the "Uninitialized" state. That's a special internal state, it means that the engine knows about the variable, but it cannot be referenced until it has been declared with `let`. It's almost the same as if the variable didn't exist.
-2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable since this moment.
+2. Then `let phrase` definition appears. There's no assignment yet, so its value is `undefined`. We can use the variable from this point forward.
 3. `phrase` is assigned a value.
 4. `phrase` changes the value.
 
@@ -286,7 +290,7 @@ Later, when `counter()` is called, a new Lexical Environment is created for the 
 
 ![](closure-makecounter-nested-call.svg)
 
-Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where finds it and changes.
+Now when the code inside `counter()` looks for `count` variable, it first searches its own Lexical Environment (empty, as there are no local variables there), then the Lexical Environment of the outer `makeCounter()` call, where it finds and changes it.
 
 **A variable is updated in the Lexical Environment where it lives.**
 
