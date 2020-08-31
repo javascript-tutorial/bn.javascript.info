@@ -92,7 +92,35 @@ let user = {
 ```
 একে বলা হয় "ট্রেইলিং" বা "হ্যাঙ্গিং" কমা। এটি এড/রিমুভ এবং পরিবর্তন করা সহজ করে, কারণ সবগুলো লাইন দেখতে একই রকম হয়।
 
+<<<<<<< HEAD
 ## তৃতীয় বন্ধনী
+=======
+````smart header="Object with const can be changed"
+Please note: an object declared as `const` *can* be modified.
+
+For instance:
+
+```js run
+const user = {
+  name: "John"
+};
+
+*!*
+user.name = "Pete"; // (*)
+*/!*
+
+alert(user.name); // Pete
+```
+
+It might seem that the line `(*)` would cause an error, but no. The `const` fixes the value of `user`, but not its contents.
+
+The `const` would give an error only if we try to set `user=...` as a whole.
+
+There's another way to make constant object properties, we'll cover it later in the chapter <info:property-descriptors>.
+````
+
+## Square brackets
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 একাধিক শব্দের প্রোপার্টি গুলোকে ডট দিয়ে এক্সেস করা যায় নাঃ
 
@@ -160,7 +188,11 @@ alert( user.key ) // আনডিফাইন্ড
 
 ### কম্পুটেড প্রোপার্টি
 
+<<<<<<< HEAD
 আমরা অবজেক্ট লিটারেলে তৃতীয় বন্ধনী ব্যবহার করতে পারি। একে বলে *কম্পিউটেড প্রোপার্টি*।
+=======
+We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 উদাহরণস্বরূপঃ
 
@@ -285,9 +317,25 @@ let user = {
 };
 ```
 
+
 ## Property names limitations
 
-Property names (keys) must be either strings or symbols (a special type for identifiers, to be covered later).
+As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction:
+
+```js run
+// these properties are all right
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+
+In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
 
 Other types are automatically converted to strings.
 
@@ -303,25 +351,7 @@ alert( obj["0"] ); // test
 alert( obj[0] ); // test (same property)
 ```
 
-**Reserved words are allowed as property names.**
-
-As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
-
-But for an object property, there's no such restriction. Any name is fine:
-
-```js run
-let obj = {
-  for: 1,
-  let: 2,
-  return: 3
-};
-
-alert( obj.for + obj.let + obj.return );  // 6
-```
-
-We can use any string as a key, but there's a special property named `__proto__` that gets special treatment for historical reasons.
-
-For instance, we can't set it to a non-object value:
+There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
 
 ```js run
 let obj = {};
@@ -331,19 +361,17 @@ alert(obj.__proto__); // [object Object] - the value is an object, didn't work a
 
 As we see from the code, the assignment to a primitive `5` is ignored.
 
-The nature of `__proto__` will be revealed in detail later in the chapter [](info:prototype-inheritance).
-
-As for now, it's important to know that such behavior of `__proto__` can become a source of bugs and even vulnerabilities if we intend to store user-provided keys in an object.
-
-The problem is that a visitor may choose `__proto__` as the key, and the assignment logic will be ruined (as shown above).
-
-There are two workarounds for the problem:
-1. Modify the object's behavior to treat `__proto__` as a regular property. We'll learn how to do it in the chapter [](info:prototype-methods).
-2. Using [Map](info:map-set) data structure which supports arbitrary keys. We'll learn it in the chapter <info:map-set>.
+We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
 
 ## প্রোপার্টি আছে কিনা পরীক্ষা করা। "in" অপারেটর।
 
+<<<<<<< HEAD
 অবজেক্টের একটি উল্লেখযোগ্য ফিচার হল এর যেকোনো প্রোপার্টিকে এক্সেস করা যায়। যদি প্রোপার্টি না থাকে তাহলে কোন এরর হয় না। বরং অবজেক্টে নেই এমন প্রোপার্টিকে এক্সেস করলে `undefined` রিটার্ন করে। প্রোপার্টি আছে কি নেই পরীক্ষার জন্য সাধারনত - আনডিফাইন্ড এর সাথে তুলনা করা হয়ে থাকেঃ
+=======
+A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+
+Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 ```js run
 let user = {};
@@ -351,7 +379,11 @@ let user = {};
 alert( user.noSuchProperty === undefined ); // true মানে "এরকম কোন প্রোপার্টি নেই"
 ```
 
+<<<<<<< HEAD
 একটি বিশেষ অপারেটর `"in"` ও রয়েছে প্রোপার্টি আছে কিনা পরীক্ষা করার জন্য।
+=======
+There's also a special operator `"in"` for that.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 সিনট্যাক্সঃ
 ```js
@@ -369,17 +401,30 @@ alert( "blabla" in user ); // false, user.blabla নেই
 
 মনে রাখবেন `in` অপারেটরের বাম পাশে অবশ্যই একটি  "প্রোপার্টির নাম" থাকতে হবে। সাধারণত এটিকে উদ্ধৃতি চিহ্নের ভেতর রাখা হয়।
 
+<<<<<<< HEAD
 উদ্ধৃতি চিহ্ন না দিলে এটিকে একটি ভেরিয়েবল হিসেবে ধরা হবে, এবং ওই ভেরিয়েবলের ভ্যালুর সাথে তুলনা করা হবে। যেমনঃ
+=======
+If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
+<<<<<<< HEAD
 alert( *!*key*/!* in user ); // true, key থেকে নামটি নিয়ে, ওই নামে প্রোপার্টি আছে কিনা দেখা হচ্ছে
 ```
 
 ````smart header="Using \"in\" for properties that store `undefined`"
 সাধারণত, `"=== undefined"` এভাবে প্রোপার্টি আছে কিনা পরীক্ষা করা ঠিকঠাক কাজ করে, কিছু বিশেষ ক্ষেত্রে এটি ভুল ফলাফল দেয়, কিন্তু `"in"` অপারেটর ঠিকমত কাজ করে।
+=======
+alert( *!*key*/!* in user ); // true, property "age" exists
+```
+
+Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+
+Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 এটি ঘটে যখন অবজেক্টের প্রোপার্টি আছে কিন্তু তা অলরেডি `undefined` হয়ে আছেঃ
 
@@ -393,11 +438,18 @@ alert( obj.test ); // এটি undefined, তাই - প্রোপার্�
 alert( "test" in obj ); // true, প্রোপার্টি আছে!
 ```
 
+<<<<<<< HEAD
 
 উপরের কোডে, `obj.test` এই প্রোপার্টি কিন্তু টেকনিক্যালি অবজেক্টে আছে। সুতরাং `in` অপারেটর ঠিকভাবে কাজ করছে।
 
 এধরেন পরিস্থিতি কিছুটা বিরল, কারণ `undefined` আসলে এসাইন করা হয় না। আমরা বেশীরভাগ সময় "অজানা" বা "খালি" বুঝাতে `null` ব্যবহার করি। তাই `in` অপারেটরের ব্যবহার কদাচিৎ দেখা যায়।
 ````
+=======
+In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+
+Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 ## "for..in" লুপ
 
@@ -432,8 +484,12 @@ for (let key in user) {
 
 এছাড়াও, আমরা এখানে `key` এর পরিবর্তে অন্য ভেরিয়েবলও ব্যবহার করতে পারব। উদাহরণস্বরূপ, `"for (let prop in obj)"` এটিও ব্যপকভাবে ব্যবহৃত হয়।
 
+<<<<<<< HEAD
 
 ### অবজেক্ট এ প্রোপার্টির অর্ডার
+=======
+### Ordered like an object
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 আমরা যদি অবজেক্টের উপর লুপ চালাই, আমরা কি সবগুলো প্রোপার্টি একই ভাবে সাজানো পাবো যেভাবে আমরা সংযুক্ত করেছি? আমরা কি এই বিষয়ে ভরসা রাখতে পারি?
 
@@ -516,6 +572,7 @@ for (let code in codes) {
 
 এখন যেভাবে কাজ করা উচিত সেভাবেই কাজ করছে।
 
+<<<<<<< HEAD
 ## রেফারেন্সের মাধ্যমে কপি করা
 
 অবজেক্ট আর প্রিমিটিভ এর মধ্যে একটি মৌলিক পার্থক্য হল, অবজেক্ট রেফারেন্সের ("by reference") মাধ্যমে সংরক্ষণ এবং কপি করা হয়।
@@ -773,6 +830,9 @@ alert(clone.sizes.width); // 51, অন্য জায়গায় পরিবর
 
 
 ## সারাংশ
+=======
+## Summary
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 অবজেক্ট হল কিছু বিশেষ ফিচার যুক্ত এসোসিয়েটিভ অ্যারে।
 
@@ -789,11 +849,15 @@ alert(clone.sizes.width); // 51, অন্য জায়গায় পরিবর
 - নির্দিষ্ট কী এর কোন প্রোপার্টি আছে কিনা পরীক্ষা করতেঃ `"key" in obj`।
 - অবজেক্টের উপর ইটারেট বা প্রতিটি কী বের করতেঃ  `for (let key in obj)` লুপ ব্যবহার করা হয়।
 
+<<<<<<< HEAD
 অবজেক্টকে রেফারেন্সের মাধ্যমে এসাইন বা কপি করা হয়। অন্যভাবে বললে, ভেরিয়েবল "অবজেক্ট ভ্যালু" রাখে না, কিন্তু ভ্যালুর "রেফারেন্স" (মেমোরি এড্রেস) রাখে। সুতরাং এরকম ভেরিয়েবল কপি করা বা ফাংশন আর্গুমেন্টে পাঠালে রেফারেন্সটা কপি হয়,  অবজেক্টটা নয়। কপি করা রেফারেন্সের মাধ্যমে করা সকল অপারেশন (যেমন প্রোপার্টি এড/রিমুভ করা) মূল অবজেক্টেই হয়।
 
 "আসলেই কপি" (ক্লোন) করার জন্য আমরা `Object.assign` অথবা  [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) ব্যবহার করতে পারি।
 
 আমরা এই অধ্যায়ে যা জেনেছি তাকে "প্লেইন অবজেক্ট", বা শুধু  or `Object` বলা হয়।
+=======
+What we've studied in this chapter is called a "plain object", or just `Object`.
+>>>>>>> f830bc5d9454d85829e011d914f215eb5896579a
 
 জাভাস্ক্রিপ্টে অনেক অন্যান্য অবজেক্ট রয়েছেঃ
 
