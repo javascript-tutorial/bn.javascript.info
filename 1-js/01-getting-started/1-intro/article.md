@@ -109,10 +109,18 @@
 
 এই জাতীয় প্রোগ্রামিং ভাষার উদাহরণ:
 
+<<<<<<< HEAD
 - [কফিস্ক্রিপ্ট](http://coffeescript.org/) জাভাস্ক্রিপ্টের জন্য একটি "সিনট্যাকটিক সুগার"। এটি সংক্ষিপ্ত সিনট্যাক্স নিয়ে আসে, আমাদের আরও পরিষ্কার এবং আরও সুনির্দিষ্ট কোড লেখার সুযোগ দেয়। সাধারণত, রুবি (একটি প্রোগ্রামিং ভাষা) ডেভেলপার রা এটি পছন্দ করে।
 - [টাইপস্ক্রিপ্ট](http://www.typescriptlang.org/) "স্ট্রিক্ট ডাটা টাইপিং" এ জোর দিয়েছিলো ডেভেলপমেন্ট ও জটিল সমস্যা গুলোকে সহজ করার জন্য। এটি মাইক্রোসফ্ট তৈরি করেছে।
 - [ফ্লো](http://flow.org/) ডাটা টাইপিং যুক্ত করে, তবে একটু অন্যভাবে। ফেইসবুক এটি তৈরি করেছে।
 - [ডার্ট](https://www.dartlang.org/) একটি স্বতন্ত্র প্রোগ্রামিং ভাষা যার নিজস্ব ইঞ্জিন রয়েছে যা ব্রাউজার ছাড়াও (মোবাইল অ্যাপ্লিকেশন হিসাবে) চালানো হয়, তবে এটি জাভাস্ক্রিপ্টে স্থানান্তরিত করা যায়। এটি গুগল তৈরী করছে।
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
+>>>>>>> 58f6599df71b8d50417bb0a52b1ebdc995614017
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
 
