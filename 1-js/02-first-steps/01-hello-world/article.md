@@ -78,7 +78,7 @@
 আমরা পুরো URL টিও দিতে পারি। উদাহরণস্বরূপ:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
 একাধিক ট্যাগ ব্যবহার করে, একাধিক স্ক্রিপ্টগুলো সংযুক্ত করতে পারিঃ

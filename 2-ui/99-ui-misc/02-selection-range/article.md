@@ -194,9 +194,9 @@ Others:
 
 To manipulate the content within the range:
 
-- `deleteContents()` - remove range content from the document
-- `extractContents()` - remove range content from the document and return as [DocumentFragment](info:modifying-document#document-fragment)
-- `cloneContents()` - clone range content and return as [DocumentFragment](info:modifying-document#document-fragment)
+- `deleteContents()` -- remove range content from the document
+- `extractContents()` -- remove range content from the document and return as [DocumentFragment](info:modifying-document#document-fragment)
+- `cloneContents()` -- clone range content and return as [DocumentFragment](info:modifying-document#document-fragment)
 - `insertNode(node)` -- insert `node` into the document at the beginning of the range
 - `surroundContents(node)` -- wrap `node` around range content. For this to work, the range must contain both opening and closing tags for all elements inside it: no partial ranges like `<i>abc`.
 
@@ -318,8 +318,7 @@ There are events on to keep track of selection:
 
 ### Selection tracking demo
 
-Here's a small demo that shows selection boundaries
-dynamically as it changes:
+Here's a small demo that shows selection boundaries dynamically as it changes:
 
 ```html run height=80
 <p id="p">Select me: <i>italic</i> and <b>bold</b></p>
@@ -621,7 +620,7 @@ The second API is very simple, as it works with text.
 The most used recipes are probably:
 
 1. Getting the selection:
-    ```js run
+    ```js
     let selection = document.getSelection();
 
     let cloned = /* element to clone the selected nodes to */;
@@ -633,7 +632,7 @@ The most used recipes are probably:
     }
     ```
 2. Setting the selection:
-    ```js run
+    ```js
     let selection = document.getSelection();
 
     // directly:
