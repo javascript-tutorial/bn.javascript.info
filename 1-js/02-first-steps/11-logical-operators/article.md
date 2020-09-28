@@ -84,16 +84,20 @@ OR `||` অপারেটর নিম্নলিখিতটি করে:
 
 কোনও মান রূপান্তর ছাড়াই মূল আকারে ফিরে আসে।
 
+<<<<<<< HEAD
 অন্য কথায়, OR `" || "` এর একটি শৃঙ্খলা truthy মান না পাওয়া গেলে প্রথম truthy মান বা শেষটি প্রদান করে।
+=======
+In other words, a chain of OR `||` returns the first truthy value or the last one if no truthy value is found.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 এই ক্ষেত্রে:
 
 ```js run
 alert( 1 || 0 ); // 1 (1 is truthy)
-alert( true || 'no matter what' ); // (true is truthy)
 
 alert( null || 1 ); // 1 (1 is the first truthy value)
 alert( null || 0 || 1 ); // 1 (the first truthy value)
+
 alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
 ```
 
@@ -101,21 +105,27 @@ alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
 
 1. **ভেরিয়েবল বা এক্সপ্রেশনগুলির একটি তালিকা থেকে প্রথম truthy মান পাওয়া।**
 
+<<<<<<< HEAD
     কল্পনা করুন যে আমাদের ভেরিয়েবলের একটি তালিকা রয়েছে যা হয় তথ্য ধারণ করতে পারে বা `null/undefined`। আমরা ডেটা সহ প্রথমটি কীভাবে খুঁজে পাব?
 
     আমরা OR ব্যবহার করতে পারি `||`:
+=======
+    For instance, we have `firstName`, `lastName` and `nickName` variables, all optional (i.e. can be undefined or have falsy values).
+
+    Let's use OR `||` to choose the one that has the data and show it (or `"Anonymous"` if nothing set):
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
     ```js run
-    let currentUser = null;
-    let defaultUser = "John";
+    let firstName = "";
+    let lastName = "";
+    let nickName = "SuperCoder";
 
     *!*
-    let name = currentUser || defaultUser || "unnamed";
+    alert( firstName || lastName || nickName || "Anonymous"); // SuperCoder
     */!*
-
-    alert( name ); // selects "John" – the first truthy value
     ```
 
+<<<<<<< HEAD
     যদি `currentUser` এবং `defaultUser` উভয়ই মিথ্যা হয়ে থাকে তবে, `"unnamed"` ফলাফল হবে।
 2. **শর্ট সার্কিট মূল্যায়ন।**
 
@@ -124,30 +134,43 @@ alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
     দ্বিতীয় আর্গুমেন্ট হিসাবে দেওয়া এক্সপ্রেশনটির একটি ভেরিয়েবল অ্যাসাইনমেন্টের মতো পার্শ্ব প্রতিক্রিয়া থাকলে এটি স্পষ্টভাবে দেখা যায়।
 
     নীচের উদাহরণে, `x` নির্ধারিত হয় না:
+=======
+    If all variables were falsy, `"Anonymous"` would show up.
 
-    ```js run no-beautify
-    let x;
+2. **Short-circuit evaluation.**
 
-    *!*true*/!* || (x = 1);
+    Another feature of OR `||` operator is the so-called "short-circuit" evaluation.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
+    It means that `||` processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
+
+    That importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+
+<<<<<<< HEAD
     alert(x); // undefined, because (x = 1) not evaluated
     ```
 
     পরিবর্তে, যদি প্রথম যুক্তিটি হল `false`, `|| one দ্বিতীয়টির মূল্যায়ন করে, সুতরাং এই নিয়োগটি চালাবেন:
+=======
+    In the example below, only the second message is printed:
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
     ```js run no-beautify
-    let x;
-
-    *!*false*/!* || (x = 1);
-
-    alert(x); // 1
+    *!*true*/!* || alert("not printed");
+    *!*false*/!* || alert("printed");
     ```
 
+<<<<<<< HEAD
     একটি অ্যাসাইনমেন্ট একটি সহজ কেস। পার্শ্ব প্রতিক্রিয়া থাকতে পারে, মূল্যায়ন যদি না পৌঁছে যায় তবে তা প্রদর্শিত হবে না।
 
     আমরা দেখতে পাচ্ছি, এরকম ব্যবহারের কেসটি "`if`" করার ছোট উপায়। প্রথম অপারেন্ড বুলেয়ানে রূপান্তরিত হয়। যদি এটি মিথ্যা হয় তবে দ্বিতীয়টি মূল্যায়ন করা হয়।
 
     বেশিরভাগ সময়, কোডটি সহজেই বোঝার জন্য "নিয়মিত" `if` ব্যবহার করা আরও ভাল তবে কখনও কখনও এটি কার্যকরও হতে পারে।
+=======
+    In the first line, the OR `||` operator stops the evaluation immediately upon seeing `true`, so the `alert` isn't run.
+
+    Sometimes, people use this feature to execute commands only if the condition on the left part is falsy.
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 ## && (AND)
 
@@ -235,6 +258,11 @@ alert( 1 && 2 && 3 ); // 3, the last one
 
 সুতরাং কোড `a && b || c && d` মূলত একই হিসাবে যদি `&&` এক্সপ্রেশনগুলি প্রথম বন্ধনে ছিল: `(a && b) || (c && d)`।````
 
+<<<<<<< HEAD
+=======
+````warn header="Don't replace `if` with `||` or `&&`"
+Sometimes, people use the AND `&&` operator as a "shorter way to write `if`".
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 ঠিক যেমন OR, এবং AND && অপারেটর কখনও কখনও `if` প্রতিস্থাপন করতে পারে।
 
@@ -253,14 +281,18 @@ let x = 1;
 ```js run
 let x = 1;
 
-if (x > 0) {
-  alert( 'Greater than zero!' );
-}
+if (x > 0) alert( 'Greater than zero!' );
 ```
 
+<<<<<<< HEAD
 সংক্ষিপ্ত প্রদর্শিত হয় `&&` এর সঙ্গে ভিন্ন। তবে `if` আরও সুস্পষ্ট এবং কিছুটা বেশি পাঠযোগ্য।
 
 সুতরাং আমরা প্রতিটি নির্মাণকে এর লক্ষ্যে ব্যবহার করার পরামর্শ দিচ্ছি: আমরা চাইলে `if` ব্যবহার করি এবং যদি আমরা চাইলে `&&` ব্যবহার করি।
+=======
+Although, the variant with `&&` appears shorter, `if` is more obvious and tends to be a little bit more readable. So we recommend using every construct for its purpose: use `if` if we want `if` and use `&&` if we want AND.
+````
+
+>>>>>>> f489145731a45df6e369a3c063e52250f3f0061d
 
 ## ! (NOT)
 
