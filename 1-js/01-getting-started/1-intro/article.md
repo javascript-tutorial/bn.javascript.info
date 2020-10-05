@@ -24,9 +24,15 @@
 
 বিভিন্ন ইঞ্জিনের আলাদা আলাদা "কোডনাম" রয়েছে । উদাহরণ স্বরূপ:
 
+<<<<<<< HEAD
 - [V8](https://bn.wikipedia.org/wiki/V8_(JavaScript_engine) -- ক্রোম এবং অপেরা
 - [স্পাইডার মাংকি](https://bn.wikipedia.org/wiki/SpiderMonkey) -- ফায়ারফক্স.
 - ...আরও অনেক কোডনাম রয়েছে যেমন ইন্টারনেট এক্সপ্লোরার এর বিভিন্ন ভার্সন এর জন্য "Trident" এবং "Chakra", মাইক্রোসফ্ট এজের জন্য "ChakraCore", সাফারির জন্য "Nitro" এবং "SquirrelFish" ইত্যাদি।
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 উপরের টার্ম গুলি মনে রাখা ভাল, কারণ সেগুলি ইন্টারনেটে ডেভেলপার আর্টিকেলে ব্যবহৃত হয়। আমরাও সেগুলো ব্যবহার করব। উদাহরণস্বরূপ, যদি "একটি X ফিচার V8 এ সাপোর্ট করে", তবে সম্ভবত এটি ক্রোম এবং অপেরাতেও কাজ করে।
 
@@ -109,10 +115,18 @@
 
 এই জাতীয় প্রোগ্রামিং ভাষার উদাহরণ:
 
+<<<<<<< HEAD
 - [কফিস্ক্রিপ্ট](http://coffeescript.org/) জাভাস্ক্রিপ্টের জন্য একটি "সিনট্যাকটিক সুগার"। এটি সংক্ষিপ্ত সিনট্যাক্স নিয়ে আসে, আমাদের আরও পরিষ্কার এবং আরও সুনির্দিষ্ট কোড লেখার সুযোগ দেয়। সাধারণত, রুবি (একটি প্রোগ্রামিং ভাষা) ডেভেলপার রা এটি পছন্দ করে।
 - [টাইপস্ক্রিপ্ট](http://www.typescriptlang.org/) "স্ট্রিক্ট ডাটা টাইপিং" এ জোর দিয়েছিলো ডেভেলপমেন্ট ও জটিল সমস্যা গুলোকে সহজ করার জন্য। এটি মাইক্রোসফ্ট তৈরি করেছে।
 - [ফ্লো](http://flow.org/) ডাটা টাইপিং যুক্ত করে, তবে একটু অন্যভাবে। ফেইসবুক এটি তৈরি করেছে।
 - [ডার্ট](https://www.dartlang.org/) একটি স্বতন্ত্র প্রোগ্রামিং ভাষা যার নিজস্ব ইঞ্জিন রয়েছে যা ব্রাউজার ছাড়াও (মোবাইল অ্যাপ্লিকেশন হিসাবে) চালানো হয়, তবে এটি জাভাস্ক্রিপ্টে স্থানান্তরিত করা যায়। এটি গুগল তৈরী করছে।
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
+>>>>>>> 181cc781ab6c55fe8c43887a0c060db7f93fb0ca
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
 
