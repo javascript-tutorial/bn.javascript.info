@@ -1,6 +1,10 @@
 # জাভাস্ক্রিপ্ট পরিচিতি
 
+<<<<<<< HEAD
 চলুন দেখে নেওয়া যাক জাভাস্ক্রিপ্ট এর বিশেষ বিশেষ দিকগুলো, আমরা এটি দিয়ে কী করতে পারি, এবং অন্যান্য প্রযুক্তিগুলি যা এর সাথে ভালো কাজ করে।
+=======
+Let's see what's so special about JavaScript, what we can achieve with it, and what other technologies play well with it.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 ## জাভাস্ক্রিপ্ট কী?
 
@@ -24,9 +28,15 @@
 
 বিভিন্ন ইঞ্জিনের আলাদা আলাদা "কোডনাম" রয়েছে । উদাহরণ স্বরূপ:
 
+<<<<<<< HEAD
 - [V8](https://bn.wikipedia.org/wiki/V8_(JavaScript_engine) -- ক্রোম এবং অপেরা
 - [স্পাইডার মাংকি](https://bn.wikipedia.org/wiki/SpiderMonkey) -- ফায়ারফক্স.
 - ...আরও অনেক কোডনাম রয়েছে যেমন ইন্টারনেট এক্সপ্লোরার এর বিভিন্ন ভার্সন এর জন্য "Trident" এবং "Chakra", মাইক্রোসফ্ট এজের জন্য "ChakraCore", সাফারির জন্য "Nitro" এবং "SquirrelFish" ইত্যাদি।
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 উপরের টার্ম গুলি মনে রাখা ভাল, কারণ সেগুলি ইন্টারনেটে ডেভেলপার আর্টিকেলে ব্যবহৃত হয়। আমরাও সেগুলো ব্যবহার করব। উদাহরণস্বরূপ, যদি "একটি X ফিচার V8 এ সাপোর্ট করে", তবে সম্ভবত এটি ক্রোম এবং অপেরাতেও কাজ করে।
 
@@ -67,7 +77,12 @@
 
       আধুনিক ব্রাউজারগুলি এটিকে ফাইল নিয়ে কাজ করার অনুমতি দেয়, তবে এর এক্সেস সীমাবদ্ধ এবং কেবলমাত্র যদি ব্যবহারকারী নির্দিষ্ট কিছু কাজ করেন যেমন ব্রাউজার উইন্ডোতে একটি ফাইল "ড্রপ" করা বা একটি "<input>" `ট্যাগের মাধ্যমে ফাইল সিলেক্ট করা।
 
+<<<<<<< HEAD
       ক্যামেরা / মাইক্রোফোন এবং অন্যান্য যন্ত্রগুলির সাথে ইন্টারঅ্যাক্ট করার উপায় রয়েছে তবে তাদের ব্যবহারকারীর সুস্পষ্ট অনুমতি প্রয়োজন। সুতরাং একটি জাভাস্ক্রিপ্ট-সক্ষম ওয়েবপেজ চাইলেই কোনও ওয়েব-ক্যামেরা চালু করতে পারে না, আশেপাশের কোন কিছু দেখতে পারে না এবং [NSA](https://bn.wikedia.org/wiki/National_Security_Agency) এর কাছে সেগুলি পাঠাতে পারে না।
+=======
+    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Different tabs/windows generally do not know about each other. Sometimes they do; for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 - ভিন্ন ভিন্ন ট্যাব / উইন্ডো সাধারণত একে অপরের সম্পর্কে জানে না। কখনও কখনও তারা জানে, যেমন, যখন একটি উইন্ডো জাভাস্ক্রিপ্ট ব্যবহার করে আরেকটি উইন্ডো খুলে। তবে এই ক্ষেত্রেও, যদি ভিন্ন কোন সাইট থেকে (অন্য কোনও ডোমেন, প্রোটোকল বা পোর্ট থেকে) আসে তবে এক পেইজের জাভাস্ক্রিপ্ট অন্য পেইজের এক্সেস পায় না।
 
@@ -109,15 +124,29 @@
 
 এই জাতীয় প্রোগ্রামিং ভাষার উদাহরণ:
 
+<<<<<<< HEAD
 - [কফিস্ক্রিপ্ট](http://coffeescript.org/) জাভাস্ক্রিপ্টের জন্য একটি "সিনট্যাকটিক সুগার"। এটি সংক্ষিপ্ত সিনট্যাক্স নিয়ে আসে, আমাদের আরও পরিষ্কার এবং আরও সুনির্দিষ্ট কোড লেখার সুযোগ দেয়। সাধারণত, রুবি (একটি প্রোগ্রামিং ভাষা) ডেভেলপার রা এটি পছন্দ করে।
 - [টাইপস্ক্রিপ্ট](http://www.typescriptlang.org/) "স্ট্রিক্ট ডাটা টাইপিং" এ জোর দিয়েছিলো ডেভেলপমেন্ট ও জটিল সমস্যা গুলোকে সহজ করার জন্য। এটি মাইক্রোসফ্ট তৈরি করেছে।
 - [ফ্লো](http://flow.org/) ডাটা টাইপিং যুক্ত করে, তবে একটু অন্যভাবে। ফেইসবুক এটি তৈরি করেছে।
 - [ডার্ট](https://www.dartlang.org/) একটি স্বতন্ত্র প্রোগ্রামিং ভাষা যার নিজস্ব ইঞ্জিন রয়েছে যা ব্রাউজার ছাড়াও (মোবাইল অ্যাপ্লিকেশন হিসাবে) চালানো হয়, তবে এটি জাভাস্ক্রিপ্টে স্থানান্তরিত করা যায়। এটি গুগল তৈরী করছে।
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
 
 ## সারাংশ
 
+<<<<<<< HEAD
 - জাভাস্ক্রিপ্ট প্রথমে শুধুমাত্র-ব্রাউজার ভাষা হিসাবে তৈরি করা হয়েছিল, তবে এখন এটি অন্যান্য অনেক জায়গাতেই ব্যবহৃত হয়।
 - বর্তমানে, জাভাস্ক্রিপ্ট HTML / CSS সম্পূর্ণ ইন্টিগ্রেশনের সাথে ব্রাউজারের বহুল প্রচারিত প্রোগ্রামিং ভাষা হিসাবে একটি বিশেষ অবস্থানে রয়েছে।
 - এমন অনেক প্রোগ্রামিং ভাষা রয়েছে যা জাভাস্ক্রিপ্টে "রূপান্তরিত" হয়ে যায় এবং নির্দিষ্ট বৈশিষ্ট্য সরবরাহ করে। জাভাস্ক্রিপ্টে দক্ষতা অর্জনের পরে কমপক্ষে সংক্ষেপে এগুলি একবার দেখার পরামর্শ দেওয়া হয়।
+=======
+- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
+- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+>>>>>>> 0599d07b3c13ee25f583fc091cead3c17a7e7779
