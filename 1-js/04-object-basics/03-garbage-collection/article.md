@@ -1,38 +1,38 @@
-# গারবেজ কালেকশন
+# Garbage collection
 
-জাভাস্ক্রিপ্টে মেমোরি ম্যানেজমেন্ট স্বয়ংক্রিয় ও অদৃশ্যভাবে হয়ে থাকে। আমাদের তৈরি করা প্রিমিটিভ, অবজেক্ট এবং ফাংশন - সবকিছুর জন্য মেমোরি প্রয়োজন হয়।
+Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
 
-যখন কোন একটা কিছু আর মেমোরিতে রাখার প্রয়োজন হয় না, তখন আসলে কি ঘটে? কিভাবে জাভাস্ক্রিপ্ট ইঞ্জিন ওগুলোকে খুঁজে বের করে এবং পরিষ্কার করে?
+What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
 
-## রিচেবিলিটি
+## Reachability
 
-জাভাস্ক্রিপ্টে মেমোরি ম্যানেজমেন্টের মূল ধারণাটি হল *রিচেবিলিটি*।
+The main concept of memory management in JavaScript is *reachability*.
 
-সহজভাবে বলতে গেলে, "রিচেবল" ভ্যালু হল যাদের এক্সেস করা যায় বা কোন না কোনভাবে ব্যবহার করা যায়। এধরণের ভ্যালুগুলো নিশ্চিতভাবে মেমোরিতে রাখতেই হবে।
+Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
 
-1. কিছু সহজাতভাবে রিচেবল ভ্যালু রয়েছে, যাদের সঙ্গত কারণেই মেমোরি থেকে মুছে দেয়া যাবে না।
+1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
 
-    উদাহরণস্বরূপঃ
+    For instance:
 
-    - বর্তমান ফাংশনের লোকাল ভেরিয়েবল এবং প্যারামিটারসমূহ।
-    - অন্যান্য ফাংশন, যেগুলো নেস্টেড কলের বর্তমান চেইনে রয়েছে, তাদের ভেরিয়েবল এবং প্যারামিটারসমূহ।
-    - গ্লোবাল ভেরিয়েবল
-    - (আরও কিছু আছে, ইন্টারনালি ব্যবহৃত হয় এরকমগুলো সহ)
+    - Local variables and parameters of the current function.
+    - Variables and parameters for other functions on the current chain of nested calls.
+    - Global variables.
+    - (there are some other, internal ones as well)
 
-    এসব ভ্যালুগুলোকে বলা হয় *রুট*.
+    These values are called *roots*.
 
-2. অন্যান্য ভ্যালুগুলোকে রিচেবল ধরা হবে, যদি তারা রুট থেকে কোন রেফারেন্সের মাধ্যমে বা রেফারেন্সের চেইনের মাধ্যমে রিচেবল হয়।
+2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
 
-    উদাহরণস্বরূপ, যদি একটি লোকাল ভেরিয়েবলে একটি অবজেক্ট থাকে, এবং ওই অবজেক্টের একটি প্রোপার্টিতে অন্য আরেকটি অবজেক্টের রেফারেন্স থাকে, তাহলে ওই অবজেক্টটি রিচেবল ধরা হবে। এবং সেই অবজেক্টে যতগুলো রেফারেন্স আছে সবগুলো রিচেবল ধরা হবে। বিস্তারিত উদাহরণগুলো নিচে দেয়া হল।
+    For instance, if there's an object in a global variable, and that object has a property referencing another object, that object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
 
-জাভাস্ক্রিপ্ট ইঞ্জিনে একটি ব্যাকগ্রাউন্ড প্রসেস আছে যাকে বলা হয় [গারবেজ কালেক্টর](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science))। এটি সকল অবজেক্টকে পর্যবেক্ষণ করে এবং যেগুলো আনরিচেবল হয়ে যায় সেগুলো মেমোরি থেকে মুছে দেয়।
+There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
 
-## একটি সহজ উদাহরণ
+## A simple example
 
-খুবই সহজ একটি উদাহরণঃ
+Here's the simplest example:
 
 ```js
-// user এর কাছে অবজেক্টটির রেফারেন্স আছে
+// user has a reference to the object
 let user = {
   name: "John"
 };
@@ -40,9 +40,9 @@ let user = {
 
 ![](memory-user-john.svg)
 
-এখানে তীর চিহ্ন দিয়ে অবজেক্টের রেফারেন্স বুঝানো হচ্ছে। গ্লোবাল ভেরিয়েবল `"user"` এর কাছে `{name: "John"}` অবজেক্টের রেফারেন্স আছে (আমরা সংক্ষেপে এটিকে John বলব). John এর `"name"` প্রোপার্টি একটি প্রিমিটিভ সংরক্ষণ করছে, তাই এটিকে অবজেক্টের ভেতরে আঁকা হয়েছে।
+Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
 
-যদি `user` কে ওভাররাইট করা হয় তাহলে রেফারেন্সটি হারিয়ে যাবে।
+If the value of `user` is overwritten, the reference is lost:
 
 ```js
 user = null;
@@ -50,14 +50,14 @@ user = null;
 
 ![](memory-user-john-lost.svg)
 
-এখন John আর রিচেবল না। যেহেতু রেফারেন্স হারিয়ে গেছে, এটিকে এক্সেস করার আর কোন উপায় নেই। গারবেজ কালেক্টর এটিকে গারবেজ হিসেবে গণ্য করবে এবং মেমোরি থেকে মুছে দিবে।
+Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
 
-## দ্বৈত রেফারেন্স
+## Two references
 
-এখন ধরে নেই আমরা `user` থেকে রেফারেন্সটি `admin` এ কপি করলামঃ
+Now let's imagine we copied the reference from `user` to `admin`:
 
 ```js
-// user এর কাছে অবজেক্টটির রেফারেন্স আছে
+// user has a reference to the object
 let user = {
   name: "John"
 };
@@ -69,16 +69,16 @@ let admin = user;
 
 ![](memory-user-john-admin.svg)
 
-এখন আমরা যদি আগের মতই রেফারেন্স মুছে দেইঃ
+Now if we do the same:
 ```js
 user = null;
 ```
 
-...তাহলেও অবজেক্টটি গ্লোবাল ভেরিয়েবল `admin` এর মাধ্যমে রিচেবল, সুতরাং এটি মেমোরিতে থাকবে। যদি আমরা `admin` কেও ওভাররাইট করি তাহলেই শুধুমাত্র এটিকে মুছে দেয়া যাবে।
+...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
 
-## পরস্পরসংযুক্ত অবজেক্ট
+## Interlinked objects
 
-এবার একটু জটিল উদাহরণঃ
+Now a more complex example. The family:
 
 ```js
 function marry(man, woman) {
@@ -98,15 +98,15 @@ let family = marry({
 });
 ```
 
-`marry` ফাংশনটি দুটি অবজেক্টকে একে অপরের সাথে যুক্ত করে দেয় এবং তৃতীয় একটি অবজেক্ট রিটার্ন করে যেটাতে আগের দুটি অবজেক্টই আছে।
+Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
 
-ফলে মেমোরির গঠন এরকম হয়ঃ
+The resulting memory structure:
 
 ![](family.svg)
 
-এখন পর্যন্ত সবগুলো অবজেক্টই রিচেবল।
+As of now, all objects are reachable.
 
-দুটি রেফারেন্সকে মুছে দেয়া যাকঃ
+Now let's remove two references:
 
 ```js
 delete family.father;
@@ -115,98 +115,98 @@ delete family.mother.husband;
 
 ![](family-delete-refs.svg)
 
-এই দুটি অবজেক্টের যেকোনো একটিকে মুছে দেয়াই যথেষ্ট নয়, কারণ সবগুলো অবজেক্ট এখনও রিচেবল।
+It's not enough to delete only one of these two references, because all objects would still be reachable.
 
-কিন্তু আমরা যদি দুটিকেই মুছে দেই, তাহলে আমরা দেখি যে John কে এক্সেস করার মত আর কোন অন্তর্মুখী রেফারেন্স অবশিষ্ট নেইঃ
+But if we delete both, then we can see that John has no incoming reference any more:
 
 ![](family-no-father.svg)
 
-বহির্গামী রেফারেন্সে কিছু যায় আসে না। শুধুমাত্র অন্তর্মুখীগুলো একটি রেফারেন্সকে রিচেবল করতে পারে। সুতরাং John এখন আনরিচেবল, তাই এটি এখন তার সব ডাটাসহ, যেগুলো আর এক্সেসেবল না, মেমোরি থেকে মুছে যাবে।
+Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
 
-গারবেজ কালেকশনের পরঃ
+After garbage collection:
 
 ![](family-no-father-2.svg)
 
-## আনরিচেবল আইসল্যান্ড
+## Unreachable island
 
-এটিও সম্ভব যে পরস্পর সংযুক্ত একগুচ্ছ অবজেক্ট একসাথে আনরিচেবল হয়ে যাচ্ছে এবং মেমোরি থেকে মুছে যাচ্ছে।
+It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
 
-যদি আগে বর্ণিত অবজেক্টের কথাই ধরা হয়, তাহলেঃ
+The source object is the same as above. Then:
 
 ```js
 family = null;
 ```
 
-মেমোরি এখন দেখতে এরকম হবেঃ
+The in-memory picture becomes:
 
 ![](family-no-family.svg)
 
-রিচেবিলিটির ধারণা কতটা গুরুত্বপূর্ণ তা এই উদাহরণটি দেখলে স্পষ্ট বোঝা যায়।
+This example demonstrates how important the concept of reachability is.
 
-এটি পরিষ্কার বোঝা যাচ্ছে John এবং Ann এখনও সংযুক্ত, তাদের মধ্যে অন্তর্মুখী রেফারেন্স আছে। কিন্তু এটাই যথেষ্ট নয়।
+It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
 
-আগের `"family"` অবজেক্ট রুট থেকে বিচ্ছিন্ন হয়ে গিয়েছে, এটির সাথে আর কোন রেফারেন্স নেই, সুতরাং পুরো অবজেক্টের গুচ্ছটি আনরিচেবল এবং মেমোরি থেকে মুছে যাবে।
+The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
 
-## ইন্টারনাল এলগরিদম
+## Internal algorithms
 
-সাধারণ গারবেজ কালেকশনের এলগরিদমকে বলা হয় "mark-and-sweep".
+The basic garbage collection algorithm is called "mark-and-sweep".
 
-নিন্মে বর্ণিত কাজগুলো "গারবেজ কালেকশন" এর সময় নিয়মিত করা হয়ঃ
+The following "garbage collection" steps are regularly performed:
 
-- গারবেজ কালেক্টর রুট গুলোকে চিহ্নিত করে।
-- তারপর সেগুলো থেকে যেসব রেফারেন্সে যাওয়া যায়, সবগুলোতে গিয়ে তাদের চিহ্নিত করে।
-- তারপর এটি চিহ্নিত করা অবজেক্টগুলো থেকে *তাদের* রেফারেন্সগুলো চিহ্নিত করে। সবগুলো খুঁজে বের করা অবজেক্টগুলোকে এটি মনে রাখে যাতে ভবিষ্যতে কোন অবজেক্টে দ্বিতীয়বার যেতে না হয়।
-- ...এবং এভাবে যতক্ষণ না সবগুলো রিচেবল রেফারেন্স (রুট থেকে) এটি খুঁজে বের করছে, ততক্ষণ উপরের প্রক্রিয়া চলতে থাকে।
-- চিহ্নিত করা অবজেক্টগুলো ছাড়া বাকি সব অবজেক্টকে মুছে দেয়া হয়।
+- The garbage collector takes roots and "marks" (remembers) them.
+- Then it visits and "marks" all references from them.
+- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
+- ...And so on until every reachable (from the roots) references are visited.
+- All objects except marked ones are removed.
 
-উদাহরণস্বরূপ, ধরা যাক আমাদের অবজেক্টের গঠন দেখতে এই রকমঃ
+For instance, let our object structure look like this:
 
 ![](garbage-collection-1.svg)
 
-আমরা পরিষ্কারভাবে ডান দিকে "আনরিচেবল রেফারেন্সগুলো" দেখতে পাচ্ছি। এখন দেখা যাক কিভাবে "mark-and-sweep" গারবেজ কালেক্টর এটিতে কাজ করে।
+We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
 
-প্রথম ধাপ হল রুট গুলোকে চিহ্নিত করাঃ
+The first step marks the roots:
 
 ![](garbage-collection-2.svg)
 
-তারপর তাদের রেফারেন্সগুলোকে চিহ্নিত করাঃ
+Then their references are marked:
 
 ![](garbage-collection-3.svg)
 
-...এবং যদি সম্ভব হয়, তাদের রেফারেন্সগুলোকে চিহ্নিত করাঃ
+...And their references, while possible:
 
 ![](garbage-collection-4.svg)
 
-এখন যেসব অবজেক্ট এ যাওয়া যায় না তাদের আনরিচেবল হিসেবে ধরা হবে এবং মেমোরি থেকে মুছে দেয়া হবেঃ
+Now the objects that could not be visited in the process are considered unreachable and will be removed:
 
 ![](garbage-collection-5.svg)
 
-আমরা পুরো প্রক্রিয়াটিকে এভাবে ভাবতে পারি - একটি বড় রঙের বালতি রুট গুলো থেকে ঢেলে দেয়া হল। রঙের ধারা যেসব রেফারেন্সের মাধ্যমে প্রবাহিত হতে পারে সেগুলো রিচেবল। বাকিগুলো আনরিচেবল এবং তাদের মুছে দেয়া হবে।
+We can also imagine the process as spilling a huge bucket of paint from the roots, that flows through all references and marks all reachable objects. The unmarked ones are then removed.
 
-এটিই হল গারবেজ কালেকশন কিভাবে কাজ করে তার ধারণা। পুরো প্রক্রিয়াটি নিখুঁত ও দ্রুত হওয়ার জন্য এবং যাতে কোড এক্সিকিউশন বাধাগ্রস্ত না হয় তার জন্য জাভাস্ক্রিপ্ট ইঞ্জিন অনেক অপটিমাইজেশন ব্যবহার করে।
+That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not affect the execution.
 
-কিছু অপটিমাইজেশনঃ
+Some of the optimizations:
 
-- **জেনারেশনাল কালেকশন** -- অবজেক্টগুলোকে দুইভাগে বিভক্ত করা হয়ঃ নতুন এবং পুরাতন। অনেক অবজেক্ট আছে যেগুলো তৈরি হয়, তাদের কাজ শেষ করে এবং দ্রুতই নিঃশেষ হয়ে যায়, তাদের দ্রুতই মুছে দেয়া যায়। যেসব অবজেক্ট অনেকক্ষণ ধরে প্রয়োজন হয় তাদের রিচেবিলিটি পরীক্ষা করা হয় দেরি করে।
-- **ইনক্রিমেন্টাল কালেকশন** -- যদি অনেকগুলো অবজেক্ট থাকে এবং আমরা তাদের প্রত্যেককে একই সাথে খুঁজে বের করে চিহ্নিত করতে চাই, তাহলে বোঝা যাওয়ার মত লম্বা সময় প্রয়োজন হবে। সুতরাং ইঞ্জিন গারবেজ কালেকশনকে ছোট ছোট অংশে ভাগ করার চেষ্টা করে। তারপর এক একটি অংশ আলাদাভাবে এক্সিকিউট করা হয়। এই প্রক্রিয়াতে কিছুটা বেশী হিসেব রাখতে হয়, তাদের মধ্যে কোন পরিবর্তন হচ্ছে কিনা তার জন্য, কিন্তু আমরা অনেকগুলো ছোট ছোট সময়ে কাজটি শেষ করতে পারছি যা একটি লম্বা সময়ের চাইতে ভালো।
-- **আইডল-টাইম কালেকশন** --  গারবেজ কালেকশন চেষ্টা করে যাতে শুধুমাত্র যে সময় সিপিইউ অলস বসে আছে সে সময় তার কাজ করার জন্য, এতে কোড এক্সিকিউশনে কোন প্রভাব পড়ার সম্ভবনা কমে যায়।
+- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
+- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
+- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
 
-আরও অনেক অপটিমাইজেশন এবং গারবেজ কালেকশন এলগরিদম রয়েছে। যদিও আমি ওগুলোকে এখানে বলতে চাই, আমার থামতে হবে, কারণ ভিন্ন ভিন্ন ইঞ্জিন ভিন্ন ভিন্ন পদ্ধতি এবং কৌশল অবলম্বন করে। এবং এটাও বোঝা গুরুত্বপূর্ণ, ইঞ্জিনগুলো যত উন্নত হচ্ছে, কৌশলগুলোও পরিবর্তন হচ্ছে, সুতরাং কোন "প্রয়োজন" ছাড়া প্রথমেই একদম গভীরভাবে জানার চেষ্টা করা সমুচিন মনে হয় না। অবশ্য এটি সম্পূর্ণভাবে আপনার আগ্রহের উপর নির্ভর করে, তাই নিচে আপনার জন্য কিছু লিঙ্ক থাকছে।
+There exist other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so studying deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
 
-## সারাংশ
+## Summary
 
-প্রধানত যেসব বিষয় জানতে হবেঃ
+The main things to know:
 
-- গারবেজ কালেকশন স্বয়ংক্রিয়ভাবে হয়। আমরা এটিকে জোর করে চালাতে বা বন্ধ করতে পারি না।
-- অবজেক্টগুলো মেমোরিতে থাকবে যদি রিচেবল হয়।
-- অন্তর্মুখী রেফারেন্স থাকা মানেই রিচেবল (রুট থেকে) নয়ঃ একদল পরস্পর সংযুক্ত অবজেক্ট একসাথে আনরিচেবল হতে পারে।
+- Garbage collection is performed automatically. We cannot force or prevent it.
+- Objects are retained in memory while they are reachable.
+- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole.
 
-আধুনিক ইঞ্জিনগুলো গারবেজ কালেকশনের জন্য অনেক উন্নত এলগরিদম ব্যবহার করে।
+Modern engines implement advanced algorithms of garbage collection.
 
-"The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) এই বইটি এধরণের কিছু এলগরিদম নিয়ে আলোচনা করে।
+A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
 
-আপনি যদি লো-লেভেল প্রোগ্রামিং এ অভ্যস্থ হন, এই আর্টিকেলে V8 গারবেজ কালেক্টর নিয়ে অনেক বিস্তারিত তথ্য পাবেন [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+If you are familiar with low-level programming, the more detailed information about V8 garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
 
-[V8 ব্লগ](https://v8.dev/) বিভিন্ন সময় মেমোরি ম্যানেজমেন্টের পরিবর্তন সম্পর্কে প্রবন্ধ প্রকাশ করে। প্রকৃতপক্ষে, গারবেজ কালেকশন নিয়ে জানতে হলে আপনাকে সাধারণত V8 এর অভ্যন্তরীণ বিষয়াদি জানতে প্রস্তুতি নিতে হবে এবং [Vyacheslav Egorov](http://mrale.ph) এর ব্লগ পড়তে হবে, যিনি V8 এ একজন ইঞ্জিনিয়ার হিসেবে কাজ করেছেন। আমি শুধু "V8" বলছি, কারণ ইন্টারনেটে এটির রিসোর্স সবচাইতে বেশী। অন্যান্য ইঞ্জিনের ক্ষেত্রে, অনেক কৌশল একই রকমের, কিন্তু গারবেজ কালেকশনের অনেক বৈশিষ্ট্য আলাদা।
+[V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn the garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of V8 engineers. I'm saying: "V8", because it is best covered with articles in the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
 
-ইঞ্জিন সম্পর্কে গভীর জ্ঞ্যান খুবই ভাল, যদি আপনার লো-লেভেল অপটিমাইজেশন প্রয়োজন হয়। ভাষা সম্পর্কে জানার পরে এ বিষয়ে পড়াশুনা করার প্রস্তুতি নেয়া ভালো পদক্ষেপ হবে।
+In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.  
