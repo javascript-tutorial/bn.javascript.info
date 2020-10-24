@@ -1,5 +1,5 @@
 # Java[^script]
 
-We have a regexp `pattern:/Java[^script]/`.
+আমাদের এ ধরণের একটি প্যাটার্ন আছে `pattern:/Java[^script]/`।
 
-Does it match anything in the string `subject:Java`? In the string `subject:JavaScript`?
+এটি কি এই স্ট্রিংয়ের `subject:Java` সাথে ম্যাচ হবে? অথবা এই স্ট্রিংয়ের `subject:JavaScript`?
