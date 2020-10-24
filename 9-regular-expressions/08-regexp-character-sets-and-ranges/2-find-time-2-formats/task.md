@@ -1,12 +1,12 @@
-# Find the time as hh:mm or hh-mm
+# সময় খুঁজা hh:mm অথবা hh-mm
 
-The time can be in the format `hours:minutes` or `hours-minutes`. Both hours and minutes have 2 digits:  `09:00` or `21-30`.
+সময়ের ফরম্যাট হতে পারে এভাবে `hours:minutes` অথবা `hours-minutes`. ঘন্টা এবং মিনিট উভয়েই দুই ডিজিটের হয়:  `09:00` অথবা `21-30`.
 
-Write a regexp to find time:
+উপরোল্লিখিত ফরম্যাটে সময় খুঁজার জন্য প্যাটার্ন লিখুন:
 
 ```js
 let regexp = /your regexp/g;
 alert( "Breakfast at 09:00. Dinner at 21-30".match(regexp) ); // 09:00, 21-30
 ```
 
-P.S. In this task we assume that the time is always correct, there's no need to filter out bad strings like "45:67". Later we'll deal with that too.
+বি.দ্র. দুই ডিজিটের যেকোন সময় সঠিক হিসেবে বিবেচনা করতে পারি, আমাদের স্ট্রিং ভ্যালিডেশন নিয়ে চিন্তিত হতে হবে না যেমন "45:67"। পরবর্তীতে আমরা এটিও দেখব।

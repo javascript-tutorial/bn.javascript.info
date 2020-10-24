@@ -123,6 +123,7 @@ user.id = "Their id value"
 
 ### Symbols in an object literal
 
+
 If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
 
 Like this:

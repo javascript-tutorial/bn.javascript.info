@@ -1,3 +1,4 @@
+
 # Object references and copying
 
 One of the fundamental differences of objects versus primitives is that objects are stored and copied "by reference", as opposed to primitive values: strings, numbers, booleans, etc -- that are always copied "as a whole value".
@@ -7,6 +8,7 @@ That's easy to understand if we look a bit "under a cover" of what happens when 
 Let's start with a primitive, such as a string.
 
 Here we put a copy of `message` into `phrase`:
+
 
 ```js
 let message = "Hello!";
@@ -25,11 +27,13 @@ Objects are not like that.
 
 Let's look at an example of such variable:
 
+
 ```js
 let user = {
   name: "John"
 };
 ```
+
 
 And here's how it's actually stored in memory:
 
@@ -50,6 +54,7 @@ For instance:
 ```js no-beautify
 let user = { name: "John" };
 
+
 let admin = user; // copy the reference
 ```
 
@@ -60,6 +65,7 @@ Now we have two variables, each one with the reference to the same object:
 As you can see, there's still one object, now with two variables that reference it.
 
 We can use any variable to access the object and modify its contents:
+
 
 ```js run
 let user = { name: 'John' };
@@ -96,8 +102,10 @@ And here two independent objects are not equal, even though they look alike (bot
 let a = {};
 let b = {}; // two independent objects
 
+
 alert( a == b ); // false
 ```
+
 
 For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are needed very rarely, usually they appear as a result of a programming mistake.
 
@@ -120,6 +128,7 @@ let user = {
 };
 
 *!*
+
 let clone = {}; // the new empty object
 
 // let's copy all user properties into it
@@ -127,6 +136,7 @@ for (let key in user) {
   clone[key] = user[key];
 }
 */!*
+
 
 // now clone is a fully independent object with the same content
 clone.name = "Pete"; // changed the data in it
@@ -141,6 +151,7 @@ The syntax is:
 ```js
 Object.assign(dest, [src1, src2, src3...])
 ```
+
 
 - The first argument `dest` is a target object.
 - Further arguments `src1, ..., srcN` (can be as many as needed) are source objects.
@@ -174,6 +185,7 @@ alert(user.name); // now user = { name: "Pete" }
 
 We also can use `Object.assign` to replace `for..in` loop for simple cloning:
 
+
 ```js
 let user = {
   name: "John",
@@ -192,6 +204,7 @@ It copies all properties of `user` into the empty object and returns it.
 Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
 
 Like this:
+
 ```js run
 let user = {
   name: "John",
@@ -207,6 +220,7 @@ alert( user.sizes.height ); // 182
 Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
 
 Like this:
+
 
 ```js run
 let user = {
