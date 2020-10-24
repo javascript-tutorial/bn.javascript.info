@@ -1,29 +1,32 @@
-# অবজেক্ট রেফারেন্স এবং কপি করা
 
-অবজেক্ট এবং প্রিমিটিভ দের মধ্যে অন্যতম পার্থক্য হলো যে অবজেক্ট গুলি কপি ও সংরখ্যন হয় রেফারেন্স এর মাধ্যমে, যেখানে প্রিমিটিভ মানঃ স্ট্রিং, বুলিয়ান, ইত্যাদি -- যেগুলো সবসময় "সম্পুর্ন মান" হিসেবে কপি হয়।
+# Object references and copying
 
-একটি মান কপি করলে কি হয় তা একটু গভীরভাবে দেখলেই আমরা এটি আরো ভালোভাবে বুঝতে পারব।
+One of the fundamental differences of objects versus primitives is that objects are stored and copied "by reference", as opposed to primitive values: strings, numbers, booleans, etc -- that are always copied "as a whole value".
 
-স্ট্রিং এর মত একটি প্রিমিটিভ নিয়েই শুরু করা যাক।
+That's easy to understand if we look a bit "under a cover" of what happens when we copy a value.
 
-এখানে আমরা `message` এর একটি কপি কে `phrase` এ রাখলামঃ
+Let's start with a primitive, such as a string.
+
+Here we put a copy of `message` into `phrase`:
+
 
 ```js
 let message = "Hello!";
 let phrase = message;
 ```
 
-এর ফলে আমরা দুটি স্বাধীন ভেরিয়েবল আছে, প্রতিটি "হেলো" স্ট্রিংটি সংরক্ষণ করছে ।
+As a result we have two independent variables, each one is storing the string `"Hello!"`.
 
 ![](variable-copy-value.svg)
 
-খুব স্বাবাভিক ই মনে হচ্ছে, তাই না?
+Quite an obvious result, right?
 
-অবজেক্ট রা এমন নয়।
+Objects are not like that.
 
-**একটি অবজেক্ট এর জন্য নির্ধারিত ভেরিয়েবল সেই অবজেক্ট কে সংরক্ষণ করে না, বরং এর ঠিকানা সংরক্ষণ করে, অন্য কথায় এটির একটি "রেফারেন্স"।**
+**A variable assigned to an object stores not the object itself, but its "address in memory", in other words "a reference" to it.**
 
-এমন একটি ভেরিয়েবল এর উদাহরণ দেখা যাকঃ
+Let's look at an example of such variable:
+
 
 ```js
 let user = {
@@ -31,35 +34,38 @@ let user = {
 };
 ```
 
-এটি স্মৃতি তে কিভাবে সংরক্ষণ করা হয় তা নিচের ছবিতে দেখানো হলোঃ
+
+And here's how it's actually stored in memory:
 
 ![](variable-contains-reference.svg)
 
-অবজেক্ট টি স্মৃতির কোথাও সংরক্ষণ করা আছে (ডানে), আর `user` ভেরিয়েবল এর কাছে এর একটি রেফারেন্স আছে।
+The object is stored somewhere in memory (at the right of the picture), while the `user` variable (at the left) has a "reference" to it.
 
-আমরা `user` এর মতো অবজেক্ট কে একটি কাগজের টুকরো হিসেবে ভাবতে পারি, যাতে ঠিকানা লেখা আছে ।
+We may think of an object variable, such as `user`, as of a sheet of paper with the address.
 
-যখন আমরা অবজেক্ট এর উপরে কোন কাজ করি, যেমন `user.name` প্রপার্টি কে নেয়া, জাভাস্ক্রিপ্ট ইঞ্জিন ঠিকানা থেকে অবজেক্ট টি বের তার উপরে কাজ টি সম্পাদন করে ।
+When we perform actions with the object, e.g. take a property `user.name`, JavaScript engine looks into that address and performs the operation on the actual object.
 
-এটি গুরুতপুর্ন কারণ 
+Now here's why it's important.
 
-**যখন কোনও বস্তুর ভেরিয়েবল কপি করা হয় - রেফারেন্সটি কপি হয়, বস্তুটি নকল হয় না ।**
+**When an object variable is copied -- the reference is copied, the object is not duplicated.**
 
-যেমন :
+For instance:
 
 ```js no-beautify
 let user = { name: "John" };
 
-let admin = user; // রেফারেন্স কপি হলো
+
+let admin = user; // copy the reference
 ```
 
-এখন আমাদের দুটি ভেরিয়েবল রয়েছে, প্রত্যেকেই একই বস্তুর রেফারেন্স:
+Now we have two variables, each one with the reference to the same object:
 
 ![](variable-copy-reference.svg)
 
-আমরা দেখতে পাচ্ছি যে, অবজেক্ট একটাই আছে কিন্তু এখন একে দুটি ভেরিয়েবল রেফারেন্স করছে ।
+As you can see, there's still one object, now with two variables that reference it.
 
-আমরা এই দুটি ভেরিয়েবল এর যেকোনো টি ব্যাবহার করে অবজেক্ট টি এক্সেস করতে পারি ও এর ভেতরের কন্টেন্ট বা ডেটা গুলি পরিবর্তন করতে পারি।
+We can use any variable to access the object and modify its contents:
+
 
 ```js run
 let user = { name: 'John' };
@@ -67,52 +73,53 @@ let user = { name: 'John' };
 let admin = user;
 
 *!*
-admin.name = 'Pete'; // এডমিন রেফারেন্সের এর মাধ্যমে পরিবর্তন হলো
+admin.name = 'Pete'; // changed by the "admin" reference
 */!*
 
-alert(*!*user.name*/!*); // 'Pete', পরিবর্তন টি "user" রেফারেন্স থেকে দেখা যাচ্ছে
+alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
 ```
 
 
-উপরের উদাহরণটি প্রমাণ করে যে এখানে কেবল একটি অবজেক্ট রয়েছে। যেন আমাদের একি কক্ষের দুটি চাবি আছে আর আমরা একটি চাবি (`admin`) দিয়ে কক্ষে প্রবেশ করেছি। পরে অন্যটি (`user`) দিয়ে কক্ষের ভেতরে দেখেছি।
+It's just as if we had a cabinet with two keys and used one of them (`admin`) to get into it. Then, if we later use another key (`user`) we can see changes.
 
-## রেফারেন্স এর মাধ্যমে তুলনা
+## Comparison by reference
 
-যদি দুটি অবজেক্ট একই বস্তু হয়, শুধুমাত্র তাহলেই তারা "ইকুয়াল"।
+Two objects are equal only if they are the same object.
 
-যেমন, এখানে `a` এবং `b` একই অবজেক্ট কে রেফারেন্স করে, সুতরাং তারা ইকুয়াল:
+For instance, here `a` and `b` reference the same object, thus they are equal:
 
 ```js run
 let a = {};
-let b = a; // রেফারেন্স কপি হোলো
+let b = a; // copy the reference
 
-alert( a == b ); // true, দুটি অবজেক্ট ই সমান
+alert( a == b ); // true, both variables reference the same object
 alert( a === b ); // true
 ```
 
-আর এখানে দুটি অবজেক্ট সমান নয়, যদিও তারা দেখতে একই (দুজনই খালি) :
+And here two independent objects are not equal, even though they look alike (both are empty):
 
 ```js run
 let a = {};
-let b = {}; // দুটি স্বাধীন অবজেক্ট
+let b = {}; // two independent objects
+
 
 alert( a == b ); // false
 ```
 
-`obj1 > obj2` এর মত তুলনা এর জন্য অথবা কোন প্রিমিটিভ এর সাথে তুলনা করার জন্য `obj == 5`, অবজেক্ট কে প্রিমিটিভ এ রূপান্তর করা হয়। অবজেক্ট গুলোকে কিভাবে তুলনা করা হয় তা সম্পর্কে আমরা শিগ্রই জানব, কিন্তু সত্যি বলতে এই ধরনের তুলনা খুব কমই প্রয়োজন হয়, সাধারণত এগুলি ভুলক্রমে চলে আসে।
 
-##  ক্লোন করা ও মিলিত করা, Object.assign
+For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are needed very rarely, usually they appear as a result of a programming mistake.
 
-তো আমরা জানলাম অবজেক্ট ভেরিএবল কে কপি করলে তা শুধু একটি নতুন রেফারেন্স তৈরি করে।
+## Cloning and merging, Object.assign
 
-কিন্তু আমাদের যদি অবজেক্ট এর স্বাধীন নকল বা ক্লোন তৈরি করতে হয় তাহলে আমরা কি করব?
+So, copying an object variable creates one more reference to the same object.
 
-তাও সম্ভব কিন্তু একটু কঠিন, কারণ এই কাজ করার জন্য জাভাস্ক্রিপ্ট এর কোন অন্তর্নির্মিত মেথড নেই।
-আসলে এটি খুব কমই প্রয়োজন হয়। রেফারেন্সে কপি করাই বেশিরভাগ সময় যথেষ্ট।
+But what if we need to duplicate an object? Create an independent copy, a clone?
 
-কিন্তু আমরা যদি আসলেই এটি চাই তাহলে আমাদের নতুন একটি অবজেক্ট বানাতে হবে, ও মুল অবজেক্ট টির সম্পূর্ণ কাঠামো কে নকল করে এর সকল প্রপার্টির প্রিমিটিভ স্তরে প্রতিলিতি তৈরি করতে হবে।
+That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. Actually, that's rarely needed. Copying by reference is good most of the time.
 
-যেমন:
+But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+
+Like this:
 
 ```js run
 let user = {
@@ -121,35 +128,37 @@ let user = {
 };
 
 *!*
-let clone = {}; // নতুন খালি অবজেক্ট 
 
-// এখন user অবজেক্ট এর সকল প্রপার্টি কে clone অবজেক্ট এ কপি করি
+let clone = {}; // the new empty object
+
+// let's copy all user properties into it
 for (let key in user) {
   clone[key] = user[key];
 }
 */!*
 
 
-// এখন ক্লোন হচ্ছে একটি স্বাধীন অবজেক্ট যার কন্টেন্ট ইউজার এর সমান 
-clone.name = "Pete"; // ডাটা পরিবর্তন করলাম 
+// now clone is a fully independent object with the same content
+clone.name = "Pete"; // changed the data in it
 
-alert( user.name ); // মুল অবজেক্ট এ এখনো John
+alert( user.name ); // still John in the original object
 ```
 
-আমরা এর জন্য [Object.assign](mdn:js/Object/assign) মেথড টিও ব্যাবহার করতে পারি।
+Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
 
-এর সিনট্যাক্স হলো:
+The syntax is:
 
 ```js
 Object.assign(dest, [src1, src2, src3...])
 ```
 
-- প্রথম আর্গুমেন্ট `dest` হলো টার্গেট অবজেক্ট ।
-- বাকি আর্গুমেন্ট গুলো `src1, ..., srcN` (যতো প্রয়োজন দেয়া যাবে) হলো মুল অবজেক্ট।
-- এটি মুল অবজেক্ট এর সকল প্রপার্টি `src1, ..., srcN` টার্গেট `dest` এ কপি করে। অন্য কথায়, দ্বিতীয় আর্গুমেন্ট থেকে বাকি সকল আর্গুমেন্ট এর প্রপার্টি গুলো প্রথম অবজেক্ট এ কপি হয়।
-- এই কল টি `dest` কে রিটার্ন করে।
 
-আমরা এটি ব্যাবহার করে একাধিক অবজেক্টকে একটি অবজেক্ট এ মিলিত করতে পারি:
+- The first argument `dest` is a target object.
+- Further arguments `src1, ..., srcN` (can be as many as needed) are source objects.
+- It copies the properties of all source objects `src1, ..., srcN` into the target `dest`. In other words, properties of all arguments starting from the second are copied into the first object.
+- The call returns `dest`.
+
+For instance, we can use it to merge several objects into one:
 ```js
 let user = { name: "John" };
 
@@ -157,24 +166,25 @@ let permissions1 = { canView: true };
 let permissions2 = { canEdit: true };
 
 *!*
-// permissions1 ও permissions2 এর সকল প্রপার্টি কে user এ কপি করে
+// copies all properties from permissions1 and permissions2 into user
 Object.assign(user, permissions1, permissions2);
 */!*
 
-// এখন user = { name: "John", canView: true, canEdit: true }
+// now user = { name: "John", canView: true, canEdit: true }
 ```
 
-কপি করা প্রপার্টি যদি ইতিমধ্যেই থেকে থাকে থাকলে এটি ওভাররাইট হয়ে যাবে:
+If the copied property name already exists, it gets overwritten:
 
 ```js run
 let user = { name: "John" };
 
 Object.assign(user, { name: "Pete" });
 
-alert(user.name); // এখন user = { name: "Pete" }
+alert(user.name); // now user = { name: "Pete" }
 ```
 
-আমরা `for..in` এর জায়গায় `Object.assign` ব্যাবহার করে সাধারণ ক্লোনিং করতে পারি :
+We also can use `Object.assign` to replace `for..in` loop for simple cloning:
+
 
 ```js
 let user = {
@@ -187,13 +197,14 @@ let clone = Object.assign({}, user);
 */!*
 ```
 
-এটি `user` এর সকল প্রপার্টি কে খালি অবজেক্ট এ কপি করে তাকে রিটার্ন করে ।
+It copies all properties of `user` into the empty object and returns it.
 
-## অভ্যন্তরীণ ক্লোনিং (Nested cloning)
+## Nested cloning
 
-এতক্ষণ পর্যন্ত আমরা ধরে নিয়েছিলাম যে `user` এর সকল প্রপার্টি ই প্রিমিটিভ । কিন্তু প্রপার্টি গুলো তো অন্যান্য অবজেক্ট এর রেফারেন্স ও হতে পারে । সেক্ষেত্রে আমরা কি করবো?
+Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
 
-যেমন:
+Like this:
+
 ```js run
 let user = {
   name: "John",
@@ -206,9 +217,10 @@ let user = {
 alert( user.sizes.height ); // 182
 ```
 
-এখন এটি `clone.sizes = user.sizes` কে কপি করার জন্য যথেষ্ট নয়, কারণ `user.sizes` হলো একটি অবজেক্ট, এটি রেফারেন্সের মাধ্যমে কপি হবে। সুতরাং `clone` ও `user` একই size শেয়ার করবে:
+Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
 
-এমন:
+Like this:
+
 
 ```js run
 let user = {
@@ -221,21 +233,21 @@ let user = {
 
 let clone = Object.assign({}, user);
 
-alert( user.sizes === clone.sizes ); // true, একই অবজেক্ট
+alert( user.sizes === clone.sizes ); // true, same object
 
-// user এবং clone size কে শেয়ার করে
-user.sizes.width++;       // একটি জায়গা থেকে প্রপার্টি পরিবর্তন
-alert(clone.sizes.width); // 51, অন্য জায়গায় রেসাল্ট দেখা
+// user and clone share sizes
+user.sizes.width++;       // change a property from one place
+alert(clone.sizes.width); // 51, see the result from the other one
 ```
 
-এটি সমাধান করার জন্য আমাদের একটি ক্লোনিং লুপ ব্যাবহার করা লাগবে যা `user[key]` এর প্রত্যেক মান কে পরীক্ষা করবে, এবং যদি এটি অবজেক্ট হয়, তাহলে এর স্ট্রাকচার কেও কপি করবে। একে বলে "ডিপ ক্লোনিং"।
+To fix that, we should use the cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
 
-আমরা রিকার্সন ব্যাবহার করে এটি তৈরি করতে পারি অথবা ইতিমধ্যেই বাস্তবায়িত একটি ব্যাবহার করতে পারি, যেমন [lodash](https://lodash.com) এর [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) ফাংশন।
+We can use recursion to implement it. Or, not to reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
 
-## সংক্ষিপ্ত
+## Summary
 
-অবজেক্ট গুলো রেফারেন্স এর মাধ্যমে কপি হয়। অন্য কথায়, একটি ভেরিয়েবল অবজেক্ট এর মান সংরক্ষণ করে না , বরং একটি রেফারেন্স (মেমোরি এড্রেস) সংরক্ষণ করে। সুতরাং এই ধরনের ভেরিয়েবল কে কপি করলে অবজেক্ট কপি হয় না বরং রেফারেন্স কপি হয়।
+Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object.
 
-কপি করা রেফারেন্সে এর মাধ্যমে করে সকল কাজ (যেমন প্রপার্টি যোগ করা/মোছা) একই অবজেক্ট এ সম্পাদিত হয়।
+All operations via copied references (like adding/removing properties) are performed on the same single object.
 
-একটি "বাস্তব কপি" (ক্লোন) তৈরি করতে আমরা ব্যাবহার করতে পারি `Object.assign` যাকে "শ্যালো কপি"(অভ্যন্তরীণ অবজেক্ট রেফারেন্সের মাধ্যমে কপি হয়) বলা হয় অথবা আমরা ব্যাবহার করতে পারি [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) এর মত "ডিপ ক্লোনিং" ফাংশন। 
+To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
