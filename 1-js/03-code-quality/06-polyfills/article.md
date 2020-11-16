@@ -23,8 +23,13 @@
 
 2. দ্বিতীয়ত, পলিফিল।
 
+<<<<<<< HEAD
     ভাষার নতুন ফিচারে হয়তো নতুন কোন বিল্ড-ইন ফাংশন এবং সিনট্যাক্স কন্সট্রাক্ট থাকতে পারে। ট্রান্সপাইলার কোড পুনরায় লিখার সময়, সিনট্যাক্স কন্সট্রাক্টকে পুরাতন সিনট্যাক্সে পরিবর্তন করে। কিন্তু নতুন বিল্ড-ইন ফাংশনের ক্ষেত্রে, আমাদের সেগুলো ইমপ্লিমেন্ট করতে হবে। জাভাস্ক্রিপ্ট অত্যন্ত ডাইনামিক ভাষা, যেকোনো ফাংশনকে আধুনিক স্ট্যান্ডার্ডের মত আচরণ করানোর জন্য স্ক্রিপ্ট তাদের এড/মডিফাই করতে পারে।
     যে স্ক্রিপ্টটি নতুন ফাংশনকে আপডেট/এড করে থাকে তাকে "পলিফিল" বলা হয়। কারণ এটি "fills in" বা দূরত্বটি দূর করে এবং পুরাতন স্ট্যান্ডার্ড এ নেই এমন ইমপ্লিমেন্টেশন প্রদান করে।
+=======
+    New language features may include not only syntax constructs, but also built-in functions.
+    The transpiler rewrites the code, transforming syntax constructs into older ones. But as for new built-in functions, we need to implement them. JavaScript is a highly dynamic language, scripts may add/modify any functions, so that they behave according to the modern standard.
+>>>>>>> 99e59ba611ab11319ef9d0d66734b0bea2c3f058
 
     দুটি মজার পলিফিল হলঃ
     - [core js](https://github.com/zloirock/core-js) অনেককিছুই সমর্থন করে, শুধু যেটা প্রয়োজন সেটা ব্যবহার করা যায়। that supports a lot, allows to include only needed features.
