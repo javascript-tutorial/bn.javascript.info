@@ -1,46 +1,46 @@
-# Quantifiers +, *, ? and {n}
+# কোয়ান্টিফায়ার +, *, ? এবং {n}
 
-Let's say we have a string like `+7(903)-123-45-67` and want to find all numbers in it. But unlike before, we are interested not in single digits, but full numbers: `7, 903, 123, 45, 67`.
+এখন মনে করন আমাদের এমন একটি `+7(903)-123-45-67` স্ট্রিং আছে এবং আমরা এর সকল নাম্বার খুঁজে পেতে চাই। কিন্ত পূর্বের মত, আমরা একক অঙ্ক চাই না, পূর্ণ সংখ্যা চাই: `7, 903, 123, 45, 67`।
 
-A number is a sequence of 1 or more digits `pattern:\d`. To mark how many we need, we can append a *quantifier*.
+সংখ্যা হল এক বা একাধিক অঙ্কের একটি সমষ্টি `pattern:\d`. আমাদের প্রয়োজনমত অঙ্কের জন্য আমরা *quantifier* সংযোজন করতে পারি।
 
-## Quantity {n}
+## সংখ্যা {n}
 
-The simplest quantifier is a number in curly braces: `pattern:{n}`.
+সবচেয়ে সহজ কোয়ান্টিফায়ার হল দ্বিতীয় বন্ধনীর মধ্যে একটি সংখ্যা: `pattern:{n}`।
 
-A quantifier is appended to a character (or a character class, or a `[...]` set etc) and specifies how many we need.
+কোয়ান্টিফায়ারে যেকোন ধরণের ক্যারাক্টার (অথবা ক্যারাক্টার ক্লাস, অথবা `[...]` সেট ইত্যাদি) আমাদের প্রয়োজনমত সংযোজন করতে পারি।
 
-It has a few advanced forms, let's see examples:
+এটি ব্যবহারের বিভিন্ন উপায় আছে, চলুন কয়েকটি উদাহরণ দেখি:
 
-The exact count: `pattern:{5}`
-: `pattern:\d{5}` denotes exactly 5 digits, the same as `pattern:\d\d\d\d\d`.
+নির্দিষ্ট সংখ্যা গণনা: `pattern:{5}`
+: `pattern:\d{5}` এটি দ্বারা ৫টি অঙ্ক বুঝায়, যা `pattern:\d\d\d\d\d` এর অনুরূপ।
 
-    The example below looks for a 5-digit number:
+    নিচের উদাহরণে একটি ৫ অঙ্কের সংখ্যা খুঁজা হচ্ছে:
 
     ```js run
     alert( "I'm 12345 years old".match(/\d{5}/) ); //  "12345"
     ```
 
-    We can add `\b` to exclude longer numbers: `pattern:\b\d{5}\b`.
+    আমরা `\b` যুক্ত করে এর চেয়ে বড় সংখ্যাগুলো বাদ দিতে পারি: `pattern:\b\d{5}\b`।
 
-The range: `pattern:{3,5}`, match 3-5 times
-: To find numbers from 3 to 5 digits we can put the limits into curly braces: `pattern:\d{3,5}`
+রেঞ্জ: `pattern:{3,5}`, ৩-৫ অঙ্কের সংখ্যার সাথে মিল খুঁজে
+: ৩ থেকে ৫ অঙ্কের মধ্যের সংখ্যা গুলো খুঁজতে আমরা দ্বিতীয় বন্ধনীতে সীমা নির্ধারণ করে দিতে পারি: `pattern:\d{3,5}`
 
     ```js run
     alert( "I'm not 12, but 1234 years old".match(/\d{3,5}/) ); // "1234"
     ```
 
-    We can omit the upper limit.
+    আমরা সর্বোচ্চ সীমাটি বাদ দিতে পারি।
 
-    Then a regexp `pattern:\d{3,}` looks for sequences of digits of length `3` or more:
+    এ রেগুলার এক্সপ্রেশনটি `pattern:\d{3,}` ৩ বা ততোধিক অঙ্কের মিল গুলো খুঁজে:
 
     ```js run
     alert( "I'm not 12, but 345678 years old".match(/\d{3,}/) ); // "345678"
     ```
 
-Let's return to the string `+7(903)-123-45-67`.
+এখন আমাদের পূর্বের `+7(903)-123-45-67` স্ট্রিংটি দেখি।
 
-A number is a sequence of one or more digits in a row. So the regexp is `pattern:\d{1,}`:
+সংখ্যা হল এক বা একাধিক অঙ্কের সমষ্টি। সুতরাং রেগুলার এক্সপ্রেশনটি হবে `pattern:\d{1,}`:
 
 ```js run
 let str = "+7(903)-123-45-67";
