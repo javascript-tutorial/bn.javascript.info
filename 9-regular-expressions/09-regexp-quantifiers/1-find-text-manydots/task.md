@@ -1,14 +1,14 @@
-importance: 5
+গুরুত্বপূর্ন: ৫
 
 ---
 
-#  How to find an ellipsis "..." ?
+#  কিভাবে একটি উপবৃত্ত খুঁজে পাব "..." ?
 
-Create a regexp to find ellipsis: 3 (or more?) dots in a row.
+একটি রেগুলার এক্সপ্রেশন লিখুন যা: ৩ (অথবা ততোধিক?) ডটের উপবৃত্ত খুঁজবে।
 
-Check it:
+এটি দেখুন:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার রেগুলার এক্সপ্রেশনটি লিখুন/g;
 alert( "Hello!... How goes?.....".match(regexp) ); // ..., .....
 ```
