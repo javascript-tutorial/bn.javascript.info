@@ -1,10 +1,10 @@
-We need to look for `#` followed by 6 hexadecimal characters.
+আমাদের `#` এর পর ৬টি হেক্সাডেসিমেল ক্যারাক্টার খোঁজা লাগবে।
 
-A hexadecimal character can be described as `pattern:[0-9a-fA-F]`. Or if we use the `pattern:i` flag, then just  `pattern:[0-9a-f]`.
+`pattern:[0-9a-fA-F]` এর মাধ্যমে আমরা হেক্সাডেসিমেল ক্যারাক্টার সংজ্ঞায়িত করতে পারি। অথবা যদি আমরা `pattern:i` ফ্ল্যাগ ব্যবহার করি তাহলে প্যাটার্নটি হবে `pattern:[0-9a-f]`।
 
-Then we can look for 6 of them using the quantifier `pattern:{6}`.
+এখন আমরা কোয়ান্টিফায়ার `pattern:{6}` ব্যবহার করে ৬টি ক্যারাক্টার খুঁজতে পারি।
 
-As a result, we have the regexp: `pattern:/#[a-f0-9]{6}/gi`.
+ফলস্বরূপ, রেগুলার এক্সপ্রেশনটি হবে: `pattern:/#[a-f0-9]{6}/gi`।
 
 ```js run
 let regexp = /#[a-f0-9]{6}/gi;
@@ -14,18 +14,18 @@ let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2"
 alert( str.match(regexp) );  // #121212,#AA00ef
 ```
 
-The problem is that it finds the color in longer sequences:
+তবে এর সমস্যা হল দীর্ঘতম সিক্যুয়েন্সেও এটি কালার খুঁজবে:
 
 ```js run
 alert( "#12345678".match( /#[a-f0-9]{6}/gi ) ) // #12345678
 ```
 
-To fix that, we can add `pattern:\b` to the end:
+শেষে `pattern:\b` সংযোজন করে আমরা এটি সমাধান করতে পারি:
 
 ```js run
-// color
+// সঠিক কালার কোড
 alert( "#123456".match( /#[a-f0-9]{6}\b/gi ) ); // #123456
 
-// not a color
+// ভুল কালার কোড
 alert( "#12345678".match( /#[a-f0-9]{6}\b/gi ) ); // null
 ```

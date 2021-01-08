@@ -1,15 +1,15 @@
-# Regexp for HTML colors
+# এইচটিএমএল কালারের জন্য রেগুলার এক্সপ্রেশন
 
-Create a regexp to search HTML-colors written as `#ABCDEF`: first `#` and then 6 hexadecimal characters.
+হেক্সাডেসিমেল এইচটিএমএল কালার `#ABCDEF`: প্রথমে `#` তারপর ৬ টি হেক্সাডেসিমেল ক্যারাক্টার খোঁজার জন্য একটি রেগুলার এক্সপ্রেশন লিখুন।
 
-An example of use:
+ব্যবহারযোগ্য একটি উদাহরণ:
 
 ```js
-let regexp = /...your regexp.../
+let regexp = /...আপনার রেগুলার এক্সপ্রেশনটি লিখুন.../
 
 let str = "color:#121212; background-color:#AA00ef bad-colors:f#fddee #fd2 #12345678";
 
 alert( str.match(regexp) )  // #121212,#AA00ef
 ```
 
-P.S. In this task we do not need other color formats like `#123` or `rgb(1,2,3)` etc.
+পুনশ্চ এই টাস্কে আমাদের `#123` বা `rgb(1,2,3)` ইত্যাদি কালার ফরমেটগুলোর প্রয়োজন নেই।
