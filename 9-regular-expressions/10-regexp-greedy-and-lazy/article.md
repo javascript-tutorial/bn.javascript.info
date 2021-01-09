@@ -1,20 +1,21 @@
-# Greedy and lazy quantifiers
+# Greedy এবং lazy কোয়ান্টিফায়ার
 
-Quantifiers are very simple from the first sight, but in fact they can be tricky.
+প্রথম দেখায় কোয়ান্টিফায়ারকে সহজ মনে হতে পারে, কিন্তু বাস্তবে এরা কৌশলী।
 
-We should understand how the search works very well if we plan to look for something more complex than `pattern:/\d+/`.
+জটিল কিছু খোঁজার পূর্বে আমাদের বুঝতে হবে `pattern:/\d+/` এরা কিভাবে কাজ করে।
 
-Let's take the following task as an example.
+উদাহরণ হিসাবে নিচের টাস্কটি নিয়ে কাজ করি।
 
-We have a text and need to replace all quotes `"..."` with guillemet marks: `«...»`. They are preferred for typography in many countries.
+আমাদের কাছে একটি টেক্সট আছে এবং আমরা সকল উদ্ধৃতি চিহ্নকে `"..."`
+গিলিমেট চিহ্ন `«...»` দিয়ে প্রতিস্থাপন করব। অনেক দেশে টাইপোগ্রাফির জন্য এগুলোই বেশি পছন্দের।
 
-For instance: `"Hello, world"` should become `«Hello, world»`. There exist other quotes, such as `„Witam, świat!”` (Polish) or `「你好，世界」` (Chinese), but for our task let's choose `«...»`.
+উদাহরণস্বরূপ: `"Hello, world"` হবে `«Hello, world»`. আরো অনেক ধরণের উদ্ধৃতি চিহ্ন আছে, যেমন `„Witam, świat!”` (পোলিশ) অথবা `「你好，世界」` (চাইনিজ), কিন্ত আমাদের টাস্কের জন্য এখন এটিই `«...»` যুতসই।
 
-The first thing to do is to locate quoted strings, and then we can replace them.
+আমাদের প্রথম কাজটি হল স্ট্রিং হতে উদ্ধৃতি চিহ্নগুলোকে চিহ্নিত করা, এবং তারপর এদের আমরা প্রতিস্থাপন করতে পারব।
 
-A regular expression like `pattern:/".+"/g` (a quote, then something, then the other quote) may seem like a good fit, but it isn't!
+রেগুলার এক্সপ্রেশনে আমাদের প্যাটার্নটি হবে এমন `pattern:/".+"/g` (শুরুর উদ্ধৃতি চিহ্ন, তারপর কিছু ক্যারাক্টার, অতঃপর শেষ উদ্ধৃতি চিহ্ন) দেখতে সঠিক মনে হচ্ছে, তবে এটি সঠিক নই!
 
-Let's try it:
+চেষ্টা করা যাক:
 
 ```js run
 let regexp = /".+"/g;
@@ -24,75 +25,75 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(regexp) ); // "witch" and her "broom"
 ```
 
-...We can see that it works not as intended!
+...আমরা দেখতে পাচ্ছি এটি আমাদের চাহিদামত কাজ করছে না!
 
-Instead of finding two matches `match:"witch"` and `match:"broom"`, it finds one: `match:"witch" and her "broom"`.
+`match:"witch"` এবং `match:"broom"` এই দুটি মিল খুঁজে পাওয়ার পরিবর্তে এটি দেখায়: `match:"witch" and her "broom"`।
 
 That can be described as "greediness is the cause of all evil".
 
 ## Greedy search
 
-To find a match, the regular expression engine uses the following algorithm:
+কোন একটি মিল খুঁজতে রেগুলার এক্সপ্রেশন ইঞ্জিন নিম্নে উল্লেখিত অ্যালগরিদম অনুযায়ী কাজ করে:
 
-- For every position in the string
-    - Try to match the pattern at that position.
-    - If there's no match, go to the next position.
+- স্ট্রিংয়ের প্রতিটি অবস্থানের জন্য
+    - অই অবস্থানে প্যাটার্নটির অবস্থান মেলানোর চেষ্টা করে।
+    - যদি কোন মিল না পায়, তাহলে পরের অবস্থানে যায়।
 
-These common words do not make it obvious why the regexp fails, so let's elaborate how the search works for the pattern `pattern:".+"`.
+উপরোল্লিখিত নিয়ম থেকে রেগুলার এক্সপ্রেশন কিভাবে কাজ করে তা আমাদের কাছে সহজে বোধগম্য নই, চলুন এই প্যাটার্নটি `pattern:".+"` কিভাবে মিল খুঁজে তা বিস্তারিত দেখি।
 
-1. The first pattern character is a quote `pattern:"`.
+1. আমাদের প্যাটার্নের প্রথম ক্যারাক্টারটি একটি উদ্ধৃতি চিহ্ন `pattern:"`।
 
-    The regular expression engine tries to find it at the zero position of the source string `subject:a "witch" and her "broom" is one`, but there's `subject:a` there, so there's immediately no match.
+    রেগুলার এক্সপ্রেশন ইঞ্জিন প্রদত্ত স্ট্রিংয়ের `subject:a "witch" and her "broom" is one` শূন্যতম অবস্থানে একটি উদ্ধৃতি চিহ্ন মেলানোর চেষ্টা করে, কিন্তু অই অবস্থানে ক্যারাক্টারটি হল `subject:a`, সুতরাং কোন মিল খুঁজে পাবে না।
 
-    Then it advances: goes to the next positions in the source string and tries to find the first character of the pattern there, fails again, and finally finds the quote at the 3rd position:
+    তারপর এটি এর পরবর্তী অবস্থানে যাবে: অই অবস্থানে প্রদত্ত স্ট্রিংয়ের সাথে প্যাটার্নের প্রথম ক্যারাক্টারটি মেলানোর চেষ্টা করে, এবং এটি মেলে না, অবশেষে ৩য় অবস্থানে এটি উদ্ধৃতি চিহ্নের সাথে মেলে:
 
     ![](witch_greedy1.svg)
 
-2. The quote is detected, and then the engine tries to find a match for the rest of the pattern. It tries to see if the rest of the subject string conforms to `pattern:.+"`.
+2. উদ্ধৃতি চিহ্নের সাথে মিল হওয়ার পর, ইঞ্জিন বাকি প্যাটার্নটির মিল খুঁজে। ইঞ্জিন প্রদত্ত স্ট্রিংয়ের সাথে আমাদের প্যাটার্নের `pattern:.+"` মিল খুঁজে।
 
-    In our case the next pattern character is `pattern:.` (a dot). It denotes "any character except a newline", so the next string letter `match:'w'` fits:
+    এইক্ষত্রে, আমাদের প্যাটার্নের পরবর্তী ক্যারাক্টারটি হল `pattern:.` (একটি ডট ক্যারাক্টার)। এটি দ্বারা বুঝায় "নতুন লাইন ব্যাতীত সকল ক্যারাক্টার", সুতরাং স্ট্রিংয়ের পরবর্তী বর্ণ `match:'w'` এর সাথে মিল খুঁজে পায়:
 
     ![](witch_greedy2.svg)
 
-3. Then the dot repeats because of the quantifier `pattern:.+`. The regular expression engine adds to the match one character after another.
+3. এরপর ডটের সাথে কোয়ান্টিফায়ার `pattern:.+` থাকার কারনে রেগুলার এক্সপ্রেশন ইঞ্জিন পরবর্তী ক্যারাক্টার গুলোর সাথে মিলতে থাকে।
 
-    ...Until when? All characters match the dot, so it only stops when it reaches the end of the string:
+    ...কিন্তু কতক্ষণ পর্যন্ত? স্ট্রিংয়ের শেষ পর্যন্ত এর সকল সকল ক্যারাক্টার ডটের সাথে মেলতে থাকে:
 
     ![](witch_greedy3.svg)
 
-4. Now the engine finished repeating `pattern:.+` and tries to find the next character of the pattern. It's the quote `pattern:"`. But there's a problem: the string has finished, there are no more characters!
+4. এখন ইঞ্জিন এই প্যাটার্নের `pattern:.+` পুনরাবৃত্তি শেষে পরের প্যাটার্নটি খুঁজে। এটি হল উদ্ধৃতি চিহ্ন `pattern:"`। কিন্ত এখানে একটি সমস্যা আছে: প্যাটার্নের অবস্থান প্রদত্ত স্ট্রিংটির শেষে, এরপর আর কোন ক্যারাক্টার নেয়!
 
-    The regular expression engine understands that it took too many `pattern:.+` and starts to *backtrack*.
+    রেগুলার এক্সপ্রেশন ইঞ্জিন বুঝতে পারে `pattern:.+` অনেক বেশী অগ্রসর হয়ে গেছে সুতরাং এটি মিলটিকে *ব্যাকট্রাক* বা প্রত্যাখ্যান করা শুরু করে।
 
-    In other words, it shortens the match for the quantifier by one character:
+    অন্যথায় বলা যায়, কোয়ান্টিফায়ারের জন্য একটি ক্যারাক্টার বাদ দেয়:
 
     ![](witch_greedy4.svg)
 
-    Now it assumes that `pattern:.+` ends one character before the string end and tries to match the rest of the pattern from that position.
+    এখন এটি ধরা যাক `pattern:.+` শেষ। স্ট্রিংয়ের শেষ অবস্থান হতে একটি ক্যারাক্টার নেয় এবং সেই অবস্থান থেকে বাকী প্যাটার্নটি মেলাতে চেষ্টা করে।
 
-    If there were a quote there, then the search would end, but the last character is `subject:'e'`, so there's no match.
+    যদি অই অবস্থানে উদ্ধৃতি চিহ্ন থাকে তবে আমাদের অনুসদ্ধানটি শেষ হবে, কিন্তু শেষ ক্যারাক্টারটি হল `subject:'e'`, সুতরাং কোন মিল হবেনা।
 
-5. ...So the engine decreases the number of repetitions of `pattern:.+` by one more character:
+5. ...সুতরাং ইঞ্জিন `pattern:.+` এর জন্য আর একটি ক্যারাক্টার কমাবে:
 
     ![](witch_greedy5.svg)
 
-    The quote `pattern:'"'` does not match `subject:'n'`.
+    কিন্তু `pattern:'"'` উদ্ধৃতি চিহ্ন `subject:'n'` এর সাথে মেলেনা।
 
-6. The engine keep backtracking: it decreases the count of repetition for `pattern:'.'` until the rest of the pattern (in our case `pattern:'"'`) matches:
+6. ইঞ্জিনটি ব্যাকট্র্যাকিং চালিয়ে যায়: এটি `pattern:'.'` এর জন্য ক্রমাগত অনুসন্ধানকৃত ফলাফলটিকে সংক্ষিপ্ত করতে থাকে যতক্ষণ পর্যন্ত আমাদের প্যাটার্নটির (এইক্ষেত্রে `pattern:'"'`) মিল শেষ হয়:
 
     ![](witch_greedy6.svg)
 
-7. The match is complete.
+7. অনুসন্ধানটি সম্পূর্ন হয়।
 
-8. So the first match is `match:"witch" and her "broom"`. If the regular expression has flag `pattern:g`, then the search will continue from where the first match ends. There are no more quotes in the rest of the string `subject:is one`, so no more results.
+8. সুতরাং আমাদের প্রথম অনুসন্ধানটি হল `match:"witch" and her "broom"`। যদি রেগুলার এক্সপ্রেশনে `pattern:g` ফ্ল্যাগটি থাকে, তাহলে অনুসন্ধানটি চলবে যেখানে প্রথম মিলটি শেষ হয়। বাকী স্ট্রিংয়ে `subject:is one` আর কোন উদ্ধৃতি চিহ্ন নেয়, সুতরাং অন্য কোন ফলাফল আসবে না।
 
-That's probably not what we expected, but that's how it works.
+যদিওবা এটি আমাদের চাহিদামত কাজ করেনি, কিন্তু আমরা বুঝতে পারছি এটি কিভাবে কাজ করে।
 
-**In the greedy mode (by default) a quantifier is repeated as many times as possible.**
+**গ্রীডি অবস্থায়(ডিফল্ট ভাবে) একটি কোয়ান্টিফায়ার যতবার সম্ভব এর পুনরাবৃত্তি ঘটায়।**
 
-The regexp engine adds to the match as many characters as it can for `pattern:.+`, and then shortens that one by one, if the rest of the pattern doesn't match.
+রেগুলার এক্সপ্রেশন ইঞ্জিন যত সম্ভব ক্যারাক্টার `pattern:.+` এর জন্য সংযোজন করে, এবং এরপর বাকী প্যাটার্ন না মিললে একটির পর একটি ক্যারাক্টার বাদ দিতে থাকে।
 
-For our task we want another thing. That's where a lazy mode can help.
+আমাদের টাস্কের জন্য আরো একটি বিষয় জানা উচিত। এই ক্ষেত্রে আমরা লেজি মোডের সাহায্য নিতে পারি।
 
 ## Lazy mode
 
