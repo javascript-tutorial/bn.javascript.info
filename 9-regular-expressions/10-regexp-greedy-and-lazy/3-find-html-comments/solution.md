@@ -1,8 +1,8 @@
-We need to find the beginning of the comment `match:<!--`, then everything till the end of `match:-->`.
+আমাদের প্রথমে খুঁজা লাগবে কমেন্ট এর শুরুর `match:<!--` অংশ, এরপর কমেন্টের শেষ `match:-->` অংশ।
 
-An acceptable variant is `pattern:<!--.*?-->` -- the lazy quantifier makes the dot stop right before `match:-->`. We also need to add flag `pattern:s` for the dot to include newlines.
+সুতরাং প্যাটার্নটি হবে `pattern:<!--.*?-->` -- লেজি কোয়ান্টিফায়ারের ডটের জন্য এটি `match:-->` এর পূর্ব পর্যন্ত মেলে। আমাদের এই ফ্ল্যাগটি `pattern:s` দিতে হবে যেন ডট দ্বারা নিউলাইন ক্যারাক্টারকেও নির্দেশ করে।
 
-Otherwise multiline comments won't be found:
+অন্যথায় একের অধিক লাইনের কমেন্টগুলো অনুসন্ধানে আসবে না:
 
 ```js run
 let regexp = /<!--.*?-->/gs;
