@@ -1,31 +1,31 @@
-# Capturing groups
+# গ্রুপ ক্যাপচারিং
 
-A part of a pattern can be enclosed in parentheses `pattern:(...)`. This is called a "capturing group".
+প্যাটার্নের কোন একটা অংশকে প্যারেন্টেসিস `pattern:(...)` দ্বারা লিখাকে "গ্রুপ ক্যাপচারিং" বলে।
 
-That has two effects:
+এর ফলে ফলাফলে দুটি পরিবর্তন আছে:
 
-1. It allows to get a part of the match as a separate item in the result array.
-2. If we put a quantifier after the parentheses, it applies to the parentheses as a whole.
+১. এটি দ্বারা লব্ধ ফলাফলের অ্যারেতে কোন একটা অংশকে আলাদা পজিশনে রাখা যায়।
+২. যদি প্যারেন্টেসিসের পরে আমরা কোয়ান্টিফায়ার রাখি, এটি সম্পূর্ন গ্রুপের জন্য কাজ করবে।
 
-## Examples
+## উদাহরণ
 
-Let's see how parentheses work in examples.
+চলুন উদাহরণ দিয়ে দেখি গ্রুপ ক্যাপচারিং কিভাবে কাজ করে।
 
-### Example: gogogo
+### উদাহরণ: gogogo
 
-Without parentheses, the pattern `pattern:go+` means `subject:g` character, followed by `subject:o` repeated one or more times. For instance, `match:goooo` or `match:gooooooooo`.
+প্যারেন্টেসিস ছাড়া, এই প্যাটার্নটি `pattern:go+` দ্বারা বুঝায় `subject:g` এবং `subject:o` এই দুটি ক্যারাক্টার এক বা একাধিকবার পুনরাবৃত্তি হবে। উদাহরণস্বরুপ, `match:goooo` অথবা `match:gooooooooo`।
 
-Parentheses group characters together, so `pattern:(go)+` means `match:go`, `match:gogo`, `match:gogogo` and so on.
+প্যারেন্টেসিস দ্বারা গ্রুপ ক্যারাক্টারগুলো একসাথে বুঝায়, সুতরাং `pattern:(go)+` দ্বারা প্রাপ্তমিলগুলো হতে পারে `match:go`, `match:gogo`, `match:gogogo` অনুরূপ আরো অনেক।
 
 ```js run
 alert( 'Gogogo now!'.match(/(go)+/i) ); // "Gogogo"
 ```
 
-### Example: domain
+### উদাহরণ: ডোমেন
 
-Let's make something more complex -- a regular expression to search for a website domain.
+চলুন আরো কঠিন কিছু করি -- রেগুলার এক্সপ্রেশন দ্বারা ওয়েবসাইটের ডোমেন খুঁজে বের করি।
 
-For example:
+যেমন:
 
 ```
 mail.com
@@ -33,9 +33,9 @@ users.mail.com
 smith.users.mail.com
 ```
 
-As we can see, a domain consists of repeated words, a dot after each one except the last one.
+এইক্ষেত্রে আমরা দেখছি, ডোমেনে শেষ শব্দটি ব্যতীত শব্দের শেষে একটি ডট থাকবে।
 
-In regular expressions that's `pattern:(\w+\.)+\w+`:
+রেগুলার এক্সপ্রেশন আমরা এটি এভাবে লিখতে পারি `pattern:(\w+\.)+\w+`:
 
 ```js run
 let regexp = /(\w+\.)+\w+/g;
@@ -43,17 +43,17 @@ let regexp = /(\w+\.)+\w+/g;
 alert( "site.com my.site.com".match(regexp) ); // site.com,my.site.com
 ```
 
-The search works, but the pattern can't match a domain with a hyphen, e.g. `my-site.com`, because the hyphen does not belong to class `pattern:\w`.
+এটি কাজ করছে, কিন্তু উপরের প্যাটার্নটি হাইফেনসহ ডোমেনের জন্য সঠিকভাবে কাজ করবে না, যেমন. `my-site.com`, কেননা `pattern:\w` এই ক্যারাক্টার ক্লাস দ্বারা হাইফেনকে নির্দেশিত করা যায় না।
 
-We can fix it by replacing `pattern:\w` with `pattern:[\w-]` in every word except the last one: `pattern:([\w-]+\.)+\w+`.
+`pattern:\w` এর পরিবর্তে `pattern:[\w-]` লিখার মাধ্যমে আমরা এটিকে নির্ভুল করতে পারি সুতরাং প্যাটার্নটি হবে: `pattern:([\w-]+\.)+\w+`।
 
-### Example: email
+### উদাহরণ: ইমেইল
 
-The previous example can be extended. We can create a regular expression for emails based on it.
+পূর্ববর্তী উদাহরণটিকে কিছুটা বর্ধিত করে আমরা ইমেইল এর জন্য একটি রেগুলার এক্সপ্রেশন লিখতে পারি।
 
-The email format is: `name@domain`. Any word can be the name, hyphens and dots are allowed. In regular expressions that's `pattern:[-.\w]+`.
+ইমেইল এর ফরম্যাট: `name@domain`। নামের মধ্যে ডট হাইফেন ইত্যাদি থাকতে পারে। সুতরাং রেগুলার এক্সপ্রেশনটি হবে `pattern:[-.\w]+`।
 
-The pattern:
+প্যাটার্ন:
 
 ```js run
 let regexp = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
@@ -61,24 +61,24 @@ let regexp = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
 alert("my@mail.com @ his@site.com.uk".match(regexp)); // my@mail.com, his@site.com.uk
 ```
 
-That regexp is not perfect, but mostly works and helps to fix accidental mistypes. The only truly reliable check for an email can only be done by sending a letter.
+এটি পুরোপুরি নির্ভুল নই, কিন্তু বেশিরভাগক্ষেত্রে অ্যাক্সিডেন্টালি ভুল টাইপিং এড়ানোর জন্য কাজের। আমরা একটি ইমেইল নির্ভুল কিনা তা যাচাই করতে পারি শুধুমাত্র ইমেইল প্রেরণের মাধ্যমে।
 
-## Parentheses contents in the match
+## ফলাফলে প্যারেন্টেসিসের কন্টেন্টগুলো কিভাবে থাকে
 
-Parentheses are numbered from left to right. The search engine memorizes the content matched by each of them and allows to get it in the result.
+প্যারেন্টেসিসগুলোকে বাম থেকে ডানে হিসেব করা হয়। সার্চ ইঞ্জিন মিলকৃত সকল কন্টেন্টকে মনে রাখে এবং ফলাফলে এদের যুক্ত করে।
 
-The method `str.match(regexp)`, if `regexp` has no flag `g`, looks for the first match and returns it as an array:
+`str.match(regexp)` মেথড, যদি `regexp` কোন `g` ফ্ল্যাগ না থাকে, প্রথম মিলটি খুঁজে এবং এটি অ্যারে হিসেবে দেখায়:
 
-1. At index `0`: the full match.
-2. At index `1`: the contents of the first parentheses.
-3. At index `2`: the contents of the second parentheses.
-4. ...and so on...
+১. `0` তম ইন্ডেক্সে: সম্পূর্ণ মিলটি।
+২. `1` তম ইন্ডেক্সে: প্রথম প্যারেন্টেসিসের মিলগুলো।
+৩. `2` তম ইন্ডেক্সে: দ্বিতীয় প্যারেন্টেসিসের মিলগুলো।
+৪. ...এভাবেই চলতে থাকে...
 
-For instance, we'd like to find HTML tags `pattern:<.*?>`, and process them. It would be convenient to have tag content (what's inside the angles), in a separate variable.
+উদাহরণস্বরূপ, আমরা এইচটিএমএল ট্যাগ `pattern:<.*?>` খুঁজে পেতে চাই, এবং এদের নিয়ে কাজ করতে চাই। এজন্য আমাদের ট্যাগগুলো এবং ট্যাগের নাম গুলো আলাদা আলাদা ভ্যারিয়েবলে রাখা সুবিধাজনক।
 
-Let's wrap the inner content into parentheses, like this: `pattern:<(.*?)>`.
+চলুন ট্যাগনামগুলোকে আমরা প্যারেন্টেসিসের দ্বারা আবদ্ধ করি, এভাবে: `pattern:<(.*?)>`।
 
-Now we'll get both the tag as a whole `match:<h1>` and its contents `match:h1` in the resulting array:
+এখন আমরা পুরো ট্যাগটি `match:<h1>` এবং ট্যাগ নামটি `match:h1` লব্ধ ফলাফলে অ্যারে হিসেবে পাব:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -89,23 +89,23 @@ alert( tag[0] ); // <h1>
 alert( tag[1] ); // h1
 ```
 
-### Nested groups
+### নেস্টেড গ্রুপ
 
-Parentheses can be nested. In this case the numbering also goes from left to right.
+প্যারেন্টেসিসগুলো নেস্টেডও হতে পারে। এক্ষেত্রেও ফলাফলে এরা বাম থেকে ডানে আসবে।
 
-For instance, when searching a tag in `subject:<span class="my">` we may be interested in:
+উদাহরণস্বরূপ, যখন আমরা এই ধরণের ট্যাগে `subject:<span class="my">` অনুসন্ধান করব আমরা ফলাফলটিকে নিম্নোক্তভাবে রাখতে পারব:
 
-1. The tag content as a whole: `match:span class="my"`.
-2. The tag name: `match:span`.
-3. The tag attributes: `match:class="my"`.
+১. পুরো কন্টেন্টটি: `match:span class="my"`।
+২. ট্যাগ নামটি: `match:span`।
+৩. ট্যাগ অ্যাট্রিবিউট: `match:class="my"`।
 
-Let's add parentheses for them: `pattern:<(([a-z]+)\s*([^>]*))>`.
+সুতরাং নেস্টেড প্যাটার্নটি হবে এমন: `pattern:<(([a-z]+)\s*([^>]*))>`।
 
-Here's how they are numbered (left to right, by the opening paren):
+দেখুন এরা কিভাবে ক্রম করে (বাম থেকে ডানে, প্যারেন্টেসিসের উপর ভিত্তি করে):
 
 ![](regexp-nested-groups-pattern.svg)
 
-In action:
+উদাহরণ:
 
 ```js run
 let str = '<span class="my">';
@@ -119,13 +119,13 @@ alert(result[2]); // span
 alert(result[3]); // class="my"
 ```
 
-The zero index of `result` always holds the full match.
+`result` এর শূন্যতম ইন্ডেক্সে সম্পূর্ণ কন্টেন্টটি।
 
-Then groups, numbered from left to right by an opening paren. The first group is returned as `result[1]`. Here it encloses the whole tag content.
+এরপর গ্রুপিং, ওপেনিং প্যারেন্টেসিসের এর উপর নির্ভর করে বাম থেকে ডানে। প্রথম গ্রুপটি হবে `result[1]`। এখানে পুরো ট্যাগ কন্টেন্টটি আসবে।
 
-Then in `result[2]` goes the group from the second opening paren `pattern:([a-z]+)` - tag name, then in `result[3]` the tag: `pattern:([^>]*)`.
+এরপর `result[2]` হল দ্বিতীয় ওপেনিং প্যারেন্টেসিসের  `pattern:([a-z]+)` কন্টেন্ট - ট্যাগ নাম, এরপর `result[3]` ট্যাগ অ্যাট্রিবিউট: `pattern:([^>]*)`।
 
-The contents of every group in the string:
+স্ট্রিংয়ের প্রতিটি গ্রুপ:
 
 ![](regexp-nested-groups-matches.svg)
 
