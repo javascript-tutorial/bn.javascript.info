@@ -23,7 +23,7 @@ alert( 'Gogogo now!'.match(/(go)+/i) ); // "Gogogo"
 
 ### উদাহরণ: ডোমেন
 
-চলুন আরো কঠিন কিছু করি -- রেগুলার এক্সপ্রেশন দ্বারা ওয়েবসাইটের ডোমেন খুঁজে বের করি।
+চলুন আরো কঠিন কিছু করি -- রেগুলার এক্সপ্রেশন দ্বারা ওয়েবসাইটের ডোমেন খুঁজে বের করা।
 
 যেমন:
 
@@ -33,7 +33,7 @@ users.mail.com
 smith.users.mail.com
 ```
 
-এইক্ষেত্রে আমরা দেখছি, ডোমেনে শেষ শব্দটি ব্যতীত শব্দের শেষে একটি ডট থাকবে।
+এইক্ষেত্রে আমরা দেখছি, ডোমেনে শেষ শব্দটি ব্যতীত প্রতিটি শব্দের শেষে একটি ডট থাকবে।
 
 রেগুলার এক্সপ্রেশন আমরা এটি এভাবে লিখতে পারি `pattern:(\w+\.)+\w+`:
 
@@ -63,22 +63,22 @@ alert("my@mail.com @ his@site.com.uk".match(regexp)); // my@mail.com, his@site.c
 
 এটি পুরোপুরি নির্ভুল নই, কিন্তু বেশিরভাগক্ষেত্রে অ্যাক্সিডেন্টালি ভুল টাইপিং এড়ানোর জন্য কাজের। আমরা একটি ইমেইল নির্ভুল কিনা তা যাচাই করতে পারি শুধুমাত্র ইমেইল প্রেরণের মাধ্যমে।
 
-## ফলাফলে প্যারেন্টেসিসের কন্টেন্টগুলো কিভাবে থাকে
+## রেজাল্টে প্যারেন্টেসিসের কন্টেন্টগুলো কিভাবে থাকে
 
-প্যারেন্টেসিসগুলোকে বাম থেকে ডানে হিসেব করা হয়। সার্চ ইঞ্জিন মিলকৃত সকল কন্টেন্টকে মনে রাখে এবং ফলাফলে এদের যুক্ত করে।
+প্যারেন্টেসিসের কন্টেন্ট গুলোকে বাম থেকে ডানে হিসেব করা হয়। সার্চ ইঞ্জিন মিলকৃত সকল কন্টেন্টকে মনে রাখে এবং রেজাল্টে এদের পাওয়া যায়।
 
-`str.match(regexp)` মেথড, যদি `regexp` কোন `g` ফ্ল্যাগ না থাকে, প্রথম মিলটি খুঁজে এবং এটি অ্যারে হিসেবে দেখায়:
+`str.match(regexp)` মেথড, যদি `regexp` কোন `g` ফ্ল্যাগ না থাকে, তাহলে প্রথম মিলটি খুঁজে এবং এটি অ্যারে হিসেবে দেখায়:
 
-১. `0` তম ইন্ডেক্সে: সম্পূর্ণ মিলটি।
-২. `1` তম ইন্ডেক্সে: প্রথম প্যারেন্টেসিসের মিলগুলো।
-৩. `2` তম ইন্ডেক্সে: দ্বিতীয় প্যারেন্টেসিসের মিলগুলো।
+১. `0` তম ইনডেক্সে: সম্পূর্ণ মিলটি।
+২. `1` তম ইনডেক্সে: প্রথম প্যারেন্টেসিসের মিলগুলো।
+৩. `2` তম ইনডেক্সে: দ্বিতীয় প্যারেন্টেসিসের মিলগুলো।
 ৪. ...এভাবেই চলতে থাকে...
 
-উদাহরণস্বরূপ, আমরা এইচটিএমএল ট্যাগ `pattern:<.*?>` খুঁজে পেতে চাই, এবং এদের নিয়ে কাজ করতে চাই। এজন্য আমাদের ট্যাগগুলো এবং ট্যাগের নাম গুলো আলাদা আলাদা ভ্যারিয়েবলে রাখা সুবিধাজনক।
+উদাহরণস্বরূপ, আমরা HTML ট্যাগ `pattern:<.*?>` খুঁজে পেতে চাই, এবং এদের নিয়ে কাজ করতে চাই। এজন্য আমাদের ট্যাগগুলো এবং ট্যাগের নাম গুলো আলাদা আলাদা ভ্যারিয়েবলে রাখা সুবিধাজনক।
 
-চলুন ট্যাগনামগুলোকে আমরা প্যারেন্টেসিসের দ্বারা আবদ্ধ করি, এভাবে: `pattern:<(.*?)>`।
+চলুন ট্যাগ নামগুলোকে আমরা প্যারেন্টেসিসের দ্বারা আবদ্ধ করি, এভাবে: `pattern:<(.*?)>`।
 
-এখন আমরা পুরো ট্যাগটি `match:<h1>` এবং ট্যাগ নামটি `match:h1` লব্ধ ফলাফলে অ্যারে হিসেবে পাব:
+এখন আমরা পুরো ট্যাগটি `match:<h1>` এবং ট্যাগ নামটি `match:h1` রেজাল্টে অ্যারে হিসেবে পাব:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -91,7 +91,7 @@ alert( tag[1] ); // h1
 
 ### নেস্টেড গ্রুপ
 
-প্যারেন্টেসিসগুলো নেস্টেডও হতে পারে। এক্ষেত্রেও ফলাফলে এরা বাম থেকে ডানে আসবে।
+প্যারেন্টেসিসগুলো নেস্টেডও হতে পারে। এক্ষেত্রেও রেজাল্টে এরা বাম থেকে ডানে আসবে।
 
 উদাহরণস্বরূপ, যখন আমরা এই ধরণের ট্যাগে `subject:<span class="my">` অনুসন্ধান করব আমরা ফলাফলটিকে নিম্নোক্তভাবে রাখতে পারব:
 
@@ -101,7 +101,7 @@ alert( tag[1] ); // h1
 
 সুতরাং নেস্টেড প্যাটার্নটি হবে এমন: `pattern:<(([a-z]+)\s*([^>]*))>`।
 
-দেখুন এরা কিভাবে ক্রম করে (বাম থেকে ডানে, প্যারেন্টেসিসের উপর ভিত্তি করে):
+দেখুন এরা কিভাবে ক্রম হয় (প্যারেন্টেসিসের উপর ভিত্তি করে বাম থেকে ডানে):
 
 ![](regexp-nested-groups-pattern.svg)
 
@@ -119,7 +119,7 @@ alert(result[2]); // span
 alert(result[3]); // class="my"
 ```
 
-`result` এর শূন্যতম ইন্ডেক্সে সম্পূর্ণ কন্টেন্টটি।
+`result` এর শূন্যতম ইনডেক্সে সম্পূর্ণ কন্টেন্টটি।
 
 এরপর গ্রুপিং, ওপেনিং প্যারেন্টেসিসের এর উপর নির্ভর করে বাম থেকে ডানে। প্রথম গ্রুপটি হবে `result[1]`। এখানে পুরো ট্যাগ কন্টেন্টটি আসবে।
 
@@ -129,49 +129,48 @@ alert(result[3]); // class="my"
 
 ![](regexp-nested-groups-matches.svg)
 
-### Optional groups
+### অপশনাল গ্রুপ
 
-Even if a group is optional and doesn't exist in the match (e.g. has the quantifier `pattern:(...)?`), the corresponding `result` array item is present and equals `undefined`.
+যদি কোন গ্রুপ অপশনাল হয় এবং কোন মিল না পায় (যেমন এই কোয়ান্টিফায়ারটি `pattern:(...)?`), `result` অ্যারেতে আইটেমটি `undefined` হিসেবে থাকবে।
 
-For instance, let's consider the regexp `pattern:a(z)?(c)?`. It looks for `"a"` optionally followed by `"z"` optionally followed by `"c"`.
+উদাহরণস্বরূপ, রেগুলার এক্সপ্রেশনটি দেখুন `pattern:a(z)?(c)?`। এটি প্রথমে `"a"` খুঁজে অতঃপর `"z"` এবং `"c"` কে অপশনাল হিসেবে খুঁজে।
 
-If we run it on the string with a single letter `subject:a`, then the result is:
+যদি আমরা একটি ক্যারাক্টার `subject:a` এর জন্য প্যাটার্নটি ব্যবহার করি, তাহলে ফলাফলটি হবে:
 
 ```js run
 let match = 'a'.match(/a(z)?(c)?/);
 
 alert( match.length ); // 3
-alert( match[0] ); // a (whole match)
+alert( match[0] ); // a (সম্পূর্ন সাবজেক্ট)
 alert( match[1] ); // undefined
 alert( match[2] ); // undefined
 ```
+অ্যারেটির সাইজ `3`, কিন্তু গ্রুপ ইনডেক্স গুলো 'undefined'।
 
-The array has the length of `3`, but all groups are empty.
-
-And here's a more complex match for the string `subject:ac`:
+এখানে পূর্বেরটির চেয়ে আরেকটি জটিল সাব্জেক্ট আছে `subject:ac`:
 
 ```js run
 let match = 'ac'.match(/a(z)?(c)?/)
 
 alert( match.length ); // 3
-alert( match[0] ); // ac (whole match)
-alert( match[1] ); // undefined, because there's nothing for (z)?
+alert( match[0] ); // ac (সম্পূর্ন সাবজেক্ট)
+alert( match[1] ); // undefined, কেননা (z)? এর সাথে কোন মিল নেই
 alert( match[2] ); // c
 ```
 
-The array length is permanent: `3`. But there's nothing for the group `pattern:(z)?`, so the result is `["ac", undefined, "c"]`.
+অ্যারেটির সাইজ: `3`। কিন্তু `pattern:(z)?` এর জন্য কোন ফলাফল নেই, সুতরাং অ্যারেটি হবে `["ac", undefined, "c"]`।
 
-## Searching for all matches with groups: matchAll
+## সকল ম্যাচের জন্য গ্রুপ অনুসন্ধান: matchAll
 
-```warn header="`matchAll` is a new method, polyfill may be needed"
-The method `matchAll` is not supported in old browsers.
+```warn header="`matchAll` হল একটি নতুন মেথড, এজন্য পলিফিলের দরকার হতে পারে"
+`matchAll` পুরাতন ব্রাউজারের জন্য কাজ করবে না।
 
-A polyfill may be required, such as <https://github.com/ljharb/String.prototype.matchAll>.
+এজন্য পলিফিলের দরকার, যেমন <https://github.com/ljharb/String.prototype.matchAll>.
 ```
 
-When we search for all matches (flag `pattern:g`), the `match` method does not return contents for groups.
+যখন আমরা সকল ম্যাচের জন্য ফ্ল্যাগ (`pattern:g`) দ্বারা অনুসন্ধান করব, `match` মেথডটি গ্রুপ কন্টেন্টগুলো রিটার্ন করে না।
 
-For example, let's find all tags in a string:
+যেমন, স্ট্রিংটি হতে সকল ট্যাগগুলো খুঁজি:
 
 ```js run
 let str = '<h1> <h2>';
@@ -181,55 +180,55 @@ let tags = str.match(/<(.*?)>/g);
 alert( tags ); // <h1>,<h2>
 ```
 
-The result is an array of matches, but without details about each of them. But in practice we usually need contents of capturing groups in the result.
+রেজাল্টে আমরা ম্যাচকৃত সকল অ্যারে দেখি, কিন্তু তাদের প্রত্যেকের গ্রুপ কন্টেন্টের বিস্তারিত নেই। কিন্তু সাধারণত আমাদের ক্যাপচারিং গ্রুপের কন্টেন্ট গুলো রেজাল্টে লাগতে পারে।
 
-To get them, we should search using the method `str.matchAll(regexp)`.
+এজন্য, আমাদের সার্চিংটা `str.matchAll(regexp)` এই মেথডের সাহায্যে চালাতে হবে।
 
-It was added to JavaScript language long after `match`, as its "new and improved version".
+এটি জাভাস্ক্রিপ্টে `match` মেথডের অনেক পরে সংযুক্ত হয়েছে, এজন্য এটি "নতুন এবং উন্নত ভার্সন"।
 
-Just like `match`, it looks for matches, but there are 3 differences:
+`match` এর মত এটিও মিলগুলো খুঁজে, কিন্তু `match` এর সাথে ৩টি পার্থক্য আছে:
 
-1. It returns not an array, but an iterable object.
-2. When the flag `pattern:g` is present, it returns every match as an array with groups.
-3. If there are no matches, it returns not `null`, but an empty iterable object.
+১. এটি অ্যারে রিটার্নের পরিবর্তে একটি ইটারেবল অবজেক্ট রিটার্ন করে।
+২. যখন `pattern:g` এই ফ্ল্যাগটি থাকে, এটি প্রতিটি মিলকে গ্রুপ কন্টেন্ট সহ একটি অ্যারে আকারে থাকে।
+৩. যদি কোন মিল না থাকে, এটি `null` রিটার্নের পরিবর্তে একটি এম্পটি ইটারেবল অবজেক্ট রিটার্ন করে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 
-// results - is not an array, but an iterable object
+// results - অ্যারে পরিবর্তে একটি ইটারেবল অবজেক্ট
 alert(results); // [object RegExp String Iterator]
 
 alert(results[0]); // undefined (*)
 
-results = Array.from(results); // let's turn it into array
+results = Array.from(results); // অ্যারেতে নিয়ে যায়
 
 alert(results[0]); // <h1>,h1 (1st tag)
 alert(results[1]); // <h2>,h2 (2nd tag)
 ```
 
-As we can see, the first difference is very important, as demonstrated in the line `(*)`. We can't get the match as `results[0]`, because that object isn't pseudoarray. We can turn it into a real `Array` using `Array.from`. There are more details about pseudoarrays and iterables in the article <info:iterable>.
+আমরা দেখছি, প্রথম পার্থক্যটি অনেক গুরত্বপূর্ণ, `(*)` দ্বারা নির্দেশিত লাইনটি খেয়াল করুন। আমরা মিলটিকে `results[0]` এর মধ্যে পায় না, কেননা অবজেক্টটি সুডোঅ্যারে নই। আমরা এটিকে `Array.from` এর মাধ্যমে `Array` তে নিতে পারি। সুডোঅ্যারে এবং ইটারেবল সম্পর্কে বিস্তারিত জানতে পারবেন এই আর্টিকেলে <info:iterable>।
 
-There's no need in `Array.from` if we're looping over results:
+`Array.from` ছাড়াও আমরা লুপের মাধ্যমে রেজাল্ট গুলো দেখতে পারি:
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 
 for(let result of results) {
   alert(result);
-  // первый вывод: <h1>,h1
-  // второй: <h2>,h2
+  // প্রথম অ্যালার্ট: <h1>,h1
+  // দ্বিতীয়: <h2>,h2
 }
 ```
 
-...Or using destructuring:
+...অথবা destructuring ব্যবহারের মাধ্যমে:
 
 ```js
 let [tag1, tag2] = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 ```
 
-Every match, returned by `matchAll`, has the same format as returned by `match` without flag `pattern:g`: it's an array with additional properties `index` (match index in the string) and `input` (source string):
+`matchAll` দ্বারা রিটার্নকৃত রেজাল্টের প্রতিটি ম্যাচ ফ্ল্যাগ `pattern:g` ছাড়া `match` মেথডের মত: তবে এর সাথে দুটি অতিরিক্ত প্রোপার্টি থাকে `index` (স্ট্রিংয়ে মিলকৃত ইনডেক্সটি) এবং `input` (সোর্স স্ট্রিং):
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
@@ -242,23 +241,23 @@ alert( tag1.index ); // 0
 alert( tag1.input ); // <h1> <h2>
 ```
 
-```smart header="Why is a result of `matchAll` an iterable object, not an array?"
-Why is the method designed like that? The reason is simple - for the optimization.
+```smart header="`matchAll` এর রেজাল্ট অ্যারে না হয়ে ইটারেবল অবজেক্ট কেন?"
+কেন এই মেথডটি এভাবে ডিজাইন করা হয়েছে? এর কারণ সহজ - অপ্টিমাইজেশনের জন্য।
 
-The call to `matchAll` does not perform the search. Instead, it returns an iterable object, without the results initially. The search is performed each time we iterate over it, e.g. in the loop.
+`matchAll` কল হলে এটি স্ট্রিংয়ে সার্চ করে না। তার পরিবর্তে, রেজাল্ট ইনিশিয়াল না হয়ে এটি একটি ইটারেবল অবজেক্ট রিটার্ন করে। এবং ইটারেটরের সময় সার্চ সম্পন্ন হয়, যেমন লুপে।
 
-So, there will be found as many results as needed, not more.
+সুতরাং, এটি প্রয়োজনমত রেজাল্ট খুঁজে পায়, এর বেশি না।
 
-E.g. there are potentially 100 matches in the text, but in a `for..of` loop we found 5 of them, then decided it's enough and make a `break`. Then the engine won't spend time finding other 95 mathces.
+যেমন কোন টেক্সটে ১০০ টি ম্যাচ আছে, এবং `for..of` এর মাধ্যমে আমরা ৫টি মিল খুঁজি, তারপর আমরা লুপ হতে `break` এর মাধ্যমে বের হয়ে যেতে পারি। সুতরাং ইঞ্জিনের বাকী ৯৫টি মিল খুঁজার জন্য অতিরিক্ত সময় অতিবাহিত করা লাগবে না।
 ```
 
-## Named groups
+## গ্রুপের নামকরণ
 
-Remembering groups by their numbers is hard. For simple patterns it's doable, but for more complex ones counting parentheses is inconvenient. We have a much better option: give names to parentheses.
+ইনডেক্স দিয়ে গ্রুপগুলোকে মনে রাখা কষ্টসাধ্য। সহজ প্যাটার্নগুলোর জন্য এটি সহনীয়, তবে জটিল প্যাটার্নগুলোর জন্য প্যারেন্টেসিস গুনে ইনডেক্সিং করা অসুবিধাজনক। আমাদের কাছে প্যারেন্টেসিসের নামকরণের একটি উপায় আছে।
 
-That's done by putting `pattern:?<name>` immediately after the opening paren.
+শুরুর প্যারেন্টেসিসের পর `pattern:?<name>` লিখার মাধ্যমে আমরা নাম দিতে পারি।
 
-For example, let's look for a date in the format "year-month-day":
+যেমন, তারিখকে আমরা এভাবে ফরম্যাট করতে পারি "year-month-day":
 
 ```js run
 *!*
@@ -273,11 +272,11 @@ alert(groups.month); // 04
 alert(groups.day); // 30
 ```
 
-As you can see, the groups reside in the `.groups` property of the match.
+এখানে দেখতে পাচ্ছি, ক্যাপচারিং গ্রুপগুলো `.groups` এর প্রপার্টি হিসেবে আছে।
 
-To look for all dates, we can add flag `pattern:g`.
+একাধিক তারিখ বের করার জন্য আমাদের `pattern:g` এর সাহায্য নেয়া লাগবে।
 
-We'll also need `matchAll` to obtain full matches, together with groups:
+গ্রুপের সাথে সম্পূর্ণ মিল খুঁজার জন্য `matchAll` মেথডের সাহায্য লাগবে:
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
@@ -295,11 +294,11 @@ for(let result of results) {
 }
 ```
 
-## Capturing groups in replacement
+## রিপ্লেসের জন্য ক্যাপচারিং গ্রুপ
 
-Method `str.replace(regexp, replacement)` that replaces all matches with `regexp` in `str` allows to use parentheses contents in the `replacement` string. That's done using `pattern:$n`, where `pattern:n` is the group number.
+`str.replace(regexp, replacement)` মেথডের সাহায্যে `regexp` এর সাথে মিলকৃত কন্টেন্ট সমূহকে রিপ্লেস করা যায়, এবং `str` এর `replacement` এ প্যারেন্টেসিস কন্টেন্টসমূহ ব্যবহার করতে পারি। এটি করা যায় `pattern:$n` এর মাধ্যমে, যেখানে `pattern:n` হল গ্রুপ নাম্বার।
 
-For example,
+যেমন,
 
 ```js run
 let str = "John Bull";
@@ -308,9 +307,9 @@ let regexp = /(\w+) (\w+)/;
 alert( str.replace(regexp, '$2, $1') ); // Bull, John
 ```
 
-For named parentheses the reference will be `pattern:$<name>`.
+গ্রুপের নামকরণ এর ক্ষেত্রে ব্যবহার করা যায় এভাবে `pattern:$<name>`।
 
-For example, let's reformat dates from "year-month-day" to "day.month.year":
+যেমন, চলুন আমাদের তারিখটিকে "year-month-day" থেকে "day.month.year" এভাবে সাজাই:
 
 ```js run
 let regexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
@@ -321,21 +320,21 @@ alert( str.replace(regexp, '$<day>.$<month>.$<year>') );
 // 30.10.2019, 01.01.2020
 ```
 
-## Non-capturing groups with ?:
+## নন-ক্যাপচারিং গ্রুপ ?:
 
-Sometimes we need parentheses to correctly apply a quantifier, but we don't want their contents in results.
+অনেক সময় আমাদের গ্রুপ ক্যাপচারিং এমনভাবে করা লাগে, যেন ওই গ্রুপের কন্টেন্ট রেজাল্টের মধ্যে না আছে।
 
-A group may be excluded by adding `pattern:?:` in the beginning.
+একটি গ্রপের কন্টেন্ট কে রেজাল্ট থেকে বাদ দিতে পারি শুরুর প্যারেন্টেসিস পর `pattern:?:` দেয়ার মাধ্যমে।
 
-For instance, if we want to find `pattern:(go)+`, but don't want the parentheses contents (`go`) as a separate array item, we can write: `pattern:(?:go)+`.
+যেমন, আমরা `pattern:(go)+` এটিকে খুঁজতে চাই, কিন্তু আমরা (`go`) এর কন্টেন্টকে অ্যারের আলাদা আইটেম হিসেবে চাই না, সুতরাং আমরা এভাবে লিখতে পারি: `pattern:(?:go)+`
 
-In the example below we only get the name `match:John` as a separate member of the match:
+সুতরাং এজন্য আমরা শুধু এই নামটি `match:John` ১ম ইনডেক্সে পাব:
 
 ```js run
 let str = "Gogogo John!";
 
 *!*
-// ?: exludes 'go' from capturing
+// ?: এর দ্বারা 'go' কে ক্যাপচারিং হতে বাদ দিতে পারি
 let regexp = /(?:go)+ (\w+)/i;
 */!*
 
@@ -343,22 +342,22 @@ let result = str.match(regexp);
 
 alert( result[0] ); // Gogogo John (full match)
 alert( result[1] ); // John
-alert( result.length ); // 2 (no more items in the array)
+alert( result.length ); // 2 (আর কোন আইটেম নেয়)
 ```
 
-## Summary
+## সারাংশ
 
-Parentheses group together a part of the regular expression, so that the quantifier applies to it as a whole.
+প্যারেন্টেসিস গ্রুপগুলো রেগুলার এক্সপ্রেশনের একটি অংশ, সুতরাং কোয়ান্টিফায়ারগুলো এদের সম্পূর্নটার উপর কাজ করবে।
 
-Parentheses groups are numbered left-to-right, and can optionally be named with  `(?<name>...)`.
+প্যারেন্টেসিস গ্রুপগুলো বাম থেকে ডানে ক্রম করা হয়, এবং চাইলে এদের নামকরণও করা যেতে পারে `(?<name>...)`।
 
-The content, matched by a group, can be obtained in the results:
+কন্টেন্ট যখন গ্রুপদ্বারা ম্যাচ হয়, তখন এদের রেজাল্টে পাওয়া যায়:
 
-- The method `str.match` returns capturing groups only without flag `pattern:g`.
-- The method `str.matchAll` always returns capturing groups.
+- `str.match` মেথডটি  এই ফ্ল্যাগছাড়া `pattern:g` ক্যাপচারিং করলে ক্যাপচারিং কন্টেন্টগুলো রিটার্ন করে।
+- `str.matchAll` মেথডটি সর্বদা ক্যাপচারিং গ্রুপগুলো রিটার্ন করে।
 
-If the parentheses have no name, then their contents is available in the match array by its number. Named parentheses are also available in the property `groups`.
+যদি প্যারেন্টেসিসে নাম না থাকে, তাহলে অ্যারেতে এদের গ্রুপের ক্রমানুসারে পাওয়া যাবে। এবং গ্রুপের নামকরণ করলে এরা `groups` এর প্রপার্টি হিসেবে থাকবে।
 
-We can also use parentheses contents in the replacement string in `str.replace`: by the number `$n` or the name `$<name>`.
+গ্রুপ কন্টেন্টগুলো আমরা রিপ্লেসম্যান্টের সময় ব্যবহার করতে পারব `str.replace`: ইনডেক্স এর ক্ষেত্রে `$n` এবং নামের ক্ষেত্রে `$<name>`।
 
-A group may be excluded from numbering by adding `pattern:?:` in its start. That's used when we need to apply a quantifier to the whole group, but don't want it as a separate item in the results array. We also can't reference such parentheses in the replacement string.
+আমরা গ্রুপের শুরুতে `pattern:?:` ব্যবহারের মাধ্যমে রেজাল্ট হতে এদের বাদ দিতে পারি। আমরা যখন সম্পূর্ন গ্রুপে কোয়ান্টিফায়ার ব্যবহার করব, কিন্তু রেজাল্টে এদের আলাদা করে চায় না তখন এটি ব্যবহার করতে পারি। এছাড়াও স্ট্রিং রিপ্লেসম্যান্টের সময় আমরা প্যারেন্টেসিস ব্যবহার করতে পারব না।
