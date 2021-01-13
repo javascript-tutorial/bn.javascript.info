@@ -1,6 +1,6 @@
-A regexp for a number is: `pattern:-?\d+(\.\d+)?`. We created it in previous tasks.
+সংখ্যা খুঁজার রেগুলার এক্সপ্রেশন: `pattern:-?\d+(\.\d+)?`। যা আমরা পূর্বের টাস্কে করেছিলাম।
 
-An operator is `pattern:[-+*/]`. The hyphen `pattern:-` goes first in the square brackets, because in the middle it would mean a character range, while we just want a character `-`.
+অপারেটর হল `pattern:[-+*/]`. হাইফেন `pattern:-` অবশ্যই ব্রাকেটের শুরুতে হতে হবে, কেননা মাঝে হলে এটি দ্বারা ক্যারাক্টারের রেঞ্জ বুঝায়, যেখানে আমরা `-` কে ক্যারাক্টার হিসেবে দেখতে চায়।
 
 The slash `/` should be escaped inside a JavaScript regexp `pattern:/.../`, we'll do that later.
 

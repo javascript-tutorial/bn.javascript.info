@@ -1,23 +1,23 @@
-# Parse an expression
+# এক্সপ্রেশনকে পার্স
 
-An arithmetical expression consists of 2 numbers and an operator between them, for instance:
+একটি গাণিতিক সমীকরণে দুটি নাম্বার এবং তাদের মাঝে একটি গাণিতিক চিহ্ন আছে, যেমন:
 
 - `1 + 2`
 - `1.2 * 3.4`
 - `-3 / -6`
 - `-2 - 2`
 
-The operator is one of: `"+"`, `"-"`, `"*"` or `"/"`.
+গাণিতিক চিহ্নগুলো হল: `"+"`, `"-"`, `"*"` অথবা `"/"`।
 
-There may be extra spaces at the beginning, at the end or between the parts.
+এখানে সমীকরণের শুরুতে,মাঝে এবং শেষে অতিরিক্ত স্পেস থাকতে পারে।
 
-Create a function `parse(expr)` that takes an expression and returns an array of 3 items:
+একটি ফাংশন লিখুন যা `parse(expr)` একটি সমীকরণ নিবে এবং তাদের কে একটি অ্যারের ৩ টি উপাদান হিসেবে রিটার্ন করবে:
 
-1. The first number.
-2. The operator.
-3. The second number.
+১. প্রথম সংখ্যাটি।
+২. গাণিতিক চিহ্নটি।
+৩. দ্বিতীয় সংখ্যাটি।
 
-For example:
+যেমন:
 
 ```js
 let [a, op, b] = parse("1.2 * 3.4");
