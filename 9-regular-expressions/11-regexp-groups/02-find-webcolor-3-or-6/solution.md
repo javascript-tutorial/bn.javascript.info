@@ -1,12 +1,12 @@
-A regexp to search 3-digit color `#abc`: `pattern:/#[a-f0-9]{3}/i`.
+৩ অঙ্কবিশিষ্ট সংখ্যা খুঁজার রেগুলার এক্সপ্রেশন হল `#abc`: `pattern:/#[a-f0-9]{3}/i`।
 
-We can add exactly 3 more optional hex digits. We don't need more or less. The color has either 3 or 6 digits.
+এরপর আমরা শুধুমাত্র আরো ৩অঙ্কবিশিষ্ট অপশনাল হেক্সাডেসিমেল নাম্বার খুঁজার প্যাটার্ন লিখব, আমাদের এর বেশি বা কমের জন্য লাগবে না। সুতরাং কালারটি হবে ৩ বা ৬ অঙ্কের।
 
-Let's use the quantifier `pattern:{1,2}` for that: we'll have `pattern:/#([a-f0-9]{3}){1,2}/i`.
+চলুন এই জন্য এই কোয়ান্টিফায়ারটি `pattern:{1,2}` ব্যবহার করি: আমাদের প্যাটার্নটি হবে `pattern:/#([a-f0-9]{3}){1,2}/i`।
 
-Here the pattern `pattern:[a-f0-9]{3}` is enclosed in parentheses to apply the quantifier `pattern:{1,2}`.
+এখানে আমরা এই প্যাটার্নটি `pattern:[a-f0-9]{3}` প্যারান্টেসিসের মধ্যে লিখব, যাতে এই  কোয়ান্টিফায়ারটি `pattern:{1,2}` ব্যবহার করা যায়।
 
-In action:
+এখানে দেখুন:
 
 ```js run
 let regexp = /#([a-f0-9]{3}){1,2}/gi;
@@ -16,7 +16,7 @@ let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
 alert( str.match(regexp) ); // #3f3 #AA00ef #abc
 ```
 
-There's a minor problem here: the pattern found `match:#abc` in `subject:#abcd`. To prevent that we can add `pattern:\b` to the end:
+তবে এখানে একটি ছোট্ট সমস্যা আছে `match:#abc` এই স্ট্রিংয়ের জন্যও কাজ করবে `subject:#abcd`, যা সঠিক নয়। এজন্য আমাদের শেষে `pattern:\b` ব্যবহার করা লাগবে:
 
 ```js run
 let regexp = /#([a-f0-9]{3}){1,2}\b/gi;

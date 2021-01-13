@@ -1,8 +1,8 @@
-# Find color in the format #abc or #abcdef
+# এই কালার ফরম্যাটগুলো খুঁজুন #abc বা #abcdef
 
-Write a RegExp that matches colors in the format `#abc` or `#abcdef`. That is: `#` followed by 3 or 6 hexadecimal digits.
+একটি রেগুলার এক্সপ্রেশন লিখুন যা এই দুটি কালার ফরম্যাটের সাথে ম্যাচ করবে `#abc` বা `#abcdef`। এটি হবে: `#` দ্বারা ৩ বা ৬ অঙ্কের হেক্সাডেসিমেল নাম্বার।
 
-Usage example:
+উদাহরণস্বরুপ:
 ```js
 let regexp = /your regexp/g;
 
@@ -11,4 +11,4 @@ let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
 alert( str.match(regexp) ); // #3f3 #AA00ef
 ```
 
-P.S. This should be exactly 3 or 6 hex digits. Values with 4 digits, such as `#abcd`, should not match.
+বি.দ্র. এটি অবশ্যই  ৩ বা ৬ অঙ্কের হেক্সাডেসিমেল নাম্বার হতে হবে। যেমন, ৪ অঙ্কের সাথে `#abcd` এরা মিলবে না।
