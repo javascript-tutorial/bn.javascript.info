@@ -1,21 +1,22 @@
 সংখ্যা খুঁজার রেগুলার এক্সপ্রেশন: `pattern:-?\d+(\.\d+)?`। যা আমরা পূর্বের টাস্কে করেছিলাম।
 
-অপারেটর হল `pattern:[-+*/]`. হাইফেন `pattern:-` অবশ্যই ব্রাকেটের শুরুতে হতে হবে, কেননা মাঝে হলে এটি দ্বারা ক্যারাক্টারের রেঞ্জ বুঝায়, যেখানে আমরা `-` কে ক্যারাক্টার হিসেবে দেখতে চায়।
+অপারেটর হল `pattern:[-+*/]`. হাইফেন `pattern:-` অবশ্যই ব্রাকেটের শুরুতে হতে হবে, কেননা মাঝে হলে এটি দ্বারা ক্যারাক্টারের রেঞ্জ বুঝায়, এখানে আমরা `-` কে ক্যারাক্টার হিসেবে ব্যবহার করতে চায়।
 
-The slash `/` should be escaped inside a JavaScript regexp `pattern:/.../`, we'll do that later.
+স্ল্যাশ `/` অবশ্যই জাভাস্ক্রিপ্টের রেগুলার এক্সপ্রেশনের মাঝে এস্কেপড `pattern:/.../` হয়, এটি আমরা এটি পরে দেখব।
 
-We need a number, an operator, and then another number. And optional spaces between them.
+আমাদের খুঁজা লাগবে একটি সংখ্যা অতঃপর একটি গাণিতিক চিহ্ন এবং শেষে আরো একটি সংখ্যা এবং তাদের মাঝের অতিরিক্ত স্পেস।
 
-The full regular expression: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`.
 
-It has 3 parts, with `pattern:\s*` between them:
-1. `pattern:-?\d+(\.\d+)?` - the first number,
-1. `pattern:[-+*/]` - the operator,
-1. `pattern:-?\d+(\.\d+)?` - the second number.
+সুতরাং রেগুলার এক্সপ্রেশনটি হবে: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`।
 
-To make each of these parts a separate element of the result array, let's enclose them in parentheses: `pattern:(-?\d+(\.\d+)?)\s*([-+*/])\s*(-?\d+(\.\d+)?)`.
+এর ৩টি অংশ আছে, সাথে এটিও `pattern:\s*`:
+১. `pattern:-?\d+(\.\d+)?` - প্রথম সংখ্যাটি।
+২. `pattern:[-+*/]` - গাণিতিক চিহ্নটি।
+৩. `pattern:-?\d+(\.\d+)?` - দ্বিতীয় সংখ্যাটি।
 
-In action:
+তাদের প্রত্যেককে রেজাল্ট অ্যারের আলাদা আলাদা উপাদান হিসেবে রাখতে প্যারান্টেসিস দ্বারা গ্রুপ করি: `pattern:(-?\d+(\.\d+)?)\s*([-+*/])\s*(-?\d+(\.\d+)?)`।
+
+যেমন:
 
 ```js run
 let regexp = /(-?\d+(\.\d+)?)\s*([-+*\/])\s*(-?\d+(\.\d+)?)/;
@@ -23,22 +24,22 @@ let regexp = /(-?\d+(\.\d+)?)\s*([-+*\/])\s*(-?\d+(\.\d+)?)/;
 alert( "1.2 + 12".match(regexp) );
 ```
 
-The result includes:
+রেজাল্টে:
 
-- `result[0] == "1.2 + 12"` (full match)
-- `result[1] == "1.2"` (first group `(-?\d+(\.\d+)?)` -- the first number, including the decimal part)
-- `result[2] == ".2"` (second group`(\.\d+)?` -- the first decimal part)
-- `result[3] == "+"` (third group `([-+*\/])` -- the operator)
-- `result[4] == "12"` (forth group `(-?\d+(\.\d+)?)` -- the second number)
-- `result[5] == undefined` (fifth group `(\.\d+)?` -- the last decimal part is absent, so it's undefined)
+- `result[0] == "1.2 + 12"` (সম্পূর্ন এক্সপ্রেশনটি)
+- `result[1] == "1.2"` (প্রথম গ্রুপ `(-?\d+(\.\d+)?)` -- প্রথম সংখ্যাটি, দশমিক অংশটিসহ)
+- `result[2] == ".2"` (দ্বিতীয় গ্রুপ`(\.\d+)?` -- প্রথম দশমিক অংশটি)
+- `result[3] == "+"` (তৃতীয় গ্রুপ `([-+*\/])` -- গাণিতিক চিহ্নটি)
+- `result[4] == "12"` (চতুর্থ গ্রুপ `(-?\d+(\.\d+)?)` -- দ্বিতীয় সংখ্যাটি)
+- `result[5] == undefined` (পঞ্চম গ্রুপ `(\.\d+)?` -- দ্বিতীয় দশমিক অংশটি অনুপস্থিত, সুতরাং এটি undefined)
 
-We only want the numbers and the operator, without the full match or the decimal parts, so let's "clean" the result a bit.
+আমরা শুধু সংখ্যাগুলো এবং গাণিতিক চিহ্নটি চায়, সম্পূর্ন অংশটি বা দশমিক অংশটি চায় না, সুতরাং আমাদের রেজাল্টকে আরো কিছুটা "clean" করি।
 
-The full match (the arrays first item) can be removed by shifting the array `result.shift()`.
+সম্পূর্ন অংশটি যা অ্যারের প্রথম ইলিমেন্ট একে আমরা `result.shift()` মেথডের সাহায্যে বাদ দিতে পারি।
 
-Groups that contain decimal parts (number 2 and 4) `pattern:(.\d+)` can be excluded by adding  `pattern:?:` to the beginning: `pattern:(?:\.\d+)?`.
+যে গ্রুপগুলোতে দশমিক অংশ থাকে (২ এবং ৪ আইটেম) এই অংশের `pattern:(.\d+)` শুরুতে  `pattern:?:` যোগ করে তাদের বাদ দিতে পারি: `pattern:(?:\.\d+)?`।
 
-The final solution:
+সুতরাং সমাধানটি হবে:
 
 ```js run
 function parse(expr) {
