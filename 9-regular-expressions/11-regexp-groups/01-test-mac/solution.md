@@ -1,8 +1,8 @@
-A two-digit hex number is `pattern:[0-9a-f]{2}` (assuming the flag `pattern:i` is set).
+একটি দুই অঙ্কবিশিষ্ট হেক্সাডেসিমেল নাম্বারের প্যাটার্ন হল `pattern:[0-9a-f]{2}` (ধরে নিই, `pattern:i` ফ্ল্যাগ সেট আছে)।
 
-We need that number `NN`, and then `:NN` repeated 5 times (more numbers);
+সুতরাং আমাদের এই নাম্বারটি `NN` লাগবে, এবং এটির `:NN` ৫ বার পুনরাবৃত্তি হবে;
 
-The regexp is: `pattern:[0-9a-f]{2}(:[0-9a-f]{2}){5}`
+রেগুলার এক্সপ্রেশনটি হবে: `pattern:[0-9a-f]{2}(:[0-9a-f]{2}){5}`
 
 Now let's show that the match should capture all the text: start at the beginning and end at the end. That's done by wrapping the pattern in `pattern:^...$`.
 
