@@ -5,7 +5,7 @@
 উদাহরণস্বরুপ:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন লিখুন/g;
 
 let str = "-1.5 0 2 -123.4.";
 

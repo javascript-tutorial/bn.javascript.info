@@ -4,7 +4,7 @@
 
 উদাহরণস্বরুপ:
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন লিখুন/g;
 
 let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
 
