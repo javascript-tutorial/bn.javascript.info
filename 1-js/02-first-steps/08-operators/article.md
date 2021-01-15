@@ -1,15 +1,15 @@
-# Basic operators, maths
+# বেসিক অপারেটর আর গণিত
 
-We know many operators from school. They are things like addition `+`, multiplication `*`, subtraction `-`, and so on.
+আমরা স্কুলে অনেক অপারেটর সম্পর্কে জেনেছি। যেমন যোগ `+`, গুণ `*`, বিয়োগ `-`, এরকম আরও।
 
-In this chapter, we’ll start with simple operators, then concentrate on JavaScript-specific aspects, not covered by school arithmetic.
+এই অধ্যায়ে আমরা সহজ কিছু অপারেটর দিয়ে শুরু করবো, তারপর জাভাস্ক্রিপ্ট এর অপারেটরের দিকে মনযোগ দিবো, যেগুলো স্কুলের গণিতে ছিল না।
 
-## Terms: "unary", "binary", "operand"
+## টার্ম: "ইউনারি", "বাইনারি", "অপারেন্ড"
 
-Before we move on, let's grasp some common terminology.
+শুরু করার আগে কিছু সাধারণ টার্মিনোলজি জেনে নিই।
 
-- *An operand* -- is what operators are applied to. For instance, in the multiplication of `5 * 2` there are two operands: the left operand is `5` and the right operand is `2`. Sometimes, people call these "arguments" instead of "operands".
-- An operator is *unary* if it has a single operand. For example, the unary negation `-` reverses the sign of a number:
+- *অপারেন্ড* -- হচ্ছে অপারেটর যার বা যাদের ওপর কাজ করে। যেমন, `৫ * ২` এর গুণে দুইটি অপারেন্ড আছে: বামের অপারেন্ড হচ্ছে `৫` এবং ডানের অপারেন্ড হচ্ছে `২`। অনেকে অপারেন্ডকে আর্গুমেন্টও বলে থাকে।
+- কোনো অপারেটরকে *ইউনারি* বলা হয় যদি এর শুধু একটিই অপারেটর থাকে। যেমন, ইউনারি নেগেশন `-` কোনো সংখ্যার চিহ্ন পরিবর্তন করে:
 
     ```js run
     let x = 1;
@@ -17,160 +17,160 @@ Before we move on, let's grasp some common terminology.
     *!*
     x = -x;
     */!*
-    alert( x ); // -1, unary negation was applied
+    alert( x ); // -১, ইউনারি নেগেশনের পর
     ```
-- An operator is *binary* if it has two operands. The same minus exists in binary form as well:
+- কোনো অপারেটরকে *বাইনারি* বলা হয় যদি এর দুইটি অপারেটর থাকে। একই মাইনাস চিহ্নর বাইনারি রূপ:
 
     ```js run no-beautify
     let x = 1, y = 3;
-    alert( y - x ); // 2, binary minus subtracts values
+    alert( y - x ); // ২, বাইনারি মাইনাস বিয়োগের কাজ করে
     ```
 
-    Formally, in the examples above we have two different operators that share the same symbol: the negation operator, a unary operator that reverses the sign, and the subtraction operator, a binary operator that subtracts one number from another.
+    ভালোভাবে বলতে গেলে, উপরের উদাহরণ দুটোয় আমরা দুইটি অপারেটর দেখিয়েছে যাদের চিন্ন একই: ইউনারি নেগেশন অপারেটর, যেই অপারেটর কোনো সংখ্যার চিহ্ন পরিবর্তন করে, এবং বিয়োগ অপারেটর, যেই বাইনারি অপারেটর একটি সংখ্যা থেকে অন্য সংখ্যা বিয়‌োগ করে।
 
-## Maths
+## গণিত
 
-The following math operations are supported:
+নিচের গাণিতিক অপারেটরগুলো ব্যবহার করা যাবে:
 
-- Addition `+`,
-- Subtraction `-`,
-- Multiplication `*`,
-- Division `/`,
-- Remainder `%`,
-- Exponentiation `**`.
+- যোগ `+`,
+- বিয়োগ `-`,
+- গুণ `*`,
+- ভাগ `/`,
+- ভাগশেষ `%`,
+- ঘাত `**`.
 
-The first four are straightforward, while `%` and `**` need a few words about them.
+প্রথম চারটি অপারেশন দেখেই বুঝা যাচ্ছে, `%` আর `**` নিয়ে আরও কিছু বলার দরকার।
 
-### Remainder %
+### ভাগশেষ %
 
-The remainder operator `%`, despite its appearance, is not related to percents.
+ভাগশেষ অপারেটর `%`, দেখে শতকরার মতো মনে হলেও শতকরার সাথে এর কোনো সম্পর্ক নেই।
 
-The result of `a % b` is the [remainder](https://en.wikipedia.org/wiki/Remainder) of the integer division of `a` by `b`.
+`a % b` এই অপারেশনের রেজাল্ট হচ্ছে `a` কে `b` দিয়ে ভাগ করার পর যা থাকে, বা [ভাগশেষ](https://en.wikipedia.org/wiki/Remainder)।
 
-For instance:
-
-```js run
-alert( 5 % 2 ); // 1, a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2, a remainder of 8 divided by 3
-```
-
-### Exponentiation **
-
-The exponentiation operator `a ** b` multiplies `a` by itself `b` times.
-
-For instance:
+যেমন:
 
 ```js run
-alert( 2 ** 2 ); // 4  (2 multiplied by itself 2 times)
-alert( 2 ** 3 ); // 8  (2 * 2 * 2, 3 times)
-alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2, 4 times)
+alert( 5 % 2 ); // ১, ৫ কে ২ দিয়ে ভাগ করার পর ভাগশেষ
+alert( 8 % 3 ); // ২, ৮ কে ৩ দিয়ে ভাগ করার পর ভাগশেষ
 ```
 
-Mathematically, the exponentiation is defined for non-integer numbers as well. For example, a square root is an exponentiation by `1/2`:
+### এক্সপ‌োনেন্সিয়েশন **
+
+এক্সপ‌োনেন্সিয়েশন অপারেটর `a ** b`, `a` কে `b` বার নিজেকে নিজে গুণ করে।
+
+যেমন:
 
 ```js run
-alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root)
-alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+alert( 2 ** 2 ); // ৪  (দুইকে দুইবার গুণ)
+alert( 2 ** 3 ); // ৮  (২ * ২ * ২, ৩ বার)
+alert( 2 ** 4 ); // ১৬ (২ * ২ * ২ * ২, ৪ বার)
+```
+
+গণিতে এক্সপ‌োনেন্সিয়েশন নন-ইন্টিজার বা অপূর্ণ সংখ্যার জন্যও প্রযোজ্য। যেমন, বর্গমূল হচ্ছে `১/২` দিয়ে এক্সপোনেন্সিয়েশন করা:
+
+```js run
+alert( 4 ** (1/2) ); // ২ (কোনো সংখ্যার সূচক ১/২ আর সংখ্যাটির বর্গমূল এক)
+alert( 8 ** (1/3) ); // ২ (কোনো সংখ্যার সূচক ১/৩ আর সংখ্যাটির ঘনমূল এক)
 ```
 
 
-## String concatenation with binary +
+## বাইনারি + দিয়ে স্ট্রিং জোড়া দেয়া
 
-Let's meet features of JavaScript operators that are beyond school arithmetics.
+এবার আমরা জাভাস্ক্রিপ্ট অপারেটরের কিছু বিশেষত্ব দেখি যেগুলো স্কুলের পাটিগণিতের বাইরে।
 
-Usually, the plus operator `+` sums numbers.
+সাধারণত, প্লাস অপারেটর `+` সংখ্যা যোগ করে।
 
-But, if the binary `+` is applied to strings, it merges (concatenates) them:
+কিন্তু যদি এই বাইনারি `+` স্ট্রিংয়ের সাথে ব্যবহার করা হয়, তাহলে এই অপারেটর স্ট্রিং দুটোকে জোড়া দেয়:
 
 ```js
 let s = "my" + "string";
 alert(s); // mystring
 ```
 
-Note that if any of the operands is a string, then the other one is converted to a string too.
+খেয়াল রাখতে হবে, যদি কোনো অপারেটর স্ট্রিং হয়, তাহলে অন্য অপারেটরটিও আগে স্ট্রিং এ রূপান্তরিত হবে।
 
-For example:
+যেমন:
 
 ```js run
 alert( '1' + 2 ); // "12"
 alert( 2 + '1' ); // "21"
 ```
 
-See, it doesn't matter whether the first operand is a string or the second one.
+লক্ষ্য করুন, কোন অপারেন্ডটি স্ট্রিং সেটা কোনো বিষয় না।
 
-Here's a more complex example:
+আরেকটি একটু জটিল উদাহরণ:
 
 ```js run
-alert(2 + 2 + '1' ); // "41" and not "221"
+alert(2 + 2 + '1' ); // "41", "221" না
 ```
 
-Here, operators work one after another. The first `+` sums two numbers, so it returns `4`, then the next `+` adds the string `1` to it, so it's like `4 + '1' = 41`.
+এখানে অপারেটরগুলো একটির পর আরেকটি কাজ করেছে। প্রথম `+` দুইটি সংখ্যাকে যোগ করেছে, তাই এটা `4` রিটার্ন করে, তারপর পরের `+` এর সাথে স্ট্রিং `1` যোগ করে, তাই `4 + '1' = 41`।
 
-The binary `+` is the only operator that supports strings in such a way. Other arithmetic operators work only with numbers and always convert their operands to numbers.
+বাইনারি `+` ই একমাত্র অপারেটর যেটি স্ট্রিং সাপোর্ট করে। অন্যন্য অপারেটর শুধু সংখ্যা নিয়ে কাজ করে আর সবসময় এর অপারেন্ডগুলোকে সংখ্যায় রূপান্তর করে নেয়।
 
-Here's the demo for subtraction and division:
+এখানে বিয়োগ আর ভাগ করে দেখানো হলো:
 
 ```js run
-alert( 6 - '2' ); // 4, converts '2' to a number
-alert( '6' / '2' ); // 3, converts both operands to numbers
+alert( 6 - '2' ); // 4, '2' কে আগে সংখ্যায় রূপান্তর করে নিয়েছে
+alert( '6' / '2' ); // 3, দুটো অপারেটরকেই সংখ্যায় রূপান্তর করে নিয়েছে
 ```
 
-## Numeric conversion, unary +
+## গাণিতিক রূপান্তর, ইউনারি +
 
-The plus `+` exists in two forms: the binary form that we used above and the unary form.
+প্লাস `+` অপারেটরের দুইটি ফর্ম আছে: বাইনারি ফর্ম যা আমরা উপরে দেখলাম, আর ইউনারি ফর্ম।
 
-The unary plus or, in other words, the plus operator `+` applied to a single value, doesn't do anything to numbers. But if the operand is not a number, the unary plus converts it into a number.
+ইউনারি প্লাস, বা, অন্য কথায়, প্লাস অপারেটর `+` যা একটি সংখ্যার সাথে ব্যবহার করা হয়, সংখ্যাটিকে কিছুই করে না। কিন্তু অপারেন্ড যদি সংখ্যা না হয়, তবে সেটিকে সংখ্যায় রূপান্তর করে।
 
-For example:
+উদাহরণ:
 
 ```js run
-// No effect on numbers
+// সংখ্যার উপর কোনো প্রভাব নাই
 let x = 1;
-alert( +x ); // 1
+alert( +x ); // ২
 
 let y = -2;
-alert( +y ); // -2
+alert( +y ); // -২
 
 *!*
-// Converts non-numbers
-alert( +true ); // 1
-alert( +"" );   // 0
+// সংখ্যায় রূপান্তর করে
+alert( +true ); // ১
+alert( +"" );   // ০
 */!*
 ```
 
-It actually does the same thing as `Number(...)`, but is shorter.
+এটা আসলে `Number(...)` যা করে ঠিক তাই করে, শুধু সংক্ষিপ্ত রূপ।
 
-The need to convert strings to numbers arises very often. For example, if we are getting values from HTML form fields, they are usually strings. What if we want to sum them?
+প্রায় সময়ই স্ট্রিংকে নাম্বারে রূপান্তর করার দরকার হতে পারে। যেমন, যদি আমরা HTML এর ফর্ম ফিল্ড থেকে ভ্যালু নিই, সেগুলো বেশিরভাগ সময়ই স্ট্রিং হয়। কিন্তু যদি সেগুলো যোগ করার দরকার পড়ে?
 
-The binary plus would add them as strings:
+বাইনারি `+` স্ট্রিং হিসেবেই যোগ করবে:
 
 ```js run
 let apples = "2";
 let oranges = "3";
 
-alert( apples + oranges ); // "23", the binary plus concatenates strings
+alert( apples + oranges ); // "23", বাইনারি প্লাস স্ট্রিং জোড়া দেয়
 ```
 
-If we want to treat them as numbers, we need to convert and then sum them:
+যদি আমরা এদেরকে সংখ্যা হিসেবে ব্যবহার করতে চাই, তাহলে আগে এদের সংখ্যায় রূপান্তর করতে হবে:
 
 ```js run
 let apples = "2";
 let oranges = "3";
 
 *!*
-// both values converted to numbers before the binary plus
-alert( +apples + +oranges ); // 5
+// দুইটি মানই বাইনারি প্লাসের আগে সংখ্যায় রূপান্তরিত হয়েছে
+alert( +apples + +oranges ); // ৫
 */!*
 
-// the longer variant
-// alert( Number(apples) + Number(oranges) ); // 5
+// একটু বড় ভার্সন
+// alert( Number(apples) + Number(oranges) ); // ৫
 ```
 
-From a mathematician's standpoint, the abundance of pluses may seem strange. But from a programmer's standpoint, there's nothing special: unary pluses are applied first, they convert strings to numbers, and then the binary plus sums them up.
+একজন ম্যাথমেটিশিয়ানের দিক থেকে চিন্তা করলে, অযথা প্লাসের ব্যবহার অদ্ভুত লাগতে পারে। কিন্তু একজন প্রোগ্রামারের কাছে এটা তেমন কিছুই না: ইউনারি প্লাস আগে কাজ করে স্ট্রিংকে সংখ্যায় রূপান্তর করে, তারপর বাইনারি প্লাস তাদের যোগ করে।
 
-Why are unary pluses applied to values before the binary ones? As we're going to see, that's because of their *higher precedence*.
+কেন বাইনারি প্লাসের আগে ইউনারি প্লাস কাজ করে? আমরা যেমনটা দেখতে যাচ্ছি, এর কারণ ইউনারি প্লাসের *প্রিসিডেন্স বেশি*।
 
-## Operator precedence
+## অপারেটরের প্রিসিডেন্স
 
 If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the default priority order of operators.
 
