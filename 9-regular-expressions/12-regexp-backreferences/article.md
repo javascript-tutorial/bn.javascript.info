@@ -1,33 +1,33 @@
-# Backreferences in pattern: \N and \k<name>
+# প্যাটার্নে ব্যাকরেফারেন্স: \N এবং \k<name>
 
-We can use the contents of capturing groups `pattern:(...)` not only in the result or in the replacement string, but also in the pattern itself.
+আমরা ক্যাপচারিং গ্রুপের `pattern:(...)` কন্টেন্ট কে রেজাল্ট বা রিপ্লেসমেন্ট ছাড়াও প্যাটার্নের কন্টেন্ট হিসেবে ব্যবহার করতে পারি।
 
-## Backreference by number: \N
+## নাম্বারের ব্যাকরেফারেন্স: \N
 
-A group can be referenced in the pattern using `pattern:\N`, where `N` is the group number.
+আমরা গ্রুপকে রেফারেন্স হিসেবে প্যাটার্নে `pattern:\N` ব্যবহার করতে পারি, এখানে `N` হল গ্রুপ নাম্বার।
 
-To make clear why that's helpful, let's consider a task.
+এর ব্যবহার আরো ভালোভাবে বুঝতে, চলুন একটা সমস্যা দেখি।
 
-We need to find quoted strings: either single-quoted `subject:'...'` or a double-quoted `subject:"..."` -- both variants should match.
+আমাদের একটি উক্তি খুঁজতে হবে: উক্তি হতে পারে একক উদ্ধৃতি চিহ্নের মাধ্যমে `subject:'...'` বা যুগল উদ্ধৃতি চিহ্নের মাধ্যমে `subject:"..."` --   শুরু এবং শেষ উভয় চিহ্নই মিলতে হবে।
 
-How to find them?
+কিভাবে আমরা এদের খুঁজব?
 
-We can put both kinds of quotes in the square brackets: `pattern:['"](.*?)['"]`, but it would find strings with mixed quotes, like `match:"...'` and `match:'..."`. That would lead to incorrect matches when one quote appears inside other ones, like in the string `subject:"She's the one!"`:
+আমরা উভয়ই চিহ্নই ব্রাকেটে রাখতে পারি: `pattern:['"](.*?)['"]`, তবে এটি মিশ্র চিহ্নদ্বারা গঠিত স্ট্রিংগুলোও খুঁজে পাবে, যেমন `match:"...'` বা `match:'..."`. কিছু স্ট্রিংয়ের জন্য এটি ভুল ফলাফল দেখাতে পারে, যেমন, `subject:"She's the one!"`:
 
 ```js run
 let str = `He said: "She's the one!".`;
 
 let regexp = /['"](.*?)['"]/g;
 
-// The result is not what we'd like to have
+// এটি একটি ভুল মিল
 alert( str.match(regexp) ); // "She'
 ```
 
-As we can see, the pattern found an opening quote `match:"`, then the text is consumed till the other quote `match:'`, that closes the match.
+এখানে আমরা দেখছি, প্যাটার্নের শুরুর চিহ্নটি `match:"`, এরপর টেক্সটের মাঝে আরো একটি চিহ্ন `match:'` আছে, এবং অনুসন্ধানটি শেষ হয়।
 
-To make sure that the pattern looks for the closing quote exactly the same as the opening one, we can wrap it into a capturing group and backreference it: `pattern:(['"])(.*?)\1`.
+এজন্য আমাদের নিশ্চিত হতে হবে শেষ উক্তি চিহ্নটি অবশ্যই শুরুর চিহ্নের অনুরূপ, এজন্য আমরা শুরুর অংশটিকে গ্রুপ করে এর ব্যাকরেফারেন্স করতে পারি: `pattern:(['"])(.*?)\1`।
 
-Here's the correct code:
+সুতরাং প্যাটার্নটি হবে:
 
 ```js run
 let str = `He said: "She's the one!".`;
@@ -39,27 +39,27 @@ let regexp = /(['"])(.*?)\1/g;
 alert( str.match(regexp) ); // "She's the one!"
 ```
 
-Now it works! The regular expression engine finds the first quote `pattern:(['"])` and memorizes its content. That's the first capturing group.
+এখন এটি কাজ করছে! রেগুলার এক্সপ্রেশন প্রথম চিহ্নটি খুঁজে `pattern:(['"])` এবং কন্টেন্ট হিসেবে সংরক্ষণ করবে। যা প্রথম ক্যাপচারিং গ্রুপ।
 
-Further in the pattern `pattern:\1` means "find the same text as in the first group", exactly the same quote in our case.
+এই প্যাটার্ন `pattern:\1` দ্বারা বুঝায় "প্রথম গ্রুপের অনুরূপ অনুসন্ধান", এখানে আমাদের ক্ষেত্রে একই উদ্ধৃতি চিহ্ন।
 
-Similar to that, `pattern:\2` would mean the contents of the second group, `pattern:\3` - the 3rd group, and so on.
+অনুরূপভাবে, `pattern:\2` দ্বারা বুঝায় দ্বিতীয় গ্রুপ, `pattern:\3` - তৃতীয় গ্রুপ, এভাবেই হতে থাকে।
 
 ```smart
-If we use `?:` in the group, then we can't reference it. Groups that are excluded from capturing `(?:...)` are not memorized by the engine.
+যদি আমরা গ্রুপে এটি `?:` ব্যবহার করি, তাহলে আমরা গ্রুপকে রেফারেন্স করতে পারব না। যেসব গ্রুপকে ক্যাপচারিং `(?:...)` হতে বাদ দেয়া হয় তাদেরকে ইঞ্জিন সংরক্ষণ করে না।
 ```
 
-```warn header="Don't mess up: in the pattern `pattern:\1`, in the replacement: `pattern:$1`"
-In the replacement string we use a dollar sign: `pattern:$1`, while in the pattern - a backslash `pattern:\1`.
+```warn header="প্যাটার্নকে `pattern:\1`, রিপ্লেসমেন্টের প্যাটার্নের: `pattern:$1` সাথে গুলিয়ে না ফেলা"
+রিপ্লেসমেন্টের সময় আমরা ডলার চিহ্ন ব্যবহার করি: `pattern:$1`, আর ব্যাকরেফারেন্সের জন্য ব্যাকস্ল্যাশ `pattern:\1`।
 ```
 
-## Backreference by name: `\k<name>`
+## নামের ব্যাকরেফারেন্স: `\k<name>`
 
-If a regexp has many parentheses, it's convenient to give them names.
+রেগুলার এক্সপ্রেশনে যদি একাধিক প্যারেন্টেসিস থাকে, তাহলে এদের নামকরণ করা সুবিধাজনক।
 
-To reference a named group we can use `pattern:\k<имя>`.
+নেমড গ্রুপগুলোকে ব্যাকরেফারেন্স হিসেবে ব্যবহারের প্যাটার্ন `pattern:\k<name>`।
 
-In the example below the group with quotes is named `pattern:?<quote>`, so the backreference is `pattern:\k<quote>`:
+যেমন নিচের উদাহরণে উদ্ধৃতি চিহ্নকে `pattern:?<quote>` দ্বারা নামকরণ করা হল, সুতরাং ব্যাকরেফারেন্স হবে `pattern:\k<quote>`:
 
 ```js run
 let str = `He said: "She's the one!".`;
