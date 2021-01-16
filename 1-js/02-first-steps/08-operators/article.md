@@ -265,11 +265,11 @@ a = c;
 ```
 এটা পড়তে সহজ, বিশেষ করে যখন কোড পড়ার আগে প্রথমে চোখ বুলিয়ে নিচ্ছেন।
 
-## Modify-in-place
+## ইন-প্লেসে মডিফাই করা
 
-We often need to apply an operator to a variable and store the new result in that same variable.
+মাঝেমধ্যেই আমাদের একটি ভ্যারিয়েবলের উপর অপারেটর ব্যবহার করে আবার একই ভ্যারিয়েবলেই ফলাফলটি রাখা লাগতে পারে।
 
-For example:
+যেমন:
 
 ```js
 let n = 2;
@@ -277,67 +277,67 @@ n = n + 5;
 n = n * 2;
 ```
 
-This notation can be shortened using the operators `+=` and `*=`:
+এই নোটেশনটি `+=` আর `*=` অপারেটর ব্যবহার করে ছোট করা যেতে পারে:
 
 ```js run
 let n = 2;
-n += 5; // now n = 7 (same as n = n + 5)
-n *= 2; // now n = 14 (same as n = n * 2)
+n += 5; // এখন n = 7 (n = n + 5 এর মতই)
+n *= 2; // এখন n = 14 (n = n * 2 এর মতই)
 
 alert( n ); // 14
 ```
 
-Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=`, etc.
+সংক্ষিপ্ত "মডিফাই-এবং-অ্যাসাইন" অপারেটর আছে সব গাণিতিক ও বিটওয়াইজ অপারেটরের জন্যই: `/=`, `-=`, ইত্যাদি।
 
-Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+নরমাল অ্যাসাইনমেন্টের মতই এদের প্রিসিডেন্স, তাই এরা অন্যান্য ক্যালকুলেশনের পর কাজ করে:
 
 ```js run
 let n = 2;
 
 n *= 3 + 5;
 
-alert( n ); // 16  (right part evaluated first, same as n *= 8)
+alert( n ); // 16  (ডান অংশ আগে ইভ্যালুয়েট হয়, n *= 8 এর অনুরূপ)
 ```
 
-## Increment/decrement
+## ইনক্রিমেন্ট/ডিক্রিমেন্ট
 
-<!-- Can't use -- in title, because the built-in parser turns it into a 'long dash' – -->
+<!-- টাইটেলে -- ব্যবহার করা যাবে না, কারণ বিল্টইন পার্সার একে 'লং ড্যাশ' – এ রূপান্তর করে -->
 
-Increasing or decreasing a number by one is among the most common numerical operations.
+কোনো সংখ্যাকে এক বাড়ানো বা কমানো কমন গাণিতিক অপারেশনগুলোর মধ্যে একটি।
 
-So, there are special operators for it:
+এজন্য এর জন্য বিশেষ অপারেটর আছে:
 
-- **Increment** `++` increases a variable by 1:
+- **ইনক্রিমেন্ট** `++` একটি ভ্যারিয়েবলকে ১ বাড়ায়:
 
     ```js run no-beautify
     let counter = 2;
-    counter++;        // works the same as counter = counter + 1, but is shorter
+    counter++;        // counter = counter + 1 এর মত একই কাজ করে, শুধু সংক্ষিপ্ত
     alert( counter ); // 3
     ```
-- **Decrement** `--` decreases a variable by 1:
+- **ডিক্রিমেন্ট** `--` একটি ভ্যারিয়েবলকে ১ কমায়:
 
     ```js run no-beautify
     let counter = 2;
-    counter--;        // works the same as counter = counter - 1, but is shorter
+    counter--;        // counter = counter - 1 এর মত একই কাজ করে, শুধু সংক্ষিপ্ত
     alert( counter ); // 1
     ```
 
 ```warn
-Increment/decrement can only be applied to variables. Trying to use it on a value like `5++` will give an error.
+ইনক্রিমেন্ট/ডিক্রিমেন্ট শুধু ভ্যারিয়েবলের সাথে ব্যবহার করা যাবে। `5++` এর মত কোনো ভ্যালুর সাথে এটি ব্যবহার করলে এরর দিবে।
 ```
 
-The operators `++` and `--` can be placed either before or after a variable.
+অপারেটর `++` and `--` কোনো ভ্যারিয়েবলের আগে বা পরে বসানো যাবে।
 
-- When the operator goes after the variable, it is in "postfix form": `counter++`.
-- The "prefix form" is when the operator goes before the variable: `++counter`.
+- যখন অপারেটরটি ভ্যারিয়েবলের পর বসে, তখন এটা "পোস্টফিক্স ফর্মে" আছে বলা হয়: `counter++`.
+- "প্রিফিক্স ফর্ম হচ্ছে" যখন অপারেটরটি ভ্যারিয়েবলের আগে বসে: `++counter`.
 
-Both of these statements do the same thing: increase `counter` by `1`.
+দুইটি স্টেটমেন্টই একই কাজ করে: `counter` কে `১` বাড়ায়।
 
-Is there any difference? Yes, but we can only see it if we use the returned value of `++/--`.
+কোনো পার্থক্য আছে কি? হ্যাঁ, কিন্তু সেটা আমরা শুধু যখন `++/--` অপারেটরদের রিটার্ন ভ্যালু ব্যবহার করবো তখনই দেখতে পাবো।
 
-Let's clarify. As we know, all operators return a value. Increment/decrement is no exception. The prefix form returns the new value while the postfix form returns the old value (prior to increment/decrement).
+পরিষ্কার করা যাক। আমরা যেমনটা জানি, সব অপারেটরই একটি ভ্যালু রিটার্ন করে। ইনক্রিমেন্ট/ডিক্রিমেন্টও কোনো ব্যতিক্রম নয়। প্রিফিক্স ফর্ম নতুন ভ্যালুটি রিটার্ন করে, অন্যদিকে পোস্টফিক্স ফর্ম পুরনো ভ্যালুটিই রিটার্ন করে (ইনক্রিমেন্ট/ডিক্রিমেন্ট করার আগে)।
 
-To see the difference, here's an example:
+উদাহরণ দিয়ে পার্থক্যটা বুঝা যাক:
 
 ```js run
 let counter = 1;
@@ -346,64 +346,64 @@ let a = ++counter; // (*)
 alert(a); // *!*2*/!*
 ```
 
-In the line `(*)`, the *prefix* form `++counter` increments `counter` and returns the new value, `2`. So, the `alert` shows `2`.
+লাইন `(*)` এ, *প্রিফিক্স* ফর্ম `++counter` `counter` এর ভ্যালু এক বাড়ায় এবং নতুন ভ্যালু, `২` রিটার্ন করে। তাই, `alert` `2` দেখায়।
 
-Now, let's use the postfix form:
+এখন আমরা পোস্টফিক্স ফর্মটি ব্যবহার করে দেখি:
 
 ```js run
 let counter = 1;
-let a = counter++; // (*) changed ++counter to counter++
+let a = counter++; // (*) ++counter কে counter++ এ পরিবর্তন করেছি
 
 alert(a); // *!*1*/!*
 ```
 
-In the line `(*)`, the *postfix* form `counter++` also increments `counter` but returns the *old* value (prior to increment). So, the `alert` shows `1`.
+লাইন `(*)` তে, *পোস্টফিক্স* ফর্ম `counter++`ও `counter` এর মান `১` বাড়ায় কিন্তু *পুরনো* ভ্যালুটি রিটার্ন করে (ইনক্রিমেন্টের আগের)। তাই, `alert` `1` দেখায়।
 
-To summarize:
+সংক্ষেপে:
 
-- If the result of increment/decrement is not used, there is no difference in which form to use:
+- যদি ইনক্রিমেন্ট/ডিক্রিমেন্টের রিটার্ন ভ্যালু ব্যবহার না করা হয়, দুই ফর্মের কোনো পার্থক্য নেই:
 
     ```js run
     let counter = 0;
     counter++;
     ++counter;
-    alert( counter ); // 2, the lines above did the same
+    alert( counter ); // 2, উপরের লাইন দুটো একই কাজ করেছে
     ```
-- If we'd like to increase a value *and* immediately use the result of the operator, we need the prefix form:
+- যদি আমরা ভ্যালু বাড়াতে চাই *এবং* সাথে সাথে অপারেটরটির ফলাফল ব্যবহার করতে চাই, আমাদের দরকার হবে প্রিফিক্স ফর্ম:
 
     ```js run
     let counter = 0;
     alert( ++counter ); // 1
     ```
-- If we'd like to increment a value but use its previous value, we need the postfix form:
+- যদি আমরা ভ্যালু বাড়াতে চাই কিন্তু পুরনো ভ্যালু ব্যবহার করতে চাই তাহলে আমাদের লাগবে পোস্টফিক্স ফর্ম:
 
     ```js run
     let counter = 0;
     alert( counter++ ); // 0
     ```
 
-````smart header="Increment/decrement among other operators"
-The operators `++/--` can be used inside expressions as well. Their precedence is higher than most other arithmetical operations.
+````smart header="অন্য অপারেটরদের মধ্যে ইনক্রিমেন্ট/ডিক্রিমেন্ট"
+অপারেটর `++/--` এক্সপ্রেশনের মধ্যেও ব্যবহার করা যাবে। এদের প্রিসিডেন্স অন্যান্য গাণিতিক অপারেটরের চেয়ে বেশি।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let counter = 1;
 alert( 2 * ++counter ); // 4
 ```
 
-Compare with:
+এর সাথে তুলনা করুন:
 
 ```js run
 let counter = 1;
-alert( 2 * counter++ ); // 2, because counter++ returns the "old" value
+alert( 2 * counter++ ); // 2, কারণ counter++ "পুরনো" ভ্যালু রিটার্ন করে
 ```
 
-Though technically okay, such notation usually makes code less readable. One line does multiple things -- not good.
+যদিও টেকনিকালি ঠিক, এইরকম নোটেশন কোড পড়া কঠিন করে। একটি লাইনে একাধিক কাজ হচ্ছে -- যা ভালো না.
 
-While reading code, a fast "vertical" eye-scan can easily miss something like `counter++` and it won't be obvious that the variable increased.
+কোড পড়ার সময়, দ্রুত "উপর থেকে নিচে" চোখ বুলানোর সময় `counter++` এর মতো কিছু সহজেই মিস করে যেতে পারে এবং এটা পরিষ্কার হবে না যে ভ্যারিয়েবলের মান বেড়েছে।
 
-We advise a style of "one line -- one action":
+আমরা "একটি লাইন -- একটি কাজ" এই স্টাইল ব্যবহারের পরামর্শ দিই:
 
 ```js run
 let counter = 1;
@@ -412,13 +412,13 @@ counter++;
 ```
 ````
 
-## Bitwise operators
+## বিটওয়াইজ অপারেটর
 
-Bitwise operators treat arguments as 32-bit integer numbers and work on the level of their binary representation.
+বিটওয়াইজ অপারেটর আর্গুমেন্টগুলোকে ৩২-বিট পূর্ণ সংখ্যা হিসেবে বিবেচনা করে এবং তাদের বাইনারি রূপের উপর কাজ করে।
 
-These operators are not JavaScript-specific. They are supported in most programming languages.
+এই অপারেটরগুলো জাভাস্ক্রিপ্ট-স্পেসিফিক নয়। বেশিরভাগ প্রোগ্রামিং ল্যাংগুয়েজেই এগুলো সাপোর্ট করবে।
 
-The list of operators:
+অপারেটরের লিস্ট:
 
 - AND ( `&` )
 - OR ( `|` )
@@ -428,43 +428,43 @@ The list of operators:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
-These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) chapter on MDN when a need arises.
+এই অপারেটরগুলো খুব কম ক্ষেত্রে যখন আমাদের সংখ্যা নিয়ে খুব নিচের (বিটওয়াইজ) লেভেলে কাজ করতে হয় তখনই শুধু ব্যবহার হয়। আমাদের এই অপারেটরগুলো এরপর আর দরকার হচ্ছে না, যেহেতু ওয়েব ডেভেলপমেন্টে এদের খুব কম কাজই আছে, কিন্তু বিশেষ কিছু ক্ষেত্র, যেমন ক্রিপ্টোগ্রাফিতে এদের দরকার হবে। আপনি MDN এর [বিটওয়াইজ অপারেটর](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) অধ্যায়টি পড়তে পারেন যখন দরকার পড়বে।
 
-## Comma
+## কমা
 
-The comma operator `,` is one of the rarest and most unusual operators. Sometimes, it's used to write shorter code, so we need to know it in order to understand what's going on.
+কমা অপারেটর `,` দুর্লভ আর সচরাচর দেখা যায় না এমন একটি অপারেটর। মাঝেমধ্যে সংক্ষিপ্ত কোড লিখতে এটি দরকার হয়, তাই আমাদের এটি জানতে হবে কী হচ্ছে বুঝার জন্য।
 
-The comma operator allows us to evaluate several expressions, dividing them with a comma `,`. Each of them is evaluated but only the result of the last one is returned.
+কমা অপারেটর আমাদের একাধিক এক্সপ্রেশন ইভ্যালুয়েট করতে দেয়, এদেরকে কমা `,` দিয়ে ভাগ করে। প্রত্যেকেই ইভ্যালুয়েট হয়, শুধু শেষটির ফলাফল রিটার্ন হয়।
 
-For example:
+যেমন:
 
 ```js run
 *!*
 let a = (1 + 2, 3 + 4);
 */!*
 
-alert( a ); // 7 (the result of 3 + 4)
+alert( a ); // 7 (3 + 4 এর ফলাফল)
 ```
 
-Here, the first expression `1 + 2` is evaluated and its result is thrown away. Then, `3 + 4` is evaluated and returned as the result.
+এখানে, প্রথম এক্সপ্রেশন `1 + 2` ইভ্যালুয়েট হয়েছে এবং এর ফলাফল ফেলে দেয়া হয়েছে। এরপর, `3 + 4` ইভ্যালুয়েট হয়েছে এবং ফলাফল হিসেবে রিটার্ন করা হয়েছে।
 
-```smart header="Comma has a very low precedence"
-Please note that the comma operator has very low precedence, lower than `=`, so parentheses are important in the example above.
+```smart header="কমার প্রিসিডেন্স খুব কম"
+খেয়াল রাখবেন কমার প্রিসিডেন্স খুব কম, `=` এর চেয়েও কম, তাই উপরের উদাহরণগুলোতে ব্র্যাকেট ব্যবহার করা হয়েছে।
 
-Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns `a = 3`, and the rest is ignored. It's like `(a = 1 + 2), 3 + 4`.
+ব্র্যাকেট ছাড়া: `a = 1 + 2, 3 + 4` প্রথমে `+` ইভ্যালুয়েট করবে, সংখ্যাগুলো যোগ করে দাঁড়াবে `a = 3, 7`, তারপর অ্যাসাইনমেন্ট অপারেটর `=` `a = 3` অ্যাসাইন করবে, আর বাকিটা কোনো কাজেই আসবে না। অনেকটা এরকম `(a = 1 + 2), 3 + 4`.
 ```
 
-Why do we need an operator that throws away everything except the last expression?
+কেন আমাদের এমন একটি অপারেটর দরকার হবে যেটি শেষ এক্সপ্রেশন বাদে সব ফেলে দেয়?
 
-Sometimes, people use it in more complex constructs to put several actions in one line.
+মাঝেমধ্যে অনেকে একে জটিল কনস্ট্রাক্টে ব্যবহার করে একাধিক কাজ এক লাইনে করতে।
 
-For example:
+যেমন:
 
 ```js
-// three operations in one line
+// এক লাইনে তিনটি কাজ
 for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
  ...
 }
 ```
 
-Such tricks are used in many JavaScript frameworks. That's why we're mentioning them. But usually they don't improve code readability so we should think well before using them.
+এরকম ট্রিক অনেক জাভাস্ক্রিপ্ট ফ্রেমওয়ার্কে দেখা যায়। যে কারণে আমরা এটার কথা বললাম। কিন্তু সচরাচর এটা কোডের রিডেবিলিটি বাড়ায় না তাই এটা ব্যবহারের আগে আমাদের একটু চিন্তা করে নেয়া উচিৎ।
