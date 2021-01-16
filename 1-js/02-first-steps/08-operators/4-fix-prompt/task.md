@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Fix the addition
+# যোগটি ঠিক করুন
 
-Here's a code that asks the user for two numbers and shows their sum.
+নিচের কোডটি ইউজারের কাছ থেকে দুটি সংখ্যা নিয়ে তাদের যোগফল দেখায়।
 
-It works incorrectly. The output in the example below is `12` (for default prompt values).
+এটা ঠিকমতো কাজ করছে না। নিচের উদাহরণে আউটপুট আসছে `12` (ডিফল্ট prompt ভ্যালুর জন্য)।
 
-Why? Fix it. The result should be `3`.
+কেন? এটি ঠিক করুন। ফলাফল `3` হওয়া উচিৎ।
 
 ```js run
 let a = prompt("First number?", 1);

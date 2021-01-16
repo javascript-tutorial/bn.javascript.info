@@ -1,6 +1,6 @@
-The reason is that prompt returns user input as a string.
+কারণ prompt ইউজার ইনপুটকে স্ট্রিং হিসেবে রিটার্ন করে।
 
-So variables have values `"1"` and `"2"` respectively.
+তাই ভ্যারিয়েবল দুটোর ভ্যালু হচ্ছে যথাক্রমে `"1"` এবং `"2"`।
 
 ```js run
 let a = "1"; // prompt("First number?", 1);
@@ -9,9 +9,9 @@ let b = "2"; // prompt("Second number?", 2);
 alert(a + b); // 12
 ```
 
-What we should do is to convert strings to numbers before `+`. For example, using `Number()` or prepending them with `+`.
+আমাদের `+` এর আগে স্ট্রিংকে নাম্বারে রূপান্তর করে নেয়া উচিৎ। যেমন, `Number()` ব্যবহার করে বা আগে `+` বসিয়ে।
 
-For example, right before `prompt`:
+যেমন একদম `prompt` এর আগে:
 
 ```js run
 let a = +prompt("First number?", 1);
@@ -20,7 +20,7 @@ let b = +prompt("Second number?", 2);
 alert(a + b); // 3
 ```
 
-Or in the `alert`:
+অথবা `alert` এ:
 
 ```js run
 let a = prompt("First number?", 1);
@@ -29,4 +29,4 @@ let b = prompt("Second number?", 2);
 alert(+a + +b); // 3
 ```
 
-Using both unary and binary `+` in the latest code. Looks funny, doesn't it?
+শেষ কোডে ইউনারি আর বাইনারি `+` দুটোই আছে। মজার দেখাচ্ছে, তাই না?
