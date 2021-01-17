@@ -1,12 +1,12 @@
-# Find non-negative integers
+# অঋণাত্নক পূর্ণসংখ্যার অনুসন্ধান
 
-There's a string of integer numbers.
+এখানে পূর্ণসংখ্যার একটি স্ট্রিং আছে।
 
-Create a regexp that looks for only non-negative ones (zero is allowed).
+একটি রেগুলার এক্সপ্রেশন লিখুন যা অঋণাত্নক পূর্ণসংখ্যার অনুসন্ধান করে (শূন্যও অনুসন্ধান করবে)।
 
-An example of use:
+উদাহরণ:
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন/g;
 
 let str = "0 12 -5 123 -18";
 
