@@ -1,9 +1,66 @@
 
-# অ্যাসিঙ্ক ইটারেটর এবং জেনারেটর
+# অ্যাসিঙ্ক ইটারেশন এবং জেনারেটর
 
-অ্যাসিঙ্ক্রোনাসলি আসা ডাটাগুলোকে অ্যাসিঙ্ক্রোনাস ইটারেটরের সাহায্যে আমরা আমাদের চাহিদা মত ইটারেট করতে পারি। উদাহরণস্বরূপ, যখন আমরা নেটওয়ার্কের মাধ্যমে ছোট ছোট অংশ ডাউনলোড করি। এটি অ্যাসিঙ্ক্রোনাস জেনারেটরের সাহায্যে আরো সহজে করা যায়।
+অ্যাসিঙ্ক্রোনাসলি আসা ডাটাগুলোকে অ্যাসিঙ্ক্রোনাস ইটারেশনের সাহায্যে আমরা আমাদের চাহিদা মত ইটারেট করতে পারি। উদাহরণস্বরূপ, যখন আমরা নেটওয়ার্কের মাধ্যমে ছোট ছোট অংশ ডাউনলোড করি। এটি অ্যাসিঙ্ক্রোনাস জেনারেটরের সাহায্যে আরো সহজে করা যায়।
 
 চলুন প্রথমে একটি উদাহরণ দেখি, সিনট্যাক্সগুলো বুঝার চেষ্টা করি এবং পরে একটি বাস্তবিক ব্যবহার দেখব।
+
+## পুনরায় ইটারেবল
+
+আসুন পুনরায় ইটারেবলের টপিক্সটি দেখি।
+
+আমাদের একটি অবজেক্ট আছে, যেমন `range`:
+```js
+let range = {
+  from: 1,
+  to: 5
+};
+```
+
+...এবং আমরা `for..of` লুপ চালাব, যেমন `for(value of range)`, `1` হতে `5` পর্যন্ত মানগুলো পেতে।
+
+অন্য কথায় বলা যায়, আমরা আমাদের অবজেক্টটিতে *iteration ability* সাপোর্ট করাব।
+
+এটি আমরা করতে পারি একটি বিশেষ মেথডের সাহায্যে `Symbol.iterator`:
+
+- This method is called in by the `for..of` construct when the loop is started, and it should return an object with the `next` method.
+- For each iteration, the `next()` method is invoked for the next value.
+- The `next()` should return a value in the form `{done: true/false, value:<loop value>}`, where `done:true` means the end of the loop.
+
+Here's an implementation for the iterable `range`:
+
+```js run
+let range = {
+  from: 1,
+  to: 5,
+
+*!*
+  [Symbol.iterator]() { // called once, in the beginning of for..of
+*/!*
+    return {
+      current: this.from,
+      last: this.to,
+
+*!*
+      next() { // called every iteration, to get the next value
+*/!*
+        if (this.current <= this.last) {
+          return { done: false, value: this.current++ };
+        } else {
+          return { done: true };
+        }
+      }
+    };
+  }
+};
+
+for(let value of range) {
+  alert(value); // 1 তারপর 2, তারপর 3, তারপর 4, তারপর 5
+}
+```
+যদি আপনি সাধারণ ইটারেটর নিয়ে আরো বিস্তারিত জানতে চান দয়া করে এটি দেখুন [ইটারেবল চ্যাপ্টার](info:iterable)।
+
+If anything is unclear, please visit the chapter [](info:iterable), it gives all the details about regular iterables.
 
 ## অ্যাসিঙ্ক ইটারেটর
 
