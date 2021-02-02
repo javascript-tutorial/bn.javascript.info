@@ -1,6 +1,6 @@
-1. Yes, true. The element `elem.lastChild` is always the last one, it has no `nextSibling`.
-2. No, wrong, because `elem.children[0]` is the first child *among elements*. But there may exist non-element nodes before it. So `previousSibling` may be a text node.
+1. হ্যাঁ, সত্য। `elem.lastChild` সর্বদা শেষটি হবে, এটির কোন `nextSibling` নেই।
+2. না, ভুল, কেননা `elem.children[0]` হবে *সকল এলিমেন্টের* মধ্যে প্রথম চাইল্ড। কিন্তু পূর্বে নন-এলিমেন্ট নোডও থাকতে পারে. সুতরাং `previousSibling` টেক্সট নোডও হতে পারে।
 
-Please note: for both cases if there are no children, then there will be an error.
+দয়া করে মনে রাখুন: উভয়ই ক্ষেত্রে কোন চিলড্রেন না থাকলে, এরোর হবে।
 
-If there are no children, `elem.lastChild` is `null`, so we can't access `elem.lastChild.nextSibling`. And the collection `elem.children` is empty (like an empty array `[]`).
+যদি কোন চিলড্রেন না থাকে, `elem.lastChild` হবে `null`, সুতরাং আমরা এভাবে লিখতে পারব না `elem.lastChild.nextSibling`। এবং `elem.children` কালেকশনটি হবে খালি (অনেকটা খালি অ্যারের মত `[]`)।
