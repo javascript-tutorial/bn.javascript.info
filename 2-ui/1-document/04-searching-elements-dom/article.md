@@ -1,14 +1,14 @@
 # Searching: getElement*, querySelector*
 
-DOM navigation properties are great when elements are close to each other. What if they are not? How to get an arbitrary element of the page?
+DOM নেভিগেশনসমূহ একই সিব্লিং বা নিকট এলিমেন্ট সমূহের জন্য অনেক কাজের। কিন্তু যদি এভাবে না থাকে? কিভাবে আমরা একটি স্বতন্ত্র এলিমেন্ট পেতে পারি?
 
-There are additional searching methods for that.
+এজন্য আমাদের কিছু সার্চিং মেথড আছে।
 
-## document.getElementById or just id
+## document.getElementById বা শুধু id
 
-If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`, no matter where it is.
+যদি এলিমেন্টে শুধু `id` অ্যাট্রিবিউট থাকে, তাহলে আমরা এলিমেন্টটি এভাবে `document.getElementById(id)` মেথডের সাহায্যে খুঁজে পেতে পারি, এটি DOM এর কোন অবস্থানে তা মূখ্য নয়।
 
-For instance:
+যেমন:
 
 ```html run
 <div id="elem">
@@ -16,17 +16,17 @@ For instance:
 </div>
 
 <script>
-  // get the element
+  // এলিমেন্টটি খোঁজা
 *!*
   let elem = document.getElementById('elem');
 */!*
 
-  // make its background red
+  // ব্রাকগ্রাউন্ড লাল সেট করা
   elem.style.background = 'red';
 </script>
 ```
 
-Also, there's a global variable named by `id` that references the element:
+এছাড়াও, গ্লোভাল ভ্যারিয়েবল হিসেবে শুধু `id` এর নাম দ্বারাও এলিমেন্টকে রেফারেন্স করতে পারি:
 
 ```html run
 <div id="*!*elem*/!*">
@@ -42,7 +42,7 @@ Also, there's a global variable named by `id` that references the element:
 </script>
 ```
 
-...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
+...এটি কাজের নয়, যদি আমরা একই নামের একটি জাভাস্ক্রিপ্ট ভ্যারিয়েবল ডিক্লেয়ার করি, এটি প্রিসিডেন্স অনুযায়ী কাজ করবে:
 
 ```html run untrusted height=0
 <div id="elem"></div>
@@ -54,31 +54,31 @@ Also, there's a global variable named by `id` that references the element:
 </script>
 ```
 
-```warn header="Please don't use id-named global variables to access elements"
-This behavior is described [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), so it's kind of standard. But it is supported mainly for compatibility.
+```warn header="দয়া করে এলিমেন্ট এক্সেস করতে id কে গ্লোবাল ভ্যারিয়েবল হিসেবে ব্যবহার করবেন না"
+আরো বিস্তারিত জানতে [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), সুতরাং এটি স্ট্যান্ডার্ড। কিন্তু এটি *compatibility* সমর্থনের জন্য।
 
-The browser tries to help us by mixing namespaces of JS and DOM. That's fine for simple scripts, inlined into HTML, but generally isn't a good thing. There may be naming conflicts. Also, when one reads JS code and doesn't have HTML in view, it's not obvious where the variable comes from.
+ব্রাউজার JS এবং DOM এর ভ্যারিয়েবল সমূহকে মিক্সিং করে আমাদের সহায়তা করে। এটি সাধারণ স্ক্রিপ্ট, ইনলাইন HTML এর জন্য ভালো হতে পারে, কিন্তু আসলেই এটি তেমন কাজের নয়। এখানে ভ্যারিয়েবলের নামের কনফ্লিক্ট হতে পারে। এছাড়াও যখন কেউ জাভাস্ক্রিপ্ট কোড পড়বে এবং ভিউতে HTML থাকবে না, ভ্যারিয়েবলটি কোথা থেকে এসেছে বোধগম্য হবে না।
 
-Here in the tutorial we use `id` to directly reference an element for brevity, when it's obvious where the element comes from.
+এখানে আমরা `id` দ্বারা সরাসরি এলিমেন্টকে রেফারেন্স করব সংক্ষিপ্তকরনের জন্য, এবং এলিমেন্টটি আমাদের কাছে সুস্পষ্ট।
 
-In real life `document.getElementById` is the preferred method.
+তবে বাস্তবিক ক্ষেত্রে `document.getElementById` ব্যবহার করা উচিত।
 ```
 
-```smart header="The `id` must be unique"
-The `id` must be unique. There can be only one element in the document with the given `id`.
+```smart header="`id` অবশ্যই স্বতন্ত্র হতে হবে"
+`id` অবশ্যই স্বতন্ত্র হতে হবে। ডকুমেন্টে `id` দ্বারা শুধুমাত্র একটি এলিমেন্টকে নির্দেশিত করে।
 
-If there are multiple elements with the same `id`, then the behavior of methods that use it is unpredictable, e.g. `document.getElementById` may return any of such elements at random. So please stick to the rule and keep `id` unique.
+যদি একই `id` দ্বারা অনেক এলিমেন্ট ডিক্লেয়ার করা হয়, তাহলে মেথডসমূহ অপ্রত্যাশিত কাজ করবে, যেমন `document.getElementById` যেকোন একটি এলেমেন্টকে রিটার্ন করতে পারে। সুতরাং আমাদের অবশ্যই মনে রাখতে হবে `id` হবে স্বতন্ত্র।
 ```
 
-```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
-The method `getElementById` that can be called only on `document` object. It looks for the given `id` in the whole document.
+```warn header="`anyElem.getElementById` না, শুধু `document.getElementById`"
+`getElementById` মেথডটি শুধুমাত্র `document` অবজেক্টের মেথড। এটি সমস্ত ডকুমেন্ট `id` দ্বারা নির্দেশিত এলিমেন্টটির খোঁজ করবে।
 ```
 
 ## querySelectorAll [#querySelectorAll]
 
-By far, the most versatile method, `elem.querySelectorAll(css)` returns all elements inside `elem` matching the given CSS selector.
+এখনো পর্যন্ত সবচেয়ে বেশি কাজের মেথডটি হল `elem.querySelectorAll(css)`, যা CSS সিলেক্টরস দ্বারা ম্যাচ করা সকল `elem` কে রিটার্ন করবে।
 
-Here we look for all `<li>` elements that are last children:
+এখানে আমরা সকল শেষ `<li>` এলিমেন্ট কে খোঁজব:
 
 ```html run
 <ul>
@@ -100,7 +100,7 @@ Here we look for all `<li>` elements that are last children:
 </script>
 ```
 
-This method is indeed powerful, because any CSS selector can be used.
+মেথডটি অনেক কাজের, কেননা আমরা যেকোন CSS সিলেক্টরস ব্যবহার করতে পারব।
 
 ```smart header="Can use pseudo-classes as well"
 Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
