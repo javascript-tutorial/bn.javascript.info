@@ -1,35 +1,35 @@
-There are many ways to do it.
+এটি অনেকভাবে করা যায়।
 
-Here are some of them:
+এখানে দেখুন:
 
 ```js
 // 1. The table with `id="age-table"`.
 let table = document.getElementById('age-table')
 
-// 2. All label elements inside that table
+// 2. table এর মধ্যে সকল `label` এলিমেন্ট
 table.getElementsByTagName('label')
-// or
+// বা
 document.querySelectorAll('#age-table label')
 
-// 3. The first td in that table (with the word "Age")
+// 3. *table* এর প্রথম `td` (with the word "Age")
 table.rows[0].cells[0]
-// or
+// বা
 table.getElementsByTagName('td')[0]
-// or
+// বা
 table.querySelector('td')
 
-// 4. The form with the name "search"
-// assuming there's only one element with name="search" in the document
+// 4. `form` এলিমেন্ট যার `name="search"`
+// ধরে নিন DOM এ একটি মাত্র name="search" এলিমেন্ট আছে
 let form = document.getElementsByName('search')[0]
-// or, form specifically
+// বা,
 document.querySelector('form[name="search"]')
 
-// 5. The first input in that form.
+// 5. `form` এর প্রথম `input` এলিমেন্ট.
 form.getElementsByTagName('input')[0]
-// or
+// বা
 form.querySelector('input')
 
-// 6. The last input in that form
-let inputs = form.querySelectorAll('input') // find all inputs
-inputs[inputs.length-1] // take the last one
+// 6. `form` এর শেষ `input` এলিমেন্ট
+let inputs = form.querySelectorAll('input') // সকল ইনপুট
+inputs[inputs.length-1] // শেষ এলিমেন্টটি নেয়া
 ```
