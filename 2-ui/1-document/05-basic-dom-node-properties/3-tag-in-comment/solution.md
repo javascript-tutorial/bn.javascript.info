@@ -1,4 +1,4 @@
-The answer: **`BODY`**.
+এটি দেখাবে: **`BODY`**।
 
 ```html run
 <script>
@@ -10,8 +10,8 @@ The answer: **`BODY`**.
 </script>
 ```
 
-What's going on step by step:
+এখানে কি হচ্ছে তা ধাপে ধাপে দেখি:
 
-1. The content of `<body>` is replaced with the comment. The comment is `<!--BODY-->`, because `body.tagName == "BODY"`. As we remember, `tagName` is always uppercase in HTML.
-2. The comment is now the only child node, so we get it in `body.firstChild`.
-3. The `data` property of the comment is its contents (inside `<!--...-->`): `"BODY"`.
+1. `<body>` এর কন্টেন্টটি কমেন্ট দ্বারা প্রতিস্থাপিত হবে। কমেন্টটি হল `<!--BODY-->`, কেননা `body.tagName == "BODY"`। এবং আমরা জানি, `tagName` সর্বদা বড়হাতের হয়।
+2. কমেন্টটি হল একমাত্র চাইল্ড নোড, সুতরাং আমরা একে `body.firstChild` প্রপার্টিতে পাব।
+3. কমেন্ট এর কন্টেন্ট হল `"BODY"` যা আমরা `data` প্রপার্টিতে পাব।

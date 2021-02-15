@@ -4,11 +4,11 @@ importance: 5
 
 # Count descendants
 
-There's a tree structured as nested `ul/li`.
+একটি নেস্টেড ট্রি স্ট্রাকচার্ড আছে `ul/li`।
 
-Write the code that for each `<li>` shows:
+একটি কোড লিখুন যা প্রতিটি `<li>` এর কন্টেন্ট কে দেখাবে:
 
-1. What's the text inside it (without the subtree)
-2. The number of nested `<li>` -- all descendants, including the deeply nested ones.
+1. ভিতরের টেক্সটটি দেখাবেন (সাবট্রি ব্যতীত)
+2. `<li>` -- এর মধ্যে সর্বমোট ডিপ নেস্টেড সহ কতটি নেস্টেড এলিমেন্ট আছে?
 
 [demo src="solution"]
