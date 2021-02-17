@@ -2,15 +2,15 @@ importance: 3
 
 ---
 
-# Make external links orange
+# এক্সটার্নাল লিংক সমূহকে কমলা রঙয়ের করা
 
-Make all external links orange by altering their `style` property.
+সকল এক্সটার্নাল লিংক সমূহকে কমলা রঙ করুন তাদের `style` প্রপার্টি পরিবর্তনের মাধ্যমে।
 
-A link is external if:
-- Its `href` has `://` in it
-- But doesn't start with `http://internal.com`.
+একটি লিংক এক্সটার্নাল হবে, যদি:
+- `href` এ `://` থাকে।
+- তবে এভাবে শুরু হবে না `http://internal.com`।
 
-Example:
+যেমন:
 
 ```html run
 <a name="list">the list</a>
@@ -24,12 +24,12 @@ Example:
 </ul>
 
 <script>
-  // setting style for a single link
+  // একটি লিংকের জন্য স্ট্যাইল সেট
   let link = document.querySelector('a');
   link.style.color = 'orange';
 </script>
 ```
 
-The result should be:
+এটি দেখতে এমন হবে:
 
 [iframe border=1 height=180 src="solution"]
