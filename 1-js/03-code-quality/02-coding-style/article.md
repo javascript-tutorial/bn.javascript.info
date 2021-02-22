@@ -117,7 +117,11 @@ if (
 
     ইন্ডেন্টশনের ক্ষেত্রে ট্যাব চিহ্ন থেকে স্পেস ব্যাবহারের একটি বাড়তি সুবিধা হল এর বেশি ফ্ল্যাক্সিবল কনফিগারেশনের 
 
+<<<<<<< HEAD
     যেমন, এভাবে আমরা আর্গুমেন্টগুলোকে  শুরুর ব্যাকেটের সাথে লম্বভাবে রাখতে পারি :
+=======
+    For instance, we can align the parameters with the opening bracket, like this:
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
     ```js no-beautify
     show(parameters,
@@ -329,7 +333,7 @@ function pow(x, n) {
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```

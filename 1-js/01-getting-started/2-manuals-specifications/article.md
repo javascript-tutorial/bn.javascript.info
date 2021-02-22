@@ -13,20 +13,32 @@
 
 "প্রায় স্ট্যান্ডার্ড" (তথাকথিত "স্টেজ-৩") ফিচারগুলোসহ একেবারে নতুন ও প্রান্তীয় ফিচারগুলোর ব্যাপারে পড়তে এখানকার প্রস্তাবগুলো দেখুন: <https://github.com/tc39/proposals>
 
+<<<<<<< HEAD
 আর আপনি যদি ব্রাউজারের জন্য ডেভেলাপ করেন তাহলে এ বিষয়ে বিস্তারিত ভাবে এই বইয়ের [দ্বিতীয় অংশে](info:browser-environment) আলোচনা করা হয়েছে।
+=======
+Also, if you're developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 ## ম্যানুয়াল
 
+<<<<<<< HEAD
 - **MDN (Mozilla) JavaScript Reference** হচ্ছে উদাহরণ ও অন্যান্য তথ্যসহ একটি ম্যানুয়াল। ভাষার নির্দিষ্ট কোন ফাংশন, মেথড ইত্যাদির ব্যাপারে বিস্তারিত তথ্যের জন্য এটি খুবই ভাল।
+=======
+- **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
     পাওয়া যাবে এখানে: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
+<<<<<<< HEAD
     যদিও বেশিরভাগ সময় ইন্টারনেটে সার্চ করলেই ভাল হয়। সার্চ করার সময় "MDN [term]" ব্যবহার করুন। যেমন `parseInt` ফাংশনের জন্য সার্চ করতে <https://google.com/search?q=MDN+parseInt>
 
 
 * **MSDN** – জাভাস্ক্রিপ্টসহ অনেক তথ্যসমৃদ্ধ মাইক্রোসফ্টের ম্যানুয়াল (ওরা অনেকসময় বলে JScript)। যদি নির্দিষ্টভাবে ইন্টারনেট এক্সপ্লোরারের ব্যাপারে কিছু লাগে তাহলে ঐখানে যাওয়াই ভাল: <http://msdn.microsoft.com/>.
 
     আর "RegExp MSDN" অথবা "RegExp MSDN jscript" আকারেও ইন্টারনেট সার্চ করতে পারেন।
+=======
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 ## কম্প্যাটিবিলিটি টেবিল
 

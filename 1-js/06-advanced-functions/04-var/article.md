@@ -77,7 +77,11 @@ if (true) {
 }
 
 *!*
+<<<<<<< HEAD
 alert(test); // এরর: test নির্ধারণ করা নেই
+=======
+alert(test); // ReferenceError: test is not defined
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 */!*
 ```
 
@@ -111,7 +115,11 @@ function sayHi() {
 }
 
 sayHi();
+<<<<<<< HEAD
 alert(phrase); // এরর: phrase নির্ধারণ করা নেই (ডেভলপার কনসোল চেক করুন)
+=======
+alert(phrase); // ReferenceError: phrase is not defined
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 ```
 
 <<<<<<< HEAD
@@ -270,7 +278,7 @@ The Function Expression is wrapped with parenthesis `(function {...})`, because 
 
 ```js run
 // Tries to declare and immediately call a function
-function() { // <-- Error: Function statements require a function name
+function() { // <-- SyntaxError: Function statements require a function name
 
   var message = "Hello";
 
@@ -319,10 +327,14 @@ In all the above cases we declare a Function Expression and run it immediately. 
 এখানে দুটি প্রধান পার্থক্য রয়েছে `var` এবং `let/const` এর মধ্যেঃ 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ১। `var` ভেরিয়েবলের কোন ব্লক স্কোপ নেই, এগুলি সর্বনিম্ন ফাংশন লেভেল পর্যন্ত বিদ্যমান থাকে। 
 ২। ফাংশনের শুরুতেই `var` ঘোষিত হয়ে যায়(স্ক্রিপ্ট গ্লোবালের জন্য শুরু হয়)।
 =======
 1. `var` variables have no block scope; their visibility is scoped to current function, or global, if declared outside function.
+=======
+1. `var` variables have no block scope, their visibility is scoped to current function, or global, if declared outside function.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 2. `var` declarations are processed at function start (script start for globals).
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 

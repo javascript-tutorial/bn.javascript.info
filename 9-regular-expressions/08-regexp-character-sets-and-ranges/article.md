@@ -55,18 +55,30 @@ alert( "Exception 0xAF".match(/x[0-9A-F][0-9A-F]/g) ); // xAF
 ```smart header="ক্যারাক্টার ক্লাসগুলো নির্দিষ্ট ক্যারাক্টার সেটের শর্টহ্যান্ড"
 উদাহরণস্বরূপ:
 
+<<<<<<< HEAD
 - **\d** -- এটি `pattern:[0-9]` এর মত,
 - **\w** -- এটি `pattern:[a-zA-Z0-9_]` এর মত,
 - **\s** -- এটি `pattern:[\t\n\v\f\r ]` এর মত, এছাড়াও আরো কিছু ইউনিকোড স্পেস ক্যারাক্টার।
+=======
+- **\d** -- is the same as `pattern:[0-9]`,
+- **\w** -- is the same as `pattern:[a-zA-Z0-9_]`,
+- **\s** -- is the same as `pattern:[\t\n\v\f\r ]`, plus few other rare Unicode space characters.
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 ```
 
 ### উদাহরণ: মাল্টি-ল্যাংগুয়েজ \w
 
 যেহেতু `pattern:[a-zA-Z0-9_]` এর শর্টহ্যান্ড ক্যারাক্টার ক্লাস হল `pattern:\w`, তাই এটি দ্বারা চাইনিজ, সিরিলিক ইত্যাদি ভাষার অক্ষরগুলো পাওয়া যায় না।
 
+<<<<<<< HEAD
 আমরা আরো সহজে প্যাটার্ন লিখতে পারি, যা দ্বারা যেকোন ভাষার ওয়ার্ডলি ক্যারাক্টার খুঁজা যায়। ইউনিকোড প্রপার্টি দ্বারা সহজে করা যায়: `pattern:[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]`।
 
 চলুন এর মর্মার্থ বুঝি. এটি `pattern:\w` এর মত আমরা নিজেদের একটি সেট তৈরি করেছি যাতে নিম্নলিখিত ইউনিকোড বৈশিষ্ট্যযুক্ত অক্ষরসমূহ অন্তর্ভুক্ত:
+=======
+We can write a more universal pattern, that looks for wordly characters in any language. That's easy with Unicode properties: `pattern:[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]`.
+
+Let's decipher it. Similar to `pattern:\w`, we're making a set of our own that includes characters with following Unicode properties:
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 - `Alphabetic` (`Alpha`) - বর্ণের জন্য,
 - `Mark` (`M`) - অ্যাকসেন্টের জন্য,
@@ -85,10 +97,17 @@ let str = `Hi 你好 12`;
 alert( str.match(regexp) ); // H,i,你,好,1,2
 ```
 
+<<<<<<< HEAD
 অবশ্যই, আমরা প্যাটার্নটি ইডিট করতে পারি: নতুন প্রপার্টি সংযুক্ত বা বাদ দিতে পারি। ইউনিকোড প্রপার্টি সম্পর্কে বিস্তারিত এখানে জানতে পারবেন <info:regexp-unicode>।
 
 ```warn header="ইউনিকোড প্রপার্টি ফায়ারফক্স এবং এজে সমর্থিত নয়"
 ইউনিকোড প্রপার্টিসমূহ `pattern:p{…}` ফায়ারফক্স এবং এজে সমর্থিত নয়. যদি আমাদের দরকার হয়, তাহলে এই লাইব্রেরীটি ব্যবহার করতে হবে [XRegExp](http://xregexp.com/)।
+=======
+Of course, we can edit this pattern: add Unicode properties or remove them. Unicode properties are covered in more details in the article <info:regexp-unicode>.
+
+```warn header="Unicode properties aren't supported in IE"
+Unicode properties `pattern:p{…}` are not implemented in IE. If we really need them, we can use library [XRegExp](http://xregexp.com/).
+>>>>>>> 7533c719fbf62ba57188d6d51fe4c038b282bd0c
 
 অথবা শুধু নির্দিষ্ট ভাষার রেঞ্জ ব্যবহার করতে পারি, যেমন:  `pattern:[а-я]` সিরিলিক বর্ণের জন্য।
 ```
