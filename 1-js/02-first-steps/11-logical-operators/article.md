@@ -1,6 +1,10 @@
 # Logical operators
 
+<<<<<<< HEAD
 জাভাস্ক্রিপ্টে তিনটি লজিক্যাল অপারেটর রয়েছে: `||` (OR), `&&` (AND), `!` (NOT).
+=======
+There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing). Here we cover the first three, the `??` operator is in the next article.
+>>>>>>> f6ae0b5a5f3e48074312ca3e47c17c92a5a52328
 
 যদিও তাদের "লজিক্যাল" বলা হয়, সেগুলি কেবল বুলিয়ান নয়, যে কোনও ধরণের মানগুলিতে প্রয়োগ করা যেতে পারে। তাদের ফলাফলও যে কোনও ধরণের হতে পারে।
 
