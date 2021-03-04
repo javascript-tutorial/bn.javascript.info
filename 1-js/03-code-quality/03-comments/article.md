@@ -22,11 +22,9 @@ code;
 
 এ ব্যাপারে একটি সুন্দর নিয়ম আছেঃ "কোডটি যদি এতটাই অস্পষ্ট হয় যে এর জন্য একটি মন্তব্য প্রয়োজন, তবে সম্ভবত মন্তব্যের পরিবর্তে এটি পুনরায় লেখা উচিত" 
 
+### কৌশল: ফাংশন পুনর্গঠন
 
-
-### Recipe: factor out functions
-
-Sometimes it's beneficial to replace a code piece with a function, like here:
+অনেক ক্ষেত্রে কোডের অংশবিশেষ এর বদলে ফাংশন ব্যবহার করাটা সুবিধাজনক। যেমনঃ
 
 ```js
 function showPrimes(n) {
@@ -45,8 +43,7 @@ function showPrimes(n) {
 }
 ```
 
-The better variant, with a factored out function `isPrime`:
-
+ `isPrime` ফাংশন দিয়ে এর এর শ্রেয়তর বিকল্পঃ 
 
 ```js
 function showPrimes(n) {
@@ -67,11 +64,11 @@ function isPrime(n) {
 }
 ```
 
-Now we can understand the code easily. The function itself becomes the comment. Such code is called *self-descriptive*.
+এখন আমরা খুব সহজেই কোডটি বুঝতে পারছি। ফাংশনটি নিজেই মন্তব্য হিসবে কাজ করছে। এ ধরনের কোড কে বলা হয় "স্ব-বর্ণনামূলক"
 
-### Recipe: create functions
+### কৌশলঃ ফাংশন তৈরি
 
-And if we have a long "code sheet" like this:
+এবং যদি আমাদের নিচের মত এরকম দীর্ঘ কোড শিট থাকেঃ
 
 ```js
 // here we add whiskey
@@ -92,7 +89,7 @@ for(let t = 0; t < 3; t++) {
 // ...
 ```
 
-Then it might be a better variant to refactor it into functions like:
+সেক্ষেত্রে শ্রেয়তর বিকল্পের জন্য কোডটি কে নিচের মত ফাংশনে পুনর্ঘঠন করা যেতে পারেঃ
 
 ```js
 addWhiskey(glass);
@@ -113,15 +110,15 @@ function addJuice(container) {
 }
 ```
 
-Once again, functions themselves tell what's going on. There's nothing to comment. And also the code structure is better when split. It's clear what every function does, what it takes and what it returns.
+ফাংশন নিজেরাই কি ঘটছে ব্যাখ্যা করে। এখানে মন্তব্য লেখার কিছু নেই। এছাড়াও আলাদা আলাদা থাকলে কোডের গঠন ভালো হয়। এটা সুপষ্ট যে প্রতিটি ফাংশন কি করে, কি গ্রহণ করে এবং কি রিটার্ন করে। 
 
-In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
+বাস্তবে,আমরা সম্পুর্ণরূপে ব্যখ্যা সম্বলিত মন্তব্য পরিহার করতে পারি না। এখানে উৎকর্ষতা সাধনের জন্য অনেক জটিল অ্যালগরিদম এবং অনেক সুক্ষ্ম সমন্বয় করা হয়। কিন্ত সাধারণভাবে আমাদের উচিৎ কোড কে সহজ-সরল এবং স্ব-বর্ণ্নামূলক রাখার জন্য চেষ্টা করা ।  
 
-## Good comments
+## ভালো মন্তব্য 
 
-So, explanatory comments are usually bad. Which comments are good?
+সুতরাং, ব্যাখ্যামূলক মন্তব্য সাধারণত খারাপ। সেক্ষেত্রে কোন ধরণের মন্তব্য ভাল?
 
-Describe the architecture
+গঠনপ্রণালী বর্ণনা করুন
 : Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) to build high-level architecture diagrams explaining the code. Definitely worth studying.
 
 Document function parameters and usage
