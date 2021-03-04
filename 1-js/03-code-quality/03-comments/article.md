@@ -1,14 +1,14 @@
-# Comments
+# মন্তব্য
 
-As we know from the chapter <info:structure>, comments can be single-line: starting with `//` and multiline: `/* ... */`.
+ইতপূর্বে আমরা কোডের গঠন চ্যাপ্টারে দেখেছি যে মন্তব্য এক লাইনের (সিংগেল লাইন) যা `//` দিয়ে শুরু এবং একাধিক লাইনের (মাল্টি লাইন) যা `/* ... */` শুরু হতে পারে.
 
-We normally use them to describe how and why the code works.
+সাধারণত আমরা কোডটি কিভাবে এবং কেনো কাজ করছে তার বর্ণনা দেবার জন্য মন্তব্য ব্যাবহার করে থাকি।
 
-At first sight, commenting might be obvious, but novices in programming often use them wrongly.
+প্রাথমিকভাবে মন্তব্য সুস্পষ্ট মনে হতে পারে, তবে প্রোগ্রামিং এ নবাগতরা প্রায়শই মন্তব্য ভুলভাবে ব্যবহার করে থাকে।
 
-## Bad comments
+## ত্রুটিপূর্ণ মন্তব্য
 
-Novices tend to use comments to explain "what is going on in the code". Like this:
+নবাগতদের মাঝে মন্তব্য ব্যবহার করে "এই কোডে কি ঘটছে" তা ব্যাখ্যা করার প্রবণতা দেখা যায়। এরকমঃ
 
 ```js
 // This code will do this thing (...) and that thing (...)
@@ -18,9 +18,11 @@ complex;
 code;
 ```
 
-But in good code, the amount of such "explanatory" comments should be minimal. Seriously, the code should be easy to understand without them.
+কিন্ত ভালো কোডে এরকম "ব্যাখ্যামূলক" মন্তব্যের উপস্থিতি হওয়া উচিৎ ন্যূনতম। মন্তব্য ছাড়াই কোড সহজবোধ্য হওয়াটা গুরুত্বপূর্ণ। 
 
-There's a great rule about that: "if the code is so unclear that it requires a comment, then maybe it should be rewritten instead".
+এ ব্যাপারে একটি সুন্দর নিয়ম আছেঃ "কোডটি যদি এতটাই অস্পষ্ট হয় যে এর জন্য একটি মন্তব্য প্রয়োজন, তবে সম্ভবত মন্তব্যের পরিবর্তে এটি পুনরায় লেখা উচিত" 
+
+
 
 ### Recipe: factor out functions
 
