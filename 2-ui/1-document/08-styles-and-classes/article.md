@@ -1,37 +1,37 @@
-# Styles and classes
+# Styles এবং classes
 
-Before we get into JavaScript's ways of dealing with styles and classes -- here's an important rule. Hopefully it's obvious enough, but we still have to mention it.
+জাভাস্ক্রিপ্টের সাহায্যে style এবং class নিয়ে কাজ করার সময় আমাদের কিছু গুরুত্বপূর্ণ রুল জেনে রাখা উচিত। যদিও আমাদের কাছে অনেক কিছু সুস্পষ্ট, তারপরও কিছু বিষয় জেনে রাখা উচিত।
 
-There are generally two ways to style an element:
+দুইটি উপায়ে আমরা এলিমেন্টে স্ট্যাইল করতে পারি:
 
-1. Create a class in CSS and add it: `<div class="...">`
-2. Write properties directly into `style`: `<div style="...">`.
+1. CSS ক্লাস এর মাধ্যমে: `<div class="...">`
+2. সরাসরি `style` প্রপার্টির মাধ্যমে : `<div style="...">`।
 
-JavaScript can modify both classes and `style` properties.
+জাভাস্ক্রিপ্টের মাধ্যমে ক্লাস এবং `style` প্রপার্টিকে উভয়ভাবে আমরা পরিবর্তন করতে পারি।
 
-We should always prefer CSS classes to `style`. The latter should only be used if classes "can't handle it".
+তবে আমাদের `style` এর জন্য CSS ক্লাস ব্যবহার করাই বেশি উপযোগী। তবে যদি ক্লাসের মাধ্যমে সম্পূর্ন ব্যাপারটি কন্ট্রোল করতে না পারি তাহলে দ্বিতীয়টির মাধ্যমে করা উচিত।
 
-For example, `style` is acceptable if we calculate coordinates of an element dynamically and want to set them from JavaScript, like this:
+যেমন, আমরা জাভাস্ক্রিপ্টের মাধ্যমে ডায়নামিক্যালি কো-অর্ডিনেট ক্যালকুলেশন করে `style` এ সেট করতে পারি, এভাবে:
 
 ```js
-let top = /* complex calculations */;
-let left = /* complex calculations */;
+let top = /* জটিল ক্যালকুলেশন */;
+let left = /* জটিল ক্যালকুলেশন */;
 
-elem.style.left = left; // e.g '123px', calculated at run-time
-elem.style.top = top; // e.g '456px'
+elem.style.left = left; // যেমন '123px', রানটাইমে ক্যালকুলেশন
+elem.style.top = top; // যেমন '456px'
 ```
 
-For other cases, like making the text red, adding a background icon -- describe that in CSS and then add the class (JavaScript can do that). That's more flexible and easier to support.
+অন্যান্য ক্ষেত্রে, যেমন টেক্সট কালার লাল, বা আইকন পরিবর্তন ইত্যাদি আমরা জাভাস্ক্রিপ্টের মাধ্যমে *CSS class* সংযুক্ত করণের দ্বারা করতে পারি। এটি আরো বেশি সহজ এবং উপযোগী।
 
-## className and classList
+## className এবং classList
 
-Changing a class is one of the most often used actions in scripts.
+জাভাস্ক্রিপ্টের মাধ্যমে আমরা প্রায়সই ক্লাসের নাম পরিবর্তন করে থাকি।
 
-In the ancient time, there was a limitation in JavaScript: a reserved word like `"class"` could not be an object property. That limitation does not exist now, but at that time it was impossible to have a `"class"` property, like `elem.class`.
+পূর্বে জাভাস্ক্রিপ্টের কিছু সীমাবদ্ধতা ছিল: `"class"` একটি রিসার্ভড ওয়ার্ড হওয়ায় এটি অবজেক্টের প্রপার্টি হতে পারত না। তবে সীমাবদ্ধতাটি এখন আর নেই, কিন্তু অই সময় `"class"` নামের প্রপার্টি অ্যাসাইন করা সম্ভব হত নাহ, যেমন `elem.class`।
 
-So for classes the similar-looking property `"className"` was introduced: the `elem.className` corresponds to the `"class"` attribute.
+ক্লাসের জন্য আমাদের অনুরূপ একটি প্রপার্টি ছিল `"className"`: `elem.className` দ্বারা `"class"` অ্যাট্রিবিউটকে নির্দেশ করে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run
 <body class="main page">
@@ -41,19 +41,19 @@ For instance:
 </body>
 ```
 
-If we assign something to `elem.className`, it replaces the whole string of classes. Sometimes that's what we need, but often we want to add/remove a single class.
+যদি আমরা `elem.className` এ কিছু অ্যাসাইন করি তাহলে এটি সম্পূর্ন ক্লাস স্ট্রিংটিকে রিপ্লেস করে। মাঝে মাঝে আমাদের এটি দরকার হয়, কিন্তু বেশিরভাগ সময় আমাদের একটি সিংগেল ক্লাস সংযুক্ত/বাদ দেয়া লাগে।
 
-There's another property for that: `elem.classList`.
+এজন্য আমাদের আরেকটি প্রপার্টি আছে: `elem.classList`।
 
-The `elem.classList` is a special object with methods to `add/remove/toggle` a single class.
+`elem.classList` একটি স্পেশাল অবজেক্ট যার কিছু মেথড আছে `add/remove/toggle`।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run
 <body class="main page">
   <script>
 *!*
-    // add a class
+    // নতুন একটি ক্লাস সংযুক্ত
     document.body.classList.add('article');
 */!*
 
@@ -62,15 +62,15 @@ For instance:
 </body>
 ```
 
-So we can operate both on the full class string using `className` or on individual classes using `classList`. What we choose depends on our needs.
+সুতরাং আমরা উভয়ই ব্যবহার করতে পারি, সম্পূর্ন ক্লাসের জন্য `className` অথবা নির্দিষ্ট একটি ক্লাসের জন্য `classList`। আমাদের প্রয়োজনমত আমরা এটি ব্যবহার করব।
 
-Methods of `classList`:
+`classList` এর মেথডসমূহ:
 
-- `elem.classList.add/remove("class")` -- adds/removes the class.
-- `elem.classList.toggle("class")` -- adds the class if it doesn't exist, otherwise removes it.
-- `elem.classList.contains("class")` -- checks for the given class, returns `true/false`.
+- `elem.classList.add/remove("class")` -- নতুন ক্লাস সংযুক্ত/বাদ দেয়ার জন্য।
+- `elem.classList.toggle("class")` -- ক্লাসটি না থাকলে সংযুক্ত হবে অন্যথায় বাদ যাবে।
+- `elem.classList.contains("class")` -- ক্লাসটি এলিমেন্টে আছে কিনা যাচাই করে, `true/false` রিটার্ন করে।
 
-Besides, `classList` is iterable, so we can list all classes with `for..of`, like this:
+এছাড়াও, `classList` একটি ইটারেবল অবজেক্ট, সুতরাং আমরা `for..of` লুপের মাধ্যমেও ইটারেট করতে পারি, এভাবে:
 
 ```html run
 <body class="main page">
@@ -82,11 +82,11 @@ Besides, `classList` is iterable, so we can list all classes with `for..of`, lik
 </body>
 ```
 
-## Element style
+## এলিমেন্ট স্ট্যাইল
 
-The property `elem.style` is an object that corresponds to what's written in the `"style"` attribute. Setting `elem.style.width="100px"` works the same as if we had in the attribute `style` a string `width:100px`.
+`elem.style` প্রপার্টিটি একটি অবজেক্ট এবং CSS `style` অ্যাট্রিবিউট সমূহ এর প্রপার্টি। `elem.style.width="100px"` এটি  ও `style` অ্যাট্রিবিউটের `width:100px` এর কাজ একই।
 
-For multi-word property the camelCase is used:
+একাধিক শব্দ দ্বারা গঠিত প্রপার্টিসমূহ ক্যামেল কেসে লিখা হয়:
 
 ```js no-beautify
 background-color  => elem.style.backgroundColor
@@ -94,16 +94,16 @@ z-index           => elem.style.zIndex
 border-left-width => elem.style.borderLeftWidth
 ```
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 document.body.style.backgroundColor = prompt('background color?', 'green');
 ```
 
 ````smart header="Prefixed properties"
-Browser-prefixed properties like `-moz-border-radius`, `-webkit-border-radius` also follow the same rule: a dash means upper case.
+Browser-prefixed প্রপার্টি সমূহ যেমন `-moz-border-radius`, `-webkit-border-radius` একই নিয়ম অনুসরণ করে: ড্যাসের স্থলে বড় হাতের অক্ষর হবে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js
 button.style.MozBorderRadius = '5px';
@@ -111,33 +111,33 @@ button.style.WebkitBorderRadius = '5px';
 ```
 ````
 
-## Resetting the style property
+## style প্রপার্টি পুনরায় সেট
 
-Sometimes we want to assign a style property, and later remove it.
+অনেক সময় আমাদের কোন একটি প্রপার্টি অ্যাসাইন করে, পরে এটি বাদ দেয়া লাগে।
 
-For instance, to hide an element, we can set `elem.style.display = "none"`.
+যেমন, কোন একটি এলিমেন্টকে অদৃশ্য করতে `elem.style.display = "none"`.
 
-Then later we may want to remove the `style.display` as if it were not set. Instead of `delete elem.style.display` we should assign an empty string to it: `elem.style.display = ""`.
+এবং পরে আমরা `style.display` এর অবস্থান পুনরায় আগের মত করতে চাই। এক্ষেত্রে `delete elem.style.display` এর পরিবর্তে ঐ প্রপার্টিতে এম্পটি স্ট্রিং অ্যাসাইন করব: `elem.style.display = ""`।
 
 ```js run
-// if we run this code, the <body> will blink
+// যদি আমরা এট রান করি, <body> ব্লিংক করবে
 document.body.style.display = "none"; // hide
 
-setTimeout(() => document.body.style.display = "", 1000); // back to normal
+setTimeout(() => document.body.style.display = "", 1000); // পূর্বের অবস্থায় ফেরত
 ```
 
-If we set `style.display` to an empty string, then the browser applies CSS classes and its built-in styles normally, as if there were no such `style.display` property at all.
+যদি আমরা `style.display` কে এম্পটি স্ট্রিং দ্বারা সেট করি, তাহলে ব্রাউজার বিল্ট ইন CSS ক্লাস সমূহ অ্যাপ্লাই করবে এবং স্ট্যাইলটি পূর্বের মত হবে, `style.display` প্রপার্টি নরমাল বিহেভ করবে।
 
-````smart header="Full rewrite with `style.cssText`"
-Normally, we use `style.*` to assign individual style properties. We can't set the full style like `div.style="color: red; width: 100px"`, because `div.style` is an object, and it's read-only.
+````smart header="পুনরায় সম্পুর্ন লিখা `style.cssText` এর মাধ্যমে"
+সাধারণত, আমরা একক স্ট্যাইল অ্যাসাইন করতে `style.*` এর প্রপার্টি সমূহতে অ্যাসাইন করি। কিন্তু আমরা চাইলে একাধিক স্ট্যাইল একসাথে সেট করতে পারিনা, এভাবে `div.style="color: red; width: 100px"`, কেননা `div.style` একটি অবজেক্ট, এবং এটি শুধুমাত্র read-only।
 
-To set the full style as a string, there's a special property `style.cssText`:
+একাধিক স্ট্যাইল স্ট্রিং হিসেবে সেট করতে, একটি স্পেশাল প্রপার্টি আছে `style.cssText`:
 
 ```html run
 <div id="div">Button</div>
 
 <script>
-  // we can set special style flags like "important" here
+  // আমরা এখানে স্পেশাল ফ্ল্যাগও অ্যাসাইন করতে পারি যেমন "important"
   div.style.cssText=`color: red !important;
     background-color: yellow;
     width: 100px;
@@ -148,27 +148,27 @@ To set the full style as a string, there's a special property `style.cssText`:
 </script>
 ```
 
-This property is rarely used, because such assignment removes all existing styles: it does not add, but replaces them. May occasionally delete something needed. But we can safely use it for new elements, when we know we won't delete an existing style.
+প্রপার্টিটি কদাচিৎ ব্যবহার হয়, কেননা এর ফলে বিদ্যমান সকল স্ট্যাইল রিমুভ হয়ে যায়: এটি পুরনো স্ট্যাইল টিকে সম্পুর্ন পরিবর্তন করে দেয়, এর ফলে অনেক সময় আমাদের প্রয়োজনীয় স্ট্যাইলও ডিলিট হয়ে যায়। তবে নতুন কোন এলিমেন্টে একাধিক স্ট্যাইল সেটের জন্য এটি উপযোগী, যখন আমরা জানি প্রয়োজনীয় কোন স্ট্যাইল এখনো সেট হয়নি।
 
-The same can be accomplished by setting an attribute: `div.setAttribute('style', 'color: red...')`.
+আমরা এভাবেও করতে পারি: `div.setAttribute('style', 'color: red...')`।
 ````
 
 ## Mind the units
 
-Don't forget to add CSS units to values.
+CSS ইউনিট ভ্যালু লিখতে ভুলবেন না।
 
-For instance, we should not set `elem.style.top` to `10`, but rather to `10px`. Otherwise it wouldn't work:
+উদাহরণস্বরূপ, আমাদের `elem.style.top` কে শুধুমাত্র `10` দ্বারা লিখলে হবে না, তার পরিবর্তে ইউনিট লিখা লাগবে যেমন `10px`। অন্যথায় এটি কাজ করবে না:
 
 ```html run height=100
 <body>
   <script>
   *!*
-    // doesn't work!
+    // এটি কাজ করবে না!
     document.body.style.margin = 20;
-    alert(document.body.style.margin); // '' (empty string, the assignment is ignored)
+    alert(document.body.style.margin); // '' (empty স্ট্রিং, অ্যাসাইমেন্ট ইগনোর হবে)
   */!*
 
-    // now add the CSS unit (px) - and it works
+    // এখন CSS unit (px) অ্যাড করলাম - এবং এটি কাজ করবে
     document.body.style.margin = '20px';
     alert(document.body.style.margin); // 20px
 
@@ -178,19 +178,19 @@ For instance, we should not set `elem.style.top` to `10`, but rather to `10px`. 
 </body>
 ```
 
-Please note: the browser "unpacks" the property `style.margin` in the last lines and infers `style.marginLeft` and `style.marginTop` from it.
+দয়া করে নোট করুন: ব্রাউজার `style.margin` প্রপার্টিটি "unpacks" করে যার ফলে আমরা `style.marginLeft` এবং `style.marginTop` এ ইউনিটটি দেখি।
 
 ## Computed styles: getComputedStyle
 
-So, modifying a style is easy. But how to *read* it?
+সুতরাং, স্ট্যাইল মোডিফাই করা সহজ। কিন্তু আমরা ভ্যালু কিভাবে জানতে পারি?
 
-For instance, we want to know the size, margins, the color of an element. How to do it?
+উদাহরণস্বরূপ, কোন এলিমেন্টের সাইজ, মার্জিন, কালার ইত্যাদি জানা লাগতে পারে। কিভাবে জানতে পারি?
 
-**The `style` property operates only on the value of the `"style"` attribute, without any CSS cascade.**
+**`style` প্রপার্টি CSS cascade শুধুমাত্র `"style"` অ্যাট্রিবিউটের ভ্যালু সমূহ পড়তে পারে।**
 
-So we can't read anything that comes from CSS classes using `elem.style`.
+সুতরাং আমরা এলিমেন্টের কোন ক্লাসের ভ্যালুসমূহ `elem.style` এর মাধ্যমে পড়তে পারব না।
 
-For instance, here `style` doesn't see the margin:
+যেমন, এখানে `style` এর মাধ্যমে আমরা মার্জিন পাব না:
 
 ```html run height=60 no-beautify
 <head>
@@ -208,25 +208,25 @@ For instance, here `style` doesn't see the margin:
 </body>
 ```
 
-...But what if we need, say, to increase the margin by `20px`? We would want the current value of it.
+...কিন্তু আমাদের যদি মার্জিন `20px` বাড়ানো লাগে তাহলে কি করব? এজন্য আমাদের বর্তমান ভ্যালু জানা দরকার।
 
-There's another method for that: `getComputedStyle`.
+এজন্য আরেকটি মেথড আছে: `getComputedStyle`.
 
-The syntax is:
+সিন্ট্যাক্স হবে:
 
 ```js
 getComputedStyle(element, [pseudo])
 ```
 
 element
-: Element to read the value for.
+: এলিমেন্ট হল যার মান পড়া দরকার
 
 pseudo
-: A pseudo-element if required, for instance `::before`. An empty string or no argument means the element itself.
+: এটি প্রয়োজন হয় যদি সুডো মান জানা লাগে, যেমন `::before`। এটি ঐচ্ছিক।
 
-The result is an object with styles, like `elem.style`, but now with respect to all CSS classes.
+রেজাল্ট হবে style প্রপার্টি সমূহের অবজেক্ট, অনেকটা `elem.style` এর মত, তবে এখন এটি এলিমেন্টের সর্বশেষ মানটি পাবে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run height=100
 <head>
@@ -237,7 +237,7 @@ For instance:
   <script>
     let computedStyle = getComputedStyle(document.body);
 
-    // now we can read the margin and the color from it
+    // এখন আমরা ইন্টারনাল CSS এর মান পাচ্ছি
 
     alert( computedStyle.marginTop ); // 5px
     alert( computedStyle.color ); // rgb(255, 0, 0)
@@ -246,23 +246,23 @@ For instance:
 </body>
 ```
 
-```smart header="Computed and resolved values"
-There are two concepts in [CSS](https://drafts.csswg.org/cssom/#resolved-values):
+```smart header="Computed এবং resolved ভ্যালু"
+এর দুটি ধারণা আছে [CSS](https://drafts.csswg.org/cssom/#resolved-values):
 
-1. A *computed* style value is the value after all CSS rules and CSS inheritance is applied, as the result of the CSS cascade. It can look like `height:1em` or `font-size:125%`.
-2. A *resolved* style value is the one finally applied to the element. Values like `1em` or `125%` are relative. The browser takes the computed value and makes all units fixed and absolute, for instance: `height:20px` or `font-size:16px`. For geometry properties resolved values may have a floating point, like `width:50.5px`.
+1. *CSS cascade* এর ফলে *computed* স্ট্যাইল এর মান পাব আমরা সকল CSS রুলস এবং CSS ইনহেরিটেন্স অ্যাপ্লাই হওয়ার পর। যেমন `height:1em` অথবা `font-size:125%`।
+2. *resolved* এর মান পাব এলিমেন্টে সর্বশেষ রুলস অ্যাপ্লাই হওয়ার পর।  যেমন  `1em` অথবা `125%` মানসমূহ আপেক্ষিক। ব্রাউজার *computed* মানটি নেয় এবং সকল সকল ইউনিটকে পরমমানে নির্দিষ্ট করে, যেমন: `height:20px` বা `font-size:16px`। জ্যামিতিক প্রপার্টিসমূহের মান ভগ্নাংশ আকারে হতে পারে, যেমন `width:50.5px`।
 
-A long time ago `getComputedStyle` was created to get computed values, but it turned out that resolved values are much more convenient, and the standard changed.
+পূর্বে `getComputedStyle` শুধুমাত্র *computed* স্ট্যাইল এর মানটি রিটার্ন করত, কিন্তু বর্তমানে এটি আরো সুবিধাজনক, *resolved* কৃতমান রিটার্ন করে।
 
-So nowadays `getComputedStyle` actually returns the resolved value of the property, usually in `px` for geometry.
+সুতরাং বর্তমানে `getComputedStyle` *resolved* কৃতমান রিটার্ন করে, সাধারণত জ্যামিতিক প্রপার্টিসমূহকে `px` এ রিটার্ন করে।
 ```
 
-````warn header="`getComputedStyle` requires the full property name"
-We should always ask for the exact property that we want, like `paddingLeft` or `marginTop` or `borderTopWidth`. Otherwise the correct result is not guaranteed.
+````warn header="`getComputedStyle` এ সম্পূর্ণ প্রপার্টির নাম প্রয়োজন"
+আমাদের অবশ্যই প্রপার্টির মান হুবহু লিখা উচিত, যেমন *padding*, *margin* বা *border* এর বদলে যথাক্রমে `paddingLeft`, `marginTop` বা `borderTopWidth` লিখতে হবে। অন্যথায় এটি সর্বদা সঠিক মান দিবে তা নিশ্চিত নয়।
 
-For instance, if there are properties `paddingLeft/paddingTop`, then what should we get for `getComputedStyle(elem).padding`? Nothing, or maybe a "generated" value from known paddings? There's no standard rule here.
+যেমন, যদি আমরা `paddingLeft/paddingTop` এর মান জানতে চাই, তাহলে আমরা কি `getComputedStyle(elem).padding` এর মান পাব? এর কোন স্ট্যান্ডার্ড রুল নাই।
 
-There are other inconsistencies. As an example, some browsers (Chrome) show `10px` in the document below, and some of them (Firefox) --  do not:
+এটি ব্রাউজার অনুযায়ী অসংগতি আচরণ করে, যেমন (Chrome) এ দেখাবে `10px` এবং (Firefox) --  কোন মান দেখাবে না:
 
 ```html run
 <style>
@@ -272,32 +272,31 @@ There are other inconsistencies. As an example, some browsers (Chrome) show `10p
 </style>
 <script>
   let style = getComputedStyle(document.body);
-  alert(style.margin); // empty string in Firefox
+  alert(style.margin); // Firefox এ খালি স্ট্রিং
 </script>
 ```
 ````
 
-```smart header="Styles applied to `:visited` links are hidden!"
-Visited links may be colored using `:visited` CSS pseudoclass.
+```smart header="Styles applied to `:visited` লিংক অদৃশ্য!"
+ভিজিটেড লিংক সমূহ হয়তবা CSS pseudoclass `:visited` এর জন্য একটি কালার দেখায়।
 
-But `getComputedStyle` does not give access to that color, because otherwise an arbitrary page could find out whether the user visited a link by creating it on the page and checking the styles.
+কিন্তু `getComputedStyle` এটি কোন কালারের মান রিটার্ন করে না কারণ এটির অ্যাক্সেস থাকে না, কেননা একটি স্বতন্ত্র পেজে স্ট্যাইল যাচাইয়ের মাধ্যমে সহজেই জানা যাবে কোন কোন পেজ ভিজিট করা হয়েছে।
 
-JavaScript may not see the styles applied by `:visited`. And also, there's a limitation in CSS that forbids applying geometry-changing styles in `:visited`. That's to guarantee that there's no side way for an evil page to test if a link was visited and hence to break the privacy.
+তাই জাভাস্ক্রিপ্টের মাধ্যমে `:visited` এর মান জানা সম্ভব না। এটি আমাদের গোপনীয়তার নিশ্চয়তা প্রদান করে।
 ```
 
-## Summary
+## সারাংশ
 
-To manage classes, there are two DOM properties:
+ক্লাস ম্যানিপুলেসনের জন্য, দুটি DOM প্রপার্টি আছে:
 
-- `className` -- the string value, good to manage the whole set of classes.
-- `classList` -- the object with methods `add/remove/toggle/contains`, good for individual classes.
+- `className` -- ক্লাস অ্যাট্রিবিউটের সকল ক্লাস স্ট্রিং হিসেবে রিটার্ন করে, এলিমেন্টের সকল ক্লাসের জন্য এটি উপযোগী।
+- `classList` -- একটি অবজেক্ট যার মেথডসমূহ `add/remove/toggle/contains`, সিংগেল ক্লাসের জন্য উপযোগী।
 
-To change the styles:
+স্ট্যাইল পরিবর্তনের জন্য:
 
-- The `style` property is an object with camelCased styles. Reading and writing to it has the same meaning as modifying individual properties in the `"style"` attribute. To see how to apply `important` and other rare stuff -- there's a list of methods at [MDN](mdn:api/CSSStyleDeclaration).
+- `style` প্রপার্টি একটি অবজেক্ট যার প্রপার্টি সমূহ ক্যামেল কেসের হয়ে থাকে। প্রতিটি একক প্রপার্টি পড়তে এবং অ্যাসাইন করতে এটি উপযোগী। কিভাবে আমরা `important` এবং অন্যান্য কদাচিৎ ব্যবহৃত বিষয়গুলো ব্যবহার করতে পারি -- তা জানতে এটি দেখুন [MDN](mdn:api/CSSStyleDeclaration)।
+- `style.cssText` এর সাহায্যে আমরা একাধিক `"style"` অ্যাট্রিবিউট সেট করতে পারি।
 
-- The `style.cssText` property corresponds to the whole `"style"` attribute, the full string of styles.
+কোন  এলিমেন্টের প্রয়োগকৃত সর্বশেষ সকল স্ট্যাইল জানতে:
 
-To read the resolved styles (with respect to all classes, after all CSS is applied and final values are calculated):
-
-- The `getComputedStyle(elem, [pseudo])` returns the style-like object with them. Read-only.
+- `getComputedStyle(elem, [pseudo])` সকল প্রপার্টি রিটার্ন করবে. এটি Read-only।
