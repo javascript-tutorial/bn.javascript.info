@@ -1,1 +1,1 @@
-To append text to each `<li>` we can alter the text node `data`.
+আমরা `<li>` এ টেক্সট নোডের `data` প্রপার্টির সাথে মানটি যুক্ত করে দিব।

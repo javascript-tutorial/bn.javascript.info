@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Show descendants in a tree
+# UL এর নেস্টেড লিস্ট এর সংখ্যা
 
-There's a tree organized as nested `ul/li`.
+একটি `ul/li` এর ট্রি আছে।
 
-Write the code that adds to each `<li>` the number of its descendants. Skip leaves (nodes without children).
+প্রতিটি `ul` এর অধীনে কতটি `<li>` আছে দেখান। (চিল্ড্রেন ব্যাতীত) নোড সমূহ বাদ যাবে।
 
-The result:
+ফলাফলটি হবে:
 
 [iframe border=1 src="solution"]
