@@ -1,8 +1,8 @@
-The answer: `1` and `2`.
+উত্তর হল: `1` এবং `2`।
 
-The first handler triggers, because it's not removed by `removeEventListener`. To remove the handler we need to pass exactly the function that was assigned. And in the code a new function is passed, that looks the same, but is still another function.
+প্রথম হ্যান্ডেলারটি রান হবে, কেননা এখানে `removeEventListener` এর মাধ্যমে হ্যান্ডেলারটি রিমুভ হবে না। কোন হ্যান্ডেলার রিমুভ করতে আমাদের সেম ভ্যারিয়েবল ফাংশন অথবা ফাংশন পাঠাতে হবে। কিন্তু এখানে একই লজিকের দুটি ফাংশন পাঠানো হচ্ছে, একই রেফারেন্সের না।
 
-To remove a function object, we need to store a reference to it, like this:
+কোন হ্যান্ডেলার রিমুভ করতে আমাদের এভাবে লিখা লাগবে:
 
 ```js
 function handler() {
@@ -13,4 +13,4 @@ button.addEventListener("click", handler);
 button.removeEventListener("click", handler);
 ```
 
-The handler `button.onclick` works independently and in addition to `addEventListener`.
+আবার `addEventListener` এর পাশাপাশি `button.onclick` ও কাজ করবে।

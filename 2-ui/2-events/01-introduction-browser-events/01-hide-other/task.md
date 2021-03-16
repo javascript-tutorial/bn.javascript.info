@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Hide on click
+# ক্লিকের মাধ্যমে অদৃশ্য
 
-Add JavaScript to the `button` to make `<div id="text">` disappear when we click it.
+একটি বাটনে `button` ক্লিক হলে এটি `<div id="text">` কে অদৃশ্য করবে।
 
-The demo:
+ডেমো দেখুন:
 
 [iframe border=1 src="solution" height=80]
