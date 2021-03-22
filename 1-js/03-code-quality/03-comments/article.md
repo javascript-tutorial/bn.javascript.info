@@ -43,7 +43,7 @@ function showPrimes(n) {
 }
 ```
 
- `isPrime` ফাংশন দিয়ে এর এর শ্রেয়তর বিকল্পঃ 
+ `isPrime` ফাংশন দিয়ে এর শ্রেয়তর বিকল্পঃ 
 
 ```js
 function showPrimes(n) {
@@ -118,13 +118,12 @@ function addJuice(container) {
 
 সুতরাং, ব্যাখ্যামূলক মন্তব্য সাধারণত খারাপ। সেক্ষেত্রে কোন ধরণের মন্তব্য ভাল?
 
-গঠনপ্রণালী বর্ণনা করুন
-: Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) to build high-level architecture diagrams explaining the code. Definitely worth studying.
+গঠনপ্রণালী বর্ণনা করুনঃ কম্পোনেন্ট এর সার্বিক একটি রূপরেখা উল্লেখ করুন, এদের পারষ্পরিক মিথষ্ক্রিয়া এবং ভিন্ন ভিন্ন কন্ট্রোল ফ্লো সম্পর্কে বলুন। সংক্ষেপে, কোড এর বার্ডস আই ভিউ। কোড সহজবোধ্য উপস্থাপন করার জন্য সার্বিক রূপরেখা তৈরির বিশেষ ধরনের ল্যাংগুয়েজ [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) রয়েছে। 
 
-Document function parameters and usage
-: There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+ফাংশন এর প্যারামিটার এবং ব্যাবহার লিপিবদ্ধ করুনঃ ফাংশন এর প্যারামিটার, ব্যাবহার, রিটার্ন ভ্যালু লিপিবদ্ধ করার জন্য বিশেষ ধরনের ল্যাংগুয়েজ [JSDoc](http://en.wikipedia.org/wiki/JSDoc) রয়েছে।
 
-For instance:
+উদাহরণস্বরূপঃ
+
 ```js
 /**
  * Returns x raised to the n-th power.
@@ -138,26 +137,24 @@ function pow(x, n) {
 }
 ```
 
-Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+এই ধরনের মন্তব্যের মাধ্যমে আমরা কোড না দেখেই ফাংশনটির কাজ এবং ব্যবহার বুঝতে পারি।
 
-By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+প্রসঙ্গত উল্লেখ্য, অনেক এডিটর যেমন [WebStorm](https://www.jetbrains.com/webstorm/) এই ধরনের ল্যাংগুয়েজ বুঝতে পারে এবং অটোকমপ্লিট ও স্বয়ংক্রিয় কোড-পরীক্ষায় তা ব্যবহার করে থাকে। 
 
-Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+এছাড়াও, মন্তব্য থেকে এইচটিএমএল-ডকুমেন্টেশন তৈরির জন্য [JSDoc 3](https://github.com/jsdoc3/jsdoc) এর মত টুল রয়েছে। JSDoc সম্পর্কে আরো জানতে <http://usejsdoc.org/> দেখতে পারেন।  
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+কাজটি কেনো এভাবে সমাধান করা হয়েছে? : যা লিখিত থাকে তা গুরুত্বপূর্ণ। তবে যা *অলিখিত* সেটা কি ঘটছে তা বোঝার জন্য অধিক গুরুত্বপূর্ণ হতে পারে। এই কাজটি কেনো ঠিক এইভাবেই সমাধান করা হয়েছে? এক্ষেত্রে কোড কোন উত্তর দেয় না।  
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+    যদি কাজটি সমাধানের অনেকগুলো উপায় থাকে, সেক্ষেত্রে কেনো এইটি? বিশেষভাবে যখন এটি আপাতদৃষ্টিতে সবচেয়ে সুস্পষ্ট সমাধান নয়  
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+    এইধরনের মন্তব্য ছাড়া নিম্নলিখিত পরস্থিতি হতে পারেঃ 
+    ১। আপনি অথবা আপনার সহকর্মীরা কিছুক্ষণ পূর্বে লিখিত কোডটি দেখলেন এবং ভাবলেন কোডটি সাব-অপটিমাল 
+    ২। আপনি ভাবলেনঃ " আমি কতটা বোকাটা ছিলাম,আর এখন কতটা বুদ্ধিমান ", এবং "আরো সুস্পষ্ট এবং সঠিক" বিকল্প ব্যবহার করে পুনরায় কোডটি লিখলেন  
+    ৩। ... কোড পুনরায় লেখার তাগিদ থাকা ভালো। কিন্তু কাজকরার প্রক্রিয়াআপনি দেখলেন "অধিক সুস্পষ্ট" সমাধানটি তে আসলে ঘাটতি রয়েছে।  এমনকি আপনি খুব অস্পষ্টভাবে মনে করতে পারবেন কেনো এমন হচ্ছে, কারণ আপনি অনেক সময় আগে এই চেষ্টা করেছেন। আপনি আবার সঠিক বিকল্পে ফিরে আসবেন কিন্তু  এর মাঝে কিছু সময় অপচয় হলো। 
 
-    Comments that explain the solution are very important. They help to continue development the right way.
+    সমাধান কে ব্যখ্যাকারী মন্তব্য খুব গুরুত্বপূর্ণ। এই ধরনের মন্তব্য সঠিক প্রক্রিয়ায় ডেভেলপমেন্ট করতে সাহাজ্য করে। 
 
-Any subtle features of the code? Where they are used?
-: If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+কোড এ কোন সূক্ষ্ম বৈশিষ্ট রয়েছে? কেনো এই ধরনের বৈশিষ্ট ব্যবহার করা হয়েছে?:  If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
 
 ## Summary
 
