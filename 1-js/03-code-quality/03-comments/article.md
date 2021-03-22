@@ -154,23 +154,23 @@ function pow(x, n) {
 
     সমাধান কে ব্যখ্যাকারী মন্তব্য খুব গুরুত্বপূর্ণ। এই ধরনের মন্তব্য সঠিক প্রক্রিয়ায় ডেভেলপমেন্ট করতে সাহাজ্য করে। 
 
-কোড এ কোন সূক্ষ্ম বৈশিষ্ট রয়েছে? কেনো এই ধরনের বৈশিষ্ট ব্যবহার করা হয়েছে?:  If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+কোড এ কোন সূক্ষ্ম বৈশিষ্ট রয়েছে? কেনো এই ধরনের বৈশিষ্ট ব্যবহার করা হয়েছে?: যদি কোড এ কোন সূক্ষ্ম অথবা সহজাত নয় এরকম কিছু থাকে তা অবশ্যই মন্তব্যে অন্তর্ভূক্ত করা উচিত।
 
-## Summary
+## সারসংক্ষেপ
 
-An important sign of a good developer is comments: their presence and even their absence.
+মন্তব্য এর উপস্থিতি/অনুপস্থিতি একজন ভালো ডেভেলপার এর বৈশিষ্ট। 
 
-Good comments allow us to maintain the code well, come back to it after a delay and use it more effectively.
+ভালো মন্তব্য আমাদের সঠিকভাবে কোড রক্ষণাবেক্ষণ এবং কিছু সময় এর ব্যবধানে কোডটিকে কার্যকরভাবে ব্যবহার করতে সাহাজ্য করে।
 
-**Comment this:**
+**মন্তব্য করুনঃ**
 
-- Overall architecture, high-level view.
-- Function usage.
-- Important solutions, especially when not immediately obvious.
+- সামগ্রিক গঠনকৌশল, বাহ্যিক কাঠামো।
+- ফাংশনের ব্যবহার।
+- গুরুত্বপূর্ণ সমাধান, বিশেষভাবে যখন তা সুস্পষ্টভাবে প্রতীয়মান নয়।
 
-**Avoid comments:**
+**মন্তব্য পরিত্যাগ করুনঃ**
 
-- That tell "how code works" and "what it does".
-- Put them in only if it's impossible to make the code so simple and self-descriptive that it doesn't require them.
+- যে মন্তব্য "কোড কিভাবে কাজ করে" এবং "কি কাজ করে" সেটা উপস্থাপন করে। 
+- সহজ এবং স্ব-ব্যখ্যায়িত কোড, যা তে মন্তব্য প্রয়োজন হয় না, তা যদি অসম্ভব হয় কেবলমাত্র সেক্ষেত্রে মন্তব্য করুন। 
 
-Comments are also used for auto-documenting tools like JSDoc3: they read them and generate HTML-docs (or docs in another format).
+অধিকন্ত JSDoc3 এর মত স্বয়ংক্রিয়-লিপিবদ্ধ করার টুল () কাজে মন্তব্য ব্যবহার করা হয়ে থাকে। এরা মন্তব্য থেকে এইচটিএমএল ডকুমেন্ট তৈরি করে (অথবা অন্য কোন ফরম্যাট এর ডকুমেন্ট)
