@@ -1,23 +1,23 @@
-# Browser default actions
+# ব্রাউজারের ডিফল্ট অ্যাকশন
 
-Many events automatically lead to certain actions performed by the browser.
+অনেক ইভেন্ট আছে তা কিভাবে সংগঠিত হবে তা ব্রাউজারে নির্দেশ করা থাকে।
 
-For instance:
+যেমন:
 
-- A click on a link - initiates navigation to its URL.
-- A click on a form submit button - initiates its submission to the server.
-- Pressing a mouse button over a text and moving it - selects the text.
+- কোন লিংকে ক্লিক - URL নেভিগেশন হয়।
+- ফর্মের সাবমিট বাটনে ক্লিকড হলে - সার্ভারে ডাটা সাবমিশন শুরু হয়।
+- কোন টেক্সটে মাউস ক্লিক করে মুভ করলে - টেক্সট সিলেক্ট হয়।
 
-If we handle an event in JavaScript, we may not want the corresponding browser action to happen, and want to implement another behavior instead.
+ইভেন্ট হ্যান্ডেলিং করার সময় অনেক সময় ব্রাউজারের ডিফল্ট বিহেভিয়ারের পরিবর্তে আমরা আমাদের চাহিদামত ইভেন্টগুলো প্রসেস করতে চাই।
 
-## Preventing browser actions
+## ব্রাউজারের অ্যাকশনকে বাধাপ্রদান
 
-There are two ways to tell the browser we don't want it to act:
+দুইভাবে আমরা ব্রাউজারের ডিফল্ট বিহেভিয়ার থামাতে পারি:
 
-- The main way is to use the `event` object. There's a method `event.preventDefault()`.
-- If the handler is assigned using `on<event>` (not by `addEventListener`), then returning `false` also works the same.
+- সাধারণত `event` অবজেক্টের মাধ্যমে, এর একটি মেথড আছে যাকে কল করার মাধ্যমে `event.preventDefault()` ।
+- আর যদি ইভেন্টটি (`addEventListener`) এর পরিবর্তে `on<event>` এর মাধ্যমে অ্যাসাইন করা হয়, তাহলে `false` রিটার্নের মাধ্যমে।
 
-In this HTML a click on a link doesn't lead to navigation, browser doesn't do anything:
+নিচের উদাহরণটিতে ব্রাউজারের URL নেভিগেশন কাজ করবে না:
 
 ```html autorun height=60 no-beautify
 <a href="/" onclick="return false">Click here</a>
@@ -25,19 +25,19 @@ or
 <a href="/" onclick="event.preventDefault()">here</a>
 ```
 
-In the next example we'll use this technique to create a JavaScript-powered menu.
+পরবর্তী মেন্যু উদাহরণটিতে আমরা জাভাস্ক্রিপ্টের এই কৌশলটি ব্যবহার করব।
 
-```warn header="Returning `false` from a handler is an exception"
-The value returned by an event handler is usually ignored.
+```warn header="হ্যান্ডালের `false` রিটার্নের মাধ্যমে একটি এক্সেপশন থ্রো হয়"
+সাধারণত ইভেন্ট হ্যান্ডালারে কোন ভ্যালু রিটার্ন হলে তা ইগনোরড করে।
 
-The only exception is `return false` from a handler assigned using `on<event>`.
+ `on<event>` দ্বারা কোন হ্যান্ডালার অ্যাসাইন করা হলে `return false` এক্সেপশন থ্রো করে।
 
-In all other cases, `return` value is ignored. In particular, there's no sense in returning `true`.
+অন্য সকল ক্ষেত্রে, `return` ভ্যালু ইগনোরড হয়। বিশেষত, `true` রিটার্নের আলাদা কোন সুবিধা নেই।
 ```
 
 ### Example: the menu
 
-Consider a site menu, like this:
+এইরকম একটি মেন্যু বিবেচনা করুন:
 
 ```html
 <ul id="menu" class="menu">
@@ -47,79 +47,78 @@ Consider a site menu, like this:
 </ul>
 ```
 
-Here's how it looks with some CSS:
+কিছু CSS রুলস সহ এটি দেখতে এমন:
 
 [iframe height=70 src="menu" link edit]
 
-Menu items are implemented as HTML-links `<a>`, not buttons `<button>`. There are several reasons to do so, for instance:
+মেন্যু আইটেম সমূহ `<button>` এর পরিবর্তে `<a>` দ্বারা লিখা। এর অনেক কারণ আছে যেমন:
 
-- Many people like to use "right click" -- "open in a new window". If we use `<button>` or `<span>`, that doesn't work.
-- Search engines follow `<a href="...">` links while indexing.
+- অনেকে "right click" এর মাধ্যমে -- "নতুন উইন্ডোতে লিংক খুলে"।`<button>` বা `<span>` ব্যবহারে এই সুবিধা পাবে না।
+- SEO এর জন্য `<a href="...">` লিংক ট্যাগ গুরুত্বপূর্ণ।
 
-So we use `<a>` in the markup. But normally we intend to handle clicks in JavaScript. So we should prevent the default browser action.
+তাই আমাদের স্ট্রাকচারটি `<a>` দ্বারা লিখি। এবং আমরা ক্লিকড ইভেন্ট টি ব্রাউজারের ডিফল্ট অ্যাকশনের পরিবর্তে আমাদের প্রয়োজনমত কাজ করতে চাই।
 
-Like here:
+যেমন এখানে:
 
 ```js
 menu.onclick = function(event) {
   if (event.target.nodeName != 'A') return;
 
   let href = event.target.getAttribute('href');
-  alert( href ); // ...can be loading from the server, UI generation etc
+  alert( href ); // ...নতুন কোন ডাটা সার্ভার থেকে আসতে পারে, অথবা অন্য কোন UI পরিবর্তন
 
 *!*
-  return false; // prevent browser action (don't go to the URL)
+  return false; // ব্রাউজারের ডিফল্ট অ্যাকশন রোধ (নতুন URL ওপেন হবে না) তবে লেফট ক্লিকের মাধ্যমে নতুন উইন্ডোতে লিংক খুলবে
 */!*
 };
 ```
 
-If we omit `return false`, then after our code executes the browser will do its "default action" -- navigating to the URL in `href`. And we don't need that here, as we're handling the click by ourselves.
+যদি আমরা `return false` না লিখি, তাহলে ক্লিকড ইভেন্টের ফলে হ্যান্ডালারের কাজ শেষ হওয়ার পর ব্রাউজারে "ডিফল্ট অ্যাকশন" অনুযায়ী নতুন লিংকটি খুলবে। যা আমরা এখানে চাই না আমরা চাই আমাদের প্রয়োজনমত হ্যান্ডেলার ইভেন্টটি সংগঠিত হোক।
 
-By the way, using event delegation here makes our menu very flexible. We can add nested lists and style them using CSS to "slide down".
+এছাড়াও এখানে ইভেন্ট ডেলিগেশনের ফলে আমাদের কোডটি অনেক ফ্লেক্সিবল, আমরা নেস্টেড লিস্ট তৈরি করতে পারি, এবং এদের CSS এর মাধ্যমে "slide down" স্ট্যাইল দিতে পারি।
 
 ````smart header="Follow-up events"
-Certain events flow one into another. If we prevent the first event, there will be no second.
+অনেক সময় ইভেন্টসমূহ একটি আরেকটির উপর নির্ভর করে। যদি আমরা প্রথম ইভেন্ট কে `prevent` করি, তাহলে দ্বিতীয় ইভেন্টটি আর সংগঠিত হবে না।
 
-For instance, `mousedown` on an `<input>` field leads to focusing in it, and the `focus` event. If we prevent the `mousedown` event, there's no focus.
+যেমন, একটি `<input>` ফিল্ডে `mousedown` ইভেন্ট আছে, এবং সাথে `focus` ইভেন্টও। যদি আমরা `mousedown` ইভেন্ট কে `prevent` করি, তাহলে focus কাজ করবে না।
 
-Try to click on the first `<input>` below -- the `focus` event happens. But if you click the second one, there's no focus.
+নিচের প্রথম `<input>` কে ক্লিক করুন -- তাহলে `focus` ইভেন্ট সংগঠিত হবে। কিন্তু যদি দ্বিতীয়টিতে ক্লিক করেন তাহলে তা কাজ করবে নাহ।
 
 ```html run autorun
 <input value="Focus works" onfocus="this.value=''">
 <input *!*onmousedown="return false"*/!* onfocus="this.value=''" value="Click me">
 ```
 
-That's because the browser action is canceled on `mousedown`. The focusing is still possible if we use another way to enter the input. For instance, the `key:Tab` key to switch from the 1st input into the 2nd. But not with the mouse click any more.
+`mousedown` ইভেন্টের ফলে দ্বিতীয় focus ইভেন্ট কাজ করে না। আমরা যদি `key:Tab` চাপার মাধ্যমে input ফিল্ড পরিবর্তন করি তখন onfocus কাজ করবে। কিন্তু মাউস ক্লিকের জন্য এটি কাজ করবে না।
 ````
 
-## The "passive" handler option
+## "passive" অপশন
 
-The optional `passive: true` option of `addEventListener` signals the browser that the handler is not going to call `preventDefault()`.
+ঐচ্ছিক `passive: true` অপশনটির মাধ্যমে আমরা `addEventListener` হ্যান্ডেলারে নিশ্চিত করতে পারি এটি `preventDefault()` কে কল করবে না।
 
-Why that may be needed?
+এটি কেন করা প্রয়োজন?
 
-There are some events like `touchmove` on mobile devices (when the user moves their finger across the screen), that cause scrolling by default, but that scrolling can be prevented using `preventDefault()` in the handler.
+কিছু ইভেন্ট আছে যেমন মোবাইল ডিভাইসে `touchmove` (ইউজার যখন স্ক্রিন স্ক্রল করতে চাইবে), এটি ডিফল্ট ভাবে স্ক্রল করবে, কিন্তু আমরা চাইলে `preventDefault()` এর মাধ্যমে এটিকে রোধ করতে পারি।
 
-So when the browser detects such event, it has first to process all handlers, and then if `preventDefault` is not called anywhere, it can proceed with scrolling. That may cause unnecessary delays and "jitters" in the UI.
+সুতরাং যখন এই ধরণের কোন ইভেন্ট ব্রাউজার ডিটেক্ট করে, এটি প্রথমে সকল হ্যান্ডেলারকে প্রসেস করে, এবং যদি কোন খানে `preventDefault` ডিফাইন করা হয়, তাহলে স্ক্রল কাজ করবে। এবং স্ক্রলিংয়ের সময় কিছুটা সময় নিবে এবং UI তে "কিছুটা বিদঘুটে" আচরণ হবে।
 
-The `passive: true` options tells the browser that the handler is not going to cancel scrolling. Then browser scrolls immediately providing a maximally fluent experience, and the event is handled by the way.
+`passive: true` এর মাধ্যমে আমরা নিশ্চিত করতে পারি হ্যান্ডেলারের কারণে স্ক্রলিং বন্ধ হবে না। এবং স্ক্রল ইফেক্ট যথেষ্ট সাবলীল ভাবে কাজ করে এভাবেই ইভেন্ট কে হ্যান্ডেল করা হয়।
 
-For some browsers (Firefox, Chrome), `passive` is `true` by default for `touchstart` and `touchmove` events.
-
+কিছু ব্রাউজার যেমন (Firefox, Chrome), `touchstart` এবং `touchmove` ইভেন্টের জন্য ডিফল্ট `passive: true` থাকে।
 
 ## event.defaultPrevented
 
-The property `event.defaultPrevented` is `true` if the default action was prevented, and `false` otherwise.
+`event.defaultPrevented` `true` হবে যদি ডিফল্ট অ্যাকশন prevented হয়, অন্যথায় `false` হবে।
 
-There's an interesting use case for it.
+এটির একটি মজার ব্যবহারিক প্রয়োগ আছে।
 
-You remember in the chapter <info:bubbling-and-capturing> we talked about `event.stopPropagation()` and why stopping bubbling is bad?
+আপনার নিশ্চয় <info:bubbling-and-capturing> এই অধ্যায়ের `event.stopPropagation()` এর মাধ্যমে bubbling কে stop করা বিপজ্জনক বলা হয়েছিল তা  মনে আছে।
 
 Sometimes we can use `event.defaultPrevented` instead, to signal other event handlers that the event was handled.
 
-Let's see a practical example.
+চলুন উদাহরণের সাহায্যে বুঝি।
 
-By default the browser on `contextmenu` event (right mouse click) shows a context menu with standard options. We can prevent it and show our own, like this:
+ডিফল্ট ভাবে `contextmenu` ইভেন্ট সংগঠিত হয় (মাউসের ডানের বাটনে প্রেস করলে) যা কিছু অপশন দেখায়। তবে আমরা চাইলে আমাদের ইচ্ছামত এটিকে পরিবর্তন করতে পারি:
 
 ```html autorun height=50 no-beautify run
 <button>Right-click shows browser context menu</button>
@@ -129,9 +128,9 @@ By default the browser on `contextmenu` event (right mouse click) shows a contex
 </button>
 ```
 
-Now, in addition to that context menu we'd like to implement document-wide context menu.
+এখন আমরা এটিকে গ্লোবালি ডিক্লেয়ার করি।
 
-Upon right click, the closest context menu should show up.
+কোন কন্টেন্টে ডানের বাটনে প্রেস করলে আমরা একটি অ্যালার্ট দেখতে পারব।
 
 ```html autorun height=80 no-beautify run
 <p>Right-click here for the document context menu</p>
@@ -150,9 +149,9 @@ Upon right click, the closest context menu should show up.
 </script>
 ```
 
-The problem is that when we click on `elem`, we get two menus: the button-level and (the event bubbles up) the document-level menu.
+তবে এখানে `elem` এর জন্য একটি সমস্যা দেখা যাচ্ছে, এটির জন্য দুটি অ্যালার্ট দেখায়: একটি button-level এবং অন্যটি document-level।
 
-How to fix it? One of solutions is to think like: "When we handle right-click in the button handler, let's stop its bubbling" and use `event.stopPropagation()`:
+কিভাবে এটি ফিক্স করা যায়? একটি সমাধান এভাবে হতে পারে: "যখন আমরা বাটনে ডানের বাটনে প্রেস, তখন `event.stopPropagation()` এর মাধ্যমে bubbling কে থামাতে পারি":
 
 ```html autorun height=80 no-beautify run
 <p>Right-click for the document menu</p>
@@ -174,9 +173,9 @@ How to fix it? One of solutions is to think like: "When we handle right-click in
 </script>
 ```
 
-Now the button-level menu works as intended. But the price is high. We forever deny access to information about right-clicks for any outer code, including counters that gather statistics and so on. That's quite unwise.
+এখন এটি শুধুমাত্র button-level এর জন্য কাজ করছে। তবে এর জন্য আমাদের চরম মূল্য দেয়া লাগতে পারে। এর জন্য আমাদের অন্যান্য লেভেলের ইভেন্ট গুলো আর কাজ করবে না, সুতরা এভাবে করা বোকামি।
 
-An alternative solution would be to check in the `document` handler if the default action was prevented? If it is so, then the event was handled, and we don't need to react on it.
+তবে আমাদের কাছে একটি বিকল্প ব্যবস্থা আছে যার মাধ্যমে আমরা এটি সমাধান করতে পারি। আমরা `document` হ্যান্ডেলারে যাচাই করব আমাদের ইভেন্ট কি `defaultPrevented` হয়েছে কিনা? যদি হয়ে থাকে, তাহলে ইভেন্ট টি আগে সংগঠিত হয়েছে, এর ফলে document-level এ কোন কিছু আর ঘটবে না।
 
 
 ```html autorun height=80 no-beautify run
@@ -200,45 +199,44 @@ An alternative solution would be to check in the `document` handler if the defau
 </script>
 ```
 
-Now everything also works correctly. If we have nested elements, and each of them has a context menu of its own, that would also work. Just make sure to check for `event.defaultPrevented` in each `contextmenu` handler.
+উপরের কোডটি নির্ভুল্ভাবে কাজ করবে। যদি আমাদের নেস্টেড এলিমেন্ট থাকে এবং প্রতিটির নিজস্ব কনট্যাক্স মেন্যু থাকে, তাও কাজ করবে। তবে আমাদের শুধু নিশ্চিত হতে হবে যেন প্রতিটি `contextmenu` হ্যান্ডালারে যেন `event.defaultPrevented` যাচায় করা হয়।
 
-```smart header="event.stopPropagation() and event.preventDefault()"
-As we can clearly see, `event.stopPropagation()` and `event.preventDefault()` (also known as `return false`) are two different things. They are not related to each other.
+```smart header="event.stopPropagation() এবং event.preventDefault()"
+আমাদের কাছে এখন পরিষ্কার, `event.stopPropagation()` এবং `event.preventDefault()` (`return false`) দুটি ভিন্ন মেথড যাদের ব্যবহার আলাদা।
 ```
 
-```smart header="Nested context menus architecture"
-There are also alternative ways to implement nested context menus. One of them is to have a single global object with a handler for `document.oncontextmenu`, and also methods that allow us to store other handlers in it.
+```smart header="নেস্টেড কনট্যাক্স মেন্যু আর্কিটেকচার"
+নেস্টেড কনট্যাক্স মেন্যু লিখার বিকল্প উপায়ও আছে। এদের মধ্যে একটি হল `document.oncontextmenu` এর জন্য একটি একক গ্লোবাল অবজেক্ট এবং চাইল্ড এলিমেন্ট প্রত্যেকের জন্য আলাদা আলাদা হ্যান্ডেলার ব্যবহার।
 
-The object will catch any right-click, look through stored handlers and run the appropriate one.
+প্রতিবার *right-click* এর জন্য অবজেক্টটি কল হবে এবং এলিমেন্ট অনুযায়ী নির্দিষ্ট হ্যান্ডেলার কল হবে।
 
-But then each piece of code that wants a context menu should know about that object and use its help instead of the own `contextmenu` handler.
 ```
 
-## Summary
+## সারাংশ
 
-There are many default browser actions:
+ব্রাউজারের কিছু নির্দিষ্ট ডিফল্ট অ্যাকশন আছে:
 
-- `mousedown` -- starts the selection (move the mouse to select).
-- `click` on `<input type="checkbox">` -- checks/unchecks the `input`.
-- `submit` -- clicking an `<input type="submit">` or hitting `key:Enter` inside a form field causes this event to happen, and the browser submits the form after it.
-- `keydown` -- pressing a key may lead to adding a character into a field, or other actions.
-- `contextmenu` -- the event happens on a right-click, the action is to show the browser context menu.
-- ...there are more...
+- `mousedown` -- সিলেকশন (মাউস মুভ করলে কোন কিছু সিলেক্ট হবে)।
+- `click` `<input type="checkbox">` -- ক্লিকে `input` এর checks/unchecks হয়।
+- `submit` -- form এর মধ্যে `<input type="submit">` এ ক্লিকে বা `key:Enter` প্রেসে ইভেন্টটি সংগঠিত হয়, এবং এর পরে ফর্মটি সাবমিট হয়।
+- `keydown` -- কী-বোর্ডে কোন বাটনে ক্লিক হলে ক্যারাক্টার অ্যাড হবে অথবা অন্য কোন অ্যাকশন সংগঠিত হবে।
+- `contextmenu` -- মাউসের right-click এ ইভেন্টটি সংগঠিত হয়, এবং এটি ব্রাউজারের context menu দেখায়।
+- ...এবং আরো অনেক...
 
-All the default actions can be prevented if we want to handle the event exclusively by JavaScript.
+ব্রাউজারের সকল ডিফল্ট অ্যাকশন আমরা জাভাস্ক্রিপ্টের মাধ্যমে রোধ করতে পারি।
 
-To prevent a default action -- use either `event.preventDefault()` or  `return false`. The second method works only for handlers assigned with `on<event>`.
+সকল ডিফল্ট অ্যাকশন রোধ করতে `event.preventDefault()` বা  `return false` ব্যবহার করতে পারি। দ্বিতীয়টি শুধুমাত্র `on<event>` এর সাথেই কাজ করে।
 
-The `passive: true` option of `addEventListener` tells the browser that the action is not going to be prevented. That's useful for some mobile events, like `touchstart` and `touchmove`, to tell the browser that it should not wait for all handlers to finish before scrolling.
+`addEventListener` এ `passive: true` অপশনটি দ্বারা বুঝায় ইভেন্টটি কোনখানে রোধ হবে না। কিছু টাচস্ক্রিন ইভেন্টের জন্য এটি ব্যবহার সুবিধাজনক, যেমন `touchstart` এবং `touchmove`, যা ব্রাউজারকে নির্দেশ করে হ্যান্ডেলারের কারণে স্ক্রলিংয়ে কোন বাধাপ্রাপ্ত হবে না।
 
-If the default action was prevented, the value of `event.defaultPrevented` becomes `true`, otherwise it's `false`.
+যদি ডিফল্ট অ্যাকশন বাধাপ্রাপ্ত হয়, তাহলে `event.defaultPrevented` এর ভ্যালু `true` হবে, অন্যথায় `false`।
 
 ```warn header="Stay semantic, don't abuse"
-Technically, by preventing default actions and adding JavaScript we can customize the behavior of any elements. For instance, we can make a link `<a>` work like a button, and a button `<button>` behave as a link (redirect to another URL or so).
+টেকনিক্যালি, আমরা জাভাস্ক্রিপ্টের মাধ্যমে যে কোন ডিফল্ট অ্যাকশন রোধ করতে পারি এবং যেকোন এলিমেন্টকে কাস্টমাইজ করতে পারি। যেমন, আমরা লিংক ট্যাগ `<a>` কে বাটন হিসেবে বা `<button>` কে অ্যাংকর লিংক হিসেবে ব্যবহার করতে পারি।
 
-But we should generally keep the semantic meaning of HTML elements. For instance, `<a>` should perform navigation, not a button.
+তবে আমাদের HTML এলিমেন্ট সমূহের যথাযথ অর্থ বোঝায় এমন ট্যাগ ব্যবহার করা উচিত। যেমন, `<a>` কে নেভিগেশনের এর বদলে বাটনের জন্য ব্যবহার করব না।
 
-Besides being "just a good thing", that makes your HTML better in terms of accessibility.
+এটি ভাল প্রাকটিসের পাশাপাশি আপনার HTML কোড কে আরো পঠনযোগ্য করে তুলে।
 
-Also if we consider the example with `<a>`, then please note: a browser allows us to open such links in a new window (by right-clicking them and other means). And people like that. But if we make a button behave as a link using JavaScript and even look like a link using CSS, then `<a>`-specific browser features still won't work for it.
+এছাড়াও আরো একটি ব্যাপার খেয়াল করুন, `<a>` ট্যাগের ফলে আমরা কোন একটি লিংক নতুন ট্যাগে খুলার সুযোগ পায়, এবং অনেক ইউজার এভাবে ব্যবহারে অভ্যস্ত। যদি আমরা কোন বাটন কে নেভিগেশনের জন্য ব্যবহার করি তাহলে এই অপশন পাবে না, যা ইউজারের সাইট ব্যবহারে একটি খারাপ প্রভাব পড়ে।
 ```
