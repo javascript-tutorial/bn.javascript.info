@@ -1,39 +1,39 @@
 # Page: DOMContentLoaded, load, beforeunload, unload
 
-The lifecycle of an HTML page has three important events:
+একটি HTML পেজের লাইফসাইকেলে তিনটি গুরুত্বপূর্ণ ইভেন্ট আছে:
 
-- `DOMContentLoaded` -- the browser fully loaded HTML, and the DOM tree is built, but external resources like pictures `<img>` and stylesheets may not yet have loaded.  
-- `load` -- not only HTML is loaded, but also all the external resources: images, styles etc.
-- `beforeunload/unload` -- the user is leaving the page.
+- `DOMContentLoaded` -- সকল HTML কন্টেন্ট লোড হয়ে DOM ট্রি বিল্ট হলে এটি ট্রিগার হয়, তবে এক্সটার্নাল রিসোর্স যেমন `<img>` ট্যাগ এর সোর্স বা `<iframe>` সোর্স লোড হওয়ার আগেই এই ইভেন্টটি ট্রিগার হয়।
+- `load` -- HTML কন্টেন্ট লোড এবং সকল এক্সটার্নাল রিসোর্স লোড হওয়ার পর এই ইভেন্টটি ট্রিগার হয়।
+- `beforeunload/unload` -- ইউজার পেজ লিভ করার পূর্বে।
 
-Each event may be useful:
+নিম্নোক্ত কাজে ইভেন্টসমূহ কাজে আসতে পারে:
 
-- `DOMContentLoaded` event -- DOM is ready, so the handler can lookup DOM nodes, initialize the interface.
-- `load` event -- external resources are loaded, so styles are applied, image sizes are known etc.
-- `beforeunload` event -- the user is leaving: we can check if the user saved the changes and ask them whether they really want to leave.
-- `unload` -- the user almost left, but we still can initiate some operations, such as sending out statistics.
+- `DOMContentLoaded` event -- DOM রেডি, সুতরাং আমরা হ্যান্ডেলারের মাধ্যমে DOM নোডকে পরিবর্তন করতে পারি।
+- `load` event -- এক্সটার্নাল রিসোর্স লোড হওয়ার কারণে স্ট্যাইল বা ইমেজ সাইজ প্রভৃতি নিয়ে কাজ করতে পারি।
+- `beforeunload` event -- ইউজার পেজ হতে লিভ হওয়ার পূর্বে কল হয়: সুতরাং আমরা পেজ হতে লিভ হওয়ার পূর্বে ইউজার হতে ডাটা সংরক্ষণ বা অন্যান্য ব্যাপারে নিশ্চায়ন করতে পারি।
+- `unload` -- ইউজার প্রায় পেজ হতে লিভ হয়ে গেছে, তবে ইউজারের বিভিন্ন পরিসংখ্যান সংরক্ষনের জন্য আমরা এটি ব্যবহার করতে পারি।
 
-Let's explore the details of these events.
+চলুন ইভেন্ট সমূহ সম্পর্কে আরো বিস্তারিত জানি।
 
 ## DOMContentLoaded
 
-The `DOMContentLoaded` event happens on the `document` object.
+`document` নোডে `DOMContentLoaded` ইভেন্টটি সংগঠিত হয়।
 
-We must use `addEventListener` to catch it:
+এবং অবশ্যই `addEventListener` এর মাধ্যমে হ্যান্ডালার অ্যাসাইন করতে হবে:
 
 ```js
 document.addEventListener("DOMContentLoaded", ready);
 // not "document.onDOMContentLoaded = ..."
 ```
 
-For instance:
+যেমন:
 
 ```html run height=200 refresh
 <script>
   function ready() {
     alert('DOM is ready');
 
-    // image is not yet loaded (unless it was cached), so the size is 0x0
+    // যেহেতু এক্সটার্নাল রিসোর্স লোড হওয়ার পূর্বে এটি ট্রিগার হয় সাইজ দেখাবে 0x0
     alert(`Image size: ${img.offsetWidth}x${img.offsetHeight}`);
   }
 
@@ -45,17 +45,17 @@ For instance:
 <img id="img" src="https://en.js.cx/clipart/train.gif?speed=1&cache=0">
 ```
 
-In the example the `DOMContentLoaded` handler runs when the document is loaded, so it can see all the elements, including `<img>` below.
+উপরের উদাহরণে `DOMContentLoaded` হ্যান্ডালার এক্সিকিউট হবে DOM ট্রি বিল্ড হওয়ার পর, সুতরাং আমরা সকল এলিমেন্ট অ্যাক্সেস করতে পারব, এমনকি `<img>` ও।
 
-But it doesn't wait for the image to load. So `alert` shows zero sizes.
+কিন্তু এটির সোর্স ডাওনলোড না হওয়ায় সাইজ শূন্য দেখাবে।
 
-At first sight, the `DOMContentLoaded` event is very simple. The DOM tree is ready -- here's the event. There are few peculiarities though.
+প্রথম দেখাতে `DOMContentLoaded` ইভেন্টকে সাধারন মনে হয়। DOM ট্রি রেডি হলেই ইভেন্ট ট্রিগার হবে। তবে এর কিছু ভিন্নতা আছে।
 
-### DOMContentLoaded and scripts
+### DOMContentLoaded এবং scripts
 
-When the browser processes an HTML-document and comes across a `<script>` tag, it needs to execute before continuing building the DOM. That's a precaution, as scripts may want to modify DOM, and even `document.write` into it, so `DOMContentLoaded` has to wait.
+যখন ব্রাউজার HTML-document কে প্রসেস করে তখন যদি `<script>` ট্যাগ এক্সিকিউট হয় তখন এদেরকে DOM ট্রি বিল্ডের পূর্বে এরা `<script>` কে এক্সিকিউট করে।  একারণে `<script>` সমূহ এক্সিকিউট না হওয়া পর্যন্ত `DOMContentLoaded` ট্রিগার হবে না।
 
-So DOMContentLoaded definitely happens after such scripts:
+সুতরাং হ্যান্ডেলার অবশ্যই সবার শেষে এক্সিকিউট হবে:
 
 ```html run
 <script>
@@ -71,19 +71,19 @@ So DOMContentLoaded definitely happens after such scripts:
 </script>
 ```
 
-In the example above, we first see "Library loaded...", and then "DOM ready!" (all scripts are executed).
+উপরের উদাহরণে আমরা দেখেছি, প্রথমে "Library loaded..." দেখাবে, তারপর "DOM ready!"
 
 ```warn header="Scripts that don't block DOMContentLoaded"
-There are two exceptions from this rule:
-1. Scripts with the `async` attribute, that we'll cover [a bit later](info:script-async-defer), don't block `DOMContentLoaded`.
-2. Scripts that are generated dynamically with `document.createElement('script')` and then added to the webpage also don't block this event.
+তবে এক্ষেত্রে দুটি ভিন্নতা আছে:
+1. `async` অ্যাট্রিবিউট সহ স্ক্রিপ্টস সমূহ `DOMContentLoaded` কে ব্লক করবে না, বিস্তারিত পরবর্তী অধ্যায়ে (info:script-async-defer)।
+2. ডায়নামিক্যালি জেনারেট স্ক্রিপ্টস সমূহ যেমন: `document.createElement('script')` এর মাধ্যমে সংযুক্ত স্ক্রিপ্টস সমূহ ইভেন্টকে ব্লক করে না।
 ```
 
-### DOMContentLoaded and styles
+### DOMContentLoaded এবং styles
 
-External style sheets don't affect DOM, so `DOMContentLoaded` does not wait for them.
+এক্সটার্নাল স্ট্যাইলশীট DOM এ কোন প্রভাব ফেলে না, সুতরাং `DOMContentLoaded` এদের জন্য অপেক্ষা করবে না।
 
-But there's a pitfall. If we have a script after the style, then that script must wait until the stylesheet loads:
+তবে একটি ব্যাপার জেনে রাখা উচিত। যদি স্ট্যাইল শীটের পরে স্ক্রিপ্ট থাকে, তাহলে স্ক্রিপ্টটি স্ট্যাইল শীট লোড হওয়া পর্যন্ত অপেক্ষা করবে:
 
 ```html run
 <link type="text/css" rel="stylesheet" href="style.css">
@@ -93,28 +93,28 @@ But there's a pitfall. If we have a script after the style, then that script mus
 </script>
 ```
 
-The reason for this is that the script may want to get coordinates and other style-dependent properties of elements, like in the example above. Naturally, it has to wait for styles to load.
+উপরে বর্ণিত উদাহরণের মত অনেক সময় আমাদের এলিমেন্টের বিভিন্ন স্ট্যাইল প্রপার্টি সম্পর্কে জানা লাগে তখন আমরা স্ট্যাইলশীট প্রথমে লোড করি। সুতরাং এটি স্ট্যাইল লোড হওয়ার জন্য অপেক্ষা করবে।
 
-As `DOMContentLoaded` waits for scripts, it now waits for styles before them as well.
+সুতরাং `DOMContentLoaded` যেভাবে স্ক্রিপ্টস এর জন্য অপেক্ষা করে তেমনি স্ট্যাইলশীটের জন্যও করে।
 
 ### Built-in browser autofill
 
-Firefox, Chrome and Opera autofill forms on `DOMContentLoaded`.
+`DOMContentLoaded` এর মাধ্যমে ফায়ারফক্স, ক্রোম এবং অপেরাতে স্বয়ংক্রিয়ভাবে ফর্ম ভ্যালু *autofill* সাপোর্ট করে।
 
-For instance, if the page has a form with login and password, and the browser remembered the values, then on `DOMContentLoaded` it may try to autofill them (if approved by the user).
+উদাহরণস্বরূপ, যদি কোন লগিন পেজে লগিন এবং পাসওয়ার্ড ফর্ম থাকে, এবং আপনি যদি *remember me* জাতীয় কোন ভ্যালু সেভ করে রাখেন তাহলে ব্রাউজার মানগুলো মনে রাখে এবং `DOMContentLoaded` ইভেন্টের মাধ্যমে ইনপুট ফিল্ডগুলো স্বয়ংক্রিয়ভাবে ফিল আপ করে।
 
-So if `DOMContentLoaded` is postponed by long-loading scripts, then autofill also awaits. You probably saw that on some sites (if you use browser autofill) -- the login/password fields don't get autofilled immediately, but there's a delay till the page fully loads. That's actually the delay until the `DOMContentLoaded` event.
+সুতরাং যদি কোন বড় স্ক্রিপ্টস এর জন্য যদি `DOMContentLoaded` ইভেন্ট ট্রিগার হতে দেরি হয়, তাহলে autofill হতে দেরি হবে। আপনি হয়তো অনেক সাইট দেখেছেন, যেখানে ব্রাউজার অটোফিল সাপোর্ট করার পরও লগিন ফিল্ড গুলো ফুল পেজ লোড না হওয়া পর্যন্ত ফিল আপ হয় না। এটি ঘটে `DOMContentLoaded` ইভেন্ট এর কারণে, কেননা ফুল পেজ লোড না হওয়া পর্যন্ত `DOMContentLoaded` ইভেন্ট ট্রিগার হয় না।
 
 
 ## window.onload [#window-onload]
 
-The `load` event on the `window` object triggers when the whole page is loaded including styles, images and other resources. This event is available via the `onload` property.
+ওয়েব পেজের সকল ধরণের রিসোর্স যেমন ইমেজ, স্ট্যাইল ইত্যাদি লোড হওয়ার পর `window` অবজেক্টের `load` ইভেন্ট ট্রিগার হয়। এবং এটিকে আমরা `onload` প্রপার্টির মাধ্যমে অ্যাক্সেস করতে পারি।
 
-The example below correctly shows image sizes, because `window.onload` waits for all images:
+নিচের উদাহরণে ইমেজের সাইজ, স্ট্যাইল ইত্যাদি সঠিকভাবে দেখাবে, কেননা `window.onload` সকল রিসোর্স লোড হওয়া পর্যন্ত অপেক্ষা করে:
 
 ```html run height=200 refresh
 <script>
-  window.onload = function() { // same as window.addEventListener('load', (event) => {
+  window.onload = function() { // window.addEventListener('load', (event) => { এভাবেও ডিফাইন করতে পারি
     alert('Page loaded');
 
     // image is loaded at this time
@@ -127,19 +127,19 @@ The example below correctly shows image sizes, because `window.onload` waits for
 
 ## window.onunload
 
-When a visitor leaves the page, the `unload` event triggers on `window`. We can do something there that doesn't involve a delay, like closing related popup windows.
+ইউজার পেজ হতে লিভ হওয়ার পূর্বে `window` এর `unload` ইভেন্টটি ট্রিগার হয়। তবে এক্ষেত্রে আমরা কনফার্মেশন বা পপ আপ দেখাতে পারব না।
 
-The notable exception is sending analytics.
+তবে আমরা চাইলে ইউজারের ব্যবহৃত পরিসংখ্যান সংরক্ষন করতে পারি।
 
-Let's say we gather data about how the page is used: mouse clicks, scrolls, viewed page areas, and so on.
+আমরা বিভিন্ন ভাবে ডাটা সংগ্রহ করতে পারি যেমন মাউস ক্লিক, স্ক্রল ইত্যাদি।
 
-Naturally, `unload` event is when the user leaves us, and we'd like to save the data on our server.
+সাধারণত ইউজার যখন পেজ হতে লিভ নেয়, তখন আমরা ডাটা সংরক্ষন করতে চায় এবং `unload` ইভেন্টটি ট্রিগার করি।
 
-There exists a special `navigator.sendBeacon(url, data)` method for such needs, described in the specification <https://w3c.github.io/beacon/>.
+এজন্য একটি বিশেষ মেথড আছে `navigator.sendBeacon(url, data)`, বিস্তারিত <https://w3c.github.io/beacon/>।
 
-It sends the data in background. The transition to another page is not delayed: the browser leaves the page, but still performs `sendBeacon`.
+এটি ব্যাকগ্রাউন্ডে ডাটা সেন্ড করে। পেজ হতে লিভ হওয়ার পরও `sendBeacon` কাজ করে।
 
-Here's how to use it:
+উদাহরণস্বরূপ:
 ```js
 let analyticsData = { /* object with gathered data */ };
 
@@ -148,24 +148,24 @@ window.addEventListener("unload", function() {
 };
 ```
 
-- The request is sent as POST.
-- We can send not only a string, but also forms and other formats, as described in the chapter <info:fetch>, but usually it's a stringified object.
-- The data is limited by 64kb.
+- রিকুয়েস্ট মেথডটি হল POST।
+- আমরা স্ট্রিং ছাড়াও অন্যান্য ফরম্যাটে ডাটা পাঠাতে পারি, বিস্তারিত এখানে <info:fetch>, ্তবে সাধারণত এটি stringify অবজেক্ট হয়।
+- ডাটা সাইজ সর্বোচ্চ 64kb।
 
-When the `sendBeacon` request is finished, the browser probably has already left the document, so there's no way to get server response (which is usually empty for analytics).
+`sendBeacon` রিকুয়েস্ট যখন সমাপ্ত হয়, ততক্ষণে আমরা পেজটি থেকে লিভ নিয়ে নেই, সুতরাং সার্ভার হতে কোন রেস্পেন্স পাব না।
 
-There's also a `keepalive` flag for doing such "after-page-left" requests in  [fetch](info:fetch) method for generic network requests. You can find more information in the chapter <info:fetch-api>.
+এছাড়াও জেনেরিক নেটওয়ার্ক রিকুয়েস্ট সমূহের [fetch](info:fetch) এর `keepalive` নামের একটি ফ্ল্যাগ আছে । আরো বিস্তারিত জানতে পারব এই অধ্যায়ে <info:fetch-api>।
 
 
-If we want to cancel the transition to another page, we can't do it here. But we can use another event -- `onbeforeunload`.
+যদি আমরা পেজ লিভ করার আগে ইউজারকে কোন কনফার্মেশন দেখাতে চাই, তাহলে `unload` এর সাহায্যে পারব না, তবে আরেকটি ইভেন্ট আছে -- `onbeforeunload`।
 
 ## window.onbeforeunload [#window.onbeforeunload]
 
-If a visitor initiated navigation away from the page or tries to close the window, the `beforeunload` handler asks for additional confirmation.
+যদি ভিজিটর এক পেজ হতে অন্য পেজে নেভিগেশন করে অথবা পেজ হতে লিভ নিতে চায় তখন `beforeunload` ইভেন্ট ট্রিগার হয়।
 
-If we cancel the event, the browser may ask the visitor if they are sure.
+এটির সাহায্যে ইউজারকে কনফার্মেশন মেসেজ দেখাতে পারি।
 
-You can try it by running this code and then reloading the page:
+নিচের কোডটি রান করে ব্রাউজার রিলোড করার ট্রাই করুন:
 
 ```js run
 window.onbeforeunload = function() {
@@ -173,9 +173,9 @@ window.onbeforeunload = function() {
 };
 ```
 
-For historical reasons, returning a non-empty string also counts as canceling the event. Some time ago browsers used to show it as a message, but as the [modern specification](https://html.spec.whatwg.org/#unloading-documents) says, they shouldn't.
+কোন non-empty স্ট্রিং রিটার্নের মাধ্যমেও আমরা ইভেন্ট ক্যান্সেল করতে পারি। পূর্বে এটি কাস্টম মেসেজ দেখাতে ব্যবহার হত তবে মডার্ন ব্রাউজার কাস্টম কনফার্মেশন মেসেজ সাপোর্ট করে না [modern specification](https://html.spec.whatwg.org/#unloading-documents)।
 
-Here's an example:
+উদাহরণস্বরূপ:
 
 ```js run
 window.onbeforeunload = function() {
@@ -183,27 +183,27 @@ window.onbeforeunload = function() {
 };
 ```
 
-The behavior was changed, because some webmasters abused this event handler by showing misleading and annoying messages. So right now old browsers still may show it as a message, but aside of that -- there's no way to customize the message shown to the user.
+এই ইভেন্টটির মাধ্যমে অনেক ডেভলাপার ইউজার কে বিভিন্ন রকমের মেসেজ দেখিয়ে বিভ্রান্তি করার কারণে এটি পরিবর্তন করা হয়েছে। তবে ব্রাউজারগুলোর পুরনো ভার্সনগুলোতে এটি কাজ করতে পারে, তবে মেসেজটি কাস্টমাইজ করার কোন উপায় নেই।
 
 ## readyState
 
-What happens if we set the `DOMContentLoaded` handler after the document is loaded?
+যদি আমরা ডকুমেন্ট লোড হওয়ার পর `DOMContentLoaded` হ্যান্ডালার সেট করি তাহলে কি ঘটবে?
 
-Naturally, it never runs.
+সাধারণত, এটি এক্সিকিউট হবে না।
 
-There are cases when we are not sure whether the document is ready or not. We'd like our function to execute when the DOM is loaded, be it now or later.
+অনেক সময় ডকুমেন্ট কি লোড হয়ে গেছে নাকি লোডিং ধাপে আছে তার উপর নির্ভর করে আমাদের কোন কার্য সম্পাদন করা লাগে, এটি আমরা কিভাবে করতে পারি?
 
-The `document.readyState` property tells us about the current loading state.
+সৌভাগ্যক্রমে `document` অবজেক্টের একটি প্রপার্টি আছে `document.readyState` নামের যা আমাদের পেজ লোডিং এর ধাপসমূহ রিটার্ন করে।
 
-There are 3 possible values:
+এর ৩টি ভ্যালু আছে:
 
-- `"loading"` -- the document is loading.
-- `"interactive"` -- the document was fully read.
-- `"complete"` -- the document was fully read and all resources (like images) are loaded too.
+- `"loading"` -- ডকুমেন্ট লোডিং।
+- `"interactive"` -- সম্পূর্ন ডকুমেন্টটি পার্স করে পড়া হয়েছে।
+- `"complete"` -- সম্পূর্ন ডকুমেন্টটি পার্স করে পড়া হয়েছে এবং সকল ধরণের রিসোর্স যেমন (img) ও লোড হয়েছে।
 
-So we can check `document.readyState` and setup a handler or execute the code immediately if it's ready.
+সুতরাং আমরা `document.readyState` এর উপর ভিত্তি করে হ্যান্ডেলার সেট করতে পারি।
 
-Like this:
+উদাহরণস্বরূপ:
 
 ```js
 function work() { /*...*/ }
@@ -217,7 +217,7 @@ if (document.readyState == 'loading') {
 }
 ```
 
-There's also the `readystatechange` event that triggers when the state changes, so we can print all these states like this:
+এছাড়াও `readystatechange` নামের একটি ইভেন্ট আছে যেটি `readyState` এর ভ্যালু পরিবর্তনের সাথে সাথে ট্রিগার হয়:
 
 ```js run
 // current state
@@ -227,11 +227,11 @@ console.log(document.readyState);
 document.addEventListener('readystatechange', () => console.log(document.readyState));
 ```
 
-The `readystatechange` event is an alternative mechanics of tracking the document loading state, it appeared long ago. Nowadays, it is rarely used.
+অনেক আগে থেকে `readystatechange` ইভেন্টটি ডকুমেন্ট এর স্টেট ট্রাকিংয়ের জন্য ব্যবহার করা হচ্ছিল, তবে বর্তমানে এর তেমন ব্যবহার নেই।
 
-Let's see the full events flow for the completeness.
+চলুন সম্পূর্ণ লাইফসাইকেল টা দেখি।
 
-Here's a document with `<iframe>`, `<img>` and handlers that log events:
+এখানে `<iframe>`, `<img>` আছে ইভেন্ট লগের জন্য একটি `log()` ফাংশন আছে:
 
 ```html
 <script>
@@ -251,9 +251,9 @@ Here's a document with `<iframe>`, `<img>` and handlers that log events:
 </script>
 ```
 
-The working example is [in the sandbox](sandbox:readystate).
+উদাহরণটি এখানে দেখুন [in the sandbox](sandbox:readystate)
 
-The typical output:
+এটির আউটপুট হবে অনেকটা এমন:
 1. [1] initial readyState:loading
 2. [2] readyState:interactive
 3. [2] DOMContentLoaded
@@ -262,23 +262,22 @@ The typical output:
 6. [4] readyState:complete
 7. [4] window onload
 
-The numbers in square brackets denote the approximate time of when it happens. Events labeled with the same digit happen approximately at the same time (+- a few ms).
+তৃতীয় বন্ধনীর সংখ্যাটি বুঝায় ইভেন্ট সমূহ ট্রিগার আনুমানিক কত সময় লেগেছে।
 
-- `document.readyState` becomes `interactive` right before `DOMContentLoaded`. These two things actually mean the same.
-- `document.readyState` becomes `complete` when all resources (`iframe` and `img`) are loaded. Here we can see that it happens in about the same time as `img.onload` (`img` is the last resource) and `window.onload`. Switching to `complete` state means the same as `window.onload`. The difference is that `window.onload` always works after all other `load` handlers.
+- এখানে দেখছি `DOMContentLoaded` এর আগে `document.readyState` এর মান `interactive` দেখাচ্ছে। এখানে দুটিই একই সময়ে ঘটে তাই সময় একই দেখাচ্ছে।
+- সকল রিসোর্স (`iframe` and `img`) লোড হওয়ার পর `document.readyState` এর মান `complete` হবে। যার কারণে ৫,৬,৭ নং ধাপের সময় একই দেখাচ্ছে। `document.readyState` এর মান `complete` এবং `window onload` উভয়ই একই স্টেট নির্দেশ করে।
 
+## সারাংশ
 
-## Summary
+পেজ লোড ইভেন্ট সমূহ:
 
-Page load events:
-
-- The `DOMContentLoaded` event triggers on `document` when the DOM is ready. We can apply JavaScript to elements at this stage.
-  - Script such as `<script>...</script>` or `<script src="..."></script>` block DOMContentLoaded, the browser waits for them to execute.
-  - Images and other resources may also still continue loading.
-- The `load` event on `window` triggers when the page and all resources are loaded. We rarely use it, because there's usually no need to wait for so long.
-- The `beforeunload` event on `window` triggers when the user wants to leave the page. If we cancel the event, browser asks whether the user really wants to leave (e.g we have unsaved changes).
-- The `unload` event on `window` triggers when the user is finally leaving, in the handler we can only do simple things that do not involve delays or asking a user. Because of that limitation, it's rarely used. We can send out a network request with `navigator.sendBeacon`.
-- `document.readyState` is the current state of the document, changes can be tracked in the `readystatechange` event:
-  - `loading` -- the document is loading.
-  - `interactive` -- the document is parsed, happens at about the same time as `DOMContentLoaded`, but before it.
-  - `complete` -- the document and resources are loaded, happens at about the same time as `window.onload`, but before it.
+  - পেজ লোডিংয়ের সময় DOM রেডি হলে `document` এর `DOMContentLoaded` ইভেন্টটি ট্রিগার হয়। এই ধাপে আমরা যেকোন এলিমেন্ট নোড কে অ্যাক্সেস করতে পারি।
+  - `<script>...</script>` বা `<script src="..."></script>` স্ক্রিপ্টস সমূহ DOMContentLoaded কে ব্লক করে রাখে, স্ক্রিপ্টস সমূহ এক্সিকিউট হওয়ার পর DOMContentLoaded ট্রিগার হয়।
+  - ইমেজ বা অন্যান্য এক্সটার্নাল রিসোর্স যেমন `iframe` লোড হতে থাকে।
+  - সকল ধরণের রিসোর্স লোড হওয়ার পর `window` এর `load` ইভেন্টটি ট্রিগার হয়। তবে এটি খুব কমই ব্যবহার করা হয় কেননা বেশিরভাগ সময় আমাদের এলিমেন্টে বিভিন্ন ধরণের অপারেশন চালানো লাগে DOM ট্রি রেডি হওয়ার পরপরই।
+  - ইউজার যখন ব্রাউজার হতে লিভ করতে চাই তখন `window` অবজেক্টের `beforeunload` ইভেন্টটি ট্রিগার হয়, এবং যদি ইভেন্টটি ক্যান্সেল করা হয় তখন এটি ইউজারকে একটি কনফার্মেশন মেসেজ দেখায়(যেমন we have unsaved changes).
+  - এবং ইউজার যখন পেজ হতে লিভ করবে তখন `window` অবজেক্টের `unload` ইভেন্টটি ট্রিগার হবে, এবং এটির সাহায্যে কোন ধরণের পপ আপ বা অন্য কোন মেসেজ দেখাতে পারব না, তবে অ্যানালাইসিসের জন্য ইউজারের ডাটা `navigator.sendBeacon` এর মাধ্যমে সংরক্ষন করতে পারি।
+  - `document.readyState` ডকুমেন্টের কারেন্ট স্টেট রিটার্ন করে, `readystatechange` ইভেন্টের মাধ্যমে আমরা স্টেট ট্র্যাক করতে পারি:
+  - `loading` -- ডকুমেন্ট স্টেট লোডিং।
+  - `interactive` -- সম্পূর্ন ডকুমেন্টটি পার্স করে পড়া হয়েছে, এবং সাথে সাথে `DOMContentLoaded` ইভেন্টটি ট্রিগার হবে, তবে `interactive` প্রথমে ট্রিগার হয়।
+  - `complete` -- সম্পূর্ন ডকুমেন্টটি পার্স করে পড়া হয়েছে এবং সকল ধরণের রিসোর্স যেমন (img) ও লোড হয়েছে, এবং সাথে সাথে `window.onload` ইভেন্টটি ট্রিগার হবে।
