@@ -428,7 +428,11 @@ checkPermission(..) // পারমিশন চেক করে, true/false র
 
 যেমন, [jQuery](http://jquery.com) ফ্রেমওয়ার্ক `$` দিয়ে শুরু করে তাদের ফাংশন নাম। আবার [Lodash](http://lodash.com/) লাইব্রেরি `_` দিয়ে শুরু করে।
 
+<<<<<<< HEAD
 এগুলো এক্সেপশন। বেশিরভাগ সময় ফাংশন নাম অর্থপূর্ন ও বিস্তারিত হওয়া উচিৎ।
+=======
+These are exceptions. Generally function names should be concise and descriptive.
+>>>>>>> 6ab384f2512902d74e4b0ff5a6be60e48ab52e96
 ```
 
 ## ফাংশন == কমেন্টস
