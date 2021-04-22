@@ -30,7 +30,7 @@ observer.observe(node, config);
 
 আরো কিছু প্রপার্টি:
 - `attributeOldValue` -- যদি `true` হয় ও `attributes` এর মান `true`, তখন কলব্যাকে অ্যাট্রিবিউটের নতুন এবং পুরনো দুটিরই মান পাব অন্যথায় শুধু নতুন মানটি পাব,
-- `characterDataOldValue` -- if `true`, pass both the old and the new value of `node.data` to callback (see below), otherwise only the new one (needs `characterData` option).
+- `characterDataOldValue` -- যদি `true` হয়, তাহলে পরিবর্তনের পূর্বের মান এবং পরিবর্তীত মান `node.data` দুটিই রিটার্ন করে (নিচে দেখুন), অন্যথায় শুধু পরিবর্তীত মানটি দেখায়(এটি হয় যদি কনফিগ এ `characterData` `true` হয়)।
 
 যখন নোডে কোন পরিবর্তন হয়, তখন `callback` এক্সিকিউট হয়: এবং প্রথম আর্গুমেন্টটি হয় [MutationRecord](https://dom.spec.whatwg.org/#mutationrecord) অবজেক্ট ও দ্বিতীয় আর্গুমেন্ট হল observer অবজেক্টটি।
 
