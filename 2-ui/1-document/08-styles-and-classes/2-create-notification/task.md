@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# নোটিফিকেশন তৈরি
+# Create a notification
 
-`showNotification(options)` নামের একটি ফাংশন লিখুন যা একটি নোটিফিকেশন দেখাবে: `<div class="notification">`। নোটিফিকেশনটি ১.৫ সেকেন্ড পর অদৃশ্য হবে।
+Write a function `showNotification(options)` that creates a notification: `<div class="notification">` with the given content. The notification should automatically disappear after 1.5 seconds.
 
-options হবে:
+The options are:
 
 ```js
-// "Hello" টেক্সট সহকারে একটি এলিমেন্ট দেখাবে window এর উপরের ডান কোণায়
+// shows an element with the text "Hello" near the right-top of the window
 showNotification({
   top: 10, // 10px from the top of the window (by default 0px)
   right: 10, // 10px from the right edge of the window (by default 0px)
@@ -21,4 +21,4 @@ showNotification({
 [demo src="solution"]
 
 
-CSS পজিশনিং স্ট্যাইল ব্যবহার করুন top/right এর জন্য।
+Use CSS positioning to show the element at given top/right coordinates. The source document has the necessary styles.
