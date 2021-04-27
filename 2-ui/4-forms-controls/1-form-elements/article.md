@@ -1,23 +1,23 @@
-# Form properties and methods
+# Form properties এবং methods
 
-Forms and control elements, such as `<input>` have a lot of special properties and events.
+ফর্মস এবং কন্ট্রোল এলিমেন্ট সমূহের অনেক স্পেশাল প্রপার্টি এবং ইভেন্ট আছে, যেমন `<input>`।
 
-Working with forms will be much more convenient when we learn them.
+ফর্মের সাথে কাজ করতে করতে তা শিখা আমাদের জন্য সুবিধাজনক।
 
-## Navigation: form and elements
+## Navigation: form এবং elements
 
-Document forms are members of the special collection `document.forms`.
+ফর্মস সমূহ ডকুমেন্ট এর একটি স্পেশাল কালেকশন `document.forms`।
 
-That's a so-called "named collection": it's both named and ordered. We can use both the name or the number in the document to get the form.
+এটিকে বলা হয় "named collection": এটির নাম এবং ইনডেক্সিং উভয়ই আছে। আমরা নাম বা ইনডেক্স উভয়ের সাহায্যেই ফর্ম এলিমেন্টকে অ্যাক্সেস করতে পারি।
 
 ```js no-beautify
 document.forms.my - the form with name="my"
 document.forms[0] - the first form in the document
 ```
 
-When we have a form, then any element is available in the named collection `form.elements`.
+একটি ফর্মের সকল এলিমেন্ট `form.elements` এ কালেকশন হিসেবে থাকে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run height=40
 <form name="my">
@@ -36,9 +36,9 @@ For instance:
 </script>
 ```
 
-There may be multiple elements with the same name, that's often the case with radio buttons.
+ফর্মে একই নামের একাধিক এলিমেন্ট থাকতে পারে, যেমন রেডিও বাটন টাইপ।
 
-In that case `form.elements[name]` is a collection, for instance:
+এক্ষেত্রে এটি ইনডেক্সিং অর্ডার কালেকশন হিসেবে থাকে `form.elements[name]`, যেমন:
 
 ```html run height=40
 <form>
@@ -57,13 +57,13 @@ alert(ageElems[0]); // [object HTMLInputElement]
 </script>
 ```
 
-These navigation properties do not depend on the tag structure. All control elements, no matter how deep they are in the form, are available in `form.elements`.
+নেভিগেশন প্রপার্টিসমূহ ট্যাগ স্ট্রাকচারের উপর নির্ভর করে না। ফর্মের কন্ট্রোল এলিমেন্ট নেস্টেড হিসেবে থাকলেও `form.elements` এ উপাদান হিসেবে থাকে।
 
 
 ````smart header="Fieldsets as \"subforms\""
-A form may have one or many `<fieldset>` elements inside it. They also have `elements` property that lists form controls inside them.
+ফর্মে এক বা একাধিক `<fieldset>` এলিমেন্ট থাকতে পারে। এবং `<fieldset>` এরও `elements` প্রপার্টি থাকে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run height=80
 <body>
@@ -90,13 +90,13 @@ For instance:
 ````
 
 ````warn header="Shorter notation: `form.name`"
-There's a shorter notation: we can access the element as `form[index/name]`.
+এছাড়াও আরো সংক্ষেপে আমরা এলিমেন্ট সমূহকে অ্যাক্সেস করতে পারি `form[index/name]`।
 
-In other words, instead of `form.elements.login` we can write `form.login`.
+অর্থাৎ, `form.elements.login` এর পরিবর্তে আমরা `form.login` এভাবেও অ্যাক্সেস করতে পারি।
 
-That also works, but there's a minor issue: if we access an element, and then change its `name`, then it is still available under the old name (as well as under the new one).
+এটিও কাজ করবে, তবে এর একটি ছোট সমস্যা আছে: যদি আমরা কোন এলিমেন্ট অ্যাক্সেস করি, এবং তারপর `name` অ্যাট্রিবিউট পরিবর্তন করি, তাহলে পুরনো নামটি তখনো অ্যাক্সেসবল থাকবে  (এবং সাথে নতুনটিও)।
 
-That's easy to see in an example:
+চলুন উদাহরণের সাহায্যে দেখি:
 
 ```html run height=40
 <form id="form">
@@ -106,9 +106,9 @@ That's easy to see in an example:
 <script>
   alert(form.elements.login == form.login); // true, the same <input>
 
-  form.login.name = "username"; // change the name of the input
+  form.login.name = "username"; // input এর name attribute এর পরিবর্তন
 
-  // form.elements updated the name:
+  // form.elements আপডেট:
   alert(form.elements.login); // undefined
   alert(form.elements.username); // input
 
@@ -119,19 +119,19 @@ That's easy to see in an example:
 </script>
 ```
 
-That's usually not a problem, because we rarely change names of form elements.
+তবে এটি তেমন সমস্যা না, কেননা আমরা খুব কমই ফর্ম এলিমেন্টের নাম পরিবর্তন করি।
 
 ````
 
 ## Backreference: element.form
 
-For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
+যেকোন এলিমেন্টের জন্য, ফর্মকে আমরা `element.form` দ্বারা অ্যাক্সেস করতে পারি। সুতরাং ফর্ম তার সকল এলিমেন্টকে রেফারেন্স করে, এবং এলিমেন্ট সমূহ ফর্মকে।
 
-Here's the picture:
+এখানে দেখুন:
 
 ![](form-navigation.svg)
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run height=40
 <form id="form">
@@ -151,44 +151,45 @@ For instance:
 
 ## Form elements
 
-Let's talk about form controls.
+ফর্ম কন্ট্রোল সম্পর্কে আলোচনা করা যাক।
 
 ### input and textarea
 
-We can access their value as `input.value` (string) or `input.checked` (boolean) for checkboxes.
+আমরা এলিমেন্টের মান এভাবে পেতে পারি `input.value` (string) অথবা চেকবক্সের জন্য `input.checked` (boolean)।
 
-Like this:
+যেমন:
 
 ```js
 input.value = "New value";
 textarea.value = "New text";
 
-input.checked = true; // for a checkbox or radio button
+input.checked = true; // চেকবক্স বা রেডিওর জন্য
 ```
 
-```warn header="Use `textarea.value`, not `textarea.innerHTML`"
-Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML` to access it.
+```warn header="`textarea.innerHTML` এর পরিবর্তে`textarea.value` ব্যবহার করুন"
+দয়া করে নোট করুন যদিও `<textarea>...</textarea>` ভ্যালুকে নেস্টেড HTML আকারে সংরক্ষন করে, আমাদের ভ্যালু অ্যাক্সেসের জন্য `textarea.innerHTML` ব্যবহার করা অনুচিত।
 
-It stores only the HTML that was initially on the page, not the current value.
+কেননা এটি পেজ ইনিশিয়াল লোডের সময়ের ডাটা সংরক্ষন করে, বর্তমান ভ্যালু রিটার্ন করবে না।
 ```
 
 ### select and option
 
-A `<select>` element has 3 important properties:
+`<select>` এলিমেন্টের ৩টি গুরুত্বপূর্ণ প্রপার্টি আছে:
 
-1. `select.options` -- the collection of `<option>` subelements,
-2. `select.value` -- the value of the currently selected `<option>`,
-3. `select.selectedIndex` -- the number of the currently selected `<option>`.
+1. `select.options` -- `<option>` এলিমেন্ট সমূহের কালেকশন,
+2. `select.value` -- সিলেক্টেড `<option>` এর ভ্যালু,
+3. `select.selectedIndex` -- সিলেক্টেড `<option>` এর ইনডেক্স।
 
-They provide three different ways of setting a value for a `<select>`:
+আমরা তিনভাবে `<select>` এর ভ্যালু সেট করতে পারি:
 
-1. Find the corresponding `<option>` element and set `option.selected` to `true`.
-2. Set `select.value` to the value.
-3. Set `select.selectedIndex` to the number of the option.
+1. `<option>`  `option.selected` to `true`.
+1. কাংখিত `<option>` এলিমেন্টের প্রপার্টি `option.selected` কে `true` সেটের মাধ্যমে।
+2. `select.value` এ মান সেট করে।
+3. `select.selectedIndex` এ অপশন এর ইনডেক্স সেট করে।
 
-The first way is the most obvious, but `(2)` and `(3)` are usually more convenient.
+যদিও প্রথম উপায়টি বেশ পঠনযোগ্য, কিন্তু `(2)` এবং `(3)` ব্যবহার বেশি সুবিধাজনক।
 
-Here is an example:
+এখানে দেখুন:
 
 ```html run
 <select id="select">
@@ -198,18 +199,18 @@ Here is an example:
 </select>
 
 <script>
-  // all three lines do the same thing
+  // ৩টি লাইনই একই কাজ করছে
   select.options[2].selected = true;
   select.selectedIndex = 2;
   select.value = 'banana';
 </script>
 ```
 
-Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. Although such functionality is available, it is rarely used. 
+`<select>` কন্ট্রোলের একটি অ্যাট্রিবিউট আছে `multiple`, যার মাধ্যমে আমরা একাধিক অপশন সিলেক্ট করতে পারি, তবে এটা খুব কদাচিৎ ব্যবহার করা হয়।
 
-In cases that you have to, then use the first way: add/remove the `selected` property from `<option>` subelements.
+এক্ষেত্রে আমাদের কোন `<option>` এর `selected` অ্যাট্রিবিউটকে add/remove করা লাগে।
 
-We can get their collection as `select.options`, for instance:
+এক্ষেত্রে আমরা `select.options` একটি কালেকশন পাব, যেমন:
 
 ```html run
 <select id="select" *!*multiple*/!*>
@@ -224,76 +225,76 @@ We can get their collection as `select.options`, for instance:
     .filter(option => option.selected)
     .map(option => option.value);
 
-  alert(selected); // blues,rock  
+  alert(selected); // blues,rock
 </script>
 ```
 
-The full specification of the `<select>` element is available in the specification <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+`<select>` এলিমেন্টের সম্পূর্ণ স্পেসিফিকেশন দেখতে <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
 
 ### new Option
 
-This is rarely used on its own. But there's still an interesting thing.
+এটি খুব কদাচিৎ ব্যবহার করা হয়। তবে এর একটি ব্যাপার জেনে রাখা উচিত।
 
-In the [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create `<option>` elements:
+`<option>` এলিমেন্ট তৈরির একটি শর্ট সিনট্যাক্স আছে [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element):
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
 ```
 
-Parameters:
+প্যারামিটার:
 
-- `text` -- the text inside the option,
-- `value` -- the option value,
-- `defaultSelected` -- if `true`, then `selected` HTML-attribute is created,
-- `selected` -- if `true`, then the option is selected.
+- `text` -- option এর টেক্সট,
+- `value` -- option ভ্যালু,
+- `defaultSelected` -- যদি `true` হয়, তাহলে HTML-attribute এ `selected` থাকবে,
+- `selected` -- যদি `true` হয়, তাহলে option টি selected হবে।
 
-There may be a small confusion about `defaultSelected` and `selected`. That's simple: `defaultSelected` sets HTML-attribute, that we can get using `option.getAttribute('selected')`. And `selected` - whether the option is selected or not, that's more important. Usually both values are either set to `true` or not set (same as `false`).
+`defaultSelected` এবং `selected` এর মাঝে কিছুটা সংশয় থাকতে পারে। `defaultSelected` এলিমেন্টে `selected` অ্যাট্রিবিউট সেট করে, আমরা এটি এভাবে `option.getAttribute('selected')` পেতে পারি। এবং `selected` - যা দ্বারা বুঝায় option কি selected নাকি না, এটি আরো গুরুত্বপূর্ন। সাধারণত দুটির মান আমরা বুলিয়ান (`true`/`false`) হিসেবে সেট করতে পারি।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js
 let option = new Option("Text", "value");
 // creates <option value="value">Text</option>
 ```
 
-The same element selected:
+ডিফল্ট `selected`:
 
 ```js
 let option = new Option("Text", "value", true, true);
 ```
 
-Option elements have properties:
+Option এলিমেন্টের প্রপার্টিসমূহ:
 
 `option.selected`
-: Is the option selected.
+: option selected.
 
 `option.index`
-: The number of the option among the others in its `<select>`.
+: The number of the option among the others in its `<select>`।
 
 `option.text`
-: Text content of the option (seen by the visitor).
+: option এর টেক্সট কন্টেন্ট (যা ইউজার UI তে দেখে)।
 
-## References
+## রেফারেন্স
 
-- Specification: <https://html.spec.whatwg.org/multipage/forms.html>.
+- স্পেসিফিকেশন: <https://html.spec.whatwg.org/multipage/forms.html>।
 
-## Summary
+## সারাংশ
 
-Form navigation:
+Form নেভিগেশন:
 
 `document.forms`
-: A form is available as `document.forms[name/index]`.
+: পেজের ফর্ম কালেকশন `document.forms[name/index]`।
 
-`form.elements`  
-: Form elements are available as `form.elements[name/index]`, or can use just `form[name/index]`. The `elements` property also works for `<fieldset>`.
+`form.elements`
+: ফর্মের এলিমেন্ট সমূহের কালেকশন `form.elements[name/index]`, অথবা শর্ট অ্যাক্সেস নোটেশন `form[name/index]`। `<fieldset>` ও `elements` কালেকশনের প্রপার্টি।
 
 `element.form`
-: Elements reference their form in the `form` property.
+: এলিমেন্ট হতে `form` অ্যাক্সেস।
 
-Value is available as `input.value`, `textarea.value`, `select.value` etc, or `input.checked` for checkboxes and radio buttons.
+কন্ট্রোলের ভ্যালু অ্যাক্সেস `input.value`, `textarea.value`, `select.value` ইত্যাদি, অথবা `input.checked` যা দ্বারা রেডিও বা চেকবক্স কন্ট্রোলের ভ্যালু অ্যাক্সেস করা যায়।
 
-For `<select>` we can also get the value by the index `select.selectedIndex` or through the options collection `select.options`.
+`<select>` এর জন্য `select.selectedIndex` অথবা `select.options`।
 
-These are the basics to start working with forms. We'll meet many examples further in the tutorial.
+এই অধ্যায়ে আমরা form এর ব্যাসিক আলোচনা করলাম। পরবর্তী অধ্যায় গুলোতে আরো বিস্তারিত জানব।
 
-In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+পরবর্তী অধ্যায়ে আমরা `focus` এবং `blur` ইভেন্টস নিয়ে আলোচনা করব, যদিও এটি যেকোন এলিমেন্টে হতে পারে, তবে বেশিরভাগ ক্ষেত্রে এটি ফর্মের কন্ট্রোলের সাথে ব্যবহার করা হয়।
