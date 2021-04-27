@@ -1,29 +1,30 @@
 
-# Pseudo-random generator
+# সুডো-র‍্যান্ডম জেনারেটর
 
-There are many areas where we need random data.
+এমন অনেক ক্ষেত্র আছে যেখানে আমাদের র‍্যান্ডম ডাটা জেনারেট করা লাগে।
 
-One of them is testing. We may need random data: text, numbers, etc. to test things out well.
+এর মধ্যে একটি হল টেস্টিং। টেস্ট করার জন্য আমাদের প্রয়োজন হতে পারে র‍্যান্ডম ডাটাঃ টেক্সট, নাম্বার ইত্যাদি।
 
-In JavaScript, we could use `Math.random()`. But if something goes wrong, we'd like to be able to repeat the test, using exactly the same data.
+জাভাস্ক্রিপ্টে আমরা `Math.random()` ব্যবহার করতে পারি। কিন্ত যদি আমরা কোন ভুল করে ফেলি এবং টেস্ট আবার একই ডাটা দিয়ে রিপিট করতে চাই। 
 
-For that, so called "seeded pseudo-random generators" are used. They take a "seed", the first value, and then generate the next ones using a formula so that the same seed yields the same sequence, and hence the whole flow is easily reproducible. We only need to remember the seed to repeat it.
+এজন্য তথাকথিত "সীডেড সুডো-র‍্যান্ডম জেনারেটর" ব্যবহার করা হয়। এইগুলো প্রথম ভ্যালুতে একটি "সীড" নেয়, এবং তারপর একটি সূত্র ব্যবহার করে পরবর্তীটি জেনারেট করে যাতে করে একই সীড একই ক্রমধারা অনুযায়ী তৈরি করতে পারে, আর এতে করে পুরো প্রবাহটি খুব সহজে পুনরায় গঠন করা যায়। এর জন্য আমাদের কেবল কোন সীডটি পুনরায় করতে হবে সেটা মনে রাখলেই চলবে।
 
-An example of such formula, that generates somewhat uniformly distributed values:
+এ জাতীয় সূত্রের একটি উদাহরণ, যেটা কিনা কিছুটা সমানভাবে ডিস্ট্রিবিউটেড মান জেনারেট করেঃ
 
 ```
 next = previous * 16807 % 2147483647
 ```
 
-If we use `1` as the seed, the values will be:
+যদি আমরা সিড হিসেবে `1` ব্যবহার করি, মানগুলো হবেঃ
 1. `16807`
 2. `282475249`
 3. `1622650073`
-4. ...and so on...
+4. ...এভাবে চলতে থাকবে...
 
-The task is to create a generator function `pseudoRandom(seed)` that takes `seed` and creates the generator with this formula.
+আপনার টাস্কটি হল একট জেনারেটর ফাংশন `pseudoRandom(seed)` তৈরি করুন যা একটি `seed` নেয়
+এবং জেনারেটরটি উপরের ফর্মুলা অনুযায়ী তৈরি করুন।
 
-Usage example:
+উদাহরণ:
 
 ```js
 let generator = pseudoRandom(1);

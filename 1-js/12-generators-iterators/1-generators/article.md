@@ -1,14 +1,14 @@
-# Generators
+# জেনারেটর
 
-Regular functions return only one, single value (or nothing).
+সাধারণ ফাংশনগুলো শুধুমাত্র একটি মান রিটার্ন করে (অথবা কিছুই রিটার্ন করে না)। 
 
-Generators can return ("yield") multiple values, one after another, on-demand. They work great with [iterables](info:iterable), allowing to create data streams with ease.
+জেনারেটরের মাধ্যমে আমরা চাহিদা অনুযায়ী একটির পর আরেকটি এভাবে অনেক মান রিটার্ন ("yield") করতে পারি। এরা [ইটারেবলের](info:iterable) সাথে দারুণ কাজ করে, এর মাধ্যমে সহজে ডাটা স্ট্রীম তৈরী করা যায়।
 
-## Generator functions
+## জেনারেটর ফাংশন
 
-To create a generator, we need a special syntax construct: `function*`, so-called "generator function".
+জেনারেটর তৈরি করতে আমাদের একটি বিশেষ সিনট্যাক্স কন্সট্রাক্ট `function*` এর প্রয়োজন হয়, এদের বলা হয় "জেনারেটর ফাংশন"।
 
-It looks like this:
+এরা দেখতে এমনঃ
 
 ```js
 function* generateSequence() {
@@ -18,9 +18,11 @@ function* generateSequence() {
 }
 ```
 
-Generator functions behave differently from regular ones. When such function is called, it doesn't run its code. Instead it returns a special object, called "generator object", to manage the execution.
+জেনারেটর ফাংশন এর আচরণ সাধারণ ফাংশন গুলো থেকে ভিন্ন।
+যখন এই ধরণের ফাংশন গুলো কল করা হয়, তখন এরা এদের কোড রান করে না।
+তার পরিবর্তে এটি রিটার্ন করে একটি বিশেষ অবজেক্ট, এদের বলা হয় "জেনারেটর অবজেক্ট", এটি এক্সিকিউশন নিয়ন্ত্রন করে।
 
-Here, take a look:
+এখানে দেখুনঃ
 
 ```js run
 function* generateSequence() {
@@ -29,24 +31,24 @@ function* generateSequence() {
   return 3;
 }
 
-// "generator function" creates "generator object"
+// "জেনারেটর ফাংশন" তৈরি করে "জেনারেটর অবজেক্ট"
 let generator = generateSequence();
 *!*
 alert(generator); // [object Generator]
 */!*
 ```
 
-The function code execution hasn't started yet:
+ফাংশনের কোড এক্সিকিউশন এখনো শুরু হয়নিঃ
 
 ![](generateSequence-1.svg)
 
-The main method of a generator is `next()`. When called, it runs the execution until the nearest `yield <value>` statement (`value` can be omitted, then it's `undefined`). Then the function execution pauses, and the yielded `value` is returned to the outer code.
+জেনারেটরের প্রধান মেথডটি হল `next()`। যখন এটি কল হয়, এটি `yield <value>` স্টেটমেন্টের (`value` বাদ যেতে পারে, তারপর এটি `undefined` হয়) আগ পর্যন্ত সম্পাদিত হয়। তারপর ফাংশনের সম্পাদন থেমে যায় এবং ইয়েল্ডেড `value` টি বাইরেরে কোডে রিটার্ন করে।
 
-The result of `next()` is always an object with two properties:
-- `value`: the yielded value.
-- `done`: `true` if the function code has finished, otherwise `false`.
+`next()` হল একটি অবজেক্ট যার দুটি প্রোপার্টি আছে:
+- `value`: ইয়েল্ডেড মানটি।
+- `done`: `true` যদি ফাংশনের কোড শেষ হয়, অন্যথায় `false`।
 
-For instance, here we create the generator and get its first yielded value:
+উদাহরণস্বরুপ, এখানে আমরা জেনারেটর তৈরি করেছি এবং আমরা এটির প্রথম ইয়েল্ডেড মানটি পাওয়া যায়ঃ
 
 ```js run
 function* generateSequence() {
@@ -64,11 +66,11 @@ let one = generator.next();
 alert(JSON.stringify(one)); // {value: 1, done: false}
 ```
 
-As of now, we got the first value only, and the function execution is on the second line:
+এখন, আমরা শুধু প্রথম ইয়েল্ডেড মানটি পেয়েছি, এবং ফাংশনটি সম্পাদনের জন্য দ্বিতীয় লাইনে রয়েছেঃ
 
 ![](generateSequence-2.svg)
 
-Let's call `generator.next()` again. It resumes the code execution and returns the next `yield`:
+চলুন আবার `generator.next()` কে কল করি। আবার কোড সম্পাদন চালু হয় এবং রিটার্ন করে পরবর্তী `yield`:
 
 ```js
 let two = generator.next();
@@ -78,7 +80,7 @@ alert(JSON.stringify(two)); // {value: 2, done: false}
 
 ![](generateSequence-3.svg)
 
-And, if we call it a third time, the execution reaches the `return` statement that finishes the function:
+এবং যখন আমরা তৃতীয়বারের মত কল করি, ফাংশন সম্পাদন পৌঁছে যায় `return` স্টেটমেন্টে যার দ্বারা ফাংশনটি শেষ হয়ঃ
 
 ```js
 let three = generator.next();
@@ -88,21 +90,22 @@ alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
 
 ![](generateSequence-4.svg)
 
-Now the generator is done. We should see it from `done:true` and process `value:3` as the final result.
+এভাবে জেনারেটরটি সম্পন্ন হয়। সব শেষে আমরা দেখতে পাই `done:true` এবং প্রসেস `value:3`।
 
-New calls to `generator.next()` don't make sense any more. If we do them, they return the same object: `{done: true}`.
+নতুন করে `generator.next()` কে কল করা আর তেমন কিছু বোঝায় না। যদি আমরা কল করি, তাহলে এটি একই অবজেক্ট রিটার্ন করে: `{done: true}`।
 
 ```smart header="`function* f(…)` or `function *f(…)`?"
-Both syntaxes are correct.
+উভয় সিনট্যাক্সই শুদ্ধ।
 
-But usually the first syntax is preferred, as the star `*` denotes that it's a generator function, it describes the kind, not the name, so it should stick with the `function` keyword.
+কিন্ত সাধারণত প্রথম সিনট্যাক্সটি বেশী ব্যবহৃত হয়, স্টার `*` চিহ্ন দ্বারা বোঝানো হয় এটি একটি জেনারেটর ফাংশন, এটি দ্বারা ফাংশনের ধরণ বুঝায়, নাম নয়, তাই এটি `function` কীওয়ার্ডের সাথে থাকা উচিত।
 ```
 
-## Generators are iterable
+## জেনারেটরসমূহ ইটারেবল
 
-As you probably already guessed looking at the `next()` method, generators are [iterable](info:iterable).
+আপনি সম্ভবত `next()` মেথডটি দেখে বুঝতে পেরেছেন জেনারেটর[ইটারেবল](info:iterable)।
 
-We can get loop over values by `for..of`:
+
+আমরা মান গুলো `for..of` লুপের মাধ্যমে পেতে পারিঃ
 
 ```js run
 function* generateSequence() {
@@ -114,15 +117,15 @@ function* generateSequence() {
 let generator = generateSequence();
 
 for(let value of generator) {
-  alert(value); // 1, then 2
+  alert(value); // 1 তারপর 2
 }
 ```
 
-Looks a lot nicer than calling `.next().value`, right?
+`.next().value` এর চেয়ে এভাবে মানগুলো খুঁজা আরো বেশি সাবলীল, তাই না?
 
-...But please note: the example above shows `1`, then `2`, and that's all. It doesn't show `3`!
+...বিঃদ্রঃ উপরের উদাহরণটিতে দেখায় `1`, তারপর `2` কিন্তু এটি `3` দেখায় না!
 
-It's because `for..of` iteration ignores the last `value`, when `done: true`. So, if we want all results to be shown by `for..of`, we must return them with `yield`:
+কারণ `for..of` ইটারেশন শেষের `value` টিকে দেখায় না, যখন `done: true` হয়ে যায়। তো, যদি আমরা `for..of` এর মাধ্যমে সব মান পেতে চাই তাহলে আমাদের অবশ্যই এদের `yield` এর সাথে রিটার্ন করতে হবেঃ
 
 ```js run
 function* generateSequence() {
@@ -136,11 +139,13 @@ function* generateSequence() {
 let generator = generateSequence();
 
 for(let value of generator) {
-  alert(value); // 1, then 2, then 3
+  alert(value); // 1, তারপর 2, তারপর 3
 }
 ```
 
-As generators are iterable, we can call all related functionality, e.g. the spread operator `...`:
+
+যেহেতু জেনারেটর ইটারেবল, তাই আমরা সকল ধরণের ইটারেবল ফাংশনালিটি কল করতে পারি, যেমনঃ স্প্রেড অপারেটর `...`:
+
 
 ```js run
 function* generateSequence() {
@@ -154,30 +159,30 @@ let sequence = [0, ...generateSequence()];
 alert(sequence); // 0, 1, 2, 3
 ```
 
-In the code above, `...generateSequence()` turns the iterable generator object into an array of items (read more about the spread operator in the chapter [](info:rest-parameters-spread-operator#spread-operator))
+উপরের কোডে, `...generateSequence()` ইটারেবল জেনারেটর অবজেক্টটি অ্যারেতে রুপান্তরিত হয় (স্প্রেড অপারেটর সম্পর্কে আরো জানতে এটি পড়ুন [](info:rest-parameters-spread-operator#spread-operator))
 
-## Using generators for iterables
+## ইটারেবলের জন্য জেনারেটরের ব্যবহার
 
-Some time ago, in the chapter [](info:iterable) we created an iterable `range` object that returns values `from..to`.
+পূর্বে, ইটারেবল অধ্যায়ে [](info:iterable) আমরা তৈরি করেছি একটা `range` অবজেক্ট যেটি রিটার্ন করত `from..to` এর মানগুলো।
 
-Here, let's remember the code:
+এখানে, আগের কোডটি দেখুনঃ
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  // for..of range calls this method once in the very beginning
+  // for..of range কে কল করা হলে সবার শুরুতে এই মেথডটি এক্সিকিউট হবে
   [Symbol.iterator]() {
-    // ...it returns the iterator object:
-    // onward, for..of works only with that object, asking it for next values
+    // ...এটি রিটার্ন করে ইটারেটর অবজেক্ট:
+    // পরবর্তীতে, for..of শুধু অবজেক্টির সাথে কাজ করে এবং এর মাধ্যমে আমরা মান গুলো জানতে পারি
     return {
       current: this.from,
       last: this.to,
 
-      // next() is called on each iteration by the for..of loop
+      // for..of লুপের প্রতিবার ইটারেশনে next() কল হয় 
       next() {
-        // it should return the value as an object {done:.., value :...}
+        // এটি রিটার্ন করবে একটি অবজেক্ট {done:.., value :...}
         if (this.current <= this.last) {
           return { done: false, value: this.current++ };
         } else {
@@ -188,20 +193,20 @@ let range = {
   }
 };
 
-// iteration over range returns numbers from range.from to range.to
+// ইটারেশন শেষে range এর রিটার্ন মান হবে range.from হতে range.to পর্যন্ত
 alert([...range]); // 1,2,3,4,5
 ```
 
-We can use a generator function for iteration by providing it as `Symbol.iterator`.
+জেনারেটর ফাংশনের মাধ্যমেও আমরা ইটারেশনের করতে পারি `Symbol.iterator`।
 
-Here's the same `range`, but much more compact:
+উপরের `range` টিকে আরো সহজভাবেঃ
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  *[Symbol.iterator]() { // a shorthand for [Symbol.iterator]: function*()
+  *[Symbol.iterator]() { // সংক্ষিপ্তরূপ [Symbol.iterator]: function*()
     for(let value = this.from; value <= this.to; value++) {
       yield value;
     }
@@ -211,25 +216,25 @@ let range = {
 alert( [...range] ); // 1,2,3,4,5
 ```
 
-That works, because `range[Symbol.iterator]()` now returns a generator, and generator methods are exactly what `for..of` expects:
-- it has a `.next()` method
-- that returns values in the form `{value: ..., done: true/false}`
+এটিও কাজ করবে, কারণ `range[Symbol.iterator]()` জেনারেটর রিটার্ন করে, এবং জেনারেটর মেথডটি `for..of` এর মত কাজ করেঃ
+- এর একটি মেথড আছে `.next()`
+- এটি মানগুলো রিটার্ন করে এই ভাবে `{value: ..., done: true/false}`
 
-That's not a coincidence, of course. Generators were added to JavaScript language with iterators in mind, to implement them easily.
+অবশ্য, এটি কাকতালীয় না। জাভাস্ক্রীপ্টে জেনারেটর সংযুক্ত করা হয়েছে সহজে ইটারেবল অবজেক্ট তৈরি করতে।
 
-The variant with a generator is much more concise than the original iterable code of `range`, and keeps the same functionality.
+পূর্বের ইটারেবল `range` কোডের চেয়েও আমারা এর বিকল্প হিসেবে জেনারেটর ব্যবহার করতে পারি এটি আরো বেশী সংক্ষিপ্ত এবং এর ফাংশানালিটি একই থাকে।
 
-```smart header="Generators may generate values forever"
-In the examples above we generated finite sequences, but we can also make a generator that yields values forever. For instance, an unending sequence of pseudo-random numbers.
+```smart header="জেনারেটর সবসময় জেনারেট ভ্যালু রিটার্ন করে"
+উপরের উদাহরণে আমরা একটি ফিনিট সিক্যুয়েন্স জেনারেট করেছি, কিন্ত আমরা সবসময় মান রিটার্ন করে এমন জেনারেটরও তৈরি করতে পারি। উদাহরণস্বরূপ একটি ইনফিনিট সুডো-র‍্যান্ডম নাম্বার সিরিজ।
 
-That surely would require a `break` (or `return`) in `for..of` over such generator. Otherwise, the loop would repeat forever and hang.
+তবে এ ধরনের জেনারেটরের জন্য `for..of` এ একটি `break` (অথবা `return`) ব্যবহার করা উচিত। অন্যথায়, লুপটি অবিরাম চলতে থাকবে এবং হ্যাং করবে।
 ```
 
-## Generator composition
+## জেনারেটর কম্পোজিশন
 
-Generator composition is a special feature of generators that allows to transparently "embed" generators in each other.
+জেনারেটর কম্পোজিশন হল এমন একটি সুবিধা যার মাধ্যমে আমরা একটি জেনারেটরের মধ্যে আরেকটি জেনারেটর সহজে "embed" করতে পারি।
 
-For instance, we have a function that generates a sequence of numbers:
+উদাহরণস্বরূপ, আমাদের একটি ফাংশন আছে এটি সিক্যুয়েন্স নাম্বার জেনারেট করেঃ
 
 ```js
 function* generateSequence(start, end) {
@@ -237,18 +242,18 @@ function* generateSequence(start, end) {
 }
 ```
 
-Now we'd like to reuse it to generate a more complex sequence:
-- first, digits `0..9` (with character codes 48..57),
-- followed by uppercase alphabet letters `A..Z` (character codes 65..90)
-- followed by lowercase alphabet letters `a..z` (character codes 97..122)
+এখন আরো জটিল সিক্যুয়েন্স বানাতে আমরা এটি পুনরায় ব্যবহার করবঃ
+- প্রথমত, নাম্বার `0..9` (ক্যারেক্টার কোড 48..57),
+- তারপর বড় হাতের অক্ষর `A..Z` (ক্যারেক্টার কোড 65..90)
+- তারপর ছোট হাতের অক্ষর `a..z` (ক্যারেক্টার কোড 97..122)
 
-We can use this sequence e.g. to create passwords by selecting characters from it (could add syntax characters as well), but let's generate it first.
+আমরা এই সিক্যুয়েন্স টা ব্যবহার করে উপরোল্লিখিত ক্যারেক্টার গুলো দিয়ে পাসওয়ার্ড তৈরি করতে পারি (এছাড়া সিম্বল ক্যারেক্টারও যুক্ত করতে পারি), চলুন প্রথমে এটা তৈরি করি।
 
-In a regular function, to combine results from multiple other functions, we call them, store the results, and then join at the end.
+সাধারন ফাংশনে, অনেকগুলো ফাংশনের মান একত্রিত করতে প্রথমে আমরা মানগুলো স্টোর করি এবং শেষে তাদের জয়েন করি। 
 
-For generators, there's a special `yield*` syntax to "embed" (compose) one generator into another.
+জেনারেটরে, একটি স্পেশাল `yield*` সিনট্যাক্স আছে যার মাধ্যমে একটি ফাংশন আরেকটি ফাংশনের মধ্যে "embed" (কম্পোজ) করা যায়।
 
-The composed generator:
+কম্পোজিট জেনারেটরঃ
 
 ```js run
 function* generateSequence(start, end) {
@@ -279,9 +284,9 @@ for(let code of generatePasswordCodes()) {
 alert(str); // 0..9A..Za..z
 ```
 
-The `yield*` directive *delegates* the execution to another generator. This term means that `yield* gen` iterates over the generator `gen` and transparently forwards its yields outside. As if the values were yielded by the outer generator.
+`yield*` ডিরেক্টিভটি দ্বারা *নির্দেশ করে* এটি অন্য একটি জেনারেটরের এক্সিকিউশন। `yield* gen` এটি দ্বারা বুঝায় জেনারেটরটি `gen` ইটারেটযোগ্য এবং আমরা সহজেই ইয়েল্ডটির মান অন্য আরেকটি আউটার জেনারেটরের মাধ্যমে পেতে পারি। 
 
-The result is the same as if we inlined the code from nested generators:
+উপরের রেজাল্ট একই থাকবে যদি আমরা নেস্টেড জেনারেটরে ইনলাইন কোড করিঃ
 
 ```js run
 function* generateSequence(start, end) {
@@ -312,22 +317,25 @@ for(let code of generateAlphaNum()) {
 alert(str); // 0..9A..Za..z
 ```
 
-A generator composition is a natural way to insert a flow of one generator into another. It doesn't use extra memory to store intermediate results.
+জেনারেটর কম্পোজিশন একটি স্বাভাবিক উপায় যার মাধ্যমে আমরা একটি ফাংশনের মধ্যে আরেকটি ফাংশন রাখতে পারি। এর ফলে মধ্যবর্তী মান স্টোরের জন্য অতিরিক্ত মেমোরি ব্যবহার হয় না।
 
-## "yield" is a two-way road
 
-Until this moment, generators were similar to iterable objects, with a special syntax to generate values. But in fact they are much more powerful and flexible.
+## "yield" হল একটি টু-ওয়ে রোড
 
-That's because `yield` is a two-way road: it not only returns the result outside, but also can pass the value inside the generator.
+এখনো পর্যন্ত আমরা বুঝছি, জেনারেটর দেখতে ইটারেবল অবজেক্ট এর মত, যার জেনারেট ভ্যালুর জন্য স্পেশাল সিনট্যাক্স আছে। কিন্তু আসলে এটি আরো বেশি পাওয়ারফুল এবং ফ্লেক্সিবল। 
 
-To do so, we should call `generator.next(arg)`, with an argument. That argument becomes the result of `yield`.
 
-Let's see an example:
+এখানে `yield` হল একটি টু-ওয়ে রোড: এটি শুধু মান রিটার্ন `yield` করে না আমরা জেনারেটরে ভ্যালুও পাস করতে পারি।
+
+
+এজন্য আমাদের `generator.next(arg)` কে কল করা লাগবে যার একটি আর্গুমেন্ট থাকতে পারে। আর্গুমেন্টটি `yield` এর রেজাল্ট হয়।
+
+একটা উদাহরণ দেখা যাকঃ
 
 ```js run
 function* gen() {
 *!*
-  // Pass a question to the outer code and wait for an answer
+  // এক্সিকিউশন কোডে একটি প্রশ্ন পাঠিয়ে উত্তরের জন্য অপেক্ষা করি
   let result = yield "2 + 2 = ?"; // (*)
 */!*
 
@@ -336,29 +344,31 @@ function* gen() {
 
 let generator = gen();
 
-let question = generator.next().value; // <-- yield returns the value
+let question = generator.next().value; // <-- ইয়েল্ড ভ্যলু রিটার্ন করে
 
-generator.next(4); // --> pass the result into the generator  
+generator.next(4); // --> উত্তরটা জেনারেটরে পাঠাই
 ```
 
 ![](genYield2.svg)
 
-1. The first call `generator.next()` should be always made without an argument (the argument is ignored if passed). It starts the execution and returns the result of the first `yield "2+2=?"`. At this point the generator pauses the execution, while staying on the line `(*)`.
-2. Then, as shown at the picture above, the result of `yield` gets into the `question` variable in the calling code.
-3. On `generator.next(4)`, the generator resumes, and `4` gets in as the result: `let result = 4`.
+1. প্রথমে `generator.next()`কোন আর্গুমেন্ট ছাড়া কল করি (আর্গুমেন্ট যাবে না যদি আমরা পাসও করি)। এটির এক্সিকিউশন শুরু হয় এবং প্রথম রিটার্নকৃত রেজাল্ট হবে `yield "2+2=?"`। এই মুহুর্তে জেনারেটরের এক্সিকিউশন `(*)` লাইনে থেমে যাবে।
+2. তারপর, উপরের ছবির মত, কোডে `yield` এর ফলাফল `question` ভ্যারিয়েবল এর মধ্যে চলে আসে।
+3. `generator.next(4)` এ, জেনারেটর থেমে যায়, এবং `4` কে রেজাল্ট এর মধ্যে পাই: `let result = 4`।
 
-Please note, the outer code does not have to immediately call`next(4)`. It may take time. That's not a problem: the generator will wait.
 
-For instance:
+দয়া করে মনে রাখুন, এক্সিকিউশন কোডে আমাদের সাথে সাথে `next(4)` কে কল করতে হবে না। এটি কিছু সময় নিতে পারে। এটি সমস্যা নই জেনারেটর অপেক্ষা করবে।
+
+
+উদাহরণস্বরূপ:
 
 ```js
-// resume the generator after some time
+// কিছু সময় পর জেনারেটর আবার শুরু হবে
 setTimeout(() => generator.next(4), 1000);
 ```
 
-As we can see, unlike regular functions, a generator and the calling code can exchange results by passing values in `next/yield`.
+আমরা দেখতে পাই যে, সাধারণ ফাংশনের বিপরীতে, জেনারেটর কল হলে ফলাফল বিনিময় করতে পারে `next/yield` মান পাসিং এর মাধ্যমে।
 
-To make things more obvious, here's another example, with more calls:
+আরো ভালোভাবে বুঝতে, আরেকটি উদাহরণ দেখুন, একাধিক কলের জন্যঃ
 
 ```js run
 function* gen() {
@@ -380,27 +390,27 @@ alert( generator.next(4).value ); // "3 * 3 = ?"
 alert( generator.next(9).done ); // true
 ```
 
-The execution picture:
+এক্সিকিউশনের ছবিঃ
 
 ![](genYield2-2.svg)
 
-1. The first `.next()` starts the execution... It reaches the first `yield`.
-2. The result is returned to the outer code.
-3. The second `.next(4)` passes `4` back to the generator as the result of the first `yield`, and resumes the execution.
-4. ...It reaches the second `yield`, that becomes the result of the generator call.
-5. The third `next(9)` passes `9` into the generator as the result of the second `yield` and resumes the execution that reaches the end of the function, so `done: true`.
+1. প্রথমে `.next()` এক্সিকিউশন শুরু হয়... এটি প্রথম `yield` এ পৌঁছায়।
+2. রেজাল্ট বহিঃস্থ কোডে রিটার্ন করে।
+3. দ্বিতীয়ত `.next(4)` এর মাধ্যমে প্রথম `yield` এর ফলাফল হিসেবে `4` জেনারেটরে যায়, এবং এক্সিকিউশন পুনরায় চালু হয়।
+4. ...এটি দ্বিতীয় `yield` এ যায় এবং এর ফলে জেনারেটরের ফলাফল হয় `3 * 3 = ?`।
+5. তৃতীয়ত `next(9)` এ `9` পাসের জন্য এটি দ্বিতীয় `yield` এর রেজাল্ট হয় এবং এক্সিকিউশন আবার শুরু হয়ে ফাংশনের শেষে পৌঁছায় এবং `done: true` হয়।
 
-It's like a "ping-pong" game. Each `next(value)` (excluding the first one) passes a value into the generator, that becomes the result of the current `yield`, and then gets back the result of the next `yield`.
+এটি অনেকটা "পিং-পং" খেলার মত. প্রতিটি `next(value)` (প্রথমটি বাদে) জেনারেটরে একটি ভ্যালূ পাস হয়, এর ফলে এটি বর্তমান `yield` এর রেজাল্ট হয়, এবং পরবর্তী `yield` টি রেজাল্টে চলে আসে।
 
 ## generator.throw
 
-As we observed in the examples above, the outer code may pass a value into the generator, as the result of `yield`.
+উপরের কোড হতে আমরা বুঝতে পারি, আমরা জেনারেটরে একটি ভ্যালু পাঠাতে পারি, যা `yield` এর রেজাল্ট হয়।
 
-...But it can also initiate (throw) an error there. That's natural, as an error is a kind of result.
+...কিন্ত আমরা চাইলে সেখানে একটি এরর (থ্রো) করতে পারি। এটি স্বাভাবিক কেননা ইরোরও একধরনের রেজাল্ট।
 
-To pass an error into a `yield`, we should call `generator.throw(err)`. In that case, the `err` is thrown in the line with that `yield`.
+`yield` এ এরর পাস করতে চাইলে আমাদের `generator.throw(err)` কে কল করা লাগবে। এই ক্ষেত্রে, `err` টি যে লাইনে `yield` আছে সেখানে পাঠানো হবে।
 
-For instance, here the yield of `"2 + 2 = ?"` leads to an error:
+উদাহরণস্বরূপ, এখানে `"2 + 2 = ?"` ইয়েল্ডটি একটি এররকে নির্দেশ করে:
 
 ```js run
 function* gen() {
@@ -409,7 +419,7 @@ function* gen() {
 
     alert("The execution does not reach here, because the exception is thrown above");
   } catch(e) {
-    alert(e); // shows the error
+    alert(e); // এররটি দেখাবে
   }
 }
 
@@ -421,16 +431,18 @@ let question = generator.next().value;
 generator.throw(new Error("The answer is not found in my database")); // (2)
 */!*
 ```
+লাইন `(2)` হতে জেনারেটরে একটি এরর এক্সেপশন থ্রো হয় যা  
+`yield` এর মাধ্যমে লাইন `(1)` এ যায়। উপরের উদাহরনে `try..catch` এর মাধ্যমে এরর আমরা দেখাতে পারি।
 
-The error, thrown into the generator at line `(2)` leads to an exception in line `(1)` with `yield`. In the example above, `try..catch` catches it and shows it.
 
-If we don't catch it, then just like any exception, it "falls out" the generator into the calling code.
+যদি আমরা এটি ধরতে না পারি অন্যান্য এক্সেপশন এর মত, তাহলে এটি জেনারেটরের এক্সিকিউশন কোডে চলে আসবে.
 
-The current line of the calling code is the line with `generator.throw`, labelled as `(2)`. So we can catch it here, like this:
+
+আমরা `generator.throw` কে নিম্নোক্ত উপায়েও লিখতে পারি যা উপরের লাইন `(2)` এর মত। চাইলে আমরা এভাবেও এররটি ধরতে পারিঃ
 
 ```js run
 function* generate() {
-  let result = yield "2 + 2 = ?"; // Error in this line
+  let result = yield "2 + 2 = ?"; // এই লাইনে এরর হবে
 }
 
 let generator = generate();
@@ -441,21 +453,20 @@ let question = generator.next().value;
 try {
   generator.throw(new Error("The answer is not found in my database"));
 } catch(e) {
-  alert(e); // shows the error
+  alert(e); // এররটি দেখাবে
 }
 */!*
 ```
+যদি আমরা এররটি না ধরি তাহলে অন্যান্য এরর এর মত এটি আমাদের এক্সিকিউশন কোডের মধ্যে চলে যাবে এবং এর ফলে কোড এক্সিকিউশন বন্ধ হয়ে যাবে।
 
-If we don't catch the error there, then, as usual, it falls through to the outer calling code (if any) and, if uncaught, kills the script.
+## সারাংশ
 
-## Summary
+- জেনারেটর তৈরী হয় জেনারেটর ফাংশনের মাধ্যমে `function* f(…) {…}`।
+- (শুধু) জেনারেটরের মধ্যে `yield` অপারেটর থাকে।
+- এক্সিকিউশন কোড এবং জেনারেটর কোডের রেজাল্ট `next/yield` কলের মাধ্যমে বিনিময় হয়।
 
-- Generators are created by generator functions `function* f(…) {…}`.
-- Inside generators (only) there exists a `yield` operator.
-- The outer code and the generator may exchange results via `next/yield` calls.
+মডার্ন জাভাস্ক্রিপ্টে জেনারেটরের ব্যবহার কম। কিন্তু অনেক সময় এটি কাজে আসে, কারণ এক্সিকিউশন কোড এবং ফাংশন কোডে ডাটা বিনিময় টা অতুলনীয়। এবং এদের মাধ্যমে সহজে ইটারেবল অবজেক্ট তৈরি করা যায়।
 
-In modern JavaScript, generators are rarely used. But sometimes they come in handy, because the ability of a function to exchange data with the calling code during the execution is quite unique. And, surely, they are great for making iterable objects.
+এছাড়াও পরবর্তী অধ্যায়ে আমরা শিখব `async generators`, যার মাধ্যমে আমরা `for await ... of` এর মধ্যে অ্যাসিনক্রোনাস জেনারেটর ডাটা স্ট্রিম (যেমনঃ নেটওয়ার্কের মাধ্যমে পেজিনেশন)করতে পারি ।
 
-Also, in the next chapter we'll learn async generators, which are used to read streams of asynchronously generated data (e.g paginated fetches over a network) in `for await ... of` loops.
-
-In web-programming we often work with streamed data, so that's another very important use case.
+ওয়েব-প্রোগ্রামিংয়ে আমরা প্রায় ডাটা স্ট্রিম নিয়ে কাজ করি, সুতরাং এটিও অন্য আরেকটি গুরত্বপূর্ণ ব্যবহারের ক্ষেত্র।
