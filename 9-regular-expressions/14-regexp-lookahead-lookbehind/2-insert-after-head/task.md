@@ -1,14 +1,13 @@
-# Insert After Head
+# Body এর ভিতরে H1 ট্যাগ
 
-We have a string with an HTML Document.
+HTML Document এর একটি স্ট্রিং আছে।
 
-Write a regular expression that inserts `<h1>Hello</h1>` immediately after `<body>` tag. The tag may have attributes.
+একটি রেগুলার এক্সপ্রেশন লিখুন যার মাধ্যমে `<body>` ট্যাগ এর পর `<h1>Hello</h1>` কে সংযোগ করতে পারি। ট্যাগটির একাধিক অ্যাট্রিবিউট থাকতে পারে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js
-let regexp = /your regular expression/;
-
+let regexp = /আপনার প্যাটার্ন/;
 let str = `
 <html>
   <body style="height: 200px">
@@ -20,7 +19,7 @@ let str = `
 str = str.replace(regexp, `<h1>Hello</h1>`);
 ```
 
-After that the value of `str` should be:
+এর পর `str` এর মান হবে:
 ```html
 <html>
   <body style="height: 200px"><h1>Hello</h1>
