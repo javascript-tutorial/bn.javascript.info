@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# DOM children
+# DOM চিলড্রেন
 
-Look at this page:
+এটি দেখুন:
 
 ```html
 <html>
@@ -18,7 +18,7 @@ Look at this page:
 </html>
 ```
 
-For each of the following, give at least one way of how to access them:
-- The `<div>` DOM node?
-- The `<ul>` DOM node?
-- The second `<li>` (with Pete)?
+নিম্নোক্ত প্রতিটি এলিমেন্ট সমূহ কিভাবে অ্যাক্সেস করা যায়?
+- `<div>` DOM নোড?
+- `<ul>` DOM নোড?
+- দ্বিতীয় `<li>` (Pete টেক্সট সহ)?

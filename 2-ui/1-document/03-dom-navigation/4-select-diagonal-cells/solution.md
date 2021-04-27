@@ -1,1 +1,1 @@
-We'll be using `rows` and `cells` properties to access diagonal table cells.
+আমরা `rows` এবং `cells` প্রপার্টি দ্বারা কোণাকুণি *td* সমূহকে সিলেক্ট করতে পারি।

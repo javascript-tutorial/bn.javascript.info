@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The sibling question
+# sibling নিয়ে প্রশ্ন
 
-If `elem` -- is an arbitrary DOM element node...
+`elem` -- কি আরবিট্ররি DOM এলিমেন্ট নোড হবে?...
 
-- Is it true that `elem.lastChild.nextSibling` is always `null`?
-- Is it true that `elem.children[0].previousSibling` is always `null` ?
+- `elem.lastChild.nextSibling` সর্বদা `null` এটি কি সত্য?
+- `elem.children[0].previousSibling` সর্বদা `null` এটি কি সত্য?

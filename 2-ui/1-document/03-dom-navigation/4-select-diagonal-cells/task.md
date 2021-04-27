@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Select all diagonal cells
+# কোণাকুণি সকল td কে সিলেক্ট করুন
 
-Write the code to paint all diagonal table cells in red.
+কোণাকুণি সকল td এর ব্যকগ্রাউন্ড লাল করার কোড লিখুন।
 
-You'll need to get all diagonal `<td>` from the `<table>` and paint them using the code:
+প্রথমে আপনাকে `<table>` এর সকল কোণাকুণি `<td>` কে সিলেক্ট করতে হবে তারপর তাদের ব্যাকগ্রাউন্ড পরিবর্তন করবেন:
 
 ```js
 // td should be the reference to the table cell
 td.style.backgroundColor = 'red';
 ```
 
-The result should be:
+আউটপুট হবে এমন:
 
 [iframe src="solution" height=180]
