@@ -1,4 +1,4 @@
-Let's make a loop over `<li>`:
+প্রথমে `<li>` এর কালেকশনটি নেয়:
 
 ```js
 for (let li of document.querySelectorAll('li')) {
@@ -6,9 +6,9 @@ for (let li of document.querySelectorAll('li')) {
 }
 ```
 
-In the loop we need to get the text inside every `li`.
+লুপের মধ্যে আমাদের প্রতিটি `li` এর টেক্সট নেয়া লাগবে।
 
-We can read the text from the first child node of `li`, that is the text node:
+আমরা `li` এর প্রথম নোডটি থেকে নোড এর কন্টেন্ট পাব, যা হল টেক্সট নোড:
 
 ```js
 for (let li of document.querySelectorAll('li')) {
@@ -18,4 +18,4 @@ for (let li of document.querySelectorAll('li')) {
 }
 ```
 
-Then we can get the number of descendants as `li.getElementsByTagName('li').length`.
+এরপর আমরা এভাবে সর্বমোট চাইল্ডনোড সমূহ পাব `li.getElementsByTagName('li').length`।

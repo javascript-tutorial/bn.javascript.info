@@ -1,58 +1,58 @@
-# Node properties: type, tag and contents
+# Node properties: type, tag এবং contents
 
-Let's get a more in-depth look at DOM nodes.
+DOM নোড সম্পর্কে আরো বিস্তারিত জানা যাক।
 
-In this chapter we'll see more into what they are and learn their most used properties.
+এই অধ্যায়ে আমরা এদের কিভাবে ব্যবহার করতে হয় এবং তাদের বহুল ব্যবহৃত প্রপার্টি সম্পর্কে জানব।
 
 ## DOM node classes
 
-Different DOM nodes may have different properties. For instance, an element node corresponding to tag `<a>` has link-related properties, and the one corresponding to `<input>` has input-related properties and so on. Text nodes are not the same as element nodes. But there are also common properties and methods between all of them, because all classes of DOM nodes form a single hierarchy.
+বিভিন্ন DOM নোডের বিভিন্ন ধরণের প্রপার্টি আছে। যেমন এলিমেন্ট নোড `<a>` ট্যাগের লিংক সম্পর্কিত প্রপার্টি আছে, এবং `<input>` ট্যাগের ইনপুট সম্পর্কিত প্রপার্টি আছে। টেক্সট নোড আবার এলিমেন্ট নোডের মত না। তবে এটির কিছু প্রপার্টিও একই, কেননা সকল DOM নোড ক্লাস একই প্যারেন্ট ক্লাস হতে আছে।
 
-Each DOM node belongs to the corresponding built-in class.
+প্রতিটি DOM নোড সংশ্লিষ্ট বিল্ট ইন ক্লাসের সাথে সম্পর্কিত।
 
-The root of the hierarchy is [EventTarget](https://dom.spec.whatwg.org/#eventtarget), that is inherited by  [Node](http://dom.spec.whatwg.org/#interface-node), and other DOM nodes inherit from it.
+হায়ার্য়াকি অনুযায়ী রুট ক্লাস হল [EventTarget](https://dom.spec.whatwg.org/#eventtarget), একে ইনহেরিট করে  [Node](http://dom.spec.whatwg.org/#interface-node), এবং অন্যান্য DOM নোড তাদের ইনহেরিট করে।
 
-Here's the picture, explanations to follow:
+নিচের ছবিটি দেখুন, বিস্তারিত আলোচনা করা হল:
 
 ![](dom-class-hierarchy.svg)
 
-The classes are:
+ক্লাসগুলো হল:
 
-- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- is the root "abstract" class. Objects of that class are never created. It serves as a base, so that all DOM nodes support so-called "events", we'll study them later.
-- [Node](http://dom.spec.whatwg.org/#interface-node) -- is also an "abstract" class, serving as a base  for DOM nodes. It provides the core tree functionality: `parentNode`, `nextSibling`, `childNodes` and so on (they are getters). Objects of `Node` class are never created. But there are concrete node classes that inherit from it, namely: `Text` for text nodes, `Element` for element nodes and more exotic ones like `Comment` for comment nodes.
-- [Element](http://dom.spec.whatwg.org/#interface-element) -- is a base class for DOM elements. It provides element-level navigation like `nextElementSibling`, `children` and searching methods like `getElementsByTagName`, `querySelector`. A browser supports not only HTML, but also XML and SVG. The `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` and `HTMLElement`.
-- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- is finally the basic class for all HTML elements. It is inherited by concrete HTML elements:
-    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- the class for `<input>` elements,
-    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- the class for `<body>` elements,
-    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- the class for `<a>` elements,
-    - ...and so on, each tag has its own class that may provide specific properties and methods.
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- এটি রুট "abstract" ক্লাস। এই ক্লাসের অবজেক্ট তৈরি হয়না। এটি বেস ক্লাস হিসেবে কাজ করে, এজন্য আমরা সকল ধরণের DOM নোডের সাথে বিভিন্ন ধরণের "events" পায়, পরবর্তীতে এ সম্পর্কে আরো বিস্তারিত জানব।
+- [Node](http://dom.spec.whatwg.org/#interface-node) -- এটিও একটি DOM নোডের "abstract" ক্লাস হিসেবে কাজ করে। এটির কিছু কোর ফাংশনালটি আছে: `parentNode`, `nextSibling`, `childNodes` ইত্যাদি (এরা getters)। এই ক্লাসেরও অবজেক্ট তৈরি হয়না। তবে কংক্রিট নোড ক্লাস সমূহ এটি থেকে ইনহেরিট হয়। যেমন: টেক্সট নোডের জন্য `Text`, এলিমেন্ট নোডের জন্য `Element` এবং অদ্ভুতুড়ে কমেন্ট নোডের জন্য `Comment`।
+- [Element](http://dom.spec.whatwg.org/#interface-element) -- এটি DOM এলিমেন্টের বেস ক্লাস। এলিমেন্ট সমূহ নেভিগেশনের জন্য `nextElementSibling`, `children` এবং সার্চিংয়ের জন্য `getElementsByTagName`, `querySelector` ইত্যাদি মেথড প্রভাইড করে। ব্রাউজার শুধুমাত্র HTML ছাড়াও XML এবং SVG ও সাপোর্ট করে। `Element` ক্লাস `SVGElement`, `XMLElement` এবং `HTMLElement` এর বেস ক্লাস হিসেবে কাজ করে।
+- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- এবং সকল HTML এলিমেন্টের বেস ক্লাস এটি, এর কিছু চাইল্ড ক্লাস আছে:
+    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- `<input>` এলিমেন্টের জন্য,
+    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) --`<body>` এলিমেন্টের জন্য,
+    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- `<a>` এলিমেন্টের জন্য,
+    - ...এইরকম, প্রতিটি ট্যাগের স্পেসিফিক নিজস্ব ক্লাস এবং কিছু স্পেসিফিক প্রপার্টি এবং মেথড আছে।
 
-So, the full set of properties and methods of a given node comes as the result of the inheritance.
+সুতরাং, প্রতিটি নোড তাদের প্যারেন্ট ক্লাস সমূহের এর সকল প্রপার্টি এবং মেথড সমূহও ইনহেরিট করে।
 
-For example, let's consider the DOM object for an `<input>` element. It belongs to [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) class.
+যেমন, DOM এর একটি `<input>` এলিমেন্ট আছে। যেটির ক্লাস হল [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement)।
 
-It gets properties and methods as a superposition of (listed in inheritance order):
+এটি তার প্যারেন্ট ক্লাস সমূহের এর সকল প্রপার্টি এবং মেথড সমূহও এর অন্তর্ভুক্ত হবে:
 
-- `HTMLInputElement` -- this class provides input-specific properties,
-- `HTMLElement` -- it provides common HTML element methods (and getters/setters),
-- `Element` -- provides generic element methods,
-- `Node` -- provides common DOM node properties,
-- `EventTarget` -- gives the support for events (to be covered),
-- ...and finally it inherits from `Object`, so "plain object" methods like `hasOwnProperty` are also available.
+- `HTMLInputElement` -- এটি ইনপুট-স্পেসিফিক প্রপার্টি প্রভাইড করে,
+- `HTMLElement` -- এটি HTML এলিমেন্টের কমন মেথড সমূহ প্রভাইড করে(getters/setters),
+- `Element` -- এটি জেনেরিক এলিমেন্ট মেথড সমূহ প্রভাইড করে,
+- `Node` -- এটি কমন DOM নোড মেথড সমূহ প্রভাইড করে,
+- `EventTarget` -- ইভেন্ট সমূহ প্রভাইড করে (এ সম্পর্কে পরবর্তীতে জানব),
+- ...এবং সর্বশেষে এরা `Object` হতে ইনহেরিট হয়, সুতরাং অবজেক্ট মেথড যেমন `hasOwnProperty` সাপোর্ট করে।
 
-To see the DOM node class name, we can recall that an object usually has the `constructor` property. It references the class constructor, and `constructor.name` is its name:
+অবজেক্ট এর `constructor` প্রপার্টি দ্বারা DOM নোডের ক্লাস নাম দেখতে পারি। `constructor.name` দ্বারা নাম দেখাবে:
 
 ```js run
 alert( document.body.constructor.name ); // HTMLBodyElement
 ```
 
-...Or we can just `toString` it:
+...অথবা `toString`:
 
 ```js run
 alert( document.body ); // [object HTMLBodyElement]
 ```
 
-We also can use `instanceof` to check the inheritance:
+আমরা `instanceof` ও ব্যবহার করতে পারি:
 
 ```js run
 alert( document.body instanceof HTMLBodyElement ); // true
@@ -62,38 +62,38 @@ alert( document.body instanceof Node ); // true
 alert( document.body instanceof EventTarget ); // true
 ```
 
-As we can see, DOM nodes are regular JavaScript objects. They use prototype-based classes for inheritance.
+আমরা দেখতে পাচ্ছি, DOM নোড সমূহ রেগুলার জাভাস্ক্রিপ্ট অবজেক্ট। এরা প্রোটোটাইপ বেসড ক্লাস ব্যবহার করে।
 
-That's also easy to see by outputting an element with `console.dir(elem)` in a browser. There in the console you can see `HTMLElement.prototype`, `Element.prototype` and so on.
+আমরা ব্রাউজারে `console.dir(elem)` এর সাহায্যে খুব সহজে এলিমেন্ট এর বিস্তারিত দেখি। কনসোলে আমরা `HTMLElement.prototype`, `Element.prototype` ইত্যাদির প্রটোটাইপ দেখব।
 
-```smart header="`console.dir(elem)` versus `console.log(elem)`"
-Most browsers support two commands in their developer tools: `console.log` and `console.dir`. They output their arguments to the console. For JavaScript objects these commands usually do the same.
+```smart header="`console.dir(elem)` বনাম `console.log(elem)`"
+বেশিরভাগ ব্রাউজার এই দুটি কমান্ড সাপোর্ট করে: `console.log` এবং `console.dir`। আমরা আর্গুমেন্টটির আউটপুট কনসোলে দেখব। জাভাস্ক্রিপ্ট অবজেক্টের জন্য দুটিই একই।
 
-But for DOM elements they are different:
+কিন্তু DOM এলিমেন্টের জন্য এটি আলাদা:
 
-- `console.log(elem)` shows the element DOM tree.
+- `console.log(elem)` DOM এলিমেন্টের ট্রি দেখাবে।
 - `console.dir(elem)` shows the element as a DOM object, good to explore its properties.
 
-Try it on `document.body`.
+`document.body` টি চেষ্টা করে দেখুন।
 ```
 
-````smart header="IDL in the spec"
-In the specification, DOM classes aren't described by using JavaScript, but a special [Interface description language](https://en.wikipedia.org/wiki/Interface_description_language) (IDL), that is usually easy to understand.
+````smart header="IDL স্পেসিফিকেশন"
+স্পেসিফিকেশনে জাভাস্ক্রিপ্ট এর মাধ্যমে DOM ক্লাস সমূহ আলোচনা করা হয়নি [Interface description language](https://en.wikipedia.org/wiki/Interface_description_language) (IDL), তবে এটি বুঝা সহজ।
 
-In IDL all properties are prepended with their types. For instance, `DOMString`, `boolean` and so on.
+IDL এ সকল প্রপার্টি তাদের টাইপ অনুযায়ী প্রিপেন্ডেড থাকে। যেমন, `DOMString`, `boolean` ইত্যাদি।
 
-Here's an excerpt from it, with comments:
+নিচে দেখানো হল:
 
 ```js
 // Define HTMLInputElement
 *!*
-// The colon ":" means that HTMLInputElement inherits from HTMLElement
+// কোলন ":" দ্বারা বুঝায় HTMLInputElement এর প্যারেন্ট HTMLElement
 */!*
 interface HTMLInputElement: HTMLElement {
-  // here go properties and methods of <input> elements
+  // এখানে <input> এলিমেন্টের প্রপার্টি এবং মেথড থাকে
 
 *!*
-  // "DOMString" means that the value of a property is a string
+  // "DOMString" দ্বারা বুঝায় প্রপার্টি সমূহ হল স্ট্রিং
 */!*
   attribute DOMString accept;
   attribute DOMString alt;
@@ -101,12 +101,12 @@ interface HTMLInputElement: HTMLElement {
   attribute DOMString value;
 
 *!*
-  // boolean value property (true/false)
+  // প্রপার্টি সমূহ হল স্ট্রিং বুলিয়ান (true/false)
   attribute boolean autofocus;
 */!*
   ...
 *!*
-  // now the method: "void" means that the method returns no value
+  // এখানে: "void" মেথড দ্বারা বুঝানো হচ্ছে এটি কোন ভ্যালু রিটার্ন করবে না
 */!*
   void select();
   ...
@@ -114,80 +114,80 @@ interface HTMLInputElement: HTMLElement {
 ```
 ````
 
-## The "nodeType" property
+## "nodeType" প্রপার্টি
 
-The `nodeType` property provides one more, "old-fashioned" way to get the "type" of a DOM node.
+পূর্বে আমরা `nodeType` প্রপার্টি এর সাহায্যে DOM নোড যাচাই করতে পারতাম।
 
-It has a numeric value:
-- `elem.nodeType == 1` for element nodes,
-- `elem.nodeType == 3` for text nodes,
-- `elem.nodeType == 9` for the document object,
-- there are few other values in [the specification](https://dom.spec.whatwg.org/#node).
+এটির একটি মান আছে:
+- `elem.nodeType == 1` এলিমেন্ট নোড,
+- `elem.nodeType == 3` টেক্সট নোড,
+- `elem.nodeType == 9` ডকুমেন্ট অবজেক্ট,
+- আরো বিস্তারিত জানতে দেখুন [the specification](https://dom.spec.whatwg.org/#node)।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run
 <body>
-  <script>  
+  <script>
   let elem = document.body;
 
-  // let's examine what it is?
+  // আসুন এটি কি ধরণের নোড যাচাই করি?
   alert(elem.nodeType); // 1 => element
 
-  // and the first child is...
+  // এবং এটি হল...
   alert(elem.firstChild.nodeType); // 3 => text
 
-  // for the document object, the type is 9
+  // ডকুমেন্ট অবজেক্ট এর মান
   alert( document.nodeType ); // 9
   </script>
 </body>
 ```
 
-In modern scripts, we can use `instanceof` and other class-based tests to see the node type, but sometimes `nodeType` may be simpler. We can only read `nodeType`, not change it.
+মডার্ন জাভাস্ক্রিপ্টে, আমরা `instanceof` এর সাহায্যে নোড টাইপ যাচাই করতে পারি, কিন্তু অনেক সময় `nodeType` ও কাজে আসে। `nodeType` হল রিড-অনলি, এটি পরিবর্তনযোগ্য নয়।
 
-## Tag: nodeName and tagName
+## ট্যাগ: nodeName এবং tagName
 
-Given a DOM node, we can read its tag name from `nodeName` or `tagName` properties:
+DOM নোড হতে, আমরা ট্যাগ নামটি `nodeName` বা `tagName` প্রপার্টির সাহায্যে পড়তে পারি:
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 alert( document.body.nodeName ); // BODY
 alert( document.body.tagName ); // BODY
 ```
 
-Is there any difference between `tagName` and `nodeName`?
+`tagName` এবং `nodeName` এর মাঝে কি কোন পার্থক্য আছে?
 
-Sure, the difference is reflected in their names, but is indeed a bit subtle.
+হ্যাঁ, প্রপার্টিগুলোর পার্থক্য নামগুলোতেই প্রতিফলিত হয়, তবে এছাড়াও কিছুটা সূক্ষ্ম পার্থক্য আছে।
 
-- The `tagName` property exists only for `Element` nodes.
-- The `nodeName` is defined for any `Node`:
-    - for elements it means the same as `tagName`.
-    - for other node types (text, comment, etc.) it has a string with the node type.
+- `tagName` প্রপার্টি শুধুমাত্র `Element` নোড এ থাকে।
+- `nodeName` প্রপার্টি যে কোন `Node` এর জন্য:
+    - এলিমেন্টের জন্য `tagName` একই।
+    - অন্যান্য নোড টাইপের জন্য যেমন (text, comment, ইত্যাদি)।
 
-In other words, `tagName` is only supported by element nodes (as it originates from `Element` class), while `nodeName` can say something about other node types.
+অন্যভাবে বলা যায়, `tagName` শুধুমাত্র এলিমেন্ট নোডের জন্য কাজ করে (অর্থাৎ `Element` ক্লাসের জন্য), অন্যদিকে `nodeName` এ যেকোন নোড টাইপের নাম পেতে পারি।
 
-For instance, let's compare `tagName` and `nodeName` for the `document` and a comment node:
+উদাহরণস্বরূপ, চলুন `document` এবং *comment* node এর জন্য `tagName` এবং `nodeName` এর পার্থক্য দেখি:
 
 
 ```html run
 <body><!-- comment -->
 
   <script>
-    // for comment
-    alert( document.body.firstChild.tagName ); // undefined (not an element)
+    // কমেন্টের জন্য
+    alert( document.body.firstChild.tagName ); // undefined (যেহেতু এটি এলিমেন্ট না)
     alert( document.body.firstChild.nodeName ); // #comment
 
-    // for document
-    alert( document.tagName ); // undefined (not an element)
+    // ডকুমেন্টের জন্য
+    alert( document.tagName ); // undefined (যেহেতু এটি এলিমেন্ট না)
     alert( document.nodeName ); // #document
   </script>
 </body>
 ```
 
-If we only deal with elements, then we can use both `tagName` and `nodeName` - there's no difference.
+যদি আমরা এলিমেন্ট নিয়ে কাজ করি, তাহলে `tagName` এবং `nodeName` উভয়ই ব্যবহার করতে পারব - তাদের মাঝে কোন পার্থক্য নাই।
 
-```smart header="The tag name is always uppercase except in XML mode"
+```smart header="XML মোড ব্যাতীত ট্যাগ নাম সর্বদা বড় হাতের হয়"
 The browser has two modes of processing documents: HTML and XML. Usually the HTML-mode is used for webpages. XML-mode is enabled when the browser receives an XML-document with the header: `Content-Type: application/xml+xhtml`.
 
 In HTML mode `tagName/nodeName` is always uppercased: it's `BODY` either for `<body>` or `<BoDy>`.
@@ -196,13 +196,13 @@ In XML mode the case is kept "as is". Nowadays XML mode is rarely used.
 ```
 
 
-## innerHTML: the contents
+## innerHTML: কন্টেন্ট
 
-The [innerHTML](https://w3c.github.io/DOM-Parsing/#widl-Element-innerHTML) property allows to get the HTML inside the element as a string.
+[innerHTML](https://w3c.github.io/DOM-Parsing/#widl-Element-innerHTML) প্রপার্টিতে এলিমেন্টের কন্টেন্ট স্ট্রিং হিসেবে নেই।
 
-We can also modify it. So it's one of the most powerful ways to change the page.
+আমরা এর সাহায্যে কন্টেন্ট পরিবর্তনও করতে পারি। সুতরাং DOM এ পরিবর্তনের অন্যতম উপায় হল এটি।
 
-The example shows the contents of `document.body` and then replaces it completely:
+নিচের উদাহরণে `document.body` এর কন্টেন্ট দেখি এবং একে পরিবর্তন করি:
 
 ```html run
 <body>
@@ -210,44 +210,44 @@ The example shows the contents of `document.body` and then replaces it completel
   <div>A div</div>
 
   <script>
-    alert( document.body.innerHTML ); // read the current contents
-    document.body.innerHTML = 'The new BODY!'; // replace it
+    alert( document.body.innerHTML ); // বর্তমান কন্টেন্ট দেখি
+    document.body.innerHTML = 'The new BODY!'; // একে পরিবর্তন করি
   </script>
 
 </body>
 ```
 
-We can try to insert invalid HTML, the browser will fix our errors:
+আমরা ভুল HTML এলিমেন্ট সংযুক্ত করতে চাইলে ব্রাউজার স্বয়ংক্রিয়ভাবে সংশোধন করে দেয়:
 
 ```html run
 <body>
 
   <script>
-    document.body.innerHTML = '<b>test'; // forgot to close the tag
-    alert( document.body.innerHTML ); // <b>test</b> (fixed)
+    document.body.innerHTML = '<b>test'; // ক্লোজিং ট্যাগ দেয়া হয়নি
+    alert( document.body.innerHTML ); // <b>test</b> (স্বয়ংক্রিয়ভাবে সংশোধন হয়ে গেছে)
   </script>
 
 </body>
 ```
 
-```smart header="Scripts don't execute"
-If `innerHTML` inserts a `<script>` tag into the document -- it becomes a part of HTML, but doesn't execute.
+```smart header="স্ক্রিপ্টস এক্সিকিউট হয় না"
+যদি ডকুমেন্টে `innerHTML` এর সাহায্যে `<script>` সংযুক্ত করি -- এটি এক্সিকিউট হবে নাহ, HTML এর একটি অংশ হিসেবে থাকবে।
 ```
 
-### Beware: "innerHTML+=" does a full overwrite
+### সতর্কীকরণ: "innerHTML+=" দ্বারা সম্পূর্ন প্রতিস্থাপন হয়
 
-We can append HTML to an element by using `elem.innerHTML+="more html"`.
+আমরা এভাবে এলিমেন্টে নতুন কন্টেন্ট সংযুক্ত করতে পারি `elem.innerHTML+="more html"`।
 
-Like this:
+যেমন:
 
 ```js
 chatDiv.innerHTML += "<div>Hello<img src='smile.gif'/> !</div>";
 chatDiv.innerHTML += "How goes?";
 ```
 
-But we should be very careful about doing it, because what's going on is *not* an addition, but a full overwrite.
+কিন্তু এটি করার সময় আমাদের সতর্ক থাকা উচিত, কেননা এটি দ্বারা নতুন ডাটা অ্যাপেন্ড হয় না, সম্পূর্ণ এলিমেন্ট প্রতিস্থাপিত হয়।
 
-Technically, these two lines do the same:
+এখানে, এই দুটি লাইন একই কাজ করে:
 
 ```js
 elem.innerHTML += "...";
@@ -257,24 +257,24 @@ elem.innerHTML = elem.innerHTML + "..."
 */!*
 ```
 
-In other words, `innerHTML+=` does this:
+`innerHTML+=` নিম্নোক্ত পদ্ধতিতে কাজ করে:
 
-1. The old contents is removed.
-2. The new `innerHTML` is written instead (a concatenation of the old and the new one).
+1. পূর্বের কন্টেন্ট রিমুভ করবে।
+2. `innerHTML` পূর্বের কন্টেন্ট এবং নতুন কন্টেন্ট সংযুক্ত হয়ে DOM এ প্রতিস্থাপিত হবে ।
 
-**As the content is "zeroed-out" and rewritten from the scratch, all images and other resources will be reloaded**.
+**যেহেতু সম্পূর্ন কন্টেন্টটি ্মুছে আবার নতুন করে লিখা হয়, সমস্ত ইমেজ এবং অন্যান্য রিসোর্স পুনরায় লোড হবে**.
 
-In the `chatDiv` example above the line `chatDiv.innerHTML+="How goes?"` re-creates the HTML content and reloads `smile.gif` (hope it's cached). If `chatDiv` has a lot of other text and images, then the reload becomes clearly visible.
+উপরের `chatDiv` উদাহরণে এই লাইনে `chatDiv.innerHTML+="How goes?"` পুনরায় HTML কন্টেন্ট এবং `smile.gif` রিলোড হবে(এটি ব্রাউজারে cached থাকতে পারে)। যদি `chatDiv` এলিমেন্টে উল্লেখ পরিমাণ পরিমাণ টেক্সট এবং ইমেজ থাকে রিলোড হওয়াটি আমাদের কাছে দৃশ্যমান হবে।
 
-There are other side-effects as well. For instance, if the existing text was selected with the mouse, then most browsers will remove the selection upon rewriting `innerHTML`. And if there was an `<input>` with a text entered by the visitor, then the text will be removed. And so on.
+এটির আরো একটি সাইড ইফেক্ট আছে। For instance, if the existing text was selected with the mouse, then most browsers will remove the selection upon rewriting `innerHTML`. And if there was an `<input>` with a text entered by the visitor, then the text will be removed. And so on.
 
-Luckily, there are other ways to add HTML besides `innerHTML`, and we'll study them soon.
+তবে, আমরা `innerHTML` ছাড়াও অন্য উপায়ে কন্টেন্ট অ্যাড করতে পারি, আমরা সামনে এ ব্যাপারে জানব।
 
-## outerHTML: full HTML of the element
+## outerHTML: এলিমেন্টের সম্পূর্ন HTML
 
-The `outerHTML` property contains the full HTML of the element. That's like `innerHTML` plus the element itself.
+`outerHTML` প্রপার্টি এলিমেন্টের সম্পূর্ন কন্টেন্ট সংরক্ষণ করে। অর্থাৎ `innerHTML` এবং এলিমেন্টের নিজস্ব কন্টেন্ট।
 
-Here's an example:
+এখানে একটি উদাহরণ দেখুন:
 
 ```html run
 <div id="elem">Hello <b>World</b></div>
@@ -284,11 +284,11 @@ Here's an example:
 </script>
 ```
 
-**Beware: unlike `innerHTML`, writing to `outerHTML` does not change the element. Instead, it replaces it in the DOM.**
+**সতর্কীকরণ: এটি `innerHTML` এর মত না, `outerHTML` এ কিছু লিখলে এটি এলিমেন্টটি পরিবর্তন করে না। ্তার পরিবর্তে, DOM এ প্রতিস্থাপিত হয়।**
 
-Yeah, sounds strange, and strange it is, that's why we make a separate note about it here. Take a look.
+হ্যাঁ, শুনতে অদ্ভুত লাগলেও, এটিই ঘটে, এজন্য আমাদের এ ব্যাপারটি আলাদা ভাবে জেনে রাখা উচিত।
 
-Consider the example:
+উদাহরণস্বরূপ:
 
 ```html run
 <div>Hello, world!</div>
@@ -297,39 +297,39 @@ Consider the example:
   let div = document.querySelector('div');
 
 *!*
-  // replace div.outerHTML with <p>...</p>
+  // div.outerHTML এর সাহায্যে <p>...</p> প্রতিস্থাপন
 */!*
   div.outerHTML = '<p>A new element</p>'; // (*)
 
 *!*
-  // Wow! 'div' is still the same!
+  // Wow! 'div' এখনো আগের মত!
 */!*
   alert(div.outerHTML); // <div>Hello, world!</div> (**)
 </script>
 ```
 
-Looks really odd, right?
+অদ্ভুত, তাই না?
 
-In the line `(*)` we replaced `div` with `<p>A new element</p>`. In the outer document (the DOM) we can see the new content instead of the `<div>`. But, as we can see in line `(**)`, the value of the old `div` variable hasn't changed!
+`(*)` এই লাইনে আমরা `div` কে `<p>A new element</p>` দ্বারা প্রতিস্থাপন করি। আউটার ডকুমেন্টে আমরা `<div>` এর বদলে নতুন কন্টেন্ট দেখি। কিন্তু, `(**)` এই লাইনে আমরা দেখছি, পুরাতন `div` ভ্যারিয়েবলের মান পরিবর্তন হয়নি।
 
-The `outerHTML` assignment does not modify the DOM element (the object referenced by, in this case, the variable 'div'), but removes it from the DOM and inserts the new HTML in its place.
+`outerHTML` এ অ্যাসাইমেন্টে DOM এলিমেন্ট মোডিফাই হয়না (এইখানে রেফারেন্স করা অবজেক্টটি হল 'div'), কিন্তু এটিকে DOM হতে রিমুভ করে নতুন HTML এতে প্লেস হয়।
 
-So what happened in `div.outerHTML=...` is:
-- `div` was removed from the document.
-- Another piece of HTML `<p>A new element</p>` was inserted in its place.
+সুতরাং চলুন দেখি `div.outerHTML=...` এর ক্ষেত্রে কি হয়:
+- ডকুমেন্ট হতে `div` টি রিমুভ হবে।
+- তার স্থলে আরেকটি নতুন HTML `<p>A new element</p>` প্রতিস্থাপিত হবে।
 - `div` still has its old value. The new HTML wasn't saved to any variable.
 
-It's so easy to make an error here: modify `div.outerHTML` and then continue to work with `div` as if it had the new content in it. But it doesn't. Such thing is correct for `innerHTML`, but not for `outerHTML`.
+এই জন্য আমরা সহজে ভুল করতে পারি: `div.outerHTML` কে পরিবর্তন করব এবং পরবর্তীতে `div` নিয়ে কাজ চালিয়ে যাব, এমন হবে নাহ। কেননা আমরা এইভাবে `innerHTML` এর সাহায্যে কাজ করতে পারব, `outerHTML` দ্বারা সম্ভব নয়।
 
-We can write to `elem.outerHTML`, but should keep in mind that it doesn't change the element we're writing to ('elem'). It puts the new HTML in its place instead. We can get references to the new elements by querying the DOM.
+আমরা কন্টেন্ট `elem.outerHTML` এর সাহায্যেও লিখতে পারি, তবে আমাদের সর্বদা মাথায় রাখতে এটি আমাদের ('elem') কে চ্যাঞ্জ করছে না। তার পরিবর্তে এটি নতুন HTML সংযুক্ত করে। আমরা DOM সার্চিং মেথড সমূহ দ্বারা নতুন এলিমেন্টকে রেফারেন্স করতে পারি।
 
 ## nodeValue/data: text node content
 
-The `innerHTML` property is only valid for element nodes.
+`innerHTML` প্রপার্টি শুধুমাত্র এলিমেন্ট নোডের সাথে কাজ করে।
 
-Other node types, such as text nodes, have their counterpart: `nodeValue` and `data` properties. These two are almost the same for practical use, there are only minor specification differences. So we'll use `data`, because it's shorter.
+অন্যান্য নোড টাইপ, যেমন টেক্সট নোড, এরও অনুরূপ প্রপার্টি আছে যেমন: `nodeValue` এবং `data`। প্রাক্টিক্যাল ইউজ কেসে দুইটির কাজ একই, তবে কিছু সামান্য পার্থক্য আছে। আমরা এখানে `data` প্রপার্টি ব্যবহার করব, কেননা এটি সংক্ষিপ্তরূপ।
 
-An example of reading the content of a text node and a comment:
+কমেন্ট এবং টেক্সট নোডের কন্টেন্ট পড়ার একটি উদাহরণ দেখুন:
 
 ```html run height="50"
 <body>
@@ -349,9 +349,9 @@ An example of reading the content of a text node and a comment:
 </body>
 ```
 
-For text nodes we can imagine a reason to read or modify them, but why comments?
+আমাদের টেক্সট নোডের পরিবর্তন করার দরকার হতে পারে, তবে কমেন্ট নোডের কন্টেন্ট কেন পরিবর্তন করা লাগতে পারে?
 
-Sometimes developers embed information or template instructions into HTML in them, like this:
+অনেক সময় ডেভলাপাররা টেমপ্লেট ইন্সট্রাকশনের জন্য কমেন্টও এমবেড করে, যেমন:
 
 ```html
 <!-- if isAdmin -->
@@ -359,13 +359,13 @@ Sometimes developers embed information or template instructions into HTML in the
 <!-- /if -->
 ```
 
-...Then JavaScript can read it from `data` property and process embedded instructions.
+...তারপরে জাভাস্ক্রিপ্ট এটি `data` প্রপার্টির সাহায্যে পড়তে পারে এবং এম্বেড থাকা এর নিয়ম হতে প্রসেস করতে পারে।
 
-## textContent: pure text
+## textContent: শুধুই টেক্সট
 
-The `textContent` provides access to the *text* inside the element: only text, minus all `<tags>`.
+`textContent` এলিমেন্টে থাকা শুধু টেক্সট রিটার্ন করে: শুধুই টেক্সট, সকল `<tags>` বাদ দেয়।
 
-For instance:
+উদাহরনস্বরূপ:
 
 ```html run
 <div id="news">
@@ -379,18 +379,18 @@ For instance:
 </script>
 ```
 
-As we can see, only text is returned, as if all `<tags>` were cut out, but the text in them remained.
+এখানে আমরা দেখছি শুধু টেক্সট রিটার্ন হচ্ছে, সকল `<tags>` ফিল্টার হয়ে শুধুমাত্র টেক্সট থাকবে।
 
-In practice, reading such text is rarely needed.
+সাধারণত, আমাদের এই ধরণের টেক্সট পড়ার দরকার হয় না।
 
-**Writing to `textContent` is much more useful, because it allows to write text the "safe way".**
+**তবে `textContent` এর সাহায্যে কোন কিছু লিখা অনেক উপকারী, এর সাহায্যে আমরা "নিরাপদ উপায়ে" কন্টেন্ট DOM এ সংযুক্ত করতে পারি।**
 
-Let's say we have an arbitrary string, for instance entered by a user, and want to show it.
+ধরুন আমাদের একটি স্বতন্ত্র স্ট্রিং আছে, যা ইউজারের ইনপুট দেয়, এবং এটি দেখাতে চাই।
 
-- With `innerHTML` we'll have it inserted "as HTML", with all HTML tags.
-- With `textContent` we'll have it inserted "as text", all symbols are treated literally.
+- `innerHTML` এর মাধ্যমে আমরা "HTML" হিসেবে সংযুক্ত করতে পারি, HTML ট্যাগ সহ।
+- `textContent` এর মাধ্যমে আমরা "text" হিসেবে সংযুক্ত করতে পারি, সকল সিম্বল টেক্সট হিসেবে কাউন্ট হবে।
 
-Compare the two:
+এখানে দেখুন:
 
 ```html run
 <div id="elem1"></div>
@@ -404,32 +404,32 @@ Compare the two:
 </script>
 ```
 
-1. The first `<div>` gets the name "as HTML": all tags become tags, so we see the bold name.
-2. The second `<div>` gets the name "as text", so we literally see `<b>Winnie-the-Pooh!</b>`.
+1. প্রথমটিতে `<div>` নামটি "HTML" আকারে দেখি: সকল ট্যাগ রেন্ডার হয়, যার জন্য আমরা নামটি বোল্ড দেখি।
+2. দ্বিতীয়টিতে `<div>` নামটি "text" আকারে দেখি, এজন্য আমরা এটি এভাবে দেখি `<b>Winnie-the-Pooh!</b>`।
 
-In most cases, we expect the text from a user, and want to treat it as text. We don't want unexpected HTML in our site. An assignment to `textContent` does exactly that.
+বেশিরভাগ ক্ষেত্রে, আমরা ইউজার থেকে ইনপুট হিসেবে শুধু টেক্সট আশ করি। আমরা কোন ধরণের অপ্রয়োজনীয় HTML দেখতে চায় না। এই ক্ষেত্রে `textContent` আমাদের কাজে আসবে।
 
-## The "hidden" property
+## "hidden" প্রপার্টি
 
-The "hidden" attribute and the DOM property specifies whether the element is visible or not.
+"hidden" অ্যাট্রিবিউট দ্বারা DOM এ কোন এলিমেন্ট প্রদর্শিত হবে কি হবে না তা কন্ট্রোল করতে পারি।
 
-We can use it in HTML or assign it using JavaScript, like this:
+আমরা এটি HTML বা JavaScript  এর সাহায্যে কন্ট্রোল করতে পারি:
 
 ```html run height="80"
-<div>Both divs below are hidden</div>
+<div>উভয়ই এলিমেন্ট হাইড থাকবে</div>
 
-<div hidden>With the attribute "hidden"</div>
+<div hidden>অ্যাট্রিবিউটের মাধ্যমে "hidden"</div>
 
-<div id="elem">JavaScript assigned the property "hidden"</div>
+<div id="elem">JavaScript  এর সাহায্যে "hidden"</div>
 
 <script>
   elem.hidden = true;
 </script>
 ```
 
-Technically, `hidden` works the same as `style="display:none"`. But it's shorter to write.
+আসলে, `hidden` প্রপার্টি `style="display:none"` এর মত কাজ করে। কিন্তু এটি সংক্ষেপে লিখা যায়।
 
-Here's a blinking element:
+এখানে একটি ব্লিংক এলিমেন্ট দেখুন:
 
 
 ```html run height=50
@@ -440,16 +440,16 @@ Here's a blinking element:
 </script>
 ```
 
-## More properties
+## আরো প্রপার্টি
 
-DOM elements also have additional properties, in particular those that depend on the class:
+DOM এলিমেন্টের আরো কিছু প্রপার্টি আছে, এবং আলাদা আলাদা ক্লাস এর আলাদা আলাদা বৈশিষ্ট্য আছে:
 
-- `value` -- the value for `<input>`, `<select>` and `<textarea>` (`HTMLInputElement`, `HTMLSelectElement`...).
-- `href` -- the "href" for `<a href="...">` (`HTMLAnchorElement`).
-- `id` -- the value of "id" attribute, for all elements (`HTMLElement`).
-- ...and much more...
+- `value` --  `<input>`, `<select>` এবং `<textarea>` এর ভ্যালু (`HTMLInputElement`, `HTMLSelectElement`...)।
+- `href` -- `<a href="...">` এর "href"  (`HTMLAnchorElement`)।
+- `id` -- "id" অ্যাট্রিবিউট, সকল এলিমেন্টের জন্য (`HTMLElement`)।
+- ...এবং আরো অনেক...
 
-For instance:
+যেমন:
 
 ```html run height="80"
 <input type="text" id="elem" value="value">
@@ -461,39 +461,39 @@ For instance:
 </script>
 ```
 
-Most standard HTML attributes have the corresponding DOM property, and we can access it like that.
+বেশিরভাগ HTML অ্যাট্রিবিউট সম্পর্কিত DOM প্রপার্টি আছে, এবং আমরা এদের এক্সেস করতে পারি।
 
-If we want to know the full list of supported properties for a given class, we can find them in the specification. For instance, `HTMLInputElement` is documented at <https://html.spec.whatwg.org/#htmlinputelement>.
+যদি আমরা কোন নির্দিষ্ট ক্লাসের সাপোর্টেড প্রপার্টি সমূহ পেতে চাই, তাহলে আমরা তাদের স্পেসিফিকশন দেখতে পারি। যেমন `HTMLInputElement` সম্পর্কে জানতে <https://html.spec.whatwg.org/#htmlinputelement>।
 
-Or if we'd like to get them fast or are interested in a concrete browser specification -- we can always output the element using `console.dir(elem)` and read the properties. Or explore "DOM properties" in the Elements tab of the browser developer tools.
+অথবা যদি আমরা আরো দ্রুত এবং বিশদ জানতে চাই ব্রাউজারের ডেভ টুলসের সাহায্য নিতে পারি -- `console.dir(elem)` এর মাধ্যমে আমরা কোন এলিমেন্টের প্রপার্টি এবং মেথড সমূহ বিস্তারিত জানতে পারি। অথবা ব্রাউজার ডেভ টুলসের এলিমেন্ট ট্যাব এ "DOM properties" দেখতে পারি।
 
-## Summary
+## সারাংশ
 
-Each DOM node belongs to a certain class. The classes form a hierarchy. The full set of properties and methods come as the result of inheritance.
+প্রতিটি DOM নোড একটি নির্দিষ্ট ক্লাসের অন্তর্গত। ক্লাসগুলো একটি হায়ার্য়াকি অনুযায়ী থাকে। ফলে সকল প্যারেন্ট ক্লাসের প্রপার্টি এবং মেথড সমূহও ইনহেরিট হয়।
 
-Main DOM node properties are:
+প্রধান DOM নোড প্রপার্টি হল:
 
 `nodeType`
-: We can use it to see if a node is a text or an element node. It has a numeric value: `1` for elements,`3` for text nodes, and a few others for other node types. Read-only.
+: এর সাহায্যে আমরা নোড যাচাই করতে পারি। এটির নিউমেরিক ভ্যালু আছে: `1` দ্বারা বুঝায় এলিমেন্ট,`3` দ্বারা বুঝায় টেক্সট নোড, এবং অন্যান্য নোড টাইপের জন্য আলাদা আলাদা ভ্যালু। এটি Read-only।
 
 `nodeName/tagName`
-: For elements, tag name (uppercased unless XML-mode). For non-element nodes `nodeName` describes what it is. Read-only.
+: এলিমেন্ট বা ট্যাগ নাম (XML-mode) ব্যাতীত বড় হাতের। এলিমেন্ট ব্যতীত অন্যান্য নোডের নামের জন্য `nodeName` প্রপার্টি ব্যবহার হয়। এটিও Read-only।
 
 `innerHTML`
-: The HTML content of the element. Can be modified.
+: এলিমেন্টের HTML কন্টেন্ট। এটি পরিবর্তনযোগ্য।
 
 `outerHTML`
-: The full HTML of the element. A write operation into `elem.outerHTML` does not touch `elem` itself. Instead it gets replaced with the new HTML in the outer context.
+: সম্পুর্ন এলিমেন্ট সহ কন্টেন্ট। `elem.outerHTML` দ্বারা কিছু সংযোজন করলে তা `elem` কে প্রতিস্থাপিত করে না। তার পরিবর্তে এটি নতুন কন্টেন্ট সংযোজন করে এবং পুরাতন টি রিমুভ হয়।
 
 `nodeValue/data`
-: The content of a non-element node (text, comment). These two are almost the same, usually we use `data`. Can be modified.
+: নন-এলিমেন্ট নোডের কন্টেন্ট এর জন্য (text, comment)। দুটিই প্রায় একই, তবে বেশিরভাগ ক্ষেত্রে `data` ব্যবহার করি। কন্টেন্ট পরিবর্তনযোগ্য।
 
 `textContent`
-: The text inside the element: HTML minus all `<tags>`. Writing into it puts the text inside the element, with all special characters and tags treated exactly as text. Can safely insert user-generated text and protect from unwanted HTML insertions.
+: এলিমেন্টের মধ্যের টেক্সট: সকল ধরণের HTML `<tags>` ব্যাতীত। কন্টেন্ট সংযোজনের সময় প্লেন টেক্সট হিসেবে সংযুক্ত হয়, যার ফলে স্পেশাল ক্যারাক্টার বা ট্যাগ সমূহ টেক্সট আকারে দেখাবে। ইউজার ইনপুট কন্টেন্ট এস্কেপিংয়ে এটি কার্যকর।
 
 `hidden`
-: When set to `true`, does the same as CSS `display:none`.
+: যদি `true` হয় তাহলে CSS `display:none` এর মত কাজ করবে।
 
-DOM nodes also have other properties depending on their class. For instance, `<input>` elements (`HTMLInputElement`) support `value`, `type`, while `<a>` elements (`HTMLAnchorElement`) support `href` etc. Most standard HTML attributes have a corresponding DOM property.
+DOM নোডের বিভিন্ন ক্লাস অনুযায়ী বিভিন্ন প্রপার্টি আছে, যেমন `<input>` (`HTMLInputElement`) এলিমেন্টের `value`, `type`, `<a>` (`HTMLAnchorElement`) এলিমেন্টের `href` ইত্যাদি। বেশিরভাগ HTML অ্যাট্রিবিউট সম্পর্কিত বিভিন্ন DOM প্রপার্টি আছে।
 
-However, HTML attributes and DOM properties are not always the same, as we'll see in the next chapter.
+যাইহোক, HTML অ্যাট্রিবিউট এবং DOM প্রপার্টি সবসময় এক হয় না, বিস্তারিত আমরা পরবর্তী অধ্যায়ে দেখব।

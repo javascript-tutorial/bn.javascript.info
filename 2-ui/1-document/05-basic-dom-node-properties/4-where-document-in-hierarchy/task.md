@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Where's the "document" in the hierarchy?
+# "document" এর হায়ার্য়াকি
 
-Which class does the `document` belong to?
+`document` কোন ক্লাসের অন্তর্গত?
 
-What's its place in the DOM hierarchy?
+DOM হায়ার্য়াকি তে এর অবস্থান কি?
 
-Does it inherit from `Node` or `Element`, or maybe `HTMLElement`?
+এটি কি `Node` বা `Element`, অথবা `HTMLElement` কে ইনহেরিট করে?

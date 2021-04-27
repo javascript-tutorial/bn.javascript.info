@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What's in the nodeType?
+# এটি কি ধরণের নোডটাইপ?
 
-What does the script show?
+স্ক্রিপ্টটি কি দেখাবে?
 
 ```html
 <html>
