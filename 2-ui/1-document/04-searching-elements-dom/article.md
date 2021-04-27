@@ -1,14 +1,14 @@
 # Searching: getElement*, querySelector*
 
-DOM navigation properties are great when elements are close to each other. What if they are not? How to get an arbitrary element of the page?
+DOM নেভিগেশনসমূহ একই সিব্লিং বা নিকট এলিমেন্ট সমূহের জন্য অনেক কাজের। কিন্তু যদি এভাবে না থাকে? কিভাবে আমরা একটি স্বতন্ত্র এলিমেন্ট পেতে পারি?
 
-There are additional searching methods for that.
+এজন্য আমাদের কিছু সার্চিং মেথড আছে।
 
-## document.getElementById or just id
+## document.getElementById বা শুধু id
 
-If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`, no matter where it is.
+যদি এলিমেন্টে শুধু `id` অ্যাট্রিবিউট থাকে, তাহলে আমরা এলিমেন্টটি এভাবে `document.getElementById(id)` মেথডের সাহায্যে খুঁজে পেতে পারি, এটি DOM এর কোন অবস্থানে আছে তা মূখ্য নয়।
 
-For instance:
+যেমন:
 
 ```html run
 <div id="elem">
@@ -16,17 +16,17 @@ For instance:
 </div>
 
 <script>
-  // get the element
+  // এলিমেন্টটি খোঁজা
 *!*
   let elem = document.getElementById('elem');
 */!*
 
-  // make its background red
+  // ব্রাকগ্রাউন্ড লাল সেট করা
   elem.style.background = 'red';
 </script>
 ```
 
-Also, there's a global variable named by `id` that references the element:
+এছাড়াও, গ্লোভাল ভ্যারিয়েবল হিসেবে শুধু `id` এর নাম দ্বারাও এলিমেন্টকে রেফারেন্স করতে পারি:
 
 ```html run
 <div id="*!*elem*/!*">
@@ -34,51 +34,51 @@ Also, there's a global variable named by `id` that references the element:
 </div>
 
 <script>
-  // elem is a reference to DOM-element with id="elem"
+  // elem দ্বারা DOM-elemnet এর id="elem" কে রেফারেন্স করা হয়
   elem.style.background = 'red';
 
-  // id="elem-content" has a hyphen inside, so it can't be a variable name
-  // ...but we can access it using square brackets: window['elem-content']
+  // id="elem-content" এর মাঝে হাইফেন আছে, এটি ভেরিয়েবল নাম হতে পারে না
+  // ...কিন্তু আমরা স্কয়ার ব্রাকেটের সাহায্যে একে অ্যাক্সেস করতে পারি: window['elem-content']
 </script>
 ```
 
-...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
+...এটি কাজের নয়, যদি আমরা একই নামের একটি জাভাস্ক্রিপ্ট ভ্যারিয়েবল ডিক্লেয়ার করি, এটি প্রিসিডেন্স অনুযায়ী কাজ করবে:
 
 ```html run untrusted height=0
 <div id="elem"></div>
 
 <script>
-  let elem = 5; // now elem is 5, not a reference to <div id="elem">
+  let elem = 5; // এখানে elem হল 5, এটি দ্বারা একে রেফারেন্স করা হবে না <div id="elem">
 
   alert(elem); // 5
 </script>
 ```
 
-```warn header="Please don't use id-named global variables to access elements"
-This behavior is described [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), so it's kind of standard. But it is supported mainly for compatibility.
+```warn header="দয়া করে এলিমেন্ট এক্সেস করতে id কে গ্লোবাল ভ্যারিয়েবল হিসেবে ব্যবহার করবেন না"
+আরো বিস্তারিত জানতে [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), সুতরাং এটি স্ট্যান্ডার্ড। কিন্তু এটি *compatibility* সমর্থনের জন্য।
 
-The browser tries to help us by mixing namespaces of JS and DOM. That's fine for simple scripts, inlined into HTML, but generally isn't a good thing. There may be naming conflicts. Also, when one reads JS code and doesn't have HTML in view, it's not obvious where the variable comes from.
+ব্রাউজার JS এবং DOM এর ভ্যারিয়েবল সমূহকে মিক্সিং করে আমাদের সহায়তা করে। এটি সাধারণ স্ক্রিপ্ট, ইনলাইন HTML এর জন্য ভালো হতে পারে, কিন্তু আসলেই এটি তেমন কাজের নয়। এখানে ভ্যারিয়েবলের নামের কনফ্লিক্ট হতে পারে। এছাড়াও যখন কেউ জাভাস্ক্রিপ্ট কোড পড়বে এবং ভিউতে HTML থাকবে না, ভ্যারিয়েবলটি কোথা থেকে এসেছে বোধগম্য হবে না।
 
-Here in the tutorial we use `id` to directly reference an element for brevity, when it's obvious where the element comes from.
+এখানে আমরা `id` দ্বারা সরাসরি এলিমেন্টকে রেফারেন্স করব সংক্ষিপ্তকরনের জন্য, এবং এলিমেন্টটি আমাদের কাছে সুস্পষ্ট।
 
-In real life `document.getElementById` is the preferred method.
+তবে বাস্তবিক ক্ষেত্রে `document.getElementById` ব্যবহার করা উচিত।
 ```
 
-```smart header="The `id` must be unique"
-The `id` must be unique. There can be only one element in the document with the given `id`.
+```smart header="`id` অবশ্যই স্বতন্ত্র হতে হবে"
+`id` অবশ্যই স্বতন্ত্র হতে হবে। ডকুমেন্টে `id` দ্বারা শুধুমাত্র একটি এলিমেন্টকে নির্দেশিত করে।
 
-If there are multiple elements with the same `id`, then the behavior of methods that use it is unpredictable, e.g. `document.getElementById` may return any of such elements at random. So please stick to the rule and keep `id` unique.
+যদি একই `id` দ্বারা অনেক এলিমেন্ট ডিক্লেয়ার করা হয়, তাহলে মেথডসমূহ অপ্রত্যাশিত কাজ করবে, যেমন `document.getElementById` যেকোন একটি এলেমেন্টকে রিটার্ন করতে পারে। সুতরাং আমাদের অবশ্যই মনে রাখতে হবে `id` হবে স্বতন্ত্র।
 ```
 
-```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
-The method `getElementById` that can be called only on `document` object. It looks for the given `id` in the whole document.
+```warn header="`anyElem.getElementById` না, শুধু `document.getElementById`"
+`getElementById` মেথডটি শুধুমাত্র `document` অবজেক্টের মেথড। এটি সমস্ত ডকুমেন্ট `id` দ্বারা নির্দেশিত এলিমেন্টটির খোঁজ করবে।
 ```
 
 ## querySelectorAll [#querySelectorAll]
 
-By far, the most versatile method, `elem.querySelectorAll(css)` returns all elements inside `elem` matching the given CSS selector.
+এখনো পর্যন্ত সবচেয়ে বেশি কাজের মেথডটি হল `elem.querySelectorAll(css)`, যা CSS সিলেক্টরস দ্বারা ম্যাচ করা সকল `elem` কে রিটার্ন করবে।
 
-Here we look for all `<li>` elements that are last children:
+এখানে আমরা সকল শেষ `<li>` এলিমেন্ট কে খোঁজব:
 
 ```html run
 <ul>
@@ -100,34 +100,34 @@ Here we look for all `<li>` elements that are last children:
 </script>
 ```
 
-This method is indeed powerful, because any CSS selector can be used.
+মেথডটি অনেক কাজের, কেননা আমরা যেকোন CSS সিলেক্টরস ব্যবহার করতে পারব।
 
-```smart header="Can use pseudo-classes as well"
-Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+```smart header="আমরা সুডো ক্লাস সমূহ ব্যবহার করতে পারব"
+CSS সিলেক্টরস সুডো-ক্লাস যেমন `:hover` এবং `:active` সাপোর্ট করবে। যেমন, `document.querySelectorAll(':hover')` পয়েন্টার করা এলিমেন্টের কালেকশন রিটার্ন করবে।
 ```
 
 ## querySelector [#querySelector]
 
-The call to `elem.querySelector(css)` returns the first element for the given CSS selector.
+`elem.querySelector(css)` CSS সিলেক্টরস দ্বারা ম্যাচ করা প্রথম `elem` কে রিটার্ন করবে।
 
-In other words, the result is the same as `elem.querySelectorAll(css)[0]`, but the latter is looking for *all* elements and picking one, while `elem.querySelector` just looks for one. So it's faster and also shorter to write.
+অন্য কথায় বলা যায়, `elem.querySelector(css)`এবং `elem.querySelectorAll(css)[0]` একই, কিন্তু দ্বিতীয়টি *সকল* এলিমেন্ট হতে একটিকে রিটার্ন করবে, যেখানে `elem.querySelector` শুধুমাত্র প্রথমটি রিটার্ন করে, সুতরাং এটি দ্রুত কাজ করে এবং কোডও সংক্ষিপ্ত।
 
 ## matches
 
-Previous methods were searching the DOM.
+পূর্ববর্তী মেথড সমূহ DOM এ সার্চ করে।
 
-The [elem.matches(css)](http://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+[elem.matches(css)](http://dom.spec.whatwg.org/#dom-element-matches) এট কোন এলিমেন্ট রিটার্ন করে না, `elem` এটি কেবল CSS সিলেক্টরস দ্বারা `elem` টি আছে কিনা যাচাই করে। এটি কেবল `true` বা `false` রিটার্ন করে।
 
-The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+মেথডটি কোন কালেকশনে ফিল্টার করতে কাজে আছে।
 
-For instance:
+উদাহরণ:
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
 <a href="http://ya.ru">...</a>
 
 <script>
-  // can be any collection instead of document.body.children
+  // document.body.children এর পরিবর্তে যে কোন কালেকশন হতে পারে
   for (let elem of document.body.children) {
 *!*
     if (elem.matches('a[href$="zip"]')) {
@@ -140,13 +140,13 @@ For instance:
 
 ## closest
 
-*Ancestors* of an element are: parent, the parent of parent, its parent and so on. The ancestors together form the chain of parents from the element to the top.
+*Ancestors* এলিমেন্ট সমূহ হল: প্যারেন্ট এলিমেন্ট, প্যারেন্ট এলিমেন্টের প্যারেন্ট, পূর্বের এলিমেন্টের প্যারেন্ট এভাবে।  এলিমেন্ট সমূহ দ্বারা এভাবে এলিমেন্ট ট্রি তৈরি করে।
 
-The method `elem.closest(css)` looks the nearest ancestor that matches the CSS-selector. The `elem` itself is also included in the search.
+`elem.closest(css)` তার CSS-selector দ্বারা নিকটতম প্যারেন্ট এলিমেন্ট কে খুঁজে। `elem` নিজেও সার্চিংয়ে অন্তর্ভুক্ত।
 
-In other words, the method `closest` goes up from the element and checks each of parents. If it matches the selector, then the search stops, and the ancestor is returned.
+অন্যথায় বলা যায়, `closest` মেথডটি এলিমেন্ট এর নিকটতম প্যারেন্ট এলিমেন্টকে খুঁজে। যদি এটি সিলেক্টরস এর সাথে ম্যাচ করে, তারপর সার্চিংটি থেমে যাবে এবং প্যারেন্ট এলিমেন্টটি রিটার্ন করবে।
 
-For instance:
+যেমন:
 
 ```html run
 <h1>Contents</h1>
@@ -164,29 +164,29 @@ For instance:
   alert(chapter.closest('.book')); // UL
   alert(chapter.closest('.contents')); // DIV
 
-  alert(chapter.closest('h1')); // null (because h1 is not an ancestor)
+  alert(chapter.closest('h1')); // null (কেননা h1 প্যারেন্ট নোড না)
 </script>
 ```
 
 ## getElementsBy*
 
-There are also other methods to look for nodes by a tag, class, etc.
+এছাড়াও আরো কিছু এলিমেন্ট দ্বারা নোড সার্চ করা যায় যেমন ট্যাগ, ক্লাস ইত্যাদি।
 
-Today, they are mostly history, as `querySelector` is more powerful and shorter to write.
+বর্তমানে মেথড সমূহ তেমন ব্যবহার হয় না, কেননা `querySelector` আরো বেশি দ্রুত এবং সংক্ষেপে লিখা যায়।
 
-So here we cover them mainly for completeness, while you can still find them in the old scripts.
+এখানে আমরা জেনে রাখার জন্য এদের আলোচনা করছি, মর্ডান জাভাস্ক্রিপ্টে এদের তেমন ব্যবহার নেই, তবে পুরনো স্ক্রিপ্ট বা লাইব্রেরী সমূহে এদের আমরা দেখতে পায়।
 
-- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
-- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
-- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+- `elem.getElementsByTagName(tag)` ট্যাগের নামানুসারে এলিমেন্টে খুঁজে এবং কালেকশন সমূহ রিটার্ন করে। `tag` এর প্যারামিটার হিসেবে যেকোন ট্যাগের জন্য `"*"` পাঠাতে পারি।
+- `elem.getElementsByClassName(className)` CSS ক্ল্যাস অনুযায়ী এলিমেন্ট সমূহ রিটার্ন করে।
+- `document.getElementsByName(name)` `name` অ্যাট্রিবিউট অনুযায়ী এলিমেন্ট সমূহ রিটার্ন করে।
 
-For instance:
+উদাহরণস্বরূপ:
 ```js
-// get all divs in the document
+// DOM এর সকল divs
 let divs = document.getElementsByTagName('div');
 ```
 
-Let's find all `input` tags inside the table:
+চলুন *table* থেকে সকল `input` ট্যাগ কে খুঁজি:
 
 ```html run height=50
 <table id="table">
@@ -218,31 +218,31 @@ Let's find all `input` tags inside the table:
 </script>
 ```
 
-```warn header="Don't forget the `\"s\"` letter!"
-Novice developers sometimes forget the letter `"s"`. That is, they try to call `getElementByTagName` instead of <code>getElement<b>s</b>ByTagName</code>.
+```warn header="সিঙ্গুলার এবং প্লুরাল ভুলবেন না `\"getElement\"` এবং `\"getElements\"`!"
+নতুন ডেভলাপাররা `\"getElement\"` এবং `\"getElements\"`নিয়ে ভুল করে ফেলে। যেমন <code>getElement<b>s</b>ByTagName</code> এর বদলে `getElementByTagName`।
 
-The `"s"` letter is absent in `getElementById`, because it returns a single element. But `getElementsByTagName` returns a collection of elements, so there's `"s"` inside.
+`"s"` ছাড়া `getElementById`, এটি একটি সিঙ্গেল এলিমেন্ট রিটার্ন করবে। কিন্তু `getElementsByTagName` এলিমেন্টের কালেকশন রিটার্ন করবে।
 ```
 
-````warn header="It returns a collection, not an element!"
-Another widespread novice mistake is to write:
+````warn header="সিঙ্গেল এলিমেন্ট এর বদলে কালেকশন রিটার্ন!"
+বেশিরভাগ সময় নতুন ডেভলাপাররা আরো একটি সাধারণ ভুল করে থাকে:
 
 ```js
-// doesn't work
+// এটি কাজ করবে না
 document.getElementsByTagName('input').value = 5;
 ```
 
-That won't work, because it takes a *collection* of inputs and assigns the value to it rather than to elements inside it.
+এটি কাজ করবে না, কেননা এটি একটি ইনপুট এর *collection* রিটার্ন করে।
 
-We should either iterate over the collection or get an element by its index, and then assign, like this:
+আমরা ইটারেট এর মাধ্যমে অথবা ইন্ডেক্স এর মাধ্যমে কালেকশনটি অ্যাক্সেস করতে পারি:
 
 ```js
-// should work (if there's an input)
+// এটি কাজ করবে (যদি ইনপুট এলিমেন্ট থাকে)
 document.getElementsByTagName('input')[0].value = 5;
 ```
 ````
 
-Looking for `.article` elements:
+`.article` এলিমেন্ট খোঁজা:
 
 ```html run height=50
 <form name="my-form">
@@ -251,23 +251,23 @@ Looking for `.article` elements:
 </form>
 
 <script>
-  // find by name attribute
+  // name attribute এর সাহায্যে খুঁজা
   let form = document.getElementsByName('my-form')[0];
 
-  // find by class inside the form
+  // form এর মধ্যে ক্ল্যাস দ্বারা খুঁজা
   let articles = form.getElementsByClassName('article');
-  alert(articles.length); // 2, found two elements with class "article"
+  alert(articles.length); // 2, "article" ক্লাস দ্বারা দুটি এলিমেন্ট খুঁজে পাই
 </script>
 ```
 
 ## Live collections
 
-All methods `"getElementsBy*"` return a *live* collection. Such collections always reflect the current state of the document and "auto-update" when it changes.
+`"getElementsBy*"` মেথড সমূহ সর্বদা একটি *live* কালেকশন রিটার্ন করবে। এই ধরণের কালেকশনসমূহ DOM এ সর্বদা কোন পরিবর্তন হলে "অটো-আপডেট" হয়।
 
-In the example below, there are two scripts.
+নিচের উদাহরণে, দুটি স্ক্রিপ্ট আছে।
 
-1. The first one creates a reference to the collection of `<div>`. As of now, its length is `1`.
-2. The second scripts runs after the browser meets one more `<div>`, so its length is `2`.
+1. প্রথমটিতে আমরা `<div>` এর একটি কালেকশন পায়, সুতরাং এর এলিমেন্ট হল `1`।
+2. দ্বিতীয় স্ক্রিপটির পূর্বে নতুন `<div>` সংযোজন হয়, সুতরাং এর এলিমেন্ট হবে `2`।
 
 ```html run
 <div>First div</div>
@@ -286,9 +286,9 @@ In the example below, there are two scripts.
 </script>
 ```
 
-In contrast, `querySelectorAll` returns a *static* collection. It's like a fixed array of elements.
+বিপরীতে, `querySelectorAll` রিটার্ন করবে একটি *static* কালেকশন। এটি এলিমেন্ট সমূহের একটি ফিক্সড অ্যারে রিটার্ন করবে।
 
-If we use it instead, then both scripts output `1`:
+নিম্নের উদাহরণে উভয়ই ক্ষেত্রে `1` রিটার্ন করবে:
 
 
 ```html run
@@ -308,19 +308,19 @@ If we use it instead, then both scripts output `1`:
 </script>
 ```
 
-Now we can easily see the difference. The static collection did not increase after the appearance of a new `div` in the document.
+উভয় উদাহরণের পার্থক্য থেকে বুঝতে পারি। স্ট্যাটিক কালেকশনে DOM এ নতুন `div` আসলেও কোন পরিবর্তন হবে না।
 
-## Summary
+## সারাংশ
 
-There are 6 main methods to search for nodes in DOM:
+DOM এ নোড খুঁজার জন্য প্রধান ৬টি মেথড আছে:
 
 <table>
 <thead>
 <tr>
-<td>Method</td>
-<td>Searches by...</td>
-<td>Can call on an element?</td>
-<td>Live?</td>
+<td>মেথড</td>
+<td>সার্চ করার উপায়...</td>
+<td>এলিমেন্ট কল করা যায়?</td>
+<td>লাইভ?</td>
 </tr>
 </thead>
 <tbody>
@@ -363,12 +363,12 @@ There are 6 main methods to search for nodes in DOM:
 </tbody>
 </table>
 
-By far the most used are `querySelector` and `querySelectorAll`, but `getElementBy*` can be sporadically helpful or found in the old scripts.
+বহুল ব্যবহৃত মেথড হল `querySelector` এবং `querySelectorAll`, কিন্তু অনেক সময় `getElementBy*` ও কাজে আসে অথবা আমরা পুরনো স্ক্রিপ্ট সমূহেও এদের ব্যবহার দেখি।
 
-Besides that:
+এছাড়াও:
 
-- There is `elem.matches(css)` to check if `elem` matches the given CSS selector.
-- There is `elem.closest(css)` to look for the nearest ancestor that matches the given CSS-selector. The `elem` itself is also checked.
+- `elem.matches(css)` দ্বারা কোন `elem` CSS selector দ্বারা মেলে কিনা যাচাই করে।
+- `elem.closest(css)` দ্বারা CSS-selector এর এলিমেন্ট এর নিকটতম প্যারেন্ট নোডকে খুঁজা হয়। `elem` টির মধ্যেও যাচাই করে।
 
-And let's mention one more method here to check for the child-parent relationship, as it's sometimes useful:
--  `elemA.contains(elemB)` returns true if `elemB` is inside `elemA` (a descendant of `elemA`) or when `elemA==elemB`.
+চাইল্ড-প্যারেন্ট খুঁজার জন্য আরো একটি মেথড আছে, যা অনেক সময় কাজে দেয়:
+-  `elemA.contains(elemB)` *true* রিটার্ন করবে যদি `elemB`, `elemA` এর মধ্যে থাকে (`elemA` এর চাইল্ড) অথবা যখন `elemA==elemB`।

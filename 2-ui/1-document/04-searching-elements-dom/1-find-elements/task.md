@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Search for elements
+# এলিমেন্টের অনুসন্ধান
 
-Here's the document with the table and form.
+এখানে table এবং form দ্বারা ডকুমেন্টটি।
 
-How to find?...
+কিভাবে খুঁজবেন?...
 
-1. The table with `id="age-table"`.
-2. All `label` elements inside that table (there should be 3 of them).
-3. The first `td` in that table (with the word "Age").
-4. The `form` with `name="search"`.
-5. The first `input` in that form.
-6. The last `input` in that form.
+1. *table* এর id `id="age-table"`।
+2. *table* এর মধ্যে সকল `label` এলিমেন্ট(৩টি এলিমেন্ট আছে)।
+3. *table* এর প্রথম `td` (যার কন্টেন্ট "Age")।
+4. `form` এলিমেন্ট যার `name="search"`।
+5. `form` এর প্রথম `input` এলিমেন্ট।
+6. `form` এর শেষ `input` এলিমেন্ট।
 
-Open the page [table.html](table.html) in a separate window and make use of browser tools for that.
+এই পেজটি আলাদা উইন্ডোতে খুলুন [table.html](table.html) এবং ডেভ টুলসের সাহায্যে যাচাইগুলো চালান।
