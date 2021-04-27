@@ -1,25 +1,25 @@
-# Find bbtag pairs
+# bbtag অনুসন্ধান
 
-A "bb-tag" looks like `[tag]...[/tag]`, where `tag` is one of: `b`, `url` or `quote`.
+"bb-tag" দেখতে এমন `[tag]...[/tag]`, যেখানে `tag` গুলো হতে পারে: `b`, `url` বা `quote`।
 
-For instance:
+উদাহরণস্বরূপ:
 ```
 [b]text[/b]
 [url]http://google.com[/url]
 ```
 
-BB-tags can be nested. But a tag can't be nested into itself, for instance:
+BB-tags একটার মধ্যে আরেকটা হতে পারে। কিন্তু একই ট্যাগের ভেতর নেস্টেড হবে না, যেমন:
 
 ```
-Normal:
+সঠিক:
 [url] [b]http://google.com[/b] [/url]
 [quote] [b]text[/b] [/quote]
 
-Can't happen:
+ভুল:
 [b][b]text[/b][/b]
 ```
 
-Tags can contain line breaks, that's normal:
+সাধারণত ট্যাগের মধ্যে লাইন ব্রেক থাকতে পারে:
 
 ```
 [quote]
@@ -27,21 +27,21 @@ Tags can contain line breaks, that's normal:
 [/quote]
 ```
 
-Create a regexp to find all BB-tags with their contents.
+একটি রেগুলার এক্সপ্রেশন লিখুন যা দ্বারা সকল BB-tags এবং এদের কন্টেন্ট খুঁজে পাওয়া যায়।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js
-let regexp = /your regexp/flags;
+let regexp = /আপনার রেগুলার এক্সপ্রেশন/ফ্ল্যাগস;
 
 let str = "..[url]http://google.com[/url]..";
 alert( str.match(regexp) ); // [url]http://google.com[/url]
 ```
 
-If tags are nested, then we need the outer tag (if we want we can continue the search in its content):
+যদি ট্যাগটি নেস্টেড হয়, তবে আমরা প্যারেন্ট ট্যাগটি খুঁজব(তাহলে আমরা পরবর্তীতে এর মধ্যের কন্টেন্টগুলোতে অনুসন্ধান চালাতে পারব):
 
 ```js
-let regexp = /your regexp/flags;
+let regexp = /আপনার রেগুলার এক্সপ্রেশন/ফ্ল্যাগস;;
 
 let str = "..[url][b]http://google.com[/b][/url]..";
 alert( str.match(regexp) ); // [url][b]http://google.com[/b][/url]

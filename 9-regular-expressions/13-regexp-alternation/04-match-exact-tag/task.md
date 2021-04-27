@@ -1,13 +1,13 @@
-# Find the full tag
+# সম্পূর্ন ট্যাগ অনুসন্ধান
 
-Write a regexp to find the tag `<style...>`. It should match the full tag: it may have no attributes  `<style>` or have several of them `<style type="..." id="...">`.
+এই ট্যাগটি খুঁজার `<style...>` একটি রেগুলার এক্সপ্রেশন লিখুন। এটি অবশ্যই সম্পূর্ণ ট্যাগটির সাথে মিলবে: এটি অ্যাট্রিবিউট ছাড়াও হতে পারে `<style>` আবার এর একাধিক অ্যাট্রিবিউট থাকতে পারে `<style type="..." id="...">`।
 
-...But the regexp should not match `<styler>`!
+...কিন্তু এটি এর সাথে `<styler>` মিলবে না!
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন/g;
 
 alert( '<style> <styler> <style test="...">'.match(regexp) ); // <style>, <style test="...">
 ```

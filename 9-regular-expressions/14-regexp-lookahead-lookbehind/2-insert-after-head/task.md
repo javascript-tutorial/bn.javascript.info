@@ -8,7 +8,6 @@ HTML Document এর একটি স্ট্রিং আছে।
 
 ```js
 let regexp = /আপনার প্যাটার্ন/;
-
 let str = `
 <html>
   <body style="height: 200px">

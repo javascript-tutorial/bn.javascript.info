@@ -87,7 +87,7 @@ if (condition) {
 ```js
 // ব্যাকটিক কোট ` এর সাহায্যে একটা স্ট্রিংকে ভাগ করা যায়
 let str = `
-  Ecma International's TC39 is a group of JavaScript developers,
+  ECMA International's TC39 is a group of JavaScript developers,
   implementers, academics, and more, collaborating with the community
   to maintain and evolve the definition of JavaScript.
 `;
@@ -286,7 +286,7 @@ function pow(x, n) {
 
 কিছু জনপ্রিয় নীতি:
 
-- [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
+- [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html)
 - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
 - [Idiomatic.JS](https://github.com/rwaldron/idiomatic.js)
 - [StandardJS](https://standardjs.com/)
