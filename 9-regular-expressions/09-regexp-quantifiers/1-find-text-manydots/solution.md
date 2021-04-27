@@ -1,9 +1,9 @@
 
-Solution:
+সমাধান:
 
 ```js run
 let regexp = /\.{3,}/g;
 alert( "Hello!... How goes?.....".match(regexp) ); // ..., .....
 ```
 
-Please note that the dot is a special character, so we have to escape it and insert as `\.`.
+আমাদের মনে রাখা উচিত ডট একটি স্পেশাল ক্যারাক্টার, সুতরাং এটিকে আমাদের ব্যাকস্লাশের `\.` মাধ্যমে এস্কেপিং করে নিতে হবে।
