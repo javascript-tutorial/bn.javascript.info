@@ -1,9 +1,9 @@
-We'll create the table as a string: `"<table>...</table>"`, and then assign it to  `innerHTML`.
+আমরা টেবল টি জেনারেট করে: `"<table>...</table>"`, এই প্রপার্টিতে `innerHTML` সেট করে দিব।
 
-The algorithm:
+ধাপসমূহ হবে:
 
-1. Create the table header with `<th>` and weekday names.
-2. Create the date object `d = new Date(year, month-1)`. That's the first day of `month` (taking into account that months in JavaScript start from `0`, not `1`).
-3. First few cells till the first day of the month `d.getDay()` may be empty. Let's fill them in with `<td></td>`.
-4. Increase the day in `d`: `d.setDate(d.getDate()+1)`. If `d.getMonth()` is not yet the next month, then add the new cell `<td>` to the calendar. If that's a Sunday, then add a newline <code>"&lt;/tr&gt;&lt;tr&gt;"</code>.
-5. If the month has finished, but the table row is not yet full, add empty `<td>` into it, to make it square.
+1. প্রথমে হেডার রো তৈরি `<th>` করি এবং সপ্তাহের নাম লিখি।
+2. *date* অবজেক্ট করি `d = new Date(year, month-1)`। এবং `month` এর প্রথম দিনটি নেব (জাভাস্ক্রিপ্টে মাস শুরু হয় `0` হতে, `1` হতে না)।
+3. শুরুর কয়েকটি সেল `d.getDay()` খালি হতে পারে। তাদের এম্পটি `<td></td>` দ্বারা পূর্ণ করুন।
+4. দিনের মান বৃদ্ধি করুন `d`: `d.setDate(d.getDate()+1)`। যদি `d.getMonth()` পরবর্তী মাস না হয়, তাহলে ক্যালেন্ডারে তারিখটি লিখুন `<td>`। যদি দিনটি রবিবার হয়, তাহলে নতুন লাইনে যান <code>"&lt;/tr&gt;&lt;tr&gt;"</code>।
+5. যদি সম্পূর্ণ মাসটি শেষ হয়, এবং টেবলটি সম্পূর্ণ না হয়, খালি `<td>` দ্বারা পূর্ণ করুন।

@@ -1,1 +1,1 @@
-Please note the usage of `textContent` to assign the `<li>` content.
+দয়া করে নোট করুন `<li>` এর কন্টেন্ট হিসেবে অ্যাসাইন করতে আমরা `textContent` ব্যবহার করব।

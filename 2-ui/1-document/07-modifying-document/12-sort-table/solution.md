@@ -1,4 +1,4 @@
-The solution is short, yet may look a bit tricky, so here I provide it with extensive comments:
+এটি খুব সহজেই করা যায়, তবে এটি কিছুটা ট্রিকি, এখানে বিস্তারিত আলোচনা করা হল:
 
 ```js
 let sortedRows = Array.from(table.tBodies[0].rows) // 1
@@ -7,12 +7,12 @@ let sortedRows = Array.from(table.tBodies[0].rows) // 1
 table.tBodies[0].append(...sortedRows); // (3)
 ```
 
-The step-by-step algorthm:
+এখানে ধাপে ধাপে অ্যালগরিদমটি আলোচনা করা হল:
 
-1. Get all `<tr>`, from `<tbody>`.
-2. Then sort them comparing by the content of the first `<td>` (the name field).
-3. Now insert nodes in the right order by `.append(...sortedRows)`.
+1. `<tbody>` হতে সকল `<tr>` কে নিই।
+2. তারপর আমরা `<td>` কে কম্পেয়ার করব (name ফিল্ডটি অনুযায়ী)।
+3. এখন আমরা সঠিক নোড অনুযায়ী তাদের সংযুক্ত করব `.append(...sortedRows)`।
 
-We don't have to remove row elements, just "re-insert", they leave the old place automatically.
+আমাদের রো এলিমেন্টকে রিমুভ করতে হবে না, শুধুমাত্র "re-insert", স্বয়ংক্রিয়ভাবে পুরনো জায়গা গুলো ঠিক হয়ে যায়।
 
-P.S. In our case, there's an explicit `<tbody>` in the table, but even if HTML table doesn't have `<tbody>`, the DOM structure always has it.
+বি.দ্র. এক্ষেত্রে, *table* এ `<tbody>` বিদ্যমান, কিন্তু অনেক সময় `<tbody>` নাও থাকতে পারে, কিন্তু DOM এ সর্বদা এটি থাকে।

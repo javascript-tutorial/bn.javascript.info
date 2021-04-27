@@ -4,7 +4,7 @@ importance: 5
 
 # Clear the element
 
-Create a function `clear(elem)` that removes everything from the element.
+একটি ফাংশন লিখুন `clear(elem)` যা এলিমেন্ট হতে সকল কিছু রিমুভ করে।
 
 ```html run height=60
 <ol id="elem">

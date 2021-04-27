@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Colored clock with setInterval
+# একটি ঘড়ি
 
-Create a colored clock like here:
+এইরকম একটি ঘড়ি বানান:
 
 [iframe src="solution" height=60]
 
-Use HTML/CSS for the styling, JavaScript only updates time in elements.
+HTML/CSS এর সাহায্যে স্ট্যাইল করুন, জাভস্ক্রিপ্টের সাহায্যে শুধু সময়টি পরিবর্তন করুন।

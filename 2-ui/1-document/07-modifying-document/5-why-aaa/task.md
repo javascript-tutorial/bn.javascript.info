@@ -2,13 +2,13 @@ importance: 1
 
 ---
 
-# Why does "aaa" remain?
+# কেন "aaa" অবশিষ্ট থাকে?
 
-In the example below, the call `table.remove()` removes the table from the document.
+নিচের উদাহরণে, `table.remove()` এর মাধ্যমে ডকুমেন্ট হতে টেবিল টি রিমুভ করা হয়।
 
-But if you run it, you can see that the text `"aaa"` is still visible.
+কিন্তু যদি আমরা এটি রান করি, তাহলে আমরা `"aaa"` কে ডকুমেন্টে দেখব।
 
-Why does that happen?
+কেন এটি রয়ে যায়?
 
 ```html height=100 run
 <table id="table">
@@ -22,6 +22,6 @@ Why does that happen?
   alert(table); // the table, as it should be
 
   table.remove();
-  // why there's still aaa in the document?
+  // কেন ডকুমেন্টে "aaa" অবশিষ্ট রয়ে গেল?
 </script>
 ```

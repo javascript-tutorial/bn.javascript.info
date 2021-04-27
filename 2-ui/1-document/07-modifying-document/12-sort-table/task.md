@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Sort the table
+# table টিকে সর্ট করুন
 
-There's a table:
+একটি table আছে:
 
 ```html run
 <table>
@@ -30,6 +30,6 @@ There's a table:
 </table>
 ```
 
-There may be more rows in it.
+এখানে আরো বেশি রো থাকতে পারে।
 
-Write the code to sort it by the `"name"` column.
+`"name"` অনুযায়ী কলামটিকে সর্ট করুন।

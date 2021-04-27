@@ -1,6 +1,6 @@
-First, let's make HTML/CSS.
+শুরুতে HTML/CSS তৈরি করি।
 
-Each component of the time would look great in its own `<span>`:
+প্রতিটি কম্পোনেন্টকে `<span>` দ্বারা আলাদা করি:
 
 ```html
 <div id="clock">
@@ -8,9 +8,9 @@ Each component of the time would look great in its own `<span>`:
 </div>
 ```
 
-Also we'll need CSS to color them.
+আমাদের CSS ও পরিবর্তন করতে হবে।
 
-The `update` function will refresh the clock, to be called by `setInterval` every second:
+`update` ফাংশনটি `setInterval` দ্বারা প্রতিসেকেন্ডে কল হয়:
 
 ```js
 function update() {
@@ -32,9 +32,9 @@ function update() {
 }
 ```
 
-In the line `(*)` we every time check the current date. The calls to `setInterval` are not reliable: they may happen with delays.
+`(*)` এই লাইনে আমরা প্রতিবারের তারিখটি পরীক্ষা করি। এ ক্ষেত্রে `setInterval` নির্ভরযোগ্য নাও হতে পারে: এটি কিছু সময় নিতে পারে।
 
-The clock-managing functions:
+আমাদের ফাংশনগুলো হবে:
 
 ```js
 let timerId;

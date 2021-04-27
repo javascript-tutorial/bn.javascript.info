@@ -1,8 +1,8 @@
-Answer: **1 and 3**.
+উত্তরটি হল: **1 and 3**।
 
-Both commands result in adding the `text` "as text" into the `elem`.
+উভয়ই কমান্ড ফলাফল হিসেবে `elem` এ `text` সংযোগ করে।
 
-Here's an example:
+এখানে একটি উদাহরণ দেখুন:
 
 ```html run height=80
 <div id="elem1"></div>
