@@ -1,7 +1,7 @@
 
-The first idea can be to list the languages with `|` in-between.
+আমরা ল্যাংগুয়েজগুলোকে অল্টারনেশন `|` দ্বারা আলাদা আলাদা লিখতে পারি।
 
-But that doesn't work right:
+কিন্তু এটি কাজ করবে না:
 
 ```js run
 let regexp = /Java|JavaScript|PHP|C|C\+\+/g;
@@ -11,18 +11,18 @@ let str = "Java, JavaScript, PHP, C, C++";
 alert( str.match(regexp) ); // Java,Java,PHP,C,C
 ```
 
-The regular expression engine looks for alternations one-by-one. That is: first it checks if we have  `match:Java`, otherwise -- looks for `match:JavaScript` and so on.
+অল্টারনেশনের সময় রেগুলার এক্সপ্রেশন ইঞ্জিন এক এক করে খুঁজে। অর্থাৎ: প্রথমত এটি `match:Java` চেক করবে, যদি না মিলে এরপর `match:JavaScript` এভাবে চলতে থাকে।
 
-As a result, `match:JavaScript` can never be found, just because `match:Java` is checked first.
+যার ফলে, `match:JavaScript` কখনোই খুঁজে পাবে না, কেননা এটি শুরুতেই `match:Java` এর সাথে মিল হয়।
 
-The same with `match:C` and `match:C++`.
+অনুরূপভাবে `match:C` এবং `match:C++`।
 
-There are two solutions for that problem:
+এ সমস্যার দুটি সমাধান আছে:
 
-1. Change the order to check the longer match first: `pattern:JavaScript|Java|C\+\+|C|PHP`.
-2. Merge variants with the same start: `pattern:Java(Script)?|C(\+\+)?|PHP`.
+১. আমাদের প্যাটার্নটিকে এভাবে সাজিয়ে: `pattern:JavaScript|Java|C\+\+|C|PHP`।
+২. অথবা একই নামগুলোর জন্য অপশনাল গ্রুপ মার্জ করে: `pattern:Java(Script)?|C(\+\+)?|PHP`।
 
-In action:
+যেমন:
 
 ```js run
 let regexp = /Java(Script)?|C(\+\+)?|PHP/g;
