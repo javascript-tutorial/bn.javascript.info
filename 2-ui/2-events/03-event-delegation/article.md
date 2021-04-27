@@ -1,19 +1,20 @@
 
-# Event delegation
+# ইভেন্ট ডেলিগেশন
 
-Capturing and bubbling allow us to implement one of most powerful event handling patterns called *event delegation*.
+Capturing এবং bubbling এর মাধ্যমে ইভেন্ট সমূহকে সহজে হ্যান্ডেল করার একটি উপায় হল  *event delegation*।
 
-The idea is that if we have a lot of elements handled in a similar way, then instead of assigning a handler to each of them -- we put a single handler on their common ancestor.
 
-In the handler we get `event.target`, see where the event actually happened and handle it.
+আইডিয়াটি হল যদি আমাদের একই ধরণের অনেক এলিমেন্ট কোন একটি প্যারেন্ট এলিমেন্টের অধীনে থাকে এবং তাদের একইভাবে হ্যান্ডেল করা লাগে তাহলে আমরা একটি হ্যান্ডেলারের মাধ্যমে তাদের হ্যান্ডেল করতে পারি।
 
-Let's see an example -- the [Ba-Gua diagram](http://en.wikipedia.org/wiki/Ba_gua) reflecting the ancient Chinese philosophy.
+হ্যান্ডেলারে আমরা `event.target` কে পাব, যার মাধ্যমে আমরা জানতে পারব কোন এলিমেন্টে ইভেন্টটি সংগঠিত হয়েছে এবং তার উপর ভিত্তি করে আমরা এটিকে হ্যান্ডেল করতে পারব।
 
-Here it is:
+একটি উদাহরণ দেখি -- [Ba-Gua diagram](http://en.wikipedia.org/wiki/Ba_gua) এটি একটি চাইনিজ ফিলোসপি।
+
+এখানে দেখুন:
 
 [iframe height=350 src="bagua" edit link]
 
-The HTML is like this:
+HTML পেজটি হবে এমন:
 
 ```html
 <table>
@@ -30,45 +31,45 @@ The HTML is like this:
 </table>
 ```
 
-The table has 9 cells, but there could be 99 or 9999, doesn't matter.
+এখানে টেবল টিতে ৯ টি ঘর আছে, কিন্তু এখানে ৯৯ বা ৯৯৯ টি থাকতে পারে, এটি আমাদের জন্য ব্যাপার না।
 
-**Our task is to highlight a cell `<td>` on click.**
+**আমাদের টাস্ক হল `<td>` তে ক্লিক হলে তা হাইলাইট হবে**
 
-Instead of assign an `onclick` handler to each `<td>` (can be many) -- we'll setup the "catch-all" handler on `<table>` element.
+আমরা প্রতিটি `<td>` তে `onclick` হ্যান্ডেলার অ্যাসাইনের মাধ্যমে এটি করতে পারি -- তবে তার পরিবর্তে আমরা এটি এমন ভাবে করব যার মাধ্যমে `<table>` এলিমেন্ট হতে একটি হ্যান্ডেলারের মাধ্যমে সব তার সকল চাইল্ড এলিমেন্ট কে অ্যাক্সেস করব।
 
-It will use `event.target` to get the clicked element and highlight it.
+আমরা `event.target` এর মাধ্যমে কোন এলিমেন্টটি ক্লিকড হয়েছে তা জানতে পারি।
 
-The code:
+কোডটি হবে:
 
 ```js
 let selectedTd;
 
 *!*
 table.onclick = function(event) {
-  let target = event.target; // where was the click?
+  let target = event.target; // যেখানে ইভেন্টটি ঘটেছে
 
-  if (target.tagName != 'TD') return; // not on TD? Then we're not interested
+  if (target.tagName != 'TD') return; // TD ট্যাগ যাচাই
 
-  highlight(target); // highlight it
+  highlight(target); // এলিমেন্টটিকে হাইলাইট
 };
 */!*
 
 function highlight(td) {
-  if (selectedTd) { // remove the existing highlight if any
+  if (selectedTd) { // পূর্বের হাইলাইট এলিমেন্টটি রিমুভড
     selectedTd.classList.remove('highlight');
   }
   selectedTd = td;
-  selectedTd.classList.add('highlight'); // highlight the new td
+  selectedTd.classList.add('highlight'); // নতুন হাইলাইট এলিমেন্টটি
 }
 ```
 
-Such a code doesn't care how many cells there are in the table. We can add/remove `<td>` dynamically at any time and the highlighting will still work.
+এখানে টেবল এ কতটি ঘর আছে তা আমাদের চিন্তা করা লাগবে না, আমাদের কোডটি ডায়নামিক্যালি *table* এর সকল ঘরকে হাইলাইটেড করতে পারবে।
 
-Still, there's a drawback.
+কিন্তু, এটির কিছু সীমাবদ্ধতা আছে।
 
-The click may occur not on the `<td>`, but inside it.
+`<td>` এর মধ্যে আরো কোন এলিমেন্ট থাকতে পারে, এবং আমাদের ক্লিকড `<td>` এর চাইল্ড এলিমেন্টে সংগঠিত হতে পারে।
 
-In our case if we take a look inside the HTML, we can see nested tags inside `<td>`, like `<strong>`:
+উপরে বর্ণিত HTML এ আমরা দেখছি `<td>` এর মধ্যে `<strong>` ট্যাগ:
 
 ```html
 <td>
@@ -79,13 +80,13 @@ In our case if we take a look inside the HTML, we can see nested tags inside `<t
 </td>
 ```
 
-Naturally, if a click happens on that `<strong>` then it becomes the value of `event.target`.
+বাস্তবে, আমরা যখন `<strong>` এ ক্লিক করি তখন এটিই `event.target`।
 
 ![](bagua-bubble.svg)
 
-In the handler `table.onclick` we should take such `event.target` and find out whether the click was inside `<td>` or not.
+আমাদের হ্যান্ডেলারটি `table.onclick` এমন ভাবে লিখতে হবে যাতে `event.target` টি কোন `<td>` এর চাইল্ড এলিমেন্টে ক্লিক হয়েছে তা কিনা জানতে পারি।
 
-Here's the improved code:
+এখানে পরিমার্জিত কোডটি দেখানো হল:
 
 ```js
 table.onclick = function(event) {
@@ -99,27 +100,26 @@ table.onclick = function(event) {
 };
 ```
 
-Explanations:
-1. The method `elem.closest(selector)` returns the nearest ancestor that matches the selector. In our case we look for `<td>` on the way up from the source element.
-2. If `event.target` is not inside any `<td>`, then the call returns immediately, as there's nothing to do.
-3. In case of nested tables, `event.target` may be a `<td>`, but lying outside of the current table. So we check if that's actually *our table's* `<td>`.
-4. And, if it's so, then highlight it.
+ব্যাখ্যা:
+1. `elem.closest(selector)` এর সাহয্যে কোন এলিমেন্ট কি ঐ সিলেক্টরের চাইল্ড এলিমেন্ট কিনা জানতে পারি। এক্ষেত্রে আমরা এলিমেন্টটি কি `<td>` এর অধীনে কিনা যাচাই করছি।
+2. `event.target` যদি `<td>` এর অধীনে না হয়, তাহলে হ্যান্ডেলারটি আর এক্সিকিউট হবে না।
+3. অনেক সময় টেবলটি নেস্টেড হতে পারে, এক্ষেত্রে আমরা যাচাই করব `event.target` কি আমাদের টেবল এর কিনা।
+4. সর্বশেষে এটি হাইলাইট ফাংশনটি কল করবে।
 
-As the result, we have a fast, efficient highlighting code, that doesn't care about the total number of `<td>` in the table.
+এর ফলে আমাদের কোডটি হবে সহজবোধ্য, পরিবর্তনযোগ্য এবং দ্রুত।
+## ইভেন্ট ডেলিগেশনের আরো উদাহরণ:
 
-## Delegation example: actions in markup
+ইভেন্ট ডেলিগেশনের আরো বিভিন্ন ব্যবহার আছে।
 
-There are other uses for event delegation.
+ধরুন, আমরা মেনু বাটন বানাতে চাই যেমন "Save", "Load", "Search" ইত্যাদি, এবং আমাদের একটি অবজেক্ট আছে যার মেথড সমূহ হল `save`, `load`, `search`... কিভাবে তাদের মিলাতে পারি?
 
-Let's say, we want to make a menu with buttons "Save", "Load", "Search" and so on. And there's an object with methods `save`, `load`, `search`... How to match them?
-
-The first idea may be to assign a separate handler to each button. But there's a more elegant solution. We can add a handler for the whole menu and `data-action` attributes for buttons that has the method to call:
+আমাদের মাথায় প্রথমে যে আইডিয়াটি আসতে পারে সেটি হল প্রত্যেক বাটনের জন্য আলাদা হ্যান্ডেলার। কিন্তু এটির আরো সহজবোধ্য এবং পরিবর্তনযোগ্য সমাধান আছে। মেন্যুটির জন্য একটি হ্যান্ডেলার অ্যাসাইনের মাধ্যমেই আমরা এটি করতে পারে এবং `data-action` অ্যাট্রিবিউটের সাহায্যে মেথডের নামটি অ্যাসাইন করে দিতে পারি:
 
 ```html
 <button *!*data-action="save"*/!*>Click to Save</button>
 ```
 
-The handler reads the attribute and executes the method. Take a look at the working example:
+হ্যান্ডেলার অ্যাট্রিবিউট হতে মেথডটি অ্যাক্সিকিউট করবে। এখানের কোডটি দেখুন:
 
 ```html autorun height=60 run untrusted
 <div id="menu">
@@ -161,28 +161,28 @@ The handler reads the attribute and executes the method. Take a look at the work
 </script>
 ```
 
-Please note that `this.onClick` is bound to `this` in `(*)`. That's important, because otherwise `this` inside it would reference the DOM element (`elem`), not the `Menu` object, and `this[action]` would not be what we need.
+দয়া করে মনে রাখুন `(*)` লাইনে `this.onClick` এর সাথে আমাদের `this` কে `bind` করতে হবে। এটি সম্পর্কে আমাদের জেনে রাখা উচিত, অন্যথায় `this` আমাদের *Menu* অবজেক্ট কে নির্দেশিত করার পরিবর্তে (`elem`) কে রেফারেন্স করবে, এবং `this[action]` এটি কাজ করবে না।
 
-So, what advantages does delegation give us here?
+এখানে ইভেন্ট ডেলিগেশনের ফলে আমাদের কি সুবিধা হচ্ছে?
 
 ```compare
-+ We don't need to write the code to assign a handler to each button. Just make a method and put it in the markup.
-+ The HTML structure is flexible, we can add/remove buttons at any time.
++ আমাদের প্রতিটি বাটনের জন্য আলাদা করে হ্যান্ডেলার অ্যাসাইন করতে হচ্ছে না। শুধুমাত্র *Menu* তে অ্যাট্রিবিউট অনুসারে মেথড সংযুক্ত করলেই হবে।
++ HTML স্ট্রাকচারটি আরো বেশি পরিবর্তনযোগ্য, আমরা চাইলে যে কোন সময় বাটন add/remove করতে পারি।
 ```
 
-We could also use classes `.action-save`, `.action-load`, but an attribute `data-action` is better semantically. And we can use it in CSS rules too.
+আমরা চাইলে ক্লাস ধরেও এটি করতে পারি `.action-save`, `.action-load`, কিন্তু `data-action` এই অ্যাট্রিবিউটটিই বেশি মানানসই। এবং আমরা এটি ধরে CSS অ্যাপ্লাই করতে পারি।
 
-## The "behavior" pattern
+## "behavior" প্যাটার্ন
 
-We can also use event delegation to add "behaviors" to elements *declaratively*, with special attributes and classes.
+স্পেশাল অ্যাট্রিবিউট এবং ক্লাসের সাহায্যে আমরা আরো সহজে এলিমেন্টে হ্যান্ডেলার সংযুক্ত করতে পারি, এটিকে "behavior" প্যাটার্ন বলে।
 
-The pattern has two parts:
-1. We add a custom attribute to an element that describes its behavior.
-2. A document-wide handler tracks events, and if an event happens on an attributed element -- performs the action.
+প্যাটার্নটির দুটি অংশ:
+1. আমরা এলিমেন্টে একটি কাস্টম অ্যাট্রিবিউট সংযুক্ত করব।
+2. একটি গ্লোবাল হ্যান্ডেলার এটিকে হ্যান্ডেল করবে, এবং অ্যাট্রিবিউট অনুযায়ী যদি কোন ইভেন্ট সংগঠিত হয় -- তাহলে ব্লকটি এক্সিকিউট হবে।
 
 ### Behavior: Counter
 
-For instance, here the attribute `data-counter` adds a behavior: "increase value on click" to buttons:
+উদাহরণস্বরূপ, এখানে `data-counter` অ্যাট্রিবিউটের সাহায্যে আমরা একটি *behavior* সংযুক্ত করব: "ক্লিক হলে বাটনের মান বাড়বে":
 
 ```html run autorun height=60
 Counter: <input type="button" value="1" data-counter>
@@ -191,7 +191,7 @@ One more counter: <input type="button" value="2" data-counter>
 <script>
   document.addEventListener('click', function(event) {
 
-    if (event.target.dataset.counter != undefined) { // if the attribute exists...
+    if (event.target.dataset.counter != undefined) { // যদি অ্যাট্রিবিউটটি থাকে...
       event.target.value++;
     }
 
@@ -199,19 +199,19 @@ One more counter: <input type="button" value="2" data-counter>
 </script>
 ```
 
-If we click a button -- its value is increased. Not buttons, but the general approach is important here.
+যদি আমরা কোন বাটনে ক্লিক করি, তাহলে এর মান বাড়বে। এখানে কাজটি কিভাবে সংগঠিত হচ্ছে তা আমাদের বুঝা গুরুত্বপূর্ন।
 
-There can be as many attributes with `data-counter` as we want. We can add new ones to HTML at any moment. Using the event delegation we "extended" HTML, added an attribute that describes a new behavior.
+এখানে `data-counter` এর মত আরো অনেক অ্যাট্রিবিউট থাকতে পারে। আমরা আমাদের চাহিদামত নতুন কোন অ্যাট্রিবিউট সংযুক্ত করতে পারি, এবং নতুন অ্যাট্রিবিউট অনুযায়ী আমরা নতুন *behavior* সংযুক্ত করতে পারি।
 
-```warn header="For document-level handlers -- always `addEventListener`"
-When we assign an event handler to the `document` object, we should always use `addEventListener`, not `document.on<event>`, because the latter will cause conflicts: new handlers overwrite old ones.
+```warn header="document-level হ্যান্ডেলারের জন্য সর্বদা `addEventListener`"
+যখন আমরা `document` অবজেক্ট এ কোন হ্যান্ডেলার অ্যাসাইন করব, সর্বদা `document.on<event>` এর বদলে `addEventListener` ব্যবহার করব, কেননা পরবর্তীতে কোডে কনফ্লিক্ট হতে পারে: নতুন হ্যান্ডেলার পূর্ববর্তীটিকে রিপ্লেস করে দিতে পারে।
 
-For real projects it's normal that there are many handlers on `document` set by different parts of the code.
+বাস্তব ক্ষেত্রে আমাদের `document` এ বিভিন্ন কাজের জন্য আলাদা আলাদা হ্যান্ডেলার অ্যাসাইন করব।
 ```
 
 ### Behavior: Toggler
 
-One more example of behavior. A click on an element with the attribute `data-toggle-id` will show/hide the element with the given `id`:
+Behavior এর আরো একটি উদাহরণ। কোন একটি এলিমেন্টের অ্যাট্রিবিউট `data-toggle-id` এবং এতে ক্লিক হলে অ্যাট্রিবিউটের ভ্যালু অনুযায়ী আরেকটি এলিমেন্টকে show/hide করবে:
 
 ```html autorun run height=60
 <button *!*data-toggle-id="subscribe-mail"*/!*>
@@ -236,37 +236,37 @@ One more example of behavior. A click on an element with the attribute `data-tog
 </script>
 ```
 
-Let's note once again what we did. Now, to add toggling functionality to an element -- there's no need to know JavaScript, just use the attribute `data-toggle-id`.
+চলুন দেখি এখানে আমরা কি করেছি। এখন, ধরুন আরো একটি এলিমেন্টে আমরা toggle ফাংশনালিটি সংযুক্ত করব -- এজন্য, আমরা শুধু `data-toggle-id` এর ভ্যালু পরিবর্তন করলেই হবে।
 
-That may become really convenient -- no need to write JavaScript for every such element. Just use the behavior. The document-level handler makes it work for any element of the page.
+এবং এটি আসলেই অনেক কাজের -- একই ধরণের Behavior এর জন্য আমাদের আলাদা করে আর জাভাস্ক্রিপ্ট কোড করা লাগছে না। document-level handler পেজের যেকোন এলিমেন্টের জন্য এটি এক্সিকিউট হবে।
 
-We can combine multiple behaviors on a single element as well.
+আমরা একটি এলিমেন্টের জন্য একাধিক Behavior সেট করতে পারি।
 
-The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
+"behavior" প্যাটার্ন জাভাস্ক্রিপ্টের mini-fragments এর বিকল্প হতে পারে।
 
-## Summary
+## সারাংশ
 
-Event delegation is really cool! It's one of the most helpful patterns for DOM events.
+ইভেন্ট ডেলিগেশন অনেক মজার একটি ফিচার! এটির সাহায্যে DOM events কে আমরা সহজে হ্যান্ডেল করতে পারি।
 
-It's often used to add the same handling for many similar elements, but not only for that.
+এটির সাহায্যে একই এলিমেন্ট বা একই ফাংশনালিটি আমরা সহজেই নিয়ন্ত্রণ করতে পারি, তবে শুধু এটিই নয়।
 
-The algorithm:
+আর কিছু ব্যাপার আছে:
 
-1. Put a single handler on the container.
-2. In the handler -- check the source element `event.target`.
-3. If the event happened inside an element that interests us, then handle the event.
+1. কোন কন্টেনার এলিমেন্টের জন্য শুধুমাত্র একটি হ্যান্ডেলার।
+2. হ্যান্ডেলারে -- আমরা সোর্স এলিমেন্টটি জানতে পারি `event.target`।
+3. যদি কোন এলিমেন্টে ইভেন্ট সংগঠিত হয় এবং এটির উপর কোন কিছু অ্যাপ্লাই করার দরকার পড়ে তাহলে তা করব।
 
-Benefits:
+সুবিধাসমূহ:
 
 ```compare
-+ Simplifies initialization and saves memory: no need to add many handlers.
-+ Less code: when adding or removing elements, no need to add/remove handlers.
-+ DOM modifications: we can mass add/remove elements with `innerHTML` and the like.
++ সহজেই ইনিশিয়ালাইজ করা যায় এবং আলাদা কোন মেমোরি লাগে না: এবং একাধিক হ্যান্ডেলার লাগে নাহ।
++ কোড সংক্ষিপ্তকরণ: কোন এলিমেন্ট add/remove এর জন্য, আলাদা করে add/remove হ্যান্ডেলার লাগে না।
++ DOM পরিবর্তন: আমরা সহজেই DOM এ পরিবর্তন করতে পারি।
 ```
 
-The delegation has its limitations of course:
+তবে ইভেন্ট ডেলিগেশন এর কিছু সীমাবদ্ধতাও আছে:
 
 ```compare
-- First, the event must be bubbling. Some events do not bubble. Also, low-level handlers should not use `event.stopPropagation()`.
-- Second, the delegation may add CPU load, because the container-level handler reacts on events in any place of the container, no matter whether they interest us or not. But usually the load is negligible, so we don't take it into account.
+- প্রথমত, event অবশ্যই bubbling করতে হবে। কিছু ইভেন্ট bubbling সাপোর্ট করে না, এছাড়াও, low-level হ্যান্ডেলার `event.stopPropagation()` ব্যবহার করে না।
+- দ্বিতীয়ত, ডেলিগেশন সামান্য CPU load করতে পারে, কেননা যেকোন এলিমেন্টের ইভেন্টের জন্য আমাদের হ্যান্ডেলারটি এক্সিকিউট হয়। তবে এটি খুব সামান্যই যা আমরা বিবেচনা না করলেও হবে।
 ```
