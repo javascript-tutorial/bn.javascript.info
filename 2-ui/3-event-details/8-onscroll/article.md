@@ -1,12 +1,12 @@
 # Scrolling
 
-The `scroll` event allows reacting to a page or element scrolling. There are quite a few good things we can do here.
+`scroll` ইভেন্ট পেজে স্ক্রলিংয়ের সময় সংগঠিত হয়। এটির সাহায্যে আমরা অনেক কিছু করতে পারি।
 
-For instance:
-- Show/hide additional controls or information depending on where in the document the user is.
-- Load more data when the user scrolls down till the end of the page.
+উদাহরণস্বরূপ:
+- ইউজারের বিভিন্ন তথ্য দেখাতে বা লুকাতে ব্যবহার করতে পারি।
+- আমরা অন ডিমান্ড অর্থাৎ স্ক্রলিংয়ের উপর ভিত্তি করে ডাটা লোড করতে পারি।
 
-Here's a small function to show the current scroll:
+নিচের হ্যান্ডেলারটি বর্তমান স্ক্রলের মানটি দেখাবে:
 
 ```js autorun
 window.addEventListener('scroll', function() {
@@ -15,23 +15,23 @@ window.addEventListener('scroll', function() {
 ```
 
 ```online
-In action:
+এখানে দেখুন:
 
 Current scroll = <b id="showScroll">scroll the window</b>
 ```
 
-The `scroll` event works both on the `window` and on scrollable elements.
+ `window` বা স্ক্রলেবল এলিমেন্ট উভয়ের সাহায্যে আমরা `scroll` ইভেন্ট অ্যাক্সেস করতে পারি।
 
 ## Prevent scrolling
 
-How do we make something unscrollable?
+কিভাবে আমরা কোন এলিমেন্টের স্ক্রল থামাতে পারি?
 
-We can't prevent scrolling by using `event.preventDefault()` in `onscroll` listener, because it triggers *after* the scroll has already happened.
+`onscroll` লিসেনারে `event.preventDefault()` কল করার মাধ্যমে আমরা স্ক্রলকে prevent করতে পারব না, কেননা `scroll` ইভেন্টটি ট্রিগার হয় কোন এলিমেন্ট স্ক্রল হওয়ার পর।
 
-But we can prevent scrolling by `event.preventDefault()` on an event that causes the scroll, for instance `keydown` event for `key:pageUp` and `key:pageDown`.
+কিন্ত আমরা ভিন্ন উপায়ে স্ক্রলকে prevent করতে পারি, যেসব ইভেন্ট এর জন্য স্ক্রল সংগঠিত হয় যদি তাদের কে `event.preventDefault()` করা হয় তাহলে স্ক্রল ইভেন্টটি সংগঠিত হবে না, যেমন `keydown`, `key:pageUp` বা `key:pageDown`।
 
-If we add an event handler to these events and `event.preventDefault()` in it, then the scroll won't start.
+যদি আমরা এইসব ইভেন্টে `event.preventDefault()` করি, তাহলে `scroll` ইভেন্টটি ট্রিগার হয় না।
 
-There are many ways to initiate a scroll, so it's more reliable to use CSS, `overflow` property.
+আমরা বিভিন্নভাবে স্ক্রল ইনিশিয়ালাইজ করতে পারি, তবে সবচেয়ে বেশি সুবিধাজনক হল CSS এর `overflow` প্রপার্টি দ্বারা ডিফাইন করা।
 
-Here are few tasks that you can solve or look through to see applications of `onscroll`.
+এখানে কিছু টাস্ক দেয়া হল যার মাধ্যমে আপনি `onscroll` এর ব্যবহার আরো ভালো করে বুঝতে পারবেন।
