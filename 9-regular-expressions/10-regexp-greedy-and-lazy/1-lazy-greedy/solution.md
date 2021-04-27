@@ -1,6 +1,6 @@
 
-The result is: `match:123 4`.
+ফলাফলটি হল: `match:123 4`।
 
-First the lazy `pattern:\d+?` tries to take as little digits as it can, but it has to reach the space, so it takes  `match:123`.
+প্রথমে লেজি মোডে এই প্যাটার্নটি `pattern:\d+?` চেষ্টা করে যত কম সম্ভব অঙ্ক নেয়ার, কিন্তু প্যাটার্নের পরবর্তী স্পেস এর জন্য এটি স্পেস পর্যন্ত মেলে, সুতরাং এটি  `match:123` এর সাথে মেলে।
 
-Then the second `\d+?` takes only one digit, because that's enough.
+অতঃপর পরবর্তী `\d+?` শুধু একটি অঙ্ক নেই, কেননা এরপর আর কোন প্যাটার্ন নেই।

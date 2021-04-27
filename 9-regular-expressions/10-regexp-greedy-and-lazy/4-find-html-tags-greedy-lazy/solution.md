@@ -1,5 +1,5 @@
 
-The solution is `pattern:<[^<>]+>`.
+সমাধানটি হল `pattern:<[^<>]+>`।
 
 ```js run
 let regexp = /<[^<>]+>/g;
