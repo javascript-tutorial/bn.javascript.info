@@ -1,28 +1,28 @@
 
-# Map and Set
+# Map এবং Set
 
-Now we've learned about the following complex data structures:
+এ পর্যন্ত আমরা নিম্নোক্ত কমপ্লেক্স ডাটা স্ট্রাকচার সমূহ শিখেছি:
 
-- Objects for storing keyed collections.
-- Arrays for storing ordered collections.
+- অবজেক্টস যা একটি কালেকশনকে কী/ভ্যালু আকারে সংরক্ষণ করে।
+- অ্যারে যা একটি কালেকশনকে ইনডেক্সক্রমে সংরক্ষণ করে।
 
-But that's not enough for real life. That's why `Map` and `Set` also exist.
+কিন্তু বাস্তবক্ষেত্রে এরা পর্যাপ্ত না। যার ফলে `Map` এবং `Set` নামের আরো দুটি ডাটা স্ট্রাকচার বিদ্যমান।
 
 ## Map
 
-[Map](mdn:js/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type.
+[Map](mdn:js/Map) হল `Object` এর মত কী/ভ্যালু আকারের একটি কালেকশন। তবে এর প্রধান পার্থক্যটি হল `Map` এ যেকোন টাইপের কী(Key) রাখা যায়।
 
-Methods and properties are:
+এর মেথড এবং প্রপার্টিসমূহ হল:
 
-- `new Map()` -- creates the map.
-- `map.set(key, value)` -- stores the value by the key.
-- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
-- `map.delete(key)` -- removes the value by the key.
-- `map.clear()` -- removes everything from the map.
-- `map.size` -- returns the current element count.
+- `new Map()` -- নতুন Map তৈরি।
+- `map.set(key, value)` -- Map এ নতুন একটি রেকর্ড সংযুক্ত করতে।
+- `map.get(key)` --  Map এর কোন একটি রেকর্ড রিটার্ন করতে, যদি `key` টি Map এ না থাকে তাহলে `undefined` রিটার্ন করে।
+- `map.has(key)` -- Map এ `key` বিদ্যমান থাকলে রিটার্ন করবে `true` অন্যথায় `false`।
+- `map.delete(key)` -- Map এর কোন একটি রেকর্ড ডিলিট করতে।
+- `map.clear()` -- সম্পূর্ণ Map কালেকশনকে ডিলিট করতে।
+- `map.size` -- Map এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let map = new Map();
@@ -39,57 +39,57 @@ alert( map.get('1') ); // 'str1'
 alert( map.size ); // 3
 ```
 
-As we can see, unlike objects, keys are not converted to strings. Any type of key is possible.
+এখানে আমরা দেখছি এটি কী কে অবজেক্টের মত স্ট্রিংয়ে রূপান্তর করে না। সুতরাং যেকোন ডাটা টাইপের কী রাখা সম্ভব।
 
-```smart header="`map[key]` isn't the right way to use a `Map`"
-Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (no object keys and so on).
+```smart header=" `Map` এর মধ্যে `map[key]` ব্যবহার করা উচিত নই"
+যদিও `map[key]` এটি কাজ করে, যেমন আমরা `map[key] = 2` সেট করতে পারি, এক্ষেত্রে ইঞ্জিন `map` কে  plain JavaScript object হিসেবে ধরে নেয়, সুতরাং এভাবে করা উচিত নই।
 
-So we should use `map` methods: `set`, `get` and so on.
+তার পরিবর্তে আমরা `map` মেথডস: `set`, `get` ইত্যাদি ব্যবহার করব।
 ```
 
-**Map can also use objects as keys.**
+**Map এ কী(Key) হিসেবে অবজেক্টও সেট করা যায়**
 
-For instance:
+যেমন:
 
 ```js run
 let john = { name: "John" };
 
-// for every user, let's store their visits count
+// প্রতিটি ইউজারের ভিজিট এর গণনা সংরক্ষণ করি
 let visitsCountMap = new Map();
 
-// john is the key for the map
+// john হল কী(Key)
 visitsCountMap.set(john, 123);
 
 alert( visitsCountMap.get(john) ); // 123
 ```
 
-Using objects as keys is one of most notable and important `Map` features. For string keys, `Object` can be fine, but not for object keys.
+`Map` এর অন্যতম গুরুত্বপূর্ন সুবিধা হল আমরা অবজেক্টকে কী(Key) হিসেবে সংরক্ষন করতে পারি। আবার, `Object` এ আমরা কী(Key) হিসেবে একটি অবজেক্টকে সেট করতে পারি, তবে এটি অবজেক্ট কী(Key) হিসেবে কাজ করবে না।
 
-Let's try:
+চলুন দেখা যাক:
 
 ```js run
 let john = { name: "John" };
 
-let visitsCountObj = {}; // try to use an object
+let visitsCountObj = {}; // একটি অবজেক্ট
 
-visitsCountObj[john] = 123; // try to use john object as the key
+visitsCountObj[john] = 123; // কী হিসেবে একটি অবজেক্ট সেট করছি
 
 *!*
-// That's what got written!
+// এটি এভাবে সেট হয়
 alert( visitsCountObj["[object Object]"] ); // 123
 */!*
 ```
 
-As `visitsCountObj` is an object, it converts all keys, such as `john` to strings, so we've got the string key `"[object Object]"`. Definitely not what we want.
+যেহেতু `visitsCountObj` একটি অবজেক্ট, এটি কোন একটি প্রপার্টি সেট হওয়ার সময় কী(Key) কে স্ট্রিংয়ে রূপান্তর করে নেয়, যেমন `john` অবজেক্টের স্ট্রিং কনভার্শন হবে `"[object Object]"`। যা আমাদের লক্ষ্য নয়।
 
-```smart header="How `Map` compares keys"
-To test keys for equivalence, `Map` uses the algorithm [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero). It is roughly the same as strict equality `===`, but the difference is that `NaN` is considered equal to `NaN`. So `NaN` can be used as the key as well.
+```smart header="`Map` কীভাবে কী(Key) যাচাই করে"
+দুটি কী(Key) কে যাচাই করতে, `Map` এই অ্যালগরিদমটি ব্যবহার করে [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero)। এটি অনেকটা `===` এর মত, তবে এটি `NaN` এর ক্ষেত্রে ভিন্ন সাধারণত (`NaN` === `NaN`) এর মান হয় `false` তবে `Map` এ `NaN` কে যাচায় করতে পারে। সুতরাং কী(Key) হিসেবে `NaN` রাখা যাবে।
 
-This algorithm can't be changed or customized.
+আমরা এই অ্যালগরিদমটি পরিবর্তন বা পরিমার্জন করতে পারব না।
 ```
 
 ````smart header="Chaining"
-Every `map.set` call returns the map itself, so we can "chain" the calls:
+প্রতিটি `map.set` রিটার্ন করে বিদ্যমান `map` টিকে, তাই আমরা এদের চেইন করতে পারব:
 
 ```js
 map.set('1', 'str1')
@@ -99,15 +99,15 @@ map.set('1', 'str1')
 ````
 
 
-## Iteration over Map
+## Map এর ইটারেশন
 
-For looping over a `map`, there are 3 methods:
+একটি `map` কে ইটারেট করতে ৩টি মেথড আছে:
 
-- `map.keys()` -- returns an iterable for keys,
-- `map.values()` -- returns an iterable for values,
-- `map.entries()` -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
+- `map.keys()` -- কালেকশনের কী(Key) এর একটি ইটারেবল রিটার্ন করে।
+- `map.values()` -- কালেকশনের ভ্যালু একটি ইটারেবল রিটার্ন করে।
+- `map.entries()` -- কালেকশনের `[key, value]` এর একটি ইটারেবল রিটার্ন করে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let recipeMap = new Map([
@@ -116,27 +116,27 @@ let recipeMap = new Map([
   ['onion',    50]
 ]);
 
-// iterate over keys (vegetables)
+// সকল কী কে ইটারেট (vegetables)
 for (let vegetable of recipeMap.keys()) {
   alert(vegetable); // cucumber, tomatoes, onion
 }
 
-// iterate over values (amounts)
+// সকল ভ্যালুকে ইটারেট (amounts)
 for (let amount of recipeMap.values()) {
   alert(amount); // 500, 350, 50
 }
 
-// iterate over [key, value] entries
-for (let entry of recipeMap) { // the same as of recipeMap.entries()
+// সম্পূর্ণ কালেকশনকে [key, value] আকারে ইটারেট
+for (let entry of recipeMap) { // এটি recipeMap.entries() এর মত
   alert(entry); // cucumber,500 (and so on)
 }
 ```
 
-```smart header="The insertion order is used"
-The iteration goes in the same order as the values were inserted. `Map` preserves this order, unlike a regular `Object`.
+```smart header="ইনশার্সন ক্রম হিসেবে মানগুলো দেখায়"
+ইটারেশনের সময় মানগুলো দেখাবে যে ক্রমে ডাটা ইনসার্ট হয়েছিল সেভাবে। `Map` ক্রমটি সংরক্ষণ করে, এটি `Object` এর মত না।
 ```
 
-Besides that, `Map` has a built-in `forEach` method, similar to `Array`:
+এছাড়াও, `Map` এর `Array` এর মত বিল্ট-ইন `forEach` মেথড আছে:
 
 ```js
 // runs the function for each (key, value) pair
@@ -147,7 +147,7 @@ recipeMap.forEach( (value, key, map) => {
 
 ## Object.entries: Map from Object
 
-When a `Map` is created, we can pass an array (or another iterable) with key/value pairs for initialization, like this:
+`Map` ইনিশিয়ালাইজের সময় আমরা একটি অ্যারে (বা যেকোন ইটারেটর) key/value আকারে সেট করতে পারি, যেমন:
 
 ```js run
 // array of [key, value] pairs
@@ -160,9 +160,9 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
-If we have a plain object, and we'd like to create a `Map` from it, then we can use built-in method [Object.entries(obj)](mdn:js/Object/entries) that returns an array of key/value pairs for an object exactly in that format.
+যদি আমরা কোন একটি `Object` হতে `Map` কে ইনিশিয়ালাইজ করতে চায়, সেক্ষেত্রে আমরা এই মেথডটি [Object.entries(obj)](mdn:js/Object/entries) ব্যবহার করতে পারি, কেননা এটি key/value আকারে একটি অ্যারে রিটার্ন করে।
 
-So we can create a map from an object like this:
+সুতরাং আমরা `Object` হতে `Map` কে এভাবে তৈরি করতে পারি:
 
 ```js run
 let obj = {
@@ -177,14 +177,14 @@ let map = new Map(Object.entries(obj));
 alert( map.get('name') ); // John
 ```
 
-Here, `Object.entries` returns the array of key/value pairs: `[ ["name","John"], ["age", 30] ]`. That's what `Map` needs.
+এখানে, `Object.entries` রিটার্ন করে: `[ ["name","John"], ["age", 30] ]`। যা একটি key/value অ্যারে।
 
 
-## Object.fromEntries: Object from Map
+## Object.fromEntries: Map হতে Object এ রূপান্তর
 
-We've just seen how to create `Map` from a plain object with `Object.entries(obj)`.
+আমরা দেখেছি কিভাবে `Object` হতে `Object.entries(obj)` এর সাহায্যে `Map` তৈরি করা যায়।
 
-There's `Object.fromEntries` method that does the reverse: given an array of `[key, value]` pairs, it creates an object from them:
+`Object` এর একটি মেথড আছে `Object.fromEntries` যা এর উল্টোটা করে: অর্থাৎ একটি `[key, value]` অ্যারেকে `Object` এ রূপান্তর করে:
 
 ```js run
 let prices = Object.fromEntries([
@@ -198,11 +198,11 @@ let prices = Object.fromEntries([
 alert(prices.orange); // 2
 ```
 
-We can use `Object.fromEntries` to get a plain object from `Map`.
+আমরা `Map` কে `Object` এ রূপান্তর করতে `Object.fromEntries` ব্যবহার করতে পারি।
 
-E.g. we store the data in a `Map`, but we need to pass it to a 3rd-party code that expects a plain object.
+যেমন আমরা কোন একটি ডাটা সংরক্ষণ করছি `Map` এ, কিন্তু সার্ভারে বা অন্য কোন থার্ড পার্টি কোডে আমাদের ডাটা পাস করতে পারি `Object` হিসেবে।
 
-Here we go:
+এখানে দেখুন:
 
 ```js run
 let map = new Map();
@@ -211,7 +211,7 @@ map.set('orange', 2);
 map.set('meat', 4);
 
 *!*
-let obj = Object.fromEntries(map.entries()); // make a plain object (*)
+let obj = Object.fromEntries(map.entries()); // একটি Object (*)
 */!*
 
 // done!
@@ -220,33 +220,33 @@ let obj = Object.fromEntries(map.entries()); // make a plain object (*)
 alert(obj.orange); // 2
 ```
 
-A call to `map.entries()` returns an iterable of key/value pairs, exactly in the right format for `Object.fromEntries`.
+`map.entries()` রিটার্ন করে একটি key/value ইটারেবল, যার রূপটা হল `Object.fromEntries` এর মত।
 
-We could also make line `(*)` shorter:
+আমরা `(*)` লাইনটিকে আরো ছোট করে লিখতে পারি:
 ```js
 let obj = Object.fromEntries(map); // omit .entries()
 ```
 
-That's the same, because `Object.fromEntries` expects an iterable object as the argument. Not necessarily an array. And the standard iteration for `map` returns same key/value pairs as `map.entries()`. So we get a plain object with same key/values as the `map`.
+এটিও কাজ করবে, কেননা `Object.fromEntries` আর্গুমেন্ট হিসেবে একটি key/value ইটারেবল নেয়। অ্যারে হতে হবে এমন বাধ্যবাধকতা নেই। এবং `map` রিটার্ন করে `map.entries()` এর মত key/value ইটারেবল। সুতরাং আমরা `map` এর মত একটি `Object` পায়।
 
 ## Set
 
-A `Set` is a special type collection - "set of values" (without keys), where each value may occur only once.
+`Set` একটি বিশেষ কালেকশন - "ভ্যালুর সেট" (কী(Key) ছাড়া), যেখানে একটি ভ্যালু শুধুমাত্র একবার থাকবে।
 
-Its main methods are:
+এটির মেথডগুলো হল:
 
-- `new Set(iterable)` -- creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
-- `set.add(value)` -- adds a value, returns the set itself.
-- `set.delete(value)` -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- `set.has(value)` -- returns `true` if the value exists in the set, otherwise `false`.
-- `set.clear()` -- removes everything from the set.
-- `set.size` -- is the elements count.
+- `new Set(iterable)` -- সেট তৈরি, যদি কোন একটি `iterable` (অ্যারেও হতে পারে) আর্গুমেন্ট হিসেবে পাস করা হয়, তাহলে ইটারেবল এর ভ্যালুগুলো সেট এর ভ্যালু হবে।
+- `set.add(value)` -- `value` টি সংযুক্ত করবে, বিদ্যমান সেটকে রিটার্ন করে।
+- `set.delete(value)` -- `value` টি রিমুভ করবে, যদি `value` রিমুভড হয় তাহলে `true` অন্যথায় `false` রিটার্ন করবে।
+- `set.has(value)` -- Set এ `value` বিদ্যমান থাকলে রিটার্ন করবে `true` অন্যথায় `false`।
+- `set.clear()` -- সম্পূর্ণ Set এর কালেকশনকে রিমুভড করে।
+- `set.size` -- Set এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
 
-The main feature is that repeated calls of `set.add(value)` with the same value don't do anything. That's the reason why each value appears in a `Set` only once.
+`Set` এর প্রধান সুবিধাটি হল `set.add(value)` এ একই ভ্যালু একের অধিক সংরক্ষন হয় না। যার ফলে `Set` এর প্রতিটি `value` হয় স্বতন্ত্র।
 
-For example, we have visitors coming, and we'd like to remember everyone. But repeated visits should not lead to duplicates. A visitor must be "counted" only once.
+যেমন, আমাদের একটি ভিজিটর কাউন্ট সিস্টেম আছে, এবং আমরা সবার ভিজিট সংরক্ষণ করতে চায়। কিন্তু একজনকে শুধুমাত্র একবার কাউন্ট করবে।
 
-`Set` is just the right thing for that:
+এক্ষেত্রে `Set` এর সাহায্যে এটি করতে পারব:
 
 ```js run
 let set = new Set();
@@ -255,14 +255,14 @@ let john = { name: "John" };
 let pete = { name: "Pete" };
 let mary = { name: "Mary" };
 
-// visits, some users come multiple times
+// ভিজিট, একই ইউজার একাধিকবার আসতে পারে
 set.add(john);
 set.add(pete);
 set.add(mary);
 set.add(john);
 set.add(mary);
 
-// set keeps only unique values
+// `Set` এর প্রতিটি `value` স্বতন্ত্র
 alert( set.size ); // 3
 
 for (let user of set) {
@@ -270,11 +270,11 @@ for (let user of set) {
 }
 ```
 
-The alternative to `Set` could be an array of users, and the code to check for duplicates on every insertion using [arr.find](mdn:js/Array/find). But the performance would be much worse, because this method walks through the whole array checking every element. `Set` is much better optimized internally for uniqueness checks.
+একটি ইউনিক অ্যারের জন্য `Set` ব্যবহার করা যেতে পারে, অন্যথায় ডুপ্লিকেট ভ্যালু এড়াতে আমাদের প্রতিবার [arr.find](mdn:js/Array/find) ব্যবহার করা লাগবে। তবে এটির পারফরম্যান্স `Set` এর তুলনায় অনেক খারাপ, কেননা প্রতিবার এলিমেন্ট সংযুক্ত করার আগে আমাদের অ্যারেটিকে ইটারেট করা লাগে এবং যাচাই করা লাগে ভ্যালুটি আছে কিনা। এক্ষেত্রে `Set` ইন্টারনালি ইউনিক ভ্যালু যাচায় করে।
 
-## Iteration over Set
+## Set এ ইটারেশন
 
-We can loop over a set either with `for..of` or using `forEach`:
+আমরা `Set` কে `for..of` বা `forEach` এর সাহায্যে ইটারেট করতে পারি:
 
 ```js run
 let set = new Set(["oranges", "apples", "bananas"]);
@@ -287,44 +287,44 @@ set.forEach((value, valueAgain, set) => {
 });
 ```
 
-Note the funny thing. The callback function passed in `forEach` has 3 arguments: a `value`, then *the same value* `valueAgain`, and then the target object. Indeed, the same value appears in the arguments twice.
+একটি মজার ব্যাপার লক্ষ্য করুন। কলব্যাকে আমরা ৩টি আর্গুমেন্ট পাস করছি `value`, `valueAgain`, `set` এখানে ২য় আর্গুমেন্ট `valueAgain` টিতে `value` পুনরায় পাস হচ্ছে। আসলে ১ম ও ২য় আর্গুমেন্টের মান একই।
 
-That's for compatibility with `Map` where the callback passed `forEach` has three arguments. Looks a bit strange, for sure. But may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
+`Map` এর সাথে সামঞ্জস্য রাখতে `forEach` এর কলব্যাকে ৩টি আর্গুমেন্ট পাস হয়। যদিও দেখতে কিছুটা অদ্ভুত তবে `Map` কে `Set` এ প্রতিস্থাপন করতে এটি সহায়তা করে বা এর উল্টোটা করতে।
 
-The same methods `Map` has for iterators are also supported:
+`Map` এর মত `Set` ও কিছু ইটারেটর মেথড সাপোর্ট করে:
 
-- `set.keys()` -- returns an iterable object for values,
-- `set.values()` -- same as `set.keys()`, for compatibility with `Map`,
-- `set.entries()` -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
+- `set.keys()` -- কালেকশনের ভ্যালু এর একটি ইটারেবল রিটার্ন করে
+- `set.values()` -- `set.keys()` এর মত, `Map` এর সাথে সামঞ্জস্য রাখতে এটি ইমপ্লিমেন্ট করা হয়েছে
+- `set.entries()` -- কালেকশনের `[key, value]` এর একটি ইটারেবল রিটার্ন করে, এটিও `Map` এর সাথে সামঞ্জস্য রাখতে এটি ইমপ্লিমেন্ট করা হয়েছে।
 
-## Summary
+## সারাংশ
 
-`Map` -- is a collection of keyed values.
+`Map` -- হল key/value এর কালেকশন
 
-Methods and properties:
+মেথডস এবং প্রপার্টি:
 
-- `new Map([iterable])` -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
-- `map.set(key, value)` -- stores the value by the key.
-- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
-- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
-- `map.delete(key)` -- removes the value by the key.
-- `map.clear()` -- removes everything from the map.
-- `map.size` -- returns the current element count.
+- `new Map()` -- নতুন Map তৈরি।
+- `map.set(key, value)` -- Map এ নতুন একটি রেকর্ড সংযুক্ত করতে।
+- `map.get(key)` --  Map এর কোন একটি রেকর্ড রিটার্ন করতে, যদি `key` টি Map এ না থাকে তাহলে `undefined` রিটার্ন করে।
+- `map.has(key)` -- Map এ `key` বিদ্যমান থাকলে রিটার্ন করবে `true` অন্যথায় `false`।
+- `map.delete(key)` -- Map এর কোন একটি রেকর্ড ডিলিট করতে।
+- `map.clear()` -- সম্পূর্ণ Map কালেকশনকে ডিলিট করতে।
+- `map.size` -- Map এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
 
-The differences from a regular `Object`:
+রেগুলার `Object` এর সাথে পার্থক্য:
 
-- Any keys, objects can be keys.
-- Additional convenient methods, the `size` property.
+- যেকোন ডাটা টাইপ কী হতে পারে এমনকি অবজেক্টেও।
+- এছাড়াও অতিরিক্ত কিছু মেথড এবং `size` প্রপার্টি।
 
-`Set` -- is a collection of unique values.
+`Set` -- স্বতন্ত্র ভ্যালু এর কালেকশন।
 
-Methods and properties:
+মেথডস এবং প্রপার্টি:
 
-- `new Set([iterable])` -- creates the set, with optional `iterable` (e.g. array) of values for initialization.
-- `set.add(value)` -- adds a value (does nothing if `value` exists), returns the set itself.
-- `set.delete(value)` -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
-- `set.has(value)` -- returns `true` if the value exists in the set, otherwise `false`.
-- `set.clear()` -- removes everything from the set.
-- `set.size` -- is the elements count.
+- `new Set(iterable)` -- সেট তৈরি, যদি কোন একটি `iterable` (অ্যারেও হতে পারে) আর্গুমেন্ট হিসেবে পাস করা হয়, তাহলে ইটারেবল এর ভ্যালুগুলো সেট এর ভ্যালু হবে।
+- `set.add(value)` -- `value` টি সংযুক্ত করবে, বিদ্যমান সেটকে রিটার্ন করে।
+- `set.delete(value)` -- `value` টি রিমুভ করবে, যদি `value` রিমুভড হয় তাহলে `true` অন্যথায় `false` রিটার্ন করবে।
+- `set.has(value)` -- Set এ `value` বিদ্যমান থাকলে রিটার্ন করবে `true` অন্যথায় `false`।
+- `set.clear()` -- সম্পূর্ণ সেটের কালেকশনকে রিমুভড করে।
+- `set.size` -- Set এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
 
-Iteration over `Map` and `Set` is always in the insertion order, so we can't say that these collections are unordered, but we can't reorder elements or directly get an element by its number.
+`Map` এবং `Set` সর্বদায় ইনশার্সন অর্ডার অনুযায়ী ইটারেট হবে, সুতরাং আমরা বলতে পারি এই কালেকশন সর্বদা একই ক্রমে থাকে, এবং আমরা এদের সরাসরি পুনরায় সাজাতে পারব না তাদের ক্রমতালিকা অনুযায়ী।
