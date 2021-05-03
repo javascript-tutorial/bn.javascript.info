@@ -1,25 +1,25 @@
-# Eval: run a code string
+# Eval: স্ট্রিং হতে কোড এক্সিকিউট
 
-The built-in `eval` function allows to execute a string of code.
+বিল্ট-ইন `eval` ফাংশন স্ট্রিংকে কোড হিসেবে রানের সুবিধা প্রদান করে।
 
-The syntax is:
+এর সিনট্যাক্স হল:
 
 ```js
 let result = eval(code);
 ```
 
-For example:
+যেমন:
 
 ```js run
 let code = 'alert("Hello")';
 eval(code); // Hello
 ```
 
-A string of code may be long, contain line breaks, function declarations, variables and so on.
+একটি স্ট্রিংয়ে অনেক কোড যেমন লাইন ব্রেক ফাংশন, ভ্যারিয়েবল ডিক্লেয়ারেশন ইত্যাদি থাকতে পারে।
 
-The result of `eval` is the result of the last statement.
+`eval` এর ফলাফল হবে সর্বশেষ স্টেটমেন্টের ফলাফল।
 
-For example:
+যেমন:
 ```js run
 let value = eval('1+1');
 alert(value); // 2
@@ -30,7 +30,7 @@ let value = eval('let i = 0; ++i');
 alert(value); // 1
 ```
 
-The eval'ed code is executed in the current lexical environment, so it can see outer variables:
+eval কোড এক্সিকিউশন লেক্সিকাল এনভায়রনমেন্টের কোডকে এক্সিকিউট করে, সুতরাং এটি এর বাইরের ভ্যারিয়েবলকে দেখতে পারে:
 
 ```js run no-beautify
 let a = 1;
@@ -46,7 +46,7 @@ function f() {
 f();
 ```
 
-It can change outer variables as well:
+এটি আউটার ভ্যারিয়েবলের মান পরিবর্তনও করতে পারে:
 
 ```js untrusted refresh run
 let x = 5;
@@ -54,7 +54,7 @@ eval("x = 10");
 alert(x); // 10, value modified
 ```
 
-In strict mode, `eval` has its own lexical environment. So functions and variables, declared inside eval, are not visible outside:
+`strict` মোডে, `eval` এর নিজস্ব লেক্সিকাল এনভায়রনমেন্ট থাকে। সুতরাং eval এর কোডকে এর বাইরে থেকে অ্যাক্সেস করা যাবে না:
 
 ```js untrusted refresh run
 // reminder: 'use strict' is enabled in runnable examples by default
@@ -65,27 +65,27 @@ alert(typeof x); // undefined (no such variable)
 // function f is also not visible
 ```
 
-Without `use strict`, `eval` doesn't have its own lexical environment, so we would see `x` and `f` outside.
+`use strict` ছাড়া, `eval` এর নিজস্ব লেক্সিকাল এনভায়রনমেন্ট থাকে না, সুতরাং `x` এবং `f` কে বাহির থেকে অ্যাক্সেস করতে পারব।
 
-## Using "eval"
+## "eval" এর ব্যবহার
 
-In modern programming `eval` is used very sparingly. It's often said that "eval is evil".
+মডার্ন জাভাস্ক্রিপ্টে `eval` তেমন ব্যবহার করা হয় না। এটি সম্পর্কে বলা হয় "eval is evil"।
 
-The reason is simple: long, long time ago JavaScript was a much weaker language, many things could only be done with `eval`. But that time passed a decade ago.
+প্রায় এক দশক আগে জাভাস্ক্রিপ্ট একটি দুর্বল প্রোগ্রামিং ল্যাঙ্গুয়েজ ছিল, সে সময় বিভিন্ন কাজ করতে আমরা  `eval` ব্যবহার করতাম।
 
-Right now, there's almost no reason to use `eval`. If someone is using it, there's a good chance they can replace it with a modern language construct or a [JavaScript Module](info:modules).
+এখন, `eval` ব্যবহারের কোন কারণ নেই। এর পরিবর্তে আমরা মডার্ন ল্যাঙ্গুয়েজ কন্সট্রাক্ট বা [JavaScript Module](info:modules) ব্যবহার করি।
 
-Please note that its ability to access outer variables has side-effects.
+দয়া করে মনে রাখুন আউটার ভ্যারিয়েবল অ্যাক্সেস থাকার কারণে বিভিন্ন সমস্যা হতে পারে।
 
-Code minifiers (tools used before JS gets to production, to compress it) rename local variables into shorter ones (like `a`, `b` etc) to make the code smaller. That's usually safe, but not if `eval` is used, as local variables may be accessed from eval'ed code string. So minifiers don't do that renaming for all variables potentially visible from `eval`. That negatively affects code compression ratio.
+প্রোডাকশনের জন্য আমরা কোড মিনিফাই করার সময় এরা লোকাল ভ্যারিয়েবলগুলোকে শর্ট ভ্যারিয়েবল দ্বারা প্রতিস্থাপন করে (যেমন `userData` হয়ে যাবে `a`) যাতে আমাদের কোডের সাইজ ছোট হয়। এটি সুবিধাজনক, কিন্তু `eval` যেহেতু তার আউটার স্কোপকে অ্যাক্সেস করতে পারে, `eval` ব্যবহারের সময় লোকাল ভ্যারিয়েবলকে শর্ট ভ্যারিয়েবল প্রতিস্থাপন করে না। যার ফলে মিনিফাই করার সময় ফাইল সাইজের অনুপাতে একটি পার্থক্য দেখা যায়।
 
-Using outer local variables inside `eval` is also considered a bad programming practice, as it makes maintaining the code more difficult.
+এছাড়াও `eval` এ আউটার স্কোপ ভ্যারিয়েবল ব্যবহার ব্যাড প্রাক্টিস, এছাড়াও কোড সহজে পরিবর্তনযোগ্য থাকে না।
 
-There are two ways how to be totally safe from such problems.
+এক্ষেত্রে আমরা দুই উপায়ে এটি ব্যবহার করতে পারি।
 
-**If eval'ed code doesn't use outer variables, please call `eval` as `window.eval(...)`:**
+**যদি এটি আউটার স্কোপের ভ্যারিয়েবল ব্যবহার না করে, তাহলে `eval` এর পরিবর্তে `window.eval(...)` ব্যবহার করুন:**
 
-This way the code is executed in the global scope:
+তাহলে আমাদের কোডটি সর্বদা গ্লোবাল স্কোপে এক্সিকিউট হবে:
 
 ```js untrusted refresh run
 let x = 1;
@@ -95,7 +95,7 @@ let x = 1;
 }
 ```
 
-**If eval'ed code needs local variables, change `eval` to `new Function` and pass them as arguments:**
+**যদি লোকাল ভ্যারিয়েবল অ্যাক্সেস করা লাগে, তাহলে `eval` এর পরিবর্তে `new Function` এ ভ্যালুটি পাস করার মাধ্যমে ব্যবহার করুন:**
 
 ```js run
 let f = new Function('a', 'alert(a)');
@@ -103,12 +103,12 @@ let f = new Function('a', 'alert(a)');
 f(5); // 5
 ```
 
-The `new Function` construct is explained in the chapter <info:new-function>. It creates a function from a string, also in the global scope. So it can't see local variables. But it's so much clearer to pass them explicitly as arguments, like in the example above.
+`new Function` সম্পর্কে এই অধ্যায়ে আলোচনা করা হয়েছে <info:new-function>। এটি গ্লোবাল স্কোপে স্ট্রিং হতে ফাংশন তৈরি করে, তাই লোকাল ভ্যারিয়েবলকে অ্যাক্সেস করতে পারে না। সুতরাং উপরের উদাহরণের মত আর্গুমেন্ট পাসের মাধ্যমে ভ্যারিয়েবলকে অ্যাক্সেস করতে পারি।
 
-## Summary
+## সারাংশ
 
-A call to `eval(code)` runs the string of code and returns the result of the last statement.
-- Rarely used in modern JavaScript, as there's usually no need.
-- Can access outer local variables. That's considered bad practice.
-- Instead, to `eval` the code in the global scope, use `window.eval(code)`.
-- Or, if your code needs some data from the outer scope, use `new Function` and pass it as arguments.
+`eval(code)` কোন একটি স্ট্রিংয়ের কোডকে এক্সিকিউট করে এবং শেষের স্টেটমেন্টের রেজাল্ট রিটার্ন করে।
+- মডার্ন জাভাস্ক্রিপ্টে বলতে গেলে এটি আর ব্যবহার করা হয় না
+- আউটার স্কোপে অ্যাক্সেস থাকে, তবে এটিকে ব্যাড প্রাক্টিস হিসেবে বিবেচনা করা হয়
+- গ্লোবাল স্কোপের জন্য `eval` এর পরিবর্তে `window.eval(...)` ব্যবহার করি।
+- অথবা লোকাল ভ্যারিয়েবল অ্যাক্সেস এর জন্য `eval` এর পরিবর্তে `new Function` এ ভ্যালু পাস করার মাধ্যমে ব্যবহার করি।
