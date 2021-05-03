@@ -1,17 +1,17 @@
-# Resource loading: onload and onerror
+# রিসোর্স লোডিং: onload এবং onerror
 
-The browser allows us to track the loading of external resources -- scripts, iframes, pictures and so on.
+আমরা এক্সটার্নাল রিসোর্স লোডিং স্টেটও ট্র্যাক করতে পারি, যেমন scripts, iframes, pictures ইত্যাদি।
 
-There are two events for it:
+এজন্য দুটি ইভেন্ট আছে:
 
-- `onload` -- successful load,
-- `onerror` -- an error occurred.
+- `onload` -- লোড সাকসেস হলে,
+- `onerror` -- যদি কোন এরর সংগঠিত হয়।
 
-## Loading a script
+## script লোডিং
 
-Let's say we need to load a third-party script and call a function that resides there.
+মনে করুন আমরা একটি থার্ড-পার্টি লাইব্রেরী লোড করব এবং ঐ লাইব্রেরীর কোন একটি ফাংশন কল করব।
 
-We can load it dynamically, like this:
+আমরা এটি ডায়নামিক্যালি লোড করব, এভাবে:
 
 ```js
 let script = document.createElement('script');
@@ -20,42 +20,42 @@ script.src = "my.js";
 document.head.append(script);
 ```
 
-...But how to run the function that is declared inside that script? We need to wait until the script loads, and only then we can call it.
+...এখন আমরা কিভাবে ফাংশনটি ডিক্লেয়ার করব? এক্ষেত্রে, আমাদের অবশ্যই লাইব্রেরীটি লোড হওয়া পর্যন্ত অপেক্ষা করতে হবে, অন্যথায় আমরা এটিকে কল করতে চাইলে এরর হবে।
 
 ```smart
-For our own scripts we could use [JavaScript modules](info:modules) here, but they are not widely adopted by third-party libraries.
+আমাদের নিজস্ব script এর জন্য [JavaScript modules](info:modules) ব্যবহার করতে পারি, তবে এখানে আমরা একটি স্বতন্ত্র থার্ড-পার্টি লাইব্রেরী লোড করতে চাচ্ছি।
 ```
 
 ### script.onload
 
-The main helper is the `load` event. It triggers after the script was loaded and executed.
+এক্ষেত্রে আমরা `load` ইভেন্ট এর সহায়তা নিতে পারি। কেননা script টি লোড হয়ে এক্সিকিউট হলে `load` ইভেন্টটি ট্রিগার হয়।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run untrusted
 let script = document.createElement('script');
 
-// can load any script, from any domain
+// এখানে যেকোন script লোড করতে পারি
 script.src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.3.0/lodash.js"
 document.head.append(script);
 
 *!*
 script.onload = function() {
-  // the script creates a variable "_"
-  alert( _.VERSION ); // shows library version
+  // স্ক্রিপ্ট টি একটি ভ্যারিয়েবল তৈরি করে "_"
+  alert( _.VERSION ); // লোডেশ এর ভার্সন দেখাবে
 };
 */!*
 ```
 
-So in `onload` we can use script variables, run functions etc.
+সুতরাং আমরা `onload` হ্যান্ডেলারে script টির বিভিন্ন ভ্যারিয়েবল, ফাংশন ব্যবহার করতে পারব।
 
-...And what if the loading failed? For instance, there's no such script (error 404) or the server is down (unavailable).
+...যদি আমাদের কোন কারণে লোডিং না হয় তাহলে কি হবে? মনে করুন, আমরা কোন একটি ভুল রিসোর্স লোড করতে চাচ্ছি (error 404) অথবা রিমোট সার্ভারটি ডাউন হয়েছে (unavailable)।
 
 ### script.onerror
 
-Errors that occur during the loading of the script can be tracked in an `error` event.
+এক্ষেত্রে script কোন কারণে লোড না হলে `error` ইভেন্টটি ট্রিগার হয়।
 
-For instance, let's request a script that doesn't exist:
+যেমন, এখানে আমরা একটি script লোড করতে চাচ্ছি যেটি একটি 404 পেজ:
 
 ```js run
 let script = document.createElement('script');
@@ -69,19 +69,19 @@ script.onerror = function() {
 */!*
 ```
 
-Please note that we can't get HTTP error details here. We don't know if it was an error 404 or 500 or something else. Just that the loading failed.
+দয়া করে মনে রাখুন এখানে আমরা HTTP error এর বিস্তারিত জানতে পারব না। যেকোন কারণে এরর সংগঠিত হতে যেমন  404 বা 500 অথবা অন্য যেকোন কারণে। তবে এটি শুধু `error` ইভেন্টটি ট্রিগার করে।
 
 ```warn
-Events `onload`/`onerror` track only the loading itself.
+`onload`/`onerror` ইভেন্ট শুধুমাত্র লোডিং স্টেটকে ট্র্যাক করতে পারে।
 
-Errors that may occur during script processing and execution are out of scope for these events. That is: if a script loaded successfully, then `onload` triggers, even if it has programming errors in it. To track script errors, one can use `window.onerror` global handler.
+তবে script এর মধ্যে কোন এরর থাকা সত্বেও script লোড হতে পারে। script এর মধ্যে কোন এরর থাকা সত্বেও `load` ইভেন্ট টি ট্রিগার হবে। যদি আমরা script এর error ট্র্যাক করতে চায় তাহলে `window.onerror` গ্লোবাল হ্যান্ডেলারের সহায়তা নিতে পারি।
 ```
 
-## Other resources
+## অন্যান্য রিসোর্স
 
-The `load` and `error` events also work for other resources, basically for any resource that has an external `src`.
+অন্যান্য যেসব এলিমেন্ট এক্সটার্নাল রিসোর্স লোড করতে পারে তাদের জন্যও `load` এবং `error` কাজ করবে।
 
-For example:
+যেমন:
 
 ```js run
 let img = document.createElement('img');
@@ -96,30 +96,26 @@ img.onerror = function() {
 };
 ```
 
-There are some notes though:
+তবে কিছু ব্যতিক্রম বৈশিষ্ট্য আছে:
 
-- Most resources start loading when they are added to the document. But `<img>` is an exception. It starts loading when it gets a src `(*)`.
-- For `<iframe>`, the `iframe.onload` event triggers when the iframe loading finished, both for successful load and in case of an error.
+- বেশিরভাগ রিসোর্স লোড হওয়া শুরু করে যখন তাদের document এ সংযুক্ত করা হয় তবে `<img>` ব্যতিক্রম। এটি লোড শুরু করবে যখনি src দেখবে `(*)`।
+- `<iframe>` এর জন্য, error বা load উভয়ের জন্য লোডিং সম্পন্ন হলে `iframe.onload` ট্রিগার হবে।
 
-That's for historical reasons.
+## Crossorigin পলিসি
 
-## Crossorigin policy
+ওয়েবের একটি নিয়ম আছে: এক সাইটের script অন্য সাইটের কন্টেন্ট কে অ্যাক্সেস করতে পারে না। যেমন  `https://facebook.com` এর script ইউজারের মেইলবক্সের `https://gmail.com` কন্টেন্ট অ্যাক্সেস করতে পারবে না।
 
-There's a rule: scripts from one site can't access contents of the other site. So, e.g. a script at `https://facebook.com` can't read the user's mailbox at `https://gmail.com`.
+আর সুনির্দিষ্টভাবে বলতে গেলে একটি অরিজিন (domain/port/protocol triplet) অন্য অরিজিনের কন্টেন্ট অ্যাক্সেস করতে পারবে না। যদিও বা তারা যদি ঐ সাইটের সাবডোমেন হয়।
 
-Or, to be more precise, one origin (domain/port/protocol triplet) can't access the content from another one. So even if we have a subdomain, or just another port, these are different origins with no access to each other.
+যদি আমরা অন্য একটি ডোমেনের script ব্যবহার করি, এবং যদি ঐ স্ক্রিপ্টে কোন এরর সংগঠিত হয়, তাহলে এরর এর বিস্তারিত জানতে পারব না।
 
-This rule also affects resources from other domains.
-
-If we're using a script from another domain, and there's an error in it, we can't get error details.
-
-For example, let's take a script `error.js` that consists of a single (bad) function call:
+যেমন, আমাদের একটি স্ক্রিপ্ট আছে `error.js` যা একটি অসংজ্ঞায়িত ফাংশনকে কল করে:
 ```js
 // 📁 error.js
 noSuchFunction();
 ```
 
-Now load it from the same site where it's located:
+এখন চলুন, আমরা একই অরিজিন হতে তাদের লোড করি:
 
 ```html run height=0
 <script>
@@ -130,14 +126,14 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script src="/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
-We can see a good error report, like this:
+এখন আমরা একটি বিস্তারিত এরর মেসেজ দেখব, এমন:
 
 ```
 Uncaught ReferenceError: noSuchFunction is not defined
 https://javascript.info/article/onload-onerror/crossorigin/error.js, 1:1
 ```
 
-Now let's load the same script from another domain:
+এখন চলুন ভিন্ন ডোমেইন হতে স্ক্রিপ্টটি লোড করি:
 
 ```html run height=0
 <script>
@@ -148,40 +144,42 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
-The report is different, like this:
+এখন এরর মেসেজটি দেখাবে এমন:
 
 ```
 Script error.
 , 0:0
 ```
 
-Details may vary depending on the browser, but the idea is the same: any information about the internals of a script, including error stack traces, is hidden. Exactly because it's from another domain.
+মেসেজটি ব্রাউজারভেদে ভিন্ন হতে পারে, তবে এরর মেসেজের বিস্তারিত দেখব না, কেননা ভিন্ন ডোমেনের কন্টেন্ট আমরা অ্যাক্সেস করতে পারব না।
 
-Why do we need error details?
+কেন আমাদের বিস্তারিত এরর মেসেজ প্রয়োজন হতে পারে?
 
-There are many services (and we can build our own) that listen for global errors using `window.onerror`, save errors and provide an interface to access and analyze them. That's great, as we can see real errors, triggered by our users. But if a script comes from another origin, then there's not much information about errors in it, as we've just seen.
+অনেক সার্ভিস আছে (এমনকি আমরা নিজেরাও বানাতে পারি) যারা `window.onerror` এর মাধ্যমে এরর  ট্র্যাক করে এবং তা অ্যানালাইসিসের জন্য সংরক্ষন করে। এটি ইউজারদের দ্বারা লাইভে সংগঠিত হওয়া এরর সমূহ ট্র্যাক করতে সহায়তা করে। তবে যদি ভিন্ন অরিজিন হতে এরর সংগঠিত হয় তাহলে তা আমরা ট্র্যাক করতে পারব না।
 
-Similar cross-origin policy (CORS) is enforced for other types of resources as well.
+অন্যান্য রিসোর্সের জন্য cross-origin policy (CORS) প্রয়োগ করা হয়।
 
-**To allow cross-origin access, the `<script>` tag needs to have the `crossorigin` attribute, plus the remote server must provide special headers.**
+**cross-origin অ্যাক্সেসের জন্য, `<script>` ট্যাগে `crossorigin` নামের বিশেষ অ্যাট্রিবিউটযুক্ত করতে হবে, এবং রিমোর্ট সার্ভার হতে একটি বিশেষ হেডার প্রভাইড করবে**
 
-There are three levels of cross-origin access:
+cross-origin অ্যাক্সেসের তিনটি ধাপ আছে:
 
-1. **No `crossorigin` attribute** -- access prohibited.
-2. **`crossorigin="anonymous"`** -- access allowed if the server responds with the header `Access-Control-Allow-Origin` with `*` or our origin. Browser does not send authorization information and cookies to remote server.
+1. **`crossorigin` অ্যাট্রিবিউটব্যতীত** -- অ্যাক্সেস বাধাপ্রাপ্ত হবে।
+2. **`crossorigin="anonymous"`** -- যদি রিমোট সার্ভার `Access-Control-Allow-Origin` এর মান `*` রেস্পন্ড করে তাহলে অ্যাক্সেস হবে।  এক্ষেত্রে ব্রাউজার সার্ভারে কোন ধরণের অথরাইজেশন ইনফরমেশন বা cookies সেন্ড করবে না।
 3. **`crossorigin="use-credentials"`** -- access allowed if the server sends back the header `Access-Control-Allow-Origin` with our origin and `Access-Control-Allow-Credentials: true`. Browser sends authorization information and cookies to remote server.
 
 ```smart
-You can read more about cross-origin access in the chapter <info:fetch-crossorigin>. It describes the `fetch` method for network requests, but the policy is exactly the same.
+cross-origin অ্যাক্সেস নিয়ে আরো বিস্তারিত <info:fetch-crossorigin>। এখানে নেটওয়ার্ক রিক্যুয়েস্টে `fetch` মেথড কিভাবে কাজ করে তা বর্ণনা করা হয়েছে, এক্ষেত্রে এটিও অনুরুপ কাজ করে।
 
-Such thing as "cookies" is out of our current scope, but you can read about them in the chapter <info:cookie>.
+যদিও আমরা এখনো "cookies" সম্পর্কে জানিনা, তবে আপনি চাইলে এই অধ্যায়ে বিস্তারিত জানতে পারবেন <info:cookie>।
 ```
 
-In our case, we didn't have any crossorigin attribute. So the cross-origin access was prohibited. Let's add it.
+উপরের উদাহরণে আমরা কোন `crossorigin` অ্যাট্রিবিউট সংযুক্ত করিনি। তাই cross-origin অ্যাক্সেস বাধাপ্রাপ্ত হবে। চলুন এটি যোগ করি।
 
-We can choose between `"anonymous"` (no cookies sent, one server-side header needed) and `"use-credentials"` (sends cookies too, two server-side headers needed).
+`crossorigin` এর ভ্যালু হিসেবে `"anonymous"` বা `"use-credentials"` সেট করতে পারি। এক্ষেত্রে `"anonymous"` এর জন্য কোন cookies সেন্ড হবে না এবং শুধুমাত্র সার্ভার-সাইড হেডার প্রয়োজন হবে অন্যদিকে `"use-credentials"` এর জন্য cookies সেন্ড হবে ও অরিজিন এবং সার্ভার উভয়েই হেডার প্রয়োজন হবে।
 
-If we don't care about cookies, then `"anonymous"` is the way to go:
+যদি আমাদের cookies মূখ্য না হয়, তাহলে `"anonymous"` সেট করলেই হবে:
+
+এখন, ধরে নিন রিমোট সার্ভার আমাদের সার্ভার `Access-Control-Allow-Origin` হেডারটি প্রদান করে। এখন আমরা রিমোট সার্ভারের এরর এর বিস্তারিত জানতে পারব।
 
 ```html run height=0
 <script>
@@ -192,15 +190,13 @@ window.onerror = function(message, url, line, col, errorObj) {
 <script *!*crossorigin="anonymous"*/!* src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
 ```
 
-Now, assuming that the server provides an `Access-Control-Allow-Origin` header, everything's fine. We have the full error report.
+## সারাংশ
 
-## Summary
+এক্সটার্নাল রিসোর্স লোড করে যেমন `<img>`, `<link>`, `<script>` এমন এলিমেন্টসমূহের লোডিং স্টেট ট্র্যাকের জন্য `load` এবং `error` নামের দুটি ইভেন্ট আছে:
 
-Images `<img>`, external styles, scripts and other resources provide `load` and `error` events to track their loading:
+- `load` যদি সঠিকভাবে লোড হয় তাহলে ট্রিগার হবে,
+- `error` যদি সঠিকভাবে লোড না হয় তাহলে ট্রিগার হবে।
 
-- `load` triggers on a successful load,
-- `error` triggers on a failed load.
+তবে `<iframe>` সর্বদা `load` ট্রিগার করবে যদিও রিসোর্স কোন 404 পেজ হয়।
 
-The only exception is `<iframe>`: for historical reasons it always triggers `load`, for any load completion, even if the page is not found.
-
-The `readystatechange` event also works for resources, but is rarely used, because `load/error` events are simpler.
+এছাড়াও `readystatechange` ইভেন্টের সাহায্যেও ট্র্যাক করা যায়, তবে এটি তেমন ব্যবহার করা হয় না, কেননা `load/error` ইভেন্টসমূহ আরো বেশি সহজবোধ্য।
