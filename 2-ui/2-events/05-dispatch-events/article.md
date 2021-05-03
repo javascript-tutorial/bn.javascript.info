@@ -1,37 +1,37 @@
-# Dispatching custom events
+# Dispatching কাস্টম ইভেন্ট
 
-We can not only assign handlers, but also generate events from JavaScript.
+জাভাস্ক্রিপ্টে শুধুমাত্র হ্যান্ডালার অ্যাসাইন করা ছাড়াও আমরা কাস্টম ইভেন্ট লিখতে পারি।
 
-Custom events can be used to create "graphical components". For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: `open` (menu open), `select` (an item is selected) and so on. Another code may listen for the events and observe what's happening with the menu.
+"graphical components" তৈরিতে আমরা কাস্টম ইভেন্টের সহায়তা নিতে পারি। উদাহরণস্বরূপ, একটি কাস্টম মেনু যার মধ্যে কি ধরণের ইভেন্ট সংগঠিত হচ্ছে তা আমরা ট্র্যাক করতে চাই: `open` (menu open), `select` (একটি আইটেম সিলেক্ট) ইত্যাদি। যার ফলে আমরা অন্যান্য কোডেও আমরা মেনুর মধ্যে কি ইভেন্ট সংগঠিত হচ্ছে তা ট্র্যাক করতে পারব।
 
-We can generate not only completely new events, that we invent for our own purposes, but also built-in ones, such as `click`, `mousedown` etc. That may be helpful for automated testing.
+সম্পূর্ন নতুন ইভেন্ট লিখার পরিবর্তে আমরা বিল্ট ইন ইভেন্টসমূহ যেমন, `click`, `mousedown` ইত্যাদি গুলোও লিখতে পারি। অটোমেটেড টেস্টিংয়ের জন্য এটি সহায়ক।
 
 ## Event constructor
 
-Build-in event classes form a hierarchy, similar to DOM element classes. The root is the built-in [Event](http://www.w3.org/TR/dom/#event) class.
+DOM ইলিমেন্ট ক্লাসের মত বিল্ট-ইন ইভেন্টের ক্লাস হায়ার্য়াকি আছে। বিল্ট-ইন রুট ইভেন্ট ক্লাস [Event](http://www.w3.org/TR/dom/#event)।
 
-We can create `Event` objects like this:
+`Event` অবজেক্ট এভাবে তৈরি করি:
 
 ```js
 let event = new Event(type[, options]);
 ```
 
-Arguments:
+আর্গুমেন্টস:
 
-- *type* -- event type, a string like `"click"` or our own like `"my-event"`.
-- *options* -- the object with two optional properties:
-  - `bubbles: true/false` -- if `true`, then the event bubbles.
-  - `cancelable: true/false` -- if `true`, then the "default action"  may be prevented. Later we'll see what it means for custom events.
+- *type* -- ইভেন্ট টাইপ, স্ট্রিং `"click"` অথবা আমাদের নিজস্ব ইভেন্ট নাম `"my-event"`।
+- *options* -- একটি অবজেক্ট যার দুটি প্রপার্টি আছে:
+  - `bubbles: true/false` -- যদি `true` হয়, ইভেন্ট bubbles হবে.
+  - `cancelable: true/false` -- যদি `true` হয়, তাহলে "default action"  বাদাপ্রাপ্ত হতে পারে। কাস্টম ইভেন্টে এটি দ্বারা কি বুঝায় তা আমরা পরে দেখব।
 
-  By default both are false: `{bubbles: false, cancelable: false}`.
+  ডিফল্টভাবে উভয়ই `false`: `{bubbles: false, cancelable: false}`.
 
 ## dispatchEvent
 
-After an event object is created, we should "run" it on an element using the call `elem.dispatchEvent(event)`.
+`Event` অবজেক্ট তৈরির পর, আমাদের কোন একটি এলিমেন্টের মেথড হিসেবে এটিকে "run" করাতে হবে এভাবে `elem.dispatchEvent(event)`।
 
-Then handlers react on it as if it were a regular browser event. If the event was created with the `bubbles` flag, then it bubbles.
+এরপর রেগুলার ব্রাউজার ইভেন্টের মত এর জন্য আমরা হ্যান্ডালার অ্যাসাইন করতে পারি। যদি আমরা `bubbles` ফ্ল্যাগ `true` পাঠায়, তাহলে এটি bubbles হবে।
 
-In the example below the `click` event is initiated in JavaScript. The handler works same way as if the button was clicked:
+নিচের উদাহরণটিতে `click` ইভেন্টটি জাভাস্ক্রিপ্টের সাহায্যে ইনিশিয়ালাইজ হবে। এছাড়াও বাটনে ক্লিক করলেও হ্যান্ডালারটি কাজ করবে:
 
 ```html run no-beautify
 <button id="elem" onclick="alert('Click!');">Autoclick</button>
@@ -43,46 +43,46 @@ In the example below the `click` event is initiated in JavaScript. The handler w
 ```
 
 ```smart header="event.isTrusted"
-There is a way to tell a "real" user event from a script-generated one.
+ইভেন্ট কি অটোমেটেড নাকি "real" ইউজারের মাধ্যমে কল হচ্ছে তা আমরা পার্থক্য করতে পারি।
 
-The property `event.isTrusted` is `true` for events that come from real user actions and `false` for script-generated events.
+`event.isTrusted` এটি "real" ইউজারের জন্য `true` হবে অন্যথায় স্ক্রিপ্ট জেনারেটর ইভেন্টের জন্য `false` হবে।
 ```
 
-## Bubbling example
+## Bubbling এর উদাহরণ
 
-We can create a bubbling event with the name `"hello"` and catch it on `document`.
+আমরা একটি কাস্টম ইভেন্ট `"hello"` লিখব যা bubbling হবে এবং আমরা এটি `document` এ ক্যাচ করব।
 
-All we need is to set `bubbles` to `true`:
+এজন্য আমাদের `bubbles` প্রপার্টি এর মান `true` পাঠাতে হবে:
 
 ```html run no-beautify
 <h1 id="elem">Hello from the script!</h1>
 
 <script>
-  // catch on document...
+  // document এর মাধ্যমে ধরা...
   document.addEventListener("hello", function(event) { // (1)
     alert("Hello from " + event.target.tagName); // Hello from H1
   });
 
-  // ...dispatch on elem!
+  // ...elem থেকে dispatch!
   let event = new Event("hello", {bubbles: true}); // (2)
   elem.dispatchEvent(event);
 
-  // the handler on document will activate and display the message.
+  // হ্যান্ডেলারটি ডকুমেন্ট হতে ক্যাচ করব।
 
 </script>
 ```
 
 
-Notes:
+নোট:
 
-1. We should use `addEventListener` for our custom events, because `on<event>` only exists for built-in events, `document.onhello` doesn't work.
-2. Must set `bubbles:true`, otherwise the event won't bubble up.
+1. কাস্টম ইভেন্টের জন্য আমরা অবশ্যই `addEventListener` ব্যবহার করব, কেননা `on<event>` শুধুমাত্র বিল্ট-ইনের জন্য কাজ করে, এছাড়াও `document.onhello` ও কাজ করবে না।
+2. অবশ্যই `bubbles:true` সেট করুন, অন্যথায় bubbling হবে না।
 
-The bubbling mechanics is the same for built-in (`click`) and custom (`hello`) events. There are also capturing and bubbling stages.
+bubbling মেকানিজম বিল্ট-ইন (`click`) এবং কাস্টম ইভেন্ট উভয়ের জন্য (`hello`) একইভাবে কাজ করে। উভয়ই ক্ষেত্রে capturing and bubbling ধাপ আছে।
 
-## MouseEvent, KeyboardEvent and others
+## MouseEvent, KeyboardEvent এবং অন্যান্য
 
-Here's a short list of classes for UI Events from the [UI Event specification](https://www.w3.org/TR/uievents):
+এখানে UI রিলেটেড কিছু ইভেন্ট ক্লাস বর্ণিত হল [UI Event specification](https://www.w3.org/TR/uievents):
 
 - `UIEvent`
 - `FocusEvent`
@@ -91,11 +91,11 @@ Here's a short list of classes for UI Events from the [UI Event specification](h
 - `KeyboardEvent`
 - ...
 
-We should use them instead of `new Event` if we want to create such events. For instance, `new MouseEvent("click")`.
+আমাদের এধরণের কোন UI ইভেন্ট লিখা লাগলে আমরা `new Event` এর পরিবর্তে UI ইভেন্ট ক্লাসগুলো লিখব। যেমন, `new MouseEvent("click")`।
 
-The right constructor allows to specify standard properties for that type of event.
+কনস্ট্রাকটর সমূহে আমরা স্ট্যান্ডার্ড অনুযায়ী প্রপার্টি সেট করতে পারি।
 
-Like `clientX/clientY` for a mouse event:
+যেমন মাউস ইভেন্টের জন্য `clientX/clientY`:
 
 ```js run
 let event = new MouseEvent("click", {
@@ -110,40 +110,40 @@ alert(event.clientX); // 100
 */!*
 ```
 
-Please note: the generic `Event` constructor does not allow that.
+দয়া কর মনে রাখুন: সাধারণ `Event` কন্সট্রাক্টর এটি সাপোর্ট করে না।
 
-Let's try:
+চলুন চেষ্টা করা যাক:
 
 ```js run
 let event = new Event("click", {
-  bubbles: true, // only bubbles and cancelable
-  cancelable: true, // work in the Event constructor
+  bubbles: true, // শুধুমাত্র bubbles ও cancelable কাজ করবে
+  cancelable: true,
   clientX: 100,
   clientY: 100
 });
 
 *!*
-alert(event.clientX); // undefined, the unknown property is ignored!
+alert(event.clientX); // undefined, অচেনা প্রপার্টি ইগনোর হবে!
 */!*
 ```
 
-Technically, we can work around that by assigning directly `event.clientX=100` after creation. So that's a matter of convenience and following the rules. Browser-generated events always have the right type.
+তবে টেকনিক্যালি, আমরা ইভেন্ট অবজেক্ট তৈরির পর এভাবে অ্যাসাইন করতে পারি `event.clientX=100`। সুতরাং এভাবে লিখা সুবিধাজনক।
 
-The full list of properties for different UI events is in the specification, for instance, [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+UI ইভেন্ট সম্পর্কে আরো বিস্তারিত জানতে স্পেসিফিকেশন দেখুন, যেমন [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
 
-## Custom events
+## কাস্টম ইভেন্টস
 
-For our own, completely new events types like `"hello"` we should use `new CustomEvent`. Technically [CustomEvent](https://dom.spec.whatwg.org/#customevent) is the same as `Event`, with one exception.
+আমাদের কাস্টম ইভেন্ট তৈরিতে `new CustomEvent` ক্লাস ব্যবহার করা উচিত যেমন `"hello"` এর জন্য। টেকনিক্যালি [CustomEvent](https://dom.spec.whatwg.org/#customevent) `Event` এর মত, তবে এর একটি পার্থক্য আছে।
 
-In the second argument (object) we can add an additional property `detail` for any custom information that we want to pass with the event.
+দ্বিতীয় আর্গুমেন্ট (object) এ আমরা অতিরিক্ত একটি প্রপার্টি `detail` সেট করতে পারি, যার মাধ্যমে আমরা ইভেন্ট এ কাস্টম ডাটা পাঠাতে পারি।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html run refresh
 <h1 id="elem">Hello for John!</h1>
 
 <script>
-  // additional details come with the event to the handler
+  // হ্যান্ডালারে ইভেন্ট অবজেক্টে আমরা একটি অতিরিক্ত প্রপার্টি detail পাই
   elem.addEventListener("hello", function(event) {
     alert(*!*event.detail.name*/!*);
   });
@@ -156,25 +156,25 @@ For instance:
 </script>
 ```
 
-The `detail` property can have any data. Technically we could live without, because we can assign any properties into a regular `new Event` object after its creation. But `CustomEvent` provides the special `detail` field for it to evade conflicts with other event properties.
+`detail` প্রপার্টিতে যেকোন ডাটা সেট করতে পারি। টেকনিক্যালি আমরা `CustomEvent` ছাড়াও `new Event` অবজেক্ট ইনিশিয়ালাইজের পর নতুন কোন প্রপার্টিতে ডাটা সেট করতে পারি। কিন্তু `CustomEvent` আমাদের একটি স্পেশাল ইউনিক প্রপার্টি `detail` দেই যার ফলে আমরা প্রপার্টির নাম কনফ্লিক্ট হওয়া এড়াতে পারি।
 
-Besides, the event class describes "what kind of event" it is, and if the event is custom, then we should use `CustomEvent` just to be clear about what it is.
+পাশাপাশি, স্পেসিফিক ইভেন্ট ক্লাস সমূহের দ্বারা ইভেন্ট ডিক্লেয়ার করলে তা আমাদের কাছে সহজে বোধগম্য, এবং ইভেন্ট যদি কাস্টম ইভেন্ট হয়, তাহলে আমাদের `CustomEvent` ব্যবহার করা উচিত যার ফলে আমরা বুঝতে পারি এটি কি কাজ করছে।
 
 ## event.preventDefault()
 
-Many browser events have a "default action", such as navigating to a link, starting a selection, and so on.
+অনেক ব্রাউজার ইভেন্টের কিছু "default action" আছে, যেমন লিংক নেভিগেশন, সিলেকশন, ইত্যাদি।
 
-For new, custom events, there are definitely no default browser actions, but a code that dispatches such event may have its own plans what to do after triggering the event.
+তবে কাস্টম ইভেন্টের জন্য, কোন ধরণের ব্রাউজার "default action" নেই, কিন্তু কাস্টম ইভেন্টের জন্য ইভেন্ট সংগঠিত হওয়ার পর ব্রাউজার কি আচরণ করবে তা আমরা নির্ধারণ করতে চাই।
 
-By calling `event.preventDefault()`, an event handler may send a signal that those actions should be canceled.
+`event.preventDefault()` কলের মাধ্যমে, হ্যান্ডেলারে একটি সংকেত পাঠাতে পারি যা দ্বারা আমরা অ্যাকশনসমূহ ক্যান্সেল করতে পারি।
 
-In that case the call to `elem.dispatchEvent(event)` returns `false`. And the code that dispatched it knows that it shouldn't continue.
+এজন্য `elem.dispatchEvent(event)` কল করুন যা `false` রিটার্ন করে। এবং আমরা এর উপর ভিত্তি করে পরবর্তী কোড রান হবে কি হবে না তা সিদ্ধান্ত নিতে পারি।
 
-Let's see a practical example - a hiding rabbit (could be a closing menu or something else).
+একটি বাস্তবিক উদাহরণ দেখা যাক - hiding rabbit।
 
-Below you can see a `#rabbit` and `hide()` function that dispatches `"hide"` event on it, to let all interested parties know that the rabbit is going to hide.
+নিচে আমরা একটি `#rabbit` এলিমেন্ট এবং `hide()` ফাংশন দেখছি যা `"hide"` ইভেন্টের মাধ্যমে dispatches হয়। যার মাধ্যমে আমরা ইউজার থেকে নিশ্চিত হয়ে নিতে পারি আমরা কি খরগোশকে দেখাব নাকি হাইড করব।
 
-Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+`rabbit.addEventListener('hide',...)` এর মাধ্যমে আমাদের অ্যাকশন বাধাপ্রাপ্ত হবে কিনা তা আমরা যাচাই করব, এবং যদি `preventDefault` এর প্রয়োজন হয়, তাহলে `event.preventDefault()` কল করুন। অন্যথায় খরগোশটি হাইড হবে না:
 
 ```html run refresh autorun
 <pre id="rabbit">
@@ -189,7 +189,7 @@ Any handler can listen for that event with `rabbit.addEventListener('hide',...)`
 <script>
   function hide() {
     let event = new CustomEvent("hide", {
-      cancelable: true // without that flag preventDefault doesn't work
+      cancelable: true // এটি ছাড়া preventDefault কাজ করবে না
     });
     if (!rabbit.dispatchEvent(event)) {
       alert('The action was prevented by a handler');
@@ -206,17 +206,17 @@ Any handler can listen for that event with `rabbit.addEventListener('hide',...)`
 </script>
 ```
 
-Please note: the event must have the flag `cancelable: true`, otherwise the call `event.preventDefault()` is ignored.
+দয়া কর মনে রাখুন: এজন্য আমাদের `cancelable: true` প্রপার্টি সেট করতে হবে, অন্যথায় `event.preventDefault()` কাজ করবে না।
 
 ## Events-in-events are synchronous
 
-Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then it's handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+সাধারণত ইভেন্ট সমূহ কিউ হিসেবে রান হয়। যেমন: ব্রাউজারে `onclick` ইভেন্ট সংগঠিত হওয়ার পর `mousemove` ইভেন্ট সংগঠিত হল, তাহলে `onclick` হ্যান্ডালার প্রসেস হওয়ার পর `mousemove` হ্যান্ডেলার কল হবে।
 
-The notable exception is when one event is initiated from within another one, e.g. using `dispatchEvent`. Such events are processed immediately: the new event handlers are called, and then the current event handling is resumed.
+তবে ব্যতিক্রম হল যখন একটি ইভেন্ট থেকে অন্য একটি ইভেন্ট কল করা হয়, যেমন `dispatchEvent` এর মাধ্যমে। এই ধরণের ইভেন্ট এর হ্যান্ডেলার সাথে সাথে প্রসেসড হয় এবং এটি শেষ হওয়ার পর ঐ হ্যান্ডেলারের বাকী কোড এক্সিকিউট হয়।
 
-For instance, in the code below the `menu-open` event is triggered during the `onclick`.
+উদাহরণস্বরূপ, নিচের কোডে `onclick` হ্যান্ডেলার কল হওয়ার সময় `menu-open` ইভেন্ট dispatch হয়।
 
-It's processed immediately, without waiting for `onclick` handler to end:
+এবং `onclick` ইভেন্টের হ্যান্ডেলার প্রসেসিং শেষ হওয়ার পূর্বে `menu-open` ইভেন্টের হ্যান্ডেলার সাথে সাথে এক্সিকিউট হবে:
 
 
 ```html run autorun
@@ -233,20 +233,20 @@ It's processed immediately, without waiting for `onclick` handler to end:
     alert(2);
   };
 
-  // triggers between 1 and 2
+  // 1 এবং 2 এর মাঝে এটি এক্সিকিউট হবে
   document.addEventListener('menu-open', () => alert('nested'));
 </script>
 ```
 
-The output order is: 1 -> nested -> 2.
+আউটপুট হবে: 1 -> nested -> 2।
 
-Please note that the nested event `menu-open` is caught on the `document`. The propagation and handling of the nested event is finished before the processing gets back to the outer code (`onclick`).
+দয়া করে নোট করুন নেস্টেড ইভেন্ট `menu-open` এ ইভেন্ট bubble হবে এবং `document` হতে একে ধরা হবে। এবং হ্যান্ডেলারটি রান হওয়ার পর (`onclick`) এর বাকি কোড প্রসেস হবে।
 
-That's not only about `dispatchEvent`, there are other cases. If an event handler calls methods that trigger other events -- they are processed synchronously too, in a nested fashion.
+এটি শুধুমাত্র `dispatchEvent` এর জন্য না অন্যান্য ক্ষেত্রেও এভাবে কাজ করে। যদি ইভেন্ট হ্যান্ডেলার কোন মেথড কল করে এবং এটি অন্য ইভেন্ট ট্রিগার করে তাহলে তারাও সিঙ্ক্রোনাসলি প্রসেসড হয়।
 
-Let's say we don't like it. We'd want `onclick` to be fully processed first, independently from `menu-open` or any other nested events.
+এখন ধরুন আমরা এভাবে প্রসেসড করতে চাই না। আমরা চাই `onclick` সম্পূর্ন প্রসেস হওয়ার পর, `menu-open` ইভেন্ট হ্যান্ডেলার কল হবে।
 
-Then we can either put the `dispatchEvent` (or another event-triggering call) at the end of `onclick` or, maybe better, wrap it in the zero-delay `setTimeout`:
+তাহলে আমরা `dispatchEvent` কে `onclick` হ্যান্ডেলারের শেষে কল করব অথবা আমরা এটিকে `setTimeout` ফাংশনের মাধ্যমে জিরো-সেকেন্ড ডিলে এর মাধ্যমে কল করব:
 
 ```html run
 <button id="menu">Menu (click me)</button>
@@ -266,29 +266,29 @@ Then we can either put the `dispatchEvent` (or another event-triggering call) at
 </script>
 ```
 
-Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `mouse.onclick`, so event handlers are totally separate.
+এখন `dispatchEvent` অ্যাসিঙ্ক্রোনাসলি কল হবে, সুতরাং `mouse.onclick` সম্পূর্ন প্রসেস হওয়ার পর `menu-open` ইভেন্ট হ্যান্ডেলার কল হবে।
 
-The output order becomes: 1 -> 2 -> nested.
+আউটপুট হবে: 1 -> 2 -> nested.
 
-## Summary
+## সারাংশ
 
-To generate an event from code, we first need to create an event object.
+কাস্টম ইভেন্টের জন্য আমাদের একটি ইভেন্ট অবজেক্ট তৈরি করতে হবে।
 
-The generic `Event(name, options)` constructor accepts an arbitrary event name and the `options` object with two properties:
-- `bubbles: true` if the event should bubble.
-- `cancelable: true` if the `event.preventDefault()` should work.
+`Event(name, options)` ক্লাস এর দুটি আর্গুমেন্টস আছে একটি স্ট্রিং যা ইভেন্টের নাম নির্দেশ করে অন্যটি একটি অবজেক্ট `options` যার দুটি প্রপার্টি:
+- `bubbles: true` হলে ইভেন্টটি বাবল হবে।
+- `cancelable: true` হলে `event.preventDefault()` কাজ করবে।
 
-Other constructors of native events like `MouseEvent`, `KeyboardEvent` and so on accept properties specific to that event type. For instance, `clientX` for mouse events.
+অন্যান্য UI ইভেন্ট যেমন `MouseEvent`, `KeyboardEvent` ইত্যাদি স্পেসিফিকেশন অনুযায়ী প্রপার্টি অ্যাক্সেপ্ট করে। যেমন, মাউস ইভেন্টের জন্য `clientX`।
 
-For custom events we should use `CustomEvent` constructor. It has an additional option named `detail`, we should assign the event-specific data to it. Then all handlers can access it as `event.detail`.
+কাস্টম ইভেন্টের জন্য আমরা `CustomEvent` কনস্ট্রাকটর ব্যবহার করি। এর একটি স্পেশাল প্রপার্টি আছে `detail`, যার মাধ্যমে আমরা ডাটা পাঠাতে পারি এবং হ্যান্ডেলারে ডাটা `event.detail` ধরতে পারি।
 
-Despite the technical possibility of generating browser events like `click` or `keydown`, we should use them with great care.
+ব্রাউজার ইভেন্ট যেমন `click` বা `keydown` এই টাইপের ইভেন্ট গুলো স্ক্রিপ্টের মাধ্যমে রান করানোর সময় আমাদের সতর্ক থাকতে হবে।
 
-We shouldn't generate browser events as it's a hacky way to run handlers. That's bad architecture most of the time.
+ব্রাউজার ইভেন্টগুলো স্ক্রিপ্টের মাধ্যমে রান করানো থেকে যথাসম্ভব বিরত থাকতে হবে, কেননা এটি বেশিরভাগ সময় *bad architecture* হিসেবে গণ্য হয়।
 
-Native events might be generated:
+নেটিভ ইভেন্টসমূহ এভাবে জেনারেট হতে পারে:
 
-- As a dirty hack to make 3rd-party libraries work the needed way, if they don't provide other means of interaction.
-- For automated testing, to "click the button" in the script and see if the interface reacts correctly.
+- 3rd-party লাইব্রেরি গুলোর জন্য।
+- অটোমেটেড টেস্টিংয়ের জন্য, স্ক্রিপ্টের মাধ্যমে "click the button" রান করিয়ে দেখব আমাদের ইন্টারফেস সঠিকভাবে কাজ করছে কিনা।
 
-Custom events with our own names are often generated for architectural purposes, to signal what happens inside our menus, sliders, carousels etc.
+কাস্টম ইভেন্ট সমূহ জেনারেট করা হয় *good architecture* এর জন্য, আমাদের কম্পোনেন্টে কি ঘটছে তা আমরা জানতে পারি।
