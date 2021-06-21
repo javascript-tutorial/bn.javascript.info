@@ -1,6 +1,6 @@
-A positive number with an optional decimal part is (per previous task): `pattern:\d+(\.\d+)?`.
+আমরা পূর্বের চ্যাপ্টারে ডেসিমেল সংখ্যা কে অপশনাল রেখে খুঁজার উপায় দেখেছিলাম: `pattern:\d+(\.\d+)?`।
 
-Let's add the optional `pattern:-` in the beginning:
+ঋণাত্নক সংখ্যা খুঁজার জন্য শুরুতে `pattern:-` কে অপশনাল হিসেবে যোগ করি:
 
 ```js run
 let regexp = /-?\d+(\.\d+)?/g;

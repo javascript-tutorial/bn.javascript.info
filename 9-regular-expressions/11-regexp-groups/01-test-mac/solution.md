@@ -1,21 +1,21 @@
-A two-digit hex number is `pattern:[0-9a-f]{2}` (assuming the flag `pattern:i` is set).
+একটি দুই অঙ্কবিশিষ্ট হেক্সাডেসিমেল নাম্বারের প্যাটার্ন হল `pattern:[0-9a-f]{2}` (ধরে নিই, `pattern:i` ফ্ল্যাগ সেট আছে)।
 
-We need that number `NN`, and then `:NN` repeated 5 times (more numbers);
+সুতরাং আমাদের এই নাম্বারটি `NN` লাগবে, এবং এটির `:NN` ৫ বার পুনরাবৃত্তি হবে;
 
-The regexp is: `pattern:[0-9a-f]{2}(:[0-9a-f]{2}){5}`
+সুতরাং রেগুলার এক্সপ্রেশনটি হবে: `pattern:[0-9a-f]{2}(:[0-9a-f]{2}){5}`
 
-Now let's show that the match should capture all the text: start at the beginning and end at the end. That's done by wrapping the pattern in `pattern:^...$`.
+এখন চলুন ম্যাচটি শুরু থেকে শেষ পর্যন্ত সকল পুরো লাইনটি পাঠ করার উপযোগী করি। এজন্য সম্পূর্ন প্যাটার্নটি  `pattern:^...$` এর মধ্যে লিখি।
 
-Finally:
+শেষ পর্যন্ত:
 
 ```js run
 let regexp = /^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$/i;
 
-alert( regexp.test('01:32:54:67:89:AB') ); // true
+alert( regexp.test('01:32:54:67:89:AB') ); // সত্য
 
-alert( regexp.test('0132546789AB') ); // false (no colons)
+alert( regexp.test('0132546789AB') ); // মিথ্যা (কোলন নেয়)
 
-alert( regexp.test('01:32:54:67:89') ); // false (5 numbers, need 6)
+alert( regexp.test('01:32:54:67:89') ); // মিথ্যা (৫টি নাম্বার, অবশ্যই ৬টি হতে হবে)
 
-alert( regexp.test('01:32:54:67:89:ZZ') ) // false (ZZ in the end)
+alert( regexp.test('01:32:54:67:89:ZZ') ) // মিথ্যা (শেষে ZZ)
 ```

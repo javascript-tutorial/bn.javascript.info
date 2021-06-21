@@ -1,11 +1,11 @@
-# Find all numbers
+# সকল নাম্বার খুঁজুন
 
-Write a regexp that looks for all decimal numbers including integer ones, with the floating point and negative ones.
+সকল ডেসিমেল (পূর্ণ সংখ্যা এবং ঋণাত্নক) সংখ্যা খুঁজার একটি রেগুলার এক্সপ্রেশন লিখুন।
 
-An example of use:
+উদাহরণস্বরুপ:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন লিখুন/g;
 
 let str = "-1.5 0 2 -123.4.";
 
