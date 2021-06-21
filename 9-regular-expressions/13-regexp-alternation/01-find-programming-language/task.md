@@ -1,11 +1,11 @@
-# Find programming languages
+# প্রোগ্রামিং ল্যাংগুয়েজ অনুসন্ধান
 
-There are many programming languages, for instance Java, JavaScript, PHP, C, C++.
+বর্তমানে অনেক প্রোগ্রামিং ল্যাংগুয়েজ আছে, যেমন Java, JavaScript, PHP, C, C++।
 
-Create a regexp that finds them in the string `subject:Java JavaScript PHP C++ C`:
+একটি রেগুলার এক্সপ্রেশন লিখুন যা দ্বারা এদের খুঁজে পাওয়া যায় `subject:Java JavaScript PHP C++ C`:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন/g;
 
 alert("Java JavaScript PHP C++ C".match(regexp)); // Java JavaScript PHP C++ C
 ```

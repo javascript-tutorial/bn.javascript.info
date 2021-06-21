@@ -1,28 +1,28 @@
-# Find quoted strings
+# স্ট্রিংয়ে উক্তি খুঁজা
 
-Create a regexp to find strings in double quotes `subject:"..."`.
+একটি রেগুলার এক্সপ্রেশন লিখুন যা স্ট্রিংয়ে উক্তি খুঁজে `subject:"..."`।
 
-The strings should support escaping, the same way as JavaScript strings do. For instance, quotes can be inserted as `subject:\"` a newline as `subject:\n`, and the slash itself as `subject:\\`.
+স্ট্রিংটি অবশ্যই জাভাস্ক্রিপ্ট স্ট্রিংয়ের মত এস্কেপিং সাপোর্ট করবে, উক্তিটির মধ্যে উদ্ধৃতি চিহ্ন  `subject:\"` বা নিউলাইন ক্যারাক্টার থাকবে `subject:\n` এবং স্ল্যাশ `subject:\\` থাকবে।
 
 ```js
 let str = "Just like \"here\".";
 ```
 
-Please note, in particular, that an escaped quote `subject:\"` does not end a string.
+আমাদের মনে রাখা উচিত যে, উক্তির মাঝে  উদ্ধৃতি চিহ্ন থাকলে `subject:\"` তা দ্বারা বুঝায় উক্তিটি শেষ হয়নি।
 
-So we should search from one quote to the other ignoring escaped quotes on the way.
+সুতরাং অনুসন্ধানের সময় আমাদের উক্তির মাঝে এস্কেপিং উদ্ধৃতি চিহ্নগুলোও খুঁজতে হবে।
 
-That's the essential part of the task, otherwise it would be trivial.
+এটিই আমাদের এই টাস্কের জন্য কঠিন অংশ, অন্যথায় এটি একটি সহজ টাস্ক।
 
-Examples of strings to match:
+উদাহরণস্বরূপ এইগুলো দেখুন:
 ```js
-.. *!*"test me"*/!* ..  
-.. *!*"Say \"Hello\"!"*/!* ... (escaped quotes inside)
-.. *!*"\\"*/!* ..  (double slash inside)
-.. *!*"\\ \""*/!* ..  (double slash and an escaped quote inside)
+.. *!*"test me"*/!* ..
+.. *!*"Say \"Hello\"!"*/!* ... (উক্তির ভেতরে এস্কেপিং উদ্ধৃতি চিহ্ন)
+.. *!*"\\"*/!* ..  (উক্তির ভেতরে দুটি স্ল্যাশ)
+.. *!*"\\ \""*/!* ..  (উক্তির ভেতরে দুটি স্ল্যাশ এবং এস্কেপিং উদ্ধৃতি চিহ্ন)
 ```
 
-In JavaScript we need to double the slashes to pass them right into the string, like this:
+জাভাস্ক্রিপ্টে  স্ট্রিংয়ের মাঝে ডাবল স্ল্যাশ এভাবে লিখতে হবে:
 
 ```js run
 let str = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';

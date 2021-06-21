@@ -18,7 +18,7 @@
 প্যারেন্টেসিস দ্বারা গ্রুপ ক্যারাক্টারগুলো একসাথে বুঝায়, সুতরাং `pattern:(go)+` দ্বারা প্রাপ্তমিলগুলো হতে পারে `match:go`, `match:gogo`, `match:gogogo` অনুরূপ আরো অনেক।
 
 ```js run
-alert( 'Gogogo now!'.match(/(go)+/i) ); // "Gogogo"
+alert( 'Gogogo now!'.match(/(go)+/ig) ); // "Gogogo"
 ```
 
 ### উদাহরণ: ডোমেন

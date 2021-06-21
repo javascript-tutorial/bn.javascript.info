@@ -1,11 +1,11 @@
 
-Opening tag is `pattern:\[(b|url|quote)\]`.
+শুরুর ট্যাগটি হবে `pattern:\[(b|url|quote)\]`।
 
-Then to find everything till the closing tag -- let's use the pattern `pattern:.*?` with flag `pattern:s` to match any character including the newline and then add a backreference to the closing tag.
+তারপর ট্যাগটি শেষ হওয়ার পূর্ব পর্যন্ত সকল কন্টেন্ট পেতে এটি `pattern:.*?` লিখি এবং নতুন লাইন সহ সকল ক্যারাক্টারের জন্য এই ফ্ল্যাগটি `pattern:s` ব্যবহার করি, অতঃপর শেষ ট্যাগটি লিখার জন্য ব্যাকরেফারেন্স ব্যবহার করি।
 
-The full pattern: `pattern:\[(b|url|quote)\].*?\[/\1\]`.
+সম্পূর্ন প্যাটার্নটি হবে: `pattern:\[(b|url|quote)\].*?\[/\1\]`।
 
-In action:
+যেমন:
 
 ```js run
 let regexp = /\[(b|url|quote)\].*?\[\/\1\]/gs;
@@ -20,4 +20,4 @@ let str = `
 alert( str.match(regexp) ); // [b]hello![/b],[quote][url]http://google.com[/url][/quote]
 ```
 
-Please note that besides escaping `pattern:[` and `pattern:]`, we had to escape a slash for the closing tag `pattern:[\/\1]`, because normally the slash closes the pattern.
+আমরা এই বন্ধনী `pattern:[` এবং `pattern:]` এর পূর্বে ব্যাকস্ল্যাশ দ্বারা এস্কেপিং করেছি, অনুরূপভাবে শেষ ট্যাগটিকেও `pattern:[\/\1]` এস্কেপিং করা লাগবে, কেননা স্ল্যাশ দ্বারা প্যাটার্নের শেষ বুঝায়।

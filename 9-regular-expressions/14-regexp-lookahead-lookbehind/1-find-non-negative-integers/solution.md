@@ -1,9 +1,9 @@
 
-The regexp for an integer number is `pattern:\d+`.
+পূর্ণসংখ্যার রেগুলার এক্সপ্রেশন হল `pattern:\d+`।
 
-We can exclude negatives by prepending it with the negative lookahead: `pattern:(?<!-)\d+`.
+আমরা ঋণাত্নক সংখ্যাগুলোকে বাদ দিতে পারি নেগেটিভ লুকবিহাইন্ড এর মাধ্যমে: `pattern:(?<!-)\d+`।
 
-Although, if we try it now, we may notice one more "extra" result:
+সম্ভবত, আমরা এটি চেষ্টা করতে পারি, তবে এক্ষেত্রে আমরা "অতিরিক্ত" ফলাফল পাব:
 
 ```js run
 let regexp = /(?<!-)\d+/g;
@@ -13,11 +13,11 @@ let str = "0 12 -5 123 -18";
 console.log( str.match(regexp) ); // 0, 12, 123, *!*8*/!*
 ```
 
-As you can see, it matches `match:8`, from `subject:-18`. To exclude it, we need to ensure that the regexp starts matching a number not from the middle of another (non-matching) number.
+এখানে দেখতে পাচ্ছি, `subject:-18` এর মিল `match:8`। এটিকে বাদ দিতে হলে, আমাদের নিশ্চিত হতে হবে রেগুলার এক্সপ্রেশনটি অন্য সংখ্যার মাঝে যাচাই করবে না।
 
-We can do it by specifying another negative lookbehind: `pattern:(?<!-)(?<!\d)\d+`. Now `pattern:(?<!\d)` ensures that a match does not start after another digit, just what we need.
+এজন্য আমরা আরো একটি লুকবিহাইন্ড ব্যবহার করতে পারি: `pattern:(?<!-)(?<!\d)\d+`। এখন `pattern:(?<!\d)` এর দ্বারা নিশ্চিত করছি কোন ম্যাচ অন্য ডিজিটের মাঝ থেকে যাচাই করবে না।
 
-We can also join them into a single lookbehind here:
+আমরা একে একটি লুকবিহাইন্ডে সংযোগ করতে পারি:
 
 ```js run
 let regexp = /(?<![-\d])\d+/g;

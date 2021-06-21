@@ -2,9 +2,15 @@
 
 ---
 
+<<<<<<< HEAD
 # যেসব প্রোপার্টি ভ্যালু একটি সংখ্যা তাদের `2` দিয়ে গুন করুন
 
 একটি ফাংশন `multiplyNumeric(obj)` লিখুন যেটি `obj` এর সব সংখ্যাভিত্তিক/numeric প্রোপার্টিগুলো কে `2` দিয়ে গুন করে।
+=======
+# Multiply numeric property values by 2
+
+Create a function `multiplyNumeric(obj)` that multiplies all numeric property values of `obj` by `2`.
+>>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 উদাহরণস্বরূপঃ
 
