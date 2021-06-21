@@ -4,7 +4,7 @@ importance: 5
 
 # Get the attribute
 
-Write the code to select the element with `data-widget-name` attribute from the document and to read its value.
+`data-widget-name` অ্যাট্রিবিউট এর এলিমেন্টটি সিলেক্ট করে অ্যাট্রিবিউটের মান পড়ার কোড লিখুন।
 
 ```html run
 <!DOCTYPE html>
