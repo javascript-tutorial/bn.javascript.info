@@ -1,29 +1,29 @@
-# Nullish coalescing operator '??'
+# নাল-ঈশ কোয়েলেসিং অপারেটর '??'
 
 [recent browser="new"]
 
-Here, in this article, we'll say that an expression is "defined" when it's neither `null` nor `undefined`.
+এই নিবন্ধে আমরা কোন একটা এক্সপ্রেশান কে তখনি "সংজ্ঞায়িত" বলবো যখন সেটা `নাল` অথবা `অসঙ্গায়িত` কোনটাই হবে না ।
 
-The nullish coalescing operator is written as two question marks `??`.
+নাল-ঈশ কোয়েলেসিং অপারেটর কে দুইটি প্রশ্নবোধক চিহ্ন দ্বারা এভাবে লেখা হয় `??`।
 
-The result of `a ?? b` is:
-- if `a` is defined, then `a`,
-- if `a` isn't defined, then `b`.
+`a ?? b` এটার উত্তর হবে :
 
+- যখন `a` সংজ্ঞায়িত, তখন `a`,
+- যখন `a` সংজ্ঞায়িত না, তখন `b`।
 
-In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
+অন্যকথায় বলতে গেলে, যদি প্রথম আর্গুমেন্ট `নাল/অসঙ্গায়িত` না হয় তাহলে `??` এটা প্রথম আর্গুমেন্ট রিটার্ন করবে । তানাহলে , দ্বিতীয়টা রিটার্ন করবে।
 
-The nullish coalescing operator isn't anything completely new. It's just a nice syntax to get the first "defined" value of the two.
+নাল-ঈশ কোয়েলেসিং অপারেটরটা নতুন কিছু নয়। এটা শুধুমাত্র একটা সুন্দর সিনট্যাক্স যেটা দুইটা মানের মধ্যে প্রথম সংজ্ঞায়িত মানটা বের করে দেয়।
 
-We can rewrite `result = a ?? b` using the operators that we already know, like this:
+আমরা ইতোমধ্যে জানা এমন অপারেটর দ্বারা `result = a ?? b` এই এক্সপ্রেশেন টাকে লিখতে পারি, এই ভাবেঃ
 
 ```js
-result = (a !== null && a !== undefined) ? a : b;
+result = a !== null && a !== undefined ? a : b;
 ```
 
-The common use case for `??` is to provide a default value for a potentially undefined variable.
+সম্ভাব্য অসঙ্গায়িত ভ্যরিয়াবল এর ডিফল্ট মান সরবরাহ করা, `??` এটার সাধারণ ব্যাবহারের ক্ষেত্র ।
 
-For example, here we show `Anonymous` if `user` isn't defined:
+উদাহরণ হিসেবে বলা যায়, যদি `user` defined না হয় তাহলে আমরা `Anonymous`দেখাবো।
 
 ```js run
 let user;
@@ -31,7 +31,7 @@ let user;
 alert(user ?? "Anonymous"); // Anonymous
 ```
 
-Of course, if `user` had any value except `null/undefined`, then we would see it instead:
+অবশ্য, যদি `user` এ `নাল/অসঙ্গায়িত` ছাড়া অন্য কোন মান থাকে তাহলে আমরা `user` কেই দেখবো:
 
 ```js run
 let user = "John";
@@ -39,55 +39,56 @@ let user = "John";
 alert(user ?? "Anonymous"); // John
 ```
 
-We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
+একটা তালিকা থেকে প্রথম মান, যেটা `নাল/অসঙ্গায়িত` হবে না সেটাও আমরা `??` এর পর্যায়াক্রম ব্যবহার করে বের করতে পারি ।
 
-Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be undefined, if the user decided not to enter a value.
+মনে করি আমাদের কাছে একজন ব্যবহারকারী এর তথ্য আছে `firstName`, `lastName` অথবা `nickName` ভ্যারিয়েবল এ। সব গুলোর মানই অসঙ্গায়িত হতে পারি যদি ব্যবহারকারী কোন তথ্য না দেয়।
 
-We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are undefined.
+আমরা চাই যেকোনো একটি ভ্যারিয়েবল নিয়ে ব্যবহারকারীর নাম দেখাতে, অথবা "Anonymous" দেখাতে যদি সব ভ্যারিয়েবল অসঙ্গায়িত হয় ।
 
-Let's use the `??` operator for that:
+এটা করার জন্যে `??` অপারেটর টা ব্যবহার করা যাক:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first defined value:
+// প্রথম সংজ্ঞায়িত মানটি দেখাবে:
 *!*
 alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
 */!*
 ```
 
-## Comparison with ||
+## || এর সাথে তুলনা
 
-The OR `||` operator can be used in the same way as `??`, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
+অর `||` অপারেটর টা `??` এই অপারেটর এর মতই ব্যবহার করা যাবে,যা [পূর্ববর্তী অধ্যায়](info:logical-operators#or-finds-the-first-truthy-value) এ বর্ণনা করা হয়েছে।
 
-For example, in the code above we could replace `??` with `||` and still get the same result:
+উদাহরণ স্বরূপ, উপরের কোড এ আমরা `??` এটার পরিবর্তে `||` এটা ব্যবহার করলেও একই ফল পাওয়া যাবে:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first truthy value:
+// প্রথম ট্রুথি মান দেখাবে:
 *!*
 alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
-The OR `||` operator exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+অর `||` অপারেটর জাভাস্ক্রিপ্ট এর শুরু থেকেই ছিল, তাই ডেভোলপাররা এটিই ব্যবহার করে আসছে অনেক লম্বা সময় ধরে ।
 
-On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
+অপরপক্ষে কোয়েলেসিং অপারেটর `??` সাম্প্রতিক সময়ে কেবল মাত্রই যুক্ত হল জাভাস্ক্রিপ্ট এ এবং এর কারণ হলে `||` এটা দ্বারা মানুষজন খুশি ছিল না।
 
-The important difference between them is that:
-- `||` returns the first *truthy* value.
-- `??` returns the first *defined* value.
+দুইটার মধ্যে গুরুত্বপূর্ণ পার্থক্য হল:
 
-In other words, `||` doesn't distinguish between `false`, `0`, an empty string `""` and `null/undefined`. They are all the same -- falsy values. If any of these is the first argument of `||`, then we'll get the second argument as the result.
+- `||` এটা রিটার্ন করে প্রথম _ট্রুথি_ মান।
+- `??` এটা রিটার্ন করে প্রথম _সংজ্ঞায়িত_ মান।
 
-In practice though, we may want to use default value only when the variable is `null/undefined`. That is, when the value is really unknown/not set.
+অন্য কথায় বলতে গেলে, `||` এই অপারেটর `false`, `0`, an empty string `""` and `নাল/অসঙ্গায়িত`, এগুলোর মধ্যে কোন পার্থক্য করে না। এর এগুলা সব একই -- ফলছি ভ্যালু। এগুলোর কোনটা যদি `||` এই অপারেটর এর প্রথম আর্গুমেন্ট হিসেবে থাকে তাহলে আমরা ফলাফল হিসেবে দ্বিতীয় আর্গুমেন্ট টা পাবো।
 
-For example, consider this:
+বাস্তবিক ক্ষেত্রে, আমরা হয়তোবা ডিফল্ট চাইব তখনি যখন ভ্যরিয়েবল এর মান `নাল/অসঙ্গায়িত` হয়। অর্থাৎ মান আসলে অজানা বা ঠিক করে দেওয়া হয় নি ।
+
+উদাহরণস্বরূপ, এটি বিবেচনা করি:
 
 ```js run
 let height = 0;
@@ -96,71 +97,71 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-- The `height || 100` checks `height` for being a falsy value, and it really is.
-    - so the result is the second argument, `100`.
-- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
-    - so the result is `height` "as is", that is `0`.
+- `height || 100` এটি দেখে যে `height` ফলছি ভ্যালু কিনা এবং ফলছি ভ্যালু হিসেবেই পায় ।
+  - তাই উত্তর হল দ্বিতীয় আর্গুমেন্ট, `100`।
+- `height ?? 100` এটি দেখে যে `height` `নাল/অসঙ্গায়িত` কিনা এবং দেখে যে এটি এমন না ।
+  - তাই উত্তর হিসেবে `height` এর মান দেখায়, যেটা হল `0`।
 
-If the zero height is a valid value, that shouldn't be replaced with the default, then `??` does just the right thing.
+যদি শূন্য উচ্চতা একটি বৈধ মান হয়ে যেটি কিনা ডিফল্ট মান দ্বারা পরিবর্তিত হবে না সেক্ষেত্রে `??` এই অপারেটর টা যথার্থ কাজ করছে ।
 
-## Precedence
+## প্রাধান্য
 
-The precedence of the `??` operator is rather low: `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table). So `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+`??` অপারেটর এর প্রাধান্য কিছুটা কম। [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) এ `৫` নাম্বার। । তাই `??` অপারেটর, `=` এবং `?` এর আগে মুল্যায়িত হবে, কিন্তু অন্যান্য বেশীর ভাগ অপারেশন, যেমন `+`, `*`, এর পরে মুল্যায়িত হবে।
 
-So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
+তাই আমরা যদি `??` এই এক্সপ্রেশন এর মাধ্যমে কোন ভ্যালু নির্বাচন করতে চাই তাহলে বন্ধনীর ব্যবহার বিবেচনা করা উচিত:
 
 ```js run
 let height = null;
 let width = null;
 
-// important: use parentheses
+// গুরুত্বপূর্ণ : বন্ধনী ব্যবহার করুন
 let area = (height ?? 100) * (width ?? 50);
 
-alert(area); // 5000
+alert(area); // ৫০০০
 ```
 
-Otherwise, if we omit parentheses, then as `*` has the higher precedence than `??`, it would execute first, leading to incorrect results.
+অন্যথায়, বন্ধনী উপেক্ষা করি তাহলে `*`, `??` থেকে বেশী প্রাধান্য পাবে, এটি আগে কার্যকর কর হবে যা ভুল ফলাফল দিবে ।
 
 ```js
-// without parentheses
+// বন্ধনী ব্যতীত
 let area = height ?? 100 * width ?? 50;
 
-// ...works the same as this (probably not what we want):
-let area = height ?? (100 * width) ?? 50;
+// ...এটির মতই কাজ করে (যা খুব সম্ভবত আমরা চাই না):
+let area = height ?? 100 * width ?? 50;
 ```
 
-### Using ?? with && or ||
+### && or || এর সাথে ?? ব্যবহার
 
-Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||` operators, unless the precedence is explicitly specified with parentheses.
+নিরাপত্তা জনিত কারণে, যদি বন্ধনী দ্বারা প্রাধান্য নির্ধারণ করে দেওয়া না হয়, তাহলে জাভাস্ক্রিপ্ট `??` টাকে `&&` এবং `||` অপারেটর এর সাথে ব্যবহার করাকে নিষেধ করে।
 
-The code below triggers a syntax error:
+নিচের কোড সিনট্যাক্স ইরর দেখাবে:
 
 ```js run
-let x = 1 && 2 ?? 3; // Syntax error
+let x = 1 && 2 ?? 3; // সিনট্যাক্স ইরর
 ```
 
-The limitation is surely debatable, but it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch to `??` from `||`.
+এটির সীমাবদ্ধতা অবশ্যই তর্কসাপেক্ষ কিন্তু যখন মানুষজন `||` এর পরিবর্তে `??` ব্যবহার করা শুরু করল তখন প্রোগ্রামিং ভুল দুর করার জন্যে এটি ল্যাঙ্গুয়েজ স্পেছিফিকেশন এ যুক্ত করা হয়।
 
-Use explicit parentheses to work around it:
+ভুল এড়ানোর জন্যে পরিষ্কারভাবে বর্ণিত বন্ধনী ব্যবহার করুন:
 
 ```js run
 *!*
-let x = (1 && 2) ?? 3; // Works
+let x = (1 && 2) ?? 3; // কাজ করে
 */!*
 
-alert(x); // 2
+alert(x); // ২
 ```
 
-## Summary
+## সারসংক্ষেপ
 
-- The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
+- একটি তালিকা থেকে সংজ্ঞায়িত মান বের করার জন্যে একটি সংক্ষিপ্ত উপায় দেয় নাল-ঈশ কোয়েলেসিং অপারেটর `??`।
 
-    It's used to assign default values to variables:
+  এটি ভ্যারিয়েবল কে ডিফল্ট মান এসাইন করার জন্যে ব্যবহার করা হয়:
 
-    ```js
-    // set height=100, if height is null or undefined
-    height = height ?? 100;
-    ```
+  ```js
+  // height=100 নির্ধারণ করবে, যদি height নাল অথবা অসঙ্গায়িত হয় 
+  height = height ?? 100;
+  ```
 
-- The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
-- It's forbidden to use it with `||` or `&&` without explicit parentheses.
+- `??` অপারেটর খুবই কম প্রাধান্যসম্পন্ন , `?` and `=` থেকে একটু বেশী প্রাধান্য পায় তাই একটি এক্সপ্রেশান এ এটি ব্যবহার এর সময় বন্ধনীর ব্যবহার বিবেচনা করা উচিত।
+- পরিষ্কারভাবে বর্ণিত বন্ধনী ছাড়া `||` অথবা `&&` সাথে এটি ব্যবহার করা নিষিদ্ধ।
