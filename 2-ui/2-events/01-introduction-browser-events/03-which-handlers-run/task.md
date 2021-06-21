@@ -2,11 +2,9 @@ importance: 5
 
 ---
 
-# Which handlers run?
+# কোন হ্যান্ডেলারটি এক্সিকিউট হবে?
 
-There's a button in the variable. There are no handlers on it.
-
-Which handlers run on click after the following code? Which alerts show up?
+বাটন ক্লিকে এখানে কোন হ্যান্ডেলারটি রান হবে, এবং কোন অ্যালার্টটি শো হবে?
 
 ```js no-beautify
 button.addEventListener("click", () => alert("1"));

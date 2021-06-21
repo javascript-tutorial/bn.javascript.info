@@ -4,7 +4,7 @@ importance: 5
 
 # Hide self
 
-Create a button that hides itself on click.
+একটি বাটন লিখুন যেটি ক্লিক করলে বাটনটিই অদৃশ্য হয়ে যাবে।
 
 ```online
 Like this:
