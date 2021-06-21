@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The postfix and prefix forms
+# পোস্টফিক্স এবং প্রিফিক্স ফর্ম
 
-What are the final values of all variables `a`, `b`, `c` and `d` after the code below?
+নিচের কোডে `a`, `b`, `c` ও `d` এর ফাইনাল ভ্যালু কী হবে?
 
 ```js
 let a = 1, b = 1;

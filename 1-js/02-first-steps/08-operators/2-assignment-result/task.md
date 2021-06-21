@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Assignment result
+# অ্যাসাইনমেন্টের ফলাফল
 
-What are the values of `a` and `x` after the code below?
+নিচের কোডে `a` এবং `x` এর মান কী হবে?
 
 ```js
 let a = 2;

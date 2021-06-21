@@ -1,5 +1,5 @@
 
-The answer is:
+উত্তর হচ্ছে:
 
 - `a = 2`
 - `b = 2`
@@ -9,10 +9,10 @@ The answer is:
 ```js run no-beautify
 let a = 1, b = 1;
 
-alert( ++a ); // 2, prefix form returns the new value
-alert( b++ ); // 1, postfix form returns the old value
+alert( ++a ); // 2, প্রিফিক্স ফর্ম নতুন ভ্যালু রিটার্ন করে
+alert( b++ ); // 1, পোস্টফিক্স ফর্ম পুরনো ভ্যালু রিটার্ন করে
 
-alert( a ); // 2, incremented once
-alert( b ); // 2, incremented once
+alert( a ); // 2, একবার বৃদ্ধি পেয়েছে
+alert( b ); // 2, একবার বৃদ্ধি পেয়েছে
 ```
 

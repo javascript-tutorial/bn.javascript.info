@@ -1,15 +1,15 @@
-# Basic operators, maths
+# বেসিক অপারেটর আর গণিত
 
-We know many operators from school. They are things like addition `+`, multiplication `*`, subtraction `-`, and so on.
+আমরা স্কুলে অনেক অপারেটর সম্পর্কে জেনেছি। যেমন যোগ `+`, গুণ `*`, বিয়োগ `-`, এরকম আরও।
 
-In this chapter, we’ll start with simple operators, then concentrate on JavaScript-specific aspects, not covered by school arithmetic.
+এই অধ্যায়ে আমরা সহজ কিছু অপারেটর দিয়ে শুরু করবো, তারপর জাভাস্ক্রিপ্টের বিশেষ কিছু অপারেটরের দেখবো যেগুলো স্কুলের পাটিগণিতে ছিল না।
 
-## Terms: "unary", "binary", "operand"
+## টার্মস: "ইউনারি", "বাইনারি", "অপারেন্ড"
 
-Before we move on, let's grasp some common terminology.
+শুরু করার আগে সাধারণ কিছু টার্মিনোলজি জেনে নিই।
 
-- *An operand* -- is what operators are applied to. For instance, in the multiplication of `5 * 2` there are two operands: the left operand is `5` and the right operand is `2`. Sometimes, people call these "arguments" instead of "operands".
-- An operator is *unary* if it has a single operand. For example, the unary negation `-` reverses the sign of a number:
+- *অপারেন্ড* -- হচ্ছে অপারেটর যার বা যাদের ওপর কাজ করে। যেমন, `৫ * ২` এর গুণে দুইটি অপারেন্ড আছে: বামের অপারেন্ড হচ্ছে `৫` এবং ডানের অপারেন্ড হচ্ছে `২`। অনেকে অপারেন্ডকে আর্গুমেন্টও বলে থাকে।
+- কোনো অপারেটরকে *ইউনারি* বলা হয় যদি এর শুধু একটিই অপারেটর থাকে। যেমন, ইউনারি নেগেশন `-` কোনো সংখ্যার চিহ্ন পরিবর্তন করে:
 
     ```js run
     let x = 1;
@@ -17,208 +17,208 @@ Before we move on, let's grasp some common terminology.
     *!*
     x = -x;
     */!*
-    alert( x ); // -1, unary negation was applied
+    alert( x ); // -১, ইউনারি নেগেশনের পর
     ```
-- An operator is *binary* if it has two operands. The same minus exists in binary form as well:
+- কোনো অপারেটরকে *বাইনারি* বলা হয় যদি এর দুইটি অপারেটর থাকে। একই মাইনাস চিহ্নর বাইনারি রূপ:
 
     ```js run no-beautify
     let x = 1, y = 3;
-    alert( y - x ); // 2, binary minus subtracts values
+    alert( y - x ); // ২, বাইনারি মাইনাস বিয়োগের কাজ করে
     ```
 
-    Formally, in the examples above we have two different operators that share the same symbol: the negation operator, a unary operator that reverses the sign, and the subtraction operator, a binary operator that subtracts one number from another.
+    ভালোভাবে বলতে গেলে, উপরের উদাহরণ দুটোয় আমরা দুইটি অপারেটর দেখিয়েছে যাদের চিহ্ন একই: ইউনারি নেগেশন অপারেটর, যেই অপারেটর কোনো সংখ্যার চিহ্ন পরিবর্তন করে, এবং বিয়োগ অপারেটর, যেই বাইনারি অপারেটর একটি সংখ্যা থেকে অন্য সংখ্যা বিয়োগ করে।
 
-## Maths
+## গণিত
 
-The following math operations are supported:
+নিচের গাণিতিক অপারেটরগুলো ব্যবহার করা যাবে:
 
-- Addition `+`,
-- Subtraction `-`,
-- Multiplication `*`,
-- Division `/`,
-- Remainder `%`,
-- Exponentiation `**`.
+- যোগ `+`,
+- বিয়োগ `-`,
+- গুণ `*`,
+- ভাগ `/`,
+- ভাগশেষ `%`,
+- সূচক `**`.
 
-The first four are straightforward, while `%` and `**` need a few words about them.
+প্রথম চারটি অপারেশন দেখেই বুঝা যাচ্ছে, `%` আর `**` নিয়ে আরও কিছু বলার দরকার।
 
-### Remainder %
+### ভাগশেষ %
 
-The remainder operator `%`, despite its appearance, is not related to percents.
+ভাগশেষ অপারেটর `%`, দেখে শতকরার মতো মনে হলেও শতকরার সাথে এর কোনো সম্পর্ক নেই।
 
-The result of `a % b` is the [remainder](https://en.wikipedia.org/wiki/Remainder) of the integer division of `a` by `b`.
+`a % b` এই অপারেশনের রেজাল্ট হচ্ছে `a` কে `b` দিয়ে ভাগ করার পর যা অবশিষ্ট থাকে, বা [ভাগশেষ](https://en.wikipedia.org/wiki/Remainder)।
 
-For instance:
-
-```js run
-alert( 5 % 2 ); // 1, a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2, a remainder of 8 divided by 3
-```
-
-### Exponentiation **
-
-The exponentiation operator `a ** b` multiplies `a` by itself `b` times.
-
-For instance:
+যেমন:
 
 ```js run
-alert( 2 ** 2 ); // 4  (2 multiplied by itself 2 times)
-alert( 2 ** 3 ); // 8  (2 * 2 * 2, 3 times)
-alert( 2 ** 4 ); // 16 (2 * 2 * 2 * 2, 4 times)
+alert( 5 % 2 ); // ১, ৫ কে ২ দিয়ে ভাগ করার পর ভাগশেষ
+alert( 8 % 3 ); // ২, ৮ কে ৩ দিয়ে ভাগ করার পর ভাগশেষ
 ```
 
-Mathematically, the exponentiation is defined for non-integer numbers as well. For example, a square root is an exponentiation by `1/2`:
+### সূচক **
+
+সূচক অপারেটর `a ** b`, `a` কে `b` বার নিজেকে নিজে গুণ করে।
+
+যেমন:
 
 ```js run
-alert( 4 ** (1/2) ); // 2 (power of 1/2 is the same as a square root)
-alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
+alert( 2 ** 2 ); // ৪  (দুইকে দুইবার গুণ)
+alert( 2 ** 3 ); // ৮  (২ * ২ * ২, ৩ বার)
+alert( 2 ** 4 ); // ১৬ (২ * ২ * ২ * ২, ৪ বার)
+```
+
+গণিতে সূচক নন-ইন্টিজার বা অপূর্ণ সংখ্যার জন্যও প্রযোজ্য। যেমন, বর্গমূল হচ্ছে `১/২` দিয়ে ঘাত করা:
+
+```js run
+alert( 4 ** (1/2) ); // ২ (কোনো সংখ্যার সূচক ১/২ আর সংখ্যাটির বর্গমূল একই)
+alert( 8 ** (1/3) ); // ২ (কোনো সংখ্যার সূচক ১/৩ আর সংখ্যাটির ঘনমূল একই)
 ```
 
 
-## String concatenation with binary +
+## বাইনারি + দিয়ে স্ট্রিং জোড়া দেয়া
 
-Let's meet features of JavaScript operators that are beyond school arithmetics.
+এবার আমরা জাভাস্ক্রিপ্ট অপারেটরের কিছু বিশেষত্ব দেখি যেগুলো স্কুলের পাটিগণিতের বাইরে।
 
-Usually, the plus operator `+` sums numbers.
+সাধারণত, প্লাস অপারেটর `+` সংখ্যা যোগ করে।
 
-But, if the binary `+` is applied to strings, it merges (concatenates) them:
+কিন্তু যদি এই বাইনারি `+` স্ট্রিংয়ের সাথে ব্যবহার করা হয়, তাহলে এই অপারেটর স্ট্রিং দুটোকে জোড়া দেয়:
 
 ```js
 let s = "my" + "string";
 alert(s); // mystring
 ```
 
-Note that if any of the operands is a string, then the other one is converted to a string too.
+খেয়াল রাখতে হবে, যদি কোনো অপারেটর স্ট্রিং হয়, তাহলে অন্য অপারেটরটিও আগে স্ট্রিং এ রূপান্তরিত হবে।
 
-For example:
+যেমন:
 
 ```js run
 alert( '1' + 2 ); // "12"
 alert( 2 + '1' ); // "21"
 ```
 
-See, it doesn't matter whether the first operand is a string or the second one.
+লক্ষ্য করুন, কোন অপারেন্ডটি স্ট্রিং সেটা কোনো বিষয় না।
 
-Here's a more complex example:
+আরেকটি একটু জটিল উদাহরণ:
 
 ```js run
-alert(2 + 2 + '1' ); // "41" and not "221"
+alert(2 + 2 + '1' ); // "41", "221" না
 ```
 
-Here, operators work one after another. The first `+` sums two numbers, so it returns `4`, then the next `+` adds the string `1` to it, so it's like `4 + '1' = 41`.
+এখানে অপারেটরগুলো একটির পর আরেকটি কাজ করেছে। প্রথম `+` দুইটি সংখ্যাকে যোগ করেছে, তাই এটা `4` রিটার্ন করে, তারপর পরের `+` এর সাথে স্ট্রিং `1` যোগ করে, তাই `4 + '1' = 41`।
 
-The binary `+` is the only operator that supports strings in such a way. Other arithmetic operators work only with numbers and always convert their operands to numbers.
+বাইনারি `+` ই একমাত্র অপারেটর যেটি স্ট্রিং সাপোর্ট করে। অন্যন্য অপারেটর শুধু সংখ্যা নিয়ে কাজ করে আর সবসময় এর অপারেন্ডগুলোকে সংখ্যায় রূপান্তর করে নেয়।
 
-Here's the demo for subtraction and division:
+এখানে বিয়োগ আর ভাগ করে দেখানো হলো:
 
 ```js run
-alert( 6 - '2' ); // 4, converts '2' to a number
-alert( '6' / '2' ); // 3, converts both operands to numbers
+alert( 6 - '2' ); // 4, '2' কে আগে সংখ্যায় রূপান্তর করে নিয়েছে
+alert( '6' / '2' ); // 3, দুটো অপারেটরকেই সংখ্যায় রূপান্তর করে নিয়েছে
 ```
 
-## Numeric conversion, unary +
+## গাণিতিক রূপান্তর, ইউনারি +
 
-The plus `+` exists in two forms: the binary form that we used above and the unary form.
+প্লাস `+` অপারেটরের দুইটি ফর্ম আছে: বাইনারি ফর্ম যা আমরা উপরে দেখলাম, আর ইউনারি ফর্ম।
 
-The unary plus or, in other words, the plus operator `+` applied to a single value, doesn't do anything to numbers. But if the operand is not a number, the unary plus converts it into a number.
+ইউনারি প্লাস, বা, অন্য কথায়, প্লাস অপারেটর `+` যা একটি সংখ্যার সাথে ব্যবহার করা হয়, সংখ্যাটিকে কিছুই করে না। কিন্তু অপারেন্ড যদি সংখ্যা না হয়, তবে সেটিকে সংখ্যায় রূপান্তর করে।
 
-For example:
+উদাহরণ:
 
 ```js run
-// No effect on numbers
+// সংখ্যার উপর কোনো প্রভাব নাই
 let x = 1;
-alert( +x ); // 1
+alert( +x ); // ১
 
 let y = -2;
-alert( +y ); // -2
+alert( +y ); // -২
 
 *!*
-// Converts non-numbers
-alert( +true ); // 1
-alert( +"" );   // 0
+// সংখ্যায় রূপান্তর করা
+alert( +true ); // ১
+alert( +"" );   // ০
 */!*
 ```
 
-It actually does the same thing as `Number(...)`, but is shorter.
+এটা আসলে `Number(...)` যা করে ঠিক তাই করে, শুধু সংক্ষিপ্ত রূপ।
 
-The need to convert strings to numbers arises very often. For example, if we are getting values from HTML form fields, they are usually strings. What if we want to sum them?
+প্রায় সময়ই স্ট্রিংকে নাম্বারে রূপান্তর করার দরকার হতে পারে। যেমন, যদি আমরা HTML এর ফর্ম ফিল্ড থেকে ভ্যালু নিই, সেগুলো বেশিরভাগ সময়ই স্ট্রিং হয়। কিন্তু যদি সেগুলো যোগ করার দরকার পড়ে?
 
-The binary plus would add them as strings:
+বাইনারি `+` স্ট্রিং হিসেবেই যোগ করবে:
 
 ```js run
 let apples = "2";
 let oranges = "3";
 
-alert( apples + oranges ); // "23", the binary plus concatenates strings
+alert( apples + oranges ); // "23", বাইনারি প্লাস স্ট্রিং জোড়া দেয়
 ```
 
-If we want to treat them as numbers, we need to convert and then sum them:
+যদি আমরা এদেরকে সংখ্যা হিসেবে ব্যবহার করতে চাই, তাহলে আগে এদের সংখ্যায় রূপান্তর করতে হবে:
 
 ```js run
 let apples = "2";
 let oranges = "3";
 
 *!*
-// both values converted to numbers before the binary plus
-alert( +apples + +oranges ); // 5
+// দুইটি মানই বাইনারি প্লাসের আগে সংখ্যায় রূপান্তরিত হয়েছে
+alert( +apples + +oranges ); // ৫
 */!*
 
-// the longer variant
-// alert( Number(apples) + Number(oranges) ); // 5
+// একটু বড় ভার্সন
+// alert( Number(apples) + Number(oranges) ); // ৫
 ```
 
-From a mathematician's standpoint, the abundance of pluses may seem strange. But from a programmer's standpoint, there's nothing special: unary pluses are applied first, they convert strings to numbers, and then the binary plus sums them up.
+একজন গণিতবিদের দিক থেকে চিন্তা করলে, অযথা প্লাসের ব্যবহার অদ্ভুত লাগতে পারে। কিন্তু একজন প্রোগ্রামারের কাছে এটা তেমন কিছুই না: ইউনারি প্লাস আগে কাজ করে স্ট্রিংকে সংখ্যায় রূপান্তর করে, তারপর বাইনারি প্লাস তাদের যোগ করে।
 
-Why are unary pluses applied to values before the binary ones? As we're going to see, that's because of their *higher precedence*.
+কেন বাইনারি প্লাসের আগে ইউনারি প্লাস কাজ করে? আমরা যেমনটা দেখতে যাচ্ছি, এর কারণ ইউনারি প্লাসের *প্রিসিডেন্স বেশি*।
 
-## Operator precedence
+## অপারেটরের প্রিসিডেন্স
 
-If an expression has more than one operator, the execution order is defined by their *precedence*, or, in other words, the default priority order of operators.
+একটা এক্সপ্রেশনে যদি একাধিক অপারেটর থাকে, তবে তাদের এক্সিকিউশন অর্ডার তাদের *প্রিসিডেন্স* দিয়ে নির্ধারিত হয়, বা অন্য কথায়, অপারেটরদের ডিফল্ট প্রায়োরিটি অর্ডার অনুযায়ী।
 
-From school, we all know that the multiplication in the expression `1 + 2 * 2` should be calculated before the addition. That's exactly the precedence thing. The multiplication is said to have *a higher precedence* than the addition.
+স্কুলে আমরা শিখেছি `1 + 2 * 2` এক্সপ্রেশনের গুণের কাজ যোগের আগে করতে হয়। এই জিনিসটাই হচ্ছে প্রিসিডেন্স। গুণের প্রিসিডেন্স যোগের চেয়ে *বেশি*।
 
-Parentheses override any precedence, so if we're not satisfied with the default order, we can use them to change it. For example, write `(1 + 2) * 2`.
+ব্র্যাকেট যেকোনো প্রিসিডেন্সকে ওভাররাইড করে, সেজন্য আমরা যদি ডিফল্ট প্রিসিডেন্স নিয়ে খুশি না হই, আমরা ব্র্যাকেট ব্যবহার করে সেটা বদলাতে পারি। যেমন লিখতে পারেন `(1 + 2) * 2`।
 
-There are many operators in JavaScript. Every operator has a corresponding precedence number. The one with the larger number executes first. If the precedence is the same, the execution order is from left to right.
+জাভাস্ক্রিপ্টে অনেক অপারেটর আছে। প্রত্যেক অপারেটরের একটি প্রিসিডেন্স নাম্বার আছে। যাদের নাম্বার বেশি তারা আগে এক্সিকিউট হবে। প্রিসিডেন্স এক হলে বাম থেকে ডানে এক্সিকিউট হবে।
 
-Here's an extract from the [precedence table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence) (you don't need to remember this, but note that unary operators are higher than corresponding binary ones):
+এটা [প্রিসিডেন্স টেবিলের](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence) একটা অংশ (আপনার এটা মনে রাখতে হবে না, শুধু লক্ষ্য করুন ইউনারি অপারেটরদের প্রিসিডেন্স তাদের সংশ্লিষ্ট বাইনারি অপারেটরের চেয়ে বেশি):
 
-| Precedence | Name | Sign |
+| প্রিসিডেন্স | নাম | চিহ্ন |
 |------------|------|------|
 | ... | ... | ... |
-| 17 | unary plus | `+` |
-| 17 | unary negation | `-` |
-| 16 | exponentiation | `**` |
-| 15 | multiplication | `*` |
-| 15 | division | `/` |
-| 13 | addition | `+` |
-| 13 | subtraction | `-` |
+| ১৭ | ইউনারি প্লাস | `+` |
+| ১৭ | ইউনারি নেগেশন | `-` |
+| ১৬ | সূচক | `**` |
+| ১৫ | গুণ | `*` |
+| ১৫ | ভাগ | `/` |
+| ১৩ | যোগ | `+` |
+| ১৩ | বিয়োগ | `-` |
 | ... | ... | ... |
-| 3 | assignment | `=` |
+| ৩ | অ্যাসাইনমেন্ট | `=` |
 | ... | ... | ... |
 
-As we can see, the "unary plus" has a priority of `17` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+আমরা দেখতে পাচ্ছি, "ইউনারি প্লাসের" প্রায়োরিটি `১৭` যা যোগের (বাইনারি প্লাস) `১৩` এর চেয়ে বেশি। এজন্য `"+apples + +oranges"` এক্সপ্রেশনে ইউনারি প্লাস বাইনারি প্লাসের আগে কাজ করেছিলো।
 
-## Assignment
+## অ্যাসাইনমেন্ট
 
-Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `3`.
+খেয়াল রাখবেন অ্যাসাইনমেন্টও `=` একটি অপারেটর। এটা প্রিসিডেন্স টেবিলের প্রায় নিচের দিকে খুব কম প্রায়োরিটি `৩` নিয়ে অবস্থান করছে।
 
-That's why, when we assign a variable, like `x = 2 * 2 + 1`, the calculations are done first and then the `=` is evaluated, storing the result in `x`.
+এজন্য যখন আমরা `x = 2 * 2 + 1` এভাবে ভ্যারিয়েবল অ্যাসাইন করি তখন ক্যালকুলেশন আগে করা হয় আর তারপর `=` এর কাজ হয় যা হলো `x` এ ফলাফলটা জমা রাখা।
 
 ```js
 let x = 2 * 2 + 1;
 
-alert( x ); // 5
+alert( x ); // ৫
 ```
 
-### Assignment = returns a value
+### অ্যাসাইনমেন্ট = একটা ভ্যালু রিটার্ন করা
 
-The fact of `=` being an operator, not a "magical" language construct has an interesting implication.
+`=` যে একট অপারেটর, কোনো জাদুকরি ল্যাঙ্গুয়েজ কনস্ট্রাকট না, তার একটা মজার প্রমাণ আছে।
 
-Most operators in JavaScript return a value. That's obvious for `+` and `-`, but also true for `=`.
+জাভাস্ক্রিপ্টের বেশিরভাগ অপারেটরই একটি ভ্যালু রিটার্ন করে। আমরা `+` আর `-` এর ক্ষেত্রে তো বুঝতেই পারছি, কিন্তু এটা `=` এর জন্যও প্রযোজ্য।
 
-The call `x = value` writes the `value` into `x` *and then returns it*.
+`x = value` এক্সপ্রেশন কল `value` কে `x` এ লিখে *এবং তারপর সেটা রিটার্ন করে*।
 
-Here's a demo that uses an assignment as part of a more complex expression:
+এখানে আরেকটু জটিল এক্সপ্রেশনে অ্যাসাইনমেন্ট ব্যবহার করে দেখানো হলো:
 
 ```js run
 let a = 1;
@@ -228,19 +228,19 @@ let b = 2;
 let c = 3 - (a = b + 1);
 */!*
 
-alert( a ); // 3
-alert( c ); // 0
+alert( a ); // ৩
+alert( c ); // ০
 ```
 
-In the example above, the result of expression `(a = b + 1)` is the value which was assigned to `a` (that is `3`). It is then used for further evaluations.
+এই উদাহরণে, এক্সপ্রেশন `(a = b + 1)` এর ফলাফল হচ্ছে যেই ভ্যালুটি `a` তে অ্যাসাইন করা হলো (যা হচ্ছে `৩`)। এটা এরপর আরও ইভ্যালুয়েশনের জন্য ব্যবহার করা হয়েছে।
 
-Funny code, isn't it? We should understand how it works, because sometimes we see it in JavaScript libraries.
+মজার কোড, তাই না? আমাদের এটা কীভাবে কাজ করে তা বুঝা উচিৎ, কারণ আমরা অনেক সময় এটা জাভাস্ক্রিপ্ট লাইব্রেরিগুলোতে দেখতে পাবো।
 
-Although, please don't write the code like that. Such tricks definitely don't make code clearer or readable.
+যদিও দয়া করে এরকম কোড লিখবেন না। এরকম ট্রিক কোড একদমই পরিষ্কার বা পড়ার মতো রাখে না।
 
-### Chaining assignments
+### চেইনিং অ্যাসাইনমেন্ট
 
-Another interesting feature is the ability to chain assignments:
+আরেকটা মজার বৈশিষ্ট্য হচ্ছে অ্যাসাইনমেন্ট চেইন করা:
 
 ```js run
 let a, b, c;
@@ -249,27 +249,27 @@ let a, b, c;
 a = b = c = 2 + 2;
 */!*
 
-alert( a ); // 4
-alert( b ); // 4
-alert( c ); // 4
+alert( a ); // ৪
+alert( b ); // ৪
+alert( c ); // ৪
 ```
 
-Chained assignments evaluate from right to left. First, the rightmost expression `2 + 2` is evaluated and then assigned to the variables on the left: `c`, `b` and `a`. At the end, all the variables share a single value.
+চেইন করা অ্যাসাইনমেন্ট ডান থেকে বামে ইভ্যালুয়েট হয়। প্রথমে, একদম ডানের এক্সপ্রেশন `2 + 2` ইভ্যালুয়েট হয় আর বামের ভ্যারিয়েবলগুলো: `c`, `b` এবং `a` তে অ্যাসাইন হয়। সবশেষে সবগুলো ভ্যারিয়েবল একটি ভ্যালুই শেয়ার করে।
 
-Once again, for the purposes of readability it's better to split such code into few lines:
+আবারও, কোড রিডেবল রাখার জন্য এরকম কোডকে একাধিক লাইনে ভাগ করে নেয়া ভালো:
 
 ```js
 c = 2 + 2;
 b = c;
 a = c;
 ```
-That's easier to read, especially when eye-scanning the code fast.
+এটা পড়তে সহজ, বিশেষ করে যখন কোড পড়ার আগে প্রথমে চোখ বুলিয়ে নিচ্ছেন।
 
-## Modify-in-place
+## ইন-প্লেসে মডিফাই করা
 
-We often need to apply an operator to a variable and store the new result in that same variable.
+মাঝেমধ্যেই আমাদের একটি ভ্যারিয়েবলের উপর অপারেটর ব্যবহার করে আবার একই ভ্যারিয়েবলেই ফলাফলটি রাখা লাগতে পারে।
 
-For example:
+যেমন:
 
 ```js
 let n = 2;
@@ -277,67 +277,67 @@ n = n + 5;
 n = n * 2;
 ```
 
-This notation can be shortened using the operators `+=` and `*=`:
+এই নোটেশনটি `+=` আর `*=` অপারেটর ব্যবহার করে ছোট করা যেতে পারে:
 
 ```js run
 let n = 2;
-n += 5; // now n = 7 (same as n = n + 5)
-n *= 2; // now n = 14 (same as n = n * 2)
+n += 5; // এখন n = 7 (n = n + 5 এর মতই)
+n *= 2; // এখন n = 14 (n = n * 2 এর মতই)
 
 alert( n ); // 14
 ```
 
-Short "modify-and-assign" operators exist for all arithmetical and bitwise operators: `/=`, `-=`, etc.
+সংক্ষিপ্ত "মডিফাই-এবং-অ্যাসাইন" অপারেটর আছে সব গাণিতিক ও বিটওয়াইজ অপারেটরের জন্যই: `/=`, `-=`, ইত্যাদি।
 
-Such operators have the same precedence as a normal assignment, so they run after most other calculations:
+নরমাল অ্যাসাইনমেন্টের মতই এদের প্রিসিডেন্স, তাই এরা অন্যান্য ক্যালকুলেশনের পর কাজ করে:
 
 ```js run
 let n = 2;
 
 n *= 3 + 5;
 
-alert( n ); // 16  (right part evaluated first, same as n *= 8)
+alert( n ); // 16  (ডান অংশ আগে ইভ্যালুয়েট হয়, n *= 8 এর অনুরূপ)
 ```
 
-## Increment/decrement
+## ইনক্রিমেন্ট/ডিক্রিমেন্ট
 
-<!-- Can't use -- in title, because the built-in parser turns it into a 'long dash' – -->
+<!-- টাইটেলে -- ব্যবহার করা যাবে না, কারণ বিল্টইন পার্সার একে 'লং ড্যাশ' – এ রূপান্তর করে -->
 
-Increasing or decreasing a number by one is among the most common numerical operations.
+কোনো সংখ্যাকে এক বাড়ানো বা কমানো কমন গাণিতিক অপারেশনগুলোর মধ্যে একটি।
 
-So, there are special operators for it:
+এজন্য এর জন্য বিশেষ অপারেটর আছে:
 
-- **Increment** `++` increases a variable by 1:
+- **ইনক্রিমেন্ট** `++` একটি ভ্যারিয়েবলকে ১ বাড়ায়:
 
     ```js run no-beautify
     let counter = 2;
-    counter++;        // works the same as counter = counter + 1, but is shorter
+    counter++;        // counter = counter + 1 এর মত একই কাজ করে, শুধু সংক্ষিপ্ত
     alert( counter ); // 3
     ```
-- **Decrement** `--` decreases a variable by 1:
+- **ডিক্রিমেন্ট** `--` একটি ভ্যারিয়েবলকে ১ কমায়:
 
     ```js run no-beautify
     let counter = 2;
-    counter--;        // works the same as counter = counter - 1, but is shorter
+    counter--;        // counter = counter - 1 এর মত একই কাজ করে, শুধু সংক্ষিপ্ত
     alert( counter ); // 1
     ```
 
 ```warn
-Increment/decrement can only be applied to variables. Trying to use it on a value like `5++` will give an error.
+ইনক্রিমেন্ট/ডিক্রিমেন্ট শুধু ভ্যারিয়েবলের সাথে ব্যবহার করা যাবে। `5++` এর মত কোনো ভ্যালুর সাথে এটি ব্যবহার করলে এরর দিবে।
 ```
 
-The operators `++` and `--` can be placed either before or after a variable.
+অপারেটর `++` and `--` কোনো ভ্যারিয়েবলের আগে বা পরে বসানো যাবে।
 
-- When the operator goes after the variable, it is in "postfix form": `counter++`.
-- The "prefix form" is when the operator goes before the variable: `++counter`.
+- যখন অপারেটরটি ভ্যারিয়েবলের পর বসে, তখন এটা "পোস্টফিক্স ফর্মে" আছে বলা হয়: `counter++`.
+- "প্রিফিক্স ফর্ম হচ্ছে" যখন অপারেটরটি ভ্যারিয়েবলের আগে বসে: `++counter`.
 
-Both of these statements do the same thing: increase `counter` by `1`.
+দুইটি স্টেটমেন্টই একই কাজ করে: `counter` কে `১` বাড়ায়।
 
-Is there any difference? Yes, but we can only see it if we use the returned value of `++/--`.
+কোনো পার্থক্য আছে কি? হ্যাঁ, কিন্তু সেটা আমরা শুধু যখন `++/--` অপারেটরদের রিটার্ন ভ্যালু ব্যবহার করবো তখনই দেখতে পাবো।
 
-Let's clarify. As we know, all operators return a value. Increment/decrement is no exception. The prefix form returns the new value while the postfix form returns the old value (prior to increment/decrement).
+পরিষ্কার করা যাক। আমরা যেমনটা জানি, সব অপারেটরই একটি ভ্যালু রিটার্ন করে। ইনক্রিমেন্ট/ডিক্রিমেন্টও কোনো ব্যতিক্রম নয়। প্রিফিক্স ফর্ম নতুন ভ্যালুটি রিটার্ন করে, অন্যদিকে পোস্টফিক্স ফর্ম পুরনো ভ্যালুটিই রিটার্ন করে (ইনক্রিমেন্ট/ডিক্রিমেন্ট করার আগে)।
 
-To see the difference, here's an example:
+উদাহরণ দিয়ে পার্থক্যটা বুঝা যাক:
 
 ```js run
 let counter = 1;
@@ -346,64 +346,64 @@ let a = ++counter; // (*)
 alert(a); // *!*2*/!*
 ```
 
-In the line `(*)`, the *prefix* form `++counter` increments `counter` and returns the new value, `2`. So, the `alert` shows `2`.
+লাইন `(*)` এ, *প্রিফিক্স* ফর্ম `++counter` `counter` এর ভ্যালু এক বাড়ায় এবং নতুন ভ্যালু, `২` রিটার্ন করে। তাই, `alert` `2` দেখায়।
 
-Now, let's use the postfix form:
+এখন আমরা পোস্টফিক্স ফর্মটি ব্যবহার করে দেখি:
 
 ```js run
 let counter = 1;
-let a = counter++; // (*) changed ++counter to counter++
+let a = counter++; // (*) ++counter কে counter++ এ পরিবর্তন করেছি
 
 alert(a); // *!*1*/!*
 ```
 
-In the line `(*)`, the *postfix* form `counter++` also increments `counter` but returns the *old* value (prior to increment). So, the `alert` shows `1`.
+লাইন `(*)` তে, *পোস্টফিক্স* ফর্ম `counter++`ও `counter` এর মান `১` বাড়ায় কিন্তু *পুরনো* ভ্যালুটি রিটার্ন করে (ইনক্রিমেন্টের আগের)। তাই, `alert` `1` দেখায়।
 
-To summarize:
+সংক্ষেপে:
 
-- If the result of increment/decrement is not used, there is no difference in which form to use:
+- যদি ইনক্রিমেন্ট/ডিক্রিমেন্টের রিটার্ন ভ্যালু ব্যবহার না করা হয়, দুই ফর্মের কোনো পার্থক্য নেই:
 
     ```js run
     let counter = 0;
     counter++;
     ++counter;
-    alert( counter ); // 2, the lines above did the same
+    alert( counter ); // 2, উপরের লাইন দুটো একই কাজ করেছে
     ```
-- If we'd like to increase a value *and* immediately use the result of the operator, we need the prefix form:
+- যদি আমরা ভ্যালু বাড়াতে চাই *এবং* সাথে সাথে অপারেটরটির ফলাফল ব্যবহার করতে চাই, আমাদের দরকার হবে প্রিফিক্স ফর্ম:
 
     ```js run
     let counter = 0;
     alert( ++counter ); // 1
     ```
-- If we'd like to increment a value but use its previous value, we need the postfix form:
+- যদি আমরা ভ্যালু বাড়াতে চাই কিন্তু পুরনো ভ্যালু ব্যবহার করতে চাই তাহলে আমাদের লাগবে পোস্টফিক্স ফর্ম:
 
     ```js run
     let counter = 0;
     alert( counter++ ); // 0
     ```
 
-````smart header="Increment/decrement among other operators"
-The operators `++/--` can be used inside expressions as well. Their precedence is higher than most other arithmetical operations.
+````smart header="অন্য অপারেটরদের মধ্যে ইনক্রিমেন্ট/ডিক্রিমেন্ট"
+অপারেটর `++/--` এক্সপ্রেশনের মধ্যেও ব্যবহার করা যাবে। এদের প্রিসিডেন্স অন্যান্য গাণিতিক অপারেটরের চেয়ে বেশি।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let counter = 1;
 alert( 2 * ++counter ); // 4
 ```
 
-Compare with:
+এর সাথে তুলনা করুন:
 
 ```js run
 let counter = 1;
-alert( 2 * counter++ ); // 2, because counter++ returns the "old" value
+alert( 2 * counter++ ); // 2, কারণ counter++ "পুরনো" ভ্যালু রিটার্ন করে
 ```
 
-Though technically okay, such notation usually makes code less readable. One line does multiple things -- not good.
+যদিও টেকনিকালি ঠিক, এইরকম নোটেশন কোড পড়া কঠিন করে। একটি লাইনে একাধিক কাজ হচ্ছে -- যা ভালো না.
 
-While reading code, a fast "vertical" eye-scan can easily miss something like `counter++` and it won't be obvious that the variable increased.
+কোড পড়ার সময়, দ্রুত "উপর থেকে নিচে" চোখ বুলানোর সময় `counter++` এর মতো কিছু সহজেই মিস করে যেতে পারে এবং এটা পরিষ্কার হবে না যে ভ্যারিয়েবলের মান বেড়েছে।
 
-We advise a style of "one line -- one action":
+আমরা "একটি লাইন -- একটি কাজ" এই স্টাইল ব্যবহারের পরামর্শ দিই:
 
 ```js run
 let counter = 1;
@@ -412,13 +412,13 @@ counter++;
 ```
 ````
 
-## Bitwise operators
+## বিটওয়াইজ অপারেটর
 
-Bitwise operators treat arguments as 32-bit integer numbers and work on the level of their binary representation.
+বিটওয়াইজ অপারেটর আর্গুমেন্টগুলোকে ৩২-বিট পূর্ণ সংখ্যা হিসেবে বিবেচনা করে এবং তাদের বাইনারি রূপের উপর কাজ করে।
 
-These operators are not JavaScript-specific. They are supported in most programming languages.
+এই অপারেটরগুলো জাভাস্ক্রিপ্ট-স্পেসিফিক নয়। বেশিরভাগ প্রোগ্রামিং ল্যাংগুয়েজেই এগুলো সাপোর্ট করবে।
 
-The list of operators:
+অপারেটরের লিস্ট:
 
 - AND ( `&` )
 - OR ( `|` )
@@ -428,43 +428,43 @@ The list of operators:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
-These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) chapter on MDN when a need arises.
+এই অপারেটরগুলো খুব কম ক্ষেত্রে যখন আমাদের সংখ্যা নিয়ে খুব নিচের (বিটওয়াইজ) লেভেলে কাজ করতে হয় তখনই শুধু ব্যবহার হয়। আমাদের এই অপারেটরগুলো এরপর আর দরকার হচ্ছে না, যেহেতু ওয়েব ডেভেলপমেন্টে এদের খুব কম কাজই আছে, কিন্তু বিশেষ কিছু ক্ষেত্র, যেমন ক্রিপ্টোগ্রাফিতে এদের দরকার হবে। আপনি MDN এর [বিটওয়াইজ অপারেটর](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) অধ্যায়টি পড়তে পারেন যখন দরকার পড়বে।
 
-## Comma
+## কমা
 
-The comma operator `,` is one of the rarest and most unusual operators. Sometimes, it's used to write shorter code, so we need to know it in order to understand what's going on.
+কমা অপারেটর `,` দুর্লভ আর সচরাচর দেখা যায় না এমন একটি অপারেটর। মাঝেমধ্যে সংক্ষিপ্ত কোড লিখতে এটি দরকার হয়, তাই আমাদের এটি জানতে হবে কী হচ্ছে বুঝার জন্য।
 
-The comma operator allows us to evaluate several expressions, dividing them with a comma `,`. Each of them is evaluated but only the result of the last one is returned.
+কমা অপারেটর আমাদের একাধিক এক্সপ্রেশন ইভ্যালুয়েট করতে দেয়, এদেরকে কমা `,` দিয়ে ভাগ করে। প্রত্যেকেই ইভ্যালুয়েট হয়, শুধু শেষটির ফলাফল রিটার্ন হয়।
 
-For example:
+যেমন:
 
 ```js run
 *!*
 let a = (1 + 2, 3 + 4);
 */!*
 
-alert( a ); // 7 (the result of 3 + 4)
+alert( a ); // 7 (3 + 4 এর ফলাফল)
 ```
 
-Here, the first expression `1 + 2` is evaluated and its result is thrown away. Then, `3 + 4` is evaluated and returned as the result.
+এখানে, প্রথম এক্সপ্রেশন `1 + 2` ইভ্যালুয়েট হয়েছে এবং এর ফলাফল ফেলে দেয়া হয়েছে। এরপর, `3 + 4` ইভ্যালুয়েট হয়েছে এবং ফলাফল হিসেবে রিটার্ন করা হয়েছে।
 
-```smart header="Comma has a very low precedence"
-Please note that the comma operator has very low precedence, lower than `=`, so parentheses are important in the example above.
+```smart header="কমার প্রিসিডেন্স খুব কম"
+খেয়াল রাখবেন কমার প্রিসিডেন্স খুব কম, `=` এর চেয়েও কম, তাই উপরের উদাহরণগুলোতে ব্র্যাকেট ব্যবহার করা হয়েছে।
 
-Without them: `a = 1 + 2, 3 + 4` evaluates `+` first, summing the numbers into `a = 3, 7`, then the assignment operator `=` assigns `a = 3`, and the rest is ignored. It's like `(a = 1 + 2), 3 + 4`.
+ব্র্যাকেট ছাড়া: `a = 1 + 2, 3 + 4` প্রথমে `+` ইভ্যালুয়েট করবে, সংখ্যাগুলো যোগ করে দাঁড়াবে `a = 3, 7`, তারপর অ্যাসাইনমেন্ট অপারেটর `=` `a = 3` অ্যাসাইন করবে, আর বাকিটা কোনো কাজেই আসবে না। অনেকটা এরকম `(a = 1 + 2), 3 + 4`.
 ```
 
-Why do we need an operator that throws away everything except the last expression?
+কেন আমাদের এমন একটি অপারেটর দরকার হবে যেটি শেষ এক্সপ্রেশন বাদে সব ফেলে দেয়?
 
-Sometimes, people use it in more complex constructs to put several actions in one line.
+মাঝেমধ্যে অনেকে একে জটিল কনস্ট্রাক্টে ব্যবহার করে একাধিক কাজ এক লাইনে করতে।
 
-For example:
+যেমন:
 
 ```js
-// three operations in one line
+// এক লাইনে তিনটি কাজ
 for (*!*a = 1, b = 3, c = a * b*/!*; a < 10; a++) {
  ...
 }
 ```
 
-Such tricks are used in many JavaScript frameworks. That's why we're mentioning them. But usually they don't improve code readability so we should think well before using them.
+এরকম ট্রিক অনেক জাভাস্ক্রিপ্ট ফ্রেমওয়ার্কে দেখা যায়। যে কারণে আমরা এটার কথা বললাম। কিন্তু সচরাচর এটা কোডের রিডেবিলিটি বাড়ায় না তাই এটা ব্যবহারের আগে আমাদের একটু চিন্তা করে নেয়া উচিৎ।
