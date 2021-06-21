@@ -6,7 +6,7 @@
 একে "এ্যারো ফাংশন" বলা হয় কারণ এটা দেখতে অনেকটা এই রকমঃ
 
 ```js
-let func = (arg1, arg2, ...argN) => expression
+let func = (arg1, arg2, ..., argN) => expression
 ```
 
 এখানে `func` নামে একটা ফাংশন তৈরি করা হয়েছে যা `arg1..argN` আর্গুমেন্ট হিসেবে নিচ্ছে, তারপর ডানপাশের `expression` টি সম্পাদন করে তার যে রেজাল্ট হয় সেটা রিটার্ন করছে।
@@ -14,7 +14,7 @@ let func = (arg1, arg2, ...argN) => expression
 অন্যথায় বলতে গেলে, এটা নিম্নোক্ত কোডটির সংক্ষিপ্ত রূপ।
 
 ```js
-let func = function(arg1, arg2, ...argN) {
+let func = function(arg1, arg2, ..., argN) {
   return expression;
 };
 ```
