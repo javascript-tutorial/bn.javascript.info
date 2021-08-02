@@ -1,31 +1,31 @@
-# Arrays
+# অ্যারে
 
-Objects allow you to store keyed collections of values. That's fine.
+আমরা দেখেছি অবজেক্ট এর কালেকশনসমূহ কী এবং ভ্যালু হিসেবে থাকে।
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc.
+কিন্তু প্রায় সময় আমাদের *ordered collection* এরও দরকার হয়, যেখানে এলিমেন্টসমূহ ক্রম অনুযায়ী ১ম, ২য়, ৩য় এভাবে থাকবে। উদাহরণস্বরূপ users, goods, HTML elements ইত্যাদির লিস্ট।
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+এক্ষেত্রে অবজেক্ট ব্যবহার করা তেমন সুবিধাজনক না, কেননা অবজেক্ট ক্রম নিয়ন্ত্রণের কোন মেথড প্রদান করে না। এভং আমরা দুটি এলিমেন্টের মাঝে নতুন কোন উপাদান সংযুক্ত করতে পারব না।
 
-There exists a special data structure named `Array`, to store ordered collections.
+তবে জাভাস্ক্রিপ্টে এই ধরণের ক্রম কালেকশন নিয়ন্ত্রণের জন্য আরেকটি বিশেষ ডাটা স্ট্রাকচার আছে যার নাম `Array`।
 
-## Declaration
+## অ্যারে ডিক্লেয়ার
 
-There are two syntaxes for creating an empty array:
+আমরা দুইভাবে অ্যারে ডিক্লেয়ার করতে পারি:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+বেশিরভাগ সময় আমরা দ্বিতীয় সিন্ট্যাক্সটি ব্যবহার করি। আমরা শুরুতে এলিমেন্ট সমূহও অ্যাসাইন করে দিতে পারি:
 
 ```js
 let fruits = ["Apple", "Orange", "Plum"];
 ```
 
-Array elements are numbered, starting with zero.
+অ্যারের এলিমেন্ট সমূহ ক্রম নাম্বার অনুসারে থাকে, এবং এটি শুন্য থেকে শুরু হয়, এদের বলা হয় *index*।
 
-We can get an element by its number in square brackets:
+আমরা তৃতীয় বন্ধনীতে *index* নাম্বার লিখার মাধ্যমে এলিমেন্ট সমূহ অ্যাক্সেস করতে পারি:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -35,19 +35,19 @@ alert( fruits[1] ); // Orange
 alert( fruits[2] ); // Plum
 ```
 
-We can replace an element:
+আমরা কোন একটি এলিমেন্টের মান পরিবর্তনও করতে পারি:
 
 ```js
 fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
 ```
 
-...Or add a new one to the array:
+...অথবা নতুন একটি এলিমেন্ট সংযুক্ত করতে পারি:
 
 ```js
 fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
 ```
 
-The total count of the elements in the array is its `length`:
+কোন অ্যারেতে সর্বমোট কতটি এলিমেন্ট আছে তা অ্যারের `length` প্রপার্টির মাধ্যমে জানতে পারি:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -55,7 +55,7 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+এছাড়াও `alert` এর মাধ্যমে সম্পূর্ণ অ্যারেটি দেখতে পারি।
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -63,24 +63,24 @@ let fruits = ["Apple", "Orange", "Plum"];
 alert( fruits ); // Apple,Orange,Plum
 ```
 
-An array can store elements of any type.
+অ্যারেতে যেকোন টাইপের এলিমেন্ট রাখতে পারি।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run no-beautify
-// mix of values
+// বিভিন্ন টাইপের এলিমেন্ট
 let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
 
-// get the object at index 1 and then show its name
+// অ্যারের দ্বিতীয় এলিমেন্টটি একটি অবজেক্ট যার একটি প্রপার্টি name
 alert( arr[1].name ); // John
 
-// get the function at index 3 and run it
+// index 3 একটি ফাংশন চলুন আমরা এটিকে এভাবে এক্সিকিউট করতে পারি
 arr[3](); // hello
 ```
 
 
 ````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+অ্যারে অবজেক্টের মত, যার শেষে কমা থাকতে পারে, এটিকে বলা হয় "trailing comma" রুলস বা স্ট্যাইল:
 ```js
 let fruits = [
   "Apple",
@@ -89,57 +89,57 @@ let fruits = [
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+"trailing comma" স্ট্যাইল এর জন্য কোন আইটেম সংযোগ বা বাদ দেয়া সহজ হয়।
 ````
 
 
-## Methods pop/push, shift/unshift
+## pop/push, shift/unshift মেথডস
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of the most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+কিউ হল অ্যারের সবচেয়ে বেশি ব্যবহৃত একটি ডাটা স্ট্রাকচার [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type))। কম্পিউটার সায়েন্সে, এটি দ্বারা বুঝায় কোন ক্রম এলিমেন্টে এর দুটি অপারেশন আছে:
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` কালেকশনে সবার শেষে একটি এলিমেন্ট যোগ করা।
+- `shift` কালেকশনের প্রথম এলিমেন্টটি রিটার্ন করবে, সুতরাং দ্বিতীয় এলিমেন্টটি প্রথম এলিমেন্ট হিসেবে বিবেচিত হবে।
 
 ![](queue.svg)
 
-Arrays support both operations.
+অ্যারে উভয়ই অপারেশন সাপোর্ট করে।
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+এটি আমরা প্রায়ই ব্যবহার করি। উদাহরণস্বরপ, স্ক্রীনে কোন মেসেজ কিউ হিসেবে দেখাতে।
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)).
+আরো একটি ডাটা স্ট্রাকচার আছে [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) এটিও অ্যারের সাহায্যে ইমপ্লিমেন্ট করা যায়।
 
-It supports two operations:
+এরও দুটি অপারেশন আছে:
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` সবার শেষে একটি এলিমেন্ট সংযুক্ত করে।
+- `pop` সবার শেষ হতে একটি এলিমেন্ট গ্রহন করে।
 
-So new elements are added or taken always from the "end".
+সুতরাং এটি অ্যারের সর্বশেষে একটি এলিমেন্ট সংযুক্ত বা গ্রহন করে।
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+স্ট্যাককে আপনে কার্ডের প্যাকেটের সাথে তুলনা করতে পারেন: নতুন কার্ড সবার উপরে থাকবে অথবা কোন একটি কার্ড নেয়া লাগলে সবার উপর হতে নেয়া লাগবে:
 
 ![](stack.svg)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+স্ট্যাক LIFO (Last-In-First-Out) প্রিন্সিপাল অনুসারে কাজ করে, অন্যদিকে কিউ  FIFO (First-In-First-Out) অনুসারে কাজ করে।
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end.
+জাভাস্ক্রিপ্টে অ্যারের সাহায্যে স্ট্যাক বা কিউ উভয়ই ইমপ্লিমেন্ট করা যায়। কেননা অ্যারেতে সবার শেষে বা শুরুতে কোন আইটেম সংযুক্ত বা বাদ করা যায়।
 
-In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+কম্পিউটার সায়েন্সে এই ধরণের ডাটা স্ট্রাকচার সমূহকে বলা হয় [deque](https://en.wikipedia.org/wiki/Double-ended_queue)ওঁ।
 
-**Methods that work with the end of the array:**
+**অ্যারের শেষ এলিমেন্ট নিয়ে কাজ করে মেথডদুটি হল:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: অ্যারের শেষ এলিমেন্টটি রিমুভড করে এবং এলিমেন্টটি রিটার্ন করে:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // অ্যারে হতে "Pear" রিমুভড হবে এবং "Pear" রিটার্ন করবে
 
     alert( fruits ); // Apple, Orange
     ```
 
 `push`
-: Append the element to the end of the array:
+: অ্যারেতে সবার শেষে নতুন একটি এলিমেন্ট যোগ করবে:
 
     ```js run
     let fruits = ["Apple", "Orange"];
@@ -149,23 +149,23 @@ In computer science the data structure that allows this, is called [deque](https
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    `fruits.push(...)` এর পরিবর্তে `fruits[fruits.length] = ...` এভাবেও এলিমেন্ট যোগ করতে পারি।
 
-**Methods that work with the beginning of the array:**
+**অ্যারের শুরুর এলিমেন্ট নিয়ে কাজ করে মেথডদুটি হল:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: অ্যারের প্রথম এলিমেন্টটি রিমুভড করে এবং এলিমেন্টটি রিটার্ন করে:
 
     ```js run
     let fruits = ["Apple", "Orange", "Pear"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // অ্যারে হতে "Apple" রিমুভড হবে এবং "Apple" রিটার্ন করবে
 
     alert( fruits ); // Orange, Pear
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: অ্যারেতে সবার শুরুতে নতুন একটি এলিমেন্ট যোগ করবে:
 
     ```js run
     let fruits = ["Orange", "Pear"];
@@ -175,7 +175,7 @@ In computer science the data structure that allows this, is called [deque](https
     alert( fruits ); // Apple, Orange, Pear
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+`push` এবং `unshift` এর সাহায্যে একবারে একাধিক এলিমেন্ট যোগ করতে পারি:
 
 ```js run
 let fruits = ["Apple"];
@@ -187,20 +187,20 @@ fruits.unshift("Pineapple", "Lemon");
 alert( fruits );
 ```
 
-## Internals
+## ইন্টারনাল
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. That's essentially the same as `obj[key]`, where `arr` is the object, while numbers are used as keys.
+অ্যারে হল একটি বিশেষ ধরণের অবজেক্ট। সাধারণত অ্যারের কোন প্রপার্টি আমরা এভাবে অ্যাক্সেস করি  `arr[0]`, আসলে এটি অবজেক্ট অ্যাক্সেসের একটি সিনট্যাক্স `obj[key]` এর মত। এখানে `arr` হল একটি অবজেক্ট আর *index* হল তার `key`.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+এটি অবজেক্ট কে এক্সট্যান্ড করে বিভিন্ন বিশেষ মেথড ডিক্লেয়ার করে এবং সাথে `length` প্রপার্টিও।
 
-Remember, there are only eight basic data types in JavaScript (see the [Data types](info:types) chapter for more info). Array is an object and thus behaves like an object.
+মনে রাখুন, জাভাস্ক্রিপ্টে শুধুমাত্র বেসিক আটটি ডাটা টাইপ আছে (আরো বিস্তারিত এখানে দেখুন [Data types](info:types))। যেহেতু অ্যারে একটি অবজেক্ট সুতরাং এরা অবজেক্টের মত আচরণ করে।
 
-For instance, it is copied by reference:
+উদাহরণস্বরূপ, অ্যারে কপি হয় রেফারেন্স অনুসারে:
 
 ```js run
 let fruits = ["Banana"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; // copy by reference (এখানে দুটি ভ্যারিয়েবলই একই রেফারেন্স নির্দেশ করে)
 
 alert( arr === fruits ); // true
 
@@ -209,75 +209,73 @@ arr.push("Pear"); // modify the array by reference
 alert( fruits ); // Banana, Pear - 2 items now
 ```
 
-...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+...তবে ইন্টারনাল রিফ্রেশেন্টেশন অ্যারেকে বিশেষ সুবিধা দেয়। জাভাস্ক্রিপ্ট ইঞ্জিন এলিমেন্ট সমূহকে মেমোরিতে পাশাপাশি ক্রম অনুসারে সংরক্ষণ করে, যার ফলে এদের মধ্যে বিভিন্ন অপারেশন অপ্টিমাইজ করে চালানো যায়, এবং এরা দ্রুত কাজ করে।
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+তবে যদি আমরা কোন একটি অ্যারের "ordered collection" কে নষ্ট করে ফেলি, এবং এদের সাধারণ অবজেক্ট হিসেবে ডিক্লেয়ার করি তাহলে অ্যারের সুবিধাগুলো থেকে আমরা বঞ্চিত হব।
 
-For instance, technically we can do this:
+উদাহরণস্বরূপ, এটি করা সম্ভব:
 
 ```js
 let fruits = []; // make an array
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // আমরা ইন্ডেক্স হিসেবে একটি প্রপার্টি সেট করেছি যার length অনেক বড়
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // এবং এখানে কী হিসেবে একটি স্ট্রিং সেট করেছি
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+এটি করা সম্ভব, কেননা অ্যারে হল একটি অবজেক্ট। সুতরাং আমরা চাইলে এভাবে প্রপার্টি সেট করতে পারি।
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+এক্ষেত্রে ইঞ্জিন দেখবে আমরা অ্যারেকে রেগুলার অবজেক্ট হিসেবে ব্যবহার করছি, যার ফলে অ্যারেটি আর অপ্টিমাইজ উপায়ে কাজ করবে না, তখন এটি সাধারণ অবজেক্টের মত কাজ করবে, এবং আমরা অ্যারের সুবিধা সমূহ আর পাব না।
 
-The ways to misuse an array:
+নিম্নোক্ত কারনে অ্যারে অপ্টিমাইজ উপায়ে কাজ করবে না:
 
-- Add a non-numeric property like `arr.test = 5`.
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- প্রপার্টি হিসেবে সংখ্যা ব্যাতীত অন্য কিছু অ্যাসাইন করা `arr.test = 5`।
+- যথাযথ ইনডেক্সিং না করা, যেমন: `arr[0]` এর পর `arr[1000]` (এখানে মাঝখানে আর কোন ইনডেক্স ব্যবহারকরা হয়নি)।
+- অ্যারের ইন্ডেক্সিংকে কে অধঃক্রমে সাজালে, যেমন `arr[1000]`, `arr[999]` এভাবে।
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+আমাদের মনে রাখতে হবে জাভাস্ক্রিপ্টে অ্যারে একটি স্পেশাল স্ট্রাকচার যা আমাদের ডাটাকে উর্ধক্রমে সংরক্ষণ করতে দেয়। এবং এটি কিছু বিশেষ মেথড প্রদান করে। যেহুতু জাভাস্ক্রিপ্ট ইঞ্জিন অ্যারের ডাটাগুলো মেমোরিতে পাশাপাশি সংরক্ষণ করে সুতরাং এদের এভাবেই ব্যবহার করা উচিত, অন্যথায় আমরা বিশেষ সুবিধাসমূহ পাব না, যদি আমাদের কী ভ্যালু অনুযায়ী কালেকশন লাগে তাহলে আমরা রেগুলার অবজেক্ট `{}` ব্যবহার করব।
 
-## Performance
+## পারফরম্যান্স
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+`push/pop` মেথড দুটি দ্রুত কাজ করে, অন্যদিকে `shift/unshift` এর পারফরম্যান্স ধীরগতির।
 
 ![](array-speed.svg)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+কেন অ্যারের শুরুর দিকের এলিমেন্ট সমূহ নিয়ে চালানো অপারেশনসমূহের পারফরম্যান্স ধীরগতির? চলুন এক্সিকিউশন টাইমে কিভাবে কাজ করে তা দেখি:
 
 ```js
 fruits.shift(); // take 1 element from the start
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+এটি শুধুমাত্র অ্যারের `0` নং ইনডেক্স প্রদান করে রিমুভ করে না পাশাপাশি অ্যারের বাকী এলিমেন্ট সমূহকে পুনরায় ইনডেক্সিং করে।
 
-The `shift` operation must do 3 things:
+`shift` অপারেশনে ৩টি ব্যাপার ঘটে:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. `0` নং ইনডেক্স এর এলিমেন্টটি রিমুভড করে।
+2. বাকী এলিমেন্ট সমূহকে পুনরায় ইনডেক্সিং করে, ইনডেক্স `1`  হবে `0`, ইনডেক্স `2` হবে `1` এভাবে শেষ এলিমেন্টটি পর্যন্ত চলতে থাকে।
+3. `length` প্রপার্টিটি আপডেট করে।
 
 ![](array-shift.svg)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**অসংখ্য এলিমেন্টের জন্য সম্পূর্ণ অ্যারেটি পুনরায় ইন্ডেক্সিং হয়, যার ফলে মেমোরিতে অসংখ্য অপারেশন চলে**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+`unshift` এর ক্ষেত্রেও একই ব্যাপার ঘটে: অ্যারের শুরুর ইনডেক্স কে প্রতিস্থাপন করে, এবং বাকী এলিমেন্ট সমূহকে প্রতিটিকে ডানে এক ঘর করে সরায়।
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+`push/pop` এর ক্ষেত্রে কি ঘটে? এক্ষেত্রে এলিমেন্ট সমূহকে সরানো লাগেনা। `push` মেথডের জন্য অ্যারের `length` প্রপার্টির মান এক বাড়াবে এবং নতুন ইনডেক্স এ একটি এলিমেন্ট সংযুক্ত করবে। `pop` মেথডের জন্য অ্যারের শেষ এলিমেন্টটি নির্ণয় করে অ্যারে হতে ডিলিট করবে, এবং `length` প্রপার্টির মান এক কমাবে।
 
-The actions for the `pop` operation:
+`pop` মেথডটি এভাবে কাজ করে:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // শেষ হতে একটি এলিমেন্ট নেয়
 ```
 
 ![](array-pop.svg)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
-
-The similar thing with the `push` method.
+**`push/pop` মেথডের ক্ষেত্রে এলিমেন্ট সমূহের ইনডেক্স এ কোন পরিবর্তন হয় না, ফলে এই অপারেশন দুটি দ্রুতগতির**
 
 ## Loops
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+কোন একটি অ্যারের আইটেম সমূহকে `for` লুপে অ্যাক্সেস করার উপায় হল ইনডেক্স ব্যবহার করা:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -289,7 +287,7 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+তবে আমরা আরো একটি উপায়ে ইটারেট করতে পারি, `for..of`:
 
 ```js run
 let fruits = ["Apple", "Orange", "Plum"];
@@ -300,9 +298,9 @@ for (let fruit of fruits) {
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+`for..of` এটি আমাদের কারেন্ট এলিমেন্ট এর ইনডেক্স রিটার্ন এর পরিবর্তে শুধুমাত্র ভ্যালু টা রিটার্ন করে, এবং বেশিরভাগ ক্ষেত্রে এটি দ্বারাই কাজ হয়ে যায়, এবং এটি শর্টহ্যান্ডও।
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+আবার, যেহেতু অ্যারে একটি অবজেক্ট, সুতরাং `for..in` এর সাহায্যেও আমরা একে ইটারেট করতে পারি:
 
 ```js run
 let arr = ["Apple", "Orange", "Pear"];
@@ -314,7 +312,7 @@ for (let key in arr) {
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+তবে এই উপায়টি খুব ভাল না, এটির কিছু সমস্যা হতে পারে:
 
 1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
 
@@ -325,11 +323,11 @@ But that's actually a bad idea. There are potential problems with it:
 Generally, we shouldn't use `for..in` for arrays.
 
 
-## A word about "length"
+## "length" নিয়ে বিস্তারিত
 
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
+যখন আমরা অ্যারেতে কোন পরিবর্তন করি তখন `length` প্রপার্টিটি পরিবর্তন হয়। তবে একটি ব্যাপার এটি আমাদের অ্যারের মোট এলিমেন্ট নির্দেশ করে না, তবে সবচেয়ে বড় ইনডেক্স এর সাথে ১ যোগ করে মানটি `length` প্রপার্টিটি সেট হয়।
 
-For instance, a single element with a large index gives a big length:
+উদাহরণস্বরূপ, কোন একটি খালি অ্যারেকে র‍্যান্ডম একটি সংখ্যা দ্বারা ইনডেক্স করলাম:
 
 ```js run
 let fruits = [];
@@ -338,38 +336,38 @@ fruits[123] = "Apple";
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that.
+তবে সাধারণত অ্যারেকে আমরা এভাবে ব্যবহার করিনা।
 
-Another interesting thing about the `length` property is that it's writable.
+এছাড়াও আরো একটি মজার ব্যাপার হল আমরা `length` প্রপার্টিকে পরিবর্তন করতে পারব।
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+যদি আমরা `length` প্রপার্টির মান বৃদ্ধি করি তাহলে কিছু ঘটবে না, তবে যদি আমরা মানটি হ্রাস করি, তখন অ্যারেটি কেটে যাবে। এবং এটি অপরিবর্তনীয়, নিচের উদাহরণটি দেখুন:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // অ্যারের শুরুর দুটি উপাদান কেটে নিলাম
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // পুনরায় আপডেট করলাম
+alert( arr[3] ); // পূর্বের ভ্যালু আর ফেরত পাব না
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+সুতরাং কোন অ্যারেকে ক্লিয়ার করার সহজ উপায় হল: `arr.length = 0;` সেট করা।
 
 
 ## new Array() [#new-array]
 
-There is one more syntax to create an array:
+অ্যারে ডিক্লেয়ার করার আরো একটি উপায় আছে:
 
 ```js
 let arr = *!*new Array*/!*("Apple", "Pear", "etc");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+এটির ব্যবহার কদাচিৎ, কেননা স্কয়ার ব্রাকেট সংক্ষিপ্ত `[]`। Also there's a tricky feature with it.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+`new Array` একটি `number` টাইপ আর্গুমেন্ট নিতে পারে, যদি আমরা `number` প্রদান করি তাহলে অ্যারেটি এভাবে তৈরি হবে: *একটি নির্দিষ্ট length থাকবে তবে  কোন আইটেম থাকবে না*।
 
-Let's see how one can shoot themself in the foot:
+উদাহরণস্বরূপ:
 
 ```js run
 let arr = new Array(2); // will it create an array of [2] ?
@@ -379,13 +377,13 @@ alert( arr[0] ); // undefined! no elements.
 alert( arr.length ); // length 2
 ```
 
-In the code above, `new Array(number)` has all elements `undefined`.
+উপরের কোডে, `new Array(number)` এর সকল ইনডেক্স এর মান `undefined` দেখাবে।
 
-To evade such surprises, we usually use square brackets, unless we really know what we're doing.
+এই ধরণের সারপ্রাইজ এড়াতে আমরা স্কয়ার ব্রাকেট ব্যবহার করি।
 
 ## Multidimensional arrays
 
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, for example to store matrices:
+অ্যারের এলিমেন্টসমূহ অ্যারে হতে পারে, এদের বলা হয় মাল্টিডাইমেনশন অ্যারে।  মাল্টিডাইমেনশন অ্যারের সাহায্যে আমরা ম্যাট্রিক্স ডিক্লেয়ার করতে পারি:
 
 ```js run
 let matrix = [
@@ -399,9 +397,9 @@ alert( matrix[1][1] ); // 5, the central element
 
 ## toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+অ্যারের একটি নিজস্ব `toString` মেথড আছে যা অ্যারের ভ্যালু সমূহকে কমা-সেপারেটেড স্ট্রিং হিসেবে রিটার্ন করে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 
 ```js run
@@ -411,7 +409,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+এছাড়াও, এটি দেখুন:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -419,9 +417,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+অ্যারেতে `Symbol.toPrimitive` বা `valueOf` মেথড নেয়, শুধুমাত্র `toString` মেথড আছে, যার ফলে `[]` হয়ে যায় এম্পটি স্ট্রিং, `[1]` হয় `"1"` এবং `[1,2]` হয় `"1,2"`।
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+যখন আমরা `"+"` এর সাহায্যে দুটি স্ট্রিং কনক্যাটেনাইট করি, এরা এভাবে কাজ করে:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -429,31 +427,31 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Don't compare arrays with ==
+## দুটি অ্যারের মধ্যে তুলনা ==
 
-Arrays in JavaScript, unlike some other programming languages, shouldn't be compared with operator `==`.
+জাভাস্ক্রিপ্টে দুটি অ্যারের মধ্যে `==` এর সাহায্যে তুলনা করা যায় না।
 
-This operator has no special treatment for arrays, it works with them as with any objects.
+অ্যারের জন্য এই অপারেটরটি আলাদা কোন বৈশিষ্ট্য প্রদান করে না, অন্যান্য অবজেক্টের মত এটিও  `==` এর সাহায্যে তুলনা করা যায় না।
 
-Let's recall the rules:
+চলুন পুনরায় অবজেক্ট তুলনার নিয়মগুলো দেখি:
 
-- Two objects are equal `==` only if they're references to the same object.
-- If one of arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
-- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+- দুটি অবজেক্ট `==` সমান হবে যদি তারা একই অবজেক্ট কে রেফারেন্স করে।
+- `==` এর সাহায্যে তুলনা করার সময় যদি একটি অবজেক্ট হয় এবং অন্যটি primitive হয়, তাহলে অবজেক্টটি primitive ভ্যালুতে পরিবর্তন হয়ে যায়, বিস্তারিত এই অধ্যায়ে <info:object-toprimitive>।
+- ...তবে `null` এবং `undefined` এরা সমান হবে `==`।
 
-The strict comparison `===` is even simpler, as it doesn't convert types. 
+strict comparison `===` আর সহজবোধ্য, এটি ডাটা টাইপও তুলনা করে।
 
-So, if we compare arrays with `==`, they are never the same, unless we compare two variables that reference exactly the same array.
+সুতরাং আমরা যদি দুটি অ্যারের তুলনা `==` করতে চায়, তাহলে তারা সমান হবে না, যদিনা অ্যারে দুটির রেফারেন্স একই হয়।
 
-For example:
+উদাহরণস্বরূপ:
 ```js run
 alert( [] == [] ); // false
 alert( [0] == [0] ); // false
 ```
 
-These arrays are technically different objects. So they aren't equal. The `==` operator doesn't do item-by-item comparison.
+এখানে দুটি অ্যারেই আলাদা আলাদা দুটি অবজেক্ট, সুতরাং তারা একই হবে না। এবং `==` অপারেটর false রিটার্ন করবে।
 
-Comparison with primitives may give seemingly strange results as well:
+তবে primitives তুলনার সময় অদ্ভুত ফলাফল পেতে পারি:
 
 ```js run
 alert( 0 == [] ); // true
@@ -461,9 +459,9 @@ alert( 0 == [] ); // true
 alert('0' == [] ); // false
 ```
 
-Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`. 
+এখানে উভয়ই ক্ষেত্রে আমরা একটি primitive ভ্যালু কে একটি অবজেক্টের সাথে তুলনা করছি। সুতরাং অবজেক্টটি `[]` primitive এ পরিবর্তন হয়ে একটি এম্পটি `''` স্ট্রিং এ রুপান্তর হবে।
 
-Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
+এবং তুলনাটি দুটি primitive ভ্যালুতে করা হয়, বিস্তারিত এই অধ্যায়ে <info:type-conversions>:
 
 ```js run
 // after [] was converted to ''
@@ -472,15 +470,15 @@ alert( 0 == '' ); // true, as '' becomes converted to number 0
 alert('0' == '' ); // false, no type conversion, different strings
 ```
 
-So, how to compare arrays?
+তাহলে, আমরা দুটি অ্যারের তুলনা করব কিভাবে?
 
-That's simple: don't use the `==` operator. Instead, compare them item-by-item in a loop or using iteration methods explained in the next chapter.
+`==` অপারেটরের সাহায্যে তুলনা করব না। তার পরিবর্তে দুটি অ্যারের আইটেম সমূহকে লুপের সাহায্যে তুলনা করব অথবা ইটারেশনের সাহায্যে যা বিস্তারিত পরবর্তী অধ্যয়ে জানতে পারব।
 
-## Summary
+## সারাংশ
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+অ্যারে হল একটি বিশেষ ধরণের অবজেক্ট, যার সাহায্যে আমরা ডাটা কে উর্ধক্রমে রাখতে পারি।
 
-- The declaration:
+- অ্যারে ডিক্লেয়ার করার উপায়:
 
     ```js
     // square brackets (usual)
@@ -490,25 +488,25 @@ Array is a special kind of object, suited to storing and managing ordered data i
     let arr = new Array(item1, item2...);
     ```
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+    `new Array(number)` এর আর্গুমেন্ট number পাস করলে তাহলে এটি অ্যারের length বুঝায়, তবে কোন এলিমেন্ট থাকবে না।
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods.
+- `length` প্রপার্টি দ্বারা অ্যারের দৈর্ঘ্য বুঝায়, নির্দিষ্ট করে বলতে গেলে শেষ ইনডেক্সে এর সাথে ১ যোগ। অ্যারের মেথড সমূহের জন্য এটি স্বয়ংক্রিয়ভাবে পরিবর্তন হয়।
 - If we shorten `length` manually, the array is truncated.
 
-We can use an array as a deque with the following operations:
+আমরা অ্যারেকে deque হিসেবে ব্যবহার করতে পারব, এর জন্য নিম্নোক্ত মেথডসমূহ আছে:
 
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds `items` to the beginning.
+- `push(...items)` কালেকশনে সবার শেষে একটি `items` যোগ করে।
+- `pop()` সবার শেষ এলিমেন্টটি রিটার্ন করে এবং অ্যারে হতে এলিমেন্টটি বাদ দেয়।
+- `shift()` কালেকশনের প্রথম এলিমেন্টটি রিটার্ন করবে এবং অ্যারে হতে এলিমেন্টটি বাদ দেয়।
+- `unshift(...items)` কালেকশনের প্রথমে একটি `items` যোগ করে।
 
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
+অ্যারের এলিমেন্ট সমূহকে অ্যাক্সেস করতে:
+  - `for (let i=0; i<arr.length; i++)` -- দ্রুত কাজ করে, এবং পুরনো ব্রাউজার গুলো সাপোর্ট করে।
+  - `for (let item of arr)` -- শুধুমাত্র আইটেমকে অ্যাক্সেস করতে।
+  - `for (let i in arr)` -- অ্যারের জন্য এটি ব্যবহার করা উচিত নয়।
 
-To compare arrays, don't use the `==` operator (as well as `>`, `<` and others), as they have no special treatment for arrays. They handle them as any objects, and it's not what we usually want.
+অ্যারেকে কম্পেয়ার করতে কম্পারিশন এবং লজিকাল অপারেটর গুলো ব্যবহার করা উচিত নয়, কেননা অ্যারে একটি অবজেক্ট, এবং অবজেক্ট কে আমরা এভাবে তলনা করতে পারি না।
 
-Instead you can use `for..of` loop to compare arrays item-by-item.
+তার পরিবর্তে আমরা `for..of` এর সাহায্যে প্রতিটি আইটেমকে তুলনা করতে পারি।
 
-We will continue with arrays and study more methods to add, remove, extract elements and sort arrays in the next chapter <info:array-methods>.
+পরবর্তী অধ্যায়ে আমরা অ্যারের আরো বিভিন্ন মেথড সম্পর্কে জানতে পারব <info:array-methods>।
