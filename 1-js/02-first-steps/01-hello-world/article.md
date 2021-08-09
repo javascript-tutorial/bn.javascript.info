@@ -9,7 +9,11 @@
 
 ## "script" ট্যাগ
 
+<<<<<<< HEAD
 জাভাস্ক্রিপ্ট এর কার্যক্রম গুলো এইচটিএমএল ডকুমেন্টের যেকোনো অংশে রাখা যেতে পারে `<script>` ট্যাগের সাহায্য নিয়ে। 
+=======
+JavaScript programs can be inserted almost anywhere into an HTML document using the `<script>` tag.
+>>>>>>> bc08fd1b32285304b14afea12a9deaa10d13452b
 
 উদাহরণস্বরূপ:
 
