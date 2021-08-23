@@ -265,7 +265,7 @@ fetch('/article/promise-chaining/user.json')
 
 Now let's do something with the loaded user.
 
-For instance, we can make one more requests to GitHub, load the user profile and show the avatar:
+For instance, we can make one more request to GitHub, load the user profile and show the avatar:
 
 ```js run
 // Make a request for user.json
@@ -332,8 +332,7 @@ function loadJson(url) {
 }
 
 function loadGithubUser(name) {
-  return fetch(`https://api.github.com/users/${name}`)
-    .then(response => response.json());
+  return loadJson(`https://api.github.com/users/${name}`);
 }
 
 function showAvatar(githubUser) {

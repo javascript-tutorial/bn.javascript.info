@@ -35,8 +35,12 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 =======
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+<<<<<<< HEAD
 - ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
+=======
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 উপরের টার্ম গুলি মনে রাখা ভাল, কারণ সেগুলি ইন্টারনেটে ডেভেলপার আর্টিকেলে ব্যবহৃত হয়। আমরাও সেগুলো ব্যবহার করব। উদাহরণস্বরূপ, যদি "একটি X ফিচার V8 এ সাপোর্ট করে", তবে সম্ভবত এটি ক্রোম এবং অপেরাতেও কাজ করে।
 
@@ -129,8 +133,13 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 - [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
 - [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
 - [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+<<<<<<< HEAD
 - [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
+=======
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
 
