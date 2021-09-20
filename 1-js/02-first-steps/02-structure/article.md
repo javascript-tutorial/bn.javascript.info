@@ -46,7 +46,11 @@ alert(3 +
 + 2);
 ```
 
+<<<<<<< HEAD
 উপরের কোডের আউটপুট `6` কারণ জাভাস্ক্রিপ্ট এখানে সেমিকোলন ব্যবহার করবে না। এটি খুবই স্পষ্ট বোঝা যাচ্ছে, যেহেতু লাইন `"+"` দিয়ে শেষ হয়েছে, সেহেতু এটি একটি "অসম্পূর্ণ এক্সপ্রেশন", সুতরাং সেমিকোলনের প্রয়োজন নেই। এবং এই ক্ষেত্রে কোডটি যেভাবে কাজ করা উচিত সেভাবেই কাজ করছে।
+=======
+The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 
 **কিন্তু কিছু পরিস্থিতিতে যেখানে সেমিকোলন অবশ্যই প্রয়োজন, জাভাস্ক্রিপ্ট তা বুঝে নিতে ব্যর্থ হয়।**
 
@@ -56,19 +60,31 @@ alert(3 +
 আপনি যদি এধরণের এররের একটি উদাহরণ দেখতে আগ্রহী হন, তাহলে এই কোডটি দেখুনঃ
 
 ```js run
-[1, 2].forEach(alert)
+alert("Hello");
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 `[]` এবং `forEach` এর মানে কি তা এখনই চিন্তা করার দরকার নেই। আমরা পরবর্তীতে তাদের নিয়ে জানব। আপাতত, শুধু মনে রাখুন এই কোডের আউটপুটঃ প্রথমে `1` এবং এরপর `2`।
 
 এবার, কোডের শুরুতে একটি `alert` বসাই এবং সেমিকোলন ছাড়াই লাইনটি শেষ করিঃ
 
 ```js run no-beautify
 alert("একটি এরর তৈরি হবে")
+=======
+No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
 
-[1, 2].forEach(alert)
+Now let's remove the semicolon after the `alert`:
+
+```js run no-beautify
+alert("Hello")
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 এখন যদি আমরা কোডটি রান করি, শুধুমাত্র শুরুর `alert` টি দেখায় এবং এরপর আমরা একটি এরর পাই!
 
 কিন্তু আমরা যদি `alert` এর পর একটি সেমিকোলন দেই, তাহলে সব ঠিকঠাক কাজ করেঃ
@@ -90,6 +106,23 @@ alert("একটি এরর তৈরি হবে")[1, 2].forEach(alert)
 ```
 
 কিন্তু এখানে একটি নয়, দুটো আলাদা স্টেটমেন্ট হবে। এভাবে একটি লাইনে যোগ করে ফেলাটা পুরোপুরি ভুল, তাই এররটি তৈরি হয়েছে। এমনটা আরও অনেক পরিস্থিতিতে হতে পারে।
+=======
+The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
+
+If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
+
+That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
+
+Here's how the engine sees it:
+
+```js run no-beautify
+alert("Hello")[1, 2].forEach(alert);
+```
+
+Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
+
+This can happen in other situations also.
+>>>>>>> 4d01fc20d4d82358e61518a31efe80dec9bb2602
 ````
 
 আমরা স্টেটমেন্টের শেষে সেমিকোলন দিতে পরামর্শ দেই, এমনকি যদি স্টেটমেন্টগুলো আলাদা লাইনেও হয়ে থাকে। এই রুলটি কমিউনিটিতে ব্যাপকভাবে গ্রহণ করা হয়েছে। আরও একবার এভাবে বলা যায় -- অধিকাংশ সময় সেমিকোলন ঊহ্য রাখা **সম্ভব**। কিন্তু এটি ব্যবহার করা নিরাপদ -- বিশেষ করে শিক্ষানবিশ/অনভিজ্ঞদের জন্য।
