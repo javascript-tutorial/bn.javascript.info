@@ -1,12 +1,12 @@
-# Element size and scrolling
+# এলিমেন্টের সাইজ এবং স্ক্রলিং
 
-অনেক জাভাস্ক্রিপ্ট প্রপার্টি আছে যাদের সাহায্যে আমরা এলিমেন্টের width, height এবং অন্যান্য জ্যামিতিক মান জানতে পারি।
+কোন একটি এলিমেন্টের width, height এবং এর কো-অর্ডিনেটের আরো অন্যান্য মান জানতে জাভাস্ক্রিপ্টের কিছু প্রপার্টি আছে।
 
-জাভাস্ক্রিপ্টের সাহায্যে এলিমেন্টের পজিশন বা মুভমেন্ট সম্পর্কে জানতে প্রায় এদের প্রয়োজন হয়।
+প্রোগ্রামাটিক্যালি জাভাস্ক্রিপ্টের সাহায্যে কোন একটি এলিমেন্টকে সরাতে বা কোন একটি নির্দিষ্ট স্থানে বসাতে এই প্রপার্টিসমূহ সম্পর্কে জানতে হয়।
 
-## Sample element
+## একটি এলিমেন্ট
 
-প্রপার্টিগুলো সম্পর্কে আরো জানতে আমরা নিচের এলিমেন্টটি দেখি:
+এই ধরণের প্রপার্টিগুলো সম্পর্কে জানতে চলুন নিচের এলিমেন্টটি দেখি:
 
 ```html no-beautify
 <div id="example">
@@ -23,9 +23,9 @@
 </style>
 ```
 
-এটির বর্ডার, প্যাডিং এবং স্ক্রলিং আছে। যা প্রপার্টির সম্পূর্ণ সেট। এখানে কোন মার্জিন নেই, যেহেতু এটি এলিমেন্টের অংশ নই, এবং তাদের অন্য কোন বিশেষ প্রপার্টি নেই।
+এটির বর্ডার, প্যাডিং এবং স্ক্রলিং আছে। যা প্রপার্টির সম্পূর্ণ সেট। যেহেতু মার্জিন এলিমেন্টের সাথে সম্পর্কিত নয়, তাই এটি এখানে ব্যবহার করা হয়নি।
 
-এলিমেন্টটি দেখতে:
+এলিমেন্টটি জ্যামিতিকভাবে দেখতে এমন:
 
 ![](metric-css.svg)
 
@@ -34,11 +34,11 @@
 ```smart header="স্ক্রলবার সম্পর্কে কিছু কথা"
 উপরের ছবিটিতে দেখছি এলিমেন্টের একটি স্ক্রলবার আছে। অনেক ব্রাউজার (সব না) স্ক্রলবারের width নিবে তার কন্টেন্ট এর width থেকে (ছবিতে "content width" এর লেভেলটি লক্ষ্য করুন)।
 
-সুতরাং স্ক্রলবার ছাড়া আমাদের কন্টেন্ট এর width হবে `300px`, মনে করুন scrollbar এর width হল `16px` (ডিভাইসভেদে যা আলাদা হয়) সুতরাং কন্টেন্ট এর width হবে `300 - 16 = 284px`। এজন্য এখানে আমরা স্ক্রলবারসহ একটি উদাহরণ নিয়েছি, স্ক্রলবার ছাড়া এলিমেন্টের ক্যালকুলেশন হত একেবারে সহজ।
+সুতরাং স্ক্রলবার ছাড়া আমাদের কন্টেন্ট এর width হবে `300px`, মনে করুন scrollbar এর width হল `16px` (ডিভাইসভেদে যা আলাদা হয়) সুতরাং কন্টেন্ট এর width হবে `300 - 16 = 284px`। এজন্য এখানে আমরা স্ক্রলবারসহ একটি উদাহরণ নিয়েছি, স্ক্রলবার ছাড়া এলিমেন্টের width হত `300px`।
 ```
 
-```smart header="`padding-bottom` কন্টেন্ট দ্বারা পূর্ণ হতে পারে"
-ছবিতে padding-bottom দেখাতে পারে, কিন্তু যদি আমাদের এলিমেন্টে অনেক টেক্সট থাকে তাহলে এটি ওভারফ্লো অর্থাৎ দেখাবে হবে, এবং `padding-bottom` সবার নিচে দেখাবে।
+```smart header="স্ক্রলেবল এলিমেন্টের জন্য `padding-bottom` সবার নিচে দেখাবে"
+যদিও ছবিতে padding-bottom দেখাচ্ছে, কিন্তু যদি আমাদের এলিমেন্টে অনেক টেক্সট থাকে তাহলে এটি ওভারফ্লো হবে, এবং `padding-bottom` সবার নিচে দেখাবে।
 ```
 
 ## জ্যামিতিক প্রপার্টি
@@ -47,13 +47,13 @@
 
 ![](metric-all.svg)
 
-প্রপার্টিগুলোর মান নাম্বার, তবে এটি দ্বারা পিক্সেল মান বুঝায়, সুতরাং এরা পিক্সেলে পরিমাপ করে।
+প্রপার্টি এর মান যদিও পূর্ণসংখ্যা দেখায়, তবে এদের একক পিক্সেল।
 
-চলুন প্রথমে এলিমেন্টের বাহিরের প্রপার্টিগুলো নিয়ে বিস্তারিত জানি।
+চলুন প্রথমে এলিমেন্টের আউটার(বাহিরের) প্রপার্টিগুলো নিয়ে বিস্তারিত জানি।
 
 ## offsetParent, offsetLeft/Top
 
-এই প্রপার্টিগুলো কদাচিৎ ব্যবহার করা হয়, কিন্তু এরা এলিমেন্টের সবচেয়ে বাহিরের জ্যামিতিক প্রপার্টি, এবং এদের সম্পর্কে আমাদের জেনে রাখা উচিত।
+যদিও এই প্রপার্টিগুলো তেমন ব্যবহার করা হয় না, কিন্তু এরা এলিমেন্টের আউটার(বাহিরের) প্রপার্টি, এবং এদের সম্পর্কে আমাদের জেনে রাখা উচিত।
 
 `offsetParent` হল ইমিডিয়েট প্যারেন্ট যার উপর ভিত্তি করে রেন্ডারিংয়ের সময় ব্রাউজার কো-অর্ডিনেট গণনা করে।
 
@@ -84,7 +84,7 @@
 
 বিভিন্ন কারণে `offsetParent` এর মান `null` হতে পারে:
 
-1. এলিমেন্ট UI তে না দেখালে (`display:none` বা DOM এ না থাকলে)।
+1. এলিমেন্টটি UI তে না দেখালে (`display:none` বা DOM এ না থাকলে)।
 2. `<body>` এবং `<html>` এর জন্য।
 3. `position:fixed` এলিমেন্টের জন্য।
 
@@ -92,7 +92,7 @@
 
 এখন চলুন এলিমেন্টের প্রপার্টিগুলো দেখি।
 
-এই প্রপার্টি দুটি এলিমেন্টের "বাইরের" width/height প্রদান করে। অথবা, অন্যভাবে বলতে গেলে বর্ডারসহ সম্পূর্ন এলিমেন্টের সাইজ।
+এরা এলিমেন্টের কন্টেন্টের বাইরের width/height সহ মান রিটার্ন করে, অর্থাৎ উভয়পাশের `padding` এবং `border` এর মানও সংযুক্ত হয়।
 
 ![](metric-offset-width-height.svg)
 
@@ -102,9 +102,9 @@
 - `offsetHeight = 290` -- সম্পূর্ন এলিমেন্টের height।
 
 ````smart header="যেসব এলিমেন্ট UI তে দৃশ্যমান না তাদের জন্য মান হতে পারে শূন্য/নাল"
-শুধুমাত্র UI তে দৃশ্যমান জ্যামিতিল প্রপার্টিগুলোর মান দেখাবে।
+শুধুমাত্র UI তে দৃশ্যমান জ্যামিতিক প্রপার্টিগুলোর মান দেখাবে।
 
-যদি কোন একটি এলিমেন্ট (বা প্যারেন্ট এলিমেন্টে) `display:none` থাকে অথবা এটি DOM এর অংশ না হলে, তাহলে সকল জ্যামিতিক প্রপার্টির মান হবে শূন্য (বা `offsetParent` এর জন্য হবে `null`)
+যদি কোন একটি এলিমেন্ট (বা প্যারেন্ট এলিমেন্টে) `display:none` থাকে অথবা এটি DOM এর সাথে সংযুক্ত না হলে, তাহলে সকল জ্যামিতিক প্রপার্টির মান হবে শূন্য (বা `offsetParent` এর জন্য হবে `null`)
 
 যেমন, যখন কোন একটি এলিমেন্ট তৈরি হয় কিন্তু এলিমেন্টটি DOM এ সংযুক্ত করা হয়নি বা এলিমেন্টের কোন একটি প্যারেন্ট নোডের স্ট্যাইল হল `display:none` তখন এর `offsetParent` হবে `null`, এবং `offsetWidth`, `offsetHeight` হবে `0`।
 
@@ -132,11 +132,11 @@ function isHidden(elem) {
 
 ![](metric-client-left-top.svg)
 
-...তবে সুনির্দিষ্টভাবে বলতে গেলে -- এই প্রপার্টিগুলো বর্ডারের width/height নির্দেশ করে না, but rather relative coordinates of the inner side from the outer side।
+...তবে সুনির্দিষ্টভাবে বলতে গেলে -- এই প্রপার্টিগুলো বর্ডারের width/height নির্দেশ করে না, এরা আউটার সাইড হতে ইনার সাইডের কো-অর্ডিনেট রিটার্ন করে।
 
 পার্থক্যটি কি?
 
-আমাদের ডকুমেন্টের কন্টেন্ট ডান-থেকে-বামে (অপারেটিং সিস্টেম আরবী বা হিব্রুর জন্য) দেখায়। তাহলে স্ক্রলবারটি ডানের পরিবর্তে বামে দেখাবে, এবং তারপর `clientLeft` স্ক্রলবারের width সহ দেখাবে।
+আমাদের ডকুমেন্টের কন্টেন্ট ডান-থেকে-বামে (যেমন আরবী বা হিব্রুর জন্য) দেখায়। এক্ষেত্রে স্ক্রলবার ডানের পরিবর্তে বামে দেখায়, এবং তারপর `clientLeft` স্ক্রলবারের width সহ দেখাবে।
 
 এক্ষেত্রে, `clientLeft` এর মান `25`এর পরিবর্তে স্ক্রলবারের width সহ হবে `25 + 16 = 41`।
 
@@ -146,7 +146,7 @@ function isHidden(elem) {
 
 ## clientWidth/Height
 
-এই প্রপার্টিদুটি এলিমেন্টের বর্ডারের ভেতরের অংশটুকু দেখায়।
+এই প্রপার্টিদুটি এলিমেন্টের বর্ডারের ভেতরের অংশটুকু দেখায় (তবে স্ক্রলবার ছাড়া)।
 
 এর মান হবে স্ক্রলবার ব্যতীত ভিতরের কন্টেন্ট এবং প্যাডিংয়ের মানের সমষ্টি:
 
@@ -154,15 +154,15 @@ function isHidden(elem) {
 
 উপরের ছবিটিতে প্রথমে `clientHeight` কে বিবেচনা করুন।
 
-এখানে কোন আনুভূমিক (বাম-ডান বা horizontal) স্ক্রলবার নেই, সুতরাং এর মান হবে বর্ডারের ভিতরের মানটি অর্থাৎ: CSS-height `200px` এবং paddings (`2 * 20px`) এর সমষ্টি `240px`।
+এখানে কোন horizontal (বাম-ডান) স্ক্রলবার নেই, সুতরাং এর মান হবে বর্ডারের ভিতরের মানটি অর্থাৎ: CSS-height `200px` এবং paddings (`2 * 20px`) এর সমষ্টি `240px`।
 
 এবং `clientWidth` হবে -- এখানে স্ক্রলবার ছাড়া content width হবে `284px`, স্ক্রলবারের কারণে এর মান `300px` হবে না। সুতরাং এর মান হবে content width `284px` এবং paddings (`2 * 20px`) এর সমষ্টি `324px`।
 
-**যদি কোন প্যাডিং না থাকে, তাহলে বর্ডার এবং স্ক্রলবারের(যে কোন একটি থাকলে) এর মধ্যে `clientWidth/Height` এর মান হবে content area এর সমান।**
+**যদি কোন `padding` না থাকে, তাহলে বর্ডার এবং স্ক্রলবারের(যে কোন একটি থাকলে) এর মধ্যে `clientWidth/Height` এর মান হবে content area এর সমান।**
 
 ![](metric-client-width-nopadding.svg)
 
-সুতরাং যদি কোন প্যাডিং না থাকে তাহলে content area এর মান পেতে আমরা ব্যবহার করতে পারি `clientWidth/clientHeight`।
+সুতরাং যদি কোন `padding` না থাকে তাহলে content area এর মান পেতে আমরা ব্যবহার করতে পারি `clientWidth/clientHeight`।
 
 ## scrollWidth/Height
 
@@ -175,7 +175,7 @@ function isHidden(elem) {
 - `scrollHeight = 723` -- আমাদের সম্পূর্ণ content area এর উচ্চতার অর্থাৎ স্ক্রলবারের অদৃশ্য(hidden) অংশটুকুর মান।
 - `scrollWidth = 324` -- বর্ডারের ভিতর যেহেতু কোন আনুভূমিক (বাম-ডান বা horizontal) স্ক্রলবার নেই সুতরাং এর মান হবে `clientWidth` এর সমান।
 
-আমরা এলিমেন্টের সম্পূর্ন প্রপার্টির মান জানতে এই প্রপার্টিগুলো ব্যবহার করতে পারি।
+আমরা কোন এলিমেন্টের সম্পূর্ন দৈর্ঘ্য বা প্রস্থের মান জানতে এই প্রপার্টিগুলো ব্যবহার করতে পারি।
 
 যেমন:
 
@@ -185,7 +185,7 @@ element.style.height = `${element.scrollHeight}px`;
 ```
 
 ```online
-Click the button to expand the element:
+এলিমেন্টকে বিস্তৃত করতে বাটনে ক্লিক করুন:
 
 <div id="element" style="width:300px;height:200px; padding: 0;overflow: auto; border:1px solid black;">text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text</div>
 
@@ -194,44 +194,44 @@ Click the button to expand the element:
 
 ## scrollLeft/scrollTop
 
-Properties `scrollLeft/scrollTop` are the width/height of the hidden, scrolled out part of the element.
+`scrollLeft/scrollTop` প্রপার্টিগুলো হল স্ক্রলেবল এলিমেন্টের অদৃশ্য width/height।
 
-On the picture below we can see `scrollHeight` and `scrollTop` for a block with a vertical scroll.
+নিচের ছবিতে আমরা ভার্টিকেল স্ক্রলের জন্য `scrollHeight` এবং `scrollTop` প্রপার্টি দেখছি।
 
 ![](metric-scroll-top.svg)
 
-In other words, `scrollTop` is "how much is scrolled up".
+অন্যভাবে বলা যায়, `scrollTop` হল "কতটুকু স্ক্রল করা হয়েছে"।
 
-````smart header="`scrollLeft/scrollTop` can be modified"
-Most of the geometry properties here are read-only, but `scrollLeft/scrollTop` can be changed, and the browser will scroll the element.
+````smart header="`scrollLeft/scrollTop` এর মান অ্যাসাইন করা যায়"
+বেশিরভাগ জ্যামিতিক প্রপার্টি শুধুমাত্র read-only, কিন্তু `scrollLeft/scrollTop` এর মান রি-অ্যাসাইন করা যায়, এবং ব্রাউজার সে অনুযায়ী এলিমেন্টকে স্ক্রল করতে পারে।
 
 ```online
-If you click the element below, the code `elem.scrollTop += 10` executes. That makes the element content scroll `10px` down.
+যদি আপনি নিচের এলিমেন্টে ক্লিক করেন তাহলে এটি `elem.scrollTop += 10` এক্সিকিউট করে। যার ফলে এলিমেন্টের কন্টেন্ট `10px`নিচে নামবে।
 
 <div onclick="this.scrollTop+=10" style="cursor:pointer;border:1px solid black;width:100px;height:80px;overflow:auto">Click<br>Me<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
 ```
 
-Setting `scrollTop` to `0` or a big value, such as `1e9` will make the element scroll to the very top/bottom respectively.
+`scrollTop` এর মান `0` বা এর বেশি সেট করা উচিত, যেমন `1e9` এলিমেন্টকে যথাক্রমে উপর নিচে স্ক্রল করবে।
 ````
 
-## Don't take width/height from CSS
+## CSS হতে width/height এর মান না নেয়া
 
-We've just covered geometry properties of DOM elements, that can be used to get widths, heights and calculate distances.
+ইতোমধ্যে আমরা DOM এলিমেন্টের জ্যামিতিক প্রপার্টিগুলো জেনেছি, যার সাহায্যে আমরা এলিমেন্টের width/height এবং অন্যান্য প্রপার্টিগুলো পেতে ব্যবহার করতে পারি।
 
-But as we know from the chapter <info:styles-and-classes>, we can read CSS-height and width using `getComputedStyle`.
+আমরা পূর্বের <info:styles-and-classes> এই অধ্যায়ে দেখেছি, আমরা CSS এর width/height জানার জন্য `getComputedStyle` ব্যবহার করতে পারব।
 
-So why not to read the width of an element with `getComputedStyle`, like this?
+তবে কোন এলিমেন্টের width/height জানতে `getComputedStyle` ব্যবহার করা উচিত হবে না, যেমন
 
 ```js run
 let elem = document.body;
 
-alert( getComputedStyle(elem).width ); // show CSS width for elem
+alert( getComputedStyle(elem).width ); // এলিমেন্টের CSS width দেখাবে
 ```
 
-Why should we use geometry properties instead? There are two reasons:
+এর পরিবর্তে আমাদের কেন জ্যামিতিক প্রপার্টিগুলো ব্যবহার করা উচিত? এর দুটি কারণ আছে:
 
-1. First, CSS `width/height` depend on another property: `box-sizing` that defines "what is" CSS width and height. A change in `box-sizing` for CSS purposes may break such JavaScript.
-2. Second, CSS `width/height` may be `auto`, for instance for an inline element:
+1. প্রথমত, CSS `width/height` অন্যান্য প্রপার্টির উপর নির্ভর করে: যেমন `box-sizing` যার ফলে width এবং height নির্ভর করে। CSS এর জন্য `box-sizing` ব্যবহারের ফলে আমাদের JavaScript এর মান সঠিক নাও দেখাতে পারে।
+2. দ্বিতীয়ত, CSS `width/height` হতে পারে `auto`, যেমন ইনলাইন এলিমেন্টের জন্য:
 
     ```html run
     <span id="elem">Hello!</span>
@@ -243,34 +243,34 @@ Why should we use geometry properties instead? There are two reasons:
     </script>
     ```
 
-    From the CSS standpoint, `width:auto` is perfectly normal, but in JavaScript we need an exact size in `px` that we can use in calculations. So here CSS width is useless.
+    এক্ষেত্রে CSS এর জন্য, `width:auto` থাকা স্বাভাবিক, তবে এক্ষেত্রে আমাদের সাইজ `px` এ জানা লাগতে পারে, যার ফলে CSS width এখানে ব্যবহারে কাজে আসবে না।
 
-And there's one more reason: a scrollbar. Sometimes the code that works fine without a scrollbar becomes buggy with it, because a scrollbar takes the space from the content in some browsers. So the real width available for the content is *less* than CSS width. And `clientWidth/clientHeight` take that into account.
+আরো একটি কারণ হল, স্ক্রলবার। অনেকসময় কোড সঠিকভাবে কাজ করলেও স্ক্রলবারের জন্য কোডটি **buggy** হতে পারে, কেননা কিছু ব্রাউজারে স্ক্রলবার কন্টেন্ট হতে কিছু স্পেস নেয়। যার ফলে কন্টেন্টের অরিজিনাল width/height আরো কম হবে। এক্ষেত্রে `clientWidth/clientHeight` সঠিক মান দিবে।
 
-...But with `getComputedStyle(elem).width` the situation is different. Some browsers (e.g. Chrome) return the real inner width, minus the scrollbar, and some of them (e.g. Firefox) -- CSS width (ignore the scrollbar). Such cross-browser differences is the reason not to use `getComputedStyle`, but rather rely on geometry properties.
+...তবে `getComputedStyle(elem).width` ব্রাউজারভেদে আলাদা আলাদা কাজ করে। কিছু ব্রাউজারে যেমন (Chrome) এটি স্ক্রলবার ব্যতীত অরিজিনাল inner-width এর মান রিটার্ন করে আবার কিছু ব্রাউজার (যেমন Firefox) স্ক্রলবার সহ মান রিটার্ন করে। এক্ষেত্রে ক্রস ব্রাউজার সাপোর্টের width/height এর মান নেয়ার জন্য আমাদের `getComputedStyle` ব্যবহার করা উচিত নই।
 
 ```online
-If your browser reserves the space for a scrollbar (most browsers for Windows do), then you can test it below.
+এখানে আপনি পরীক্ষা করে দেখতে পারেন।
 
 [iframe src="cssWidthScroll" link border=1]
 
-The element with text has CSS `width:300px`.
+স্ক্রলবার সহ এলিমেন্টের অরিজিনাল `width:300px`।
 
-On a Desktop Windows OS, Firefox, Chrome, Edge all reserve the space for the scrollbar. But  Firefox shows `300px`, while Chrome and Edge show less. That's because Firefox returns the CSS width and other browsers return the "real" width.
+ডেস্কটপে Windows OS, Firefox, Chrome, Edge সব ব্রাউজার স্ক্রলবার সংরক্ষন করে। তবে এখানে ফায়ারফক্স দেখাবে `300px`, যেখানে অন্যান্য ব্রাউজার Chrome এবং Edge width এর মান আরো কম দেখাবে।
 ```
 
-Please note that the described difference is only about reading `getComputedStyle(...).width` from JavaScript, visually everything is correct.
+দয়া করে মনে রাখুন এটি শুধুমাত্র জাভাস্ক্রিপ্টের সাহায্যে `getComputedStyle(...).width` এর মান নিতে পার্থক্য হতে পারে, তবে দৃশ্যমান সব সঠিক হতে পারে।
 
-## Summary
+## সারাংশ
 
-Elements have the following geometry properties:
+একটি এলিমেন্টের নিম্নোক্ত জ্যামিতিক প্রপার্টিগুলো আছে:
 
-- `offsetParent` -- is the nearest positioned ancestor or `td`, `th`, `table`, `body`.
-- `offsetLeft/offsetTop` -- coordinates relative to the upper-left edge of `offsetParent`.
-- `offsetWidth/offsetHeight` -- "outer" width/height of an element including borders.
-- `clientLeft/clientTop` -- the distances from the upper-left outer corner to the upper-left inner (content + padding) corner. For left-to-right OS they are always the widths of left/top borders. For right-to-left OS the vertical scrollbar is on the left so `clientLeft` includes its width too.
-- `clientWidth/clientHeight` -- the width/height of the content including paddings, but without the scrollbar.
-- `scrollWidth/scrollHeight` -- the width/height of the content, just like `clientWidth/clientHeight`, but also include scrolled-out, invisible part of the element.
-- `scrollLeft/scrollTop` -- width/height of the scrolled out upper part of the element, starting from its upper-left corner.
+- `offsetParent` -- ইমিডিয়েট প্যারেন্ট যার মধ্যে এলিমেন্টটির অবস্থান অথবা `td`, `th`, `table`, `body`।
+- `offsetLeft/offsetTop` -- `offsetParent` এর উপর ভিত্তি করে upper-left এর দিকের কোঅর্ডিনেট.
+- `offsetWidth/offsetHeight` -- এলিমেন্টের "outer" width/height(বর্ডারসহ)।
+- `clientLeft/clientTop` -- upper-left "outer" কর্নার হতে upper-left "inner" কর্নারের দূরত্ব। left-to-right কন্টেন্টের এর জন্য OS সর্বদা left/top বর্ডারের width সহ হবে। right-to-left এর জন্য ভার্টিকেল স্ক্রলবার left এ অবস্থান করে, তাই এখানে `clientLeft` এর width ও সংযুক্ত হবে।
+- `clientWidth/clientHeight` -- কন্টেন্টের অরিজিনাল width/height, স্ক্রলবার ব্যাতীত।
+- `scrollWidth/scrollHeight` -- এটিও কন্টেন্টের width/height রিটার্ন করে `clientWidth/clientHeight` এর মত, তবে এটি সম্পূর্ণ কন্টেন্টের সাইজ রিটার্ন করে, অর্থাৎ স্ক্রলবারের কারণে এলিমেন্টের অদৃশ্য কন্টেন্টসহ।
+- `scrollLeft/scrollTop` -- এলিমেন্টের স্ক্রল করা অংশের width/height, upper-left কর্নার হতে শুরু হয়।
 
-All properties are read-only except `scrollLeft/scrollTop` that make the browser scroll the element if changed.
+`scrollLeft/scrollTop` ব্যতীত বাকীসব প্রপার্টি read-only।
