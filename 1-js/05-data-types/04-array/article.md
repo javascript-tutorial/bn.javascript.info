@@ -209,7 +209,11 @@ arr.push("Pear"); // modify the array by reference
 alert( fruits ); // Banana, Pear - 2 items now
 ```
 
+<<<<<<< HEAD
 ...তবে ইন্টারনাল রিফ্রেশেন্টেশন অ্যারেকে বিশেষ সুবিধা দেয়। জাভাস্ক্রিপ্ট ইঞ্জিন এলিমেন্ট সমূহকে মেমোরিতে পাশাপাশি ক্রম অনুসারে সংরক্ষণ করে, যার ফলে এদের মধ্যে বিভিন্ন অপারেশন অপ্টিমাইজ করে চালানো যায়, এবং এরা দ্রুত কাজ করে।
+=======
+...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 তবে যদি আমরা কোন একটি অ্যারের "ordered collection" কে নষ্ট করে ফেলি, এবং এদের সাধারণ অবজেক্ট হিসেবে ডিক্লেয়ার করি তাহলে অ্যারের সুবিধাগুলো থেকে আমরা বঞ্চিত হব।
 
@@ -377,9 +381,13 @@ alert( arr[0] ); // undefined! no elements.
 alert( arr.length ); // length 2
 ```
 
+<<<<<<< HEAD
 উপরের কোডে, `new Array(number)` এর সকল ইনডেক্স এর মান `undefined` দেখাবে।
 
 এই ধরণের সারপ্রাইজ এড়াতে আমরা স্কয়ার ব্রাকেট ব্যবহার করি।
+=======
+To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 ## Multidimensional arrays
 
@@ -435,9 +443,15 @@ alert( "1,2" + 1 ); // "1,21"
 
 চলুন পুনরায় অবজেক্ট তুলনার নিয়মগুলো দেখি:
 
+<<<<<<< HEAD
 - দুটি অবজেক্ট `==` সমান হবে যদি তারা একই অবজেক্ট কে রেফারেন্স করে।
 - `==` এর সাহায্যে তুলনা করার সময় যদি একটি অবজেক্ট হয় এবং অন্যটি primitive হয়, তাহলে অবজেক্টটি primitive ভ্যালুতে পরিবর্তন হয়ে যায়, বিস্তারিত এই অধ্যায়ে <info:object-toprimitive>।
 - ...তবে `null` এবং `undefined` এরা সমান হবে `==`।
+=======
+- Two objects are equal `==` only if they're references to the same object.
+- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
+- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 strict comparison `===` আর সহজবোধ্য, এটি ডাটা টাইপও তুলনা করে।
 
