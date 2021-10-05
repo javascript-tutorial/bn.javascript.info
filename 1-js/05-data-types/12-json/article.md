@@ -1,10 +1,10 @@
-# JSON methods, toJSON
+# জেসন মেথড, toJSON
 
-Let's say we have a complex object, and we'd like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+মনে করুন আমাদের একটি কমপ্লেক্স অবজেক্ট আছে, এবং আমরা এটিকে সার্ভারে সেন্ড করতে বা লগ করতে স্ট্রিংয়ে রূপান্তর করতে চাই।
 
-Naturally, such a string should include all important properties.
+সাধারণত, এক্ষেত্রে অবজেক্টের সকল প্রপার্টি স্ট্রিংয়ে রূপান্তর করতে হবে।
 
-We could implement the conversion like this:
+এটি আমরা `toString()` এর সাহায্যে এভাবে করতে পারি:
 
 ```js run
 let user = {
@@ -21,20 +21,20 @@ let user = {
 alert(user); // {name: "John", age: 30}
 ```
 
-...But in the process of development, new properties are added, old properties are renamed and removed. Updating such `toString` every time can become a pain. We could try to loop over properties in it, but what if the object is complex and has nested objects in properties? We'd need to implement their conversion as well.
+...তবে এক্ষেত্রে সমস্যা হল, ডেভলাপমেন্টের সময় অবজেক্টে আরো নতুন প্রপার্টি যুক্ত বা বাদ বা প্রপার্টির নাম সংশোধন করা লাগতে পারে। এবং অবজেক্টে কোন পরিবর্তন করলে আমাদের `toString` এ ম্যানুয়ালী পরিবর্তন করতে হবে, যা আসলে কষ্টসাধ্য এবং বিরক্তিকর। তবে চাইলে আমরা লুপের সাহায্যে আমাদের কাঙ্খীত স্ট্রিং পেতে পারি, তবে এক্ষেত্রে আমাদের কমপ্লেক্স নেস্টেড অবজেক্টের জন্যও কাজ করা লাগতে পারে।
 
-Luckily, there's no need to write the code to handle all this. The task has been solved already.
+সৌভাগ্যক্রমে, ইতোমধ্যে একটি বিল্ট-ইন একটি অবজেক্ট আছে `JSON`। যার সাহায্যে আমরা এটি সমাধান করতে পারি।
 
 ## JSON.stringify
 
-The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](http://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+[JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) হল  ভ্যালু বা অবজেক্টকে একটি সাধারণ ফর্মে দেখানোর পদ্ধতি [RFC 4627](http://tools.ietf.org/html/rfc4627)। এটি সর্বপ্রথম জাভাস্ক্রিপ্টের জন্য তৈরি করা হয়েছিল, তবে বর্তমানে অন্যান্য সকল ল্যাংগুয়েজে `JSON` নিয়ে কাজ করার নিজস্ব লাইব্রেরী আছে। তাই এখন ক্লায়েন্ট থেকে সার্ভারের (যেমন পাইথন, রুবি, জাভা, পিএইচপি ইত্যাদির) সাথে সহজেই `JSON` ডাটা আদান-প্রদান করা যায়।
 
-JavaScript provides methods:
+জাভাস্ক্রিপ্টে `JSON` এর দুটি মেথড আছে:
 
-- `JSON.stringify` to convert objects into JSON.
-- `JSON.parse` to convert JSON back into an object.
+- `JSON.stringify` অবজেক্ট বা ভ্যালুকে JSON এ রূপান্তর করে।
+- `JSON.parse` JSON হতে অবজেক্ট বা ভ্যালুতে রূপান্তর করে।
 
-For instance, here we `JSON.stringify` a student:
+উদাহরণস্বরূপ, এখানে `student` অবজেক্টকে `JSON.stringify` দ্বারা `JSON` এ রূপান্তর:
 ```js run
 let student = {
   name: 'John',
@@ -48,7 +48,7 @@ let student = {
 let json = JSON.stringify(student);
 */!*
 
-alert(typeof json); // we've got a string!
+alert(typeof json); // টাইপ স্ট্রিং
 
 alert(json);
 *!*
@@ -64,35 +64,34 @@ alert(json);
 */!*
 ```
 
-The method `JSON.stringify(student)` takes the object and converts it into a string.
+`JSON.stringify(student)` মেথডটি `student` অবজেক্টকে স্ট্রিংয়ে রূপান্তর করছে।
 
-The resulting `json` string is called a *JSON-encoded* or *serialized* or *stringified* or *marshalled* object. We are ready to send it over the wire or put into a plain data store.
+`json` স্ট্রিংটিকে বলা হয় *JSON-encoded* বা *serialized* বা *stringified* বা *marshalled* অবজেক্ট। এটি এখন সার্ভারে পাঠানোর জন্য অথবা কোন টেক্সট আকারে কোথাও সংরক্ষনের জন্য প্রস্তুত।
 
+দয়া করে মনে রাখুন একটি JSON-encoded অবজেক্ট আর সাধারণ অবজেক্টের কিছু পার্থক্য আছে:
 
-Please note that a JSON-encoded object has several important differences from the object literal:
+- JSON এ কোন একক উদ্ধৃতি (single quotes '') চিহ্ন বা ব্যাকটিকস (` `` `) থাকে না। সুতরাং `'John'` হবে `"John"`।
+- অবশ্যই অবজেক্টের প্রপার্টি দ্বৈত উদ্ধৃতি(double quoted "")  চিহ্ন দ্বারা আবদ্ধ থাকবে। সুতরাং `age:30` হবে `"age":30`।
 
-- Strings use double quotes. No single quotes or backticks in JSON. So `'John'` becomes `"John"`.
-- Object property names are double-quoted also. That's obligatory. So `age:30` becomes `"age":30`.
+প্রিমিটিভ ডাটা টাইপের জন্যও `JSON.stringify` কাজ করবে।
 
-`JSON.stringify` can be applied to primitives as well.
-
-JSON supports following data types:
+JSON নিম্নোক্ত ডাটাটাইপ সাপোর্ট করে:
 
 - Objects `{ ... }`
 - Arrays `[ ... ]`
 - Primitives:
     - strings,
     - numbers,
-    - boolean values `true/false`,
+    - boolean ভ্যালু `true/false`,
     - `null`.
 
-For instance:
+যেমন:
 
 ```js run
-// a number in JSON is just a number
+// নাম্বারের JSON হবে নাম্বার
 alert( JSON.stringify(1) ) // 1
 
-// a string in JSON is still a string, but double-quoted
+// স্ট্রিংয়ের JSON হবে স্ট্রিংয়ের, তবে এটি দ্বৈত উদ্ধৃতি(double quoted "")  চিহ্ন দ্বারা আবদ্ধ থাকবে
 alert( JSON.stringify('test') ) // "test"
 
 alert( JSON.stringify(true) ); // true
@@ -100,13 +99,13 @@ alert( JSON.stringify(true) ); // true
 alert( JSON.stringify([1, 2, 3]) ); // [1,2,3]
 ```
 
-JSON is data-only language-independent specification, so some JavaScript-specific object properties are skipped by `JSON.stringify`.
+JSON ল্যাংগুয়েজের উপর সীমাবদ্ধ নই, তাই `JSON.stringify` JavaScript-specific অবজেক্ট প্রপার্টি সমূহকে উপেক্ষা করবে।
 
-Namely:
+সাধারণত:
 
-- Function properties (methods).
-- Symbolic properties.
-- Properties that store `undefined`.
+- ফাংশন প্রপার্টি (methods)।
+- Symbolic প্রপার্টি।
+- অথবা প্রপার্টির ভ্যালু `undefined` হলে।
 
 ```js run
 let user = {
@@ -120,11 +119,11 @@ let user = {
 alert( JSON.stringify(user) ); // {} (empty object)
 ```
 
-Usually that's fine. If that's not what we want, then soon we'll see how to customize the process.
+যেহেতু এখানের সকল প্রপার্টি জাভাস্ক্রিপ্টের নিজস্ব পদ্ধতি, তাই খালি অবজেক্ট রিটার্ন করেছে, তবে আমরা চাইলে এদের কাস্টমাইজ করতে পারি, যা নিচে আলোচনা করা হয়েছে।
 
-The great thing is that nested objects are supported and converted automatically.
+তবে আনন্দের বিষয় হল এটি নেস্টেড অবজেক্টের জন্যও কাজ করে।
 
-For instance:
+যেমন:
 
 ```js run
 let meetup = {
@@ -138,7 +137,7 @@ let meetup = {
 };
 
 alert( JSON.stringify(meetup) );
-/* The whole structure is stringified:
+/* সম্পূর্ণ অবজেক্টটি stringified করা হয়েছে:
 {
   "title":"Conference",
   "room":{"number":23,"participants":["john","ann"]},
@@ -146,9 +145,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-The important limitation: there must be no circular references.
+তবে এর একটি সীমাবদ্ধতা আছে, এক্ষেত্রে কোন সার্কুলার রেফারেন্স থাকা যাবে না।
 
-For instance:
+যেমন:
 
 ```js run
 let room = {
@@ -168,33 +167,33 @@ JSON.stringify(meetup); // Error: Converting circular structure to JSON
 */!*
 ```
 
-Here, the conversion fails, because of circular reference: `room.occupiedBy` references `meetup`, and `meetup.place` references `room`:
+এখানে এটি এরর হবে, কেননা এদের মাঝে উভমুখী রেফারেন্স ডিক্লেয়ার করা হয়েছে, যেমন `room.occupiedBy` রেফারেন্স করছে `meetup` কে, এবং `meetup.place` রেফারেন্স করছে `room` কে:
 
 ![](json-meetup.svg)
 
 
-## Excluding and transforming: replacer
+## প্রপার্টির রূপান্তর: replacer
 
-The full syntax of `JSON.stringify` is:
+`JSON.stringify` এর সম্পূর্ণ সিনট্যাক্সটি হল:
 
 ```js
 let json = JSON.stringify(value[, replacer, space])
 ```
 
 value
-: A value to encode.
+: এনকোড করার জন্য ভ্যালু।
 
 replacer
-: Array of properties to encode or a mapping function `function(key, value)`.
+: প্রপার্টিসমূহের অ্যারে বা একটি ম্যাপ ফাংশন `function(key, value)`।
 
 space
-: Amount of space to use for formatting
+: ফরম্যাটিংয়ে ব্যবহৃত স্পেস
 
-Most of the time, `JSON.stringify` is used with the first argument only. But if we need to fine-tune the replacement process, like to filter out circular references, we can use the second argument of `JSON.stringify`.
+বেশিরভাগ সময় আমরা `JSON.stringify` এ শুধুমাত্র প্রথম আর্গুমেন্টটি ব্যবহার করি। তবে যদি আমরা এনকোডের সময় কোন প্রপার্টি কাস্টমাইজ করতে চাই, তাহলে `JSON.stringify` এর  দ্বিতীয় আর্গুমেন্টটি ব্যবহার করব।
 
-If we pass an array of properties to it, only these properties will be encoded.
+যদি আমরা দ্বিতীয় আর্গুমেন্টে প্রপার্টির নামের অ্যারে পাঠাই, তাহলে শুধুমাত্র ঐ প্রপার্টিগুলো সেট হবে।
 
-For instance:
+যেমন:
 
 ```js run
 let room = {
@@ -213,9 +212,9 @@ alert( JSON.stringify(meetup, *!*['title', 'participants']*/!*) );
 // {"title":"Conference","participants":[{},{}]}
 ```
 
-Here we are probably too strict. The property list is applied to the whole object structure. So the objects in `participants` are empty, because `name` is not in the list.
+এক্ষেত্রে আমরা একটি অদ্ভুত ব্যাপার লক্ষ্য করছি, যদিও আমরা সম্পূর্ণ অবজেক্টটি পাস করেছি, কিন্তু `participants` এর মান খালি দেখায়, কেননা আমরা আর্গুমেন্ট অ্যারেতে `name` প্রপার্টি সংযুক্ত করিনি।
 
-Let's include in the list every property except `room.occupiedBy` that would cause the circular reference:
+এখন চলুন আমাদের অবজেক্টের সার্কুলার রেফারেন্সের জন্য `room.occupiedBy` বাদে বাকী সকল প্রপার্টিযুক্ত করি:
 
 ```js run
 let room = {
@@ -240,13 +239,13 @@ alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'num
 */
 ```
 
-Now everything except `occupiedBy` is serialized. But the list of properties is quite long.
+এখন আমরা `occupiedBy` বাদে বাকী সকল প্রপার্টিকে সিরিয়ালাইজড করেছি, কিন্তু এভাবে করায় আমাদের অ্যারে লিস্টের প্রপার্টি বেড়েই চলছে যা কমপ্লেক্স অবজেক্টের জন্য নিয়ন্ত্রন করা কষ্টসাধ্য।
 
-Fortunately, we can use a function instead of an array as the `replacer`.
+তবে, এজন্য আমরা চাইলে অ্যারের পরিবর্তে একটি `replacer` ফাংশন ব্যবহার করতে পারি।
 
-The function will be called for every `(key, value)` pair and should return the "replaced" value, which will be used instead of the original one. Or `undefined` if the value is to be skipped.
+ফাংশনটি প্রতিটি প্রপার্টির জন্য `(key, value)` হিসেবে কল হবে এবং একটি মান রিটার্ন করবে যা ঐ প্রপার্টির ভ্যালু হিসেবে সেট হবে। অথবা ঐ প্রপার্টি বাদ দিতে আমরা `undefined` সেট করতে পারি।
 
-In our case, we can return `value` "as is" for everything except `occupiedBy`. To ignore `occupiedBy`, the code below returns `undefined`:
+এক্ষেত্রে উপরের অংশেরমত মান পেতে আমরা `value` রিটার্ন করব আর `occupiedBy` কে বাদ দিতে কন্ডিশন যাচাই করে তার মান `undefined` সেট করব:
 
 ```js run
 let room = {
@@ -279,20 +278,20 @@ number:       23
 */
 ```
 
-Please note that `replacer` function gets every key/value pair including nested objects and array items. It is applied recursively. The value of `this` inside `replacer` is the object that contains the current property.
+দয়া করে মনে রাখবেন `replacer` ফাংশন নেস্টেড অবজেক্টের সকল প্রপার্টি key/value হিসেবে পায়, এটি `recursively` কল হয়। `replacer` এর মাঝে `this` বর্তমান অবজেক্টকে নির্দেশ করবে।
 
-The first call is special. It is made using a special "wrapper object": `{"": meetup}`. In other words, the first `(key, value)` pair has an empty key, and the value is the target object as a whole. That's why the first line is `":[object Object]"` in the example above.
+তবে এক্ষেত্রে প্রথম ইটারেশনটি একটু আলাদা। এটি তৈরি হয় একটি "wrapper object" দ্বারা `{"": meetup}`। অন্যভাবে বলতে গেলে প্রথমবার `(key, value)` এর key হবে খালি এবং ভ্যালু হবে টার্গেট অবজেক্টের মান। যার কারণে সবার শুরুতে আমরা এটি দেখতে পাই `":[object Object]"`।
 
-The idea is to provide as much power for `replacer` as possible: it has a chance to analyze and replace/skip even the whole object if necessary.
+উপরের আলোচনা থেকে আমরা বুঝতে পারি `replacer` ফাংশনটি যথেষ্ট শক্তিশালী: এর উপর ভিত্তি করে আমরা যেকোন প্রপার্টি পরিবর্তন বা বাদ দিতে পারি।
 
 
-## Formatting: space
+## ফরম্যাটিং: স্পেস
 
-The third argument of `JSON.stringify(value, replacer, space)` is the number of spaces to use for pretty formatting.
+`JSON.stringify(value, replacer, space)` এর তৃতীয় আর্গুমেন্টটি একটি পূর্ণ ধনাত্নক সংখ্যা নেয়, যা দ্বারা আমরা স্ট্রিংটি আরো সুন্দর করে ফরম্যাট করতে পারি।
 
-Previously, all stringified objects had no indents and extra spaces. That's fine if we want to send an object over a network. The `space` argument is used exclusively for a nice output.
+ইতোমধ্যে আমরা যেসব এনকোডেড স্ট্রিং দেখেছি এদের ফরম্যাট বা অতিরিক্ত স্পেস ছিল না। সার্ভারে ডাটা পাঠাতে এটি সমস্যা করবে না, কিন্তু যদি আমরা লগ অ্যাপ্লিকেশনের জন্য স্ট্রিংটি সুন্দর করে দেখাতে চাই এক্ষেত্রে স্ট্রিংটিকে আমাদের সুন্দর পাঠযোগ্য ফরম্যাটে দেখানো উচিত।
 
-Here `space = 2` tells JavaScript to show nested objects on multiple lines, with indentation of 2 spaces inside an object:
+এখানে `space = 2` দ্বারা বুঝানো হচ্ছে নেস্টেড অবজেক্টটি মাল্টিপল লাইনে সুন্দর ফরম্যাটে দেখাবে:
 
 ```js run
 let user = {
@@ -305,7 +304,7 @@ let user = {
 };
 
 alert(JSON.stringify(user, null, 2));
-/* two-space indents:
+/* দুই স্পেস ইন্ডেন্টেশন:
 {
   "name": "John",
   "age": 25,
@@ -316,7 +315,7 @@ alert(JSON.stringify(user, null, 2));
 }
 */
 
-/* for JSON.stringify(user, null, 4) the result would be more indented:
+/* JSON.stringify(user, null, 4) চার স্পেস ইন্ডেন্টেশন:
 {
     "name": "John",
     "age": 25,
@@ -328,13 +327,13 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
-The `space` parameter is used solely for logging and nice-output purposes.
+`space` প্যারামিটারটি আমরা ব্যবহার করি লগ কে সুন্দর ভাবে দেখাতে।
 
-## Custom "toJSON"
+## নিজস্ব "toJSON"
 
-Like `toString` for string conversion, an object may provide method `toJSON` for to-JSON conversion. `JSON.stringify` automatically calls it if available.
+জাভাস্ক্রিপ্ট কোন অবজেক্টকে স্ট্রিং এ রূপান্তরের জন্য `toString` ব্যবহার করে, অবজেক্টকে JSON এ রূপান্তরের সময়ও ভ্যালু স্ট্রিং হিসেবে পেতে `JSON.stringify` `toJSON` কল করে। এক্ষেত্রে `JSON.stringify` স্বয়ংক্রিয়ভাবে `toString` কে কল করে।
 
-For instance:
+যেমন:
 
 ```js run
 let room = {
@@ -359,9 +358,9 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-Here we can see that `date` `(1)` became a string. That's because all dates have a built-in `toJSON` method which returns such kind of string.
+এখানে আমরা দেখছি `(1)` এ নির্দেশিত `date` অবজেক্টটি একটি স্ট্রিংয়ে রূপান্তর হয়েছে। কেননা আমাদের `Date` অবজেক্টে বিল্টইন `toJSON` মেথড রয়েছে।
 
-Now let's add a custom `toJSON` for our object `room` `(2)`:
+এখন চলুন `(2)` এর নির্দেশিত `room` প্রপার্টির জন্য কাস্টম `toJSON` ইমপ্লিমেন্ট করি:
 
 ```js run
 let room = {
@@ -393,25 +392,25 @@ alert( JSON.stringify(meetup) );
 */
 ```
 
-As we can see, `toJSON` is used both for the direct call `JSON.stringify(room)` and when `room` is nested in another encoded object.
+সুতরাং আমরা বুঝতে পারছি এনকোডের সময় আমাদের `JSON.stringify(room)` স্বয়ংক্রিয়ভাবে `toString` কে কল করে যার ফলে `room` নেস্টেড অবজেক্ট হওয়ার পরও এটি নাম্বার হিসেবে সেট হয়েছে।
 
 
 ## JSON.parse
 
-To decode a JSON-string, we need another method named [JSON.parse](mdn:js/JSON/parse).
+JSON-string হতে অবজেক্টে রূপান্তরের জন্য আরেকটি মেথড আছে [JSON.parse](mdn:js/JSON/parse)।
 
-The syntax:
+সিন্ট্যাক্স হল:
 ```js
 let value = JSON.parse(str, [reviver]);
 ```
 
 str
-: JSON-string to parse.
+: অবজেক্টে রূপান্তরের জন্য JSON-string।
 
 reviver
-: Optional function(key,value) that will be called for each `(key, value)` pair and can transform the value.
+: অপশনাল function(key,value) যেটি প্রতিটি প্রপার্টির জন্য কল হবে এবং আমরা কন্ডিশনালি ভ্যালু পরিবর্তন করতে পারব।
 
-For instance:
+যেমন:
 
 ```js run
 // stringified array
@@ -422,7 +421,7 @@ numbers = JSON.parse(numbers);
 alert( numbers[1] ); // 1
 ```
 
-Or for nested objects:
+নেস্টেড অবজেক্টের জন্য:
 
 ```js run
 let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
@@ -432,40 +431,40 @@ let user = JSON.parse(userData);
 alert( user.friends[1] ); // 1
 ```
 
-The JSON may be as complex as necessary, objects and arrays can include other objects and arrays. But they must obey the same JSON format.
+JSON স্ট্রিংটি আরো কমপ্লেক্স হতে পারে, এতে অ্যারে, অবজেক্ট ও যুক্ত থাকতে পারে। তবে সবাইকে অবশ্যই একই JSON ফরম্যাট মানতে হবে।
 
-Here are typical mistakes in hand-written JSON (sometimes we have to write it for debugging purposes):
+তবে অনেক সময় ম্যানুয়ালি JSON লিখার সময় কিছু সাধারণ ভুল প্রায় হয়:
 
 ```js
 let json = `{
-  *!*name*/!*: "John",                     // mistake: property name without quotes
-  "surname": *!*'Smith'*/!*,               // mistake: single quotes in value (must be double)
-  *!*'isAdmin'*/!*: false                  // mistake: single quotes in key (must be double)
-  "birthday": *!*new Date(2000, 2, 3)*/!*, // mistake: no "new" is allowed, only bare values
-  "friends": [0,1,2,3]              // here all fine
+  *!*name*/!*: "John",                     // এটি ভুল: প্রপার্টি অবশ্যই double quoted হতে হবে
+  "surname": *!*'Smith'*/!*,               // এটি ভুল: ভ্যালু single quotes(অবশ্যই double quoted হতে হবে)
+  *!*'isAdmin'*/!*: false                  // এটি ভুল: প্রপার্টি single quotes (অবশ্যই double quoted হতে হবে)
+  "birthday": *!*new Date(2000, 2, 3)*/!*, // এটি ভুল: "new" কীওয়ার্ড অ্যালাউ হবে না
+  "friends": [0,1,2,3]              // এটি সঠিক
 }`;
 ```
 
-Besides, JSON does not support comments. Adding a comment to JSON makes it invalid.
+এছাড়াও JSON এর মাঝে কমেন্ট গ্রহণযোগ্য না। কমেন্ট সংযুক্তের জন্য JSON ইনভ্যালিড হবে।
 
-There's another format named [JSON5](http://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+তবে এই ধরণের ইনভ্যালিড JSON কে পার্স করার জন্য একটি লাইব্ররী আছে [JSON5](http://json5.org/), যা single quotes, comments ইত্যাদি প্রপার্টিযুক্ত স্ট্রিংকেও পার্স করতে পারে।
 
-The regular JSON is that strict not because its developers are lazy, but to allow easy, reliable and very fast implementations of the parsing algorithm.
+এটা ভাবার কারণ নেই, JSON এর ডেভলাপাররা অলস বলে এইসব সমস্যার সমাধান করছে না, কারণ এই স্ট্রিক্ট থাকার ফলে পার্সিং অ্যালগরিদমটি অনেক দ্রুত কাজ করে।
 
-## Using reviver
+## অপশনাল reviver ফাংশন
 
-Imagine, we got a stringified `meetup` object from the server.
+মনে করুন, আমরা সার্ভার হতে একটি stringified `meetup` অবজেক্ট পেয়েছি।
 
-It looks like this:
+দেখতে এমন:
 
 ```js
 // title: (meetup title), date: (meetup date)
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
 ```
 
-...And now we need to *deserialize* it, to turn back into JavaScript object.
+...এখন আমরা এটিকে *deserialize* করে জাভাস্ক্রিপ্ট অবজেক্টে রূপান্তর করে নেব।
 
-Let's do it by calling `JSON.parse`:
+চলুন `JSON.parse` কে কল করি:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -477,11 +476,11 @@ alert( meetup.date.getDate() ); // Error!
 */!*
 ```
 
-Whoops! An error!
+ওপস! এরর!
 
-The value of `meetup.date` is a string, not a `Date` object. How could `JSON.parse` know that it should transform that string into a `Date`?
+কেননা `meetup.date` হল একটি স্ট্রিং, কোন `Date` অবজেক্ট না। এখন *deserialize* করার সময়  `JSON.parse` কীভাবে এটিকে `Date` অবজেক্টে রূপান্তর করবে?
 
-Let's pass to `JSON.parse` the reviving function as the second argument, that returns all values "as is", but `date` will become a `Date`:
+এক্ষেত্রে আমরা `JSON.parse` এর দ্বিতীয় আর্গুমেন্টে একটি ফাংশন পাঠাব যেটি `date` প্রপার্টির মানকে `Date` অবজেক্টে রূপান্তর করবে:
 
 ```js run
 let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
@@ -493,10 +492,10 @@ let meetup = JSON.parse(str, function(key, value) {
 });
 */!*
 
-alert( meetup.date.getDate() ); // now works!
+alert( meetup.date.getDate() ); // কাজ করছে!
 ```
 
-By the way, that works for nested objects as well:
+মজার ব্যাপার হল, এটি নেস্টেড অবজেক্ট প্রপার্টির জন্যও কাজ করবে:
 
 ```js run
 let schedule = `{
@@ -518,10 +517,10 @@ alert( schedule.meetups[1].date.getDate() ); // works!
 
 
 
-## Summary
+## সারাংশ
 
-- JSON is a data format that has its own independent standard and libraries for most programming languages.
-- JSON supports plain objects, arrays, strings, numbers, booleans, and `null`.
-- JavaScript provides methods [JSON.stringify](mdn:js/JSON/stringify) to serialize into JSON and [JSON.parse](mdn:js/JSON/parse) to read from JSON.
-- Both methods support transformer functions for smart reading/writing.
-- If an object has `toJSON`, then it is called by `JSON.stringify`.
+- JSON হল একটি ডাটা ফরম্যাট যেটি কোন নির্দিষ্ট ল্যাংগুয়েজের উপর নির্ভর না, প্রায় সকল প্রোগ্রামিং ল্যাংগুয়েজে JSON এর জন্য স্ট্যান্ডার্ড লাইব্রেরী আছে।
+- JSON সাপোর্ট করে অবজেক্ট, অ্যারে, স্ট্রিং, নাম্বার, বুলিয়ান এবং `null` ডাটা টাইপ।
+- জাভাস্ক্রিপ্টে ডাটাকে জেসন এনকোডের জন্য  [JSON.stringify](mdn:js/JSON/stringify) এবং জেসন ডিকোড করতে [JSON.parse](mdn:js/JSON/parse) এই দুটি মেথড আছে।
+- এনকোড বা ডিকোডের সময় প্রপার্টি সমূহকে কাস্টমাইজেশনের জন্য দুটি মেথডই কলব্যাক ফাংশন সাপোর্ট করে।
+- যদি কোন অবজেক্টে `toJSON` মেথড থাকে, তাহলে `JSON.stringify` এর সময় স্বয়ংক্রিয়ভাবে `toJSON` কল হবে।
