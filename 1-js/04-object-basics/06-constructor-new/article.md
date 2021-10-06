@@ -1,20 +1,20 @@
-# Constructor, operator "new"
+# কন্সট্রাকটর এবং "new" অপারেটর
 
-The regular `{...}` syntax allows to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+সাধারণত আমরা `{...}` এর সাহায্যে শুধুমাত্র একটি অবজেক্ট তৈরি করতে পারি। কিন্তু প্রায়সময় আমাদের একই ধরণের অনেক অবজেক্ট তৈরি করা লাগে, যেমন ইউজার বা টিচার অবজেক্ট।
 
-That can be done using constructor functions and the `"new"` operator.
+আমরা এটি করতে পারি কনস্ট্রাকটর ফাংশনের `"new"` অপারেটরের সাহায্যে।
 
-## Constructor function
+## কন্সট্রাকটর ফাংশন
 
-Constructor functions technically are regular functions. There are two conventions though:
+কন্সট্রাকটর ফাংশন দেখতে সাধারণ ফাংশনগুলোর মতই, তবে এটি দুটি নিয়ম মেনে চলে:
 
-1. They are named with capital letter first.
-2. They should be executed only with `"new"` operator.
+1. ফাংশনের নামটি বড় হাতের অক্ষর দিয়ে শুরু হয়। যেমন `user` এর পরিবর্তে `User`
+2. এদের ডিক্লেয়ার করার সময় অর্থাৎ ফাংশন কল করার সময় `"new"` অপারেটর দিয়ে কল করতে হবে।
 
-For instance:
+যেমন:
 
 ```js run
-function User(name) {
+function user(name) {
   this.name = name;
   this.isAdmin = false;
 }
@@ -27,31 +27,31 @@ alert(user.name); // Jack
 alert(user.isAdmin); // false
 ```
 
-When a function is executed with `new`, it does the following steps:
+যখন কোন ফাংশন এ `new` অপারেটর ব্যবহার করা হয়, এটি নিম্নোক্ত বিষয়গুলো মেনে চলে:
 
-1. A new empty object is created and assigned to `this`.
-2. The function body executes. Usually it modifies `this`, adds new properties to it.
-3. The value of `this` is returned.
+1. একটি নতুন খালি অবজেক্ট তৈরি `this` এ অ্যাসাইন হবে।
+2. এরপর ফাংশনের বডি এক্সিকিউট হবে। সাধারণত এটি `this` এ রূপান্তর হবে, এবং নতুন প্রপার্টি সংযুক্ত হবে।
+3. এবং সবার শেষে `this` এর মান রিটার্ন করবে।
 
-In other words, `new User(...)` does something like:
+নিচে `new User(...)` কীভাবে কাজ করছে তা দেখানো হয়েছে:
 
 ```js
 function User(name) {
 *!*
-  // this = {};  (implicitly)
+  // this = {};  (ইঞ্জিন এখানে this এ একটি খালি অবজেক্ট অ্যাসাইন করছে)
 */!*
 
-  // add properties to this
+  // প্রপার্টিযুক্ত হচ্ছে
   this.name = name;
   this.isAdmin = false;
 
 *!*
-  // return this;  (implicitly)
+  // return this;  (সবার শেষে ইঞ্জিন this এর মান রিটার্ন করছে)
 */!*
 }
 ```
 
-So `let user = new User("Jack")` gives the same result as:
+তাই `let user = new User("Jack")` এর মানটি হবে আমাদের নিচের `{...}` এর সাহায্যে ডিক্লেয়ার করা অবজেক্টের মত:
 
 ```js
 let user = {
@@ -60,88 +60,88 @@ let user = {
 };
 ```
 
-Now if we want to create other users, we can call `new User("Ann")`, `new User("Alice")` and so on. Much shorter than using literals every time, and also easy to read.
+এখন আমরা যদি অন্য ইউজার তৈরি করতে চাই, তাহলে এভাবে কল করতে পারে `new User("Ann")`, `new User("Alice")` ইত্যাদি। সাধারণত এটি আরো বেশি পঠনযোগ্য এবং পরিবর্তনযোগ্য।
 
-That's the main purpose of constructors -- to implement reusable object creation code.
+কন্সট্রাকটর ব্যবহারের প্রধান উদ্দেশ্যই হল পুনরায় ব্যবহারযোগ্য অবজেক্ট তৈরি সহজ করা।
 
-Let's note once again -- technically, any function can be used as a constructor. That is: any function can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+একটি ব্যাপার সম্পর্কে পরিষ্কার ধারণা থাকা দরকার। সাধারণত, যে কোন ফাংশনকে আমরা কন্সট্রাকটর ফাংশন হিসেবে ব্যবহার করতে পারি। অর্থাৎ যেকোন ফাংশনকে `new` দ্বারা কল করা হলে এটি কন্সট্রাকটর ফাংশন হিসেবে কাজ করবে। অর্থাৎ আপনি যদি ফাংশনের নামের সব অক্ষর ছোট হাতের ব্যবহার করেন তাও কাজ করবে, তবে কন্সট্রাকটর ফাংশনকে বড় হাতের অক্ষর দিয়ে শুরু করা সার্বজনীন স্বীকৃত, এবং এটি নির্দেশ করে আমাদের ফাংশনটি ডিক্লেয়ার করতে হবে `new` কী-ওয়ার্ড দ্বারা।
 
 ````smart header="new function() { ... }"
-If we have many lines of code all about creation of a single complex object, we can wrap them in constructor function, like this:
+যদি আমাদের একটি কমপ্লেক্স অবজেক্ট শুধুমাত্র একবার তৈরি করা লাগে, তাহলে এটি অ্যানোনিমাস ফাংশন কন্ট্রাকটরের সাহায্যে তৈরি করতে পারি, এভাবে:
 
 ```js
 let user = new function() {
   this.name = "John";
   this.isAdmin = false;
 
-  // ...other code for user creation
-  // maybe complex logic and statements
-  // local variables etc
+  // ...user এর অন্যান্য প্রপার্টি
+  // লজিক এবং স্টেটমেন্ট
+  // লোকাল ভ্যারিয়েবল ইত্যাদি
 };
 ```
 
-The constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+এখানে আমরা কন্সট্রাকটরটিকে পুনরায় কল করতে পারব না, কেননা এটি কোথাও সংরক্ষন করা হয়নি, তৈরি করেই কল করা হয়ে গিয়েছে। এই ধরণের এনক্যাপসুলেশন প্রয়োজন হয় একটি অবজেক্টের জন্য, যা পুনরায় ব্যবহার করা যাবে না।
 ````
 
-## Constructor mode test: new.target
+## Constructor কিনা যাচাই: new.target
 
-```smart header="Advanced stuff"
-The syntax from this section is rarely used, skip it unless you want to know everything.
+```smart header="অ্যাডভান্স টপিক"
+এটি সাধারণত তেমন ব্যবহার করা হয়না, চাইলে এটি বাদ দিতে পারেন, তবে জেনে রাখা ভালো।
 ```
 
-Inside a function, we can check whether it was called with `new` or without it, using a special `new.target` property.
+একটি ফাংশনের মধ্যে আমরা চাইলে যাচাই করতে পারি, এটি `new` দ্বারা কল করা হয়েছে নাকি হয়নি, এজন্য একটি বিশেষ প্রপার্টি আছে `new.target`।
 
-It is empty for regular calls and equals the function if called with `new`:
+নিচের কোডে আমরা `User` কে `new` দ্বারা কল করলে `new.target` এর মান পাব একটি খালি অবজেক্ট অন্যথায় `undefined`:
 
 ```js run
 function User() {
   alert(new.target);
 }
 
-// without "new":
+// "new" বাদে কল:
 *!*
 User(); // undefined
 */!*
 
-// with "new":
+// "new" অপারেটরের সাহায্যে কল:
 *!*
 new User(); // function User { ... }
 */!*
 ```
 
-That can be used inside the function to know whether it was called with `new`, "in constructor mode", or without it, "in regular mode".
+উপরের টেকনিকটি খাটিয়ে আমরা কোন ফাংশনকে "constructor mode" এ নাকি "regular mode" কল করা হচ্ছে তা জানতে পারব।
 
-We can also make both `new` and regular calls to do the same, like this:
+এবং আমরা চাইলে আমাদের "regular mode" এ কল করা ফাংশনকেও `new` দ্বারা আবদ্ধ করতে পারি, এভাবে:
 
 ```js run
 function User(name) {
-  if (!new.target) { // if you run me without new
-    return new User(name); // ...I will add new for you
+  if (!new.target) { // new ব্যাতীত কল করলে এটি এক্সিকিউট হবে
+    return new User(name); // ...new অ্যাসাইন হচ্ছে
   }
 
   this.name = name;
 }
 
-let john = User("John"); // redirects call to new User
+let john = User("John"); // new User কল হবে
 alert(john.name); // John
 ```
 
-This approach is sometimes used in libraries to make the syntax more flexible. So that people may call the function with or without `new`, and it still works.
+অনেকসময় এটি ব্যবহার করা হয় লাইব্রেরীগুলোর সিনট্যাক্স আরো সহজবোধ্য করতে। ফলে আমরা কোন ফাংশনকে `new` ছাড়া কল করলেও কাজ করবে।
 
-Probably not a good thing to use everywhere though, because omitting `new` makes it a bit less obvious what's going on. With `new` we all know that the new object is being created.
+তবে এটি কোন ভালো আইডিয়া না, কেননা `new` বাদে কল করলে আমাদের কোড কীভাবে কাজ করছে তা জানা কিছুটা দুর্বোধ্য হয়ে যাবে। কেননা `new` দ্বারা কল করলে আমরা বুঝতে পারি একটি `Object` তৈরি হচ্ছে।
 
-## Return from constructors
+## কন্সট্রাকটরের রিটার্ন
 
-Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result.
+সাধারণত কন্সট্রাকটরের `return` স্টেটমেন্ট থাকে না। এর সব কাজ `this` এ সম্পন্ন হয়ে সবার শেষে `this` কে রিটার্ন করে।
 
-But if there is a `return` statement, then the rule is simple:
+কিন্তু যদি `return` স্টেটমেন্ট থাকে, তাহলে এটি নিম্নোক্ত নিয়ম মেনে চলে:
 
-- If `return` is called with an object, then the object is returned instead of `this`.
-- If `return` is called with a primitive, it's ignored.
+- যদি কোন অবজেক্টকে `return` করা হয় তাহলে এটি `this` এর পরিবর্তে ঐ অবজেক্টকে রিটার্ন করবে।
+- যদি কোন প্রিমিটিভ ভ্যালু `return` করা হয় তাহলে এটি উপেক্ষা করবে।
 
-In other words, `return` with an object returns that object, in all other cases `this` is returned.
+অন্যভাবে বলতে গেলে, যদি আমরা `this` এর পরিবর্তে কোন অবজেক্ট `return` করি তাহলে এটি ঐ অবজেক্টকেই রিটার্ন করে, অন্যথায় `this` রিটার্ন হয়।
 
-For instance, here `return` overrides `this` by returning an object:
+যেমন, এখানে `return` এ `this` কে অন্য একটি অবজেক্ট দ্বারা ওভাররাইড করা হচ্ছে:
 
 ```js run
 function BigUser() {
@@ -154,7 +154,7 @@ function BigUser() {
 alert( new BigUser().name );  // Godzilla, got that object
 ```
 
-And here's an example with an empty `return` (or we could place a primitive after it, doesn't matter):
+আরো একটি উদাহরণ দেখা যাক যেখানে আমরা শুধু `return` স্টেটমেন্ট ব্যবহার করছি (অথবা এটি প্রিমিটিভ ভ্যালুও হতে পারে, যা উপেক্ষা করবে):
 
 ```js run
 function SmallUser() {
@@ -167,10 +167,10 @@ function SmallUser() {
 alert( new SmallUser().name );  // John
 ```
 
-Usually constructors don't have a `return` statement. Here we mention the special behavior with returning objects mainly for the sake of completeness.
+সাধারণত কন্সট্রাকটরে `return` স্টেটমেন্ট ব্যবহার করা হয়না। তারপরও আমরা এটি আলোচনা করেছি যদি ব্যবহার করি তাহলে তা কেমন আচরণ করে তা জানার জন্য।
 
-````smart header="Omitting parentheses"
-By the way, we can omit parentheses after `new`, if it has no arguments:
+````smart header="প্রথমবন্ধনী ছাড়া কল"
+আমরা new অপারেটর ব্যবহারের সময় `()` ছাড়াও কন্সট্রাকটর ফাংশনকে কল করতে পারি, যদি এতে কোন আর্গুমেন্ট না থাকে:
 
 ```js
 let user = new User; // <-- no parentheses
@@ -178,16 +178,16 @@ let user = new User; // <-- no parentheses
 let user = new User();
 ```
 
-Omitting parentheses here is not considered a "good style", but the syntax is permitted by specification.
+যদিও বন্ধনী ছাড়া কন্সট্রাকটর স্টেটমেন্ট লিখা উচিত না, তারপরও যে এই সিনট্যাক্স কাজ করে তা বুঝার জন্য এটি আলোচনা করা হল।
 ````
 
-## Methods in constructor
+## কনস্ট্রাকটরে মেথড কল
 
-Using constructor functions to create objects gives a great deal of flexibility. The constructor function may have parameters that define how to construct the object, and what to put in it.
+কনস্ট্রাকটর ফাংশনের মাধ্যমে আমরা সহজে রিইউজেবল অবজেক্ট তৈরি করতে পারি। এতে প্যারামিটার থাকতে পারে, যার মাধ্যমে নির্ধারণ করে দিতে পারি অবজেক্টটি কীভাবে তৈরি হবে।
 
-Of course, we can add to `this` not only properties, but methods as well.
+অবশ্যই, আমরা `this` এ শুধুমাত্র প্রপার্টি না, মেথডও রাখতে পারি।
 
-For instance, `new User(name)` below creates an object with the given `name` and the method `sayHi`:
+যেমন নিচের কোডে `new User(name)` এর একটি `name` প্রপার্টি আছে এবং একটি মেথড `sayHi`:
 
 ```js run
 function User(name) {
@@ -212,19 +212,19 @@ john = {
 */
 ```
 
-To create complex objects, there's a more advanced syntax, [classes](info:classes), that we'll cover later.
+কমপ্লেক্স অবজেক্ট তৈরিতে আমরা [classes](info:classes) সিনট্যাক্স ব্যবহার করতে পারব, যার সম্পর্কে পরবর্তী অধ্যায়ে বিস্তারিত জানতে পারব।
 
-## Summary
+## সারাংশ
 
-- Constructor functions or, briefly, constructors, are regular functions, but there's a common agreement to name them with capital letter first.
-- Constructor functions should only be called using `new`. Such a call implies a creation of empty `this` at the start and returning the populated one at the end.
+- কন্সট্রাকটর ফাংশন এবং রেগুলার ফাংশনের মাঝে পার্থক্য হল কন্সট্রাকটর ফাংশন ক্যামেল কেসে লিখা হয়।
+- কন্সট্রাকটর ফাংশনকে `new` দ্বারা কল করা হয়। এইক্ষেত্রে ফাংশনের শুরুতে একটি খালি `this` অবজেক্ট তৈরি হবে এবং সবার শেষে `this` অবজেক্ট রিটার্ন হবে।
 
-We can use constructor functions to make multiple similar objects.
+সাধারণত কনস্ট্রাকটর ফাংশন ব্যবহার করি একই টাইপের অনেক অবজেক্ট ডিক্লেয়ার করতে।
 
-JavaScript provides constructor functions for many built-in language objects: like `Date` for dates, `Set` for sets and others that we plan to study.
+জাভাস্ক্রিপ্টে অনেক বিল্ট-ইন কনস্ট্রাকটর ফাংশন আছে, যেমন `Date`, `Set`, `Map` ইত্যাদি। যার সম্পর্কে সামনের অধ্যায়গুলোতে বিস্তারিত জানতে পারব।
 
-```smart header="Objects, we'll be back!"
-In this chapter we only cover the basics about objects and constructors. They are essential for learning more about data types and functions in the next chapters.
+```smart header="পরবর্তী অধ্যায়গুলোতে অবজেক্ট নিয়ে আরো বিস্তারিত জানব!"
+এই অধ্যায়ে আমরা বেসিক অবজেক্ট এবং কনস্ট্রাকটর সম্পর্কে জেনেছি। যা পরবর্তী অধ্যায়ে বিভিন্ন ডাটা টাইপ এবং ফাংশন সম্পর্কে বুঝতে জানা থাকা উচিত।
 
-After we learn that, we return to objects and cover them in-depth in the chapters <info:prototypes> and <info:classes>.
+এর শেষে আমরা অবজেক্ট নিয়ে আরো বিষদ আলোচনা করেছি <info:prototypes> এবং <info:classes> এর অধ্যায়ে।
 ```
