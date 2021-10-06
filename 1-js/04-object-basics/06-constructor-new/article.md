@@ -14,7 +14,7 @@
 যেমন:
 
 ```js run
-function user(name) {
+function User(name) {
   this.name = name;
   this.isAdmin = false;
 }
