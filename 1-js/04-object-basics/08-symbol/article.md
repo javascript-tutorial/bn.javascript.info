@@ -1,31 +1,31 @@
 
-# Symbol type
+# সিম্বল টাইপ
 
-By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
+অবজেক্টের স্পেসিফিকেশন অনুযায়ী আমরা জেনেছি প্রপার্টি কি(key) হতে পারে স্ট্রিং অথবা সিম্বল টাইপ। নাম্বার, বুলিয়ান বা অন্য কোন ধরণের প্রিমিটিভ টাইপ কি(key) হিসেবে রাখা যায় না, শুধুমাত্র স্ট্রিং অথবা সিম্বল এই দুটি টাইপ অ্যাক্সেপ্টবেল।
 
-Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+পূর্বের অনুচ্ছেদগুলোতে আমরা প্রপার্টি হিসেবে শুধুমাত্র স্ট্রিং ব্যবহার করেছি, এই অনুচ্ছেদে আমরা সিম্বল টাইপ কিভাবে ব্যবহার করা যায় এবং এর ব্যবহারের সুবিধা কি তা নিয়ে আলোচনা করব।
 
-## Symbols
+## সিম্বল
 
-A "symbol" represents a unique identifier.
+"সিম্বল (symbol)" একটি একক বৈশিষ্ট্য প্রদানের নিশ্চয়তা প্রদান করে।
 
-A value of this type can be created using `Symbol()`:
+এই ধরণের টাইপ তৈরি করতে আমরা ব্যবহার করি `Symbol()`:
 
 ```js
-// id is a new symbol
+// এখানে id হল একটি symbol
 let id = Symbol();
 ```
 
-Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+তৈরির সময়, আমরা সিম্বলের একটি নাম প্রদান করি, যা ডিবাগিংয়ের জন্য সুবিধাজনক:
 
 ```js
-// id is a symbol with the description "id"
+// এখানে id হল একটি Symbol যার নাম হল "id"
 let id = Symbol("id");
 ```
 
-Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn't affect anything.
+Symbol আমাদের নিশ্চয়তা প্রদান করে এর মান হবে অদ্বিতীয়। যদি আমরা একই নাম দ্বারা একাধিক সিম্বল তৈরি করি, তাদের মান হবে আলাদা। সিম্বলের প্রদানকৃত নামটি শুধুমাত্র একটি লেভেল।
 
-For instance, here are two symbols with the same description -- they are not equal:
+যেমন, এখানে আমরা এখানে একই নামের দুটি সিম্বল তৈরি করেছি -- কন্ডিশনালি এদের মান সমান হবে না:
 
 ```js run
 let id1 = Symbol("id");
@@ -36,12 +36,12 @@ alert(id1 == id2); // false
 */!*
 ```
 
-If you are familiar with Ruby or another language that also has some sort of "symbols" -- please don't be misguided. JavaScript symbols are different.
+রুবি বা অন্য যেকোন ল্যাংগুয়েজের "symbols" এর সাথে এটিকে গুলিয়ে ফেলবেন না। জাভাস্ক্রিপ্টের সিম্বল আলাদা।
 
-````warn header="Symbols don't auto-convert to a string"
-Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+````warn header="Symbols স্বয়ংক্রিয়ভাবে স্ট্রিং এ কনভার্ট হয়না"
+জাভস্ক্রিপ্টের বেশিরভাগ মান স্ট্রিংয়ে টাইপ কাস্টিং হতে পারে। যেমন `alert` প্রায় সবধরণের মানকে স্ট্রিংয়ে রূপান্তর করতে পারে। তবে সিম্বল অটো কনভার্ট হতে পারে না।
 
-For instance, this `alert` will show an error:
+যেমন, নিচের কোডটিতে `alert` এর জন্য এরর দেখাবে:
 
 ```js run
 let id = Symbol("id");
@@ -50,17 +50,17 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+That's a "language guard" against messing up, কেননা স্ট্রিং এবং সিম্বল মৌলিকভাবে আলাদা যার জন্য এদের নিজেদের মধ্যে পরিবর্তন গ্রহণযোগ্য নয়।
 
-If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+যদি আমরা কোন একটি সিম্বল দেখাতে চাই, তাহলে `.toString()` মেথডের মাধ্যমে দেখাতে পারি, এভাবে:
 ```js run
 let id = Symbol("id");
 *!*
-alert(id.toString()); // Symbol(id), now it works
+alert(id.toString()); // Symbol(id), এখন এটি কাজ করবে
 */!*
 ```
 
-Or get `symbol.description` property to show the description only:
+অথবা নাম জানতে `symbol.description`:
 ```js run
 let id = Symbol("id");
 *!*
@@ -70,16 +70,16 @@ alert(id.description); // id
 
 ````
 
-## "Hidden" properties
+## "হিডেন" প্রপার্টি
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+সিম্বল অবজেক্টের মধ্যে একটি "hidden" প্রপার্টি রাখার সুবিধা প্রদান করে, যাতে অনিচ্ছাকৃত কোন প্রপার্টি অ্যাক্সেস বা ওভাররাইট করা না যায়।
 
-For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+যেমন, আমাদের একটি `user` অবজেক্ট আছে, যেটি অন্য আরেকটি থার্ড-পার্টি কোডের সাথে সম্পর্কিত। এখন আমরা এর জন্য একটি আইডেন্টিফায়ার সেট করতে চাই।
 
-Let's use a symbol key for it:
+চলুন এর জন্য একটি সিম্বল প্রপার্টি ব্যবহার করি:
 
 ```js run
-let user = { // belongs to another code
+let user = { // যা অন্য আরেকটি কোডের সাথে সম্পর্কিত
   name: "John"
 };
 
@@ -87,16 +87,16 @@ let id = Symbol("id");
 
 user[id] = 1;
 
-alert( user[id] ); // we can access the data using the symbol as the key
+alert( user[id] ); // এখন আমরা এর ডাটাকে সিম্বল কী(Key) দ্বারা অ্যাক্সেস করতে পারব
 ```
 
-What's the benefit of using `Symbol("id")` over a string `"id"`?
+এটিতো আমরা চাইলে স্ট্রিং প্রপার্টি `"id"` দ্বারা করতে পারতাম তার পরিবর্তে `Symbol("id")` ব্যবহার সুবিধাজনক কেন?
 
-As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
+যেহেতু `user` অবজেক্টটি অন্য আরেকটি স্ক্রিপ্টের সাথেও সম্পর্কিত, এবং ঐ কোডটিও যেহেতু `user` অবজেক্ট নিয়ে কাজ করে, আমরা চাইনা এর মধ্যে নতুন আরেকটি ফিল্ড যুক্ত হোক। এবং নিরাপত্তার জন্য এটি থার্ড পার্টির জন্য অ্যাক্সেসবল হওয়াও উচিত নয়, সিম্বল ব্যবহার করায় আমরা এই ব্যাপারে নিশ্চিত থাকতে পারি সিম্বল ডাটাসমূহ এক স্ক্রিপ্টের সাথে অন্য স্ক্রিপ্টের মধ্যে আদান প্রদান হবে না।
 
 Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
 
-Then that script can create its own `Symbol("id")`, like this:
+এক্ষেত্রে ঐ স্ক্রিপ্ট নিজস্ব সিম্বল তৈরি করতে পারে এভাবে, `Symbol("id")`:
 
 ```js
 // ...
@@ -105,28 +105,28 @@ let id = Symbol("id");
 user[id] = "Their id value";
 ```
 
-There will be no conflict between our and their identifiers, because symbols are always different, even if they have the same name.
+এক্ষেত্রে দুটি স্ক্রিপ্টের মধ্যে কোন কনফ্লিক্ট হবে না, কেননা সিম্বলের নাম এক হলেও সিম্বলসমূহ হবে ইউনিক,
 
-...But if we used a string `"id"` instead of a symbol for the same purpose, then there *would* be a conflict:
+...যদি তার পরিবর্তে আমরা প্রপার্টি হিসেবে স্ট্রিং`"id"` ব্যবহার করি, তাহলে উভয়ের মাঝে কনফ্লিক্ট হবে:
 
 ```js run
 let user = { name: "John" };
 
-// Our script uses "id" property
+// আমাদের user এর "id" প্রপার্টি
 user.id = "Our id value";
 
-// ...Another script also wants "id" for its purposes...
+// ...অন্য আরেকটি স্ক্রিপ্টও কোন কারণে "id" প্রপার্টি ব্যবহার করছে
 
 user.id = "Their id value"
-// Boom! overwritten by another script!
+// ওহহহ! আরেকটি স্ক্রিপ্ট দ্বারা ওভাররাইড হয়ে গেল :(
 ```
 
-### Symbols in an object literal
+### অবজেক্ট লিটারেল এ `{...}` সিম্বল প্রপার্টি
 
 
-If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
+যদি আমরা অবজেক্ট লিটারেলে `{...}` সিম্বল প্রপার্টি ব্যবহার করতে চাই, এর জন্য আমরা এটি তৃতীয় বন্ধনীর মধ্যে লিখতে হবে।
 
-Like this:
+যেমন:
 
 ```js
 let id = Symbol("id");
@@ -138,13 +138,13 @@ let user = {
 */!*
 };
 ```
-That's because we need the value from the variable `id` as the key, not the string "id".
+কেননা এটি দ্বারা আমরা নিশ্চিত করতে পারি, এখানের `id` হল একটি সিম্বল টাইপের ভ্যারিয়েবল, প্রপার্টির নাম স্ট্রিং "id"  না।
 
-### Symbols are skipped by for..in
+### for..in লুপের মধ্যে সিম্বল প্রপার্টি অ্যাক্সেসবল না
 
-Symbolic properties do not participate in `for..in` loop.
+সিম্বল প্রপার্টি সমূহ `for..in` লুপের মধ্যে অ্যাক্সেসবল না।
 
-For instance:
+যেমন:
 
 ```js run
 let id = Symbol("id");
@@ -155,16 +155,16 @@ let user = {
 };
 
 *!*
-for (let key in user) alert(key); // name, age (no symbols)
+for (let key in user) alert(key); // name, age (সিম্বল প্রপার্টি দেখাবে না)
 */!*
 
-// the direct access by the symbol works
+// তবে সরাসরি এটি অ্যাক্সেসবল
 alert( "Direct: " + user[id] );
 ```
 
-`Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+`Object.keys(user)` এর জন্যও সিম্বল প্রপার্টি অ্যাক্সেসবল না। কেননা এটি "হাইড সিম্বল প্রপার্টির" নিয়ম মেনে চলে। অন্যথায় অন্য আরেকটি স্ক্রিপ্ট হতে আমাদের অবজেক্টের মধ্যে লুপ চালিয়ে আমরা সিম্বল প্রপার্টির মান জেনে যেতে পারি, যা উচিত নয়।
 
-In contrast, [Object.assign](mdn:js/Object/assign) copies both string and symbol properties:
+তবে, [Object.assign](mdn:js/Object/assign) এর ক্ষেত্রে উভয় টাইপের প্রপার্টি কপি হয়, যেমন:
 
 ```js run
 let id = Symbol("id");
@@ -177,7 +177,7 @@ let clone = Object.assign({}, user);
 alert( clone[id] ); // 123
 ```
 
-There's no paradox here. That's by design. The idea is that when we clone an object or merge objects, we usually want *all* properties to be copied (including symbols like `id`).
+তবে এ নিয়ে চিন্তিত হওয়া উচিত নই। কেননা এদের এমনভাবে ডিজাইন করা হয়েছে যেন আমরা কোন অবজেক্টকে ক্লোন বা মার্জ করতে পারি। সাধারণত এজন্য আমরা চাই সকল ধরণের প্রপার্টি(সিম্বল সহ) কপি হোক।
 
 ## Global symbols
 
