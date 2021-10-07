@@ -1,10 +1,6 @@
 # The Modern JavaScript Tutorial in Bengali
 
-<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Bengali.
-=======
-This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
->>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 
 **That's how you can contribute:**
@@ -18,9 +14,9 @@ This repository hosts the English content of the Modern JavaScript Tutorial, pub
     - PR title should match article title, the bot will write it's number into the issue.
 
 Please kindly allow maintainers to review and merge or request changes in your translation.
-   
+
 If maintainers do not respond, or if you'd like to become a maintainer, write us at the [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
-    
+
 **Let others know what you're translating, in message boards or chats in your language. Invite them to join!**
 
 🎉 Thank you!
@@ -41,13 +37,13 @@ The folder has one of files:
 - `article.md` for an article,
 - `task.md` for a task formulation (+`solution.md` with the solution text if any).
 
-A file starts with the `# Title Header`, and then the text in Markdown-like format, editable in a simple text editor. 
+A file starts with the `# Title Header`, and then the text in Markdown-like format, editable in a simple text editor.
 
 Additional resources and examples for the article or the task, are also in the same folder.
 
 ## Translation Tips
 
-Please keep line breaks and paragraphs "as is": don't add newlines and don't remove existing ones. Makes it easy to merge future changes from the English version into the translation. 
+Please keep line breaks and paragraphs "as is": don't add newlines and don't remove existing ones. Makes it easy to merge future changes from the English version into the translation.
 
 If you see that the English version can be improved – great, please send a PR to it.
 
@@ -89,13 +85,12 @@ const text = 'Hola mundo';
 document.querySelector('.hola').innerHTML = text;
 ```
 
-<<<<<<< HEAD
+
 ### External Links
-=======
+
   - `index.md` stands for a chapter
   - `article.md` stands for an article
   - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
->>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 If an external link is to Wikipedia, e.g. `https://en.wikipedia.org/wiki/JavaScript`, and a version of that article exists in your language that is of decent quality, link to that version instead.
 
@@ -142,4 +137,4 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 
 You can run the tutorial server locally to see how the translation looks.
 
-The server and install instructions are at <https://github.com/javascript-tutorial/server>. 
+The server and install instructions are at <https://github.com/javascript-tutorial/server>.
