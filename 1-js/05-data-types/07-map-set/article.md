@@ -31,8 +31,8 @@ map.set('1', 'str1');   // a string key
 map.set(1, 'num1');     // a numeric key
 map.set(true, 'bool1'); // a boolean key
 
-// remember the regular Object? it would convert keys to string
-// Map keeps the type, so these two are different:
+// অবজেক্টের ক্ষেত্রে কী হত মনে আছে? এক্ষেত্রে এটি স্ট্রিংয়ে কনভার্ট হত
+// আর এখানে Map এটিকে অপরিবর্তনীয় রাখে, দুটির মূল পার্থক্য এটিই:
 alert( map.get(1)   ); // 'num1'
 alert( map.get('1') ); // 'str1'
 
