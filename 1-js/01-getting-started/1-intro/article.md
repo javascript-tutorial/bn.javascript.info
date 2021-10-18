@@ -29,6 +29,7 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 বিভিন্ন ইঞ্জিনের আলাদা আলাদা "কোডনাম" রয়েছে । উদাহরণ স্বরূপ:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [V8](https://bn.wikipedia.org/wiki/V8_(JavaScript_engine) -- ক্রোম এবং অপেরা
 - [স্পাইডার মাংকি](https://bn.wikipedia.org/wiki/SpiderMonkey) -- ফায়ারফক্স.
 - ...আরও অনেক কোডনাম রয়েছে যেমন ইন্টারনেট এক্সপ্লোরার এর বিভিন্ন ভার্সন এর জন্য "Trident" এবং "Chakra", মাইক্রোসফ্ট এজের জন্য "ChakraCore", সাফারির জন্য "Nitro" এবং "SquirrelFish" ইত্যাদি।
@@ -39,6 +40,13 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 উপরের টার্ম গুলি মনে রাখা ভাল, কারণ সেগুলি ইন্টারনেটে ডেভেলপার আর্টিকেলে ব্যবহৃত হয়। আমরাও সেগুলো ব্যবহার করব। উদাহরণস্বরূপ, যদি "একটি X ফিচার V8 এ সাপোর্ট করে", তবে সম্ভবত এটি ক্রোম এবং অপেরাতেও কাজ করে।
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 
 ```smart header="ইঞ্জিনগুলি কিভাবে কাজ করে?"
 
@@ -129,8 +137,13 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 - [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
 - [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
 - [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+<<<<<<< HEAD
 - [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
+=======
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
 
