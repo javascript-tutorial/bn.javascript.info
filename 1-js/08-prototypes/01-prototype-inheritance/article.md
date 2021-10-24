@@ -1,22 +1,22 @@
-# Prototypal inheritance
+# প্রটোটাইপল ইনহেরিটেন্স
 
-In programming, we often want to take something and extend it.
+প্রোগ্রামিংয়ের এ প্রায় সময় আমরা রিইউজেবল কোডবেস তৈরির জন্য অন্য কোডকে এক্সটেন্ড করি।
 
-For instance, we have a `user` object with its properties and methods, and want to make `admin` and `guest` as slightly modified variants of it. We'd like to reuse what we have in `user`, not copy/reimplement its methods, just build a new object on top of it.
+যেমন, আমাদের একটি প্রপার্টি এবং মেথড সম্বলিত `user` অবজেক্ট আছে, এবং আমরা এর উপর ভিত্তি করে আলাদা কিছু বৈশিষ্ট্যের জন্য `admin` এবং `guest` তৈরি করতে চাই। এজন্য নতুন করে `user` এর কোডকে পুনরায় `admin` এবং `guest` এর মধ্যে কপি-পেস্ট করা কোন ভাল বুদ্ধি না, তার চেয়ে যদি আমরা কোন ভাবে `user` কে এক্সটেন্ড করতে পারি সেক্ষেত্রে একটি রিইউজিবল কোড বেস তৈরি করতে পারব।
 
-*Prototypal inheritance* is a language feature that helps in that.
+এক্ষেত্রে আমাদের জাভাস্ক্রিপ্টের *Prototypal inheritance* ফিচারটি সম্পর্কে জানা লাগবে।
 
 ## [[Prototype]]
 
-In JavaScript, objects have a special hidden property `[[Prototype]]` (as named in the specification), that is either `null` or references another object. That object is called "a prototype":
+জাভাস্ক্রিপ্টে অবজেক্টে একটি হিডেন প্রপার্টি আছে `[[Prototype]]` (স্পেসিকেশনে এটিকে এ নাম দেয়া হয়েছে), যেটি `null` অথবা কোন অবজেক্টকে রেফারেন্স করে। এ অবজেক্টকে বলা হয় প্রটোটাইপ:
 
 ![prototype](object-prototype-empty.svg)
 
-The prototype is a little bit "magical". When we want to read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, such thing is called "prototypal inheritance". Many cool language features and programming techniques are based on it.
+যখন আমরা কোন `object` এর প্রপার্টি পড়তে চাই, এবং যদি এটি ঐ `object` এ অনুপস্থিত থাকে, তখন জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে প্রটোটাইপে অনুসন্ধান করে। একে বলা হয় "প্রটোটাইপল ইনহেরিটেন্স"। আমরা বিভিন্ন উদাহরণের সাহায্যে এই ব্যাপারটি শিখব, এছাড়াও আরো অনেক ল্যাংগুয়েজে এই ধরণের ফিচার সাপোর্ট করে।
 
-The property `[[Prototype]]` is internal and hidden, but there are many ways to set it.
+`[[Prototype]]` এটি অবজেক্টের ইন্টারনাল এবং হিডেন প্রপার্টি, তবে বিভিন্ন ভাবে আমরা একে অ্যাক্সেস করতে পারি।
 
-One of them is to use the special name `__proto__`, like this:
+তারমধ্যে একটি বিশেষ প্রপার্টি হল `__proto__`, এর সাহায্যে আমরা নিম্নোক্ত উপায়ে প্রটোটাইপ রেফারেন্স হিসেবে অন্য অবজেক্টকে সেট করতে পারি:
 
 ```js run
 let animal = {
@@ -31,17 +31,9 @@ rabbit.__proto__ = animal;
 */!*
 ```
 
-```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
-Please note that `__proto__` is *not the same* as `[[Prototype]]`. It's a getter/setter for it.
+এখন আমরা যদি `rabbit` এর কোন প্রপার্টি পড়তে চাই, এবং এটি যদি এর মধ্যে অনুপস্থিত থাকে, তাহলে জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে `animal` এ একে অনুসন্ধান করে।
 
-It exists for historical reasons. In modern language it is replaced with functions `Object.getPrototypeOf/Object.setPrototypeOf` that also get/set the prototype. We'll study the reasons for that and these functions later.
-
-By the specification, `__proto__` must only be supported by browsers, but in fact all environments including server-side support it. For now, as `__proto__` notation is a little bit more intuitively obvious, we'll use it in the examples.
-```
-
-If we look for a property in `rabbit`, and it's missing, JavaScript automatically takes it from `animal`.
-
-For instance:
+যেমন:
 
 ```js
 let animal = {
@@ -55,24 +47,24 @@ let rabbit = {
 rabbit.__proto__ = animal; // (*)
 */!*
 
-// we can find both properties in rabbit now:
+// এখন আমরা rabbit এর মধ্যে দুইটি প্রপার্টিই অ্যাক্সেস করতে পারব:
 *!*
 alert( rabbit.eats ); // true (**)
 */!*
 alert( rabbit.jumps ); // true
 ```
 
-Here the line `(*)` sets `animal` to be a prototype of `rabbit`.
+এখানে `(*)` চিহ্নিত লাইনে `animal` কে `rabbit` এর প্রটোটাইপ হিসেবে সেট করা হয়েছে।
 
-Then, when `alert` tries to read property `rabbit.eats` `(**)`, it's not in `rabbit`, so JavaScript follows the `[[Prototype]]` reference and finds it in `animal` (look from the bottom up):
+এবং, যখন আমরা `alert` এ `rabbit.eats` কে পড়তে চাই `(**)` চিহ্নিত লাইনটি দেখুন, এটি দেখে `rabbit` এর মধ্যে এটি এটি অনুপস্থিত, তখন জাভাস্ক্রিপ্ট  `[[Prototype]]` রেফারেন্সের নিয়ম অনুসারে `animal` এর মধ্যে ঐ প্রপার্টি খুঁজে (নিচের ছবিটি দেখুন):
 
 ![](proto-animal-rabbit.svg)
 
-Here we can say that "`animal` is the prototype of `rabbit`" or "`rabbit` prototypically inherits from `animal`".
+এখানে আমরা বলতে পারি "`animal` হল `rabbit` এর প্রটোটাইপ" অথবা "`animal` থেকে `rabbit` প্রটোটাইপল ইনহেরিট হয়েছে"।
 
-So if `animal` has a lot of useful properties and methods, then they become automatically available in `rabbit`. Such properties are called "inherited".
+সুতরাং যদি `animal` এ একাধিক ব্যবহারযোগ্য প্রপার্টি এবং মেথড থাকে, তাহলে তাদের স্বয়ংক্রিয়ভাবে `rabbit` এর মেথড ও প্রপার্টি হিসেবে অ্যাক্সেস করা যাবে। এদের ইনহেরিটেড প্রপার্টি বলে।
 
-If we have a method in `animal`, it can be called on `rabbit`:
+সুতরাং যদি `animal` এ কোন মেথড থাকে তাহলে এটিকে `rabbit` থেকেও কল করা যাবে:
 
 ```js run
 let animal = {
@@ -89,17 +81,17 @@ let rabbit = {
   __proto__: animal
 };
 
-// walk is taken from the prototype
+// walk কে প্রটোটাইপ হতে সংগ্রহ করা হয়েছে
 *!*
 rabbit.walk(); // Animal walk
 */!*
 ```
 
-The method is automatically taken from the prototype, like this:
+মেথডটি স্বয়ংক্রিয়ভাবে প্রটোটাইপ হতে অ্যাক্সেস হবে, নিচের ছবিটি দেখুন:
 
 ![](proto-animal-rabbit-walk.svg)
 
-The prototype chain can be longer:
+আমরা চাইলে প্রটোটাইপ চেইনও তৈরি করতে পারি:
 
 ```js run
 let animal = {
@@ -123,33 +115,48 @@ let longEar = {
 */!*
 };
 
-// walk is taken from the prototype chain
+// এখানে walk প্রটোটাইপ চেইন হিসেবে animal হতে অ্যাক্সেস হবে
 longEar.walk(); // Animal walk
-alert(longEar.jumps); // true (from rabbit)
+alert(longEar.jumps); // true (rabbit হতে অ্যাক্সেস করে)
 ```
 
 ![](proto-animal-rabbit-chain.svg)
 
-There are only two limitations:
+এখন আমরা যদি `longEar` হতে কোন কিছু পড়তে চাই এবং এটি যদি তার মধ্যে অনুপস্থিত থাকে, জাভাস্ক্রিপ্ট প্রথমে `rabbit` এর মধ্যে খুঁজবে এবং তারপর `animal` এ খুঁজবে।
 
-1. The references can't go in circles. JavaScript will throw an error if we try to assign `__proto__` in a circle.
-2. The value of `__proto__` can be either an object or `null`. Other types are ignored.
+তবে এর দুটি সীমাবদ্ধতা রয়েছে:
 
-Also it may be obvious, but still: there can be only one `[[Prototype]]`. An object may not inherit from two others.
+1. আমরা রেফারেন্সকে চক্রকারে সেট করতে পারব না। এক্ষেত্রে চক্রকারে `__proto__` এ কোন অবজেক্ট অ্যাসাইন করতে চাইলে জাভাস্ক্রিপ্ট একটি এরর দিবে।
+2. `__proto__` এর মান কেবলমাত্র `null` এবং অবজেক্ট হতে পারবে, অন্য টাইপগুলো ইগনোর হবে।
 
-## Writing doesn't use prototype
+যদিও এটি সুস্পষ্ট, কিন্তু এখানে শুধুমাত্র একটি `[[Prototype]]` হতে পারে। একটি অবজেক্ট একই সাথে দুটি অবজেক্টকে ইনহেরিট করতে পারে না।
 
-The prototype is only used for reading properties.
 
-Write/delete operations work directly with the object.
+```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
+সাধারণত নতুন ডেভলাপাররা এই দুটির মধ্যে পার্থক্য না জেনে রাখায় প্রায় এই সাধারন ভুলটি করে।
 
-In the example below, we assign its own `walk` method to `rabbit`:
+দয়া করে মনে রাখবে `__proto__` ইন্টারনাল প্রপার্টি `[[Prototype]]` এর মত না। এটি `[[Prototype]]` এর একটি getter/setter। পরবর্তী অধ্যায়গুলোতে আমরা বিস্তারিত জানব, আপাতত এটি মনে রাখুন, যেহেতু এখনো আমরা জাভাস্ক্রিপ্টের ল্যাংগুয়েজ নিয়ে পড়াশোনা করছি।
+
+তবে `__proto__` প্রপার্টি হল পুরনো জাভাস্ক্রিপ্টের একটি ফিচার। তবে মডার্ন জাভাস্ক্রিপ্টে আমাদের কিছু মেথড আছে `Object.getPrototypeOf/Object.setPrototypeOf` যার মাধ্যমে আমরা এই ধরণের কাজ করতে পারি।
+
+স্পেসিফিকেশন অনুযায়ী, `__proto__` শুধুমাত্র ব্রাউজারের জন্য সাপোর্ট করে। তবে অন্যান্য এনভায়রনমেন্টের জন্যও `__proto__` সাপোর্ট করে, সুতরাং আমরা এদের নিশ্চিন্তে ব্যবহার করতে পারব।
+
+যেহেতু `__proto__` নোটেশন কিছুটা সুস্পষ্ট, সামনের উদাহরণগুলোতেও আমরা এটি ব্যবহার করব।
+```
+
+## প্রটোটাইপ অ্যাসাইনিং এবং ডিলিটিং সাপোর্ট করে না
+
+প্রটোটাইপ শুধুমাত্র কোন প্রপার্টি বা মেথড পড়তে ব্যবহৃত হয়।
+
+অ্যাসাইন/ডিলিট অপারেশনগুলো সরাসরি অবজেক্টের সাথে কাজ করে।
+
+নিচের উদাহরণে দেখুন আমরা `rabbit` এর মধ্যে `walk` মেথড লিখেছি:
 
 ```js run
 let animal = {
   eats: true,
   walk() {
-    /* this method won't be used by rabbit */  
+    /* এই মেথডটি rabbit এর জন্য ব্যবহার হবে না */
   }
 };
 
@@ -166,13 +173,13 @@ rabbit.walk = function() {
 rabbit.walk(); // Rabbit! Bounce-bounce!
 ```
 
-From now on, `rabbit.walk()` call finds the method immediately in the object and executes it, without using the prototype:
+এখানে, `rabbit.walk()` সরাসরি `rabbit` অবজেক্টের মেথডকে কল করবে এবং একে এক্সিকিউট করবে, এখানে প্রটোটাইপ ব্যবহার হবে না:
 
 ![](proto-animal-rabbit-walk-2.svg)
 
-Accessor properties are an exception, as assignment is handled by a setter function. So writing to such a property is actually the same as calling a function.
+তবে অ্যাক্সেসর প্রপার্টি সমূহ কিছুটা ব্যতিক্রম, এক্ষেত্রে ভ্যালু অ্যাসাইন করতে গেলে তা হ্যান্ডেল হয় `setter` ফাংশনের মাধ্যমে। এই ধরণের প্রপার্টি গুলো ফাংশনের মত কল হয়।
 
-For that reason `admin.fullName` works correctly in the code below:
+একারণে `admin.fullName` নিচের কোডের জন্য সঠিকভাবে কাজ করবে:
 
 ```js run
 let user = {
@@ -195,33 +202,33 @@ let admin = {
 
 alert(admin.fullName); // John Smith (*)
 
-// setter triggers!
+// setter কল হবে!
 admin.fullName = "Alice Cooper"; // (**)
 
-alert(admin.fullName); // Alice Cooper , state of admin modified
-alert(user.fullName); // John Smith , state of user protected
+alert(admin.fullName); // Alice Cooper, পরিবর্তিত admin এর নাম
+alert(user.fullName); // John Smith, অপরিবর্তিত কেননা user এর স্টেট protected
 ```
 
-Here in the line `(*)` the property `admin.fullName` has a getter in the prototype `user`, so it is called. And in the line `(**)` the property has a setter in the prototype, so it is called.
+এখানে `(*)` লাইনে `admin.fullName` হল `user` প্রটোটাইপ এর একটি getter প্রপার্টি, সুতরাং এটি কল হবে। এবং এই `(**)` লাইনে এটি প্রটোটাইপের একটি সেটার প্রপার্টি, তাই এটি কল হবে।
 
-## The value of "this"
+## "this" এর মান
 
-An interesting question may arise in the example above: what's the value of `this` inside `set fullName(value)`? Where are the properties `this.name` and `this.surname` written: into `user` or `admin`?
+উপরের উদাহরণটি দেখে আমাদের মনে একটি প্রশ্নের উদয় হয়: `set fullName(value)` এর মধ্যে `this` এর মান কি হবে? এবং `this.name` ও `this.surname` কোন অবজেক্টে `user` নাকি `admin` লিখা আছে?
 
-The answer is simple: `this` is not affected by prototypes at all.
+সোজাভাবে বলতে গেলে: `this` এর মান প্রটোটাইপের জন্য প্রভাবিত হয় না।
 
-**No matter where the method is found: in an object or its prototype. In a method call, `this` is always the object before the dot.**
+**মেথডটি যেখানেই থাকুক না কেন অবজেক্টে বা প্রটোটাইপে `this` সর্বদা অবজেক্টকেই নির্দেশ করে**
 
-So, the setter call `admin.fullName=` uses `admin` as `this`, not `user`.
+সুতরাং, `admin.fullName=` এর জন্য `this` সর্বদা `admin` কে নির্দেশ করবে, `user` কে না।
 
-That is actually a super-important thing, because we may have a big object with many methods, and have objects that inherit from it. And when the inheriting objects run the inherited methods, they will modify only their own states, not the state of the big object.
+এটি একটি গুরুত্বপূর্ণ ব্যাপার, মনে করুন আমাদের একটি অনেক মেথড সম্বলিত কমপ্লেক্স অবজেক্ট আছে, এবং একে ইনহেরিট করে নতুন একটি অবজেক্ট তৈরি করা হল। এখন আমরা যদি আমাদের অবজেক্টটিকে কল করি, এবং তার বিভিন্ন মেথডের সাহায্যে বিভিন্ন স্টেট পরিবর্তন করি তাহলে এক্ষেত্রে অবজেক্টের স্টেট পরিবর্তন হবে, প্রটোটাইপ অবজেক্টের কোন পরিবর্তন হবে না।
 
-For instance, here `animal` represents a "method storage", and `rabbit` makes use of it.
+মনে করুন, এখানে `animal` এ একটি মেথড আছে, এবং `rabbit` এটিকে ব্যবহার করে।
 
-The call `rabbit.sleep()` sets `this.isSleeping` on the `rabbit` object:
+`rabbit` অবজেক্টের মাধ্যমে `rabbit.sleep()` কে কল করে একটি প্রপার্টি সেট করছি `this.isSleeping`:
 
 ```js run
-// animal has methods
+// মেথডগুলো animal এ লিখা হয়েছে
 let animal = {
   walk() {
     if (!this.isSleeping) {
@@ -238,26 +245,26 @@ let rabbit = {
   __proto__: animal
 };
 
-// modifies rabbit.isSleeping
+// এখান থেকে একে সেট করা হল rabbit.isSleeping
 rabbit.sleep();
 
 alert(rabbit.isSleeping); // true
-alert(animal.isSleeping); // undefined (no such property in the prototype)
+alert(animal.isSleeping); // undefined (প্রটোটাইপে এই ধরণের কোন অবজেক্ট পাবে না)
 ```
 
-The resulting picture:
+ফলাফলটি দেখতে এমন:
 
 ![](proto-animal-rabbit-walk-3.svg)
 
-If we had other objects, like `bird`, `snake`, etc., inheriting from `animal`, they would also gain access to methods of `animal`. But `this` in each method call would be the corresponding object, evaluated at the call-time (before dot), not `animal`. So when we write data into `this`, it is stored into these objects.
+এখন যদি আমাদের অন্য অবজেক্ট থাকে যেমন `bird`, `snake`, ইত্যাদি, যা `animal` থেকে ইনহেরিট হয়, তারাও `animal` এর মেথডসমূহ অ্যাক্সেস করতে পারবে। কিন্তু `this` রেফার করবে আমাদের ঐ অবজেক্টকেই এক্ষেত্রে `animal` এর স্টেট অপরিবর্তিত থাকবে। সুতরাং আমরা যখন প্রটোটাইপ অবজেক্টে `this` কে কল করি, এটি ঐ অবজেক্টের স্টেটকে নির্দেশ করবে।
 
-As a result, methods are shared, but the object state is not.
+ফলশ্রুতিতে, মেথডগুলো পুনরায় ব্যবহারযোগ্য, কিন্তু প্রটোটাইপ অবজেক্টের স্টেট পরিবর্তন হয় না।
 
-## for..in loop
+## for..in লুপ
 
-The `for..in` loop iterates over inherited properties too.
+`for..in` লুপ ইটারেটের সময় ইনহেরিটেড প্রপার্টিকেও ইটারেট করে।
 
-For instance:
+যেমন:
 
 ```js run
 let animal = {
@@ -270,19 +277,19 @@ let rabbit = {
 };
 
 *!*
-// Object.keys only returns own keys
+// তবে Object.keys শুধুমাত্র object এর নিজস্ব কী রিটার্ন করে
 alert(Object.keys(rabbit)); // jumps
 */!*
 
 *!*
-// for..in loops over both own and inherited keys
+// for..in লুপ নিজস্ব এবং ইনহেরিটেড key কে দেখায়
 for(let prop in rabbit) alert(prop); // jumps, then eats
 */!*
 ```
 
-If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+এছাড়াও যদি আমরা চাই ইনহেরিটেড প্রপার্টিকে বাদ দিতে, তার জন্য একটি বিল্ট-ইন মেথড আছে [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): এটি `obj` এর নিজস্ব প্রপার্টির `key` এর জন্য `true` রিটার্ন করে।
 
-So we can filter out inherited properties (or do something else with them):
+সুতরাং আমরা নিম্নোক্তভাবে কোন অবজেক্টকে ফিল্টার করতে পারি:
 
 ```js run
 let animal = {
@@ -305,28 +312,28 @@ for(let prop in rabbit) {
 }
 ```
 
-Here we have the following inheritance chain: `rabbit` inherits from `animal`, that inherits from `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
+এখানে ইনহেরিটেন্সটি এভাবে সম্পন্ন হয়: `rabbit` ইনহেরিট হয় `animal` থেকে, এবং এটি ইনহেরিট হয় `Object.prototype` থেকে (কেননা `animal` হল একটি লিটারেল অবজেক্ট `{...}`, সুতরাং এটি ডিফল্ট), এবং এটির প্রটোটাইপ হবে `null`:
 
 ![](rabbit-animal-object.svg)
 
-Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` coming from? We did not define it. Looking at the chain we can see that the method is provided by `Object.prototype.hasOwnProperty`. In other words, it's inherited.
+নোট: আমাদের মনে একটি মজার প্রশ্ন আসতে পারে `rabbit.hasOwnProperty` কোথা থেকে আসল? যেহেতু এটি আমরা ডিফাইন করিনি। উপরের ছবিটি দেখলে দেখবেন `hasOwnProperty` আসলে `Object.prototype` হতে এসেছে। সোজাভাবে বলতে গেলে এটি ইনহেরিটেড মেথড।
 
-...But why does `hasOwnProperty` not appear in the `for..in` loop like `eats` and `jumps` do, if `for..in` lists inherited properties?
+...তাহলে কেন `hasOwnProperty` মেথডটি `for..in` লুপে `eats` এবং `jumps` এর মত দেখায়নি? কেননা আমরা তো জেনেছি `for..in` লুপে ইনহেরিটেড প্রপার্টিসমূহও অ্যাক্সেস হয়।
 
-The answer is simple: it's not enumerable. Just like all other properties of `Object.prototype`, it has `enumerable:false` flag. And `for..in` only lists enumerable properties. That's why it and the rest of the `Object.prototype` properties are not listed.
+এর কারণ সহজ: এটি একটি `enumerable` প্রপার্টি। `Object.prototype` এর অন্যান্য প্রপার্টির মত, এটির জন্য `enumerable:false` ফ্ল্যাগ ব্যবহার করা হয়েছে। এবং `for..in` শুধুমাত্র `enumerable` প্রপার্টিকে অ্যাক্সেস করতে পারে। একারণে `Object.prototype` এর অন্যান্য প্রপার্টিসমূহও অ্যাক্সেসবল না।
 
-```smart header="Almost all other key/value-getting methods ignore inherited properties"
-Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
+```smart header="প্রায় সকল অবজেক্ট সম্পর্কিত মেথড সমূহ ইনহেরিটেড প্রপার্টিকে উপেক্ষা করে"
+প্রায় সকল অবজেক্ট সম্পর্কিত মেথড সমূহ ইনহেরিটেড প্রপার্টিকে উপেক্ষা করে, যেমন `Object.keys`, `Object.values` এর ইনহেরিটেড প্রপার্টিকে উপেক্ষা করে।
 
-They only operate on the object itself. Properties from the prototype are *not* taken into account.
+এইগুলো শুধুমাত্র অবজেক্টের নিজের প্রপার্টি এবং মেথড নিয়ে কাজ করে। প্রটোটাইপের প্রপার্টিসমূহ এই মেথডসমূহের জন্য অগ্রাহ্য।
 ```
 
-## Summary
+## সারাংশ
 
-- In JavaScript, all objects have a hidden `[[Prototype]]` property that's either another object or `null`.
-- We can use `obj.__proto__` to access it (a historical getter/setter, there are other ways, to be covered soon).
-- The object referenced by `[[Prototype]]` is called a "prototype".
-- If we want to read a property of `obj` or call a method, and it doesn't exist, then JavaScript tries to find it in the prototype.
-- Write/delete operations act directly on the object, they don't use the prototype (assuming it's a data property, not a setter).
-- If we call `obj.method()`, and the `method` is taken from the prototype, `this` still references `obj`. So methods always work with the current object even if they are inherited.
-- The `for..in` loop iterates over both its own and its inherited properties. All other key/value-getting methods only operate on the object itself.
+- জাভাস্ক্রিপ্টের প্রতিটি অবজেক্টে একটি লুকায়িত প্রপার্টি `[[Prototype]]` আছে যেটির মান হতে পারে একটি অবজেক্ট অথবা `null`।
+- আমরা একে `obj.__proto__` এর মাধ্যমে অ্যাক্সেস করতে পারি(পুরনো জাভস্ক্রিপ্ট অনুযায়ী getter/setter ব্যবহার করতে পারি, তবে আরো পদ্ধতি আছে, যা আমরা সামনে দেখব)।
+- `[[Prototype]]` দ্বারা রেফারেন্সকৃত অবজেক্টটিকে বলা হয় "prototype"।
+- যখন আমরা কোন `obj` এর কোন মেথড বা প্রপার্টিকে অ্যাক্সেস করতে চাই, যদি এটি ঐ `obj` এ অনুপস্থিত থাকে, তাহলে তার প্রটোটাইপে অনুসন্ধান করে।
+- অ্যাসাইন/ডিলিট অপারেশন সরাসরি মূল অবজেক্টের মধ্যে সংগঠিত হয়, এরা প্রটোটাইপ এর স্টেট ব্যবহার করে না (এদের setter এর বদলে ডাটা প্রপার্টি হিসেবে ধরে নিন)।
+- যদি আমরা `obj.method()` কে কল করি, এবং এটি প্রটোটাইপের `method` কে অ্যাক্সেস করে, তাহলে `this` রেফার করে `obj` এর স্টেটকে। সুতরাং মেথড সমূহ যদিও ইনহেরিট হয় এরা অবজেক্টের স্টেটের সাথে কাজ করে।
+- `for..in` লুপ নিজস্ব এবং ইনহেরিটেড উভয়ই প্রপার্টিকে ইটারেট করে। এছাড়া `Object` সম্পর্কিত অন্যান্য মেথড যেমন `Object.keys`, `Object.values` তে প্রটোটাইপের প্রপার্টি অ্যাক্সেস হয় না।
