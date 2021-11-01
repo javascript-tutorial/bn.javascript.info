@@ -2,6 +2,7 @@
 
 [recent browser="new"]
 
+<<<<<<< HEAD
 এই নিবন্ধে আমরা কোন একটা এক্সপ্রেশান কে তখনি "সংজ্ঞায়িত" বলবো যখন সেটা `নাল` অথবা `অসঙ্গায়িত` কোনটাই হবে না ।
 
 নাল-ঈশ কোয়েলেসিং অপারেটর কে দুইটি প্রশ্নবোধক চিহ্ন দ্বারা এভাবে লেখা হয় `??`।
@@ -12,6 +13,17 @@
 - যখন `a` সংজ্ঞায়িত না, তখন `b`।
 
 অন্যকথায় বলতে গেলে, যদি প্রথম আর্গুমেন্ট `নাল/অসঙ্গায়িত` না হয় তাহলে `??` এটা প্রথম আর্গুমেন্ট রিটার্ন করবে । তানাহলে , দ্বিতীয়টা রিটার্ন করবে।
+=======
+The nullish coalescing operator is written as two question marks `??`.
+
+As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. We'll say that an expression is "defined" when it's neither `null` nor `undefined`.
+
+The result of `a ?? b` is:
+- if `a` is defined, then `a`,
+- if `a` isn't defined, then `b`.
+
+In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 নাল-ঈশ কোয়েলেসিং অপারেটরটা নতুন কিছু নয়। এটা শুধুমাত্র একটা সুন্দর সিনট্যাক্স যেটা দুইটা মানের মধ্যে প্রথম সংজ্ঞায়িত মানটা বের করে দেয়।
 
@@ -21,29 +33,47 @@
 result = a !== null && a !== undefined ? a : b;
 ```
 
+<<<<<<< HEAD
 সম্ভাব্য অসঙ্গায়িত ভ্যরিয়াবল এর ডিফল্ট মান সরবরাহ করা, `??` এটার সাধারণ ব্যাবহারের ক্ষেত্র ।
 
 উদাহরণ হিসেবে বলা যায়, যদি `user` defined না হয় তাহলে আমরা `Anonymous`দেখাবো।
+=======
+Now it should be absolutely clear what `??` does. Let's see where it helps.
+
+The common use case for `??` is to provide a default value for a potentially undefined variable.
+
+For example, here we show `user` if defined, otherwise `Anonymous`:
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ```js run
 let user;
 
-alert(user ?? "Anonymous"); // Anonymous
+alert(user ?? "Anonymous"); // Anonymous (user not defined)
 ```
 
+<<<<<<< HEAD
 অবশ্য, যদি `user` এ `নাল/অসঙ্গায়িত` ছাড়া অন্য কোন মান থাকে তাহলে আমরা `user` কেই দেখবো:
+=======
+Here's the example with `user` assigned to a name:
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ```js run
 let user = "John";
 
-alert(user ?? "Anonymous"); // John
+alert(user ?? "Anonymous"); // John (user defined)
 ```
 
 একটা তালিকা থেকে প্রথম মান, যেটা `নাল/অসঙ্গায়িত` হবে না সেটাও আমরা `??` এর পর্যায়াক্রম ব্যবহার করে বের করতে পারি ।
 
+<<<<<<< HEAD
 মনে করি আমাদের কাছে একজন ব্যবহারকারী এর তথ্য আছে `firstName`, `lastName` অথবা `nickName` ভ্যারিয়েবল এ। সব গুলোর মানই অসঙ্গায়িত হতে পারি যদি ব্যবহারকারী কোন তথ্য না দেয়।
 
 আমরা চাই যেকোনো একটি ভ্যারিয়েবল নিয়ে ব্যবহারকারীর নাম দেখাতে, অথবা "Anonymous" দেখাতে যদি সব ভ্যারিয়েবল অসঙ্গায়িত হয় ।
+=======
+Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to enter a value.
+
+We'd like to display the user name using one of these variables, or show "Anonymous" if all of them aren't defined.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 এটা করার জন্যে `??` অপারেটর টা ব্যবহার করা যাক:
 
@@ -75,7 +105,11 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
+<<<<<<< HEAD
 অর `||` অপারেটর জাভাস্ক্রিপ্ট এর শুরু থেকেই ছিল, তাই ডেভোলপাররা এটিই ব্যবহার করে আসছে অনেক লম্বা সময় ধরে ।
+=======
+Historically, the OR `||` operator was there first. It exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 অপরপক্ষে কোয়েলেসিং অপারেটর `??` সাম্প্রতিক সময়ে কেবল মাত্রই যুক্ত হল জাভাস্ক্রিপ্ট এ এবং এর কারণ হলে `||` এটা দ্বারা মানুষজন খুশি ছিল না।
 
@@ -97,16 +131,31 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
+<<<<<<< HEAD
 - `height || 100` এটি দেখে যে `height` ফলছি ভ্যালু কিনা এবং ফলছি ভ্যালু হিসেবেই পায় ।
   - তাই উত্তর হল দ্বিতীয় আর্গুমেন্ট, `100`।
 - `height ?? 100` এটি দেখে যে `height` `নাল/অসঙ্গায়িত` কিনা এবং দেখে যে এটি এমন না ।
   - তাই উত্তর হিসেবে `height` এর মান দেখায়, যেটা হল `0`।
 
 যদি শূন্য উচ্চতা একটি বৈধ মান হয়ে যেটি কিনা ডিফল্ট মান দ্বারা পরিবর্তিত হবে না সেক্ষেত্রে `??` এই অপারেটর টা যথার্থ কাজ করছে ।
+=======
+- The `height || 100` checks `height` for being a falsy value, and it's `0`, falsy indeed.
+    - so the result of `||` is the second argument, `100`.
+- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
+    - so the result is `height` "as is", that is `0`.
+
+In practice, the zero height is often a valid value, that shouldn't be replaced with the default. So `??` does just the right thing.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ## প্রাধান্য
 
+<<<<<<< HEAD
 `??` অপারেটর এর প্রাধান্য কিছুটা কম। [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) এ `৫` নাম্বার। । তাই `??` অপারেটর, `=` এবং `?` এর আগে মুল্যায়িত হবে, কিন্তু অন্যান্য বেশীর ভাগ অপারেশন, যেমন `+`, `*`, এর পরে মুল্যায়িত হবে।
+=======
+The precedence of the `??` operator is about the same as `||`, just a bit lower. It equals `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table), while `||` is `6`.
+
+That means that, just like `||`, the nullish coalescing operator `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 তাই আমরা যদি `??` এই এক্সপ্রেশন এর মাধ্যমে কোন ভ্যালু নির্বাচন করতে চাই তাহলে বন্ধনীর ব্যবহার বিবেচনা করা উচিত:
 
@@ -140,7 +189,11 @@ let area = height ?? 100 * width ?? 50;
 let x = 1 && 2 ?? 3; // সিনট্যাক্স ইরর
 ```
 
+<<<<<<< HEAD
 এটির সীমাবদ্ধতা অবশ্যই তর্কসাপেক্ষ কিন্তু যখন মানুষজন `||` এর পরিবর্তে `??` ব্যবহার করা শুরু করল তখন প্রোগ্রামিং ভুল দুর করার জন্যে এটি ল্যাঙ্গুয়েজ স্পেছিফিকেশন এ যুক্ত করা হয়।
+=======
+The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ভুল এড়ানোর জন্যে পরিষ্কারভাবে বর্ণিত বন্ধনী ব্যবহার করুন:
 

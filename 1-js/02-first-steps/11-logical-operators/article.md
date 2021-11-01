@@ -1,6 +1,10 @@
 # Logical operators
 
+<<<<<<< HEAD
 জাভাস্ক্রিপ্টে তিনটি লজিক্যাল অপারেটর রয়েছে: `||` (OR), `&&` (AND), `!` (NOT).
+=======
+There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing). Here we cover the first three, the `??` operator is in the next article.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 যদিও তাদের "লজিক্যাল" বলা হয়, সেগুলি কেবল বুলিয়ান নয়, যে কোনও ধরণের মানগুলিতে প্রয়োগ করা যেতে পারে। তাদের ফলাফলও যে কোনও ধরণের হতে পারে।
 
@@ -64,7 +68,7 @@ if (hour < 10 || hour > 18 || isWeekend) {
 }
 ```
 
-## OR "||" finds the first truthy value
+## OR "||" finds the first truthy value [#or-finds-the-first-truthy-value]
 
 উপরে বর্ণিত যুক্তি কিছুটা ক্লাসিকাল। এখন, জাভাস্ক্রিপ্টের "অতিরিক্ত" বৈশিষ্ট্যগুলি নিয়ে আসি।
 
@@ -144,7 +148,7 @@ alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
 
     It means that `||` processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
 
-    That importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+    The importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
 
 <<<<<<< HEAD
     alert(x); // undefined, because (x = 1) not evaluated

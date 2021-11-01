@@ -12,7 +12,11 @@
 
 ![prototype](object-prototype-empty.svg)
 
+<<<<<<< HEAD
 যখন আমরা কোন `object` এর প্রপার্টি পড়তে চাই, এবং যদি এটি ঐ `object` এ অনুপস্থিত থাকে, তখন জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে প্রটোটাইপে অনুসন্ধান করে। একে বলা হয় "প্রটোটাইপল ইনহেরিটেন্স"। আমরা বিভিন্ন উদাহরণের সাহায্যে এই ব্যাপারটি শিখব, এছাড়াও আরো অনেক ল্যাংগুয়েজে এই ধরণের ফিচার সাপোর্ট করে।
+=======
+When we read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, this is called "prototypal inheritance". And soon we'll study many examples of such inheritance, as well as cooler language features built upon it.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 `[[Prototype]]` এটি অবজেক্টের ইন্টারনাল এবং হিডেন প্রপার্টি, তবে বিভিন্ন ভাবে আমরা একে অ্যাক্সেস করতে পারি।
 
@@ -27,13 +31,19 @@ let rabbit = {
 };
 
 *!*
-rabbit.__proto__ = animal;
+rabbit.__proto__ = animal; // sets rabbit.[[Prototype]] = animal
 */!*
 ```
 
+<<<<<<< HEAD
 এখন আমরা যদি `rabbit` এর কোন প্রপার্টি পড়তে চাই, এবং এটি যদি এর মধ্যে অনুপস্থিত থাকে, তাহলে জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে `animal` এ একে অনুসন্ধান করে।
 
 যেমন:
+=======
+Now if we read a property from `rabbit`, and it's missing, JavaScript will automatically take it from `animal`.
+
+For instance:
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ```js
 let animal = {
@@ -122,16 +132,23 @@ alert(longEar.jumps); // true (rabbit হতে অ্যাক্সেস ক�
 
 ![](proto-animal-rabbit-chain.svg)
 
+<<<<<<< HEAD
 এখন আমরা যদি `longEar` হতে কোন কিছু পড়তে চাই এবং এটি যদি তার মধ্যে অনুপস্থিত থাকে, জাভাস্ক্রিপ্ট প্রথমে `rabbit` এর মধ্যে খুঁজবে এবং তারপর `animal` এ খুঁজবে।
 
 তবে এর দুটি সীমাবদ্ধতা রয়েছে:
 
 1. আমরা রেফারেন্সকে চক্রকারে সেট করতে পারব না। এক্ষেত্রে চক্রকারে `__proto__` এ কোন অবজেক্ট অ্যাসাইন করতে চাইলে জাভাস্ক্রিপ্ট একটি এরর দিবে।
 2. `__proto__` এর মান কেবলমাত্র `null` এবং অবজেক্ট হতে পারবে, অন্য টাইপগুলো ইগনোর হবে।
+=======
+Now if we read something from `longEar`, and it's missing, JavaScript will look for it in `rabbit`, and then in `animal`.
+
+There are only two limitations:
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 যদিও এটি সুস্পষ্ট, কিন্তু এখানে শুধুমাত্র একটি `[[Prototype]]` হতে পারে। একটি অবজেক্ট একই সাথে দুটি অবজেক্টকে ইনহেরিট করতে পারে না।
 
 
+<<<<<<< HEAD
 ```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
 সাধারণত নতুন ডেভলাপাররা এই দুটির মধ্যে পার্থক্য না জেনে রাখায় প্রায় এই সাধারন ভুলটি করে।
 
@@ -145,6 +162,22 @@ alert(longEar.jumps); // true (rabbit হতে অ্যাক্সেস ক�
 ```
 
 ## প্রটোটাইপ অ্যাসাইনিং এবং ডিলিটিং সাপোর্ট করে না
+=======
+
+```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
+It's a common mistake of novice developers not to know the difference between these two.
+
+Please note that `__proto__` is *not the same* as the internal `[[Prototype]]` property. It's a getter/setter for `[[Prototype]]`. Later we'll see situations where it matters, for now let's just keep it in mind, as we build our understanding of JavaScript language.
+
+The `__proto__` property is a bit outdated. It exists for historical reasons, modern JavaScript suggests that we should use `Object.getPrototypeOf/Object.setPrototypeOf` functions instead that get/set the prototype. We'll also cover these functions later.
+
+By the specification, `__proto__` must only be supported by browsers. In fact though, all environments including server-side support `__proto__`, so we're quite safe using it.
+
+As the `__proto__` notation is a bit more intuitively obvious, we use it in the examples.
+```
+
+## Writing doesn't use prototype
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 প্রটোটাইপ শুধুমাত্র কোন প্রপার্টি বা মেথড পড়তে ব্যবহৃত হয়।
 
@@ -205,8 +238,13 @@ alert(admin.fullName); // John Smith (*)
 // setter কল হবে!
 admin.fullName = "Alice Cooper"; // (**)
 
+<<<<<<< HEAD
 alert(admin.fullName); // Alice Cooper, পরিবর্তিত admin এর নাম
 alert(user.fullName); // John Smith, অপরিবর্তিত কেননা user এর স্টেট protected
+=======
+alert(admin.fullName); // Alice Cooper, state of admin modified
+alert(user.fullName); // John Smith, state of user protected
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 ```
 
 এখানে `(*)` লাইনে `admin.fullName` হল `user` প্রটোটাইপ এর একটি getter প্রপার্টি, সুতরাং এটি কল হবে। এবং এই `(**)` লাইনে এটি প্রটোটাইপের একটি সেটার প্রপার্টি, তাই এটি কল হবে।
