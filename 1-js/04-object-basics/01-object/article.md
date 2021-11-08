@@ -93,6 +93,7 @@ let user = {
 একে বলা হয় "ট্রেইলিং" বা "হ্যাঙ্গিং" কমা। এটি এড/রিমুভ এবং পরিবর্তন করা সহজ করে, কারণ সবগুলো লাইন দেখতে একই রকম হয়।
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## তৃতীয় বন্ধনী
 =======
 ````smart header="Object with const can be changed"
@@ -119,6 +120,8 @@ The `const` would give an error only if we try to set `user=...` as a whole.
 There's another way to make constant object properties, we'll cover it later in the chapter <info:property-descriptors>.
 ````
 
+=======
+>>>>>>> 4541b7af7584014a676da731f6e8774da5e059f6
 ## Square brackets
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
