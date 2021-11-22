@@ -248,7 +248,11 @@ alert( tag1.input ); // <h1> <h2>
 
 সুতরাং, এটি প্রয়োজনমত রেজাল্ট খুঁজে পায়, এর বেশি না।
 
+<<<<<<< HEAD
 যেমন কোন টেক্সটে ১০০ টি ম্যাচ আছে, এবং `for..of` এর মাধ্যমে আমরা ৫টি মিল খুঁজি, তারপর আমরা লুপ হতে `break` এর মাধ্যমে বের হয়ে যেতে পারি। সুতরাং ইঞ্জিনের বাকী ৯৫টি মিল খুঁজার জন্য অতিরিক্ত সময় অতিবাহিত করা লাগবে না।
+=======
+E.g. there are potentially 100 matches in the text, but in a `for..of` loop we found 5 of them, then decided it's enough and made a `break`. Then the engine won't spend time finding other 95 matches.
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 ```
 
 ## গ্রুপের নামকরণ
@@ -334,7 +338,11 @@ alert( str.replace(regexp, '$<day>.$<month>.$<year>') );
 let str = "Gogogo John!";
 
 *!*
+<<<<<<< HEAD
 // ?: এর দ্বারা 'go' কে ক্যাপচারিং হতে বাদ দিতে পারি
+=======
+// ?: excludes 'go' from capturing
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 let regexp = /(?:go)+ (\w+)/i;
 */!*
 

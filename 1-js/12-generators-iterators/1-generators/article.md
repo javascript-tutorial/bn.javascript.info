@@ -459,7 +459,35 @@ try {
 ```
 যদি আমরা এররটি না ধরি তাহলে অন্যান্য এরর এর মত এটি আমাদের এক্সিকিউশন কোডের মধ্যে চলে যাবে এবং এর ফলে কোড এক্সিকিউশন বন্ধ হয়ে যাবে।
 
+<<<<<<< HEAD
 ## সারাংশ
+=======
+If we don't catch the error there, then, as usual, it falls through to the outer calling code (if any) and, if uncaught, kills the script.
+
+## generator.return
+
+`generator.return(value)` finishes the generator execution and return the given `value`.
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next();        // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next();        // { value: undefined, done: true }
+```
+
+If we again use `generator.return()` in a completed generator, it will return that value again ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return)).
+
+Often we don't use it, as most of time we want to get all returning values, but it can be useful when we want to stop generator in a specific condition.
+
+## Summary
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 
 - জেনারেটর তৈরী হয় জেনারেটর ফাংশনের মাধ্যমে `function* f(…) {…}`।
 - (শুধু) জেনারেটরের মধ্যে `yield` অপারেটর থাকে।
