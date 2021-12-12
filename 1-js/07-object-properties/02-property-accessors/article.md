@@ -1,31 +1,31 @@
 
-# Property getters and setters
+# প্রপার্টি getter এবং setter
 
-There are two kinds of object properties.
+জাভাস্ক্রিপ্টে অবজেক্ট প্রপার্টি দুই ধরণের।
 
-The first kind is *data properties*. We already know how to work with them. All properties that we've been using until now were data properties.
+এর মধ্যে একটি হল *data properties*। ইতোমধ্যে আমরা এদের দেখেছি। এই পর্যন্ত আমরা যেসব প্রপার্টি দেখেছি তাদের বলা হয় ডাটা প্রপার্টিস।
 
-The second type of properties is something new. It's *accessor properties*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+আরেক প্রকার প্রপার্টিটি আমাদের জন্য নতুন। একে বলা হয় *accessor properties*।  আসলে এরা হল ফাংশন যার মাধ্যমে কোন ভ্যালু *get* বা *set* করা যায়। তবে এরা রেগুলার প্রপার্টির ন্যায় কাজ করে।
 
-## Getters and setters
+## Getters এবং setters
 
-Accessor properties are represented by "getter" and "setter" methods. In an object literal they are denoted by `get` and `set`:
+অ্যাক্সেসর প্রপার্টিকে সাধারণত রিপ্রেজেন্ট করা হয় "getter" এবং "setter" মেথড দ্বারা। অবজেক্টে লিখার সময় এদের লিখা হয় `get` এবং `set` দ্বারা:
 
 ```js
 let obj = {
   *!*get propName()*/!* {
-    // getter, the code executed on getting obj.propName
+    // getter, এটি এক্সিকিউট হবে যখন obj.propName কল হবে
   },
 
   *!*set propName(value)*/!* {
-    // setter, the code executed on setting obj.propName = value
+    // setter, এটি এক্সিকিউট হবে যখন obj.propName = value কল হবে
   }
 };
 ```
 
-The getter works when `obj.propName` is read, the setter -- when it is assigned.
+অর্থাৎ getter কল হয় `obj.propName` এর মান পড়তে, এবং setter কল হয় মান অ্যাসাইন করতে।
 
-For instance, we have a `user` object with `name` and `surname`:
+যেমন, আমাদের `user` অবজেক্টে প্রপার্টিসমূহ হল `name` এবং `surname`:
 
 ```js
 let user = {
@@ -34,7 +34,7 @@ let user = {
 };
 ```
 
-Now we want to add a `fullName` property, that should be `"John Smith"`. Of course, we don't want to copy-paste existing information, so we can implement it as an accessor:
+এখন আমরা একটি একটি নতুন প্রপার্টি `fullName` সংযোজন করতে চাচ্ছি, যেটির মান হবে `"John Smith"`। অবশ্যই আমরা নামগুলো কপি-পেস্টের মাধ্যমে লিখতে চাই না, সুতরাং আমরা এর জন্য অ্যাক্সেসর ব্যবহার করতে পারি:
 
 ```js run
 let user = {
@@ -53,9 +53,9 @@ alert(user.fullName); // John Smith
 */!*
 ```
 
-From the outside, an accessor property looks like a regular one. That's the idea of accessor properties. We don't *call* `user.fullName` as a function, we *read* it normally: the getter runs behind the scenes.
+সাধারণত অ্যাক্সেসর প্রপার্টি সমূহ অবজেক্ট নিয়ে কাজ করার সময় সাধারণ প্রপার্টির মত কাজ করে। এটিই অ্যাক্সেসর প্রপার্টির আইডিয়া। আমরা `user.fullName` কে ফাংশন হিসেবে *call* করব না, কিন্তু এদের আমরা সাধারণ প্রপার্টির মত *read* করতে পারব: এখানে getters আমাদের অন্তরালে কাজ করবে।
 
-As of now, `fullName` has only a getter. If we attempt to assign `user.fullName=`, there will be an error:
+এ পর্যন্ত, আমরা `fullName` এর জন্য getter ব্যবহার করেছি। এখন আমরা যদি এর মধ্যে মান অ্যাসাইন করতে চাই অর্থাৎ `user.fullName=`, তাহলে একটি এরর হবে:
 
 ```js run
 let user = {
@@ -65,11 +65,11 @@ let user = {
 };
 
 *!*
-user.fullName = "Test"; // Error (property has only a getter)
+user.fullName = "Test"; // Error (কেননা প্রপার্টির জন্য শুধুমাত্র getter সংজ্ঞায়িত করা হয়েছে)
 */!*
 ```
 
-Let's fix it by adding a setter for `user.fullName`:
+চলুন, `user.fullName` এর জন্য একটি setter ফাংশন লিখি:
 
 ```js run
 let user = {
@@ -87,29 +87,29 @@ let user = {
 */!*
 };
 
-// set fullName is executed with the given value.
+// এখন fullName আমাদের নতুন মানের জন্য কাজ করবে
 user.fullName = "Alice Cooper";
 
 alert(user.name); // Alice
 alert(user.surname); // Cooper
 ```
 
-As the result, we have a "virtual" property `fullName`. It is readable and writable.
+getter এবং setter এর মাধ্যমে আমরা একটি "virtual" প্রপার্টি `fullName` ডিক্লেয়ার করেছি। যেটি পঠনযোগ্য এবং লিখনযোগ্য (readable এবং writable)।
 
-## Accessor descriptors
+## অ্যাক্সেসর ডেস্ক্রিপ্টর
 
-Descriptors for accessor properties are different from those for data properties.
+অ্যাক্সেসর প্রপার্টির জন্য ডেস্ক্রিপ্টর প্রপার্টি সমূহ ডাটা প্রপার্টি থেকে ভিন্ন।
 
-For accessor properties, there is no `value` or `writable`, but instead there are `get` and `set` functions.
+অ্যাক্সেসর প্রপার্টির জন্য, কোন `value` বা `writable` ফ্ল্যাগ থাকে না, তার পরিবর্তে `get` এবং `set` ফাংশন আছে।
 
-That is, an accessor descriptor may have:
+অ্যাক্সেসর ডেস্ক্রিপ্টর এ থাকে:
 
-- **`get`** -- a function without arguments, that works when a property is read,
-- **`set`** -- a function with one argument, that is called when the property is set,
-- **`enumerable`** -- same as for data properties,
-- **`configurable`** -- same as for data properties.
+- **`get`** -- একটি ফাংশন যার কোন আর্গুমেন্ট থাকে না, এটি প্রপার্টির মান পড়তে ব্যবহার হয়,
+- **`set`** -- একটি ফাংশন যার একটি আর্গুমেন্ট থাকে, যখন কোন মান অ্যাসাইন করতে চাই তখন কল হবে,
+- **`enumerable`** -- ডাটা প্রপার্টির মত কাজ করে,
+- **`configurable`** -- ডাটা প্রপার্টির মত কাজ করে,
 
-For instance, to create an accessor `fullName` with `defineProperty`, we can pass a descriptor with `get` and `set`:
+যেমন, নিচের কোডে আমরা `defineProperty` এর মাধ্যমে `fullName` ডিফাইন করব, এর জন্য আমরা `get` এবং `set` ফাংশন ব্যবহার করি:
 
 ```js run
 let user = {
@@ -134,9 +134,9 @@ alert(user.fullName); // John Smith
 for(let key in user) alert(key); // name, surname
 ```
 
-Please note that a property can be either an accessor (has `get/set` methods) or a data property (has a `value`), not both.
+দয়া করে মনে রাখুন কোন প্রপার্টি হয় অ্যাক্সেসর হবে (অর্থাৎ `get/set` মেথড) থাকবে অন্যথায় ডাটা প্রপার্টি হবে (`value` থাকে), একই সাথে অ্যাক্সেসর এবং ডাটা প্রপার্টি হবে না।
 
-If we try to supply both `get` and `value` in the same descriptor, there will be an error:
+যদি আমরা এভাবে করতে চাই অর্থাৎ `get` এবং `value` উভয়ই যদি ডেস্ক্রিপ্টর এ ডিফাইন করি তাহলে এরর হবে:
 
 ```js run
 *!*
@@ -151,11 +151,11 @@ Object.defineProperty({}, 'prop', {
 });
 ```
 
-## Smarter getters/setters
+## স্মার্ট getters/setters
 
-Getters/setters can be used as wrappers over "real" property values to gain more control over operations with them.
+Getters/setters দ্বারা আমরা আমাদের প্রপার্টি সমূহকে আরো বিভিন্ন ভাবে কন্ট্রোল করতে পারি।
 
-For instance, if we want to forbid too short names for `user`, we can have a setter `name` and keep the value in a separate property `_name`:
+যেমন, যদি আমরা আমাদের `user` এর নাম সংক্ষিপ্ত হওয়া এড়াতে চাই, এক্ষেত্রে আমরা setter দ্বারা `name` কে আলাদা করে `_name` প্রপার্টিতে সেট করতে পারি এবং সংক্ষিপ্ত নামের জন্য একটি অ্যালার্ট দেখাতে পারি:
 
 ```js run
 let user = {
@@ -175,19 +175,19 @@ let user = {
 user.name = "Pete";
 alert(user.name); // Pete
 
-user.name = ""; // Name is too short...
+user.name = ""; // সংক্ষিপ্ত নাম...
 ```
 
-So, the name is stored in `_name` property, and the access is done via getter and setter.
+সুতরাং আমাদের মূল নামটি সংরক্ষন হবে `_name` প্রপার্টি এর মধ্যে তবে আমরা `name` কে পড়ব বা অ্যাসাইন করব getter এবং setter এর দ্বারা।
 
-Technically, external code is able to access the name directly by using `user._name`. But there is a widely known convention that properties starting with an underscore `"_"` are internal and should not be touched from outside the object.
+আমরা জানি, যেসব প্রপার্টির নাম আন্ডারস্কোর `"_"` দিয়ে শুরু হয় তারা হল ইন্টারনাল প্রপার্টি এদের বাহির হতে অ্যাক্সেস করা উচিত নই, যদিও টেকনিক্যালি `user._name` এর মান বাহির হতে পাওয়া সম্ভব।
 
 
-## Using for compatibility
+## কোড এর সামঞ্জস্য
 
-One of the great uses of accessors is that they allow to take control over a "regular" data property at any moment by replacing it with a getter and a setter and tweak its behavior.
+অ্যাক্সেসরের অন্যতম দারুন একটি ব্যবহার হল এর মাধ্যমে আমরা আমাদের প্রপার্টি সমূহের ডাটা পরিবর্তন হলেও এর বিহেভিয়ার অপরিবর্তনীয় রাখতে পারি।
 
-Imagine we started implementing user objects using data properties `name` and `age`:
+মনে করুন আমাদের একটি `User` অবজেক্ট আছে যাদের প্রপার্টি হল `name` এবং `age`:
 
 ```js
 function User(name, age) {
@@ -200,7 +200,7 @@ let john = new User("John", 25);
 alert( john.age ); // 25
 ```
 
-...But sooner or later, things may change. Instead of `age` we may decide to store `birthday`, because it's more precise and convenient:
+...তবে পরবর্তীতে আমরা আমাদের কোডকে পরিবর্তন করলাম। `age` এর পরিবর্তে আমরা এখন `birthday` সংরক্ষণ করব, কেননা এটি বেশি সুস্পষ্ট এবং সুবিধাজনক:
 
 ```js
 function User(name, birthday) {
@@ -211,13 +211,13 @@ function User(name, birthday) {
 let john = new User("John", new Date(1992, 6, 1));
 ```
 
-Now what to do with the old code that still uses `age` property?
+এখন আমাদের যেসব কোডে `age` প্রপার্টি ব্যবহার করা হয়েছে তাদের কি হবে?
 
-We can try to find all such places and fix them, but that takes time and can be hard to do if that code is used by many other people. And besides, `age` is a nice thing to have in `user`, right?
+আমরা চাইলে সকল age প্রপার্টিকে খুঁজে পরিবর্তন করতে পারি, তবে যদি আমাদের অনেক পরিবর্তন করা লাগে তাহলে তা হবে কষ্টসাধ্য। এর পাশাপাশি, আমাদের কিছু কিছু জায়গায় `age` দেখানো লাগতে পারে, তাই না?
 
-Let's keep it.
+আমরা চাই যেন এটি সঠিকভাবে কাজ করে।
 
-Adding a getter for `age` solves the problem:
+এজন্য `age` এর জন্য একটি getter ব্যবহারের মাধ্যমে সমস্যাটির সমাধান করতে পারি:
 
 ```js run no-beautify
 function User(name, birthday) {
@@ -225,7 +225,7 @@ function User(name, birthday) {
   this.birthday = birthday;
 
 *!*
-  // age is calculated from the current date and birthday
+  // এখানে আমরা বর্তমান age ক্যাল্কুলেশন করছি
   Object.defineProperty(this, "age", {
     get() {
       let todayYear = new Date().getFullYear();
@@ -237,8 +237,8 @@ function User(name, birthday) {
 
 let john = new User("John", new Date(1992, 6, 1));
 
-alert( john.birthday ); // birthday is available
-alert( john.age );      // ...as well as the age
+alert( john.birthday ); // birthday কে অ্যাক্সেস করতে পারছি
+alert( john.age );      // ..এবং age ও কাজ করছে
 ```
 
-Now the old code works too and we've got a nice additional property.
+এখন আমরা দেখছি আমাদের পুরনো স্ট্রাকচারটাকে কিভাবে নতুন স্ট্রাকচারের সাথে কাজ করাতে পারছি।
