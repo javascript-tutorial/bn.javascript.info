@@ -1,93 +1,93 @@
 
-# Object to primitive conversion
+# অবজেক্ট হতে প্রিমিটিভে রূপান্তর
 
-What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
+দুটি অবজেক্টের মধ্যে যোগ `obj1 + obj2`, বিয়োগ `obj1 - obj2` বা অবজেক্টকে প্রিন্ট করার সময় `alert(obj)` কীভাবে কাজ করে?
 
-In that case, objects are auto-converted to primitives, and then the operation is carried out.
+এইক্ষেত্রে, অবজেক্ট শুরুতে প্রিমিটিভ ভ্যালুতে রূপান্তর হয়, এবং তারপর এদের মধ্যের অপারেশন গুলো সংগঠিত হয়।
 
-In the chapter <info:type-conversions> we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to fill it.
+এই অধ্যায়ে <info:type-conversions> আমরা স্ট্রিং, বুলিয়ান এবং সাংখ্যিক পদ্ধতির রূপান্তরের নিয়ম দেখেছি। তবে অবজেক্ট নিয়ে আলোচনা করা হয়নি। ইতোমধ্যে যেহেতু আমরা সিম্বল এবং মেথড সম্পর্কে পড়েছি সুতরাং আমরা অবজেক্ট রূপান্তর নিয়ে জানতে পারব।
 
-1. All objects are `true` in a boolean context. There are only numeric and string conversions.
-2. The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter <info:date>) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
-3. As for the string conversion -- it usually happens when we output an object like `alert(obj)` and in similar contexts.
+1. বুলিয়ানের জন্য সকল অবজেক্ট `true` রিটার্ন করবে। এক্ষেত্রে শুধুমাত্র সাংখ্যিক এবং স্ট্রিং রূপান্তর আছে।
+2. সাংখ্যিক রূপান্তর ঘটবে যখন দুটি অবজেক্টের মধ্যে বিয়োগ অপারেশন বা অন্যান্য গাণিতিক অপারেশন চালানো হয়। যেমন দুটি `Date` (এইখানে <info:date> আলোচনা করা হয়েছে) অবজেক্টের পার্থক্য নির্ণয়ে এবং এর ফলে দুটি তারিখ অবেজেক্টের `date1 - date2` পার্থক্য জানা যাবে।
+3. সাধারণত স্ট্রিংয়ের রূপান্তর ঘটে যখন আমরা কোন অবজেক্টের মান দেখাতে চাই যেমন `alert(obj)` অথবা এই ধরণের অন্যান্য অপারেশনের জন্য।
 
 ## ToPrimitive
 
-We can fine-tune string and numeric conversion, using special object methods.
+আমরা স্ট্রিং এবং সাংখ্যিক রূপান্তরকে বিশেষ অবজেক্ট মেথডের সাহায্যে নিয়ন্ত্রন করতে পারি।
 
-There are three variants of type conversion, so-called "hints", described in the [specification](https://tc39.github.io/ecma262/#sec-toprimitive):
+৩ ধরণের টাইপ কাস্টিং আছে, এদের বলা হয় "hints", এখানে বিস্তারিত আলোচনা করা হয়েছে [specification](https://tc39.github.io/ecma262/#sec-toprimitive):
 
 `"string"`
-: For an object-to-string conversion, when we're doing an operation on an object that expects a string, like `alert`:
+: অবজেক্ট হতে স্ট্রিংয়ে রূপান্তরের জন্য, যখন আমরা এমন কোন অপারেশন এক্সিকিউট করি যেটি মান হিসেবে স্ট্রিং আশা করে, যেমন `alert` বা অবজেক্টের প্রপার্টির নাম:
 
     ```js
-    // output
+    // আউটপুট
     alert(obj);
 
-    // using object as a property key
+    // প্রপার্টি  হিসেবে স্ট্রিং নিতে পারে
     anotherObj[obj] = 123;
     ```
 
 `"number"`
-: For an object-to-number conversion, like when we're doing maths:
+: অবজেক্ট হতে সাংখ্যিক রূপান্তর, যেমন বিভিন্ন গাণিতিক অপারেশনের জন্য:
 
     ```js
-    // explicit conversion
+    // সরাসরি রূপান্তর
     let num = Number(obj);
 
-    // maths (except binary plus)
-    let n = +obj; // unary plus
+    // গাণিতিক অপারেশন(বাইনারি যোগ ব্যাতিত অর্থাৎ obj1 + obj2 কাজ করবে না)
+    let n = +obj; // ইউনারি যোগ
     let delta = date1 - date2;
 
-    // less/greater comparison
+    // বড়/ছোট যাচাই
     let greater = user1 > user2;
     ```
 
 `"default"`
-: Occurs in rare cases when the operator is "not sure" what type to expect.
+: যখন অপারেশনটি কী ধরনের মান আশা করে এ ব্যাপারে নিশ্চিত নই।
 
-    For instance, binary plus `+` can work both with strings (concatenates them) and numbers (adds them), so both strings and numbers would do. So if a binary plus gets an object as an argument, it uses the `"default"` hint to convert it.
+    যেমন স্ট্রিং কনক্যাটেনেশন বা যোগফল উভয়ের জন্য বাইনারি যোগ `+` অপারেশন ব্যবহার করা হয়, সুতরাং এটি স্ট্রিং বা নাম্বার যেকোনটার জন্য কাজ করে। সুতরাং যখন বাইনারি যোগ একটি অবজেক্টকে আর্গুমেন্ট হিসেবে নেয়, এটি `"default"` হিন্ট হিসেবে কনভার্ট হয়।
 
-    Also, if an object is compared using `==` with a string, number or a symbol, it's also unclear which conversion should be done, so the `"default"` hint is used.
+    এছাড়াও যখন আমরা সমান যাচাইয়ের জন্য `==` ব্যবহার করি এটি সংখ্যা বা নাম্বার উভয় টাইপের জন্য কাজ করে, এক্ষেত্রেও এটি "default"` হিন্ট ব্যবহার করে।
 
     ```js
-    // binary plus uses the "default" hint
+    // বাইনারি যোগের জন্য ব্যবহার হয় "default" হিন্ট
     let total = obj1 + obj2;
 
-    // obj == number uses the "default" hint
+    // obj == number এক্ষেত্রেও ব্যবহার হয় "default" হিন্ট
     if (user == 1) { ... };
     ```
 
-    The greater and less comparison operators, such as `<` `>`, can work with both strings and numbers too. Still, they use the `"number"` hint, not `"default"`. That's for historical reasons.
+    কম্পারিশন অপারেটর যেমন `<` `>`, এটিও নাম্বার এবং স্ট্রিংয়ের জন্য কাজ করে। তবে এটি `"default"` এর বদলে `"number"` হিন্ট ব্যবহার করে। ঐতিহাসিক কারণে এমন হয়।
 
-    In practice though, we don't need to remember these peculiar details, because all built-in objects except for one case (`Date` object, we'll learn it later) implement `"default"` conversion the same way as `"number"`. And we can do the same.
+    তবে প্রাত্যহিক কাজে, আমাদের এই সূক্ষ্ণ ব্যাপারগুলো এত বিশদ মনে রাখার কোন দরকার নেই, কেননা সকল বিল্ট-ইন অবজেক্টে (শুধুমাত্র `Date` অবজেক্ট ব্যাতীত) `"default"` আর `"number"` কে একই ধরা হয়েছে। এবং আমরাও আমাদের অবজেক্টে এভাবে করতে পারি।
 
-```smart header="No `\"boolean\"` hint"
-Please note -- there are only three hints. It's that simple.
+```smart header="কোন `\"boolean\"` হিন্ট নেই"
+দয়া করে মনে রাখুন, শুধুমাত্র উপরে উল্লেখিত তিনটি হিন্ট আছে।
 
-There is no "boolean" hint (all objects are `true` in boolean context) or anything else. And if we treat `"default"` and `"number"` the same, like most built-ins do, then there are only two conversions.
+কোন ধরণের "boolean" বা অন্য কোন ধরণের হিন্ট নেই, (বুলিয়ানের জন্য যেকোন অবজেক্টের জন্য `true` রিটার্ন করবে। এবং যদি আমরা `"default"` এবং `"number"` কে একটি হিন্ট ধরে নেই, তাহলে বলতে পারি শুধুমাত্র দুই ধরণের কনভার্শন আছে।
 ```
 
-**To do the conversion, JavaScript tries to find and call three object methods:**
+**এই কনভার্শনের জন্য জাভাস্ক্রিপ্ট ইঞ্জিন অবজেক্টের তিনটি মেথড কল করার চেষ্টা করে:**
 
-1. Call `obj[Symbol.toPrimitive](hint)` - the method with the symbolic key `Symbol.toPrimitive` (system symbol), if such method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. প্রথমে কল করবে `obj[Symbol.toPrimitive](hint)` - যদি মেথডটি অবজেক্টে প্রপার্টি হিসেবে থাকে তাহলে এটি কল হবে এটি একটি সিম্বল কী(key) `Symbol.toPrimitive` (system symbol)।
+2. অন্যথায় যদি হিন্ট `"string"` হয়
+    - তাহলে `obj.toString()` কে কল করবে না হয় `obj.valueOf()`।
+3. অন্যথায় যদি হিন্ট `"number"` বা `"default"` হয়
+    - তাহলে প্রথমে `obj.valueOf()` কে কল করবে না হয় `obj.toString()`।
 
 ## Symbol.toPrimitive
 
-Let's start from the first method. There's a built-in symbol named `Symbol.toPrimitive` that should be used to name the conversion method, like this:
+চলুন প্রথম মেথডটি সম্পর্কে জানি। একটি বিল্ট-ইন সিম্বল আছে `Symbol.toPrimitive` যেটি টাইপ কনভার্শনের জন্য ব্যবহার করা হয়, এভাবে:
 
 ```js
 obj[Symbol.toPrimitive] = function(hint) {
-  // must return a primitive value
-  // hint = one of "string", "number", "default"
+  // অবশ্যই রিটার্ন ভ্যালু প্রিমিটিভ হতে হবে
+  // hint হতে পারে "string", "number" বা "default"
 };
 ```
 
-For instance, here `user` object implements it:
+এখানে আমরা `user` অবজেক্ট এর জন্য এটি ইমপ্লিমেন্ট করছি:
 
 ```js run
 let user = {
@@ -100,32 +100,31 @@ let user = {
   }
 };
 
-// conversions demo:
 alert(user); // hint: string -> {name: "John"}
 alert(+user); // hint: number -> 1000
 alert(user + 500); // hint: default -> 1500
 ```
 
-As we can see from the code, `user` becomes a self-descriptive string or a money amount depending on the conversion. The single method `user[Symbol.toPrimitive]` handles all conversion cases.
+উপরের কোডে আমরা দেখেছি `user` এটি অটোমেটিক স্ট্রিং কনভার্শনে নাম বা গাণিতিক অপারেশনের জন্য টাকার পরিমান রিটার্ন করে। তিন ধরণের হিন্টকে একটিমাত্র `user[Symbol.toPrimitive]` মেথড দ্বারা নিয়ন্ত্রন করা হচ্ছে।
 
 
 ## toString/valueOf
 
-Methods `toString` and `valueOf` come from ancient times. They are not symbols (symbols did not exist that long ago), but rather "regular" string-named methods. They provide an alternative "old-style" way to implement the conversion.
+পুরনো জাভাস্ক্রিপ্টে`toString` এবং `valueOf` নামের দুটি মেথড ছিল। `Symbol` মডার্ন জাভাস্ক্রিপ্টের একটি প্রিমিটিভ টাইপ। সুতরাং আমরা চাইলে es5 স্টাইলেও এটি ইমপ্লিমেন্ট করতে পারি।
 
-If there's no `Symbol.toPrimitive` then JavaScript tries to find them and try in the order:
+যদি `Symbol.toPrimitive` ইমপ্লিমেন্ট করা না থাকে তখন ইঞ্জিন নিচের মেথডগুলো খুঁজ করে:
 
-- `toString -> valueOf` for "string" hint.
-- `valueOf -> toString` otherwise.
+- `toString -> valueOf` "string" কনভার্শনের জন্য।
+- অন্যথায় `valueOf -> toString`।
 
-These methods must return a primitive value. If `toString` or `valueOf` returns an object, then it's ignored (same as if there were no method).
+মেথডগুলো একটি প্রিমিটিভ ভ্যালু রিটার্ন করে। যদি `toString` বা `valueOf` কোন অবজেক্ট রিটার্ন করে, তাহলে এটি উপেক্ষা করে (অনেকটা কোন কনভার্শন মেথড না থাকার মত)।
 
-By default, a plain object has following `toString` and `valueOf` methods:
+ডিফল্টভাবে, একটি অবজেক্ট এভাবে কাজ করে প্রথমে `toString` মেথডকে কল করবে তারপর `valueOf` মেথড:
 
-- The `toString` method returns a string `"[object Object]"`.
-- The `valueOf` method returns the object itself.
+- `toString` মেথড একটি স্ট্রিং রিটার্ন করে `"[object Object]"`।
+- আর `valueOf` মেথড অবজেক্টটিকে রিটার্ন করে।
 
-Here's the demo:
+এখানে দেখুন:
 
 ```js run
 let user = {name: "John"};
@@ -134,13 +133,13 @@ alert(user); // [object Object]
 alert(user.valueOf() === user); // true
 ```
 
-So if we try to use an object as a string, like in an `alert` or so, then by default we see `[object Object]`.
+যখন আমরা কোন একটি অবজেক্টকে `alert` এর মাধ্যমে দেখাতে চাই, ডিফল্টভাবে এটি দেখাই `[object Object]`।
 
-And the default `valueOf` is mentioned here only for the sake of completeness, to avoid any confusion. As you can see, it returns the object itself, and so is ignored. Don't ask me why, that's for historical reasons. So we can assume it doesn't exist.
+এবং `valueOf` কে দেখানো হয়েছে এটি কি রিটার্ন করছে দেখানোর জন্য। আমরা দেখছি এটি অবজেক্টটিকে রিটার্ন করে।
 
-Let's implement these methods.
+এবার চলুন মেথডসমূহকে ইমপ্লিমেন্ট করি।
 
-For instance, here `user` does the same as above using a combination of `toString` and `valueOf` instead of `Symbol.toPrimitive`:
+যেমন, এখানে `user` এর জন্য `Symbol.toPrimitive` এর পরিবর্তে `toString` এবং `valueOf` ইমপ্লিমেন্ট করছি:
 
 ```js run
 let user = {
@@ -164,9 +163,9 @@ alert(+user); // valueOf -> 1000
 alert(user + 500); // valueOf -> 1500
 ```
 
-As we can see, the behavior is the same as the previous example with `Symbol.toPrimitive`.
+এখানে আমরা দেখতে পাচ্ছি এরা `Symbol.toPrimitive` এর মতই কাজ করছে।
 
-Often we want a single "catch-all" place to handle all primitive conversions. In this case, we can implement `toString` only, like this:
+অনেক সময় সব ধরণের কনভার্শনের জন্য আমরা শুধুমাত্র একটি মান পেতে চাই। এক্ষেত্রে আমরা `toString` ব্যবহার করতে পারি, এভাবে:
 
 ```js run
 let user = {
@@ -181,47 +180,47 @@ alert(user); // toString -> John
 alert(user + 500); // toString -> John500
 ```
 
-In the absence of `Symbol.toPrimitive` and `valueOf`, `toString` will handle all primitive conversions.
+অর্থাৎ `Symbol.toPrimitive` না থাকলে এটি প্রিমিটিভ কনভার্শনের জন্য `valueOf`, `toString`  কে কল করে।
 
 ## Return types
 
-The important thing to know about all primitive-conversion methods is that they do not necessarily return the "hinted" primitive.
+সকল ধরণের প্রিমিটিভ কনভার্শনের জন্য একটি গুরুত্বপূর্ন ব্যাপার জেনে রাখা উচিত এটি হিন্ট অনুযায়ী মান রিটার্ন করবে এমন নিশ্চয়তা নেই।
 
-There is no control whether `toString` returns exactly a string, or whether `Symbol.toPrimitive` method returns a number for a hint `"number"`.
+যেমন `toString` এর জন্য স্ট্রিং রিটার্ন অথবা `Symbol.toPrimitive` মেথডটি সাংখ্যিক হিন্টের জন্য `"number"` রিটার্ন করবে এমন নই।
 
-The only mandatory thing: these methods must return a primitive, not an object.
+শুধুমাত্র একটি বিষয় আবশ্যক: এই মেথডসমূহ অবশ্যই একটি প্রিমিটিভ মান রিটার্ন করবে, কোন অবজেক্ট না।
 
-```smart header="Historical notes"
-For historical reasons, if `toString` or `valueOf` returns an object, there's no error, but such value is ignored (like if the method didn't exist). That's because in ancient times there was no good "error" concept in JavaScript.
+```smart header="ঐতিহাসিক নোট"
+পুরনো জাভাস্ক্রিপ্ট এ `toString` বা `valueOf` অবজেক্ট রিটার্ন করতে পারত, এজন্য কোন এরর দেখাত না। এর মানটি উপেক্ষা করত। কেননা আগে জাভাস্ক্রিপ্টের "error" হ্যান্ডেলিং তেমন স্মার্ট ছিল না।
 
-In contrast, `Symbol.toPrimitive` *must* return a primitive, otherwise there will be an error.
+বিপরীতে, `Symbol.toPrimitive` এ *অবশ্যই* একটি প্রিমিটিভ ভ্যালু রিটার্ন করতে হবে, অন্যথায় এরর দেখাবে।
 ```
 
-## Further conversions
+## আরো কনভার্শন
 
-As we know already, many operators and functions perform type conversions, e.g. multiplication `*` converts operands to numbers.
+ইতোমধ্যে আমরা জেনেছি, অনেক অপারেটর এবং ফাংশন এর জন্য টাইপ কনভার্শন কাজ করে, যেমন গুনফল `*` বের করতে টাইপ কনভার্শন হয়।
 
-If we pass an object as an argument, then there are two stages:
-1. The object is converted to a primitive (using the rules described above).
-2. If the resulting primitive isn't of the right type, it's converted.
+যদি আমরা কোন অবজেক্টকে আর্গুমেন্ট হিসেবে পাঠায়, তাহলে এটি দুটি ধাপ মেনে চলে:
+1. উপরে বর্ণিত নিয়ম অনুযায়ী এটি প্রিমিটিভে রূপান্তর হবে।
+2. যদি প্রিমিটিভের টাইপ সঠিক না হয় তাহলে এটি সঠিক টাইপে কনভার্ট হবে।
 
-For instance:
+যেমন:
 
 ```js run
 let obj = {
-  // toString handles all conversions in the absence of other methods
+  // সকল ধরণের কনভার্শনের জন্য এটি কল হবে
   toString() {
     return "2";
   }
 };
 
-alert(obj * 2); // 4, object converted to primitive "2", then multiplication made it a number
+alert(obj * 2); // 4, প্রথমে এটি স্ট্রিংয়ে রূপান্তর হবে "2", তারপর নাম্বারে পরিবর্তন হয়ে গুনের কাজ করবে
 ```
 
-1. The multiplication `obj * 2` first converts the object to primitive (that's a string `"2"`).
-2. Then `"2" * 2` becomes `2 * 2` (the string is converted to number).
+1. প্রথম এটি প্রিমিটিভে রূপান্তর হবে `obj * 2` (যেটি একটি স্ট্রিং `"2"`)।
+2. তারপর `"2" * 2` হবে `2 * 2` (স্ট্রিংটি নাম্বারে কনভার্ট হবে)।
 
-Binary plus will concatenate strings in the same situation, as it gladly accepts a string:
+বাইনারি যোগের জন্য স্ট্রিং কনক্যাট হবে, যেহেতু এটি স্ট্রিং গ্রহণ করে:
 
 ```js run
 let obj = {
@@ -230,26 +229,26 @@ let obj = {
   }
 };
 
-alert(obj + 2); // 22 ("2" + 2), conversion to primitive returned a string => concatenation
+alert(obj + 2); // 22 ("2" + 2), স্ট্রিং প্রিমিটিভে রূপান্তর হয়ে কনক্যাট হবে
 ```
 
-## Summary
+## সারাংশ
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+অনেক বিল্ট-ইন ফাংশনের জন্য অবজেক্ট থেকে প্রিমিটিভ স্বয়ংক্রিয়ভাবে কল হয় এবং এরা ভ্যালু হিসেবে একটি প্রিমিটিভ আশা করে।
 
-There are 3 types (hints) of it:
-- `"string"` (for `alert` and other operations that need a string)
-- `"number"` (for maths)
-- `"default"` (few operators)
+৩ ধরণের টাইপ(এদের হিন্ট বলা হয়) আছে:
+- `"string"` (`alert` এবং অন্যান্য কিছু অপারেশনের জন্য স্ট্রিং প্রয়োজন হয় যেমন অবজেক্টে প্রপার্টি সেট করতে)
+- `"number"` (গাণিতিক কাজে)
+- `"default"` (কিছু অনিশ্চিত অপারেশন আছে যেমন বাইনারি যোগ কনক্যাট এবং যোগের জন্য ব্যবহার হয়)
 
-The specification describes explicitly which operator uses which hint. There are very few operators that "don't know what to expect" and use the `"default"` hint. Usually for built-in objects `"default"` hint is handled the same way as `"number"`, so in practice the last two are often merged together.
+বেশিরভাগ অপারেশন কী টাইপের অপারেটর প্রয়োজন তা সুনির্দিষ্টভাবে উল্লেখ আছে। তবে কিছু অপারেশন আছে যারা অপারেটর এর ব্যাপারে অনিশ্চিত এক্ষেত্রে `"default"` হিন্ট ব্যবহার হয়। সাধারণত বেশিরভাগ বিল্ট-ইন অবজেক্ট `"default"` এর জন্য `"number"` হিন্ট ব্যবহার করে, সুতরাং আমরাও এই দুটি টাইপকে একত্রে করে নিতে পারি।
 
-The conversion algorithm is:
+কনভার্শন অ্যালগরিদম:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. প্রথমে `obj[Symbol.toPrimitive](hint)` কে কল করবে, যদি এটি থাকে।
+2. অন্যথায় যদি হিন্ট `"string"` হয়
+    - তাহলে `obj.toString()` কে কল করবে না হয় `obj.valueOf()`।
+3. অন্যথায় যদি হিন্ট `"number"` বা `"default"` হয়
+    - তাহলে প্রথমে `obj.valueOf()` কে কল করবে না হয় `obj.toString()`।
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.  
+তবে, প্রায়সময় সকল ধরণের হিন্টের জন্য `obj.toString()` কে ব্যবহার করতে পারি, কেননা এটি অবজেক্টের পঠনযোগ্য একটি মান প্রধানে সক্ষম, যার ফলে সহজে ডিবাগ বা লগ করা যায়।
