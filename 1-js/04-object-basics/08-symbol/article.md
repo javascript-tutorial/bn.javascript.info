@@ -1,31 +1,31 @@
 
-# Symbol type
+# সিম্বল টাইপ
 
-By specification, object property keys may be either of string type, or of symbol type. Not numbers, not booleans, only strings or symbols, these two types.
+অবজেক্টের স্পেসিফিকেশন অনুযায়ী আমরা জেনেছি প্রপার্টি কি(key) হতে পারে স্ট্রিং অথবা সিম্বল টাইপ। নাম্বার, বুলিয়ান বা অন্য কোন ধরণের প্রিমিটিভ টাইপ কি(key) হিসেবে রাখা যায় না, শুধুমাত্র স্ট্রিং অথবা সিম্বল এই দুটি টাইপ অ্যাক্সেপ্টবেল।
 
-Till now we've been using only strings. Now let's see the benefits that symbols can give us.
+পূর্বের অনুচ্ছেদগুলোতে আমরা প্রপার্টি হিসেবে শুধুমাত্র স্ট্রিং ব্যবহার করেছি, এই অনুচ্ছেদে আমরা সিম্বল টাইপ কিভাবে ব্যবহার করা যায় এবং এর ব্যবহারের সুবিধা কি তা নিয়ে আলোচনা করব।
 
-## Symbols
+## সিম্বল
 
-A "symbol" represents a unique identifier.
+"সিম্বল (symbol)" একটি ইউনিক আইডেন্টিটির নিশ্চয়তা প্রদান করে।
 
-A value of this type can be created using `Symbol()`:
+এই ধরণের টাইপ তৈরি করতে আমরা ব্যবহার করি `Symbol()`:
 
 ```js
-// id is a new symbol
+// এখানে id হল একটি symbol
 let id = Symbol();
 ```
 
-Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+তৈরির সময়, আমরা সিম্বলের একটি নাম প্রদান করি, যা ডিবাগিংয়ের জন্য সুবিধাজনক:
 
 ```js
-// id is a symbol with the description "id"
+// এখানে id হল একটি Symbol যার নাম হল "id"
 let id = Symbol("id");
 ```
 
-Symbols are guaranteed to be unique. Even if we create many symbols with the same description, they are different values. The description is just a label that doesn't affect anything.
+Symbol আমাদের নিশ্চয়তা প্রদান করে এর মান হবে ইউনিক। যদি আমরা একই নাম দ্বারা একাধিক সিম্বল তৈরি করি, তাদের প্রত্যেকের মান হবে আলাদা। সিম্বলের প্রদানকৃত নামটি শুধুমাত্র একটি লেভেল।
 
-For instance, here are two symbols with the same description -- they are not equal:
+যেমন, এখানে আমরা এখানে একই নামের দুটি সিম্বল তৈরি করেছি -- কন্ডিশনালি এদের মান সমান হবে না:
 
 ```js run
 let id1 = Symbol("id");
@@ -36,12 +36,12 @@ alert(id1 == id2); // false
 */!*
 ```
 
-If you are familiar with Ruby or another language that also has some sort of "symbols" -- please don't be misguided. JavaScript symbols are different.
+রুবি বা অন্য যেকোন ল্যাংগুয়েজের "symbols" এর সাথে এটিকে গুলিয়ে ফেলবেন না। জাভাস্ক্রিপ্টের সিম্বল আলাদা।
 
-````warn header="Symbols don't auto-convert to a string"
-Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+````warn header="Symbols স্বয়ংক্রিয়ভাবে স্ট্রিং এ কনভার্ট হয়না"
+জাভস্ক্রিপ্টের বেশিরভাগ মান স্ট্রিংয়ে টাইপ কাস্টিং হতে পারে। যেমন `alert` প্রায় সবধরণের মানকে স্ট্রিংয়ে রূপান্তর করতে পারে। তবে সিম্বল অটো কনভার্ট হতে পারে না।
 
-For instance, this `alert` will show an error:
+যেমন, নিচের কোডটিতে `alert` এর জন্য এরর দেখাবে:
 
 ```js run
 let id = Symbol("id");
@@ -50,17 +50,17 @@ alert(id); // TypeError: Cannot convert a Symbol value to a string
 */!*
 ```
 
-That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
+এটি একটি ল্যাংগুয়েজ ডিজাইন, কেননা স্ট্রিং এবং সিম্বল মৌলিকভাবে আলাদা যার জন্য এদের নিজেদের মধ্যে পরিবর্তন গ্রহণযোগ্য নয়।
 
-If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+যদি আমরা কোন একটি সিম্বল দেখাতে চাই, তাহলে `.toString()` মেথডের মাধ্যমে দেখাতে পারি, এভাবে:
 ```js run
 let id = Symbol("id");
 *!*
-alert(id.toString()); // Symbol(id), now it works
+alert(id.toString()); // Symbol(id), এখন এটি কাজ করবে
 */!*
 ```
 
-Or get `symbol.description` property to show the description only:
+অথবা নাম জানতে `symbol.description`:
 ```js run
 let id = Symbol("id");
 *!*
@@ -70,33 +70,33 @@ alert(id.description); // id
 
 ````
 
-## "Hidden" properties
+## "হিডেন" প্রপার্টি
 
-Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
+সিম্বল অবজেক্টের মধ্যে একটি "hidden" প্রপার্টি রাখার সুবিধা প্রদান করে, যাতে অনিচ্ছাকৃত কোন প্রপার্টি অ্যাক্সেস বা ওভাররাইট করা না যায়।
 
-For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
+যেমন, মনে করুন আমরা একটি প্যাকেজ ডেভলাপ করতেছি এবং আমরা আর্গুমেন্ট হিসেবে একটি অবজেক্ট নিয়ে তার মধ্যে আমাদের লজিকগুলো ইমপ্লিমেন্ট করি, যেমন একটি `user` অবজেক্ট আছে, এখন এটি আমরা আমাদের প্যাকেজে আর্গুমেন্ট হিসেবে। এখন আমরা আমাদের সুবিধার জন্য এর একটি আইডেন্টিফায়ার সেট করতে চাই।
 
-Let's use a symbol key for it:
+চলুন এর জন্য একটি সিম্বল প্রপার্টি ব্যবহার করি:
 
 ```js run
-let user = { // belongs to another code
+let user = { // মূল অবজেক্ট এর কোড
   name: "John"
 };
 
-let id = Symbol("id");
+let id = Symbol("id"); // আমাদের প্যাকেজের কোড
 
 user[id] = 1;
 
-alert( user[id] ); // we can access the data using the symbol as the key
+alert( user[id] ); // এখন আমরা এর ডাটাকে সিম্বল কী(Key) দ্বারা অ্যাক্সেস করতে পারব
 ```
 
-What's the benefit of using `Symbol("id")` over a string `"id"`?
+এটিতো আমরা চাইলে স্ট্রিং প্রপার্টি `"id"` দ্বারাও করতে পারতাম তার পরিবর্তে `Symbol("id")` ব্যবহার সুবিধাজনক কেন?
 
-As `user` objects belongs to another code, and that code also works with them, we shouldn't just add any fields to it. That's unsafe. But a symbol cannot be accessed accidentally, the third-party code probably won't even see it, so it's probably all right to do.
+যেহেতু `user` অবজেক্টটি অন্য আরেকটি স্ক্রিপ্ট হতে এসেছে এবং ঐ কোডটিও যেহেতু `user` অবজেক্ট নিয়ে কাজ করে, আমরা চাইনা এর মধ্যে আমাদের আইডেন্টিফিকেশনের জন্য ব্যবহার করা প্রপার্টিটি অন্য স্ক্রিপ্টে অ্যাক্সেসবল হোক। এবং নিরাপত্তার খাতিরে এটি ভিন্ন স্ক্রিপ্টের জন্য অ্যাক্সেসবল হওয়াও উচিত নয়, সিম্বল ব্যবহার করায় আমরা এই ব্যাপারে নিশ্চিত থাকতে পারি সিম্বল ডাটাসমূহ এক স্ক্রিপ্টের সাথে অন্য স্ক্রিপ্টের মধ্যে আদান প্রদান হবে না।
 
-Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
+এছাড়াও, মনে করুন মূল স্ক্রিপ্টে আইডেন্টিফিকেশনের জন্য `user` অবজেক্টে একই নামের একটি আইডেন্টিটি সেট করে। এক্ষেত্রে আমরা নিশ্চিন্ত থাকতে পারি দুটি সিম্বলের নাম একই হওয়ার পরও স্ক্রিপ্টদুটির মধ্যে ডাটা লিক বা ওভাররাইড হবে না।
 
-Then that script can create its own `Symbol("id")`, like this:
+এক্ষেত্রে মূল স্ক্রিপ্ট তার নিজস্ব আইডেন্টিটিরে জন্য সিম্বল তৈরি করতে পারে এভাবে, `Symbol("id")`:
 
 ```js
 // ...
@@ -105,28 +105,28 @@ let id = Symbol("id");
 user[id] = "Their id value";
 ```
 
-There will be no conflict between our and their identifiers, because symbols are always different, even if they have the same name.
+এক্ষেত্রে দুটি স্ক্রিপ্টের মধ্যে কোন কনফ্লিক্ট হবে না, কেননা সিম্বলের নাম এক হলেও সিম্বলসমূহ হবে ইউনিক,
 
-...But if we used a string `"id"` instead of a symbol for the same purpose, then there *would* be a conflict:
+...যদি তার পরিবর্তে আমরা প্রপার্টি হিসেবে স্ট্রিং`"id"` ব্যবহার করি, তাহলে উভয়ের মাঝে কনফ্লিক্ট হবে:
 
 ```js run
 let user = { name: "John" };
 
-// Our script uses "id" property
+// আমাদের user এর "id" প্রপার্টি
 user.id = "Our id value";
 
-// ...Another script also wants "id" for its purposes...
+// ...অন্য আরেকটি স্ক্রিপ্টও কোন কারণে "id" প্রপার্টি ব্যবহার করছে
 
 user.id = "Their id value"
-// Boom! overwritten by another script!
+// ওহহহ! আরেকটি স্ক্রিপ্ট দ্বারা ওভাররাইড হয়ে গেল :(
 ```
 
-### Symbols in an object literal
+### অবজেক্ট লিটারেল এ `{...}` সিম্বল প্রপার্টি
 
 
-If we want to use a symbol in an object literal `{...}`, we need square brackets around it.
+যদি আমরা অবজেক্ট লিটারেলে `{...}` সিম্বল প্রপার্টি ব্যবহার করতে চাই, এর জন্য আমরা এটি তৃতীয় বন্ধনীর মধ্যে লিখতে হবে।
 
-Like this:
+যেমন:
 
 ```js
 let id = Symbol("id");
@@ -138,13 +138,13 @@ let user = {
 */!*
 };
 ```
-That's because we need the value from the variable `id` as the key, not the string "id".
+কেননা এটি দ্বারা আমরা নিশ্চিত করতে পারি, এখানের `id` হল একটি সিম্বল টাইপের ভ্যারিয়েবল, প্রপার্টির নাম স্ট্রিং "id"  না।
 
-### Symbols are skipped by for..in
+### for..in লুপের মধ্যে সিম্বল প্রপার্টি অ্যাক্সেসিবল না
 
-Symbolic properties do not participate in `for..in` loop.
+সিম্বল প্রপার্টি সমূহ `for..in` লুপের মধ্যে অ্যাক্সেসিবল না।
 
-For instance:
+যেমন:
 
 ```js run
 let id = Symbol("id");
@@ -155,16 +155,16 @@ let user = {
 };
 
 *!*
-for (let key in user) alert(key); // name, age (no symbols)
+for (let key in user) alert(key); // name, age (সিম্বল প্রপার্টি দেখাবে না)
 */!*
 
-// the direct access by the symbol works
+// তবে সরাসরি এটি অ্যাক্সেসবল
 alert( "Direct: " + user[id] );
 ```
 
-`Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+`Object.keys(user)` এর জন্যও সিম্বল প্রপার্টি অ্যাক্সেসিবল না। কেননা এটি "হাইড সিম্বল প্রপার্টির" নিয়ম মেনে চলে। অন্যথায় অন্য আরেকটি স্ক্রিপ্ট হতে আমাদের অবজেক্টের মধ্যে লুপ চালিয়ে আমরা সিম্বল প্রপার্টির মান জেনে যেতে পারি, যা উচিত নয়।
 
-In contrast, [Object.assign](mdn:js/Object/assign) copies both string and symbol properties:
+তবে, [Object.assign](mdn:js/Object/assign) এর ক্ষেত্রে উভয় টাইপের প্রপার্টি কপি হয়, যেমন:
 
 ```js run
 let id = Symbol("id");
@@ -177,60 +177,60 @@ let clone = Object.assign({}, user);
 alert( clone[id] ); // 123
 ```
 
-There's no paradox here. That's by design. The idea is that when we clone an object or merge objects, we usually want *all* properties to be copied (including symbols like `id`).
+তবে এ নিয়ে চিন্তিত হওয়া উচিত নই। কেননা এদের এমনভাবে ডিজাইন করা হয়েছে যেন আমরা কোন অবজেক্টকে ক্লোন বা মার্জ করতে পারি। সাধারণত এজন্য আমরা চাই সকল ধরণের প্রপার্টি(সিম্বল সহ) কপি হোক।
 
-## Global symbols
+## গ্লোবাল সিম্বল
 
-As we've seen, usually all symbols are different, even if they have the same name. But sometimes we want same-named symbols to be same entities. For instance, different parts of our application want to access symbol `"id"` meaning exactly the same property.
+ইতোমধ্যে আমরা জেনেছি নাম একই হওয়া সত্বেও সিম্বল সমূহ প্রত্যেকেই আলাদা। কিন্তু অনেক সময় আমরা একই নামের জন্য একাধিক সিম্বল ব্যবহার করতে চাই। যেমন আমরা অ্যাপ্লিকেশনের আলাদা আলাদা অংশের `"id"` নামের প্রপার্টিকে অ্যাক্সেস করতে চাই।
 
-To achieve that, there exists a *global symbol registry*. We can create symbols in it and access them later, and it guarantees that repeated accesses by the same name return exactly the same symbol.
+এজন্য একটি পদ্ধতি আছে *global symbol registry*। যার মাধ্যমে আমরা সিম্বল তৈরি করতে পারি, এবং পরবর্তীতে একে অ্যাক্সেস করতে পারি যা আমাদের নিশ্চয়তা প্রদান করে একই নামের আরেকটি সিম্বল ডিক্লেয়ার হলেও এটি প্রথম সিম্বলটিকে রিটার্ন করে।
 
-In order to read (create if absent) a symbol from the registry, use `Symbol.for(key)`.
+global symbol registry হতে সিম্বলের মান পড়তে ব্যবহার হয় `Symbol.for(key)`।
 
-That call checks the global registry, and if there's a symbol described as `key`, then returns it, otherwise creates a new symbol `Symbol(key)` and stores it in the registry by the given `key`.
+অর্থাৎ এটি প্রথমে গ্লোবাল রেজিস্ট্রিতে চেক করবে ঐ `key`(নামের) কোন সিম্বল ডিক্লেয়ার করা হয়েছে কিনা যদি ডিক্লেয়ার হয় তাহলে ঐ সিম্বলকে রিটার্ন করবে অন্যথায় ঐ `key` নামের একটি সিম্বল তৈরি করে তা রেজিস্ট্রিতে সংরক্ষন করবে।
 
-For instance:
+যেমন:
 
 ```js run
-// read from the global registry
-let id = Symbol.for("id"); // if the symbol did not exist, it is created
+// গ্লোবাল রেজিস্ট্রিতে আছে কিনা যাচাই করবে
+let id = Symbol.for("id"); // যেহেতু এই নামের সিম্বল নাই তাই নতুন সিম্বল তৈরি হবে এবং রেজিস্ট্রিতে সংরক্ষন করবে
 
-// read it again (maybe from another part of the code)
+// গ্লোবাল রেজিস্ট্রিতে আছে কিনা যাচাই করবে (এটি হতে পারে অন্য কোন স্ক্রিপ্টের কোড)
 let idAgain = Symbol.for("id");
 
-// the same symbol
+// দুইটি সিম্বল একই
 alert( id === idAgain ); // true
 ```
 
-Symbols inside the registry are called *global symbols*. If we want an application-wide symbol, accessible everywhere in the code -- that's what they are for.
+যেসব সিম্বল গ্লোবাল রেজিস্ট্রিতে স্টোর হবে তাদের বলা হয় *global symbols*। যদি আমরা কোন সিম্বলকে সকল স্ক্রিপ্টের জন্য অ্যাক্সেস দিতে চাই তাহলে *global symbols* ব্যবহার করব।
 
-```smart header="That sounds like Ruby"
-In some programming languages, like Ruby, there's a single symbol per name.
+```smart header="শুনতে কী Ruby এর মত মনে হচ্ছে?"
+কিছু প্রোগ্রামিং ল্যাংগুয়েজে যেমন Ruby তে একটি `key` শুধুমাত্র একটি সিম্বলের জন্য।
 
-In JavaScript, as we can see, that's right for global symbols.
+আমরা দেখেছি জাভাস্ক্রিপ্টে, গ্লোবাল সিম্বল ডিক্লেয়ার করতে পারি।
 ```
 
 ### Symbol.keyFor
 
-For global symbols, not only `Symbol.for(key)` returns a symbol by name, but there's a reverse call: `Symbol.keyFor(sym)`, that does the reverse: returns a name by a global symbol.
+গ্লোবাল সিম্বলের জন্য `Symbol.for(key)` এর বিপরীতে আরেকটি মেথড আছে যা সিম্বলের নাম রিটার্ন করে `Symbol.keyFor(sym)`।
 
-For instance:
+যেমন:
 
 ```js run
-// get symbol by name
+// সিম্বল ডিক্লেয়ার
 let sym = Symbol.for("name");
 let sym2 = Symbol.for("id");
 
-// get name by symbol
+// সিম্বলের নাম
 alert( Symbol.keyFor(sym) ); // name
 alert( Symbol.keyFor(sym2) ); // id
 ```
 
-The `Symbol.keyFor` internally uses the global symbol registry to look up the key for the symbol. So it doesn't work for non-global symbols. If the symbol is not global, it won't be able to find it and returns `undefined`.
+`Symbol.keyFor` ব্যবহার করা হয় ইন্টারনালি ঐ নামের কোন গ্লোবাল ইতোমধ্যে সিম্বল ডিক্লেয়ার করা হয়েছে কিনা তা জানতে। সুতরাং এটি নন-গ্লোবাল সিম্বলের জন্য কাজ করবে না। যদি কোন গ্লোবাল সিম্বল না থাকে তাহলে `undefined` রিটার্ন করবে।
 
-That said, any symbols have `description` property.
+তবে সব সিম্বলের `description` প্রপার্টি আছে।
 
-For instance:
+যেমন:
 
 ```js run
 let globalSymbol = Symbol.for("name");
@@ -244,35 +244,35 @@ alert( localSymbol.description ); // name
 
 ## System symbols
 
-There exist many "system" symbols that JavaScript uses internally, and we can use them to fine-tune various aspects of our objects.
+এছাড়াও ইন্টারনালি অবজেক্টের বিভিন্ন বিষয় নিয়ে কাজ করতে সিম্বলের আরো কিছু মেথড আছে।
 
-They are listed in the specification in the [Well-known symbols](https://tc39.github.io/ecma262/#sec-well-known-symbols) table:
+এ সম্পর্কে স্পেশিফিকেশনে আলোচনা করা হয়েছে [Well-known symbols](https://tc39.github.io/ecma262/#sec-well-known-symbols):
 
 - `Symbol.hasInstance`
 - `Symbol.isConcatSpreadable`
 - `Symbol.iterator`
 - `Symbol.toPrimitive`
-- ...and so on.
+- ...ইত্যাদি.
 
-For instance, `Symbol.toPrimitive` allows us to describe object to primitive conversion. We'll see its use very soon.
+যেমন, `Symbol.toPrimitive` অবজেক্টকে প্রিমিটিভ কনভার্শন করতে ব্যবহার করা হয়। যা নিয়ে পরবর্তী অনুচ্ছেদে আলোচনা করা হয়েছে।
 
-Other symbols will also become familiar when we study the corresponding language features.
+আমরা অন্যান্য সিম্বল সমূহ নিয়েও পরিচিত হয়ে যাব আরো ভিবিন্ন ল্যাংগুয়েজ ফিচার নিয়ে আলোচনার সময়।
 
-## Summary
+## সারাংশ
 
-`Symbol` is a primitive type for unique identifiers.
+`Symbol` হল ইউনিক আইডেন্টিফায়ারের একটি প্রিমিটিভ টাইপ।
 
-Symbols are created with `Symbol()` call with an optional description (name).
+সিম্বল তৈরি করা হয় `Symbol()` দ্বারা যেটির একটি অপশনাল প্যারামিটার(name) আছে।
 
-Symbols are always different values, even if they have the same name. If we want same-named symbols to be equal, then we should use the global registry: `Symbol.for(key)` returns (creates if needed) a global symbol with `key` as the name. Multiple calls of `Symbol.for` with the same `key` return exactly the same symbol.
+প্রতিটি সিম্বল স্বতন্ত্র। এমনকি যদি দুটি সিম্বলের মান একইও হয়। এছাড়াও যদি আমরা কোন সিম্বলকে একই নামে ইনিশিয়ালাইজ করতে চাই তাহলে আমাদের গ্লোবাল রেজিস্ট্রি ব্যবহার করতে হবে: `Symbol.for(key)` এটি চেক করবে একই নামের আগে কোন সিম্বল ডিক্লেয়ার করা হয়েছে কিনা, যদি হয়ে থাকে তাহলে ঐ সিম্বলকে রেফারেন্স করে অন্যথায় `undefined`।
 
-Symbols have two main use cases:
+সিম্বলের দুটি প্রধান ব্যবহার হল:
 
-1. "Hidden" object properties.
-    If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
+1. "হিডেন" অবজেক্ট প্রপার্টি।
+    যদি আমরা কোন একটি অবজেক্টে কোন প্রপার্টি সংযুক্ত করতে চাই যেটি অন্য আরেকটি স্ক্রিপ্ট বা লাইব্রেরিতে ব্যবহার হয়, এবং আমরা চাই প্রপার্টিসমূহ যেন উভয়ের মধ্যে হিডেন থাকে, তখন আমরা সিম্বল প্রপার্টি ব্যবহার করি। সিম্বলিক প্রপার্টিসমূহ `for..in` বা `Object.keys(user)` দ্বারা অ্যাক্সেসিবল না। এছাড়াও সরাসরিও এক স্ক্রিপ্টের সিম্বল অন্য স্ক্রিপ্ট থেকে অ্যাক্সেসিবল হবে না, কেননা অন্য স্ক্রিপ্টে সিম্বল অ্যাক্সেস হবে না। ফলে স্ক্রিপ্টের মধ্যে মধ্যে ডাটা লিক বা ওভাররাইড হওয়ার সম্ভাবনা থাকে না।
 
-    So we can "covertly" hide something into objects that we need, but others should not see, using symbolic properties.
+    সুতরাং অবজেক্টের কোন কিছু হিডেন রাখতে আমরা সিম্বল ব্যবহার করতে পারি।
 
-2. There are many system symbols used by JavaScript which are accessible as `Symbol.*`. We can use them to alter some built-in behaviors. For instance, later in the tutorial we'll use `Symbol.iterator` for [iterables](info:iterable), `Symbol.toPrimitive` to setup [object-to-primitive conversion](info:object-toprimitive) and so on.
+2. এছাড়াও আরো অনেক সিম্বল সিস্টেম আছে যেগুলো জাভাস্ক্রিপ্টের সাহায্যে অ্যাক্সেসিবল `Symbol.*`।  অবজেক্টের কিছু বিহেভিয়ার পরিবর্তনের জন্য আমরা এদের ব্যবহার করি। যেমন [iterables](info:iterable) টিউটোরিয়ালে `Symbol.iterator` এবং [object-to-primitive conversion](info:object-toprimitive) এ `Symbol.toPrimitive` এর ব্যবহার দেখব।.
 
-Technically, symbols are not 100% hidden. There is a built-in method [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) that allows us to get all symbols. Also there is a method named [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys of an object including symbolic ones. So they are not really hidden. But most libraries, built-in functions and syntax constructs don't use these methods.
+তবে, সিম্বল কিন্তু প্রকৃতপক্ষে ১০০% হিডেন না। একটি বিল্ট ইন মেথড আছে ` Object.getOwnPropertySymbols(obj)`যেটি সকল সিম্বলকে রিটার্ন করে, এছাড়াও আরেকটি মেথড আছে [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) যেটি সকল প্রপার্টি (সিম্বল সহ) রিটার্ন করে। সুতরাং বলা যায় এরা প্রকৃতপক্ষে হিডেন না। তবে বেশিরভাগ লাইব্রেরী এই মেথডগুলো নিয়ে কাজ করেনা।
