@@ -6,15 +6,19 @@
 একে "এ্যারো ফাংশন" বলা হয় কারণ এটা দেখতে অনেকটা এই রকমঃ
 
 ```js
-let func = (arg1, arg2, ...argN) => expression
+let func = (arg1, arg2, ..., argN) => expression;
 ```
 
+<<<<<<< HEAD
 এখানে `func` নামে একটা ফাংশন তৈরি করা হয়েছে যা `arg1..argN` আর্গুমেন্ট হিসেবে নিচ্ছে, তারপর ডানপাশের `expression` টি সম্পাদন করে তার যে রেজাল্ট হয় সেটা রিটার্ন করছে।
+=======
+This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 অন্যথায় বলতে গেলে, এটা নিম্নোক্ত কোডটির সংক্ষিপ্ত রূপ।
 
 ```js
-let func = function(arg1, arg2, ...argN) {
+let func = function(arg1, arg2, ..., argN) {
   return expression;
 };
 ```
