@@ -1,39 +1,39 @@
-# Date and time
+# তারিখ এবং সময়
 
-Let's meet a new built-in object: [Date](mdn:js/Date). It stores the date, time and provides methods for date/time management.
+এই অধ্যায়ে আমরা নতুন আরেকটি বিল্ট-ইন অবজেক্ট [Date](mdn:js/Date) সম্পর্কে জানব। এর সাহায্যে আমরা তারিখ/সময় এর বিভিন্ন মেথড নিয়ে কাজ করতে পারি।
 
-For instance, we can use it to store creation/modification times, to measure time, or just to print out the current date.
+যেমন, আমরা কোন ডাটা তৈরির বা পরিবর্তন এর সময় সংরক্ষণ করতে, অথবা বর্তমান সময় বা তারিখ জানার জন্য এদের ব্যবহার করি।
 
-## Creation
+## অবজেক্ট তৈরি
 
-To create a new `Date` object call `new Date()` with one of the following arguments:
+নতুন একটি `Date` অবজেক্ট তৈরি করতে আমরা `new Date()` কে কল করব, যেটি কিছু আর্গুমেন্ট নেয়:
 
 `new Date()`
-: Without arguments -- create a `Date` object for the current date and time:
+: কোন আর্গুমেন্ট ছাড়া `Date` অবজেক্ট কল করলে এটি বর্তমান সময় এবং তারিখ দেখাবে:
 
     ```js run
     let now = new Date();
-    alert( now ); // shows current date/time
+    alert( now ); // বর্তমান সময় এবং তারিখ দেখাবে
     ```
 
 `new Date(milliseconds)`
-: Create a `Date` object with the time equal to number of milliseconds (1/1000 of a second) passed after the Jan 1st of 1970 UTC+0.
+: `Date` অবজেক্ট তৈরির সময় আমরা মিলিসেকেন্ড(১ সেকেন্ডের ১০০০ ভাগ) আর্গুমেন্ট হিসেবে পাঠাতে পারি, যা ১৯৭০ সালের ১লা জানুয়ারি(UTC+0) থেকে সময় গণনা করে।
 
     ```js run
-    // 0 means 01.01.1970 UTC+0
+    // ০ দ্বারা বুঝায় 01.01.1970 UTC+0
     let Jan01_1970 = new Date(0);
     alert( Jan01_1970 );
 
-    // now add 24 hours, get 02.01.1970 UTC+0
+    // এখন আরো ২৪ ঘন্টা যোগ করলে পাই, 02.01.1970 UTC+0
     let Jan02_1970 = new Date(24 * 3600 * 1000);
     alert( Jan02_1970 );
     ```
 
-    An integer number representing the number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
+    ১৯৭০ এর শুরু থেকে অতিক্রান্ত সময়কে মিলিসেকেন্ড দ্বারা প্রকাশ করাকে বলা হয় *timestamp*।
 
-    It's a lightweight numeric representation of a date. We can always create a date from a timestamp using `new Date(timestamp)` and convert the existing `Date` object to a timestamp using the `date.getTime()` method (see below).
+    কোন একটি তারিখকে আমরা এভাবে সংখ্যা দ্বারা প্রকাশ করতে পারি। `new Date(timestamp)` অবজেক্ট তৈরিতে আমরা সর্বদা কোন একটি টাইমস্ট্যাম্প আর্গুমেন্ট হিসেবে পাঠাব যা আমাদের ঐ টাইমস্ট্যাম্প হিসেবে `Date` অবজেক্ট রিটার্ন করে এবং `Date` অবজেক্ট থেকে টাইমস্ট্যাম্প পেতে আমরা `date.getTime()` মেথড ব্যবহার করতে পারি (নিম্নে বিস্তারিত আলোচনা করা হয়েছে)।
 
-    Dates before 01.01.1970 have negative timestamps, e.g.:
+    ০১-০১-১৯৭০ এর আগের তারিখের জন্য আমরা ঋণাত্নক টাইমস্ট্যাম্প ব্যবহার করতে পারি, যেমন:
     ```js run
     // 31 Dec 1969
     let Dec31_1969 = new Date(-24 * 3600 * 1000);
@@ -41,101 +41,104 @@ To create a new `Date` object call `new Date()` with one of the following argume
     ```
 
 `new Date(datestring)`
-: If there is a single argument, and it's a string, then it is parsed automatically. The algorithm is the same as `Date.parse` uses, we'll cover it later.
+: যদি প্রথম একটি আর্গুমেন্টে কোন একটি তারিখ স্ট্রিং হিসেবে পাঠাই, তাহলে এটি স্বয়ংক্রিয়ভাবে তারিখে রূপান্তর হয়ে যায়। এক্ষেত্রে `Date.parse` অ্যালগরিদম ব্যবহার হয়(নিম্নে বিস্তারিত আলোচনা করা হয়েছে)।
 
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-    // The time is not set, so it's assumed to be midnight GMT and
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
+    // যেহেতু কোন সময়ের উল্লেখ নেই, সুতরাং এটি GMT রাত ১২.০০ টা হিসেব করে নেয়
+    // এবং স্থানীয় সময়মান অনুসারে দেখায়
+    // সময়টি হতে পারে
     // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
+    // অথবা
     // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
+    // অথবা
+    // Thu Jan 26 2017 06:00:00 GMT+0600 (Bangladesh Standard Time)
     ```
 
 `new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
+: স্থানীয় সময়মান হিসেবে `Date` অবজেক্ট তৈরীর জন্য আমরা উপরের নিয়ম অনুযায়ী কল করতে পারি, এক্ষেত্রে প্রথম দুটি আর্গুমেন্ট অবশ্যই দিতে হবে, শুধুমাত্র একটি আর্গুমেন্ট পাঠালে তখন এটি টাইমস্ট্যাম্প হিসেবে ধরে নিবে।
 
-    - The `year` must have 4 digits: `2013` is okay, `98` is not.
-    - The `month` count starts with `0` (Jan), up to `11` (Dec).
-    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
-    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+    - `year` অবশ্যই পূর্ণভাবে লিখতে হবে: `1998` এর বদলে `98` লিখা সঠিক নয়।
+    - `month` `0` (Jan) থেকে শুরু হয়, সর্বোচ্চ `11` (Dec)।
+    - `date` প্যারামিটার মাসের দিন হিসেব করে, যদি আর্গুমেন্ট পাস করা না হয় ডিফল্ট `1` তারিখ সেট হয়।
+    - যদি আর্গুমেন্ট `hours/minutes/seconds/ms` পাস করা না হয় ডিফল্ট `0` সেট হয়।
 
-    For instance:
+    উদাহরণস্বরূপ:
 
     ```js
     new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
+    new Date(2011, 0, 1); // দুইটার মান একই
     ```
 
-    The maximal precision is 1 ms (1/1000 sec):
+    সর্বাধিক নির্ভুল মান পেতে 1ms (1/1000 sec) ব্যবহার করা যায়:
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
     alert( date ); // 1.01.2011, 02:03:04.567
     ```
 
-## Access date components
+## তারিখের বিভিন্ন মেথড
 
-There are methods to access the year, month and so on from the `Date` object:
+`Date` অবজেক্ট এর তারিখ, মাস, সময় ইত্যাদি জানার জন্য বিভিন্ন বিল্ট-ইন মেথড রয়েছে:
 
 [getFullYear()](mdn:js/Date/getFullYear)
-: Get the year (4 digits)
+: এটি সাল রিটার্ন করে (৪ অঙ্কের)
 
 [getMonth()](mdn:js/Date/getMonth)
-: Get the month, **from 0 to 11**.
+: এটি মাসের ক্রম রিটার্ন করে, **0 হতে 11 পর্যন্ত**
 
 [getDate()](mdn:js/Date/getDate)
-: Get the day of month, from 1 to 31, the name of the method does look a little bit strange.
+: এটি মাসের কততম দিন তা রিটার্ন করে, 1 হতে 31 পর্যন্ত, যদিও এই মেথডের নামটি কিছুটা সাংঘর্ষিক মনে হয়।
 
 [getHours()](mdn:js/Date/getHours), [getMinutes()](mdn:js/Date/getMinutes), [getSeconds()](mdn:js/Date/getSeconds), [getMilliseconds()](mdn:js/Date/getMilliseconds)
-: Get the corresponding time components.
+: ঘন্টা, মিনিট, সেকেন্ড, মিলিসেকেন্ড ইত্যাদি রিটার্ন করে।
 
-```warn header="Not `getYear()`, but `getFullYear()`"
-Many JavaScript engines implement a non-standard method `getYear()`. This method is deprecated. It returns 2-digit year sometimes. Please never use it. There is `getFullYear()` for the year.
+```warn header="`getYear()` নয়, বরং `getFullYear()`"
+অনেক জাভাস্ক্রিপ্ট ইঞ্জিন একটি নন-স্ট্যান্ডার্ড মেথড `getYear()` সাপোর্ট করে, তবে এটি বর্তমানে অচল। এটি অনেক সময় ২ অঙ্কের সাল রিটার্ন করে, দয়া করে এটি ব্যবহার করবেন না। তার পরিবর্তে `getFullYear()` ব্যবহার করুন।
 ```
 
-Additionally, we can get a day of week:
+এছাড়াও, আমরা সপ্তাহের নামও জানতে পারি:
 
 [getDay()](mdn:js/Date/getDay)
-: Get the day of week, from `0` (Sunday) to `6` (Saturday). The first day is always Sunday, in some countries that's not so, but can't be changed.
+: এটি বারের নাম রিটার্ন করে, `0` (Sunday বা রবিবার) হতে `6` (Saturday বা শনিবার), যদিও অনেক দেশে সপ্তাহের শুরু অন্য কোন দিন দিয়ে হয়, এক্ষেত্রে আপনাকে নিজস্ব মেথড ব্যবহার করতে হতে পারে যেমন: বাংলাদেশ।
 
-**All the methods above return the components relative to the local time zone.**
+**উপরে উল্লেখিত সকল মেথড স্থানীয় সময় এর উপর ভিত্তি করে মান রিটার্ন করে।**
 
-There are also their UTC-counterparts, that return day, month, year and so on for the time zone UTC+0: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay). Just insert the `"UTC"` right after `"get"`.
+এছাড়াও আমরা চাইলে UTC হিসেবে মান পেতে পারি, যা UTC+0 সময় অনুযায়ী তারিখ, সময় ও দিন রিটার্ন করে: [getUTCFullYear()](mdn:js/Date/getUTCFullYear), [getUTCMonth()](mdn:js/Date/getUTCMonth), [getUTCDay()](mdn:js/Date/getUTCDay)। এক্ষেত্রে `"get"` এর পর `"UTC"` যোগ করলেই হবে।
 
-If your local time zone is shifted relative to UTC, then the code below shows different hours:
+UTC এর সময় অনুযায়ী আপনার স্থানীয় সময় পরিবর্তন হলে, নিচের কোডের জন্য আলাদা আলাদা মান দেখাবে:
 
 ```js run
 // current date
 let date = new Date();
 
-// the hour in your current time zone
+// স্থানীয় সময় অনুযায়ী দেখাবে
 alert( date.getHours() );
 
-// the hour in UTC+0 time zone (London time without daylight savings)
+// UTC+0 এর সময় অনুযায়ী দেখাবে (লন্ডনের সময়)
 alert( date.getUTCHours() );
 ```
 
-Besides the given methods, there are two special ones that do not have a UTC-variant:
+উপরে উল্লেখিত মেথড গুলো ছাড়া আরো দুটি বিশেষ মেথড আছে যাদের আলাদা করে UTC মেথড নাই:
 
 [getTime()](mdn:js/Date/getTime)
-: Returns the timestamp for the date -- a number of milliseconds passed from the January 1st of 1970 UTC+0.
+: ঐ তারিখের টাইমস্ট্যাম্প রিটার্ন করবে -- অর্থাৎ ১লা জানুয়ারী ১৯৭০ এর ০০.০০ (UTC+0) হতে অতিক্রান্ত মিলিসেকেন্ড।
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-: Returns the difference between UTC and the local time zone, in minutes:
+: UTC+0 এবং স্থানীয় সময়ের পার্থক্য মিনেটের মধ্যে দেখাবে:
 
     ```js run
-    // if you are in timezone UTC-1, outputs 60
-    // if you are in timezone UTC+3, outputs -180
+    // যদি আপনার স্থানীয় সময় UTC-1 অনুযায়ী হয় দেখাবে 60
+    // যদি আপনার স্থানীয় সময় UTC+3 অনুযায়ী হয় দেখাবে -180
+    // বাংলাদেশের জন্য দেখাবে UTC+6 অনুযায়ী -360
     alert( new Date().getTimezoneOffset() );
 
     ```
 
-## Setting date components
+## সময়ের বিভিন্ন অংশ সেট করা
 
-The following methods allow to set date/time components:
+নিচের মেথড গুলোর সাহায্যে আমরা সময়ের বিভিন্ন প্রপার্টি সেট করতে পারব:
 
 - [`setFullYear(year, [month], [date])`](mdn:js/Date/setFullYear)
 - [`setMonth(month, [date])`](mdn:js/Date/setMonth)
@@ -146,36 +149,36 @@ The following methods allow to set date/time components:
 - [`setMilliseconds(ms)`](mdn:js/Date/setMilliseconds)
 - [`setTime(milliseconds)`](mdn:js/Date/setTime) (sets the whole date by milliseconds since 01.01.1970 UTC)
 
-Every one of them except `setTime()` has a UTC-variant, for instance: `setUTCHours()`.
+`setTime()` ব্যতীত সকল মেথডের আরো একটি UTC মেথড আছে, যেমন: `setUTCHours()`.
 
-As we can see, some methods can set multiple components at once, for example `setHours`. The components that are not mentioned are not modified.
+আমরা দেখছি, কিছু মেথড আছে যারা বিভিন্ন মান একসাথে নিতে পারে, যেমন `setHours`। এক্ষেত্রে শুধুমাত্র আর্গুমেন্ট পাঠানো অংশটুকুই পরিবর্তন হবে, বাকীগুলো হবে না।
 
-For instance:
+যেমন:
 
 ```js run
 let today = new Date();
 
 today.setHours(0);
-alert(today); // still today, but the hour is changed to 0
+alert(today); // বর্তমান তারিখ দেখাবে এবং ঘন্টা পরিবর্তন হবে, কিন্তু মিনিট বা সেকেন্ডের কোন পরিবর্তন হবে না
 
 today.setHours(0, 0, 0, 0);
-alert(today); // still today, now 00:00:00 sharp.
+alert(today); // বর্তমান তারিখ দেখাবে এবং সময় দেখাবে 00:00:00।
 ```
 
-## Autocorrection
+## অটোকারেকশন
 
-The *autocorrection* is a very handy feature of `Date` objects. We can set out-of-range values, and it will auto-adjust itself.
+`Date` অবজেক্ট এর দারুন একটি ফিচার হল এটি আমাদের ভুল সময়কে *অটোকারেকশন* করে নিতে পারে। যদি আমরা অনিচ্ছাকৃতভাবে কোন ভুল ইনপুট দিয়ে ফেলি, তাহলে এটি স্বয়ংক্রিয়ভাবে সময় ঠিক করে নেয়।
 
-For instance:
+যেমন:
 
 ```js run
-let date = new Date(2013, 0, *!*32*/!*); // 32 Jan 2013 ?!?
-alert(date); // ...is 1st Feb 2013!
+let date = new Date(2013, 0, *!*32*/!*); // 32 জানুয়ারী 2013 ?!?
+alert(date); // ...অর্থাৎ এটি হবে ১লা ফেব্রুয়ারী 2013!
 ```
 
-Out-of-range date components are distributed automatically.
+এই অটোকারেকশন ফিচারটি মেথডের ক্ষেত্রেও কাজ করবে।
 
-Let's say we need to increase the date "28 Feb 2016" by 2 days. It may be "2 Mar" or "1 Mar" in case of a leap-year. We don't need to think about it. Just add 2 days. The `Date` object will do the rest:
+মনে করুন আমরা "28 ফেব্রুয়ারী 2016" এর সাথে ২দিন যোগ করব, এক্ষেত্রে এটি অধিবর্ষের(লিপ ইয়ার) জন্য "২রা মার্চ" অথবা "১লা মার্চ" হতে পারে। আমাদের এ ব্যাপারে চিন্তা করতে হবে না, কেননা `Date` অবজেক্ট স্বয়ংক্রিয়ভাবে এটি ব্যবস্থা নিতে পারে:
 
 ```js run
 let date = new Date(2016, 1, 28);
@@ -186,68 +189,68 @@ date.setDate(date.getDate() + 2);
 alert( date ); // 1 Mar 2016
 ```
 
-That feature is often used to get the date after the given period of time. For instance, let's get the date for "70 seconds after now":
+এই ফিচারটি আমরা একটি নির্দিষ্ট সময়ের পরের সময় জানতেও কাজে আসে, মনে করুন আমরা "বর্তমান সময়ের 70 সেকেন্ড পরের সময়টি" জানতে চাই:
 
 ```js run
 let date = new Date();
 date.setSeconds(date.getSeconds() + 70);
 
-alert( date ); // shows the correct date
+alert( date );
 ```
 
-We can also set zero or even negative values. For example:
+আমরা শুন্য অথবা ঋণাত্নক মানও সেট করতে পারি, যেমন:
 
 ```js run
-let date = new Date(2016, 0, 2); // 2 Jan 2016
+let date = new Date(2016, 0, 2); // 2রা জানুয়ারি 2016
 
-date.setDate(1); // set day 1 of month
+date.setDate(1); // এখন ১ তারিখ সেট করলাম
 alert( date );
 
-date.setDate(0); // min day is 1, so the last day of the previous month is assumed
+date.setDate(0); // যেহেতু সর্বনিম্ন তারিখ হতে পারে 1, সুতরাং এটি এর আগের দিন দেখাবে
 alert( date ); // 31 Dec 2015
 ```
 
-## Date to number, date diff
+## তারিখের পার্থক্য এবং তারিখ এর টাইমস্ট্যাম্প
 
-When a `Date` object is converted to number, it becomes the timestamp same as `date.getTime()`:
+যখন `Date` অবজেক্টকে নাম্বারে রূপান্তর করা হয় তখন এটি `date.getTime()` এর মত টাইমস্ট্যাম্প রিটার্ন করে:
 
 ```js run
 let date = new Date();
-alert(+date); // the number of milliseconds, same as date.getTime()
+alert(+date); // date.getTime() এর মত মিলিসেকেন্ড রিটার্ন করে
 ```
 
-The important side effect: dates can be subtracted, the result is their difference in ms.
+তবে গুরুত্বপূর্ন ব্যাপার হল আমরা এর সাহায্যে দুটি সময়ের মিলিসেকেন্ডের পার্থক্যও বের করতে পারি।
 
-That can be used for time measurements:
+আমরা এটি সময় এর পার্থক্য নির্ণয়ের জন্য ব্যবহার করি:
 
 ```js run
-let start = new Date(); // start measuring time
+let start = new Date(); // শুরু
 
 // do the job
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-let end = new Date(); // end measuring time
+let end = new Date(); // শেষ
 
 alert( `The loop took ${end - start} ms` );
 ```
 
 ## Date.now()
 
-If we only want to measure time, we don't need the `Date` object.
+তবে শুধুমাত্র সময় পরিমাপের জন্য `Date` অবজেক্ট এর প্রয়োজন নেই।
 
-There's a special method `Date.now()` that returns the current timestamp.
+একটি বিশেষ মেথড আছে `Date.now()` যা বর্তমান টাইমস্ট্যাম্প রিটার্ন করে।
 
-It is semantically equivalent to `new Date().getTime()`, but it doesn't create an intermediate `Date` object. So it's faster and doesn't put pressure on garbage collection.
+এটি অনেকটা `new Date().getTime()` এর মতই, কিন্তু এটি প্রথমে `Date` অবজেক্ট তৈরি করে না। সুতরাং এটি `new Date().getTime()` এর তুলনায় দ্রুত কাজ করে এবং গার্বেজ কালেকশনের জন্য অতিরিক্ত সময় ব্যয় করে না।
 
-It is used mostly for convenience or when performance matters, like in games in JavaScript or other specialized applications.
+বেশিরভাগ ক্ষেত্রে এটি ব্যবহার করা হয় পারফরম্যান্সের জন্য, যেমন গেম বা অন্যান্য বিশেষ অ্যাপ্লিকেশন।
 
-So this is probably better:
+এক্ষেত্রে এটি ব্যবহার করা উচিত:
 
 ```js run
 *!*
-let start = Date.now(); // milliseconds count from 1 Jan 1970
+let start = Date.now();
 */!*
 
 // do the job
@@ -259,36 +262,36 @@ for (let i = 0; i < 100000; i++) {
 let end = Date.now(); // done
 */!*
 
-alert( `The loop took ${end - start} ms` ); // subtract numbers, not dates
+alert( `The loop took ${end - start} ms` );
 ```
 
-## Benchmarking
+## বেঞ্চমার্কিং
 
-If we want a reliable benchmark of CPU-hungry function, we should be careful.
+যদি আমরা অধিক CPU ব্যবহার করে, এমন ফাংশনের বেঞ্চমার্ক করতে চাই, আমাদের সতর্ক থাকা উচিত।
 
-For instance, let's measure two functions that calculate the difference between two dates: which one is faster?
+যেমন, আমরা আমাদের দুটি ফাংশন আছে যারা দুটি সময়ের পার্থক্য ক্যালকুলেশন করে, এক্ষেত্রে কোনটি দ্রুত কাজ করবে?
 
-Such performance measurements are often called "benchmarks".
+এই ধরণের পারফরম্যান্স পরিমাপকে বলা হয় "benchmarks"।
 
 ```js
-// we have date1 and date2, which function faster returns their difference in ms?
+// নিচের দুটি ফাংশনের একটি `Date` অবজেক্ট ব্যবহার করে ক্যালকুলেশন করছে, অন্যটি `getTime()` ব্যবহার করে, কোনটি দ্রুত কাজ করবে?
 function diffSubtract(date1, date2) {
   return date2 - date1;
 }
 
-// or
+// অথবা
 function diffGetTime(date1, date2) {
   return date2.getTime() - date1.getTime();
 }
 ```
 
-These two do exactly the same thing, but one of them uses an explicit `date.getTime()` to get the date in ms, and the other one relies on a date-to-number transform. Their result is always the same.
+এখানে দুটি ফাংশনের কাজ একই, তবে একটি ক্যাল্কুলেট করছে `date.getTime()` এর সাহায্যে অন্যটি `Date` অবজেক্ট কে নাম্বারে(টাইপ কাস্টিং) কনভার্ট করে। এরা উভয়ই সঠিক রেজাল্ট দেখাবে।
 
-So, which one is faster?
+কোনটি দ্রুত কাজ করবে?
 
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
+যেহুতু ফাংশন দুটি একেবারে সাধারণ সুতরাং আমরা দুটি ফাংশনকে অনেকবার কল করে তাদের মাঝের সময় নির্ণয় করতে পারি, এক্ষেত্রে চলুন এদের কমপক্ষে ১০০০০০ বার কল করি।
 
-Let's measure:
+সম্পূর্ন ক্যালকুলেশনটি হবে এমন:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -312,19 +315,19 @@ alert( 'Time of diffSubtract: ' + bench(diffSubtract) + 'ms' );
 alert( 'Time of diffGetTime: ' + bench(diffGetTime) + 'ms' );
 ```
 
-Wow! Using `getTime()` is so much faster! That's because there's no type conversion, it is much easier for engines to optimize.
+এখানে কি দেখলেন!? `getTime()` অনেক দ্রুত কাজ করছে! কেননা এটির ক্ষেত্রে আলাদা করে কোন টাইপ কনভার্শন করা লাগছে না, যার জন্য ইঞ্জিন সহজে অপ্টিমাইজ করতে পারছে।
 
-Okay, we have something. But that's not a good benchmark yet.
+ইতোমধ্যে, আমরা ব্যাপারটি বুঝতে পারলাম। তবে এটিকে এখনো ভালো বেঞ্চমার্কিং বলা যাবে না।
 
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
+মনে করুন `bench(diffSubtract)` কোডটি রান করার সময় আমাদের CPU প্যারালাল ভাবে অন্য কোন কাজ করে, এবং আলাদা কিছু রিসোর্স ব্যবহার করে। এবং ঐ সময়ের মাঝে `bench(diffGetTime)` এর কাজ শেষ হচ্ছে।
 
-A pretty real scenario for a modern multi-process OS.
+যা বর্তমান আধুনিক OS গুলোর ক্ষেত্রে হরহামেশাই হয়।
 
-As a result, the first benchmark will have less CPU resources than the second. That may lead to wrong results.
+যার ফলে, আমাদের বেঞ্চমার্কিং এর ফলাফল ভুল দেখাতে পারে।
 
-**For more reliable benchmarking, the whole pack of benchmarks should be rerun multiple times.**
+**এজন্য নির্ভুলভাবে বেঞ্চমার্কিং এর জন্য, আমাদের বেঞ্চমার্কিং কোডটিকে কয়েকবার চালানো উচিত**
 
-For example, like this:
+এইভাবে:
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -359,7 +362,7 @@ alert( 'Total time for diffSubtract: ' + time1 );
 alert( 'Total time for diffGetTime: ' + time2 );
 ```
 
-Modern JavaScript engines start applying advanced optimizations only to "hot code" that executes many times (no need to optimize rarely executed things). So, in the example above, first executions are not well-optimized. We may want to add a heat-up run:
+আধুনিক জাভাস্ক্রিপ্ট ইঞ্জিন গুলোতে "hot code" (যেখানে কম্পাইলারের বেশি সময় লাগতে পারে) এর জন্য এই ধরণের কোডের ক্ষেত্রে আমরা একটি "heat-up" সংযুক্ত করতে পারি:
 
 ```js
 // added for "heating up" prior to the main loop
@@ -373,28 +376,28 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
+```warn header="মাইক্রোবেঞ্চমার্কিং এর সময় আরো সতর্ক থাকা উচিত"
+মডার্ন জাভাস্ক্রিপ্ট ইঞ্জিন সমূহ যথেষ্ট অপ্টিমাইজভাবে কাজ করে। এক্ষেত্রে সাধারণ ব্যবহার যোগ্য সমস্যা গুলোর সাথে আর্টিফিশিয়াল টেস্ট এর রেজাল্টে অসামাঞ্জস্য দেখা দিতে পারে, যেমন যদি আমরা একেবারে মাইক্রোবেঞ্চমার্কিং অর্থাৎ একটি অপারেটর কিভাবে কাজ করছে, অথবা বিল্ট-ইন ফাংশন কেমন সময় নিবে। আপনি যদি এমন পারফরম্যন্স সম্পর্কে জানতে আরো বেশি আগ্রহী হন মাইক্রোবেঞ্চমার্কিং না করে জাভাস্ক্রিপ্ট ইঞ্জিন কীভাবে কাজ করে তা বুঝলে হবে।
 
-The great pack of articles about V8 can be found at <http://mrale.ph>.
+V8 ইঞ্জিন সম্পর্কে জানতে এটি একটি দারুন রিসোর্স <http://mrale.ph>।
 ```
 
-## Date.parse from a string
+## স্ট্রিং হতে সময় বের করার মেথড Date.parse()
 
-The method [Date.parse(str)](mdn:js/Date/parse) can read a date from a string.
+[Date.parse(str)](mdn:js/Date/parse) মেথডটি স্ট্রিং হতে সময় রূপান্তর করতে পারে।
 
-The string format should be: `YYYY-MM-DDTHH:mm:ss.sssZ`, where:
+স্ট্রিংয়ের ফরম্যট হবে: `YYYY-MM-DDTHH:mm:ss.sssZ`, যেখানে:
 
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` that would mean UTC+0.
+- `YYYY-MM-DD` -- তারিখ: year-month-day.
+- ক্যারাক্টার `"T"` ব্যবহার হয় ডেলিমিটার হিসেবে।
+- `HH:mm:ss.sss` -- সময়: hours, minutes, seconds এবং milliseconds.
+- `'Z'` অপশনাল যা টাইমজোনকে নির্দেশ করে `+-hh:mm`, যেমন বাংলাদেশের (UTC+6) জন্য '2020-01-26T13:51:50.417+06:00'। শুধুমাত্র `Z` বুঝায় UTC+0
 
-Shorter variants are also possible, like `YYYY-MM-DD` or `YYYY-MM` or even `YYYY`.
+এছাড়াও আমরা সংক্ষিপ্তভাবে এদের কল করতে পারি, যেমন `YYYY-MM-DD` বা `YYYY-MM` এমনকি `YYYY`।
 
-The call to `Date.parse(str)` parses the string in the given format and returns the timestamp (number of milliseconds from 1 Jan 1970 UTC+0). If the format is invalid, returns `NaN`.
+`Date.parse(str)` স্ট্রিং হতে টাইমস্ট্যাম্পকে মিলিসেকেন্ড হিসেবে রিটার্ন করে (১৯৭০ সালের ১লা জানুয়ারি(UTC+0) হতে অতিক্রান্ত মিলিসেকেন্ড)। ইনভ্যালিড স্ট্রিং ফরম্যাটের জন্য রিটার্ন করবে `NaN`।
 
-For instance:
+যেমন:
 
 ```js run
 let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
@@ -402,32 +405,32 @@ let ms = Date.parse('2012-01-26T13:51:50.417-07:00');
 alert(ms); // 1327611110417  (timestamp)
 ```
 
-We can instantly create a `new Date` object from the timestamp:
+আমরা টাইমস্ট্যাম্প হতে `new Date` অবজেক্ট তৈরি করতে পারি:
 
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 
-alert(date);  
+alert(date);
 ```
 
-## Summary
+## সারাংশ
 
-- Date and time in JavaScript are represented with the [Date](mdn:js/Date) object. We can't create "only date" or "only time": `Date` objects always carry both.
-- Months are counted from zero (yes, January is a zero month).
-- Days of week in `getDay()` are also counted from zero (that's Sunday).
-- `Date` auto-corrects itself when out-of-range components are set. Good for adding/subtracting days/months/hours.
-- Dates can be subtracted, giving their difference in milliseconds. That's because a `Date` becomes the timestamp when converted to a number.
-- Use `Date.now()` to get the current timestamp fast.
+- জাভাস্ক্রিপ্টে সময় এবং তারিখ উভয়ই কাজ করে [Date](mdn:js/Date) অবজেক্ট দ্বারা। আমরা শুধুমাত্র সময় বা তারিখকে আলাদা করে কল করতে পারব না `Date` অবজেক্ট উভয়ই সংরক্ষণ করে।
+- মাসের গণনা শুরু হয় শূন্য হতে (০ দ্বারা বুঝায় জানুয়ারি).
+- সপ্তাহের বারও শুরু হয় শূন্য হতে `getDay()`(০ দ্বারা বুঝায় রবিবার).
+- `Date` অবজেক্ট এর সাথে সময় বা দিন যোগ বিয়োগের সময় তারিখ স্বয়ংক্রিয়ভাবে ঠিক করে নেই।
+- দুটি সময়ের মধ্যে মিলিসেকেন্ডের পার্থক্যও বের করা সম্ভব। কারণ `Date` টাইপ কাস্টিং হয়ে টাইমস্ট্যাম্পে রূপান্তর হতে পারে।
+- বর্তমান টাইমস্ট্যাম্প পেতে `Date.now()` `new Date()` হতে অধিক দ্রুত কাজ করে।
 
-Note that unlike many other systems, timestamps in JavaScript are in milliseconds, not in seconds.
+আমাদের মনে রাখা উচিত, জাভাস্ক্রিপ্ট টাইমস্ট্যাম্পকে মিলিসেকেন্ডে রিটার্ন করে, সেকেন্ডে নয়।
 
-Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
+অনেক সময় আমাদের আরো নির্ভুলভাবে পরিমাপ করা লাগতে পারে। এজন্য জাভাস্ক্রিপ্টের মাইক্রোসেকেন্ডে (১ সেকেন্ডের ১০লাখ ভাগ) ক্যালকুলেশনের কোন বিল্ট-ইন মেথড নাই। তবে বেশিরভাগ এইভাইরনমেন্টের কিছু মেথড আছে। যেমন ব্রাউজারের ক্ষেত্রে [performance.now()](mdn:api/Performance/now) যা পেজ লোডিংয়ের পর থেকে মাইক্রোসেকেন্ডের সময় রিটার্ন করতে পারে।
 
 ```js run
 alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, but only the first 3 are correct
+// এটি দেখাবে এমন কিছু: "Loading started 34731.26000000001ms ago"
+// .26 হল মাইক্রোসেকেন্ড (260 microseconds)
+// দশমিকের পর ৩ ঘর পর্যন্ত সঠিক মান দেখাতে পারে
 ```
 
-Node.js has `microtime` module and other ways. Technically, almost any device and environment allows to get more precision, it's just not in `Date`.
+Node.js এর আছে `microtime` মডুইল। সাধারণত প্রতিটি এনভায়রনমেন্টের নিজস্ব মেথড আছে যা `Date` এর তুলনায় আরো নির্দিষ্ট সময় নির্ভুলভাবে প্রদান করতে পারে।
