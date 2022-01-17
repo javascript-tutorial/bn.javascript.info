@@ -1,7 +1,11 @@
 
 পূর্ণসংখ্যার রেগুলার এক্সপ্রেশন হল `pattern:\d+`।
 
+<<<<<<< HEAD
 আমরা ঋণাত্নক সংখ্যাগুলোকে বাদ দিতে পারি নেগেটিভ লুকবিহাইন্ড এর মাধ্যমে: `pattern:(?<!-)\d+`।
+=======
+We can exclude negatives by prepending it with the negative lookbehind: `pattern:(?<!-)\d+`.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 সম্ভবত, আমরা এটি চেষ্টা করতে পারি, তবে এক্ষেত্রে আমরা "অতিরিক্ত" ফলাফল পাব:
 

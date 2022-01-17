@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 আমরা পূর্বের চ্যাপ্টারে ডেসিমেল সংখ্যা কে অপশনাল রেখে খুঁজার উপায় দেখেছিলাম: `pattern:\d+(\.\d+)?`।
+=======
+A positive number with an optional decimal part is: `pattern:\d+(\.\d+)?`.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 ঋণাত্নক সংখ্যা খুঁজার জন্য শুরুতে `pattern:-` কে অপশনাল হিসেবে যোগ করি:
 
