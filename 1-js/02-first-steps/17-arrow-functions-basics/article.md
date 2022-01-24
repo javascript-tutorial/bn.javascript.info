@@ -6,15 +6,19 @@
 একে "এ্যারো ফাংশন" বলা হয় কারণ এটা দেখতে অনেকটা এই রকমঃ
 
 ```js
-let func = (arg1, arg2, ...argN) => expression
+let func = (arg1, arg2, ..., argN) => expression;
 ```
 
+<<<<<<< HEAD
 এখানে `func` নামে একটা ফাংশন তৈরি করা হয়েছে যা `arg1..argN` আর্গুমেন্ট হিসেবে নিচ্ছে, তারপর ডানপাশের `expression` টি সম্পাদন করে তার যে রেজাল্ট হয় সেটা রিটার্ন করছে।
+=======
+This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 অন্যথায় বলতে গেলে, এটা নিম্নোক্ত কোডটির সংক্ষিপ্ত রূপ।
 
 ```js
-let func = function(arg1, arg2, ...argN) {
+let func = function(arg1, arg2, ..., argN) {
   return expression;
 };
 ```
@@ -34,7 +38,11 @@ let sum = function(a, b) {
 alert( sum(1, 2) ); // 3
 ```
 
+<<<<<<< HEAD
 এখানে আপনি যেমনটি দেখতে পাচ্ছেন, `(a, b) => a + b` ফাংশনটি দুইটা আর্গুমেন্ট নিচ্ছে যথাক্রমে `a` ও `b` এবং সম্পাদনের সময় এটি `a + b` এক্সপ্রেশনটির মান নির্ণয় করছে এবং তার রেজাল্টটি রিটার্ন করছে। 
+=======
+As you can see, `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 - যদি আমাদের কেবল একটি মাত্র আর্গুমেন্ট থাকে তাহলে প্যারামিটারগুলোর দুই পাশে যে প্যারেন্থেসিস বা প্রথম বন্ধনী থাকে সেটি না দিলেও চলে, যেটা কোডটাকে আরও সংক্ষিপ্ত করে নিয়ে আসে। 
 
@@ -87,7 +95,11 @@ welcome();
 let sum = (a, b) => {  // এই কার্লি ব্র্যাসটা শুরু করে একটা বহুলাইন ফাংশনের।
   let result = a + b;
 *!*
+<<<<<<< HEAD
   return result; // যদি আমরা কার্লি ব্র্যাসেস ব্যবহার করি, তাহলে আমাদের আলাদাকরে একটা "return" ব্যবহার করা লাগবে। 
+=======
+  return result; // if we use curly braces, then we need an explicit "return"
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 */!*
 };
 
