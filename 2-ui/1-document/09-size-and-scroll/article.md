@@ -116,7 +116,11 @@ function isHidden(elem) {
 }
 ```
 
+<<<<<<< HEAD
 দয়া করে নোট করুন যদি কোন একটি এলিমেন্ট UI তে বিদ্যমান থাকে কিন্তু এর সাইজ শূন্য (যেমন একটি এম্পটি `<div>`) এক্ষেত্রে `isHidden` রিটার্ন করবে `true`।
+=======
+Please note that such `isHidden` returns `true` for elements that are on-screen, but have zero sizes.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 ````
 
 ## clientTop/Left
