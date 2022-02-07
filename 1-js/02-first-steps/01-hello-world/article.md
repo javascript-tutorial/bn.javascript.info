@@ -9,7 +9,11 @@
 
 ## "script" ট্যাগ
 
+<<<<<<< HEAD
 জাভাস্ক্রিপ্ট এর কার্যক্রম গুলো এইচটিএমএল ডকুমেন্টের যেকোনো অংশে রাখা যেতে পারে `<script>` ট্যাগের সাহায্য নিয়ে। 
+=======
+JavaScript programs can be inserted almost anywhere into an HTML document using the `<script>` tag.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 উদাহরণস্বরূপ:
 
@@ -73,7 +77,11 @@
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 এখানে, `/path/to/script.js` এই পথটি হয় সাইট এর মূল থেকে স্ক্রিপ্টের জন্য একটি সঠিক পথ। বর্তমান পৃষ্ঠা থেকে যে কেউ আপেক্ষিক পথ সরবরাহ করতে পারে. উদাহরণস্বরূপ, `src="script.js"` এই `"script.js"` ফাইল দিয়ে বর্তমান ফোল্ডার থেকে বুঝায়। 
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"`, just like `src="./script.js"`, would mean a file `"script.js"` in the current folder.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 আমরা পুরো URL টিও দিতে পারি। উদাহরণস্বরূপ:
 
