@@ -110,7 +110,7 @@ alert( 'I*!*\'*/!*m the Walrus!' ); // *!*I'm*/!* the Walrus!
 
 As you can see, we have to prepend the inner quote by the backslash `\'`, because otherwise it would indicate the string end.
 
-Of course, only to the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
+Of course, only the quotes that are the same as the enclosing ones need to be escaped. So, as a more elegant solution, we could switch to double quotes or backticks instead:
 
 ```js run
 alert( `I'm the Walrus!` ); // I'm the Walrus!
@@ -312,7 +312,7 @@ if (str.indexOf("Widget") != -1) {
 
 #### The bitwise NOT trick
 
-One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
+One of the old tricks used here is the [bitwise NOT](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_NOT) `~` operator. It converts the number to a 32-bit integer (removes the decimal part if exists) and then reverses all bits in its binary representation.
 
 In practice, that means a simple thing: for 32-bit integers `~n` equals `-(n+1)`.
 
@@ -345,7 +345,7 @@ It is usually not recommended to use language features in a non-obvious way, but
 
 Just remember: `if (~str.indexOf(...))` reads as "if found".
 
-To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check is correct only if a string is not that long.
+To be precise though, as big numbers are truncated to 32 bits by `~` operator, there exist other numbers that give `0`, the smallest is `~4294967295=0`. That makes such check correct only if a string is not that long.
 
 Right now we can see this trick only in the old code, as modern JavaScript provides `.includes` method (see below).
 
@@ -534,7 +534,7 @@ The "right" algorithm to do string comparisons is more complex than it may seem,
 
 So, the browser needs to know the language to compare.
 
-Luckily, all modern browsers (IE10- requires the additional library [Intl.JS](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA 402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
+Luckily, all modern browsers (IE10- requires the additional library [Intl.js](https://github.com/andyearnshaw/Intl.js/)) support the internationalization standard [ECMA-402](http://www.ecma-international.org/ecma-402/1.0/ECMA-402.pdf).
 
 It provides a special method to compare strings in different languages, following their rules.
 

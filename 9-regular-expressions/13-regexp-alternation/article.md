@@ -1,14 +1,14 @@
-# Alternation (OR) |
+# অল্টারনেশন (অর) |
 
-Alternation is the term in regular expression that is actually a simple "OR".
+রেগুলার এক্সপ্রেশনের অল্টারনেশন টার্মটিকে সহজ ভাষায় বলা হয় "OR (অর)"।
 
-In a regular expression it is denoted with a vertical line character `pattern:|`.
+রেগুলার এক্সপ্রেশনে এটিকে ভার্টিকেল লাইন ক্যারাক্টার `pattern:|` দ্বারা বুঝায়।
 
-For instance, we need to find programming languages: HTML, PHP, Java or JavaScript.
+যেমন, আমরা প্রোগ্রামিং ল্যাংগুয়েজগুলো খুঁজতে চাই: HTML, PHP, Java or JavaScript।
 
-The corresponding regexp: `pattern:html|php|java(script)?`.
+এজন্য রেগুলার এক্সপ্রেশটি হবে: `pattern:html|php|java(script)?`।
 
-A usage example:
+যেমন:
 
 ```js run
 let regexp = /html|php|css|java(script)?/gi;
@@ -18,50 +18,50 @@ let str = "First HTML appeared, then CSS, then JavaScript";
 alert( str.match(regexp) ); // 'HTML', 'CSS', 'JavaScript'
 ```
 
-We already saw a similar thing -- square brackets. They allow to choose between multiple characters, for instance `pattern:gr[ae]y` matches `match:gray` or `match:grey`.
+আমরা ইতোমধ্যে স্কয়ার ব্র্যাকেট দ্বারা এমন সমস্যা সমাধান করেছি। এটি আমাদেরকে একাধিক ক্যারাক্টার নির্বাচন করতে দেয় , যেমন `pattern:gr[ae]y` এটি  `match:gray` বা `match:grey` এর সাথে মিলবে।
 
-Square brackets allow only characters or character sets. Alternation allows any expressions. A regexp `pattern:A|B|C` means one of expressions `A`, `B` or `C`.
+স্কয়ার ব্র্যাকেট শুধুমাত্র ক্যারাক্টার বা ক্যারাক্টার সেট এর জন্য প্রযোজ্য। আর অল্টারনেশন যেকোন এক্সপ্রেশনের জন্য কাজ করে। রেগুলার এক্সপ্রেশটি  `pattern:A|B|C` দ্বারা বুঝায় `A`, `B` বা `C`।
 
-For instance:
+যেমন:
 
-- `pattern:gr(a|e)y` means exactly the same as `pattern:gr[ae]y`.
-- `pattern:gra|ey` means `match:gra` or `match:ey`.
+- `pattern:gr(a|e)y` দ্বারা বুঝায় এটি হুবহু `pattern:gr[ae]y` এর মত।
+- `pattern:gra|ey` দ্বারা বুঝায় `match:gra` বা `match:ey`।
 
-To apply alternation to a chosen part of the pattern, we can enclose it in parentheses:
-- `pattern:I love HTML|CSS` matches `match:I love HTML` or `match:CSS`.
-- `pattern:I love (HTML|CSS)` matches `match:I love HTML` or `match:I love CSS`.
+আমরা কোন নির্দিষ্ট অংশকে অল্টারনেশন করতে চাইলে, একে প্যারেন্টেসিসের মধ্যে রাখতে হবে:
+- `pattern:I love HTML|CSS` এটি মিলবে `match:I love HTML` বা `match:CSS` এর সাথে।
+- `pattern:I love (HTML|CSS)` এটি মিলবে `match:I love HTML` বা `match:I love CSS` এর সাথে।
 
-## Example: regexp for time
+## উদাহরণ: সময়ের জন্য রেগুলার এক্সপ্রেশ
 
-In previous articles there was a task to build a regexp for searching time in the form `hh:mm`, for instance `12:00`. But a simple `pattern:\d\d:\d\d` is too vague. It accepts `25:99` as the time (as 99 seconds match the pattern, but that time is invalid).
+পূর্ববর্তীতে আমাদের একটি টাস্ক ছিল রেগুলার এক্সপ্রেশ দ্বারা সময় `hh:mm` খুঁজা, যেমন `12:00`। কিন্তু এই প্যাটার্নটি `pattern:\d\d:\d\d` একেবারে নির্ভুল ছিলনা। কেননা এটি `25:99` এর সাথেও মিল খুঁজে পেত(এখানে 25 এবং 99 প্যাটার্নের সাথে মিলে কিন্তু এটি একটি ভুল সময়)।
 
-How can we make a better pattern?
+আমরা কিভাবে আরো নির্ভুল প্যাটার্ন লিখতে পারি?
 
-We can use more careful matching. First, the hours:
+আমাদের ্প্যাটার্নটি আরো নিখুঁতভাবে করতে হবে। প্রথমত, ঘন্টা:
 
-- If the first digit is `0` or `1`, then the next digit can be any: `pattern:[01]\d`.
-- Otherwise, if the first digit is `2`, then the next must be `pattern:[0-3]`.
-- (no other first digit is allowed)
+- যদি প্রথম সংখ্যাটি `0` বা `1` হয়, পরবর্তী অংকটি যেকোন কিছু হতে পারে: `pattern:[01]\d`।
+- অথবা, যদি প্রথম সংখ্যাটি `2` হয়, পরবর্তী অংকটি `pattern:[0-3]` এর মধ্যে হতে হবে।
+- (প্রথম সংখ্যাটি ০,১ বা ২ ব্যতীত অন্য কিছু হবেনা)
 
-We can write both variants in a regexp using alternation: `pattern:[01]\d|2[0-3]`.
+সুতরা আমরা এটি অল্টারনেশনের সাহায্যে লিখতে পারি: `pattern:[01]\d|2[0-3]`।
 
-Next, minutes must be from `00` to `59`. In the regular expression language that can be written as `pattern:[0-5]\d`: the first digit `0-5`, and then any digit.
+এরপর, মিনিট হবে `00` থেকে `59` এর মধ্যে। রেগুলার এক্সপ্রেশনে এটিকে আমরা এভাবে লিখতে পারি `pattern:[0-5]\d`: প্রথম সংখ্যাটি `0-5` এর মধ্যে, এবং এরপর যেকোন অংক।
 
-If we glue minutes and seconds together, we get the pattern: `pattern:[01]\d|2[0-3]:[0-5]\d`.
+এখন ঘন্টা এবং মিনিটকে একত্রে লিখলে প্যাটার্নটি হবে: `pattern:[01]\d|2[0-3]:[0-5]\d`।
 
-We're almost done, but there's a problem. The alternation `pattern:|` now happens to be between `pattern:[01]\d` and `pattern:2[0-3]:[0-5]\d`.
+আমাদের প্যাটার্ন লেখা প্রায় শেষ, ্কিন্তু এখানে একটি সমস্যা আছে। অল্টারনেশন `pattern:|` দ্বারা বুঝানো হচ্ছে হয় এটি `pattern:[01]\d` অথবা এটি `pattern:2[0-3]:[0-5]\d`।
 
-That is: minutes are added to the second alternation variant, here's a clear picture:
+অর্থাৎ মিনিটও দ্বিতীয় অল্টারনেশন ভ্যারিয়েন্ট এর সাথে যুক্ত হয়ে গেছে, এখানে ভালোভাবে দেখুন:
 
 ```
 [01]\d  |  2[0-3]:[0-5]\d
 ```
 
-That pattern looks for `pattern:[01]\d` or `pattern:2[0-3]:[0-5]\d`.
+প্যাটার্নটি খুঁজবে `pattern:[01]\d` বা `pattern:2[0-3]:[0-5]\d`।
 
-But that's wrong, the alternation should only be used in the "hours" part of the regular expression, to allow `pattern:[01]\d` OR `pattern:2[0-3]`. Let's correct that by enclosing "hours" into parentheses: `pattern:([01]\d|2[0-3]):[0-5]\d`.
+কিন্তু এটি ভুল, অল্টারনেশন শুধুমাত্র "ঘন্টার" এর জন্য প্রযোজ্য হবে, হয় এটি হবে `pattern:[01]\d` নয়ত এটি `pattern:2[0-3]`। চলুন "ঘন্টার" অংশটিকে প্যারেন্টেসিসের মধ্যে লিখি: `pattern:([01]\d|2[0-3]):[0-5]\d`।
 
-The final solution:
+সুতরাং সমাধানটি হবে:
 
 ```js run
 let regexp = /([01]\d|2[0-3]):[0-5]\d/g;

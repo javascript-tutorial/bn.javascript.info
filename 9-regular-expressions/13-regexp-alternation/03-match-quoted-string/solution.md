@@ -1,13 +1,13 @@
-The solution: `pattern:/"(\\.|[^"\\])*"/g`.
+সমাধানটি হবে: `pattern:/"(\\.|[^"\\])*"/g`।
 
-Step by step:
+ধাপে ধাপে দেখি:
 
-- First we look for an opening quote `pattern:"`
-- Then if we have a backslash `pattern:\\` (we technically have to double it in the pattern, because it is a special character, so that's a single backslash in fact), then any character is fine after it (a dot).
-- Otherwise we take any character except a quote (that would mean the end of the string) and a backslash (to prevent lonely backslashes, the backslash is only used with some other symbol after it): `pattern:[^"\\]`
-- ...And so on till the closing quote.
+- প্রথমে আমরা একটি শুরুর উদ্ধৃতি চিহ্নটি খুঁজব `pattern:"`
+- এরপর আমরা ব্যাকস্ল্যাশ খুঁজব `pattern:\\` (এজন্য আমাদের দুটি ব্যাকস্ল্যাশ দিতে হবে, কেননা এটি একটি স্পেশাল ক্যারাক্টার), এরপর যেকোন ক্যারাক্টারের জন্য(একটি ডট)।
+- অন্যথায় আমরা উদ্ধৃতি চিহ্ন এবং ব্যাকস্ল্যাশ ব্যতীত সকল ক্যারাক্টার নিব: `pattern:[^"\\]`
+- ...এবং সর্বশেষ শেষ উদ্ধৃতি চিহ্ন।
 
-In action:
+সমাধানটি হবে:
 
 ```js run
 let regexp = /"(\\.|[^"\\])*"/g;

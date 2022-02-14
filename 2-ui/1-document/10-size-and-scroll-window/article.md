@@ -1,50 +1,50 @@
-# Window sizes and scrolling
+# Window sizes এবং scrolling
 
-How do we find the width and height of the browser window? How do we get the full width and height of the document, including the scrolled out part? How do we scroll the page using JavaScript?
+আমরা ব্রাউজার উইন্ডোর width এবং height কীভাবে পেতে পারি? scrolled out অংশটুকু সহ ডকুমেন্টের সম্পূর্ণ width এবং height পেতে পারি? জাভাস্ক্রিপ্টের সাহায্যে কীভাবে পেজে স্ক্রল করতে পারি?
 
-For most such requests, we can use the root document element `document.documentElement`, that corresponds to the `<html>` tag. But there are additional methods and peculiarities important enough to consider.
+এই সমস্ত তথ্যের জন্য আমরা রুট ডকুমেন্ট এলিমেন্ট `document.documentElement` ব্যবহার করতে পারি, যেটি দ্বারা বুঝানো হয় `<html>` ট্যাগ। তবে এর আরো কিছু মেথড এবং প্রপার্টি আছে।
 
-## Width/height of the window
+## window এর Width/height
 
-To get window width and height we can use `clientWidth/clientHeight` of `document.documentElement`:
+window এর Width/height জানার জন্য আমরা  `document.documentElement` এর `clientWidth/clientHeight` প্রপার্টি ব্যবহার করতে পারি:
 
 ![](document-client-width-height.svg)
 
 ```online
-For instance, this button shows the height of your window:
+যেমন নিচের বাটনে ক্লিক করলে এটি আপনার বর্তমান window এর height দেখাবে:
 
 <button onclick="alert(document.documentElement.clientHeight)">alert(document.documentElement.clientHeight)</button>
 ```
 
-````warn header="Not `window.innerWidth/Height`"
-Browsers also support properties `window.innerWidth/innerHeight`. They look like what we want. So why not to use them instead?
+````warn header="এটি `window.innerWidth/innerHeight` এর বিকল্প না"
+ব্রাউজার `window.innerWidth/innerHeight` প্রপার্টি সাপোর্ট করে।  এটি আমাদের চাহিদামত মান প্রদান করে, তারপরও এদের ব্যবহার করা কেন অনুচিত?
 
-If there exists a scrollbar, and it occupies some space, `clientWidth/clientHeight` provide the width/height without it (subtract it). In other words, they return width/height of the visible part of the document, available for the content.
+যদি ডকুমেন্টে কোন স্ক্রলবার উপস্থিত থাকে, এবং এটি কিছু জায়গা নেই, `clientWidth/clientHeight` স্ক্রলবার ব্যতীত width/height এর মান রিটার্ন করে। অন্যভাবে বলতে গেলে এরা শুধুমাত্র দৃশ্যমান ডকুমেন্টের কন্টেন্টের width/height রিটার্ন করে।
 
-...And `window.innerWidth/innerHeight` include the scrollbar.
+যেখানে `window.innerWidth/innerHeight` স্ক্রলবারসহ মান রিটার্ন করে।
 
-If there's a scrollbar, and it occupies some space, then these two lines show different values:
+যদি স্ক্রলবার উপস্থিত থাকে, তাহলে এটি সামান্য পরিমান স্পেস নিতে পারে, যার ফলে নিচের কোডের জন্য ভিন্ন ভিন্ন মান দেখাতে পারে:
 ```js run
-alert( window.innerWidth ); // full window width
-alert( document.documentElement.clientWidth ); // window width minus the scrollbar
+alert( window.innerWidth ); // সম্পূর্ণ window width
+alert( document.documentElement.clientWidth ); // স্ক্রলবার ব্যতীত window width
 ```
 
-In most cases we need the *available* window width: to draw or position something. That is: inside scrollbars if there are any. So we should use `documentElement.clientHeight/Width`.
+বেশিরভাগ ক্ষেত্রে আমরা কোন এলিমেন্টকে window এর মধ্যে অবস্থান দিতে স্ক্রলবার ছাড়া *available* window width এর মান জানা লাগবে, এক্ষেত্রে আমরা ব্যবহার করব `documentElement.clientHeight/clientWidth`।
 ````
 
-```warn header="`DOCTYPE` is important"
-Please note: top-level geometry properties may work a little bit differently when there's no `<!DOCTYPE HTML>` in HTML. Odd things are possible.
+```warn header="সবার উপরে অবশ্যই `DOCTYPE` লিখতে হবে"
+নোট করুন: `<!DOCTYPE HTML>` ব্যবহার না করলে টপ লেভেল জ্যামিতিক প্রপার্টিগুলো সঠিকভাবে কাজ নাও করতে পারে। এক্ষেত্রে অনাকাঙ্খীত মান দেখাতে পারে।
 
-In modern HTML we should always write `DOCTYPE`.
+মডার্ন HTML এ অবশ্যই `DOCTYPE` লিখতে হবে।
 ```
 
-## Width/height of the document
+## ডকুমেন্টের Width/height
 
-Theoretically, as the root document element is `document.documentElement`, and it encloses all the content, we could measure document full size as `document.documentElement.scrollWidth/scrollHeight`.
+তাত্ত্বিকভাবে, যেহেতু `document.documentElement` রুট ডকুমেন্ট, এবং এর মধ্যে সকল কন্টেন্ট অবস্থান করে, আমরা ডকুমেন্টের সম্পূর্ণ সাইজ `document.documentElement.scrollWidth/scrollHeight` এর মাধ্যমে নিতে পারে।
 
-But on that element, for the whole page, these properties do not work as intended. In Chrome/Safari/Opera if there's no scroll, then `documentElement.scrollHeight` may be even less than  `documentElement.clientHeight`! Sounds like a nonsense, weird, right?
+কিন্তু ঐ এলিমেন্টের জন্য সম্পূর্ণ পেজের প্রপার্টি সমূহ সঠিকভাবে কাজ নাও করতে পারে। Chrome/Safari/Opera, এর ক্ষেত্রে যদি কোন স্ক্রলবার না থাকে তাহলে `documentElement.scrollHeight` এর মান `documentElement.clientHeight` থেকে ছোট হতে পারে! ব্যাপারটা অদ্ভুত, তাই না?
 
-To reliably obtain the full document height, we should take the maximum of these properties:
+এইক্ষেত্রে আমরা নিম্নোক্তভাবে সঠিক মানটি পেতে পারি:
 
 ```js run
 let scrollHeight = Math.max(
@@ -56,101 +56,101 @@ let scrollHeight = Math.max(
 alert('Full document height, with scrolled out part: ' + scrollHeight);
 ```
 
-Why so? Better don't ask. These inconsistencies come from ancient times, not a "smart" logic.
+এমন কেন? এটি আপাতত না জানলেও হবে। তবে এই সমস্যার জন্য এটি একটি ভালো সমাধান।
 
-## Get the current scroll [#page-scroll]
+## বর্তমান স্ক্রল পজিশনের মান [#page-scroll]
 
-DOM elements have their current scroll state in `elem.scrollLeft/scrollTop`.
+DOM এলিমেন্টের বর্তমান স্ক্রলের মান পেতে `scrollLeft/scrollTop` প্রপার্টি আছে।
 
-For document scroll `document.documentElement.scrollLeft/Top` works in most browsers, except older WebKit-based ones, like Safari (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)), where we should use `document.body` instead of `document.documentElement`.
+বর্তমানের বেশিরভাগ ব্রাউজারে `document.documentElement.scrollLeft/scrollTop` কাজ করে, তবে কিছু পুরনো ইঞ্জিন যেমন WebKit, যেটি সাফারি ব্যবহার করে (bug [5991](https://bugs.webkit.org/show_bug.cgi?id=5991)) এদের ক্ষেত্রে `document.documentElement` এর পরিবর্তে `document.body` ব্যবহার করা উচিত।
 
-Luckily, we don't have to remember these peculiarities at all, because the scroll is available in the special properties `window.pageXOffset/pageYOffset`:
+সৌভাগ্যক্রমে, আমাদের এত ঝামেলা করার দরকার নেই, কেননা এর জন্য আরেকটি বিশেষ প্রপার্টি আছে `window.pageXOffset/pageYOffset`:
 
 ```js run
 alert('Current scroll from the top: ' + window.pageYOffset);
 alert('Current scroll from the left: ' + window.pageXOffset);
 ```
 
-These properties are read-only.
+এগুলো read-only.
 
-## Scrolling: scrollTo, scrollBy, scrollIntoView [#window-scroll]
+## স্ক্রলিং: scrollTo, scrollBy, scrollIntoView [#window-scroll]
 
 ```warn
-To scroll the page from JavaScript, its DOM must be fully built.
+পেজের কোন একটি অবস্থানে জাভাস্ক্রিপ্টের সাহায্যে স্ক্রল করতে, তবে এজন্য সম্পূর্ণ DOM বিল্ট হওয়া লাগবে।
 
-For instance, if we try to scroll the page from the script in `<head>`, it won't work.
+যেমন যদি আমরা `<head>` এর কোন স্ক্রিপ্ট থেকে স্ক্রল করতে চাই এটি কাজ করবে না।
 ```
 
-Regular elements can be scrolled by changing `scrollTop/scrollLeft`.
+বেশিরভাগ এলিমেন্ট স্ক্রল করা যেতে পারে `scrollTop/scrollLeft` এর মাধ্যমে।
 
-We can do the same for the page using `document.documentElement.scrollTop/Left` (except Safari, where `document.body.scrollTop/Left` should be used instead).
+এটি আমরা এভাবেও করতে পারি `document.documentElement.scrollTop/scrollLeft` (কেবল Safari ব্যতীত, এক্ষেত্রে  `document.body.scrollTop/Left` ব্যবহার করতে হবে)।
 
-Alternatively, there's a simpler, universal solution: special methods  [window.scrollBy(x,y)](mdn:api/Window/scrollBy) and [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo).
+বিকল্প হিসেবে, আরো সহজ একটি সমাধান আছে [window.scrollBy(x,y)](mdn:api/Window/scrollBy) এবং [window.scrollTo(pageX,pageY)](mdn:api/Window/scrollTo)।
 
-- The method `scrollBy(x,y)` scrolls the page *relative to its current position*. For instance, `scrollBy(0,10)` scrolls the page `10px` down.
+- `scrollBy(x,y)` মেথডটি আমাদের বর্তমান অবস্থানের উপর ভিত্তি করে স্ক্রল করবে। যেমন `scrollBy(0,10)` এর জন্য `10px` নিচে নামবে।
 
     ```online
-    The button below demonstrates this:
+    বাটনটিতে ক্লিক করলে বুঝতে পারবেন:
 
     <button onclick="window.scrollBy(0,10)">window.scrollBy(0,10)</button>
     ```
-- The method `scrollTo(pageX,pageY)` scrolls the page *to absolute coordinates*, so that the top-left corner of the visible part has coordinates `(pageX, pageY)` relative to the document's top-left corner. It's like setting `scrollLeft/scrollTop`.
+- `scrollTo(pageX,pageY)` মেথডটি টপ-লেভেল রুট এলিমেন্টের top-left উপর ভিত্তি করে কাজ করে।
 
-    To scroll to the very beginning, we can use `scrollTo(0,0)`.
+    পেজের একদম শুরুতে যেতে আমরা ব্যবহার করতে পারি `scrollTo(0,0)`।
 
     ```online
     <button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button>
     ```
 
-These methods work for all browsers the same way.
+এরা সকল ব্রাউজারের জন্য কাজ করে।
 
 ## scrollIntoView
 
-For completeness, let's cover one more method:  [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView).
+চলুন, নতুন আরো একটি মেথড সম্পর্কে জানি : [elem.scrollIntoView(top)](mdn:api/Element/scrollIntoView)।
 
-The call to `elem.scrollIntoView(top)` scrolls the page to make `elem` visible. It has one argument:
+আমরা কোন একটি `elem` এর অবস্থানে স্ক্রল পজিশন সেট করতে ব্যবহার করি `elem.scrollIntoView(top)`। এটি একটি আর্গুমেন্ট নেয়:
 
-- if `top=true` (that's the default), then the page will be scrolled to make `elem` appear on the top of the window. The upper edge of the element is aligned with the window top.
-- if `top=false`, then the page scrolls to make `elem` appear at the bottom. The bottom edge of the element is aligned with the window bottom.
+- `top=true` (এটি ডিফল্ট), এর জন্য স্ক্রল পজিশন এলিমেন্টের উপরের অংশটুকুর জন্য সেট হয়। অর্থাৎ আপনি যদি কোন একটি এলিমেন্টে নেভিগেশন করতে চান এক্ষেত্রে `scrollIntoView()` ব্যবহার করতে পারেন।
+- `top=false`, এর জন্য স্ক্রল পজিশন এলিমেন্টের নিচের দিকের অংশটুকুর জন্য সেট হয়।
 
 ```online
-The button below scrolls the page to make itself show at the window top:
+নিচের বাটনে ক্লিক করলে এটি `scrollIntoView` সেকশনের উপরের অংশে স্ক্রল পজিশন সেট করে:
 
 <button onclick="this.scrollIntoView()">this.scrollIntoView()</button>
 
-And this button scrolls the page to show it at the bottom:
+এবং এই বাটনে ক্লিক করলে এটি `scrollIntoView` সেকশনের নিচের অংশে স্ক্রল পজিশন সেট করে:
 
 <button onclick="this.scrollIntoView(false)">this.scrollIntoView(false)</button>
 ```
 
-## Forbid the scrolling
+## স্ক্রলিংকে আটকানো
 
-Sometimes we need to make the document "unscrollable". For instance, when we need to cover it with a large message requiring immediate attention, and we want the visitor to interact with that message, not with the document.
+অনেকসময় আমরা আমাদের ডকুমেন্টের স্ক্রলিং ফিচারটিকে রোধ করতে চাই। যেমন যদি আমাদের এমন একটি গুরুত্বপূর্ণ মেসেজসহ কভার পেজ আছে, যেটির কোন মেসেজ দ্বারা ভিজিটরকে আকৃষ্ট করতে চাই।
 
-To make the document unscrollable, it's enough to set `document.body.style.overflow = "hidden"`. The page will freeze on its current scroll.
+কোন একটি এলিমেন্টকে আনস্ক্রলেবল করতে চাইলে, এভাবে করতে পারি `document.body.style.overflow = "hidden"`। এর ফলে আমাদের পেজটি বর্তমান স্ক্রলিং পজিশনে স্থির (freeze) হয়ে যাবে।
 
 ```online
-Try it:
+এটি দেখুন:
 
 <button onclick="document.body.style.overflow = 'hidden'">document.body.style.overflow = 'hidden'</button>
 
 <button onclick="document.body.style.overflow = ''">document.body.style.overflow = ''</button>
 
-The first button freezes the scroll, the second one resumes it.
+প্রথম বাটনের জন্য স্ক্রলিং ফিচার বন্ধ হয়ে যাবে, এবং দ্বিতীয়টির জন্য এটি পুনরায় স্ক্রলেবল হবে।
 ```
 
-We can use the same technique to "freeze" the scroll for other elements, not just for `document.body`.
+এভাবে শুধু `document.body` এলিমেন্টের জন্য না আমরা যেকোন এলিমেন্টের জন্য এভাবে স্ক্রলিং বন্ধ বা চালু করতে পারি।
 
-The drawback of the method is that the scrollbar disappears. If it occupied some space, then that space is now free, and the content "jumps" to fill it.
+তবে এটির একটি সমস্যা হল এর ফলে আমাদের স্ক্রলবারটি অদৃশ্য হয়ে যায়। যার ফলে কিছু জায়গা তৈরি হয় এবং এখানে কন্টেন্ট সমূহ কিছু জায়গা নিতে পারে।
 
-That looks a bit odd, but can be worked around if we compare `clientWidth` before and after the freeze, and if it increased (the scrollbar disappeared) then add `padding` to `document.body` in place of the scrollbar, to keep the content width the same.
+এটি দেখতে কিছুটা বিদঘুটে লাগতে পারে, তবে এক্ষেত্রে আমরা চাইলে `clientWidth` এর সহায়তা নিতে পারি। যখন আমাদের স্পেসবার অদৃশ্য হয়ে যায়, তখন আমরা কিছুটা `padding` সেট করে দিতে পারি, যার ফলে পার্থক্য বুঝা যাবে না।
 
-## Summary
+## সারাংশ
 
-Geometry:
+এলিমেন্টের সাইজ:
 
-- Width/height of the visible part of the document (content area width/height): `document.documentElement.clientWidth/Height`
-- Width/height of the whole document, with the scrolled out part:
+- দৃশ্যমান ডকুমেন্টের (content area width/height) এর Width/height পেতে: `document.documentElement.clientWidth/clientHeight`
+- অদৃশ্য অংশটুকুর মান সহ Width/height পেতে:
 
     ```js
     let scrollHeight = Math.max(
@@ -160,11 +160,11 @@ Geometry:
     );
     ```
 
-Scrolling:
+স্ক্রলিং:
 
-- Read the current scroll: `window.pageYOffset/pageXOffset`.
-- Change the current scroll:
+- বর্তমান স্ক্রলিং পজিশনের মান জানতে: `window.pageYOffset/pageXOffset`.
+- প্রোগ্রামাটিক্যালী স্ক্রলিং করতে:
 
-    - `window.scrollTo(pageX,pageY)` -- absolute coordinates,
-    - `window.scrollBy(x,y)` -- scroll relative the current place,
-    - `elem.scrollIntoView(top)` -- scroll to make `elem` visible (align with the top/bottom of the window).
+    - `window.scrollTo(pageX,pageY)` -- পেজের একদম শুরুতে যেতে,
+    - `window.scrollBy(x,y)` -- বর্তমান পজিশনের উপর ভিত্তি করে স্ক্রল করতে,
+    - `elem.scrollIntoView(top)` -- কোন একটি এলিমেন্টের `elem` পজিশনে স্ক্রল করতে (`true/false` ডকুমেন্টের উপরের বা নিচের অবস্থানে যেতে).

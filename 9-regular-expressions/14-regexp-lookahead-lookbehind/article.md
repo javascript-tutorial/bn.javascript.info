@@ -1,39 +1,39 @@
-# Lookahead and lookbehind
+# লুকঅ্যাহেড এবং লুকবিহাইন্ড
 
-Sometimes we need to find only those matches for a pattern that are followed or preceeded by another pattern.
+অনেক সময় আমাদের এমন প্যাটার্ন খুঁজা লাগে যা অন্য প্যাটার্নের উপর নির্ভর করে।
 
-There's a special syntax for that, called "lookahead" and "lookbehind", together referred to as "lookaround".
+এজন্য রেগুলার এক্সপ্রেশনে একটি বিশেষ সিনট্যাক্স আছে "লুকঅ্যাহেড" এবং "লুকবিহাইন্ড", এদের একত্রে বলা হয়  "লুকঅ্যারাউন্ড"।
 
-For the start, let's find the price from the string like `subject:1 turkey costs 30€`. That is: a number, followed by `subject:€` sign.
+চলুন একটি ব্যবহারিক উদাহরণ দেখি, `subject:1 turkey costs 30€` এ স্ট্রিং হতে আমরা দাম খুঁজে বের করব। প্যাটার্নটি হবে প্রথমে একটি `subject:€` চিহ্ন তারপর একটি সংখ্যা।
 
-## Lookahead
+## লুকঅ্যাহেড
 
-The syntax is: `pattern:X(?=Y)`, it means "look for `pattern:X`, but match only if followed by `pattern:Y`". There may be any pattern instead of `pattern:X` and `pattern:Y`.
+সিনট্যাক্সটি হবে: `pattern:X(?=Y)`, এটি দ্বারা বুঝায় এর সাথে মিলবে `pattern:X`, কেবলমাত্র এটি যদি `pattern:Y` দ্বারা শুরু হয়। `pattern:X` এবং `pattern:Y` এর পরিবর্তে যেকোন প্যাটার্ন হতে পারে।
 
-For an integer number followed by `subject:€`, the regexp will be `pattern:\d+(?=€)`:
+`subject:€` পর একটি পূর্ণ সংখ্যা হবে, সুতরাং রেগুলার এক্সপ্রেশনটি হবে `pattern:\d+(?=€)`:
 
 ```js run
 let str = "1 turkey costs 30€";
 
-alert( str.match(/\d+(?=€)/) ); // 30, the number 1 is ignored, as it's not followed by €
+alert( str.match(/\d+(?=€)/) ); // 30, 1 এর সাথে মিল হবে না কেননা এর পূর্বে € নাই
 ```
 
-Please note: the lookahead is merely a test, the contents of the parentheses `pattern:(?=...)` is not included in the result `match:30`.
+লক্ষ্য করুন: লুকঅ্যাহেড হল একটি যাচাই পদ্ধতি, প্যারেন্টেসিসের কন্টেন্ট `pattern:(?=...)` রেজাল্টের মধ্যে আসবে না অর্থাৎ রেজাল্ট হবে `match:30`।
 
-When we look for `pattern:X(?=Y)`, the regular expression engine finds `pattern:X` and then checks if there's `pattern:Y` immediately after it. If it's not so, then the potential match is skipped, and the search continues.
+চলুন `pattern:X(?=Y)` কিভাবে কাজ করছে তা বোঝার চেষ্টা করি, রেগুলার এক্সপ্রেশন ইঞ্জিন প্রথমে খুঁজবে `pattern:X` এবং এরপর খুঁজবে `pattern:Y` আছে কিনা। যদি এটি না মেলে, তাহলে ঐ মিলগুলো বাদ দিবে, এবং অনুসন্ধান চালিয়ে যাবে।
 
-More complex tests are possible, e.g. `pattern:X(?=Y)(?=Z)` means:
+আমরা আরো জটিল অনুসন্ধানও চালাতে পারি, যেমন `pattern:X(?=Y)(?=Z)` দ্বারা বুঝায়:
 
-1. Find `pattern:X`.
-2. Check if `pattern:Y` is immediately after `pattern:X` (skip if isn't).
-3. Check if `pattern:Z` is immediately after `pattern:X` (skip if isn't).
-4. If both tests passed, then it's the match.
+১. প্রথমে `pattern:X` খুঁজবে।
+২. পরবর্তী অনুসন্ধান চালাবে যদি `pattern:X` এরপর `pattern:Y` থাকে(অন্যথায় বাদ যাবে)।
+৩. পরবর্তী অনুসন্ধান চালাবে যদি `pattern:X` এরপর `pattern:Z` থাকে(অন্যথায় বাদ যাবে)।
+৪. যদি উভয়ই অনুসন্ধান মিলে, তাহলে `pattern:X` রেজাল্ট দেখাবে।
 
-In other words, such pattern means that we're looking for `pattern:X` followed by   `pattern:Y` and `pattern:Z` at the same time.
+অন্য কথায় বলা যায়, আমরা `pattern:X` কে এমনভাবে খুঁজছি যার পরে `pattern:Y` এবং `pattern:Z` থাকবে।
 
-That's only possible if patterns `pattern:Y` and `pattern:Z` aren't mutually exclusive.
+এটি অবশ্যই সম্ভব হবে যদি `pattern:Y` এবং `pattern:Z` পরস্পর সাংঘর্ষিক না হয়।
 
-For example, `pattern:\d+(?=\s)(?=.*30)` looks for `pattern:\d+` only if it's followed by a space, and there's `30` somewhere after it:
+যেমন, `pattern:\d+(?=\s)(?=.*30)` দ্বারা বুঝায় `pattern:\d+` এরপর একটি স্পেস থাকবে, এবং তারপর যেকোন অবস্থানে `30` থাকবে:
 
 ```js run
 let str = "1 turkey costs 30€";
@@ -41,67 +41,67 @@ let str = "1 turkey costs 30€";
 alert( str.match(/\d+(?=\s)(?=.*30)/) ); // 1
 ```
 
-In our string that exactly matches the number `1`.
+এক্ষেত্রে আমাদের প্রাপ্ত ফলাফলটি হবে `1`।
 
-## Negative lookahead
+## নেগেটিভ লুকঅ্যাহেড
 
-Let's say that we want a quantity instead, not a price from the same string. That's a number `pattern:\d+`, NOT followed by `subject:€`.
+চলুন আমরা দামের বদলে পরিমাণ খুঁজে বের করি। সুতরাং সংখ্যাটি হবে `pattern:\d+` যার পরে `subject:€` থাকবে না।
 
-For that, a negative lookahead can be applied.
+এজন্য আমরা, নেগেটিভ লুকঅ্যাহেড এর সাহায্য নিতে পারি।
 
-The syntax is: `pattern:X(?!Y)`, it means "search `pattern:X`, but only if not followed by `pattern:Y`".
+সিনট্যাক্সটি হবে: `pattern:X(?!Y)`, এটি দ্বারা বুঝায় "`pattern:X` কে খুঁজবে, কেবলমাত্র এরপর যদি `pattern:Y` না থাকে"।
 
 ```js run
 let str = "2 turkeys cost 60€";
 
-alert( str.match(/\d+(?!€)/) ); // 2 (the price is skipped)
+alert( str.match(/\d+(?!€)/) ); // 2 (দামকে বাদ দেয়া হয়েছে)
 ```
 
-## Lookbehind
+## লুকবিহাইন্ড
 
-Lookahead allows to add a condition for "what follows".
+লুকঅ্যাহেড একটি শর্ত আরোপ করে "পরবর্তী অবস্থান"।
 
-Lookbehind is similar, but it looks behind. That is, it allows to match a pattern only if there's something before it.
+লুকবিহাইন্ড ও অনুরূপ, কিন্তু এটি পূর্বের অবস্থান খুঁজে। অর্থাৎ এটি মিলবে কেবল প্যাটার্নের পূর্বের কোন একটি প্যাটার্নের সাথে মিললে।
 
-The syntax is:
-- Positive lookbehind: `pattern:(?<=Y)X`, matches `pattern:X`, but only if there's  `pattern:Y` before it.
-- Negative lookbehind: `pattern:(?<!Y)X`, matches `pattern:X`, but only if there's no `pattern:Y` before it.
+সিনট্যাক্সটি হবে:
+- পজেটিভ লুকবিহাইন্ড: `pattern:(?<=Y)X`, `pattern:X` মিলবে, কেবল এরপূর্বে যদি  `pattern:Y` থাকে।
+- নেগেটিভ লুকবিহাইন্ড: `pattern:(?<!Y)X`, `pattern:X` মিলবে, কেবল এরপূর্বে যদি  `pattern:Y` না থাকে।
 
-For example, let's change the price to US dollars. The dollar sign is usually before the number, so to look for `$30` we'll use `pattern:(?<=\$)\d+` -- an amount preceded by `subject:$`:
+যেমন, চলুন আমরা দামটিকে US ডলার চিহ্ন দ্বারা প্রকাশ করি। ডলার চিহ্ন সাধারণত সংখ্যার পূর্বে থাকে, সুতরাং `$30` এটি খুঁজতে আমাদের প্যাটার্নটি হবে `pattern:(?<=\$)\d+` -- দামের পূর্বে একটি `subject:$` চিহ্ন:
 
 ```js run
 let str = "1 turkey costs $30";
 
-// the dollar sign is escaped \$
-alert( str.match(/(?<=\$)\d+/) ); // 30 (skipped the sole number)
+// রেজাল্টে ডলার চিহ্নটি আসবে না \$
+alert( str.match(/(?<=\$)\d+/) ); // 30 (পরিমাণটি বাদ যাবে)
 ```
 
-And, if we need the quantity -- a number, not preceded by `subject:$`, then we can use a negative lookbehind `pattern:(?<!\$)\d+`:
+এবং আমাদের যদি পরিমাণটি লাগে, অর্থাৎ আর পূর্বে `subject:$` থাকবে না, এজন্য আমরা নেগেটিভ লুকবিহাইন্ড ব্যবহার করতে পারব `pattern:(?<!\$)\d+`:
 
 ```js run
 let str = "2 turkeys cost $60";
 
-alert( str.match(/(?<!\$)\d+/) ); // 2 (skipped the price)
+alert( str.match(/(?<!\$)\d+/) ); // 2 (দাম বাদ যাবে)
 ```
 
-## Capturing groups
+## ক্যাপচারিং গ্রুপ
 
-Generally, the contents inside lookaround parentheses does not become a part of the result.
+সাধারণত, লুকঅ্যারাউন্ড এর প্যারেন্টেসিস এর কন্টেন্টগুলো রেজাল্টে আসেনা।
 
-E.g. in the pattern `pattern:\d+(?=€)`, the `pattern:€` sign doesn't get captured as a part of the match. That's natural: we look for a number `pattern:\d+`, while `pattern:(?=€)` is just a test that it should be followed by `subject:€`.
+যেমন এই প্যাটার্নে `pattern:\d+(?=€)`, `pattern:€` এই চিহ্নটি আমাদের মিলের অংশ হিসেবে দেখাবে না। এটিই স্বাভাবিক: কেননা আমরা এখানে একটি সংখ্যার `pattern:\d+` খুঁজ করছি, যেখানে `pattern:(?=€)` এটি দ্বারা শুধুমাত্র আমরা নিশ্চিত করছি সংখ্যাটি `subject:€` এরপর আসবে।
 
-But in some situations we might want to capture the lookaround expression as well, or a part of it. That's possible. Just wrap that part into additional parentheses.
+কিন্তু কিছু ক্ষেত্রে আমাদের লুক অ্যারাউন্ডের এক্সপ্রেশনটিকেও ক্যাপচার করতে হতে পারে, অথবা এর একটি অংশও হতে পারে। এটিও সম্ভব। আমাদের শুধু অংশটিকে আরেকটি আলাদা প্যারেন্টেসিসের মধ্যে লিখা লাগবে।
 
-In the example below the currency sign `pattern:(€|kr)` is captured, along with the amount:
+নিচের উদাহরণে আমরা দামের পাশাপাশি কারেন্সী চিহ্নকেও `pattern:(€|kr)` ক্যাপচার করব:
 
 ```js run
 let str = "1 turkey costs 30€";
-let regexp = /\d+(?=(€|kr))/; // extra parentheses around €|kr
+let regexp = /\d+(?=(€|kr))/; // অতিরিক্ত একটি প্যারেন্টেসিস €|kr
 
 alert( str.match(regexp) ); // 30, €
 ```
 
-And here's the same for lookbehind:
+লুকবিহাইন্ডের জন্য অনুরূপ:
 
 ```js run
 let str = "1 turkey costs $30";
@@ -110,21 +110,22 @@ let regexp = /(?<=(\$|£))\d+/;
 alert( str.match(regexp) ); // 30, $
 ```
 
-## Summary
+## সারাংশ
 
-Lookahead and lookbehind (commonly referred to as "lookaround") are useful when we'd like to match something depending on the context before/after it.
+"লুকঅ্যাহেড" এবং "লুকবিহাইন্ড" (একত্রে বলা হয়  "লুকঅ্যারাউন্ড") ব্যবহার উপযোগী যদি কোন অংশ এর আগে বা পরের অংশের উপর নির্ভর করে।
 
-For simple regexps we can do the similar thing manually. That is: match everything, in any context, and then filter by context in the loop.
+সাধারণ রেগুলার এক্সপ্রেশনের মাধ্যমেই আমরা একই ব্যাপার করতে পারি।
+অর্থাৎ যা সবকিছুর সাথেই মিল খুঁজবে, তারপর লুপের মাধ্যমে অই কন্টেক্সট গুলো যাচাই বাচাইয়ের মাধ্যমে খুঁজতে পারি।
 
-Remember, `str.match` (without flag `pattern:g`) and `str.matchAll` (always) return matches as arrays with `index` property, so we know where exactly in the text it is, and can check the context.
+মনে রাখবেন, `str.match` (`pattern:g` ফ্ল্যাগছাড়া) এবং `str.matchAll` (সর্বদাই) মিলগুলোকে `index` অ্যারে আকারে রিটার্ন করে, সুতরাং আমরা জানি আমাদের কোন ইনডেক্সে কোন কন্টেক্সট নিয়ে যাচাই বাছাই করা লাগবে।
 
-But generally lookaround is more convenient.
+তবে লুকঅ্যারাউন্ড এর মাধ্যমে আমরা এটি আরো সহজে করতে পারি।
 
-Lookaround types:
+লুকঅ্যারাউন্ড এর টাইপস:
 
-| Pattern            | type             | matches |
+| প্যাটার্ন            | টাইপ             | ম্যাচ |
 |--------------------|------------------|---------|
-| `X(?=Y)`   | Positive lookahead | `pattern:X` if followed by `pattern:Y` |
-| `X(?!Y)`   | Negative lookahead | `pattern:X` if not followed by `pattern:Y` |
-| `(?<=Y)X` |  Positive lookbehind | `pattern:X` if after `pattern:Y` |
-| `(?<!Y)X` | Negative lookbehind | `pattern:X` if not after `pattern:Y` |
+| `X(?=Y)`   | পজেটিভ লুকঅ্যাহেড | `pattern:X` এর পরবর্তী প্যাটার্ন হবে `pattern:Y` |
+| `X(?!Y)`   | নেগেটিভ লুকঅ্যাহেড | `pattern:X` এর পরবর্তী প্যাটার্ন `pattern:Y` হবে না |
+| `(?<=Y)X` |  পজেটিভ লুকবিহাইন্ড | `pattern:X` এর পূর্ববর্তী প্যাটার্ন হবে `pattern:Y` |
+| `(?<!Y)X` | নেগেটিভ লুকবিহাইন্ড | `pattern:X` এর পূর্ববর্তী প্যাটার্ন `pattern:Y` হবে না |

@@ -1,12 +1,12 @@
-# Find HTML comments
+# এইচটিএমএল কমেন্ট অনুসন্ধান
 
-Find all HTML comments in the text:
+নিচের টেক্সট হতে সকল এইচটিএমএল কমেন্ট খুঁজার একটি প্যাটার্ন লিখুন:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /আপনার প্যাটার্ন/g;
 
 let str = `... <!-- My -- comment
- test --> ..  <!----> .. 
+ test --> ..  <!----> ..
 `;
 
 alert( str.match(regexp) ); // '<!-- My -- comment \n test -->', '<!---->'

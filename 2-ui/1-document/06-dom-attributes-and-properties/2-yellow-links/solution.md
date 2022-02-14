@@ -1,9 +1,9 @@
 
-First, we need to find all external references.
+প্রথমত, আমাদের সকল এক্সটার্নাল লিংক খুঁজে বের করতে হবে।
 
-There are two ways.
+এটি দুইভাবে করতে পারি।
 
-The first is to find all links using `document.querySelectorAll('a')` and then filter out what we need:
+প্রথমে আমরা সকল লিংক কে নিব `document.querySelectorAll('a')` এবং তারপর আমরা আমদের চাহিদামত ফিল্টার করব:
 
 ```js
 let links = document.querySelectorAll('a');
@@ -22,13 +22,13 @@ for (let link of links) {
 }
 ```
 
-Please note: we use `link.getAttribute('href')`. Not `link.href`, because we need the value from HTML.
+দয়া করে নোট রাখুন: আমরা `link.getAttribute('href')` ব্যবহার করব। `link.href` ব্যবহার করব না, কেননা আমাদের HTML ভ্যালুটি লাগবে।
 
-...Another, simpler way would be to add the checks to CSS selector:
+...আরেকটি উপায় হল, CSS selector ব্যবহার করা:
 
 ```js
-// look for all links that have :// in href
-// but href doesn't start with http://internal.com
+// সকল লিংকের href এ :// খুঁজা
+// কিন্তু href, http://internal.com দ্বারা শুরু হবে না
 let selector = 'a[href*="://"]:not([href^="http://internal.com"])';
 let links = document.querySelectorAll(selector);
 

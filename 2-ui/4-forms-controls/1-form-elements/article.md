@@ -125,8 +125,7 @@ That's usually not a problem, because we rarely change names of form elements.
 
 ## Backreference: element.form
 
-For any element, the form is available as `element.form`. So a form references all elements, and elements
-reference the form.
+For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
 
 Here's the picture:
 
@@ -206,7 +205,9 @@ Here is an example:
 </script>
 ```
 
-Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. That's feature is rarely used. In that case we need to use the first way: add/remove the `selected` property from `<option>` subelements.
+Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. Although such functionality is available, it is rarely used. 
+
+In cases that you have to, then use the first way: add/remove the `selected` property from `<option>` subelements.
 
 We can get their collection as `select.options`, for instance:
 

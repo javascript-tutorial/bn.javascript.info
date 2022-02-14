@@ -1,13 +1,13 @@
 
-The pattern start is obvious: `pattern:<style`.
+প্যাটার্নটি শুরু হবে: `pattern:<style`।
 
-...But then we can't simply write `pattern:<style.*?>`, because `match:<styler>` would match it.
+...কিন্তু আমরা এটিকে এভাবে `pattern:<style.*?>` লিখতে পারব না, কেননা `match:<styler>` এর সাথেও মিলবে।
 
-We need either a space after `match:<style` and then optionally something else or the ending `match:>`.
+`match:<style` এর পর আমাদের একটি স্পেস লাগবে এবং এর পর তাদের অপশনাল অ্যাট্রিবিউট লাগবে এবং শেষ হবে `match:>` দ্বারা।
 
-In the regexp language: `pattern:<style(>|\s.*?>)`.
+সুতরাং প্যাটার্নটি হবে: `pattern:<style(>|\s.*?>)`।
 
-In action:
+সমাধানটি হবে:
 
 ```js run
 let regexp = /<style(>|\s.*?>)/g;

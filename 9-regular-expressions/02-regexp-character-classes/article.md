@@ -1,14 +1,14 @@
-# Character classes
+# ক্যারাক্টার ক্লাস
 
-Consider a practical task -- we have a phone number like `"+7(903)-123-45-67"`, and we need to turn it into pure numbers: `79035419441`.
+একটি প্রাক্টিক্যাল টাস্কের কথা চিন্তা করুন -- আমাদের এই ধরণের `"+7(903)-123-45-67"` একটি নাম্বার আছে, এখন আমাদের এটিকে এই ধরণের `79035419441` নাম্বারে পরিবর্তন করতে হবে।
 
-To do so, we can find and remove anything that's not a number. Character classes can help with that.
+তো আমাদের এটি করতে যেসব ক্যারেক্টার "ডিজিট বা অঙ্ক" নয় তাদের বাদ দিতে হবে। ক্যারেক্টার ক্লাসের সাহায্যে আমরা এটি করতে পারি।
 
-A *character class* is a special notation that matches any symbol from a certain set.
+*ক্যারেক্টার ক্লাস* হল একটি বিশেষ চিহ্ন বা বর্ণ যা দ্বারা কোন একটি নির্দিষ্ট সেটের যেকোন সিম্বলকে নির্দেশ করে।
 
-For the start, let's explore the "digit" class. It's written as `pattern:\d` and corresponds to "any single digit".
+শুরুতে, চলুন "ডিজিট" ক্লাস সম্পর্কে জানি। এটি লিখা হয় `pattern:\d` দিয়ে এবং এটি যেকোন "একক ডিজিট বা অঙ্কের" সাথে মিলে।
 
-For instance, the let's find the first digit in the phone number:
+উদাহরণস্বরূপ, চলুন ফোন নম্বরটিতে প্রথমে ডিজিটটি খুঁজি:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -18,39 +18,39 @@ let regexp = /\d/;
 alert( str.match(regexp) ); // 7
 ```
 
-Without the flag `pattern:g`, the regular expression only looks for the first match, that is the first digit `pattern:\d`.
+`pattern:g` ফ্ল্যাগটি ছাড়া, রেগুলার এক্সপ্রেশনটি শুধু প্রথম মিলটি খুঁজে, এখানে প্রথম ডিজিটের প্যাটার্ন হল `pattern:\d`।
 
-Let's add the `pattern:g` flag to find all digits:
+এখন চলুন সব ডিজিটের জন্য ফ্ল্যাগ `pattern:g` ব্যবহার করি:
 
 ```js run
 let str = "+7(903)-123-45-67";
 
 let regexp = /\d/g;
 
-alert( str.match(regexp) ); // array of matches: 7,9,0,3,1,2,3,4,5,6,7
+alert( str.match(regexp) ); // মিলকৃত অঙ্কগুলো অ্যারে আকারে রিটার্ন করেঃ 7,9,0,3,1,2,3,4,5,6,7
 
-// let's make the digits-only phone number of them:
+// চলুন শুধু ডিজিটগুলো দিয়ে ফোন নাম্বারটি তৈরি করিঃ
 alert( str.match(regexp).join('') ); // 79035419441
 ```
 
-That was a character class for digits. There are other character classes as well.
+এই ক্যারাক্টার ক্লাসটি শুধু ডিজিটের জন্য। অন্যান্য ক্যারাক্টারগুলোর জন্যও এই ধরণের ক্লাস আছে।
 
-Most used are:
+সর্বাধিক ব্যবহৃত ক্লাশগুলো হল:
 
-`pattern:\d` ("d" is from "digit")
-: A digit: a character from `0` to `9`.
+`pattern:\d` ("d" দ্বারা বুঝায় "digit" বা অঙ্ক)
+: "digit" বা অঙ্ক হল: `0` to `9` পর্যন্ত অঙ্কগুলো।
 
-`pattern:\s` ("s" is from "space")
-: A space symbol: includes spaces, tabs `\t`, newlines `\n` and few other rare characters, such as `\v`, `\f` and `\r`.
+`pattern:\s` ("s" দ্বারা বুঝায় "space")
+: স্পেস সিম্বল হল: স্পেসসহ, ট্যাব `\t`, নিউলাইন `\n` এছাড়াও কিছু বিরল ক্যারেক্টার আছে, যেমন: `\v`, `\f` এবং `\r`।
 
-`pattern:\w` ("w" is from "word")
-: A "wordly" character: either a letter of Latin alphabet or a digit or an underscore `_`. Non-Latin letters (like cyrillic or hindi) do not belong to `pattern:\w`.
+`pattern:\w` ("w" দ্বারা বুঝায় "word" বা বর্ণ)
+: "wordly" ক্যারেক্টার হল: লাতিন বর্ণমালার বর্ণ বা অঙ্ক বা আন্ডারস্কোর `_`। নন-লাতিন বর্ণ (যেমন হিন্দি বা বাংলা) বর্ণগুলো `pattern:\w` দ্বারা বুঝায় না।
 
-For instance, `pattern:\d\s\w` means a "digit" followed by a "space character" followed by a "wordly character", such as `match:1 a`.
+উদাহরণস্বরূপ, `pattern:\d\s\w` দ্বারা বুঝায় একটি "অঙ্ক" একটি "স্পেস ক্যারেক্টার" একটি "বর্ণ ক্যারাক্টার" যেমন: `match:1 a`।
 
-**A regexp may contain both regular symbols and character classes.**
+**রেগুলার এক্সপ্রেশনে রেগুলার সিম্বল এবং ক্যারেক্টার ক্লাসের সিম্বল একসাথে থাকতে পারে।**
 
-For instance, `pattern:CSS\d` matches a string `match:CSS` with a digit after it:
+উদাহরণস্বরূপ, `pattern:CSS\d` এই প্যাটার্নটি `match:CSS` এবং একটি ডিজিটদ্বারা গঠিত স্ট্রিংয়ের সাথে মিলেঃ
 
 ```js run
 let str = "Is there CSS4?";
@@ -59,32 +59,32 @@ let regexp = /CSS\d/
 alert( str.match(regexp) ); // CSS4
 ```
 
-Also we can use many character classes:
+একইভাবে আমরা অনেক ক্যারেক্টার ক্লাসের মাধ্যমেও চেক করতে পারি:
 
 ```js run
 alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 ```
 
-The match (each regexp character class has the corresponding result character):
+মিলটিতে (প্রতিটি রেগুলার এক্সপ্রেশন ক্যারেক্টার ক্লাস রেজাল্টের ক্যারেক্টারগুলোর সাথে মিলে):
 
 ![](love-html5-classes.svg)
 
-## Inverse classes
+## ইনভার্স ক্লাস
 
-For every character class there exists an "inverse class", denoted with the same letter, but uppercased.
+প্রতিটি ক্যারেক্টার ক্লাসের আবার একটি "ইনভার্স ক্লাস" আছে, তবে এদের বড় হাতের অক্ষর দিয়ে প্রকাশ করা হয়।
 
-The "inverse" means that it matches all other characters, for instance:
+ইনভার্স ক্লাস দ্বারা বুঝানো হয় এটি দ্বারা অন্যান্য ক্যারেক্টার গুলোর সাথে মিলবে, উদাহরণস্বরূপ:
 
 `pattern:\D`
-: Non-digit: any character except `pattern:\d`, for instance a letter.
+: নন-ডিজিট: `pattern:\d` বাদে অন্যান্য ক্যারেক্টার। উদাহরণস্বরূপ, বর্ণমালা।
 
 `pattern:\S`
-: Non-space: any character except `pattern:\s`, for instance a letter.
+: নন-স্পেস: `pattern:\s` বাদে অন্যান্য ক্যারেক্টার। উদাহরণস্বরূপ, বর্ণমালা।
 
 `pattern:\W`
-: Non-wordly character: anything but `pattern:\w`, e.g a non-latin letter or a space.
+: নন-ওয়ার্ডলি ক্যারাক্টার: `pattern:\w` বাদে অন্যান্য ক্যারেক্টার, যেমন: লাতিন বর্ণমালা বা স্পেস বাদে অন্যান্যসমূহ।
 
-In the beginning of the chapter we saw how to make a number-only phone number from a string like `subject:+7(903)-123-45-67`: find all digits and join them.
+এই অধ্যায়ের শুরুতে আমরা দেখেছি কিভাবে স্ট্রিং হতে শুধু ফোন নাম্বার পেতে পারি যেমন: `subject:+7(903)-123-45-67`  এখানে সব ডিজিট খুঁজে তাদের একত্র করা।
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -92,7 +92,8 @@ let str = "+7(903)-123-45-67";
 alert( str.match(/\d/g).join('') ); // 79031234567
 ```
 
-An alternative, shorter way is to find non-digits `pattern:\D` and remove them from the string:
+
+এর পরিবর্তে, আমরা আরো সংক্ষিপ্তভাবে সকল নন-ডিজিট `pattern:\D` নাম্বারগুলোকে বাদ দিয়েও এটি করতে পারি:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -100,104 +101,105 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
-## A dot is "any character"
+## ডট দ্বারা "যেকোন ক্যারেক্টার" বুঝায়
 
-A dot `pattern:.` is a special character class that matches "any character except a newline".
+ডট `pattern:.` হল একটি বিশেষ ক্যারেক্টার যা দ্বারা নিউলাইন `\n` ব্যতীত সকল ক্লাসকে বুঝার।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 alert( "Z".match(/./) ); // Z
 ```
 
-Or in the middle of a regexp:
+রেগুলার এক্সপ্রেশনের মধ্যের কোন ক্যারেক্টারকে বুঝাতে:
 
 ```js run
 let regexp = /CS.4/;
 
 alert( "CSS4".match(regexp) ); // CSS4
 alert( "CS-4".match(regexp) ); // CS-4
-alert( "CS 4".match(regexp) ); // CS 4 (space is also a character)
+alert( "CS 4".match(regexp) ); // CS 4 (স্পেসও একটি ক্যারাক্টার)
 ```
 
-Please note that a dot means "any character", but not the "absense of a character". There must be a character to match it:
+অনুগ্রহ করে মনে রাখবেন যদিও ডট দ্বারা "যেকোন ক্যারেক্টার" বুঝায়, কিন্ত "ক্যারাক্টারের অনুপস্থিতি বা শূণ্যস্থান" কে বুঝায় না। মিলের জন্য অবশ্যই একটি ক্যারেক্টার থাকা লাগবে:
 
 ```js run
-alert( "CS4".match(/CS.4/) ); // null, no match because there's no character for the dot
+alert( "CS4".match(/CS.4/) ); // null, কেননা ডট দ্বারা বুঝাতে কোন ক্যারেক্টার নাই
 ```
 
-### Dot as literally any character with "s" flag
+### s ফ্ল্যাগের সাথে ডট হল যেকোন ক্যারেক্টার
 
-By default, a dot doesn't match the newline character `\n`.
+ডিফল্টভাবে ডট নিউলাইন ক্যারেক্টারের `\n` সাথে মিলেনা।
 
-For instance, the regexp `pattern:A.B` matches `match:A`, and then `match:B` with any character between them, except a newline `\n`:
+উদাহরণস্বরূপ, `pattern:A.B` এই রেগুলার এক্সপ্রেশটি প্রথমে `match:A` এবং `match:B` এর মাঝে নিউলাইন `\n` ব্যতীত অন্য কোন ক্যারেক্টার থাকলে মিলবে:
 
 ```js run
 alert( "A\nB".match(/A.B/) ); // null (no match)
 ```
 
-There are many situations when we'd like a dot to mean literally "any character", newline included.
+অনেক সময় আমাদের ডট দ্বারা নিউলাইনসহ যেকোন ক্যারেক্টারকে বুঝাতে হয়।
 
-That's what flag `pattern:s` does. If a regexp has it, then a dot `pattern:.` matches literally any character:
+`pattern:s` ফ্ল্যাগের সাহায্যে এটি আমরা করতে পারি। যদি রেগুলার এক্সপ্রেশনে এটি থাকে তাহলে ডট `pattern:.` যেকোন ক্যারেক্টারের সাথে মিলে:
 
 ```js run
 alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
 ```
 
-````warn header="Not supported in Firefox, IE, Edge"
-Check <https://caniuse.com/#search=dotall> for the most recent state of support. At the time of writing it doesn't include Firefox, IE, Edge.
+````warn header=" Firefox, IE, Edge এ কাজ করে না"
+বর্তমানে যেসব ব্রাউজারে সাপোর্ট করে তা চেক করুন <https://caniuse.com/#search=dotall>। এই লিখাটি লিখার সময় এটি Firefox, IE, Edge এ কাজ করে না।
 
-Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character".
+সৌভাগ্যক্রমে, অন্য একটি উপায় আছে, যা সব জায়গায় কাজ করে।
+আমরা রেগুলার এক্সপ্রেশনে এভাবেও `pattern:[\s\S]` ব্যবহার করতে পারি যা "যেকোন ক্যারেক্টারের " সাথে মিলে।
 
 ```js run
 alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
 ```
 
-The pattern `pattern:[\s\S]` literally says: "a space character OR not a space character". In other words, "anything". We could use another pair of complementary classes, such as `pattern:[\d\D]`, that doesn't matter.
+`pattern:[\s\S]`-টি দ্বারা আক্ষরিক অর্থে বুঝানো হচ্ছে "একটি স্পেস ক্যারেক্টার অথবা স্পেস ক্যারেক্টার নয়"। অন্য অর্থে, "যেকোন কিছু"। এর পরিবর্তে আমরা এভাবেও করতে পারি `pattern:[\d\D]`।
 
-This trick works everywhere. Also we can use it if we don't want to set `pattern:s` flag, in cases when we want a regular "no-newline" dot too in the pattern.
+ট্রিকটি সবখানে কাজ করবে।  এছাড়াও যদি আমরা এই ফ্ল্যাগটি `pattern:s` ছাড়া ব্যবহার করতে চাই তাও কাজ করবে।
 ````
 
-````warn header="Pay attention to spaces"
-Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+````warn header="স্পেস ব্যবহারের সতর্কতা"
+সাধারণত আমাদের স্পেস ব্যবহারের সতর্কতা অবলম্বন করা প্রয়োজন। যেমন `subject:1-5` এবং `subject:1 - 5` স্ট্রিং দুটি প্রায় একই।
 
-But if a regexp doesn't take spaces into account, it may fail to work.
+কিন্তু যদি রেগুলার এক্সপ্রেশনে আমরা স্পেস এর ব্যাপারে খেয়াল না করি, এটি কাজ করবে না।
 
-Let's try to find digits separated by a hyphen:
-
-```js run
-alert( "1 - 5".match(/\d-\d/) ); // null, no match!
-```
-
-Let's fix it adding spaces into the regexp `pattern:\d - \d`:
+চলুন হাইফেন দ্বারা আলাদা ডিজিটগুলো খুঁজার চেষ্টা করি:
 
 ```js run
-alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, now it works
-// or we can use \s class:
-alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, also works
+alert( "1 - 5".match(/\d-\d/) ); // null, মিল পাবেনা!
 ```
 
-**A space is a character. Equal in importance with any other character.**
+স্পেসযুক্ত করে রেগুলার এক্সপ্রেশনটি ঠিক করি `pattern:\d - \d`:
 
-We can't add or remove spaces from a regular expression and expect to work the same.
+```js run
+alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, এখন এটি কাজ করবে
+// অথবা আমরা \s ক্লাসটিও ব্যবহার করতে পারি:
+alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, এটিও কাজ করবে
+```
 
-In other words, in a regular expression all characters matter, spaces too.
+**স্পেসও একটি ক্যারেক্টার। এটি অন্যান্য ক্যারেক্টারের মত গুরুত্বপূর্ণ।**
+
+রেগুলার এক্সপ্রেশনে স্পেস যোগ বা বাদ দিয়ে সঠিকভাবে কাজ করবে আমরা এই আশা করতে পারিনা।
+
+অন্য অর্থে বলা যায়, রেগুলার এক্সপ্রেশনে স্পেসসহ প্রতিটি ক্যারেক্টার তাৎপর্যপূর্ণ।
 ````
 
-## Summary
+## সারাংশ
 
-There exist following character classes:
+রেগুলার এক্সপ্রেশনে নিম্নোক্ত ক্যারেক্টার ক্লাসগুলো আছে:
 
-- `pattern:\d` -- digits.
-- `pattern:\D` -- non-digits.
-- `pattern:\s` -- space symbols, tabs, newlines.
-- `pattern:\S` -- all but `pattern:\s`.
-- `pattern:\w` -- Latin letters, digits, underscore `'_'`.
-- `pattern:\W` -- all but `pattern:\w`.
-- `pattern:.` -- any character if with the regexp `'s'` flag, otherwise any except a newline `\n`.
+- `pattern:\d` -- ডিজিট বা অঙ্ক।
+- `pattern:\D` -- নন-ডিজিট বা অঙ্ক ব্যতীত অন্যান্য ক্যারাক্টার।
+- `pattern:\s` -- স্পেস, ট্যাব, নিউলাইন।
+- `pattern:\S` -- `pattern:\s` ব্যতীত বাকীসব।
+- `pattern:\w` -- লাতিন বর্ণমালা, অঙ্ক, আন্ডারস্কোর `'_'`।
+- `pattern:\W` -- `pattern:\w` ব্যতীত বাকীসব।
+- `pattern:.` -- যেকোন ক্যারাক্টার যদি `'s'` ফ্ল্যাগ থাকে, অন্যথায় নিউলাইন `\n` ব্যতীত বাকীসব।
 
-...But that's not all!
+...কিন্ত এখানেই শেষ নয়!
 
-Unicode encoding, used by JavaScript for strings, provides many properties for characters, like: which language the letter belongs to (if it's a letter) it is it a punctuation sign, etc.
+ইউনিকোড এনকোডিং, জাভাস্ক্রিপ্টে স্ট্রিংয়ে অন্যান্য বিভিন্ন ক্যারেক্টার যেমনঃ অন্যান্য ভাষার বর্ণ বা চিহ্ন ইত্যাদি ব্যবহৃত হয়।
 
-We can search by these properties as well. That requires flag `pattern:u`, covered in the next article.
+আমরা এই ধরণের প্রোপার্টিগুলো দ্বারাও সার্চ করতে পারি। এজন্য এই ফ্ল্যাগটি `pattern:u` প্রয়োজন, যা পরবর্তী অনুচ্ছেদে আমরা জানব।

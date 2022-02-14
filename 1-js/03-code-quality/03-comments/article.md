@@ -1,14 +1,14 @@
-# Comments
+# কমেন্ট
 
-As we know from the chapter <info:structure>, comments can be single-line: starting with `//` and multiline: `/* ... */`.
+ইতপূর্বে আমরা কোডের গঠন চ্যাপ্টারে দেখেছি যে কমেন্ট এক লাইনের (সিংগেল লাইন) যা `//` দিয়ে শুরু এবং একাধিক লাইনের (মাল্টি লাইন) যা `/* ... */` শুরু হতে পারে.
 
-We normally use them to describe how and why the code works.
+সাধারণত আমরা কোডটি কিভাবে এবং কেনো কাজ করছে তার বর্ণনা দেবার জন্য কমেন্ট ব্যাবহার করে থাকি।
 
-At first sight, commenting might be obvious, but novices in programming often use them wrongly.
+প্রাথমিকভাবে কমেন্ট সুস্পষ্ট মনে হতে পারে, তবে প্রোগ্রামিং এ নবাগতরা প্রায়শই কমেন্ট ভুলভাবে ব্যবহার করে থাকে।
 
-## Bad comments
+## ত্রুটিপূর্ণ কমেন্ট
 
-Novices tend to use comments to explain "what is going on in the code". Like this:
+নবাগতদের মাঝে কমেন্ট ব্যবহার করে "এই কোডে কি ঘটছে" তা ব্যাখ্যা করার প্রবণতা দেখা যায়। এরকমঃ
 
 ```js
 // This code will do this thing (...) and that thing (...)
@@ -18,13 +18,13 @@ complex;
 code;
 ```
 
-But in good code, the amount of such "explanatory" comments should be minimal. Seriously, the code should be easy to understand without them.
+কিন্ত ভালো কোডে এরকম "ব্যাখ্যামূলক" কমেন্টে এর উপস্থিতি হওয়া উচিৎ ন্যূনতম। কমেন্ট ছাড়াই কোড সহজবোধ্য হওয়াটা গুরুত্বপূর্ণ। 
 
-There's a great rule about that: "if the code is so unclear that it requires a comment, then maybe it should be rewritten instead".
+এ ব্যাপারে একটি সুন্দর নিয়ম আছেঃ "কোডটি যদি এতটাই অস্পষ্ট হয় যে এর জন্য একটি কমেন্ট প্রয়োজন, তবে সম্ভবত কমেন্ট এর পরিবর্তে এটি পুনরায় লেখা উচিত" 
 
-### Recipe: factor out functions
+### কৌশল: ফাংশন পুনর্গঠন
 
-Sometimes it's beneficial to replace a code piece with a function, like here:
+অনেক ক্ষেত্রে কোডের অংশবিশেষ এর বদলে ফাংশন ব্যবহার করাটা সুবিধাজনক। যেমনঃ
 
 ```js
 function showPrimes(n) {
@@ -43,8 +43,7 @@ function showPrimes(n) {
 }
 ```
 
-The better variant, with a factored out function `isPrime`:
-
+ `isPrime` ফাংশন দিয়ে এর শ্রেয়তর বিকল্পঃ 
 
 ```js
 function showPrimes(n) {
@@ -65,11 +64,11 @@ function isPrime(n) {
 }
 ```
 
-Now we can understand the code easily. The function itself becomes the comment. Such code is called *self-descriptive*.
+এখন আমরা খুব সহজেই কোডটি বুঝতে পারছি। ফাংশনটি নিজেই কমেন্ট হিসবে কাজ করছে। এ ধরনের কোড কে বলা হয় "স্ব-বর্ণনামূলক"
 
-### Recipe: create functions
+### কৌশলঃ ফাংশন তৈরি
 
-And if we have a long "code sheet" like this:
+এবং যদি আমাদের নিচের মত এরকম দীর্ঘ কোড শিট থাকেঃ
 
 ```js
 // here we add whiskey
@@ -90,7 +89,7 @@ for(let t = 0; t < 3; t++) {
 // ...
 ```
 
-Then it might be a better variant to refactor it into functions like:
+সেক্ষেত্রে শ্রেয়তর বিকল্পের জন্য কোডটি কে নিচের মত ফাংশনে পুনর্ঘঠন করা যেতে পারেঃ
 
 ```js
 addWhiskey(glass);
@@ -111,70 +110,67 @@ function addJuice(container) {
 }
 ```
 
-Once again, functions themselves tell what's going on. There's nothing to comment. And also the code structure is better when split. It's clear what every function does, what it takes and what it returns.
+ফাংশন নিজেরাই কি ঘটছে ব্যাখ্যা করে। এখানে কমেন্ট লেখার কিছু নেই। এছাড়াও আলাদা আলাদা থাকলে কোডের গঠন ভালো হয়। এটা সুপষ্ট যে প্রতিটি ফাংশন কি করে, কি গ্রহণ করে এবং কি রিটার্ন করে। 
 
-In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
+বাস্তবে,আমরা সম্পুর্ণরূপে ব্যখ্যা সম্বলিত কমেন্ট পরিহার করতে পারি না। এখানে উৎকর্ষতা সাধনের জন্য অনেক জটিল অ্যালগরিদম এবং অনেক সুক্ষ্ম সমন্বয় করা হয়। কিন্ত সাধারণভাবে আমাদের উচিৎ কোড কে সহজ-সরল এবং স্ব-বর্ণ্নামূলক রাখার জন্য চেষ্টা করা ।  
 
-## Good comments
+## ভালো কমেন্ট 
 
-So, explanatory comments are usually bad. Which comments are good?
+সুতরাং, ব্যাখ্যামূলক কমেন্ট সাধারণত খারাপ। সেক্ষেত্রে কোন ধরণের কমেন্ট ভালো?
 
-Describe the architecture
-: Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) to build high-level architecture diagrams explaining the code. Definitely worth studying.
+গঠনপ্রণালী বর্ণনা করুনঃ কম্পোনেন্ট এর সার্বিক একটি রূপরেখা উল্লেখ করুন, এদের পারষ্পরিক মিথষ্ক্রিয়া এবং ভিন্ন ভিন্ন কন্ট্রোল ফ্লো সম্পর্কে বলুন। সংক্ষেপে, কোড এর বার্ডস আই ভিউ। কোড সহজবোধ্য উপস্থাপন করার জন্য সার্বিক রূপরেখা তৈরির বিশেষ ধরনের ল্যাংগুয়েজ [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) রয়েছে। 
 
-Document function parameters and usage
-: There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+ফাংশন এর প্যারামিটার এবং ব্যাবহার লিপিবদ্ধ করুনঃ ফাংশন এর প্যারামিটার, ব্যাবহার, রিটার্ন ভ্যালু লিপিবদ্ধ করার জন্য বিশেষ ধরনের ল্যাংগুয়েজ [JSDoc](http://en.wikipedia.org/wiki/JSDoc) রয়েছে।
 
-    For instance:
-    ```js
-    /**
-     * Returns x raised to the n-th power.
-     *
-     * @param {number} x The number to raise.
-     * @param {number} n The power, must be a natural number.
-     * @return {number} x raised to the n-th power.
-     */
-    function pow(x, n) {
-      ...
-    }
-    ```
+উদাহরণস্বরূপঃ
 
-    Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+```js
+/**
+ * Returns x raised to the n-th power.
+ *
+ * @param {number} x The number to raise.
+ * @param {number} n The power, must be a natural number.
+ * @return {number} x raised to the n-th power.
+ */
+function pow(x, n) {
+  ...
+}
+```
 
-    By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+এই ধরনের কমেন্ট এর মাধ্যমে আমরা কোড না দেখেই ফাংশনটির কাজ এবং ব্যবহার বুঝতে পারি।
 
-    Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+প্রসঙ্গত উল্লেখ্য, অনেক এডিটর যেমন [WebStorm](https://www.jetbrains.com/webstorm/) এই ধরনের ল্যাংগুয়েজ বুঝতে পারে এবং অটোকমপ্লিট ও স্বয়ংক্রিয় কোড-পরীক্ষায় তা ব্যবহার করে থাকে। 
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+এছাড়াও, কমেন্ট থেকে এইচটিএমএল-ডকুমেন্টেশন তৈরির জন্য [JSDoc 3](https://github.com/jsdoc3/jsdoc) এর মত টুল রয়েছে। JSDoc সম্পর্কে আরো জানতে <http://usejsdoc.org/> দেখতে পারেন।  
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+কাজটি কেনো এভাবে সমাধান করা হয়েছে? : যা লিখিত থাকে তা গুরুত্বপূর্ণ। তবে যা *অলিখিত* সেটা কি ঘটছে তা বোঝার জন্য অধিক গুরুত্বপূর্ণ হতে পারে। এই কাজটি কেনো ঠিক এইভাবেই সমাধান করা হয়েছে? এক্ষেত্রে কোড কোন উত্তর দেয় না।  
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+    যদি কাজটি সমাধানের অনেকগুলো উপায় থাকে, সেক্ষেত্রে কেনো এইটি? বিশেষভাবে যখন এটি আপাতদৃষ্টিতে সবচেয়ে সুস্পষ্ট সমাধান নয়  
 
-    Comments that explain the solution are very important. They help to continue development the right way.
+    এইধরনের কমেন্ট ছাড়া নিম্নলিখিত পরস্থিতি হতে পারেঃ 
+    ১। আপনি অথবা আপনার সহকর্মীরা কিছুক্ষণ পূর্বে লিখিত কোডটি দেখলেন এবং ভাবলেন কোডটি সাব-অপটিমাল 
+    ২। আপনি ভাবলেনঃ " আমি কতটা বোকাটা ছিলাম,আর এখন কতটা বুদ্ধিমান ", এবং "আরো সুস্পষ্ট এবং সঠিক" বিকল্প ব্যবহার করে পুনরায় কোডটি লিখলেন  
+    ৩। ... কোড পুনরায় লেখার তাগিদ থাকা ভালো। কিন্তু কাজকরার প্রক্রিয়াআপনি দেখলেন "অধিক সুস্পষ্ট" সমাধানটি তে আসলে ঘাটতি রয়েছে।  এমনকি আপনি খুব অস্পষ্টভাবে মনে করতে পারবেন কেনো এমন হচ্ছে, কারণ আপনি অনেক সময় আগে এই চেষ্টা করেছেন। আপনি আবার সঠিক বিকল্পে ফিরে আসবেন কিন্তু  এর মাঝে কিছু সময় অপচয় হলো। 
 
-Any subtle features of the code? Where they are used?
-: If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+    সমাধান কে ব্যখ্যাকারী কমেন্ট খুব গুরুত্বপূর্ণ। এই ধরনের কমেন্ট সঠিক প্রক্রিয়ায় ডেভেলপমেন্ট করতে সাহাজ্য করে। 
 
-## Summary
+কোড এ কোন সূক্ষ্ম বৈশিষ্ট রয়েছে? কেনো এই ধরনের বৈশিষ্ট ব্যবহার করা হয়েছে?: যদি কোড এ কোন সূক্ষ্ম অথবা সহজাত নয় এরকম কিছু থাকে তা অবশ্যই মন্তব্যে অন্তর্ভূক্ত করা উচিত।
 
-An important sign of a good developer is comments: their presence and even their absence.
+## সারসংক্ষেপ
 
-Good comments allow us to maintain the code well, come back to it after a delay and use it more effectively.
+কমেন্ট এর উপস্থিতি/অনুপস্থিতি একজন ভালো ডেভেলপার এর বৈশিষ্ট। 
 
-**Comment this:**
+ভালো কমেন্ট আমাদের সঠিকভাবে কোড রক্ষণাবেক্ষণ এবং কিছু সময় এর ব্যবধানে কোডটিকে কার্যকরভাবে ব্যবহার করতে সাহাজ্য করে।
 
-- Overall architecture, high-level view.
-- Function usage.
-- Important solutions, especially when not immediately obvious.
+**কমেন্ট করুনঃ**
 
-**Avoid comments:**
+- সামগ্রিক গঠনকৌশল, বাহ্যিক কাঠামো।
+- ফাংশনের ব্যবহার।
+- গুরুত্বপূর্ণ সমাধান, বিশেষভাবে যখন তা সুস্পষ্টভাবে প্রতীয়মান নয়।
 
-- That tell "how code works" and "what it does".
-- Put them in only if it's impossible to make the code so simple and self-descriptive that it doesn't require them.
+**কমেন্ট পরিত্যাগ করুনঃ**
 
-Comments are also used for auto-documenting tools like JSDoc3: they read them and generate HTML-docs (or docs in another format).
+- যে কমেন্ট "কোড কিভাবে কাজ করে" এবং "কি কাজ করে" সেটা উপস্থাপন করে। 
+- সহজ এবং স্ব-ব্যখ্যায়িত কোড, যা তে কমেন্ট প্রয়োজন হয় না, তা যদি অসম্ভব হয় কেবলমাত্র সেক্ষেত্রে কমেন্ট করুন। 
+
+অধিকন্ত JSDoc3 এর মত স্বয়ংক্রিয়-লিপিবদ্ধ করার টুল () কাজে কমেন্ট ব্যবহার করা হয়ে থাকে। এরা কমেন্ট থেকে এইচটিএমএল ডকুমেন্ট তৈরি করে (অথবা অন্য কোন ফরম্যাট এর ডকুমেন্ট)
