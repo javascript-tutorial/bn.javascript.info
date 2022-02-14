@@ -27,7 +27,11 @@ alert(user); // {name: "John", age: 30}
 
 ## JSON.stringify
 
+<<<<<<< HEAD
 [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) হল  ভ্যালু বা অবজেক্টকে একটি সাধারণ ফর্মে দেখানোর পদ্ধতি [RFC 4627](http://tools.ietf.org/html/rfc4627)। এটি সর্বপ্রথম জাভাস্ক্রিপ্টের জন্য তৈরি করা হয়েছিল, তবে বর্তমানে অন্যান্য সকল ল্যাংগুয়েজে `JSON` নিয়ে কাজ করার নিজস্ব লাইব্রেরী আছে। তাই এখন ক্লায়েন্ট থেকে সার্ভারের (যেমন পাইথন, রুবি, জাভা, পিএইচপি ইত্যাদির) সাথে সহজেই `JSON` ডাটা আদান-প্রদান করা যায়।
+=======
+The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 জাভাস্ক্রিপ্টে `JSON` এর দুটি মেথড আছে:
 
@@ -103,9 +107,15 @@ JSON ল্যাংগুয়েজের উপর সীমাবদ্ধ ন
 
 সাধারণত:
 
+<<<<<<< HEAD
 - ফাংশন প্রপার্টি (methods)।
 - Symbolic প্রপার্টি।
 - অথবা প্রপার্টির ভ্যালু `undefined` হলে।
+=======
+- Function properties (methods).
+- Symbolic keys and values.
+- Properties that store `undefined`.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 ```js run
 let user = {
@@ -275,6 +285,7 @@ name:         John
 name:         Alice
 place:        [object Object]
 number:       23
+occupiedBy: [object Object]
 */
 ```
 
@@ -327,7 +338,13 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
+<<<<<<< HEAD
 `space` প্যারামিটারটি আমরা ব্যবহার করি লগ কে সুন্দর ভাবে দেখাতে।
+=======
+The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+
+The `space` parameter is used solely for logging and nice-output purposes.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 ## নিজস্ব "toJSON"
 
