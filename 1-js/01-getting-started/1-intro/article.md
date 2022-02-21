@@ -29,6 +29,7 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 বিভিন্ন ইঞ্জিনের আলাদা আলাদা "কোডনাম" রয়েছে । উদাহরণ স্বরূপ:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [V8](https://bn.wikipedia.org/wiki/V8_(JavaScript_engine) -- ক্রোম এবং অপেরা
 - [স্পাইডার মাংকি](https://bn.wikipedia.org/wiki/SpiderMonkey) -- ফায়ারফক্স.
 - ...আরও অনেক কোডনাম রয়েছে যেমন ইন্টারনেট এক্সপ্লোরার এর বিভিন্ন ভার্সন এর জন্য "Trident" এবং "Chakra", মাইক্রোসফ্ট এজের জন্য "ChakraCore", সাফারির জন্য "Nitro" এবং "SquirrelFish" ইত্যাদি।
@@ -39,6 +40,13 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 উপরের টার্ম গুলি মনে রাখা ভাল, কারণ সেগুলি ইন্টারনেটে ডেভেলপার আর্টিকেলে ব্যবহৃত হয়। আমরাও সেগুলো ব্যবহার করব। উদাহরণস্বরূপ, যদি "একটি X ফিচার V8 এ সাপোর্ট করে", তবে সম্ভবত এটি ক্রোম এবং অপেরাতেও কাজ করে।
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 
 ```smart header="ইঞ্জিনগুলি কিভাবে কাজ করে?"
 
@@ -69,7 +77,11 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 ## জাভাস্ক্রিপ্ট ব্রাউজারে কী করতে পারে না?
 
+<<<<<<< HEAD
 ব্রাউজারে জাভাস্ক্রিপ্টের ক্ষমতাগুলি ব্যবহারকারীর সুরক্ষার জন্য সীমাবদ্ধ। উদ্দেশ্যটি হ'ল কোনও খারাপ ওয়েবপেজকে ব্যক্তিগত তথ্যে প্রবেশ করা বা ব্যবহারকারীর ডেটা ক্ষতিগ্রস্থ করা থেকে বিরত রাখা।
+=======
+JavaScript's abilities in the browser are limited for the sake of a user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 
 এই জাতীয় বিধিনিষেধের উদাহরণগুলির মধ্যে রয়েছে:
 
@@ -95,10 +107,17 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 জাভাস্ক্রিপ্ট সম্পর্কে কমপক্ষে _ তিনটি _ দুর্দান্ত জিনিস রয়েছে:
 
+<<<<<<< HEAD
 ```তুলনা
 + HTML/CSS এর সাথে সম্পূর্ণ ইন্টিগ্রেশন।
 + সহজ জিনিস সহজভাবে করা হয়।
 + প্রত্যেকটা প্রধান ব্রাউজারেই স্বাভাবিক ভাবে চলে।
+=======
+```compare
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 ```
 
 জাভাস্ক্রিপ্ট একমাত্র ব্রাউজার প্রযুক্তি যা এই তিনটি জিনিসকে একত্রিত করে।
@@ -129,8 +148,13 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 - [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
 - [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
 - [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+<<<<<<< HEAD
 - [Brython](https://brython.info/) is a Python transpiler to JavaScript that allow to write application in pure Python without JavaScript.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
+=======
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+>>>>>>> e2f9e5840737e00846bfd492192d8a3828820c60
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
 
@@ -142,6 +166,6 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 - এমন অনেক প্রোগ্রামিং ভাষা রয়েছে যা জাভাস্ক্রিপ্টে "রূপান্তরিত" হয়ে যায় এবং নির্দিষ্ট বৈশিষ্ট্য সরবরাহ করে। জাভাস্ক্রিপ্টে দক্ষতা অর্জনের পরে কমপক্ষে সংক্ষেপে এগুলি একবার দেখার পরামর্শ দেওয়া হয়।
 =======
 - JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
 - There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
