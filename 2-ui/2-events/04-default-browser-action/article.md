@@ -17,7 +17,11 @@
 - সাধারণত `event` অবজেক্টের মাধ্যমে, এর একটি মেথড আছে যাকে কল করার মাধ্যমে `event.preventDefault()` ।
 - আর যদি ইভেন্টটি (`addEventListener`) এর পরিবর্তে `on<event>` এর মাধ্যমে অ্যাসাইন করা হয়, তাহলে `false` রিটার্নের মাধ্যমে।
 
+<<<<<<< HEAD
 নিচের উদাহরণটিতে ব্রাউজারের URL নেভিগেশন কাজ করবে না:
+=======
+In this HTML, a click on a link doesn't lead to navigation; the browser doesn't do anything:
+>>>>>>> 2cca9a9d09fdd45819832294225aa3721fa5a2d4
 
 ```html autorun height=60 no-beautify
 <a href="/" onclick="return false">Click here</a>
@@ -96,7 +100,11 @@ menu.onclick = function(event) {
 
 ঐচ্ছিক `passive: true` অপশনটির মাধ্যমে আমরা `addEventListener` হ্যান্ডেলারে নিশ্চিত করতে পারি এটি `preventDefault()` কে কল করবে না।
 
+<<<<<<< HEAD
 এটি কেন করা প্রয়োজন?
+=======
+Why might that be needed?
+>>>>>>> 2cca9a9d09fdd45819832294225aa3721fa5a2d4
 
 কিছু ইভেন্ট আছে যেমন মোবাইল ডিভাইসে `touchmove` (ইউজার যখন স্ক্রিন স্ক্রল করতে চাইবে), এটি ডিফল্ট ভাবে স্ক্রল করবে, কিন্তু আমরা চাইলে `preventDefault()` এর মাধ্যমে এটিকে রোধ করতে পারি।
 
