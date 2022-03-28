@@ -351,7 +351,7 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-// run bench(upperSlice) and bench(upperLoop) each 10 times alternating
+// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -388,10 +388,17 @@ V8 ইঞ্জিন সম্পর্কে জানতে এটি এক�
 
 স্ট্রিংয়ের ফরম্যট হবে: `YYYY-MM-DDTHH:mm:ss.sssZ`, যেখানে:
 
+<<<<<<< HEAD
 - `YYYY-MM-DD` -- তারিখ: year-month-day.
 - ক্যারাক্টার `"T"` ব্যবহার হয় ডেলিমিটার হিসেবে।
 - `HH:mm:ss.sss` -- সময়: hours, minutes, seconds এবং milliseconds.
 - `'Z'` অপশনাল যা টাইমজোনকে নির্দেশ করে `+-hh:mm`, যেমন বাংলাদেশের (UTC+6) জন্য '2020-01-26T13:51:50.417+06:00'। শুধুমাত্র `Z` বুঝায় UTC+0
+=======
+- `YYYY-MM-DD` -- is the date: year-month-day.
+- The character `"T"` is used as the delimiter.
+- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
+- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 
 এছাড়াও আমরা সংক্ষিপ্তভাবে এদের কল করতে পারি, যেমন `YYYY-MM-DD` বা `YYYY-MM` এমনকি `YYYY`।
 
@@ -428,9 +435,15 @@ alert(date);
 
 ```js run
 alert(`Loading started ${performance.now()}ms ago`);
+<<<<<<< HEAD
 // এটি দেখাবে এমন কিছু: "Loading started 34731.26000000001ms ago"
 // .26 হল মাইক্রোসেকেন্ড (260 microseconds)
 // দশমিকের পর ৩ ঘর পর্যন্ত সঠিক মান দেখাতে পারে
+=======
+// Something like: "Loading started 34731.26000000001ms ago"
+// .26 is microseconds (260 microseconds)
+// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+>>>>>>> 741d90ce8a730d66e987bff5e9794d6e41cb2f05
 ```
 
 Node.js এর আছে `microtime` মডুইল। সাধারণত প্রতিটি এনভায়রনমেন্টের নিজস্ব মেথড আছে যা `Date` এর তুলনায় আরো নির্দিষ্ট সময় নির্ভুলভাবে প্রদান করতে পারে।
