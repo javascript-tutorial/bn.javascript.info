@@ -1,10 +1,17 @@
 
 # Map এবং Set
 
+<<<<<<< HEAD
 এ পর্যন্ত আমরা নিম্নোক্ত কমপ্লেক্স ডাটা স্ট্রাকচার সমূহ শিখেছি:
 
 - অবজেক্টস যা একটি কালেকশনকে কী/ভ্যালু আকারে সংরক্ষণ করে।
 - অ্যারে যা একটি কালেকশনকে ইনডেক্সক্রমে সংরক্ষণ করে।
+=======
+Till now, we've learned about the following complex data structures:
+
+- Objects are used for storing keyed collections.
+- Arrays are used for storing ordered collections.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 কিন্তু বাস্তবক্ষেত্রে এরা পর্যাপ্ত না। যার ফলে `Map` এবং `Set` নামের আরো দুটি ডাটা স্ট্রাকচার বিদ্যমান।
 
@@ -41,8 +48,13 @@ alert( map.size ); // 3
 
 এখানে আমরা দেখছি এটি কী(Key) কে অবজেক্টের মত স্ট্রিংয়ে রূপান্তর করে না। সুতরাং যেকোন ডাটা টাইপের কী রাখা সম্ভব।
 
+<<<<<<< HEAD
 ```smart header=" `Map` এর মধ্যে `map[key]` ব্যবহার করা উচিত নই"
 যদিও `map[key]` এটি কাজ করে, যেমন আমরা `map[key] = 2` সেট করতে পারি, এক্ষেত্রে ইঞ্জিন `map` কে plain JavaScript object হিসেবে বিবেচনা করে, সুতরাং এভাবে ব্যবহার করা উচিত নয়।
+=======
+```smart header="`map[key]` isn't the right way to use a `Map`"
+Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (only string/symbol keys and so on).
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 তার পরিবর্তে আমরা `map` মেথড সমূহঃ `set`, `get` ইত্যাদি ব্যবহার করবো।
 ```
@@ -63,15 +75,21 @@ visitsCountMap.set(john, 123);
 alert( visitsCountMap.get(john) ); // 123
 ```
 
+<<<<<<< HEAD
 `Map` এর অন্যতম গুরুত্বপূর্ন সুবিধা হল আমরা অবজেক্টকে কী(Key) হিসেবে সংরক্ষন করতে পারি। আবার, `Object` এ আমরা কী(Key) হিসেবে একটি অবজেক্টকে সেট করতে পারি, তবে এটি অবজেক্ট কী(Key) হিসেবে কাজ করবে না।
+=======
+Using objects as keys is one of the most notable and important `Map` features. The same does not count for `Object`. String as a key in `Object` is fine, but we can't use another `Object` as a key in `Object`.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 চলুন দেখা যাক:
 
 ```js run
 let john = { name: "John" };
+let ben = { name: "Ben" };
 
 let visitsCountObj = {}; // একটি অবজেক্ট
 
+<<<<<<< HEAD
 visitsCountObj[john] = 123; // কী হিসেবে একটি অবজেক্ট সেট করছি
 
 *!*
@@ -81,6 +99,18 @@ alert( visitsCountObj["[object Object]"] ); // 123
 ```
 
 যেহেতু `visitsCountObj` একটি অবজেক্ট, এটি কোন একটি প্রপার্টি সেট হওয়ার সময় কী(Key) কে স্ট্রিংয়ে রূপান্তর করে নেয়, যেমন `john` অবজেক্টের স্ট্রিং কনভার্শন হবে `"[object Object]"`। যা আমাদের লক্ষ্য নয়।
+=======
+visitsCountObj[ben] = 234; // try to use ben object as the key
+visitsCountObj[john] = 123; // try to use john object as the key, ben object will get replaced
+
+*!*
+// That's what got written!
+alert( visitsCountObj["[object Object]"] ); // 123 
+*/!*
+```
+
+As `visitsCountObj` is an object, it converts all `Object` keys, such as `john` and `ben` above, to same string `"[object Object]"`. Definitely not what we want.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ```smart header="`Map` কীভাবে কী(Key) যাচাই করে"
 দুটি কী(Key) কে যাচাই করতে, `Map` এই অ্যালগরিদমটি ব্যবহার করে [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero)। এটি অনেকটা `===` এর মত, তবে এটি `NaN` এর ক্ষেত্রে ভিন্ন সাধারণত (`NaN` === `NaN`) এর মান হয় `false` তবে `Map` এ `NaN` কে যাচায় করতে পারে। সুতরাং কী(Key) হিসেবে `NaN` রাখা যাবে।
@@ -303,6 +333,7 @@ set.forEach((value, valueAgain, set) => {
 
 মেথডস এবং প্রপার্টি:
 
+<<<<<<< HEAD
 - `new Map()` -- নতুন Map তৈরি।
 - `map.set(key, value)` -- Map এ নতুন একটি রেকর্ড সংযুক্ত করতে।
 - `map.get(key)` --  Map এর কোন একটি রেকর্ড রিটার্ন করতে, যদি `key` টি Map এ না থাকে তাহলে `undefined` রিটার্ন করে।
@@ -310,6 +341,15 @@ set.forEach((value, valueAgain, set) => {
 - `map.delete(key)` -- Map এর কোন একটি রেকর্ড ডিলিট করতে।
 - `map.clear()` -- সম্পূর্ণ Map কালেকশনকে ডিলিট করতে।
 - `map.size` -- Map এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
+=======
+- `new Map([iterable])` -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
+- `map.set(key, value)` -- stores the value by the key, returns the map itself.
+- `map.get(key)` -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- `map.has(key)` -- returns `true` if the `key` exists, `false` otherwise.
+- `map.delete(key)` -- removes the value by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
+- `map.clear()` -- removes everything from the map.
+- `map.size` -- returns the current element count.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 রেগুলার `Object` এর সাথে পার্থক্য:
 

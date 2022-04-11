@@ -19,7 +19,11 @@
 
 প্রথমত, চলুন কোন প্রপার্টির ফ্ল্যাগ কীভাবে দেখা যায় তা দেখি।
 
+<<<<<<< HEAD
 এই মেথডটি কোন একটি প্রপার্টির সকল তথ্য দেখাবে [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor)।
+=======
+The method [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 লিখার নিয়ম:
 ```js
@@ -54,7 +58,11 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
+<<<<<<< HEAD
 নিজস্ব ফ্ল্যাগ সেট করতে ব্যবহার করি [Object.defineProperty](mdn:js/Object/defineProperty)।
+=======
+To change the flags, we can use [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 সিনট্যাক্স হল:
 
@@ -194,7 +202,11 @@ alert(Object.keys(user)); // name
 
 এই non-configurable ফ্ল্যাগটি (`configurable:false`) কিছু বিল্ট-ইন অবজেক্টের প্রপার্টির জন্য সেট করা আছে।
 
+<<<<<<< HEAD
 non-configurable ফ্ল্যাগ সেট করা হলে প্রপার্টিটি ডিলিট করা সম্ভব না।
+=======
+A non-configurable property can't be deleted, its attributes can't be modified.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 যেমন, `Math.PI` হল non-writable, non-enumerable এবং non-configurable:
 
@@ -214,11 +226,12 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 সুতরাং আপনি চাইলেও `Math.PI` এর মান পরিবর্তন বা ডিলিট করতে পারবেন না।
 
 ```js run
-Math.PI = 3; // Error
+Math.PI = 3; // Error, because it has writable: false
 
 // delete Math.PI এটিও কাজ করবে না
 ```
 
+<<<<<<< HEAD
 কোন একটি প্রপার্টিকে non-configurable হিসেবে শুধুমাত্র একবার সেট করতে পারবেন। আমরা পুনরায় এটিকে `defineProperty` এর মাধ্যমে পরিবর্তন করতে পারব না।
 
 সুস্পষ্ট ভাবে বলতে গেলে non-configurability এর জন্য `defineProperty` এর মধ্যে কিছু বিধিনিষেধ তৈরি হয়:
@@ -226,6 +239,22 @@ Math.PI = 3; // Error
 2. `get/set` দ্বারা পরিবর্তন করা যাবে না।
 
 এখানে `user.name` non-configurable, তবে আমরা চাইলে একে রি-অ্যাসাইন করতে পারি:
+=======
+We also can't change `Math.PI` to be `writable` again:
+
+```js run
+// Error, because of configurable: false
+Object.defineProperty(Math, "PI", { writable: true });
+```
+
+There's absolutely nothing we can do with `Math.PI`.
+
+Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+
+**Please note: `configurable: false` prevents changes of property flags and its deletion, while allowing to change its value.**
+
+Here `user.name` is non-configurable, but we can still change it (as it's writable):
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ```js run
 let user = {
@@ -240,7 +269,11 @@ user.name = "Pete"; // works fine
 delete user.name; // Error
 ```
 
+<<<<<<< HEAD
 এবং এখানে আমরা `user.name` কে যদি একেবারে কনস্ট্যান্ট করে দিতে চাই:
+=======
+And here we make `user.name` a "forever sealed" constant, just like the built-in `Math.PI`:
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ```js run
 let user = {
@@ -259,10 +292,19 @@ delete user.name;
 Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
+```smart header="The only attribute change possible: writable true -> false"
+There's a minor exception about changing flags.
+
+We can change `writable: true` to `false` for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+```
 
 ## Object.defineProperties
 
+<<<<<<< HEAD
 আরেকটি মেথড আছে যেটি দ্বারা একবারে একাধিক প্রপার্টি সেট করা যায় [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties)।
+=======
+There's a method [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) that allows to define many properties at once.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 সিনট্যাক্সটি হল:
 
@@ -288,7 +330,11 @@ Object.defineProperties(user, {
 
 ## Object.getOwnPropertyDescriptors
 
+<<<<<<< HEAD
 অবজেক্টের সকল প্রপার্টির বর্ণনা পেতে আমরা ব্যবহার করতে পারি এই মেথডটি ব্যবহার করে [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors)।
+=======
+To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 এই `Object.getOwnPropertyDescriptors` এবং `Object.defineProperties` মেথডের এর মাধ্যমে আমরা প্রপার্টির ফ্ল্যাগ সহ ক্লোন অবজেক্ট তৈরি করতে পারি:
 
@@ -306,7 +352,11 @@ for (let key in user) {
 
 ...কিন্তু এটি ফ্ল্যাগসমূহকে কপি করবে না। সুতরাং আমরা ফ্ল্যাগসহ ক্লোন করতে ব্যবহার করব `Object.defineProperties`।
 
+<<<<<<< HEAD
 আরেকটি পার্থক্য হল `for..in` সাধারণত সিম্বলিক প্রপার্টিসমূহ উপেক্ষা করে, তবে `Object.getOwnPropertyDescriptors` এর জন্য সকল প্রপার্টি (সিম্বল প্রপার্টি গুলো সহ) রিটার্ন হয়।
+=======
+Another difference is that `for..in` ignores symbolic and non-enumerable properties, but `Object.getOwnPropertyDescriptors` returns *all* property descriptors including symbolic and non-enumerable ones.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 ## গ্লোবালি কোন অবজেক্টকে সিল করা
 
@@ -314,6 +364,7 @@ for (let key in user) {
 
 এছাড়াও আরো কিছু মেথড আছে যাদের সাহায্যে *সম্পূর্ণ* অবজেক্টের জন্য কাজ করতে পারি:
 
+<<<<<<< HEAD
 [Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
 : অবজেক্টে নতুন কোন প্রপার্টির সংযোজন করা যাবে না।
 
@@ -322,9 +373,20 @@ for (let key in user) {
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
 : কোন প্রপার্টি ডিলিট, সংযোজন, পরিবর্তন এড়াতে। সকল প্রপার্টিতে `configurable: false, writable: false` সেট হয়।
+=======
+[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+: Forbids the addition of new properties to the object.
+
+[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
+: Forbids adding/removing of properties. Sets `configurable: false` for all existing properties.
+
+[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 এছাড়াও অবজেক্টের অবস্থা যাচাইয়ের জন্যও কিছু মেথড আছে:
 
+<<<<<<< HEAD
 [Object.isExtensible(obj)](mdn:js/Object/isExtensible)
 : যদি নতুন প্রপার্টির সংযোজন বন্ধ থাকে তাহলে `false` রিটার্ন করবে অন্যথায় `true`।
 
@@ -333,5 +395,15 @@ for (let key in user) {
 
 [Object.isFrozen(obj)](mdn:js/Object/isFrozen)
 : যদি কোন প্রপার্টি ডিলিট, সংযোজন, পরিবর্তন করার অপশন বন্ধ থাকে তাহলে `true` রিটার্ন করবে, এবং সকল প্রপার্টিতে `configurable: false, writable: false` ফ্ল্যাগ সেট করা থাকে।
+=======
+[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
+: Returns `false` if adding properties is forbidden, otherwise `true`.
+
+[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+: Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+
+[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
+: Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+>>>>>>> ac7daa516fa8e687427eac51186af97154748afa
 
 তবে বাস্তবক্ষেত্রে এই মেথডসমূহ তেমন ব্যবহার করা হয় না।
