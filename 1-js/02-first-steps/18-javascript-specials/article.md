@@ -256,7 +256,7 @@ We covered three ways to create a function in JavaScript:
 3. Arrow functions:
 
     ```js
-    // expression at the right side
+    // expression on the right side
     let sum = (a, b) => a + b;
 
     // or multi-line syntax with { ... }, need return here:
@@ -273,7 +273,7 @@ We covered three ways to create a function in JavaScript:
     ```
 
 
-- Functions may have local variables: those declared inside its body. Such variables are only visible inside the function.
+- Functions may have local variables: those declared inside its body or its parameter list. Such variables are only visible inside the function.
 - Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
 - Functions always return something. If there's no `return` statement, then the result is `undefined`.
 
