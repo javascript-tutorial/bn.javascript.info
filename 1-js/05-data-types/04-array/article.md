@@ -92,6 +92,38 @@ let fruits = [
 "trailing comma" স্ট্যাইল এর জন্য কোন আইটেম সংযোগ বা বাদ দেয়া সহজ হয়।
 ````
 
+## Get last elements with "at"
+
+[recent browser="new"]
+
+Let's say we want a last element of the array.
+
+Some programming languages allow to use negative indexes for the same purpose, like `fruits[-1]`.
+
+Although, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+
+We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+
+A bit cumbersome, isn't it? We need to write the variable name twice.
+
+Luckily, there's a shorter syntax: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// same as fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Plum
+```
+
+In other words, `arr.at(i)`:
+- is exactly the same as `arr[i]`, if `i >= 0`.
+- for negative values of `i`, it steps back from the end of the array.
 
 ## pop/push, shift/unshift মেথডস
 
@@ -137,6 +169,8 @@ let fruits = [
 
     alert( fruits ); // Apple, Orange
     ```
+
+    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
 
 `push`
 : অ্যারেতে সবার শেষে নতুন একটি এলিমেন্ট যোগ করবে:
@@ -209,7 +243,11 @@ arr.push("Pear"); // modify the array by reference
 alert( fruits ); // Banana, Pear - 2 items now
 ```
 
+<<<<<<< HEAD
 ...তবে ইন্টারনাল রিফ্রেশেন্টেশন অ্যারেকে বিশেষ সুবিধা দেয়। জাভাস্ক্রিপ্ট ইঞ্জিন এলিমেন্ট সমূহকে মেমোরিতে পাশাপাশি ক্রম অনুসারে সংরক্ষণ করে, যার ফলে এদের মধ্যে বিভিন্ন অপারেশন অপ্টিমাইজ করে চালানো যায়, এবং এরা দ্রুত কাজ করে।
+=======
+...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 তবে যদি আমরা কোন একটি অ্যারের "ordered collection" কে নষ্ট করে ফেলি, এবং এদের সাধারণ অবজেক্ট হিসেবে ডিক্লেয়ার করি তাহলে অ্যারের সুবিধাগুলো থেকে আমরা বঞ্চিত হব।
 
@@ -377,9 +415,13 @@ alert( arr[0] ); // undefined! no elements.
 alert( arr.length ); // length 2
 ```
 
+<<<<<<< HEAD
 উপরের কোডে, `new Array(number)` এর সকল ইনডেক্স এর মান `undefined` দেখাবে।
 
 এই ধরণের সারপ্রাইজ এড়াতে আমরা স্কয়ার ব্রাকেট ব্যবহার করি।
+=======
+To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 ## Multidimensional arrays
 
@@ -435,11 +477,19 @@ alert( "1,2" + 1 ); // "1,21"
 
 চলুন পুনরায় অবজেক্ট তুলনার নিয়মগুলো দেখি:
 
+<<<<<<< HEAD
 - দুটি অবজেক্ট `==` সমান হবে যদি তারা একই অবজেক্ট কে রেফারেন্স করে।
 - `==` এর সাহায্যে তুলনা করার সময় যদি একটি অবজেক্ট হয় এবং অন্যটি primitive হয়, তাহলে অবজেক্টটি primitive ভ্যালুতে পরিবর্তন হয়ে যায়, বিস্তারিত এই অধ্যায়ে <info:object-toprimitive>।
 - ...তবে `null` এবং `undefined` এরা সমান হবে `==`।
 
 strict comparison `===` আর সহজবোধ্য, এটি ডাটা টাইপও তুলনা করে।
+=======
+- Two objects are equal `==` only if they're references to the same object.
+- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
+- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+
+The strict comparison `===` is even simpler, as it doesn't convert types.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 সুতরাং আমরা যদি দুটি অ্যারের তুলনা `==` করতে চায়, তাহলে তারা সমান হবে না, যদিনা অ্যারে দুটির রেফারেন্স একই হয়।
 
@@ -459,7 +509,11 @@ alert( 0 == [] ); // true
 alert('0' == [] ); // false
 ```
 
+<<<<<<< HEAD
 এখানে উভয়ই ক্ষেত্রে আমরা একটি primitive ভ্যালু কে একটি অবজেক্টের সাথে তুলনা করছি। সুতরাং অবজেক্টটি `[]` primitive এ পরিবর্তন হয়ে একটি এম্পটি `''` স্ট্রিং এ রুপান্তর হবে।
+=======
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
+>>>>>>> 291b5c05b99452cf8a0d32bd32426926dbcc0ce0
 
 এবং তুলনাটি দুটি primitive ভ্যালুতে করা হয়, বিস্তারিত এই অধ্যায়ে <info:type-conversions>:
 
