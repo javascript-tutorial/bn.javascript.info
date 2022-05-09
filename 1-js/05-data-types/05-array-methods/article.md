@@ -1,23 +1,23 @@
-# Array methods
+# অ্যারে মেথডস
 
-Arrays provide a lot of methods. To make things easier, in this chapter they are split into groups.
+অ্যারের বিল্ট-ইন আরো কিছু মেথড আছে, যার সাহায্যে আমরা সহজে অনেক অপারেশন চালাতে পারি।
 
-## Add/remove items
+## এলিমেন্ট সংযুক্ত করা বা বাদ দেয়া
 
-We already know methods that add and remove items from the beginning or the end:
+পূর্বের অধ্যায়ে আমরা দেখেছি কিভাবে অ্যারের শুরুতে বা শেষে কোন এলিমেন্ট যুক্ত করতে বা বাদ দিতে পারি:
 
-- `arr.push(...items)` -- adds items to the end,
-- `arr.pop()` -- extracts an item from the end,
-- `arr.shift()` -- extracts an item from the beginning,
-- `arr.unshift(...items)` -- adds items to the beginning.
+- `arr.push(...items)` -- অ্যারের শেষে এলিমেন্ট যুক্ত করতে,
+- `arr.pop()` -- অ্যারের শেষে এলিমেন্টটি বাদ দিতে,
+- `arr.shift()` -- অ্যারের শুরুর এলিমেন্টটি বাদ দিতে,
+- `arr.unshift(...items)` -- অ্যারের শুরুতে এলিমেন্ট যুক্ত করতে.
 
-Here are a few others.
+এছাড়াও আরো কিছু মেথড আছে
 
 ### splice
 
-How to delete an element from the array?
+অ্যারের কোন একটি এলিমেন্ট কিভাবে ডিলিট করা যায়?
 
-The arrays are objects, so we can try to use `delete`:
+যেহেতু অ্যারে একটি অবজেক্ট, সুতরাং এলিমেন্ট রিমুভ করতে `delete` ব্যবহার করতে পারি:
 
 ```js run
 let arr = ["I", "go", "home"];
@@ -30,50 +30,50 @@ alert( arr[1] ); // undefined
 alert( arr.length ); // 3
 ```
 
-The element was removed, but the array still has 3 elements, we can see that `arr.length == 3`.
+যদিওবা আমরা এলিমেন্টটি রিমুভ করেছি তারপরও অ্যারেতে ৩টি এলিমেন্ট আছে, ইতোমধ্যে যা আমরা দেখেছি `arr.length == 3`।
 
-That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of elements to shift and occupy the freed place. We expect to have a shorter array now.
+এটি স্বাভাবিক, কেননা `delete obj.key` এর দ্বারা আমরা `key` এর মান রিমুভ করি। এবং এটি অবজেক্টের জন্য ঠিক আছে। কিন্তু অ্যারের জন্য আমাদের অ্যারেটিকে পুনরায় সাজাতে হবে।
 
-So, special methods should be used.
+এজন্য, আমরা একটি বিশেষ মেথডের সাহায্য নেব।
 
-The [arr.splice](mdn:js/Array/splice) method is a swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+[arr.splice](mdn:js/Array/splice) মেথড যার সাহায্যে অ্যারেতে আমরা বিভিন্ন অপারেশন চালাতে পারি। যেমন: কোন এলিমেন্ট insert, remove বা replace।
 
-The syntax is:
+সিনট্যাক্সটি হল:
 
 ```js
 arr.splice(start[, deleteCount, elem1, ..., elemN])
 ```
 
-It modifies `arr` starting from the index `start`: removes `deleteCount` elements and then inserts `elem1, ..., elemN` at their place. Returns the array of removed elements.
+এখানে `start` দ্বারা বুঝায় কোন index হতে এলিমেন্ট ডিলিট হবে: এরপর `deleteCount` দ্বারা বুঝায় কতটি এলিমেন্ট ডিলিট হবে এরপর `elem1, ..., elemN` দ্বারা বুঝায় ঐ ইনডেক্সে নতুন এলিমেন্ট যুক্ত হবে। এবং মেথডটি রিমুভড হওয়া এলিমেন্টসমূহ রিটার্ন করে।
 
-This method is easy to grasp by examples.
+চলুন উদাহরণের সাহায্যে শিখি:
 
-Let's start with the deletion:
+চলুন, প্রথমে এলিমেন্ট ডিলিট করা দেখি:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
 
 *!*
-arr.splice(1, 1); // from index 1 remove 1 element
+arr.splice(1, 1); // ১ নং ইনডেক্স হতে ১ টি এলিমেন্ট ডিলিট
 */!*
 
 alert( arr ); // ["I", "JavaScript"]
 ```
 
-Easy, right? Starting from the index `1` it removed `1` element.
+সহজ, তাই না? এখানে আমরা ১ নং ইনডেক্স হতে ১ টি এলিমেন্ট ডিলিট করেছি।
 
-In the next example we remove 3 elements and replace them with the other two:
+পরবর্তী উদাহরণে আমরা প্রথম ৩টি এলিমেন্ট ডিলিট করব, এবং ঐ ইনডেক্সে নতুন দুটি এলিমেন্ট সংযুক্ত করব:
 
 ```js run
 let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
 
-// remove 3 first elements and replace them with another
+// প্রথম ৩টি এলিমেন্ট বাদ যাবে এবং নতুন ২টি এলিমেন্ট ঐ ইনডেক্সে যুক্ত হবে
 arr.splice(0, 3, "Let's", "dance");
 
-alert( arr ) // now [*!*"Let's", "dance"*/!*, "right", "now"]
+alert( arr ) // পরিবর্তিত অ্যারেটি [*!*"Let's", "dance"*/!*, "right", "now"]
 ```
 
-Here we can see that `splice` returns the array of removed elements:
+এখন আমরা দেখি `splice` রিটার্ন হওয়া এলিমেন্ট রিটার্ন করে:
 
 ```js run
 let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
@@ -81,31 +81,31 @@ let arr = [*!*"I", "study",*/!* "JavaScript", "right", "now"];
 // remove 2 first elements
 let removed = arr.splice(0, 2);
 
-alert( removed ); // "I", "study" <-- array of removed elements
+alert( removed ); // ডিলিট হওয়া এলিমেন্ট "I", "study"
 ```
 
-The `splice` method is also able to insert the elements without any removals. For that we need to set `deleteCount` to `0`:
+এছাড়াও `splice` এর সাহায্যে আমরা কোন এলিমেন্ট ডিলিট না করে নির্দিষ্ট ইনডেক্সে নতুন এলিমেন্ট সংযুক্ত করতে পারি এক্ষেত্রে আমরা `deleteCount` এর মান `0` সেট করব:
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
 
-// from index 2
-// delete 0
-// then insert "complex" and "language"
+// 2 নং ইনডেক্স হতে
+// 0 ডিলেট হবে এবং 
+// "complex" এবং "language" যুক্ত হবে
 arr.splice(2, 0, "complex", "language");
 
 alert( arr ); // "I", "study", "complex", "language", "JavaScript"
 ```
 
-````smart header="Negative indexes allowed"
-Here and in other array methods, negative indexes are allowed. They specify the position from the end of the array, like here:
+````smart header="নেগেটিভ ইনডেক্স"
+অ্যারে মেথডসমূহে নেগেটিভ ইনডেক্স ব্যবহার করতে পারি। নেগেটিভ ইনডেক্স দ্বারা বুঝায় গণনা অ্যারের শেষ হতে শুরু হবে, যেমন:
 
 ```js run
 let arr = [1, 2, 5];
 
-// from index -1 (one step from the end)
-// delete 0 elements,
-// then insert 3 and 4
+// এখানে -1 দ্বারা বুঝাচ্ছে অ্যারের শেষ পজিশনের পরের পজিশন,
+// এখানে কোন এলিমেন্ট ডিলেট হবে না,
+// ২টি নতুন এলিমেন্ট `3, 4` যুক্ত হবে।
 arr.splice(-1, 0, 3, 4);
 
 alert( arr ); // 1,2,3,4,5
@@ -114,19 +114,19 @@ alert( arr ); // 1,2,3,4,5
 
 ### slice
 
-The method [arr.slice](mdn:js/Array/slice) is much simpler than similar-looking `arr.splice`.
+[arr.slice](mdn:js/Array/slice) মেথড অনেকটা `arr.splice` এর মত।
 
-The syntax is:
+এর সিনট্যাক্স হল:
 
 ```js
 arr.slice([start], [end])
 ```
 
-It returns a new array copying to it all items from index `start` to `end` (not including `end`). Both `start` and `end` can be negative, in that case position from array end is assumed.
+এটি অ্যারের `start` হতে `end` ইনডেক্স পর্যন্ত এলিমেন্ট সমূহকে অ্যারে হিসেবে রিটার্ন করে। `start` এবং `end` এর ইনডেক্স মান নেগেটিভ হতে পারে, যা দ্বারা রিভার্স কাউন্ট করে।
 
-It's similar to a string method `str.slice`, but instead of substrings it makes subarrays.
+এটি `str.slice` এর মত, তবে সাবস্ট্রিংয়ের পরিবর্তে এটি সাবঅ্যারে রিটার্ন করে।
 
-For instance:
+যেমন:
 
 ```js run
 let arr = ["t", "e", "s", "t"];
@@ -136,40 +136,40 @@ alert( arr.slice(1, 3) ); // e,s (copy from 1 to 3)
 alert( arr.slice(-2) ); // s,t (copy from -2 till the end)
 ```
 
-We can also call it without arguments: `arr.slice()` creates a copy of `arr`. That's often used to obtain a copy for further transformations that should not affect the original array.
+এছাড়াও আমরা কোন একটি অ্যারেকে কপি করতে `arr.slice()` মেথডটি কোন আর্গুমেন্ট ছাড়া কল করতে পারি। যার ফলে এটি একটি নতুন অ্যারে রিটার্ন করবে এবং আমরা একে পরিবর্তন করলে অরিজিনাল অ্যারেতে কোন পরিবর্তন হবে না।
 
 ### concat
 
-The method [arr.concat](mdn:js/Array/concat) creates a new array that includes values from other arrays and additional items.
+দুই বা ততোধিক অ্যারে যোগ করার জন্য [arr.concat](mdn:js/Array/concat) মেথড ব্যবহার করা হয়।
 
-The syntax is:
+এর সিনট্যাক্স হল:
 
 ```js
 arr.concat(arg1, arg2...)
 ```
 
-It accepts any number of arguments -- either arrays or values.
+এটি এক বা একাধিক অ্যারে বা ভ্যালু আর্গুমেন্ট হিসবে নেই।
 
-The result is a new array containing items from `arr`, then `arg1`, `arg2` etc.
+যার ফলে নতুন অ্যারের এলিমেন্টগুলো হবে `arr` এবং `arg1`, `arg2` ইত্যাদি সকল এলিমেন্টের সমষ্টি।
 
-If an argument `argN` is an array, then all its elements are copied. Otherwise, the argument itself is copied.
+যদি একটি আর্গুমেন্ট `argN` একটি অ্যারে হয়, তবে সেই অ্যারের সকল এলিমেন্ট কপি হবে। অন্যথায়, আর্গুমেন্টটি নিজেই কপি হবে।
 
-For instance:
+যেমন:
 
 ```js run
 let arr = [1, 2];
 
-// create an array from: arr and [3,4]
+// নতুন অ্যারেটি হবে দুটি অ্যারের সমষ্টি [3,4]
 alert( arr.concat([3, 4]) ); // 1,2,3,4
 
-// create an array from: arr and [3,4] and [5,6]
+// নতুন অ্যারেটি হবে তিনটি অ্যারের সমষ্টি [3,4] এবং [5,6]
 alert( arr.concat([3, 4], [5, 6]) ); // 1,2,3,4,5,6
 
-// create an array from: arr and [3,4], then add values 5 and 6
+// নতুন অ্যারেটি হবে একটি অ্যারে [3,4], এবং দুটি ভ্যালু  5 এবং 6 এর সমষ্টি
 alert( arr.concat([3, 4], 5, 6) ); // 1,2,3,4,5,6
 ```
 
-Normally, it only copies elements from arrays. Other objects, even if they look like arrays, are added as a whole:
+সাধারণত, এটি শুধুমাত্র অ্যারে বা প্রিমিটিভ ভ্যালুগুলো কপি করে। যদি কোন অবজেক্টের আর্কিটেকচার অ্যারের মত হয় তাহলে এটি অবজেক্টটিকেই সংযুক্ত করে:
 
 ```js run
 let arr = [1, 2];
@@ -182,7 +182,7 @@ let arrayLike = {
 alert( arr.concat(arrayLike) ); // 1,2,[object Object]
 ```
 
-...But if an array-like object has a special `Symbol.isConcatSpreadable` property, then it's treated as an array by `concat`: its elements are added instead:
+...কিন্তু যদি অব্জেক্টটি দেখতে অ্যারের মত হয় এবং এর মধ্যে একটি বিশেষ প্রপার্টি `Symbol.isConcatSpreadable` থাকে, তাহলে `concat` এ এরা অ্যারের মত সংযুক্ত হবে:
 
 ```js run
 let arr = [1, 2];
@@ -201,23 +201,23 @@ alert( arr.concat(arrayLike) ); // 1,2,something,else
 
 ## Iterate: forEach
 
-The [arr.forEach](mdn:js/Array/forEach) method allows to run a function for every element of the array.
+[arr.forEach](mdn:js/Array/forEach) মেথডটি আর্গুমেন্ট হিসেবে একটি কলব্যাক ফাংশন নেয়, এবং প্রতিটি এলিমেন্টের জন্য এটি কল হয়।
 
-The syntax:
+এর সিনট্যাক্স হল:
 ```js
 arr.forEach(function(item, index, array) {
   // ... do something with item
 });
 ```
 
-For instance, this shows each element of the array:
+যেমন, নিচের কোডটিতে প্রতিটি এলিমেন্ট এর জন্য একটি অ্যালার্ট কল হবে:
 
 ```js run
 // for each element call alert
 ["Bilbo", "Gandalf", "Nazgul"].forEach(alert);
 ```
 
-And this code is more elaborate about their positions in the target array:
+এখানে আমরা এলিমেন্টের পজিশন নিয়ে আরো বিস্তারিত জানতে পারি:
 
 ```js run
 ["Bilbo", "Gandalf", "Nazgul"].forEach((item, index, array) => {
@@ -225,22 +225,22 @@ And this code is more elaborate about their positions in the target array:
 });
 ```
 
-The result of the function (if it returns any) is thrown away and ignored.
+যদি ফাংশন কোন কিছু রিটার্ন করে তাহলে এটি তা অগ্রাহ্য করে।
 
 
-## Searching in array
+## অ্যারেতে অনুসন্ধান
 
-Now let's cover methods that search in an array.
+এখন আমরা অ্যারের বিভিন্ন সার্চ মেথড সম্পর্কে জানব।
 
 ### indexOf/lastIndexOf and includes
 
-The methods [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) and [arr.includes](mdn:js/Array/includes) have the same syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+[arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) এবং [arr.includes](mdn:js/Array/includes) এদের সিনট্যাক্স এবং কাজ স্ট্রিং এর মেথডগুলোর মত, তবে এখানে আর্গুমেন্ট হিসেবে ক্যারাক্টারের পরিবর্তে এলিমেন্ট নেয়:
 
-- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
-- `arr.lastIndexOf(item, from)` -- same, but looks for from right to left.
-- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+- `arr.indexOf(item, from)` -- অ্যারেতে `from` ইনডেক্স হতে একটি `item` অনুসন্ধান করে, যদি পাই তাহলে ইনডেক্সটি রিটার্ন করে, অন্যথায় `-1`।
+- `arr.lastIndexOf(item, from)` -- একই তবে এটি রিভার্স হতে অনুসন্ধান চালায়।
+- `arr.includes(item, from)` -- অ্যারেতে `from` ইনডেক্স হতে একটি `item` অনুসন্ধান করে, যদি পাই তাহলে `true`  রিটার্ন করে।
 
-For instance:
+যেমন:
 
 ```js run
 let arr = [1, 0, false];
@@ -252,41 +252,41 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
-Note that the methods use `===` comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+এরা কম্পারিশনের সময় `===` ব্যবহার করে। সুতরাং , যদি আমরা একটি স্ট্রিং `'0'` খুঁজি, তাহলে এটি এলিমেন্ট ডাটা টাইপ একই না হওয়ায় `-1` রিটার্ন করবে।
 
-If we want to check for inclusion, and don't want to know the exact index, then `arr.includes` is preferred.
+যদি অ্যারেতে কোন একটি এলিমেন্ট আছে কিনা নিশ্চিত হতে চায়, তাহলে `arr.includes` ব্যবহার করা শ্রেয়।
 
-Also, a very minor difference of `includes` is that it correctly handles `NaN`, unlike `indexOf/lastIndexOf`:
+এছাড়াও `includes` এর একটি পার্থক্য আছে যা সঠিকভাবে `NaN` কে হ্যান্ডেল করে, যা `indexOf/lastIndexOf` পারে না:
 
 ```js run
 const arr = [NaN];
-alert( arr.indexOf(NaN) ); // -1 (should be 0, but === equality doesn't work for NaN)
+alert( arr.indexOf(NaN) ); // -1 (0 রিটার্ন করা উচিত, কিন্তু === NaN এর জন্য কাজ করে না)
 alert( arr.includes(NaN) );// true (correct)
 ```
 
-### find and findIndex
+### find এবং findIndex
 
-Imagine we have an array of objects. How do we find an object with the specific condition?
+মনে করুন আমাদের অ্যারের এলিমেন্টগুলো অবজেক্ট। কিভাবে কোন একটি নির্দিষ্ট শর্তের জন্য আমরা অবজেক্ট খুঁজতে পারি?
 
-Here the [arr.find(fn)](mdn:js/Array/find) method comes in handy.
+এক্ষেত্রে [arr.find(fn)](mdn:js/Array/find) মেথড ব্যবহার করি।
 
-The syntax is:
+এর সিনট্যাক্স হল:
 ```js
 let result = arr.find(function(item, index, array) {
-  // if true is returned, item is returned and iteration is stopped
-  // for falsy scenario returns undefined
+  // যদি শর্ত পূরন হয়, তাহলে এলিমেন্টটি রিটার্ন করবে এবং ইটারেশন বন্ধ হয়ে যাবে
+  // falsy এর জন্য রিটার্ন হবে undefined
 });
 ```
 
-The function is called for elements of the array, one after another:
+প্রতিটি এলিমেন্টের জন্য ফাংশনটি কল হবে :
 
-- `item` is the element.
-- `index` is its index.
-- `array` is the array itself.
+- `item` এলিমেন্টটি।.
+- `index` এলিমেন্টের ইনডেক্স
+- `array` অ্যারেটি
 
-If it returns `true`, the search is stopped, the `item` is returned. If nothing found, `undefined` is returned.
+যদি `true` রিটার্ন করে, তাহলে অনুসন্ধানটি বন্ধ হয়ে যাবে, এবং `item` টি রিটার্ন করবে। যদি কোন এলিমেন্ট না পাই, তাহলে `undefined` রিটার্ন করবে।
 
-For example, we have an array of users, each with the fields `id` and `name`. Let's find the one with `id == 1`:
+যেমন, আমাদের `users` এর একটি অ্যারে আছে, যার প্রপার্টিগুলো হল `id` এবং `name`। এখন চলুন আমরা একটি এলিমেন্ট খুঁজি যার `id` হল `1`, `id == 1`:
 
 ```js run
 let users = [
@@ -300,28 +300,28 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
-In real life arrays of objects is a common thing, so the `find` method is very useful.
+বাস্তবিকক্ষেত্রে আমাদের প্রায় সময় অ্যারের অবজেক্ট নিয়ে কাজ করতে হয়, এক্ষেত্রে এই ধরণের অ্যারেতে অবজেক্ট অনুসন্ধানে `find` মেথডটি ব্যবহার করতে পারি।
 
-Note that in the example we provide to `find` the function `item => item.id == 1` with one argument. That's typical, other arguments of this function are rarely used.
+নোট: বেশিরভাগক্ষেত্রে কলব্যাক ফাংশনটিতে আমরা শুধুমাত্র একটি আর্গুমেন্ট পাস করি `item => item.id == 1`। অন্যান্য আর্গুমেন্টগুলো তেমন ব্যবহার করিনা।
 
-The [arr.findIndex](mdn:js/Array/findIndex) method is essentially the same, but it returns the index where the element was found instead of the element itself and `-1` is returned when nothing is found.
+[arr.findIndex](mdn:js/Array/findIndex) মেথডটিও অনুরূপ, তবে এটি এলিমেন্টের পরিবর্তে এলিমেন্টের `index` রিটার্ন করে।
 
 ### filter
 
-The `find` method looks for a single (first) element that makes the function return `true`.
+`true` রিটার্নের জন্য `find` মেথডটি শুধুমাত্র একটি (প্রথম) এলিমেন্ট রিটার্ন করে।
 
-If there may be many, we can use [arr.filter(fn)](mdn:js/Array/filter).
+অনেক সময় আমাদের কোন একটি শর্তের জন্য একাধিক এলিমেন্ট থাকতে পারে, এক্ষেত্রে আমরা ব্যবহার করি [arr.filter(fn)](mdn:js/Array/filter)।
 
-The syntax is similar to `find`, but `filter` returns an array of all matching elements:
+এর সিনট্যাক্স হল `find` এর মত, তবে `filter` যেসকল এলিমেন্ট শর্ত পূরণ করে তাদের সকলকে রিটার্ন করে:
 
 ```js
 let results = arr.filter(function(item, index, array) {
-  // if true item is pushed to results and the iteration continues
-  // returns empty array if nothing found
+  // যদি শর্ত পূরন হয়, তাহলে এলিমেন্টটি results এ push করবে এবং ইটারেশন চালিয়ে যাবে
+  // কোন এলিমেন্ট না পেলে এম্পটি অ্যারে রিটার্ন করবে
 });
 ```
 
-For instance:
+উদাহরনস্বরূপ:
 
 ```js run
 let users = [
@@ -330,31 +330,31 @@ let users = [
   {id: 3, name: "Mary"}
 ];
 
-// returns array of the first two users
+// প্রথম দুইটি এলিমেন্টকে রিটার্ন করবে
 let someUsers = users.filter(item => item.id < 3);
 
 alert(someUsers.length); // 2
 ```
 
-## Transform an array
+## অ্যারের রূপান্তর
 
-Let's move on to methods that transform and reorder an array.
+চলুন অ্যারে রূপান্তর করার মেথডগুলো দেখি।
 
 ### map
 
-The [arr.map](mdn:js/Array/map) method is one of the most useful and often used.
+[arr.map](mdn:js/Array/map) মেথডটি আমাদের প্রায় দরকার হয় এবং প্রায় ব্যবহার করে থাকি।
 
-It calls the function for each element of the array and returns the array of results.
+এটি অ্যারের প্রতিটি এলিমেন্টের জন্য কলব্যাক ফাংশনটি কল করবে এবং প্রতিটি এলিমেন্ট `results` এ `push` করবে।
 
-The syntax is:
+এর সিনট্যাক্স হল:
 
 ```js
 let result = arr.map(function(item, index, array) {
-  // returns the new value instead of item
+  // নতুন একটি এলিমেন্ট রিটার্ন করবে
 });
 ```
 
-For instance, here we transform each element into its length:
+যেমন, এখানে আমরা প্রতিটি এলিমেন্টে যতটি ক্যারেক্টার আছে তা রিটার্ন করছি, এবং আমাদের নতুন `results` অ্যারেটি হবে এলিমেন্টের ক্যারেক্টার সংখ্যা:
 
 ```js run
 let lengths = ["Bilbo", "Gandalf", "Nazgul"].map(item => item.length);
@@ -363,41 +363,41 @@ alert(lengths); // 5,7,6
 
 ### sort(fn)
 
-The call to [arr.sort()](mdn:js/Array/sort) sorts the array *in place*, changing its element order.
+[arr.sort()](mdn:js/Array/sort) অ্যারের এলিমেন্টগুলো বিভিন্ন ক্রমে যেমন উর্ধক্রম বা অধঃক্রমে সাজাতে আমরা এই মেথডটি ব্যবহার করি।
 
-It also returns the sorted array, but the returned value is usually ignored, as `arr` itself is modified.
+এটি পুনর্বিন্যাস্ত অ্যারে রিটার্ন করে, কিন্তু সাধারণত আমরা এটি অগ্রাহ্য করি, কেননা `arr` ভ্যারিয়েবলটি নিজেই পুনর্বিন্যস্ত হয়।
 
-For instance:
+যেমন:
 
 ```js run
 let arr = [ 1, 2, 15 ];
 
-// the method reorders the content of arr
+// arr এর এলিমেন্টগুলো পুনর্বিন্যাস্ত হয়
 arr.sort();
 
 alert( arr );  // *!*1, 15, 2*/!*
 ```
 
-Did you notice anything strange in the outcome?
+অ্যারেটিকে কি গোলমেলে লাগছে?
 
-The order became `1, 15, 2`. Incorrect. But why?
+এখানে পুনর্বিন্যাস্ত ক্রমটি ভুল `1, 15, 2` । কিন্তু কেন?
 
-**The items are sorted as strings by default.**
+**এলিমেন্টগুলো ডিফল্ট স্ট্রিং হিসাবে তুলনা করে পুনর্বিন্যাস্ত হয়**
 
-Literally, all elements are converted to strings for comparisons. For strings, lexicographic ordering is applied and indeed `"2" > "15"`.
+সাধারণত, তুলনা করার জন্য সকল এলিমেন্টকে স্ট্রিংয়ে রূপান্তর করা হয়। প্রকৃতপক্ষে, স্ট্রিংয়ের জন্য লেক্সিগ্রাফিকক্রমে তুলনা করা হয় `"2" > "15"`।
 
-To use our own sorting order, we need to supply a function as the argument of `arr.sort()`.
+আমাদের নিজস্ব ক্রম অনুযায়ী সাজাতে, `arr.sort()` এ আর্গুমেন্ট হিসেবে একটি ফাংশন পাঠাতে পারি।
 
-The function should compare two arbitrary values and return:
+ফাংশনটি দুটি ভ্যালুর মধ্যে তুলনা করে:
 ```js
 function compare(a, b) {
-  if (a > b) return 1; // if the first value is greater than the second
-  if (a == b) return 0; // if values are equal
-  if (a < b) return -1; // if the first value is less than the second
+  if (a > b) return 1; // যদি প্রথম ভ্যালুটি দ্বিতীয়টি থেকে বড় হয়
+  if (a == b) return 0; // যদি ভ্যালু দুটি সমান হয়
+  if (a < b) return -1; // যদি প্রথম ভ্যালুটি দ্বিতীয়টি থেকে ছোট হয়
 }
 ```
 
-For instance, to sort as numbers:
+উদাহরণস্বরূপ, উপরের উদাহরণটি আবার দেখি:
 
 ```js run
 function compareNumeric(a, b) {
@@ -415,13 +415,13 @@ arr.sort(compareNumeric);
 alert(arr);  // *!*1, 2, 15*/!*
 ```
 
-Now it works as intended.
+এখন এটি সঠিকভাবে কাজ করছে।
 
-Let's step aside and think what's happening. The `arr` can be array of anything, right? It may contain numbers or strings or objects or whatever. We have a set of *some items*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+চলুন এটি কিভাবে কাজ করছে তা বুঝার চেষ্টা করি। `arr` এর এলিমেন্টগুলো যেকোন ডাটাটাইপের হতে পারে, তাই না? এলিমেন্টগুলো হতে পারে নাম্বার বা স্ট্রিং কিংবা অবজেক্ট অথবা যেকোন কিছু। আমাদের *কিছু এলিমেন্টের* একটি সেট আছে। পুনর্বিন্যাস্ত করার জন্য এলিমেন্টগুলোকে কিভাবে তুলনা করবে তার জন্য একটি *ordering function* লাগবে। যা সাধারণত ডিফল্ট স্ট্রিং হিসাবে পুনর্বিন্যাস্ত হয়।
 
-The `arr.sort(fn)` method implements a generic sorting algorithm. We don't need to care how it internally works (an optimized [quicksort](https://en.wikipedia.org/wiki/Quicksort) or [Timsort](https://en.wikipedia.org/wiki/Timsort) most of the time). It will walk the array, compare its elements using the provided function and reorder them, all we need is to provide the `fn` which does the comparison.
+`arr.sort(fn)` মেথডটি একটি জেনেরিক সর্টিং অ্যালগরিদম ইমপ্লিমেন্ট করে। ইন্টারনালি এটি কিভাবে কাজ করে তা আমাদের জানা লাগবে না ([quicksort](https://en.wikipedia.org/wiki/Quicksort) বা [Timsort](https://en.wikipedia.org/wiki/Timsort))। এটি অ্যারের মধ্যে ইটারেট করবে, প্রদত্ত ফাংশন অনুযায়ী এলিমেন্টগুলোর মধ্যে তুলনা করবে এবং অ্যারেটিকে পুনর্বিন্যস্ত করবে, আমাদের জানা লাগবে আমাদের প্রদত্ত `fn` কিভাবে তুলনা করছে।
 
-By the way, if we ever want to know which elements are compared -- nothing prevents from alerting them:
+যা হোক, আমরা যদি জানতে চাই কোন এলিমেন্টেগুলোর মধ্যে তুলনা করা হচ্ছে -- তাহলে এভাবে জানতে পারি:
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -430,12 +430,12 @@ By the way, if we ever want to know which elements are compared -- nothing preve
 });
 ```
 
-The algorithm may compare an element with multiple others in the process, but it tries to make as few comparisons as possible.
+সর্টিংয়ের সময় একটি এলিমেন্ট একাধিক এলিমেন্টের সাথে তুলনা করতে পারে, তবে এটি যথাসম্ভব সর্টিং টিকে অপ্টিমাইজ করার চেষ্টা করে।
 
-````smart header="A comparison function may return any number"
-Actually, a comparison function is only required to return a positive number to say "greater" and a negative number to say "less".
+````smart header="কম্পারিজন ফাংশন যেকোন নাম্বার রিটার্ন করতে পারে"
+সাধারণত, তুলনা করার সময় কাস্টম ফাংশনটি "বড়" বুঝাতে ধনাত্নক সংখ্যা এবং "ছোট" বুঝাতে ঋনাত্নক সংখ্যা রিটার্ন করে।
 
-That allows to write shorter functions:
+আমরা আরো সংক্ষিপ্তভাবে ফাংশনটিকে লিখতে পারি:
 
 ```js run
 let arr = [ 1, 2, 15 ];
@@ -446,37 +446,37 @@ alert(arr);  // *!*1, 2, 15*/!*
 ```
 ````
 
-````smart header="Arrow functions for the best"
-Remember [arrow functions](info:arrow-functions-basics)? We can use them here for neater sorting:
+````smart header="আরো সংক্ষেপের জন্য অ্যারো ফাংশন"
+[arrow functions](info:arrow-functions-basics) সিনট্যাক্স মনে আছে? আরো সংক্ষেপের জন্য আমরা এটি ব্যবহার করতে পারি:
 
 ```js
 arr.sort( (a, b) => a - b );
 ```
 
-This works exactly the same as the longer version above.
+এটি রেগুলার ফাংশনের মতই কাজ করে।
 ````
 
-````smart header="Use `localeCompare` for strings"
-Remember [strings](info:string#correct-comparisons) comparison algorithm? It compares letters by their codes by default.
+````smart header="স্ট্রিংয়ের জন্য `localeCompare`"
+[strings](info:string#correct-comparisons) তুলনার অ্যালগরিদমটি মনে আছে? এটি ডিফল্টভাবে তাদের কোড অনুসারে তুলনা করে।
 
-For many alphabets, it's better to use `str.localeCompare` method to correctly sort letters, such as `Ö`.
+অনেক বর্ণমালার জন্য , সঠিকভাবে সর্টিংয়ের জন্য `str.localeCompare`  মেথডটি ব্যবহার করা উচিত, যেমন `Ö`।
 
-For example, let's sort a few countries in German:
+উদাহরণস্বরূপ, চলুন আমরা জার্মান বর্ণমালা দ্বারা তৈরি একটি অ্যারেকে পুনর্বিন্যস্ত করি:
 
 ```js run
 let countries = ['Österreich', 'Andorra', 'Vietnam'];
 
-alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (wrong)
+alert( countries.sort( (a, b) => a > b ? 1 : -1) ); // Andorra, Vietnam, Österreich (ভুল)
 
-alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (correct!)
+alert( countries.sort( (a, b) => a.localeCompare(b) ) ); // Andorra,Österreich,Vietnam (সঠিক!)
 ```
 ````
 
 ### reverse
 
-The method [arr.reverse](mdn:js/Array/reverse) reverses the order of elements in `arr`.
+[arr.reverse](mdn:js/Array/reverse) মেথডটি `arr` এর এলিমেন্টগুলোকে উল্টোভাবে পুনর্বিন্যস্ত করে।
 
-For instance:
+উদাহরণস্বরুপ:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -485,15 +485,15 @@ arr.reverse();
 alert( arr ); // 5,4,3,2,1
 ```
 
-It also returns the array `arr` after the reversal.
+এটিও `arr` এর রিভার্স অ্যারেটি রিটার্ন করে।
 
-### split and join
+### split এবং join
 
-Here's the situation from real life. We are writing a messaging app, and the person enters the comma-delimited list of receivers: `John, Pete, Mary`. But for us an array of names would be much more comfortable than a single string. How to get it?
+একটি বাস্তব সমস্যার কথা চিন্তা করুন। আমরা একটি মেসেজিং অ্যাপ ডেভলাপ করছি, এখন একজন ইউজার মেসেজটি যাদের পাঠাবে তাদের নাম কমা দ্বারা আলাদা আলাদা করে লিখল: `John, Pete, Mary`। এখন আমাদের রিসিভারের নামগুলো স্ট্রিংয়ের তুলনায় অ্যারে দ্বারা ইটারেট করা সহজ। এখন একটি স্ট্রিংকে কিভাবে অ্যারেতে রূপান্তর করতে পারি?
 
-The [str.split(delim)](mdn:js/String/split) method does exactly that. It splits the string into an array by the given delimiter `delim`.
+[str.split(delim)](mdn:js/String/split) মেথড স্ট্রিংকে অ্যারেতে রূপান্তর করে। এটি স্ট্রিংকে কোন একটি ডেলিমিটারের `delim` সাপেক্ষে অ্যারেতে রূপান্তর করে।
 
-In the example below, we split by a comma followed by space:
+নিচের উদাহরণে আমরা একটি কমা এবং একটি স্পেসের সাপেক্ষে স্ট্রিংকে অ্যারেতে বিভক্ত করব:
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -505,7 +505,7 @@ for (let name of arr) {
 }
 ```
 
-The `split` method has an optional second numeric argument -- a limit on the array length. If it is provided, then the extra elements are ignored. In practice it is rarely used though:
+`split` মেথডের দ্বিতীয় আর্গুমেন্টটি অপশনাল -- যা অ্যারের length নির্ধারণ করে দেয়। যদি `length` নির্দিষ্ট করে দেয়া হয়, তাহলে অতিরিক্ত এলিমেন্টগুলো উপেক্ষা করবে। তবে বাস্তবিক ক্ষেত্রে এটি খুব কম ব্যবহার করা হয়:
 
 ```js run
 let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
@@ -513,8 +513,8 @@ let arr = 'Bilbo, Gandalf, Nazgul, Saruman'.split(', ', 2);
 alert(arr); // Bilbo, Gandalf
 ```
 
-````smart header="Split into letters"
-The call to `split(s)` with an empty `s` would split the string into an array of letters:
+````smart header="স্ট্রিংয়ের প্রতিটি বর্নমালার অ্যারে"
+যদি আমরা একটি এম্পটি স্ট্রিং ডেলিমিটার `s` হিসেবে পাঠায়  `split(s)` তাহলে স্ট্রিংটির বর্ণমালা গুলো দ্বারা একটি অ্যারে তৈরি হবে:
 
 ```js run
 let str = "test";
@@ -523,27 +523,27 @@ alert( str.split('') ); // t,e,s,t
 ```
 ````
 
-The call [arr.join(glue)](mdn:js/Array/join) does the reverse to `split`. It creates a string of `arr` items joined by `glue` between them.
+`split` এর বিপরীত মেথডটি হল [arr.join(glue)](mdn:js/Array/join)। এটি `arr` এর এলিমেন্ট সমূহকে একটি গ্লু `glue` সাপেক্ষে স্ট্রিংয়ে রূপান্তর করে।
 
-For instance:
+উদাহরণস্বরুপ:
 
 ```js run
 let arr = ['Bilbo', 'Gandalf', 'Nazgul'];
 
-let str = arr.join(';'); // glue the array into a string using ;
+let str = arr.join(';'); // অ্যারেকে ; সাপেক্ষে জোড়া দিয়ে স্ট্রিংয়ে রূপান্তর
 
 alert( str ); // Bilbo;Gandalf;Nazgul
 ```
 
 ### reduce/reduceRight
 
-When we need to iterate over an array -- we can use `forEach`, `for` or `for..of`.
+কোন একটি অ্যারেকে ইটারেট করতে আমরা ব্যবহার করতে পারি `forEach`, `for` বা `for..of`।
 
-When we need to iterate and return the data for each element -- we can use `map`.
+ইটারেটের সময় আমাদের প্রতিটি এলিমেন্ট রিটার্ন করতে ব্যবহার করি `map`।
 
-The methods [arr.reduce](mdn:js/Array/reduce) and [arr.reduceRight](mdn:js/Array/reduceRight) also belong to that breed, but are a little bit more intricate. They are used to calculate a single value based on the array.
+[arr.reduce](mdn:js/Array/reduce) এবং [arr.reduceRight](mdn:js/Array/reduceRight) মেথডগুলোও একই ভাবে অ্যারের প্রতিটি এলিমেন্ট ইটারেট করে, তবে এটি কিছুটা জটিল। অ্যারের সাপেক্ষে আমরা কোন একটি ভ্যালুর মান গণনা করতে পারি।
 
-The syntax is:
+এর সিনট্যাক্স হল:
 
 ```js
 let value = arr.reduce(function(accumulator, item, index, array) {
@@ -551,24 +551,24 @@ let value = arr.reduce(function(accumulator, item, index, array) {
 }, [initial]);
 ```
 
-The function is applied to all array elements one after another and "carries on" its result to the next call.
+অ্যারের প্রতিটি এলিমেন্টের জন্য ফাংশনটি কল হবে এবং পূর্বের মানটি সংরক্ষন করে পরবর্তী কলে আগের মানটি প্রদান করে।
 
-Arguments:
+আর্গুমেন্টস:
 
-- `accumulator` -- is the result of the previous function call, equals `initial` the first time (if `initial` is provided).
-- `item` -- is the current array item.
-- `index` -- is its position.
-- `array` -- is the array.
+- `accumulator` -- পূর্ববর্তী ফাংশন কলের রিটার্নকৃত মানটি, প্রথম এলিমেন্টের জন্য `initial` মানটি (যদি `initial` ডিক্লেয়ার করা হয়)।
+- `item` -- ইটারেটকৃত এলিমেন্টটি।
+- `index` -- ইটারেটকৃত এলিমেন্টের পজিশন।
+- `array` -- অ্যারেটি।
 
-As function is applied, the result of the previous function call is passed to the next one as the first argument.
+ফাংশন কল হলে, পূর্ববর্তী ফাংশন কলের রিটার্নকৃত মানটি পরবর্তী কলের জন্য প্রথম আর্গুমেন্ট হিসেবে পাস হবে।
 
-So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end it becomes the result of `reduce`.
+সুতরাং, প্রথম আর্গুমেন্টটি মূলত আমাদের পূর্ববর্তী সকল এক্সিকিউশনের মানটি ফলাফল হিসেবে সংরক্ষণ করে। এবং সর্বশেষে এটি `reduce` এর রেজাল্ট হয়।
 
-Sounds complicated?
+জটিল মনে হচ্ছে?
 
-The easiest way to grasp that is by example.
+চলুন, উদাহরণের সাহায্যে বুঝার চেষ্টা করি।
 
-Here we get a sum of an array in one line:
+নিচের উদাহরণে আমরা অ্যারের সকল এলিমেন্টের যোগফল বের করছি:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
@@ -578,74 +578,74 @@ let result = arr.reduce((sum, current) => sum + current, 0);
 alert(result); // 15
 ```
 
-The function passed to `reduce` uses only 2 arguments, that's typically enough.
+সাধারণত `reduce` ফাংশনের দুটি আর্গুমেন্ট।
 
-Let's see the details of what's going on.
+চলুন এটি কিভাবে কাজ করছে তা বিস্তারিত দেখি।
 
-1. On the first run, `sum` is the `initial` value (the last argument of `reduce`), equals `0`, and `current` is the first array element, equals `1`. So the function result is `1`.
-2. On the second run, `sum = 1`, we add the second array element (`2`) to it and return.
-3. On the 3rd run, `sum = 3` and we add one more element to it, and so on...
+1. ১ম বার কল হলে, `sum` হল `initial` মানটি (`reduce` এর ২য় আর্গুমেন্টটি), অর্থাৎ `0`, এবং `current` হল ১ম এলিমেন্টটি, অর্থাৎ `1`। সুতরাং ১ম বার এক্সিকিউশনে এর মান হবে `1`।
+2. ২য় এক্সিকিউশনে, `sum = 1`, এখন `sum` এর সাথে ২য় এলিমেন্টটি (`2`) যোগ হবে (`2+1`) এবং মানটি রিটার্ন করবে।
+3. ৩য় এক্সিকিউশনে, `sum = 3` এবং পূর্বের মত ৩য় এলিমেন্টটি যোগ হবে, এভাবে প্রতিটি এলিমেন্ট ইটারেট করবে...
 
-The calculation flow:
+ক্যালকুলেশন ফ্লো:
 
 ![](reduce.svg)
 
-Or in the form of a table, where each row represents a function call on the next array element:
+এখানে আরো বিস্তারিত আলোচনা করা হল:
 
-|   |`sum`|`current`|result|
+|   |`sum`|`current`|ফলাফল|
 |---|-----|---------|---------|
-|the first call|`0`|`1`|`1`|
-|the second call|`1`|`2`|`3`|
-|the third call|`3`|`3`|`6`|
-|the fourth call|`6`|`4`|`10`|
-|the fifth call|`10`|`5`|`15`|
+|১ম এক্সিকিউশনে|`0`|`1`|`1`|
+|২য় এক্সিকিউশনে|`1`|`2`|`3`|
+|৩য় এক্সিকিউশনে|`3`|`3`|`6`|
+|৪র্থ এক্সিকিউশনে|`6`|`4`|`10`|
+|৫ম এক্সিকিউশনে|`10`|`5`|`15`|
 
-Here we can clearly see how the result of the previous call becomes the first argument of the next one.
+এখানে আমরা দেখছি কিভাবে প্রতিবার এক্সিকিউশনের রিটার্নকৃত মানটি এর পরের এক্সিকিউশনে যাচ্ছে।
 
-We also can omit the initial value:
+দ্বিতীয় আর্গুমেন্টটি অপশনাল:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-// removed initial value from reduce (no 0)
+// প্রাথমিক মানটি পাস করছি না
 let result = arr.reduce((sum, current) => sum + current);
 
 alert( result ); // 15
 ```
 
-The result is the same. That's because if there's no initial, then `reduce` takes the first element of the array as the initial value and starts the iteration from the 2nd element.
+ফলাফল একই আসবে। কেননা এখানে কোন প্রাথমিক মান নাই। যদি কোন প্রাথমিক মান না থাকে, তাহলে `reduce` প্রথম এলিমেন্টকে প্রাথমিক মান হিসেবে ধরে নিবে এবং ইটারেশন শুরু হবে ২য় এলিমেন্ট হতে।
 
-The calculation table is the same as above, minus the first row.
+উপরের ক্যালকুলেশন টেবলের মত তবে এক্ষেত্রে দ্বিতীয় সারি হতে।
 
-But such use requires an extreme care. If the array is empty, then `reduce` call without initial value gives an error.
+তবে এটি ব্যবহারে সময় আমাদের সতর্ক থাকতে হবে। যদি অ্যারেটিতে কোন এলিমেন্ট না থাকে, তাহলে `reduce` কোন প্রাথমিক মান ছাড়া কল হবে এবং এরর থ্রো করবে।
 
-Here's an example:
+যেমন, এখানে দেখুন:
 
 ```js run
 let arr = [];
 
 // Error: Reduce of empty array with no initial value
-// if the initial value existed, reduce would return it for the empty arr.
+// যদি প্রাথমিক মানটি পাস করি, তাহলে খালি অ্যারের জন্য প্রাথমিক মানটি রিটার্ন করবে
 arr.reduce((sum, current) => sum + current);
 ```
 
-So it's advised to always specify the initial value.
+সুতরাং অনাকাঙ্ক্ষিত এরর এড়াতে সবসময় প্রাথমিক মানটি আর্গুমেন্টে পাস করা উচিত।
 
-The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same, but goes from right to left.
+[arr.reduceRight](mdn:js/Array/reduceRight) মেথডটিও একই কাজ করে, তবে এটি অ্যারের উল্টোদিক হতে ইটারেট করে।
 
 
 ## Array.isArray
 
-Arrays do not form a separate language type. They are based on objects.
+পূর্বের অধ্যায়ে জেনেছি জাভাস্ক্রিপ্টে অ্যারে আলাদা কোন টাইপ না। এটি মূলত একটি বিশেষ ধরণের অবজেক্ট।
 
-So `typeof` does not help to distinguish a plain object from an array:
+সুতরাং `typeof` অ্যারে ও অবজেক্টের মধ্যে পার্থক্য করতে পারে না:
 
 ```js run
 alert(typeof {}); // object
 alert(typeof []); // same
 ```
 
-...But arrays are used so often that there's a special method for that: [Array.isArray(value)](mdn:js/Array/isArray). It returns `true` if the `value` is an array, and `false` otherwise.
+...তবে এর জন্য আমাদের আরেকটি বিশেষ মেথড আছে: [Array.isArray(value)](mdn:js/Array/isArray)। যদি `value` একটি অ্যারে হয় তাহলে `true` রিটার্ন করবে, অন্যথায় `false`।
 
 ```js run
 alert(Array.isArray({})); // false
@@ -653,25 +653,25 @@ alert(Array.isArray({})); // false
 alert(Array.isArray([])); // true
 ```
 
-## Most methods support "thisArg"
+## বেশিরভাগ মেথড "thisArg" সাপোর্ট করে
 
-Almost all array methods that call functions -- like `find`, `filter`, `map`, with a notable exception of `sort`, accept an optional additional parameter `thisArg`.
+বেশিরভাগ অ্যারে মেথড -- যেমন `find`, `filter`, `map` ইত্যাদি আরেকটি অপশনাল আর্গুমেন্ট `thisArg` নিতে পারে।
 
-That parameter is not explained in the sections above, because it's rarely used. But for completeness we have to cover it.
+উপরে আমরা প্যারামিটারটি সম্পর্কে আলোচনা করিনি, কেননা এটি কদাচিৎ ব্যবহার হয়। তবে আমাদের এটিও জেনে রাখা উচিত।
 
-Here's the full syntax of these methods:
+মেথডগুলোর সিনট্যাক্স হবে:
 
 ```js
 arr.find(func, thisArg);
 arr.filter(func, thisArg);
 arr.map(func, thisArg);
 // ...
-// thisArg is the optional last argument
+// thisArg হল একটি অপশনাল আর্গুমেন্ট
 ```
 
-The value of `thisArg` parameter becomes `this` for `func`.
+`thisArg` প্যারামিটারের মান হবে ঐ `func` এর `this`।
 
-For example, here we use a method of `army` object as a filter, and `thisArg` passes the context:
+যেমন, অ্যারের অবজেক্টকে ফিল্টার করতে `army` অবজেক্টের একটি মেথড ব্যবহার করছি, এবং এটিকে `thisArg` এর দ্বারা কন্টেক্সে পাস করছি:
 
 ```js run
 let army = {
@@ -690,7 +690,7 @@ let users = [
 ];
 
 *!*
-// find users, for who army.canJoin returns true
+// যেসব users এর জন্য army.canJoin এর true রিটার্ন করে
 let soldiers = users.filter(army.canJoin, army);
 */!*
 
@@ -699,53 +699,53 @@ alert(soldiers[0].age); // 20
 alert(soldiers[1].age); // 23
 ```
 
-If in the example above we used `users.filter(army.canJoin)`, then `army.canJoin` would be called as a standalone function, with `this=undefined`, thus leading to an instant error.
+উপরের উদাহরণে আমরা যদি শুধুমাত্র `users.filter(army.canJoin)` দ্বারা চেষ্টা করি, তাহলে `army.canJoin` একটি স্বতন্ত্র ফাংশন কল করবে যেখানে `this=undefined`, এবং প্রোগ্রামটি একটি এরর থ্রো করবে।
 
-A call to `users.filter(army.canJoin, army)` can be replaced with `users.filter(user => army.canJoin(user))`, that does the same. The latter is used more often, as it's a bit easier to understand for most people.
+`users.filter(army.canJoin, army)` এর বদলে এভাবেও `users.filter(user => army.canJoin(user))` কল করতে পারি, যা একই কাজ করে। পরবর্তী নিয়মেই বেশিরভাগ কল করা হয়, এবং এটি পড়তে ও বুঝতেও বেশি সুবিধাজনক।
 
-## Summary
+## সারাংশ
 
-A cheat sheet of array methods:
+অ্যারের মেথডের চিটশীট:
 
-- To add/remove elements:
-  - `push(...items)` -- adds items to the end,
-  - `pop()` -- extracts an item from the end,
-  - `shift()` -- extracts an item from the beginning,
-  - `unshift(...items)` -- adds items to the beginning.
-  - `splice(pos, deleteCount, ...items)` -- at index `pos` deletes `deleteCount` elements and inserts `items`.
-  - `slice(start, end)` -- creates a new array, copies elements from index `start` till `end` (not inclusive) into it.
-  - `concat(...items)` -- returns a new array: copies all members of the current one and adds `items` to it. If any of `items` is an array, then its elements are taken.
+- এলিমেন্ট add/remove এর জন্য:
+  - `arr.push(...items)` -- অ্যারের শেষে এলিমেন্ট যুক্ত করতে,
+  - `arr.pop()` -- অ্যারের শেষে এলিমেন্টটি বাদ দিতে,
+  - `arr.shift()` -- অ্যারের শুরুর এলিমেন্টটি বাদ দিতে,
+  - `arr.unshift(...items)` -- অ্যারের শুরুতে এলিমেন্ট যুক্ত করতে.
+  - `splice(pos, deleteCount, ...items)` -- `pos` ইনডেক্স হতে `deleteCount` অনুযায়ী এলিমেন্ট ডিলিট করে এবং `items` যুক্ত করে।
+  - `slice(start, end)` -- অ্যারের `start` হতে `end` ইনডেক্স পর্যন্ত এলিমেন্ট সমূহকে একটি নতুন অ্যারে হিসেবে রিটার্ন করে।
+  - `concat(...items)` -- কোন একটি অ্যারের সাথে আরেকটি নতুন অ্যারে বা নতুন `items` সংযুক্ত করে, এটিও একটি নতুন অ্যারে রিটার্ন করে।
 
-- To search among elements:
-  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, return the index or `-1` if not found.
-  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
-  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
-  - `findIndex` is like `find`, but returns the index instead of a value.
+- এলিমেন্ট অনুসন্ধানের মেথড:
+  - `indexOf/lastIndexOf(item, pos)` -- কোন একটি নির্দিষ্ট পজিশন `pos` থেকে একটি `item` অনুসন্ধান করে, এলিমেন্ট পাওয়া গেলে `index` পাওয়া না গেলে `-1` রিটার্ন করে।
+  - `includes(value)` -- অ্যারেতে `value` টি থাকলে `true` রিটার্ন করবে, অন্যথায় `false`।
+  - `find/filter(func)` -- এলিমেন্ট সমূহকে কাস্টম ফাংশনের উপর ভিত্তি করে অনুসন্ধান চালায়, ফাংশনের `true` রিটার্নের জন্য প্রথম/সকল এলিমেন্ট রিটার্ন করে।
+  - `findIndex` -- এটি `find` এর মত, তবে এটি ভ্যালুর পরিবর্তে `index` রিটার্ন করে।
 
-- To iterate over elements:
-  - `forEach(func)` -- calls `func` for every element, does not return anything.
+- প্রতিটি এলিমেন্ট ইটারেট করতে:
+  - `forEach(func)` -- প্রতিটি এলিমেন্টের জন্য একটি `func` কল হয়, কোন কিছু রিটার্ন করে না।
 
-- To transform the array:
-  - `map(func)` -- creates a new array from results of calling `func` for every element.
-  - `sort(func)` -- sorts the array in-place, then returns it.
-  - `reverse()` -- reverses the array in-place, then returns it.
-  - `split/join` -- convert a string to array and back.
-  - `reduce/reduceRight(func, initial)` -- calculate a single value over the array by calling `func` for each element and passing an intermediate result between the calls.
+- অ্যারের রুপান্তরের জন্য:
+  - `map(func)` -- প্রতিটি এলিমেন্টের জন্য একটি `func` কল হয় এবং রূপান্তরিত এলিমেন্টগুলো অ্যারে হিসেবে রিটার্ন করে।
+  - `sort(func)` -- অ্যারেকে সর্ট করতে, সর্টিং অ্যারেটি রিটার্ন করে।
+  - `reverse()` -- অ্যারের এলিমেন্টসমূহকে বিপরীতক্রমে পেতে।
+  - `split/join` -- স্ট্রিংকে অ্যারেতে আর অ্যারেকে স্ট্রিংয়ে রূপান্তর করতে।
+  - `reduce/reduceRight(func, initial)` -- অ্যারের প্রতিটি এলিমেন্টের জন্য `func` কল হবে এবং পূর্বের মানটি সংরক্ষন করে পরবর্তী কলে আগের মানটি প্রদান করে এবং সর্বশেষে একটি ফলাফল রিটার্ন করে।
 
-- Additionally:
-  - `Array.isArray(arr)` checks `arr` for being an array.
+- অতিরিক্ত:
+  - `Array.isArray(arr)` এটি `arr` কে যাচাই করে অ্যারে কিনা।
 
-Please note that methods `sort`, `reverse` and `splice` modify the array itself.
+দয়া করে মনে রাখুন `sort`, `reverse` এবং `splice` অরিজিনাল অ্যারেকে রূপান্তর করে।
 
-These methods are the most used ones, they cover 99% of use cases. But there are few others:
+প্রাত্যহিকক্ষেত্রে বেশিরভাগ সময় এই মেথড সমূহ ব্যবহার করি। তবে আরো কিছু মেথড আছে:
 
-- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) check the array.
+- [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) অ্যারেটিকে যাচাই করে।
 
-  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
-  
-  These methods behave sort of like `||` and `&&` operators: if `fn`  returns a truthy value, `arr.some()` immediately returns `true` and stops iterating over the rest items; if `fn`  returns a falsy value, `arr.every()` immediately returns `false` and stops iterating over the rest items as well.
+  `fn` ফাংশনটি `map` এর মত সকল এলিমেন্টকে ইটারেট করে। যদি কোন/সকল রেজাল্ট `true` হয়, তাহলে `true` রিটার্ন করবে, অন্যথায় `false`।
 
-  We can use `every` to compare arrays:
+  মেথডগুলো `||` এবং `&&` অপারেটরের মত কাজ করে: যদি `fn`  কোন একটি এলিমেন্টের জন্য `true` রিটার্ন করে, `arr.some()` সাথে সাথে ইটারেশন থামিয়ে `true` রিটার্ন করবে অর্থাৎ `arr.some()` অ্যারের কোন একটি এলিমেন্টের জন্য শর্ত পূরণ হলে `true` রিটার্ন করে। আবার যদি `fn`  কোন একটি এলিমেন্টের জন্য `false` রিটার্ন করে `arr.every()` সাথে সাথে ইটারেশন থামিয়ে `false` রিটার্ন করবে অর্থাৎ `arr.every()` অ্যারের প্রতিটি এলিমেন্টের জন্য শর্ত পূরণ হলে `true` রিটার্ন করে।
+
+  দুটি অ্যারেকে তুলনা করতে ব্যবহার করতে পারি `every` মেথড:
   ```js run
   function arraysEqual(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
@@ -754,16 +754,16 @@ These methods are the most used ones, they cover 99% of use cases. But there are
   alert( arraysEqual([1, 2], [1, 2])); // true
   ```
 
-- [arr.fill(value, start, end)](mdn:js/Array/fill) -- fills the array with repeating `value` from index `start` to `end`.
+- [arr.fill(value, start, end)](mdn:js/Array/fill) -- ইনডেক্স `start` হতে `end` পর্যন্ত `value` দ্বারা পূর্ন হবে।
 
-- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- copies its elements from position `start` till position `end` into *itself*, at position `target` (overwrites existing).
+- [arr.copyWithin(target, start, end)](mdn:js/Array/copyWithin) -- অ্যারের নিজের এলিমেন্ট ঐ অ্যারের অন্য একটি পজিশনে কপি করতে এই মেথডটি ব্যবহার করি, `target` (বর্তমান ভ্যালুকে প্রতিস্থাপন করবে) `start` যে পজিশন থেকে কপি হবে এবং যে পজিশন পর্যন্ত `end` কপি হবে।
 
-- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) create a new flat array from a multidimensional array.
+- [arr.flat(depth)](mdn:js/Array/flat)/[arr.flatMap(fn)](mdn:js/Array/flatMap) মাল্টিডাইমেনশনাল অ্যারে থেকে ফ্লাট অর্থাৎ একমাত্রিক অ্যারেতে রূপান্তর।
 
-For the full list, see the [manual](mdn:js/Array).
+অ্যারের সম্পূর্ণ মেথডের তালিকাটি দেখতে, [manual](mdn:js/Array)।
 
-From the first sight it may seem that there are so many methods, quite difficult to remember. But actually that's much easier.
+প্রথম দেখায় মনে হতে পারে অনেক মেথড আছে, এবং এদের মনে রাখা কঠিন। আসলে এটি তেমন কঠিন কিছু না।
 
-Look through the cheat sheet just to be aware of them. Then solve the tasks of this chapter to practice, so that you have experience with array methods.
+চিটশীটটি আবার লক্ষ্য করুন। তারপর এই অধ্যায়ের সমস্যাগুলো সমাধান করুন, তাহলে মেথডসমূহ সম্পর্কে আপনার ধারণা হবে।
 
-Afterwards whenever you need to do something with an array, and you don't know how -- come here, look at the cheat sheet and find the right method. Examples will help you to write it correctly. Soon you'll automatically remember the methods, without specific efforts from your side.
+এরপর যখন আপনি অ্যারে নিয়ে কাজ করবেন, এবং কিভাবে করবেন তা জানেন না তখন এখানে আসুন, এবং চিটশীটটি আবার দেখুন এবং সঠিক মেথডটি ব্যবহার করুন। উদাহরণগুলো আপনাকে সঠিকভাবে মেথডগুলোর ব্যবহার শিখতে সাহায্য করবে। এভাবে ব্যবহার করতে করতে আপনি মেথডগুলো শিখে যাবেন, দয়া করে একবার পড়েই মেথডগুলো মুখস্থ করতে যাবেন না, ব্যবহার করতে করতেই এগুলো শিখা হয়ে যাবে।
