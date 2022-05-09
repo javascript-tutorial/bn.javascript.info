@@ -5,7 +5,11 @@
     ```js run
     alert( "Java".match(/Java[^script]/) ); // null
     ```
+<<<<<<< HEAD
 - হ্যাঁ, কারণ `pattern:[^script]` অংশটি `"S"` ক্যারাক্টারের সাথে ম্যাচ করে। `"S"` ক্যারাক্টারটি `pattern:script` এর মধ্যে নেই। যেহেতু রেগুলার এক্সপ্রেশন কেস-সেনসিটিভ (কোন `pattern:i` ফ্ল্যাগ নেই), তাই ক্যারাক্টার `"S"` এবং `"s"` কে আলাদা হিসেবে বিবেচনা করে।
+=======
+- Yes, because the `pattern:[^script]` part matches the character `"S"`. It's not one of `pattern:script`. As the regexp is case-sensitive (no `pattern:i` flag), it treats `"S"` as a different character from `"s"`.
+>>>>>>> 206485fc3a5465f961608b6e7303fae2e1a0e0b5
 
     ```js run
     alert( "JavaScript".match(/Java[^script]/) ); // "JavaS"

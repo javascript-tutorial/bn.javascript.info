@@ -106,7 +106,7 @@ Let's examine the `for` statement part-by-part:
 
 | part  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
-| begin | `i = 0`    | Executes once upon entering the loop.                                      |
+| begin | `let i = 0`    | Executes once upon entering the loop.                                      |
 | condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
 | body | `alert(i)`| Runs again and again while the condition is truthy.                         |
 | step| `i++`      | Executes after the body on each iteration. |
@@ -268,7 +268,7 @@ for (let i = 0; i < 10; i++) {
 
 From a technical point of view, this is identical to the example above. Surely, we can just wrap the code in an `if` block instead of using `continue`.
 
-But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+But as a side effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
 ````
 
 ````warn header="No `break/continue` to the right side of '?'"
@@ -318,7 +318,7 @@ alert('Done!');
 
 We need a way to stop the process if the user cancels the input.
 
-The ordinary `break` after `input` would only break the inner loop. That's not sufficient--labels, come to the rescue!
+The ordinary `break` after `input` would only break the inner loop. That's not sufficient -- labels, come to the rescue!
 
 A *label* is an identifier with a colon before a loop:
 ```js
@@ -363,12 +363,23 @@ Labels do not allow us to jump into an arbitrary place in the code.
 
 For example, it is impossible to do this:
 ```js
-break label; // doesn't jumps to the label below
+break label; // jump to the label below (doesn't work)
 
 label: for (...)
 ```
 
-A call to `break/continue` is only possible from inside a loop and the label must be somewhere above the directive.
+A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+```js
+label: {
+  // ...
+  break label; // works
+  // ...
+}
+```
+
+...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
+
+A `continue` is only possible from inside a loop.
 ````
 
 ## Summary
