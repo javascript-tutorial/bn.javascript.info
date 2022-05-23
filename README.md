@@ -19,7 +19,11 @@ If maintainers do not respond, or if you'd like to become a maintainer, write us
 
 **Let others know what you're translating, in message boards or chats in your language. Invite them to join!**
 
+<<<<<<< HEAD
 🎉 Thank you!
+=======
+**You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 Your name and the contribution size will appear in the "About project" page when the translation gets published.
 
@@ -117,6 +121,7 @@ Some files, usually tasks, have YAML metadata at the top, delimited by `---`:
 ```md
 importance: 5
 
+<<<<<<< HEAD
 ---
 ...
 ```
@@ -138,3 +143,8 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 You can run the tutorial server locally to see how the translation looks.
 
 The server and install instructions are at <https://github.com/javascript-tutorial/server>.
+=======
+---  
+♥  
+Ilya Kantor @iliakan
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e

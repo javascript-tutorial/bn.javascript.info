@@ -741,7 +741,13 @@ alert(soldiers[1].age); // 23
 
 - [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) অ্যারেটিকে যাচাই করে।
 
+<<<<<<< HEAD
   `fn` ফাংশনটি `map` এর মত সকল এলিমেন্টকে ইটারেট করে। যদি কোন/সকল রেজাল্ট `true` হয়, তাহলে `true` রিটার্ন করবে, অন্যথায় `false`।
+=======
+  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+
+  These methods behave sort of like `||` and `&&` operators: if `fn` returns a truthy value, `arr.some()` immediately returns `true` and stops iterating over the rest of items; if `fn` returns a falsy value, `arr.every()` immediately returns `false` and stops iterating over the rest of items as well.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
   মেথডগুলো `||` এবং `&&` অপারেটরের মত কাজ করে: যদি `fn`  কোন একটি এলিমেন্টের জন্য `true` রিটার্ন করে, `arr.some()` সাথে সাথে ইটারেশন থামিয়ে `true` রিটার্ন করবে অর্থাৎ `arr.some()` অ্যারের কোন একটি এলিমেন্টের জন্য শর্ত পূরণ হলে `true` রিটার্ন করে। আবার যদি `fn`  কোন একটি এলিমেন্টের জন্য `false` রিটার্ন করে `arr.every()` সাথে সাথে ইটারেশন থামিয়ে `false` রিটার্ন করবে অর্থাৎ `arr.every()` অ্যারের প্রতিটি এলিমেন্টের জন্য শর্ত পূরণ হলে `true` রিটার্ন করে।
 

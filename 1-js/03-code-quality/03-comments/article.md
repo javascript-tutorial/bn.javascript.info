@@ -141,7 +141,11 @@ function pow(x, n) {
 
 প্রসঙ্গত উল্লেখ্য, অনেক এডিটর যেমন [WebStorm](https://www.jetbrains.com/webstorm/) এই ধরনের ল্যাংগুয়েজ বুঝতে পারে এবং অটোকমপ্লিট ও স্বয়ংক্রিয় কোড-পরীক্ষায় তা ব্যবহার করে থাকে। 
 
+<<<<<<< HEAD
 এছাড়াও, কমেন্ট থেকে এইচটিএমএল-ডকুমেন্টেশন তৈরির জন্য [JSDoc 3](https://github.com/jsdoc3/jsdoc) এর মত টুল রয়েছে। JSDoc সম্পর্কে আরো জানতে <http://usejsdoc.org/> দেখতে পারেন।  
+=======
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+>>>>>>> d5e8b6d308869738bd1f08dde62b64c969b0673e
 
 কাজটি কেনো এভাবে সমাধান করা হয়েছে? : যা লিখিত থাকে তা গুরুত্বপূর্ণ। তবে যা *অলিখিত* সেটা কি ঘটছে তা বোঝার জন্য অধিক গুরুত্বপূর্ণ হতে পারে। এই কাজটি কেনো ঠিক এইভাবেই সমাধান করা হয়েছে? এক্ষেত্রে কোড কোন উত্তর দেয় না।  
 
