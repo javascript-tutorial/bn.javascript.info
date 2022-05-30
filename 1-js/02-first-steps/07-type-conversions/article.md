@@ -11,7 +11,7 @@
 এই অধ্যায়ে, আমরা অবজেক্ট নয় বরং, প্রিমিটিভ বিষয়গূলো জানবো। পরবর্তিতে, অবজেক্টের ধারণা পেলে, আমরা অবজেক্ট রূপান্তর নিয়ে আলোচনা করবো। <info:object-toprimitive>.
 =======
 ```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. For now we'll just be talking about primitives.
+In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
 
 Later, after we learn about objects, in the chapter <info:object-toprimitive> we'll see how objects fit in.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d:1-js/02-first-steps/07-type-conversions/article.md
