@@ -51,7 +51,7 @@ let user = {
 // first, declare
 function sayHi() {
   alert("Hello!");
-};
+}
 
 // then add as a method
 user.sayHi = sayHi;
@@ -81,7 +81,7 @@ user = {
 // method shorthand looks better, right?
 user = {
 *!*
-  sayHi() { // same as "sayHi: function()"
+  sayHi() { // same as "sayHi: function(){...}"
 */!*
     alert("Hello");
   }
