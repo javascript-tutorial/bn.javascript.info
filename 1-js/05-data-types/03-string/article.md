@@ -48,9 +48,9 @@ let guestList = "Guests: // Error: Unexpected token ILLEGAL
   * John";
 ```
 
-Single and double quotes come from ancient times of language creation when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
+Single and double quotes come from ancient times of language creation, when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
 
-Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This is called "tagged templates". This feature makes it easier to implement custom templating, but is rarely used in practice. You can read more about it in the [manual](mdn:/JavaScript/Reference/Template_literals#Tagged_templates). 
+Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This is called "tagged templates". This feature makes it easier to implement custom templating, but is rarely used in practice. You can read more about it in the [manual](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
 
 ## Special characters
 
@@ -81,21 +81,21 @@ Here's the full list:
 | Character | Description |
 |-----------|-------------|
 |`\n`|New line|
-|`\r`|Carriage return: not used alone. Windows text files use a combination of two characters `\r\n` to represent a line break. |
+|`\r`|In Windows text files a combination of two characters `\r\n` represents a new break, while on non-Windows OS it's just `\n`. That's for historical reasons, most Windows software also understands `\n`. |
 |`\'`, `\"`|Quotes|
 |`\\`|Backslash|
 |`\t`|Tab|
 |`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- kept for compatibility, not used nowadays. |
-|`\xXX`|Unicode character with the given hexadecimal unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
-|`\uXXXX`|A unicode symbol with the hex code `XXXX` in UTF-16 encoding, for instance `\u00A9` -- is a unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
-|`\u{X…XXXXXX}` (1 to 6 hex characters)|A unicode symbol with the given UTF-32 encoding. Some rare characters are encoded with two unicode symbols, taking 4 bytes. This way we can insert long codes. |
+|`\xXX`|Unicode character with the given hexadecimal Unicode `XX`, e.g. `'\x7A'` is the same as `'z'`.|
+|`\uXXXX`|A Unicode symbol with the hex code `XXXX` in UTF-16 encoding, for instance `\u00A9` -- is a Unicode for the copyright symbol `©`. It must be exactly 4 hex digits. |
+|`\u{X…XXXXXX}` (1 to 6 hex characters)|A Unicode symbol with the given UTF-32 encoding. Some rare characters are encoded with two Unicode symbols, taking 4 bytes. This way we can insert long codes. |
 
-Examples with unicode:
+Examples with Unicode:
 
 ```js run
 alert( "\u00A9" ); // ©
-alert( "\u{20331}" ); // 佫, a rare Chinese hieroglyph (long unicode)
-alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long unicode)
+alert( "\u{20331}" ); // 佫, a rare Chinese hieroglyph (long Unicode)
+alert( "\u{1F60D}" ); // 😍, a smiling face symbol (another long Unicode)
 ```
 
 All special characters start with a backslash character `\`. It is also called an "escape character".
@@ -214,7 +214,7 @@ alert( 'Interface'.toLowerCase() ); // interface
 
 Or, if we want a single character lowercased:
 
-```js
+```js run
 alert( 'Interface'[0].toLowerCase() ); // 'i'
 ```
 
@@ -239,7 +239,7 @@ alert( str.indexOf('widget') ); // -1, not found, the search is case-sensitive
 alert( str.indexOf("id") ); // 1, "id" is found at the position 1 (..idget with id)
 ```
 
-The optional second parameter allows us to search starting from the given position.
+The optional second parameter allows us to start searching from a given position.
 
 For instance, the first occurrence of `"id"` is at position `1`. To look for the next occurrence, let's start the search from position `2`:
 
@@ -371,8 +371,8 @@ alert( "Widget".includes("id", 3) ); // false, from position 3 there is no "id"
 The methods [str.startsWith](mdn:js/String/startsWith) and [str.endsWith](mdn:js/String/endsWith) do exactly what they say:
 
 ```js run
-alert( "Widget".startsWith("Wid") ); // true, "Widget" starts with "Wid"
-alert( "Widget".endsWith("get") ); // true, "Widget" ends with "get"
+alert( "*!*Wid*/!*get".startsWith("Wid") ); // true, "Widget" starts with "Wid"
+alert( "Wid*!*get*/!*".endsWith("get") ); // true, "Widget" ends with "get"
 ```
 
 ## Getting a substring
@@ -499,7 +499,7 @@ All strings are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). Th
     alert( String.fromCodePoint(90) ); // Z
     ```
 
-    We can also add unicode characters by their codes using `\u` followed by the hex code:
+    We can also add Unicode characters by their codes using `\u` followed by the hex code:
 
     ```js run
     // 90 is 5a in hexadecimal system
@@ -526,9 +526,9 @@ Now it becomes obvious why `a > Z`.
 The characters are compared by their numeric code. The greater code means that the character is greater. The code for `a` (97) is greater than the code for `Z` (90).
 
 - All lowercase letters go after uppercase letters because their codes are greater.
-- Some letters like `Ö` stand apart from the main alphabet. Here, it's code is greater than anything from `a` to `z`.
+- Some letters like `Ö` stand apart from the main alphabet. Here, its code is greater than anything from `a` to `z`.
 
-### Correct comparisons
+### Correct comparisons [#correct-comparisons]
 
 The "right" algorithm to do string comparisons is more complex than it may seem, because alphabets are different for different languages.
 
@@ -604,11 +604,11 @@ You will find more ways to deal with surrogate pairs later in the chapter <info:
 
 ### Diacritical marks and normalization
 
-In many languages there are symbols that are composed of the base character with a mark above/under it.
+In many languages, there are symbols that are composed of the base character with a mark above/under it.
 
 For instance, the letter `a` can be the base character for: `àáâäãåā`. Most common "composite" character have their own code in the UTF-16 table. But not all of them, because there are too many possible combinations.
 
-To support arbitrary compositions, UTF-16 allows us to use several unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
+To support arbitrary compositions, UTF-16 allows us to use several Unicode characters: the base character followed by one or many "mark" characters that "decorate" it.
 
 For instance, if we have `S` followed by the special "dot above" character (code `\u0307`), it is shown as Ṡ.
 
@@ -626,7 +626,7 @@ For example:
 alert( 'S\u0307\u0323' ); // Ṩ
 ```
 
-This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different unicode compositions.
+This provides great flexibility, but also an interesting problem: two characters may visually look the same, but be represented with different Unicode compositions.
 
 For instance:
 
@@ -639,7 +639,7 @@ alert( `s1: ${s1}, s2: ${s2}` );
 alert( s1 == s2 ); // false though the characters look identical (?!)
 ```
 
-To solve this, there exists a "unicode normalization" algorithm that brings each string to the single "normal" form.
+To solve this, there exists a "Unicode normalization" algorithm that brings each string to the single "normal" form.
 
 It is implemented by [str.normalize()](mdn:js/String/normalize).
 
@@ -663,7 +663,7 @@ If you want to learn more about normalization rules and variants -- they are des
 
 - There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions `${…}`.
 - Strings in JavaScript are encoded using UTF-16.
-- We can use special characters like `\n` and insert letters by their unicode using `\u...`.
+- We can use special characters like `\n` and insert letters by their Unicode using `\u...`.
 - To get a character, use: `[]`.
 - To get a substring, use: `slice` or `substring`.
 - To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
