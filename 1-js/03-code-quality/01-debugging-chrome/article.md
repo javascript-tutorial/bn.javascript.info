@@ -1,76 +1,77 @@
-# Debugging in Chrome
+# ক্রোমে ডিবাগিং
 
-Before writing more complex code, let's talk about debugging.
+আরো জটিল জটিল কোড লিখার আগে ডিভাগিং সম্পর্কে জানা যাক
 
-[Debugging](https://en.wikipedia.org/wiki/Debugging) is the process of finding and fixing errors within a script. All modern browsers and most other environments support debugging tools -- a special UI in developer tools that makes debugging much easier. It also allows to trace the code step by step to see what exactly is going on.
+[ডিবাগিং](https://en.wikipedia.org/wiki/Debugging) হল একটি স্ক্রিপ্টের মধ্যে ত্রুটিগুলি খুঁজে বের করার এবং ঠিক করার একটি প্রক্রিয়া। এখনকার সকল মর্ডান ব্রাউজার এবং বেশিরভাগ অন্যান্য এনভার্নমেন্ট গুলো ডিভাগিং সাপোর্ট করে থাকে -- ডেভেলপমন্ট টুলসে কিছু স্পেশাল (UI) এর কারনে ডিভাগিং করা আরো সহজ হয়েছে. এমনকি এটির মাধ্যমে কোড স্টেপ বাই স্টেপ ট্রেস করা যায় যার কারনে বুজা যায় যে কোথায় কি হচ্ছে ।
 
-We'll be using Chrome here, because it has enough features, most other browsers have a similar process.
+আমরা এখানে ক্রোম ব্রাউজার ব্যবহার করব , কারন এতে যথেষ্ট ফিচারস রয়েছে আর এমনিতেও অন্যান্য সকল ব্রাউজার গুলায় একই প্রসেস ।
 
-## The "Sources" panel
+## সোর্স প্যানেল ( Sources )
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+আপনার ক্রোম ভার্সনটি হয়ত একটু ভিন্ন হতে পারে, তবে সবকিছুই একই রকম থাকতে পারে ।
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `Sources` panel.
+- ক্রোমে এই [উদাহরণ পেজটি](debugging/index.html) খুলুন ।
+- ডেভেলপার টুলস ওপেন করুন এই কিবোর্ড শর্টকাটের মাধ্যমে `key:F12` (Mac: `key:Cmd+Opt+I`) ।
+- `Sources` প্যানেল সিলেক্ট করুন ।
 
-Here's what you should see if you are doing it for the first time:
+আপনি যদি প্রথম এটি করে থাকেন তাহলে নিচের মত দেখতে পাবেন ঃ
 
 ![](chrome-open-sources.svg)
 
-The toggler button <span class="devtools" style="background-position:-172px -98px"></span> opens the tab with files.
+এই টগলার <span class="devtools" style="background-position:-172px -98px"></span> বাটনটিতে ক্লিক করলে ফাইল সহ একটি টেব ওপেন হয় ।
 
-Let's click it and select `hello.js` in the tree view. Here's what should show up:
+ট্রি ভিউ থেকে `hello.js` ফাইলটি সিলেক্ট করুন তাহলে নিচের মত দেখতে পাবেন ঃ
 
 ![](chrome-tabs.svg)
 
-The Sources panel has 3 parts:
+এই সোর্স প্যানেলটির তিনটি পার্ট রয়েছে ঃ
 
-1. The **File Navigator** pane lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
-2. The **Code Editor** pane shows the source code.
-3. The **JavaScript Debugging** pane is for debugging, we'll explore it soon.
+1. **File Navigator** এই সেকশনে এইচটিএমল, জাভাস্ক্রিপ্ট , সিএসস এবং অন্যান্য ফাইল এমনকি ইমেজ সহ দেখায় । ক্রোমের এক্সটেনশন গুলো হয়ত এখানেও দেখাতে পারে ।
+2. **Code Editor** এই সেকশনে সোর্স কোড গুলো দেখায় ।
+3. **JavaScript Debugging** এই সেকশনটি ডিভাগিং এর জন্য আর আমরা খুব শিগ্রই এটা নিয়ে আলোচনা করবো ।
 
-Now you could click the same toggler <span class="devtools" style="background-position:-172px -122px"></span> again to hide the resources list and give the code some space.
+এখন চাইলে কোড এডিটরে স্পেস বাড়ানোর জন্য টগল <span class="devtools" style="background-position:-172px -122px"></span> বাটনটিতে ক্লিক করে রিসোর্স ট্যাবটি হাইড করতে পারেন ।
 
-## Console
+## কন্সোল ( Console )
 
-If we press `key:Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+যদি আমরা কিবোর্ডের `key:Esc` ক্লিক করি তাহলে নিচে কন্সোল ওপেন হবে । অইখানে আমরা কমান্ড টাইপ করে `key:Enter` প্রেস করে এক্সিকিউট করতে পারবো ।
 
-After a statement is executed, its result is shown below.
+একটি স্টেটমেন্ট এক্সিকিউট করার পর তার রেজাল্ট নিচেই দেখতে পাবো ।
 
-For example, here `1+2` results in `3`, and `hello("debugger")` returns nothing, so the result is `undefined`:
+উদাহরণ হিসেবে এখানে `1+2` এর রেজাল্ট `3` এবং `hello("debugger")` কিছুই রিটার্ন করে না , সেক্ষেত্রে রেজাল্ট হবে `undefined` :
 
 ![](chrome-sources-console.svg)
 
-## Breakpoints
+## ব্রেকপয়েন্টস ( Breakpoints )
 
-Let's examine what's going on within the code of the [example page](debugging/index.html). In `hello.js`, click at line number `4`. Yes, right on the `4` digit, not on the code.
+চলুন [উদাহরণ পেজ](debugging/index.html) টি পরীক্ষা করে দেখা যাক । `hello.js` ফাইলে লাইন নং `4` এ ক্লিক করুন তবে কোডে নয় শুধুমাত্র ডিজিট `4` এর উপর ।
 
-Congratulations! You've set a breakpoint. Please also click on the number for line `8`.
+অভিনন্দন ! আপনি একটি ব্রেকপয়েন্ট সেট করেছেন । ঠিক একই ভাবে আবারো ক্লিক করুন লাইন নং `8` ।
 
-It should look like this (blue is where you should click):
+এটা অনেকটা নিচের মত দেখাবে (নীল যেখানে আপনাকে ক্লিক করা উচিত):
 
 ![](chrome-sources-breakpoint.svg)
 
-A *breakpoint* is a point of code where the debugger will automatically pause the JavaScript execution.
+একটি ব্রেকপয়েন্ট হল কোডের একটি পয়েন্ট যেখানে ডিবাগার স্বয়ংক্রিয়ভাবে জাভাস্ক্রিপ্ট এক্সিকিউশনকে বিরতি দেবে ।
 
-While the code is paused, we can examine current variables, execute commands in the console etc. In other words, we can debug it.
+যখন কোডটি পজ অবস্থায় থাকে তখন আমরা বর্তমান ভেরিয়েবল গুলো পরীক্ষা করতে পারি, কনসোলে কমান্ড চালাতে পারি এছাড়াও অনেক কিছু করতে পারি । অন্য কথায়, আমরা এটি ডিবাগ করতে পারি।
 
-We can always find a list of breakpoints in the right panel. That's useful when we have many breakpoints in various files. It allows us to:
-- Quickly jump to the breakpoint in the code (by clicking on it in the right panel).
-- Temporarily disable the breakpoint by unchecking it.
-- Remove the breakpoint by right-clicking and selecting Remove.
-- ...And so on.
+আমরা সবসময় ডান প্যানেলে ব্রেকপয়েন্টের একটি তালিকা খুঁজে পেতে পারি। এটি আসলে অনেক দরকারী যখন আমাদের বিভিন্ন ফাইলে অনেক ব্রেকপয়েন্ট থাকে। এটি আমাদের যা অনুমতি দেয় তা হল ঃ
+
+- যেকোন সময় যেকোন ব্রেকপয়েন্টে জাম্প করা যাবে ( ডান পাশের প্যানেলে ক্লিক করে ) ।
+- আনচেকের মাধ্যমে ব্রেকপয়েন্টকে সাময়িকের জন্য ডিজেবল করা যাবে ।
+- রাইট ক্লিক করে রিমুভ সিলেক্টের মাধ্যমে ব্রেকপয়েন্ট রিমুভ করা যায় ।
+- ...ইত্যাদি ।
 
 ```smart header="Conditional breakpoints"
-*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression is truthy.
+লাইন নাম্বারে *Right click* করে *conditional* ব্রেক পয়েন্ট তৈরি করা যায় । এটা তখনি ট্রিগ্রার করে যখন এক্সপ্রেশনটি সত্য হয় ।
 
-That's handy when we need to stop only for a certain variable value or for certain function parameters.
+এটা আসলেই কার্যকর যখন আমাদের একটি নির্দিষ্ট ভেরিয়বল ভেলুতে থামা দরকার অথবা নির্দিষ্ট ফাংসন প্যারামিটারে ।
 ```
 
-## Debugger command
+## ডিভাগার কমান্ড
 
-We can also pause the code by using the `debugger` command in it, like this:
+আমরা নিচের মত `debugger` কমান্ড ব্যবহার করেও কোড পজ করতে পারি ঃ
 
 ```js
 function hello(name) {
@@ -84,90 +85,99 @@ function hello(name) {
 }
 ```
 
-That's very convenient when we are in a code editor and don't want to switch to the browser and look up the script in developer tools to set the breakpoint.
+এটি খুবই সুবিধাজনক যখন আমরা একটি কোড এডিটরে থাকি এবং ব্রেকপয়েন্ট সেট করতে ব্রাউজারের ডেভলপার টুলে যাওয়া লাগে না ।
 
+## পজ করুন এবং চারদিকে লক্ষ্য করুন
 
-## Pause and look around
+আমাদের উদাহরণে পেজ লোডের সময় `hello()` কল করা হয়েছে, তো সবচাইতে সহজ উপায় ডিবাগারটি একটিভ করার জন্য (ব্রেকপয়েন্ট সেট করার পর) পেজটি রিলোড করতে হবে । কিবোর্ড থেকে `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac) প্রেস করুন ।
 
-In our example, `hello()` is called during the page load, so the easiest way to activate the debugger (after we've set the breakpoints) is to reload the page. So let's press `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac).
-
-As the breakpoint is set, the execution pauses at the 4th line:
+ব্রেকপয়েন্ট সেট করা হলে, এক্সিকিউশন ৪নং লাইনে থামে ঃ
 
 ![](chrome-sources-debugger-pause.svg)
 
-Please open the informational dropdowns to the right (labeled with arrows). They allow you to examine the current code state:
+ডানদিকে ইনফরম্যাশনাল ড্রপডাউনটি খুলুন ( এরো চিহ্নের আইকন )। আর এখান থেকেই বর্তমান কোড গুলো পরীক্ষা করার যায়:
 
-1. **`Watch` -- shows current values for any expressions.**
+1. **`Watch` -- যেকোনো এক্সপ্রেশনের জন্য বর্তমান মান দেখায় ।**
 
-    You can click the plus `+` and input an expression. The debugger will show its value at any moment, automatically recalculating it in the process of execution.
+   আপনি চাইলে প্লাসে `+` ক্লিক করে একটি এক্সপ্রেশন ইনপুট দিতে পারেন । ডিবাগার যেকোনো মুহূর্তে এটির মান দেখাবে এবং অটোম্যাটিক্যালি এক্সিকিশন প্রসেস গুলো পুনরায় ক্যালকুলেট হবে ।
 
-2. **`Call Stack` -- shows the nested calls chain.**
+2. **`Call Stack` -- নেস্টেড কল গুলো দেখায়.**
 
-    At the current moment the debugger is inside `hello()` call, called by a script in `index.html` (no function there, so it's called "anonymous").
+   এই মূহুর্তে ডিভাগার `hello()` কল এর ভিতর রয়েছে , আর এটি `index.html` এর মধ্যে থাকা স্ক্রিপ্ট থেকে কল হয়েছে ( কোন ফাংশন ছিলো না , তাই এটাকে এননিমাউস বলা হয় ) ।
 
-    If you click on a stack item (e.g. "anonymous"), the debugger jumps to the corresponding code, and all its variables can be examined as well.
-3. **`Scope` -- current variables.**
+   যদি আপনি কল স্ট্যাক থেকে যেকোন স্ট্যাক আইটেম (e.g. "anonymous") ক্লিক করেন তাহলে ডিভাগার ঠিক সেই কোডেই জাম্প করবে এবং থাকা সকল ভেরিয়েবল গুলো পরিক্ষা করে দেখা যাবে।
 
-    `Local` shows local function variables. You can also see their values highlighted right over the source.
+3. **`Scope` -- বর্তমান ভেরিয়েবল.**
 
-    `Global` has global variables (out of any functions).
+   `Local` লোকাল ফাংশনের ভেরিয়েবল গুলো দেখায় । সেই সাথে সোর্স কোডে ভেলু গুলো হাইলাইট করে দেখানো হয় ।
 
-    There's also `this` keyword there that we didn't study yet, but we'll do that soon.
+   `Global` গ্লোবাল ভেরিয়েবল গুলো দেখায় (যেকোন ফাংসনের বাহিরের ভেরিয়েবল).
 
-## Tracing the execution
+   সেখানে এই `this` কিউয়ার্ডটিও রয়েছে যা আমরা এখনো আলোচনা করিনি কিন্তু খুব শিগ্রই এটা নিয়ে আলোচনা হবে ।
 
-Now it's time to *trace* the script.
+## এক্সিকিউশান গুলো ট্রেস করা
 
-There are buttons for it at the top of the right panel. Let's engage them.
+এখন স্ক্রিপ্ট ট্রেস করার সময় -
+
+ডান প্যানেলের উপরে এটির জন্য বাটন রয়েছে । চলুন ক্লিক করা যাক
+
 <!-- https://github.com/ChromeDevTools/devtools-frontend/blob/master/front_end/Images/src/largeIcons.svg -->
-<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": continue the execution, hotkey `key:F8`.
-: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
 
-    Here's what we can see after a click on it:
+<span class="devtools" style="background-position:-146px -168px"></span> -- "Resume": এক্সিকিউশান চলমানের জন্য, hotkey `key:F8`.
 
-    ![](chrome-sources-debugger-trace-1.svg)
+পুনরায় এক্সকিউশান করুন । যদি কোন অতিরিক্ত ব্রেকপয়েন্ট না থাকে, তাহলে এক্সিকিউশান কন্টিনিউ হতে থাকবে আর ডিভাগার তার কন্ট্রল হারাবে ।
 
-    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call Stack" at the right. It has increased by one more call. We're inside `say()` now.
+ক্লিক করার পর আমরা যা দেখতে পাই এখানে ঃ
 
-<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": run the next command, hotkey `key:F9`.
-: Run the next statement. If we click it now, `alert` will be shown.
+![](chrome-sources-debugger-trace-1.svg)
 
-    Clicking this again and again will step through all script statements one by one.
+এক্সিকিউশনটি আবার শুরু হয়েছে এবং অন্য একটি ব্রেকপয়েন্টে `say()` যেয়ে থেমেছে । এখন কল স্ট্যাকে লক্ষ্য করুন এখানে আরেকটি কল বৃদ্ধি পেয়েছে । এখন আমরা `say()` এর মধ্যে ।
 
-<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
-: Similar to the previous the "Step" command, but behaves differently if the next statement is a function call. That is: not a built-in, like `alert`, but a function of our own.
+<span class="devtools" style="background-position:-200px -190px"></span> -- "Step": পরবর্তী কমান্ড চালান, hotkey `key:F9`.
 
-    The "Step" command goes into it and pauses the execution at its first line, while "Step over" executes the nested function call invisibly, skipping the function internals.
+পরবর্তী স্টেটমেন্টটি চালান । যদি আমরা এখন এটি ক্লিক করি তাহলে `alert` দেখাবে ।
 
-    The execution is then paused immediately after that function.
+বার বার এটিতে ক্লিক করলে স্টেটমেন্টগুলো একের পর এক এক্সিকিউশান হতে থাকবে ।
 
-    That's good if we're not interested to see what happens inside the function call.
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": পরবর্তী কমান্ড চালান তবে ফাংশানে যাবেন না, hotkey `key:F10`.
+
+অনেকটা আগের কমান্ডের "Step" মতই কিন্তু একটু অন্যভাবে আচরন করে যদি পরবর্তি স্টেটমেন্টটি একটি ফাংশন কল হয়ে থাকে ( এটা বিল্ট ইন না `alert` এর মত কিন্তু এটি আমাদের নিজস্ব একটি ফাংশন )
+
+যদি আমরা সেগুলি তুলনা করি, “Step” কমান্ডটি একটি নেস্টেড ফাংশন কলে যায় এবং তার প্রথম লাইনে এক্সিকিউশনকে পজ করে, যখন “Step over” এক্সিকিউট হয় তখন নেস্টেড ফাংশন অদৃশ্যভাবে কল হয়ে থাকে সেই সাথে ফাংশন ইন্টারনাল গুলো এড়িয়ে যায়।
+
+সেই ফাংশন কলের পরপরই এক্সিকিউশান আবার পজ হয়।
+
+তবে সমস্যা নাই যদি আমরা ফাংশনের ভিতর কি হচ্ছে না হচ্ছে তা না দেখতে চাই ।
 
 <span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
-: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
 
-    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+এটিও "Step" এর মত , কিন্তু এটি এসিনক্রোনাস ফাংসন কল এর ক্ষেত্রে একটু অন্য রকম বিহেভ করে । যদি আপনি সবে মাত্র জাভাস্ক্রিপ্ট শিখা শুরু করছেন তাহলে আপনি চাইলে এটি ইগনোর করতে পারেন , যদিও আমাদের কোন এসিনক্রোনাস ফাংসন কল নেই ।
 
-<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
-: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+ফিউচারের জন্য নোট করে রাখতে পারেন যে "Step" কমান্ড এসিনক্রোনাস একশান ইগনোর করে থাকে , যেমন `setTimeout` (scheduled function call) যেট পরে এক্সিকিউট করে থাকে । "Step into" কোডের ভেতর যায় এবং প্রয়োজন হলে অপেক্ষা করে । আরো তথ্যের জন্য এটা দেখতে পারেন [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) ।
 
-<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
-: That button does not move the execution. Just a mass on/off for breakpoints.
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": বর্তমান ফাংশন শেষ না হওয়া পর্যন্ত এক্সিকিউশান চালিয়ে যান, hotkey `key:Shift+F11`.
 
-<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
-: When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+এক্সিকিউশন চালিয়ে যান এবং বর্তমান ফাংশনের একেবারে শেষ লাইনে এটি বন্ধ করুন। এটি <span class="devtools" style="background-position:-200px -190px"></span> তখন কার্যকর যখন আমরা ভুলবশত একটি নেস্টেড কল ব্যবহার করে প্রবেশ করি । আর এটি আমাদের উপর ইন্টারেস্ট রাখে না যার কারনে আমরা শেষ না হওয়া পর্যন্ত কন্টিনিউ করতে থাকি যত দ্রুত সম্ভব ।
+
+<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable সকল ব্রেক পয়েন্টগুলো
+
+এই বাটনটি এক্সিকিউশন করে না , শুধুমাত্র ব্রেকপয়েন্টকে অন/অফ করার জন্য ব্যবহার হয় ।
+
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable অটোম্যাটিক পজ হয় যদি কোন ত্রুটি ধরা পড়ে
+
+অন থাকা অবস্থায় এবং ডেভলপার টুল ওপেন থাকলে স্ক্রিপ্ট এক্সিকিউশনের সময় একটি ত্রুটি ধরা পড়লে স্বয়ংক্রিয়ভাবে এটি পজ হয় ৷ তারপর আমরা ডিবাগারে ভেরিয়েবল বিশ্লেষণ করে দেখতে পারি কি ভুল হয়েছে। সুতরাং যদি আমাদের স্ক্রিপ্ট একটি ত্রুটির জন্য এক্সিকিউশান বন্ধ হয়ে যায় তাহলে আমরা ডিবাগার খুলতে পারি এবং এই অপশানটি অন করে পেজ রিলোড দিয়ে দেখতে পারি যে কোথায় এটি বন্ধ হয় এবং বর্তমান অবস্থা কি তা জানতে পারি ।
 
 ```smart header="Continue to here"
-Right click on a line of code opens the context menu with a great option called "Continue to here".
+একটি লাইনের উপর রাইট ক্লিক করে কন্টেক্সট মেনু ওপেন করলে একটা "Continue to here" অপশান পাবো ।
 
-That's handy when we want to move multiple steps forward to the line, but we're too lazy to set a breakpoint.
+লাইনে যখন একাধিক স্টেপ এগিয়ে নিয়ে যেতে চাই তখন এটি সুবিধাজনক, কিন্তু একটি ব্রেকপয়েন্ট সেট করতে আমরা খুব অলসতা করি
 ```
 
-## Logging
+## লগিং ( Logging )
 
-To output something to console from our code, there's `console.log` function.
+আমাদের কোড থেকে কিছু আউটপুটের জন্য এই `console.log` ফাংশনটি রয়েছে ।
 
-For instance, this outputs values from `0` to `4` to console:
+এক্ষেত্রে `0` থেকে `4` পর্যন্ত কন্সলে ভেলু আউটপুটের জন্য ঃ
 
 ```js run
 // open console to see
@@ -176,21 +186,22 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-Regular users don't see that output, it is in the console. To see it, either open the Console panel of developer tools or press `key:Esc` while in another panel: that opens the console at the bottom.
+রেগুলা ইউজাররা কোন আউটপুট দেখতে পাচ্ছেন না কারন এটি কন্সোলে প্রিন্ট হয়েছে । এটি দেখার জন্য আপনাকে কন্সোল প্যানেল ওপেন করতে হবে `key:Esc` প্রেস করুন । তাহলে নিচে কন্সোল প্যানেল ওপেন হবে ।
 
-If we have enough logging in our code, then we can see what's going on from the records, without the debugger.
+যদি আমাদের কোডে যথেষ্ট লগিং থাকে, তাহলে আমরা ডিবাগার ছাড়াই রেকর্ড থেকে কী ঘটছে তা দেখতে পারি।
 
-## Summary
+## সারসংক্ষেপ
 
-As we can see, there are three main ways to pause a script:
-1. A breakpoint.
-2. The `debugger` statements.
-3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-90px -146px"></span> is "on").
+তো আমারা যা দেখলাম এখানে ৩ টি প্রধান উপায় রয়েছে স্ক্রিপ্ট থামানোর জন্য ঃ
 
-When paused, we can debug - examine variables and trace the code to see where the execution goes wrong.
+1. ব্রেকপয়েন্ট
+2. `debugger` স্টেটমেন্ট
+3. এরর ( যদি ডেভটুল ওপেন থাকে এবং বাটন <span class="devtools" style="background-position:-90px -146px"></span> অন থাকলে).
 
-There are many more options in developer tools than covered here. The full manual is at <https://developers.google.com/web/tools/chrome-devtools>.
+যখন পজ হয় তখন আমরা ডিবাগ করতে পারি - ভেরিয়েবল পরীক্ষা করে এবং কোডটি ট্রেস করে দেখতে পারি যে এক্সিকিউশনটি কোথায় ভুল হয়েছে।
 
-The information from this chapter is enough to begin debugging, but later, especially if you do a lot of browser stuff, please go there and look through more advanced capabilities of developer tools.
+এখানে আরো অনেক অপশান রয়েছে ডেভটুলসের যা আমরা কভার করিনি । সম্পূর্ণ তথ্য এখানে রয়েছে - <https://developers.google.com/web/tools/chrome-devtools>
 
-Oh, and also you can click at various places of dev tools and just see what's showing up. That's probably the fastest route to learn dev tools. Don't forget about the right click and context menus!
+এই অধ্যায়ের তথ্যগুলি ডিবাগিং শুরু করার জন্য যথেষ্ট, কিন্তু পরে বিশেষ করে যদি আপনি অনেক ব্রাউজার ব্যবহার করেন তাহলে অনুগ্রহ করে সেই ব্রাউজার গুলোর ডেভটুল গুলোর ফিচারস চেক করবেন ।
+
+ওহ, এবং এছাড়াও আপনি ডেভ টুলের বিভিন্ন জায়গায় ক্লিক করতে পারেন এবং শুধু দেখতে পারেন কি দেখাচ্ছে। এটি সম্ভবত ডেভ টুল শেখার দ্রুততম রাস্তা । আর ডান ক্লিক এবং কন্টেক্সট মেনু সম্পর্কে ভুলবেন না!
