@@ -12,8 +12,13 @@
 
 আপনি যদি এখনো কোন IDE নির্বাচন না করে থাকেন, তবে নিচের যেকোন একটি ব্যবহার করে দেখতে পারেনঃ
 
+<<<<<<< HEAD
 - [Visual Studio Code](https://code.visualstudio.com/) (এটি ক্রস প্ল্যাটফর্ম ও সম্পূর্ণ ফ্রি)
 - [WebStorm](http://www.jetbrains.com/webstorm/) (এটিও ক্রস প্ল্যাটফর্ম তবে পেইড)
+=======
+- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
+- [WebStorm](https://www.jetbrains.com/webstorm/) (cross-platform, paid).
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 উইন্ডোজ ব্যবহার কারীদের জন্য "Visual Studio" নামের আরও একটি IDE রয়েছে, তবে "Visual Studio Code" র সাথে কনফিউজ হওয়ার দরকার নাই। এটি সম্পূর্ণ আলাদা একটি IDE, যদিও দুইটাই মাইক্রোসফট এর ডেভেলপ করা। "Visual Studio" একটি পেইড ও উইন্ডোজ ফ্রেন্ডলি এডিটর, এটি সবচেয়ে ভালো কাজ করে ডট নেট প্ল্যাটফর্মে। এটি জাভাস্ক্রিপ্ট এর জন্যও ভালো কাজ করে। একটি ফ্রি কমিউনিটি ভার্শনও আছে [Visual Studio Community](https://www.visualstudio.com/vs/community/) নামে।
 
@@ -31,11 +36,18 @@
 
 নিচের লিংক গুলো আপনার মনোযোগ আকর্ষণ করবেঃ
 
+<<<<<<< HEAD
 - [Atom](https://atom.io/) (এটি ক্রস প্ল্যাটফর্ম ও সম্পূর্ণ ফ্রি)।
 - [Visual Studio Code](https://code.visualstudio.com/) (এটি ক্রস প্ল্যাটফর্ম ও সম্পূর্ণ ফ্রি)।
 - [Sublime Text](http://www.sublimetext.com) (এটি ক্রস প্ল্যাটফর্ম ও কিছু ক্ষেত্রে ফ্রি)।
 - [Notepad++](https://notepad-plus-plus.org/) (উইন্ডোজ, ফ্রি)।
 - [Vim](http://www.vim.org/) এবং [Emacs](https://www.gnu.org/software/emacs/) ও অসাধারণ এডিটর, যদি আপনি এদের সঠিক ব্যবহার করতে জানেন।
+=======
+- [Atom](https://atom.io/) (cross-platform, free).
+- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
+- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+>>>>>>> 7964b11b8fa2c314d9a09a82ea4b585cda618c80
 
 ## চলুন ঝগড়া বাদ দিয়ে কিছু কথা বলিঃ
 
