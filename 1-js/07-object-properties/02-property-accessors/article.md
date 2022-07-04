@@ -5,7 +5,11 @@
 
 এর মধ্যে একটি হল *data properties*। ইতোমধ্যে আমরা এদের দেখেছি। এই পর্যন্ত আমরা যেসব প্রপার্টি দেখেছি তাদের বলা হয় ডাটা প্রপার্টিস।
 
+<<<<<<< HEAD
 আরেক প্রকার প্রপার্টিটি আমাদের জন্য নতুন। একে বলা হয় *accessor properties*।  আসলে এরা হল ফাংশন যার মাধ্যমে কোন ভ্যালু *get* বা *set* করা যায়। তবে এরা রেগুলার প্রপার্টির ন্যায় কাজ করে।
+=======
+The second type of property is something new. It's an *accessor property*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 ## Getters এবং setters
 

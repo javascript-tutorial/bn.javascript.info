@@ -47,7 +47,7 @@ switch (a) {
     break;
 */!*
   case 5:
-    alert( 'Too large' );
+    alert( 'Too big' );
     break;
   default:
     alert( "I don't know such values" );
@@ -139,7 +139,7 @@ switch (a) {
 
 Now both `3` and `5` show the same message.
 
-The ability to "group" cases is a side-effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
+The ability to "group" cases is a side effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
 
 ## Type matters
 

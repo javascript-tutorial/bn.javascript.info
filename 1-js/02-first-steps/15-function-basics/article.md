@@ -20,10 +20,14 @@ function showMessage() {
 }
 ```
 
+<<<<<<< HEAD
 ফাংশন বানাতে প্রথমের `function` কীওয়ার্ডটা লিখে বুঝিয়ে দিতে হবে জাভাস্ক্রিপ্ট ইঞ্জিনকে যা এখন আমরা যা লিখতে যাচ্ছি তা একসাথে একটা কাজ সমাধান করতে যাচ্ছে। এরপরে _ফাংশনের নাম_ লিখে ফাংশনকে যে কোনো জায়গা থেকে ডাকার ব্যবস্থা করতে হবে। এরপর দুই প্রথম ব্রাকেটের মাঝে কিছু জিনিস দিতে হবে প্রয়োজন অনুসারে, যেটাকে বলে _প্যারামিটার_ (প্যারামিটার যে দিতেই হবে তার বাধ্যবাধকতা নেই। যেমন উপরের উদাহরণে দেওয়া হয় নাই। যদি প্যারামিটার লাগে তাহলে কমা দিয়ে আলাদা করে হয় প্যারামিটারগুলো। একটা ফাংশনে একাধিক প্যারামিটার থাকতে পারে।) সবশেষে দুই সেকেন্ড ব্রাকেটের মাঝে কোড লিখতে হয়, যা কিনা কোনো নির্দিষ্ট কাজ করতে সাহায্য করবে। এই অংশকে বলা হয় _ফাংশন বডি_।
+=======
+The `function` keyword goes first, then goes the *name of the function*, then a list of *parameters* between the parentheses (comma-separated, empty in the example above, we'll see examples later) and finally the code of the function, also named "the function body", between curly braces.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 ```js
-function name(parameters) {
+function name(parameter1, parameter2, ... parameterN) {
   ...body...
 }
 ```
@@ -137,25 +141,30 @@ alert( userName ); // *!*Rahim*/!*, অপরিবর্তনীয়, ফাং
 
 ## প্যারামিটার
 
+<<<<<<< HEAD
 আমরা প্রয়োজনীয় ডাটা প্যারামিটার এর মাধ্যমে কোনো ফাংশনে ব্যবহার করতে পারি। (এদেরকে _ফাংশন আর্গুমেন্টস_ ও বলা হয়)।
+=======
+We can pass arbitrary data to functions using parameters.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 নিচের উদাহরণে দুইটা প্যারামিটার আছে। একটা `from` এবং অন্যটা `text`।
 
 ```js run
+<<<<<<< HEAD
 function showMessage(*!*from, text*/!*) { // আর্গুমেন্টসঃ from, text
+=======
+function showMessage(*!*from, text*/!*) { // parameters: from, text
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
   alert(from + ': ' + text);
 }
 
-*!*
-showMessage('Ann', 'Hello!'); // Ann: Hello! (*)
-showMessage('Ann', "What's up?"); // Ann: What's up? (**)
-*/!*
+*!*showMessage('Ann', 'Hello!');*/!* // Ann: Hello! (*)
+*!*showMessage('Ann', "What's up?");*/!* // Ann: What's up? (**)
 ```
 
 যখন ফাংশন লাইন `(*)` এবং `(**)` কল করে, ভ্যালুগুলো `from` এবং `text` এ এসাইন হয়। পরবর্তিতে প্রয়োজনানুসারে ফাংশন তাদেরকে ব্যবহার করে।
 
 আরেকটা উদাহরণ দেখা যাকঃ ভ্যারিয়েবল `from` ফাংশনে ডিক্লিয়ার করলাম। নোটঃ ফাংশন `from` কে পরিবর্তন করে, কিন্তু এই পরিবর্তন বাইরে কোথাও দেখা যাবে না। কারণ, ফাংশন সবসময় ভ্যাল্যুর একটা কপি নিজের কাছে রেখে দিবে।
-
 
 ```js run
 function showMessage(from, text) {
@@ -175,9 +184,27 @@ showMessage(from, "Hello"); // *Ann*: Hello
 alert( from ); // Ann
 ```
 
+<<<<<<< HEAD
 ## ডিফল্ট ভ্যালু
 
 যদি কোনো প্যারামিটার এর মান দেওয়া না থাকে, তাহলে সেটার ভ্যালু `undefined` ধরে নেওয়া হয়।
+=======
+When a value is passed as a function parameter, it's also called an *argument*.
+
+In other words, to put these terms straight:
+
+- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term).
+- An argument is the value that is passed to the function when it is called (it's a call time term).
+
+We declare functions listing their parameters, then call them passing arguments.
+
+In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+
+
+## Default values
+
+If a function is called, but an argument is not provided, then the corresponding value becomes `undefined`.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 তাই একাধিক প্যারামিটারের ক্ষেত্রে `showMessage(from, text)` একটা আর্গুমেন্ট দিলেও প্রোগ্রাম চলবে। যেমনঃ
 
@@ -185,6 +212,7 @@ alert( from ); // Ann
 showMessage("Ann");
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 এইখানে কোনো ভুল নেই। এমন ফাংশন কল `"Ann: undefined"` রিটার্ন করবে। এখানে `text` প্যারামিটারের মান বলে দেওয়া হয় নাই। তাই `text === undefined` ধরে নিবে প্রোগ্রাম।
 =======
@@ -192,6 +220,11 @@ That's not an error. Such a call would output `"*Ann*: undefined"`. There's no `
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d:1-js/02-first-steps/15-function-basics/article.md
 
 যদি কোনো মান সেট না হলে ডিফল্টভাবে একটা মান ধরে নিয়ে প্রোগ্রাম চালাতে চাই, তাহলে প্যারামিটারেই মানটা এসাইন করে দিতে পারবো। যেমনঃ
+=======
+That's not an error. Such a call would output `"*Ann*: undefined"`. As the value for `text` isn't passed, it becomes `undefined`.
+
+We can specify the so-called "default" (to use if omitted) value for a parameter in the function declaration, using `=`:
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 ```js run
 function showMessage(from, *!*text = "no text given"*/!*) {
@@ -215,8 +248,46 @@ function showMessage(from, text = anotherFunction()) {
 ```smart header="Evaluation of default parameters"
 জাভাস্ক্রিপ্টে কোনো প্যারামিটারের বিপরীতে কোনো মান সেট করে না দিলে প্যারামিটারে ডিফল্টভাবে এসাইন করা মান কল হবে যতবার পুরো ফাংশন কল করা হবে।
 
+<<<<<<< HEAD
 উপরের উদাহরণ টেনে বলা যায়, `anotherFunction()` ততবার কল হবে যতবার `showMessage()` কল করা হবে `text` প্যারামিটারের মান দেওয়া ছাড়াই।
+=======
+In the example above, `anotherFunction()` isn't called at all, if the `text` parameter is provided.
+
+On the other hand, it's independently called every time when `text` is missing.
 ```
+
+````smart header="Default parameters in old JavaScript code"
+Several years ago, JavaScript didn't support the syntax for default parameters. So people used other ways to specify them.
+
+Nowadays, we can come across them in old scripts.
+
+For example, an explicit check for `undefined`:
+
+```js
+function showMessage(from, text) {
+*!*
+  if (text === undefined) {
+    text = 'no text given';
+  }
+*/!*
+
+  alert( from + ": " + text );
+}
+```
+
+...Or using the `||` operator:
+
+```js
+function showMessage(from, text) {
+  // If the value of text is falsy, assign the default value
+  // this assumes that text == "" is the same as no text at all
+  text = text || 'no text given';
+  ...
+}
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
+```
+````
+
 
 <<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 ````smart header="Default parameters old-style"
@@ -226,15 +297,21 @@ function showMessage(from, text = anotherFunction()) {
 =======
 ### Alternative default parameters
 
+<<<<<<< HEAD
 Sometimes it makes sense to set default values for parameters not in the function declaration, but at a later stage, during its execution.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d:1-js/02-first-steps/15-function-basics/article.md
+=======
+Sometimes it makes sense to assign default values for parameters not in the function declaration, but at a later stage.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
-To check for an omitted parameter, we can compare it with `undefined`:
+We can check if the parameter is passed during the function execution, by comparing it with `undefined`:
 
 ```js run
 function showMessage(text) {
+  // ...
+
 *!*
-  if (text === undefined) {
+  if (text === undefined) { // if the parameter is missing
     text = 'empty message';
   }
 */!*
@@ -248,24 +325,28 @@ showMessage(); // empty message
 ...Or we could use the `||` operator:
 
 ```js
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 function showMessage(from, text) {
   // যদি `text` এর মান না দেওয়া হয় তাহলে "default" ভ্যালু সেট করে নিবে
   text = text || 'no text given';
 =======
 // if text parameter is omitted or "" is passed, set it to 'empty'
+=======
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 function showMessage(text) {
+  // if text is undefined or otherwise falsy, set it to 'empty'
   text = text || 'empty';
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d:1-js/02-first-steps/15-function-basics/article.md
   ...
 }
 ```
 
-Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when falsy values, such as `0`, are considered regular:
+Modern JavaScript engines support the [nullish coalescing operator](info:nullish-coalescing-operator) `??`, it's better when most falsy values, such as `0`, should be considered "normal":
 
 ```js run
-// if there's no "count" parameter, show "unknown"
 function showCount(count) {
+  // if count is undefined or null, show "unknown"
   alert(count ?? "unknown");
 }
 
@@ -428,7 +509,11 @@ checkPermission(..) // পারমিশন চেক করে, true/false র
 
 যেমন, [jQuery](http://jquery.com) ফ্রেমওয়ার্ক `$` দিয়ে শুরু করে তাদের ফাংশন নাম। আবার [Lodash](http://lodash.com/) লাইব্রেরি `_` দিয়ে শুরু করে।
 
+<<<<<<< HEAD
 এগুলো এক্সেপশন। বেশিরভাগ সময় ফাংশন নাম অর্থপূর্ন ও বিস্তারিত হওয়া উচিৎ।
+=======
+These are exceptions. Generally function names should be concise and descriptive.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 ```
 
 ## ফাংশন == কমেন্টস
@@ -494,7 +579,11 @@ function name(parameters, delimited, by, comma) {
 
 কোডকে অর্থপূর্ন ও গোছালো রাখতে লোকাল ভ্যারিয়েবল ইউজ করা উচিৎ, গ্লোবাল ভ্যারিয়েবল ইউজ না করে।
 
+<<<<<<< HEAD
 বাইরের ভ্যারিয়েবল মডিফাই করে ও কোনো প্যারামিটার না রেখে ফাংশন ইউজ করার চেয়ে প্যারামিটারসহ ফাংশন নিয়ে কাজ করা অনেক বেশি অর্থপূর্ন ও সহজ।
+=======
+It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side effect.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 ফাংশন নামকরণঃ
 

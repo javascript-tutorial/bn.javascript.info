@@ -13,20 +13,32 @@
 
 "প্রায় স্ট্যান্ডার্ড" (তথাকথিত "স্টেজ-৩") ফিচারগুলোসহ একেবারে নতুন ও প্রান্তীয় ফিচারগুলোর ব্যাপারে পড়তে এখানকার প্রস্তাবগুলো দেখুন: <https://github.com/tc39/proposals>
 
+<<<<<<< HEAD
 আর আপনি যদি ব্রাউজারের জন্য ডেভেলাপ করেন তাহলে এ বিষয়ে বিস্তারিত ভাবে এই বইয়ের [দ্বিতীয় অংশে](info:browser-environment) আলোচনা করা হয়েছে।
+=======
+Also, if you're developing for the browser, then there are other specifications covered in the [second part](info:browser-environment) of the tutorial.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 ## ম্যানুয়াল
 
+<<<<<<< HEAD
 - **MDN (Mozilla) JavaScript Reference** হচ্ছে উদাহরণ ও অন্যান্য তথ্যসহ একটি ম্যানুয়াল। ভাষার নির্দিষ্ট কোন ফাংশন, মেথড ইত্যাদির ব্যাপারে বিস্তারিত তথ্যের জন্য এটি খুবই ভাল।
+=======
+- **MDN (Mozilla) JavaScript Reference** is the main manual with examples and other information. It's great to get in-depth information about individual language functions, methods etc.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
     পাওয়া যাবে এখানে: <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference>.
 
+<<<<<<< HEAD
     যদিও বেশিরভাগ সময় ইন্টারনেটে সার্চ করলেই ভাল হয়। সার্চ করার সময় "MDN [term]" ব্যবহার করুন। যেমন `parseInt` ফাংশনের জন্য সার্চ করতে <https://google.com/search?q=MDN+parseInt>
 
 
 * **MSDN** – জাভাস্ক্রিপ্টসহ অনেক তথ্যসমৃদ্ধ মাইক্রোসফ্টের ম্যানুয়াল (ওরা অনেকসময় বলে JScript)। যদি নির্দিষ্টভাবে ইন্টারনেট এক্সপ্লোরারের ব্যাপারে কিছু লাগে তাহলে ঐখানে যাওয়াই ভাল: <http://msdn.microsoft.com/>.
 
     আর "RegExp MSDN" অথবা "RegExp MSDN jscript" আকারেও ইন্টারনেট সার্চ করতে পারেন।
+=======
+Although, it's often best to use an internet search instead. Just use "MDN [term]" in the query, e.g. <https://google.com/search?q=MDN+parseInt> to search for `parseInt` function.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 ## কম্প্যাটিবিলিটি টেবিল
 
@@ -34,8 +46,13 @@
 
 ব্রাউজার ভিত্তিক বা অন্যান্য ইন্জিনগুলোতে এগুলোর সাপোর্ট দেখুন:
 
+<<<<<<< HEAD
 - <http://caniuse.com> - ফিচারভিত্তিক সাপোর্টের টেবিল। যেমন- কোন ইন্জিনগুলো অধুনিক ক্রিপ্টোগ্রাফি ফাংশনগুলো সাপোর্ট করে দেখতে: <http://caniuse.com/#feat=cryptography>.
 - <https://kangax.github.io/compat-table> - ভাষার ফিচারসমূহ ও কোন ইন্জিনগুলো সেগুলো সাপোর্ট করে বা করে না তার উপর একটি টেবিল।
+=======
+- <https://caniuse.com> - per-feature tables of support, e.g. to see which engines support modern cryptography functions: <http://caniuse.com/#feat=cryptography>.
+- <https://kangax.github.io/compat-table> - a table with language features and engines that support those or don't support.
+>>>>>>> fe1c4a241f12a0939d1e0977cec6504ccd67201f
 
 এই সবগুলো রিসোর্সই সত্যিকারের ডেভেলাপমেন্টে কাজে লাগে। যেহেতু এগুলো ভাষার বিস্তারিত, সেগুলোর সাপোর্ট ইত্যাদি ব্যাপারে মূল্যবান তথ্য ধারণ করে।
 
