@@ -2,7 +2,7 @@
 
 Automated testing will be used in further tasks, and it's also widely used in real projects.
 
-## Why we need tests?
+## Why do we need tests?
 
 When we write a function, we can usually imagine what it should do: which parameters give which results.
 
@@ -51,7 +51,7 @@ describe("pow", function() {
 A spec has three main building blocks that you can see above:
 
 `describe("title", function() { ... })`
-: What functionality we're describing. In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
+: What functionality we're describing? In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
 
 `it("use case description", function() { ... })`
 : In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
@@ -79,7 +79,7 @@ So, the development is *iterative*. We write the spec, implement it, make sure t
 
 Let's see this development flow in our practical case.
 
-The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use a few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
 
 ## The spec in action
 
