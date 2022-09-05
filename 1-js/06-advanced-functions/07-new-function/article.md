@@ -1,19 +1,19 @@
 
-# The "new Function" syntax
+# "new Function" সিনট্যাক্স
 
-There's one more way to create a function. It's rarely used, but sometimes there's no alternative.
+আরো একভাবে ফাংশন ডিক্লেয়ার করা যায়। যদিও এটির ব্যবহার খুব কম, তবে অনেকসময় এটি ব্যবহার করা ছাড়া উপায় থাকে না।
 
-## Syntax
+## সিনট্যাক্স
 
-The syntax for creating a function:
+ফাংশন ডিক্লেয়ার করার সিনট্যাক্সটি হল:
 
 ```js
 let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-The function is created with the arguments `arg1...argN` and the given `functionBody`.
+ফাংশনটিতে আর্গুমেন্ট `arg1...argN` এবং `functionBody` থাকে।
 
-It's easier to understand by looking at an example. Here's a function with two arguments:
+উদাহরণের মাধ্যমে সিনট্যাক্সটি সহজে বুঝতে পারব, এখানে একটি ফাংশন ডিক্লেয়ার করেছি যার দুটি আর্গুমেন্ট আছে:
 
 ```js run
 let sum = new Function('a', 'b', 'return a + b');
@@ -21,7 +21,7 @@ let sum = new Function('a', 'b', 'return a + b');
 alert( sum(1, 2) ); // 3
 ```
 
-And here there's a function without arguments, with only the function body:
+এবং নিচের ফাংশনটিতে কোন আর্গুমেন্ট নেই, শুধুমাত্র ফাংশনের বডি আছে:
 
 ```js run
 let sayHi = new Function('alert("Hello")');
@@ -29,28 +29,28 @@ let sayHi = new Function('alert("Hello")');
 sayHi(); // Hello
 ```
 
-The major difference from other ways we've seen is that the function is created literally from a string, that is passed at run time.
+অন্যান্য ফাংশনের সাথে এটির মূল পার্থক্যটি হল, ফাংশনটি তৈরি হয় স্ট্রিং হতে, যা রানটাইমে পাস করা যায়।
 
-All previous declarations required us, programmers, to write the function code in the script.
+অ্যারো বা রেগুলার ফাংশনগুলোর ক্ষেত্রে আমরা দেখেছি, ফাংশনের বডি বা আর্গুমেন্ট স্ক্রিপ্টে আগে থেকেই ডিক্লেয়ার করতে হত।
 
-But `new Function` allows to turn any string into a function. For example, we can receive a new function from a server and then execute it:
+তবে, `new Function` এর মাধ্যমে আমরা কোন স্ট্রিংকে ফাংশনে পরিবর্তন করতে পারি। যেমন, আমরা সার্ভার কোন একটি ফাংশন পাঠাতে পারি এবং স্ক্রিপ্টে এটি এক্সিকিউট করতে পারি:
 
 ```js
-let str = ... receive the code from a server dynamically ...
+let str = ...সার্ভার হতে ডায়নামিক্যালি ফাংশনের বিস্তারিত তথ্য নিয়ে আসবে ...
 
 let func = new Function(str);
 func();
 ```
 
-It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template, in complex web-applications.
+এটি কিছু নির্দিষ্ট ক্ষেত্রে ব্যবহার করা হয়, যেমন আমরা সার্ভার হতে কোন কোড বা টেমপ্লেট হতে ডায়নামিক্যালি কোন একটি ফাংশন কে কম্পাইল করতে চাই, এক্ষেত্রে এটি ব্যবহার করতে হবে।
 
-## Closure
+## ক্লোজার
 
-Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the Lexical Environment from where it's created  (we covered that in the chapter <info:closure>).
+সাধারণত একটি ফাংশন কোথায় ডিক্লেয়ার করা হয়েছে তার বিস্তারিত `[[Environment]]` প্রপার্টিতে সংরক্ষণ করে। এটি তার লেক্সিকাল এনভায়রনমেন্টকে রেফারেন্স করে  (যা এই অধ্যায়ে আলোচনা করেছি <info:closure>)।
 
-But when a function is created using `new Function`, its `[[Environment]]` is set to reference not the current Lexical Environment, but the global one.
+কিন্তু যখন একটি ফাংশন `new Function` দ্বারা তৈরি হয়, এটি কারেন্ট লেক্সিকাল এনভায়রনমেন্টকে `[[Environment]]` এ সেট করে না, তবে গ্লোবাল স্কোপে অ্যাক্সেস থাকে।
 
-So, such function doesn't have access to outer variables, only to the global ones.
+সুতরাং, এই ধরণের ফাংশন আউটার ভ্যারিয়েবলকে অ্যাক্সেস করতে পারে না, শুধুমাত্র গ্লোবাল স্কোপকে অ্যাক্সেস করতে পারে।
 
 ```js run
 function getFunc() {
@@ -66,7 +66,7 @@ function getFunc() {
 getFunc()(); // error: value is not defined
 ```
 
-Compare it with the regular behavior:
+রেগুলার ফাংশনে দেখুন:
 
 ```js run
 function getFunc() {
@@ -82,37 +82,37 @@ function getFunc() {
 getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
 ```
 
-This special feature of `new Function` looks strange, but appears very useful in practice.
+যদিওবা `new Function` দেখতে কিছুটা ভিন্ন, তবে এটি কিছু ক্ষেত্রে অনেক কাজে আসে।
 
-Imagine that we must create a function from a string. The code of that function is not known at the time of writing the script (that's why we don't use regular functions), but will be known in the process of execution. We may receive it from the server or from another source.
+মনে করুন আমরা স্ট্রিং হতে একটি ফাংশন তৈরি করব। কিন্তু ফাংশনটির কোড কি হবে বা এটির কাজ কি হবে তা আমরা জানিনা (এজন্য আমরা এগুলার ফাংশন ব্যবহার করব না), তবে এক্সিকিউশনের সময় কোড কি হবে তা জানতে পারি, হতে পারে কোডটি পাব অন্য কোন রিসোর্স বা সার্ভার থেকে।
 
-Our new function needs to interact with the main script.
+আমাদের নতুন ফাংশনটিকে মূল স্ক্রিপ্টের সাথে ইন্টারঅ্যাক্ট করা দরকার।
 
-What if it could access the outer variables?
+যদি এটি আউটার ভ্যারিয়েবলকে অ্যাক্সেস করতে পারে তাহলে কি হবে?
 
-The problem is that before JavaScript is published to production, it's compressed using a *minifier* -- a special program that shrinks code by removing extra comments, spaces and -- what's important, renames local variables into shorter ones.
+সমস্যাটি দেখা দেয় যখন আমরা প্রোডাকশনের জন্য জাভাস্ক্রিপ্টকে *minifier* দ্বারা কম্প্রেসড করি, ফলে আমাদের কোডের অতিরিক্ত কমেন্ট, স্পেসগুলো রিমুভ হয়ে যায়, এছাড়াও লোকাল ভ্যারিয়েবলগুলোর নাম সংক্ষিপ্ত হয়ে যায়।
 
-For instance, if a function has `let userName`, minifier replaces it `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+যেমন, যদি কোন ফাংশনে একটি ভ্যারিয়েবল থাকে `let userName`, তাহলে মিনিফাই হওয়ার সময় এটি হতে পারে `let a` (অথবা অন্য কোন নাম বা ক্যারেক্টার), এবং এটি ঐ লোকাল স্কোপের সব জায়গায় হয়। এবং এটির জন্য কোন সমস্যা হয় না, কেননা ভ্যারিয়েবলটি লোকাল, ফলে এটি অন্য কোন স্কোপ হতে অ্যাক্সেস হবে না। এবং মিনিফাই এর সময় ঐ ফাংশনের সকল জায়গায় ভ্যারিয়েবলটি প্রতিস্থাপিত হয়। *minifier* যথেষ্ট স্মার্ট, এরা কোড অ্যানালাইজ করে এসব করে, ফলে কোডে কোন ব্রেক হয় না।
 
-So if `new Function` had access to outer variables, it would be unable to find renamed  `userName`.
+সুতরাং যদি `new Function` এর আউটার স্কোপে অ্যাক্সেস থাকে, তাহলে `userName` ভ্যারিয়েবলের নাম পরিবর্তনের ফলে অ্যাক্সেস করতে পারবে না, এবং এরর তৈরি হতে পারে।
 
-**If `new Function` had access to outer variables, it would have problems with minifiers.**
+**যদি `new Function` এর আউটার স্কোপে অ্যাক্সেস থাকে, তাহলে মিনিফাই হওয়ার পর সমস্যা হতে পারে**
 
-Besides, such code would be architecturally bad and prone to errors.
+এছাড়াও, এই ধরণের কোড আর্কিটেকচার ভঙ্গুর প্রকৃতির হয়।
 
-To pass something to a function, created as `new Function`, we should use its arguments.
+আউটার স্কোপের কোন কিছু `new Function` এ পাস করার জন্য আমাদের আর্গুমেন্ট ব্যবহার করতে হবে।
 
-## Summary
+## সারাংশ
 
-The syntax:
+সিনট্যাক্স:
 
 ```js
 let func = new Function ([arg1, arg2, ...argN], functionBody);
 ```
 
-For historical reasons, arguments can also be given as a comma-separated list.
+আমরা আর্গুমেন্টকে কমা সেপারেটেড স্ট্রিং হিসেবে পাঠাতে পারি।
 
-These three declarations mean the same:
+যেমন:
 
 ```js
 new Function('a', 'b', 'return a + b'); // basic syntax
@@ -120,4 +120,4 @@ new Function('a,b', 'return a + b'); // comma-separated
 new Function('a , b', 'return a + b'); // comma-separated with spaces
 ```
 
-Functions created with `new Function`, have `[[Environment]]` referencing the global Lexical Environment, not the outer one. Hence, they cannot use outer variables. But that's actually good, because it insures us from errors. Passing parameters explicitly is a much better method architecturally and causes no problems with minifiers.
+`new Function` তৈরি হওয়ার সময় `[[Environment]]` এ শুধুমাত্র গ্লোবাল ল্যাক্সিকাল এনভায়রনমেন্ট কে রেফার করে। এরা আউটার স্কোপকে অ্যাক্সেস করতে পারে না। তবে এটি ভালো, কেননা এক্ষেত্রে আমরা সহজে এরর নির্নয় করতে পারি। আউটার স্কোপের ভ্যারিয়েবল অ্যাক্সেসের জন্য ভ্যারিয়েবলকে আর্গুমেন্ট হিসেবে পাঠাতে পারি।
