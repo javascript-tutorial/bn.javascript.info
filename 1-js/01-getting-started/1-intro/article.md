@@ -29,6 +29,7 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 বিভিন্ন ইঞ্জিনের আলাদা আলাদা "কোডনাম" রয়েছে । উদাহরণ স্বরূপ:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [V8](https://bn.wikipedia.org/wiki/V8_(JavaScript_engine) -- ক্রোম এবং অপেরা
 - [স্পাইডার মাংকি](https://bn.wikipedia.org/wiki/SpiderMonkey) -- ফায়ারফক্স.
 - ...আরও অনেক কোডনাম রয়েছে যেমন ইন্টারনেট এক্সপ্লোরার এর বিভিন্ন ভার্সন এর জন্য "Trident" এবং "Chakra", মাইক্রোসফ্ট এজের জন্য "ChakraCore", সাফারির জন্য "Nitro" এবং "SquirrelFish" ইত্যাদি।
@@ -39,21 +40,38 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 উপরের টার্ম গুলি মনে রাখা ভাল, কারণ সেগুলি ইন্টারনেটে ডেভেলপার আর্টিকেলে ব্যবহৃত হয়। আমরাও সেগুলো ব্যবহার করব। উদাহরণস্বরূপ, যদি "একটি X ফিচার V8 এ সাপোর্ট করে", তবে সম্ভবত এটি ক্রোম এবং অপেরাতেও কাজ করে।
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
+
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ```smart header="ইঞ্জিনগুলি কিভাবে কাজ করে?"
 
 ইঞ্জিনগুলি জটিল। তবে বেসিকগুলি সহজ
 
+<<<<<<< HEAD
 ১. ইঞ্জিন (ব্রাউজারের সাথে সংযুক্ত থাকে) স্ক্রিপ্টটি পড়ে ("পার্স করে")।
 ২. তারপরে এটি স্ক্রিপ্টটিকে মেশিনের ভাষায় রূপান্তর ("কম্পাইল") করে।
 ৩. এবং তারপরে মেশিন খুব দ্রুত কোডটি চালায়
+=======
+1. The engine (embedded if it's a browser) reads ("parses") the script.
+2. Then it converts ("compiles") the script to machine code.
+3. And then the machine code runs, pretty fast.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ইঞ্জিনটি এই প্রক্রিয়ার প্রতিটি ধাপে অপ্টিমাইজেশন করে। এমনকি এটি স্ক্রিপ্ট চলার সময়ও পর্যবেক্ষন করতে থাকে, এর মধ্য দিয়ে প্রবাহিত ডেটা বিশ্লেষণ করে এবং সেই ধারনার উপর ভিত্তি করে মেশিন কোড অপ্টিমাইজ করে।
 ```
 
 ## জাভাস্ক্রিপ্ট ব্রাউজারে কী করতে পারে ?
 
+<<<<<<< HEAD
 আধুনিক জাভাস্ক্রিপ্ট একটি "নিরাপদ" প্রোগ্রামিং ভাষা। এটি মেমরি বা সিপিইউতে নিম্ন-স্তরের এক্সেস দেয় না, কারণ এটি প্রাথমিকভাবে ব্রাউজারগুলির জন্য তৈরি করা হয়েছিল যার এসব এক্সেস এর প্রয়োজন হত না।
+=======
+Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or the CPU, because it was initially created for browsers which do not require it.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 জাভাস্ক্রিপ্টের সামর্থ যে এনভায়রনমেন্ট এ চলছে তার উপর অনেক বেশি নির্ভর করে। উদাহরণস্বরূপ, [Node.js](https://wikipedia.org/wiki/Node.js) এমন কিছু ফাংশন সমর্থন করে যা জাভাস্ক্রিপ্ট কে যেকোনো ফাইল পড়তে/এডিট করতে, নেটওয়ার্ক রিকুয়েস্ট ইত্যাদি করার সুবিধা দেয়।
 
@@ -69,7 +87,11 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 ## জাভাস্ক্রিপ্ট ব্রাউজারে কী করতে পারে না?
 
+<<<<<<< HEAD
 ব্রাউজারে জাভাস্ক্রিপ্টের ক্ষমতাগুলি ব্যবহারকারীর সুরক্ষার জন্য সীমাবদ্ধ। উদ্দেশ্যটি হ'ল কোনও খারাপ ওয়েবপেজকে ব্যক্তিগত তথ্যে প্রবেশ করা বা ব্যবহারকারীর ডেটা ক্ষতিগ্রস্থ করা থেকে বিরত রাখা।
+=======
+JavaScript's abilities in the browser are limited to protect the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 এই জাতীয় বিধিনিষেধের উদাহরণগুলির মধ্যে রয়েছে:
 
@@ -77,6 +99,7 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
       আধুনিক ব্রাউজারগুলি এটিকে ফাইল নিয়ে কাজ করার অনুমতি দেয়, তবে এর এক্সেস সীমাবদ্ধ এবং কেবলমাত্র যদি ব্যবহারকারী নির্দিষ্ট কিছু কাজ করেন যেমন ব্রাউজার উইন্ডোতে একটি ফাইল "ড্রপ" করা বা একটি "<input>" `ট্যাগের মাধ্যমে ফাইল সিলেক্ট করা।
 
+<<<<<<< HEAD
       ক্যামেরা / মাইক্রোফোন এবং অন্যান্য যন্ত্রগুলির সাথে ইন্টারঅ্যাক্ট করার উপায় রয়েছে তবে তাদের ব্যবহারকারীর সুস্পষ্ট অনুমতি প্রয়োজন। সুতরাং একটি জাভাস্ক্রিপ্ট-সক্ষম ওয়েবপেজ চাইলেই কোনও ওয়েব-ক্যামেরা চালু করতে পারে না, আশেপাশের কোন কিছু দেখতে পারে না এবং [NSA](https://bn.wikedia.org/wiki/National_Security_Agency) এর কাছে সেগুলি পাঠাতে পারে না।
 
 - ভিন্ন ভিন্ন ট্যাব / উইন্ডো সাধারণত একে অপরের সম্পর্কে জানে না। কখনও কখনও তারা জানে, যেমন, যখন একটি উইন্ডো জাভাস্ক্রিপ্ট ব্যবহার করে আরেকটি উইন্ডো খুলে। তবে এই ক্ষেত্রেও, যদি ভিন্ন কোন সাইট থেকে (অন্য কোনও ডোমেন, প্রোটোকল বা পোর্ট থেকে) আসে তবে এক পেইজের জাভাস্ক্রিপ্ট অন্য পেইজের এক্সেস পায় না।
@@ -90,22 +113,46 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 ![](limitations.svg)
 
 জাভাস্ক্রিপ্ট যদি ব্রাউজারের বাইরে ব্যবহার করা হয় তবে এসব সীমাবদ্ধতা থাকে না, যেমন সার্ভার। আধুনিক ব্রাউজারগুলি প্লাগইন / এক্সটেনশন গুলিকে অতিরিক্ত পার্মিশন চেয়ে নিতে দেয়।
+=======
+    There are ways to interact with the camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other page if they come from different sites (from a different domain, protocol or port).
+
+    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and must contain special JavaScript code that handles it. We'll cover that in the tutorial.
+
+    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com`, for example, and steal information from there.
+- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+
+![](limitations.svg)
+
+Such limitations do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugins/extensions which may ask for extended permissions.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ## কী জাভাস্ক্রিপ্টকে অতুলনীয় করে তোলে?
 
 জাভাস্ক্রিপ্ট সম্পর্কে কমপক্ষে _ তিনটি _ দুর্দান্ত জিনিস রয়েছে:
 
+<<<<<<< HEAD
 ```তুলনা
 + HTML/CSS এর সাথে সম্পূর্ণ ইন্টিগ্রেশন।
 + সহজ জিনিস সহজভাবে করা হয়।
 + প্রত্যেকটা প্রধান ব্রাউজারেই স্বাভাবিক ভাবে চলে।
+=======
+```compare
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 ```
 
 জাভাস্ক্রিপ্ট একমাত্র ব্রাউজার প্রযুক্তি যা এই তিনটি জিনিসকে একত্রিত করে।
 
 এটিই জাভাস্ক্রিপ্টকে অনন্য করে তোলে। এ কারণেই এটি ব্রাউজার ইন্টারফেস তৈরির জন্য সবচেয়ে জনপ্রিয় টুল।
 
+<<<<<<< HEAD
 বলা হয়ে থাকে, জাভাস্ক্রিপ্ট দিয়ে সার্ভার, মোবাইল অ্যাপ্লিকেশন ইত্যাদি তৈরি করা যায়।
+=======
+That said, JavaScript can be used to create servers, mobile applications, etc.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ## জাভাস্ক্রিপ্ট এর "উপর" প্রোগ্রামিং ভাষাগুলো
 
@@ -113,12 +160,17 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 
 এটাই অবশ্য স্বাভাবিক, কারণ প্রজেক্ট এবং প্রয়োজনীয়তা সবার জন্য আলাদা।
 
+<<<<<<< HEAD
 সুতরাং সম্প্রতি নতুন ভাষাগুলির আধিক্য উপস্থিত হয়েছে, যা ব্রাউজারে চালানোর আগে জাভাস্ক্রিপ্টে _ট্রান্সপাইল_ (রূপান্তরিত) হয়।
+=======
+So, recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 আধুনিক টুলগুলি এই ট্রান্সপাইলেশনকে খুব দ্রুত এবং স্বচ্ছ করে তোলে, যা আসলে ডেভেলপার দের অন্য প্রোগ্রামিং ভাষায় কোড করার সুযোগ দেয় এবং এটিকে অভ্যন্তরে ("Under the hood") স্বয়ংক্রিয়ভাবে রূপান্তরিত করে।
 
 এই জাতীয় প্রোগ্রামিং ভাষার উদাহরণ:
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 - [কফিস্ক্রিপ্ট](http://coffeescript.org/) জাভাস্ক্রিপ্টের জন্য একটি "সিনট্যাকটিক সুগার"। এটি সংক্ষিপ্ত সিনট্যাক্স নিয়ে আসে, আমাদের আরও পরিষ্কার এবং আরও সুনির্দিষ্ট কোড লেখার সুযোগ দেয়। সাধারণত, রুবি (একটি প্রোগ্রামিং ভাষা) ডেভেলপার রা এটি পছন্দ করে।
 - [টাইপস্ক্রিপ্ট](http://www.typescriptlang.org/) "স্ট্রিক্ট ডাটা টাইপিং" এ জোর দিয়েছিলো ডেভেলপমেন্ট ও জটিল সমস্যা গুলোকে সহজ করার জন্য। এটি মাইক্রোসফ্ট তৈরি করেছে।
@@ -133,6 +185,16 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
 আরো অনেক আছে। যদিও আমরা যদি ট্রান্সপাইলড ল্যাঙ্গুয়েজ গুলির মধ্যে যেকোনো একটি ব্যবহার করি তবে আমরা কী করছি তা বুঝতে আমাদের জাভাস্ক্রিপ্ট জানা উচিত।
+=======
+- [CoffeeScript](https://coffeescript.org/) is "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](https://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](https://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+
+There are more. Of course, even if we use one of these transpiled languages, we should also know JavaScript to really understand what we're doing.
+>>>>>>> 53b35c16835b7020a0a5046da5a47599d313bbb8
 
 ## সারাংশ
 
@@ -142,6 +204,6 @@ Let's see what's so special about JavaScript, what we can achieve with it, and w
 - এমন অনেক প্রোগ্রামিং ভাষা রয়েছে যা জাভাস্ক্রিপ্টে "রূপান্তরিত" হয়ে যায় এবং নির্দিষ্ট বৈশিষ্ট্য সরবরাহ করে। জাভাস্ক্রিপ্টে দক্ষতা অর্জনের পরে কমপক্ষে সংক্ষেপে এগুলি একবার দেখার পরামর্শ দেওয়া হয়।
 =======
 - JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
 - There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
