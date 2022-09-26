@@ -89,7 +89,11 @@ alert( str.match(regexp) ); // "witch" and her "broom"
 
 যদিওবা এটি আমাদের চাহিদামত কাজ করেনি, কিন্তু আমরা বুঝতে পারছি এটি কিভাবে কাজ করে।
 
+<<<<<<< HEAD
 **গ্রীডি অবস্থায়(ডিফল্ট ভাবে) একটি কোয়ান্টিফায়ার যতবার সম্ভব এর পুনরাবৃত্তি ঘটায়।**
+=======
+**In the greedy mode (by default) a quantified character is repeated as many times as possible.**
+>>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 রেগুলার এক্সপ্রেশন ইঞ্জিন যত সম্ভব ক্যারাক্টার `pattern:.+` এর জন্য সংযোজন করে, এবং এরপর বাকী প্যাটার্ন না মিললে একটির পর একটি ক্যারাক্টার বাদ দিতে থাকে।
 
@@ -110,7 +114,7 @@ let regexp = /".+?"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(regexp) ); // witch, broom
+alert( str.match(regexp) ); // "witch", "broom"
 ```
 
 পরিবর্তনটি বোঝার জন্য, আসুন ধাপগুলো একে একে বোঝার চেষ্টা করি।
@@ -180,7 +184,7 @@ let regexp = /"[^"]+"/g;
 
 let str = 'a "witch" and her "broom" is one';
 
-alert( str.match(regexp) ); // witch, broom
+alert( str.match(regexp) ); // "witch", "broom"
 ```
 
 এই প্যাটার্নটি `pattern:"[^"]+"` আমাদের সঠিক ফলাফল দেয়, কেননা এটি `pattern:'"'` একটি উদ্ধৃতি চিহ্ন খুঁজে অতঃপর `pattern:[^"]` এক বা একাধিক উদ্ধৃতি চিহ্ন নয় এমন ক্যারাক্টার খুঁজে, এবং শেষ উদ্ধৃতি চিহ্ন খুঁজ করে।
@@ -293,10 +297,18 @@ alert( str2.match(regexp) ); // <a href="link1" class="doc">, <a href="link2" cl
 
 দুটি মোডে কোয়ান্টিফায়ার কাজ করে:
 
+<<<<<<< HEAD
 গ্রীডি
 : রেগুলার এক্সপ্রেশন ইঞ্জিন ডিফল্টভাবে কোয়ান্টিফায়ারকে যত বেশী সম্ভব এর পুনরাবৃত্তি করে। উদাহরণস্বরূপ, `pattern:\d+` সকল সম্ভাব্য অঙ্কের সাথে মিলে। যখন আর কোন কিছুর সাথে মিল খুঁজে পায় না (স্ট্রিং শেষ অথবা আর কোন অঙ্ক থাকে না), তারপর এটি বাকী প্যাটার্নের সাথে মিল খুঁজে। আর যদি কোন মিল না থাকে তাহলে পুনরাবৃত্তিকৃত ফলাফলটিকে কমাতে থাকে এবং আবার মেলানোর চেষ্টা করে।
 
 লেজি
 : কোয়ান্টিফায়ারের পরে প্রশ্নবোধক চিহ্ন `pattern:?` দিলে এই মোডটি চালু হয়। রেগুলার এক্সপ্রেশন ইঞ্জিন কোয়ানটিফায়ারের পুনরাবৃত্তির পূর্বে বাকী প্যাটার্নটি মেলানোর চেষ্টা করে।
+=======
+Greedy
+: By default the regular expression engine tries to repeat the quantified character as many times as possible. For instance, `pattern:\d+` consumes all possible digits. When it becomes impossible to consume more (no more digits or string end), then it continues to match the rest of the pattern. If there's no match then it decreases the number of repetitions (backtracks) and tries again.
+
+Lazy
+: Enabled by the question mark `pattern:?` after the quantifier. The regexp engine tries to match the rest of the pattern before each repetition of the quantified character.
+>>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 এছাড়াও আমরা দেখেছি, গ্রীডি অনুসন্ধানের জন্য লেজি মোড "প্যানাসিয়া বা সর্বসব" না। এর পরিবর্তে গ্রীডি অনুসন্ধানের জন্য এই প্যাটার্নটিও `pattern:"[^"]+"` যথেষ্ট কাজের।

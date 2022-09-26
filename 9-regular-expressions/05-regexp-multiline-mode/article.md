@@ -16,7 +16,7 @@ let str = `1st place: Winnie
 3rd place: Eeyore`;
 
 *!*
-alert( str.match(/^\d/gm) ); // 1, 2, 3
+console.log( str.match(/^\d/gm) ); // 1, 2, 3
 */!*
 ```
 
@@ -28,14 +28,18 @@ let str = `1st place: Winnie
 3rd place: Eeyore`;
 
 *!*
-alert( str.match(/^\d/g) ); // 1
+console.log( str.match(/^\d/g) ); // 1
 */!*
 ```
 
 কেননা ক্যারেট চিহ্ন `pattern:^` ডিফল্টভাবে কেবলমাত্র টেক্সটের শুরুতে মিল খুঁজে, এবং মাল্টিলাইন মোডে -- এটি যেকোন লাইনের শুরুতে মিল খুঁজে।
 
 ```smart
+<<<<<<< HEAD
 "লাইনের শুরু" দিয়ে বুঝায় "লাইন ব্রেকের পরপর": মাল্টিলাইন মোডে `pattern:^` লাইনের শুরু হতে নিউলাইন ক্যারাক্টারের `\n` আগ পর্যন্ত মিলে।
+=======
+"Start of a line" formally means "immediately after a line break": the test  `pattern:^` in multiline mode matches at all positions preceded by a newline character `\n`.
+>>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 
 এবং টেক্সটের শুরু হতে।
 ```
@@ -51,7 +55,7 @@ let str = `Winnie: 1
 Piglet: 2
 Eeyore: 3`;
 
-alert( str.match(/\d$/gm) ); // 1,2,3
+console.log( str.match(/\d$/gm) ); // 1,2,3
 ```
 
 `m` ফ্ল্যাগ ছাড়া, ডলার চিহ্ন `pattern:$` কেবলমাত্র টেক্সটের শেষে মিল খুঁজে, সুতরাং আমরা শুধু শেষের অংশটি পাবো।
@@ -75,7 +79,7 @@ let str = `Winnie: 1
 Piglet: 2
 Eeyore: 3`;
 
-alert( str.match(/\d\n/gm) ); // 1\n,2\n
+console.log( str.match(/\d\n/g) ); // 1\n,2\n
 ```
 
 এখানে আমরা দেখতে পাচ্ছি। ৩ টা ফলাফলের বদলে ২ টি ফলাফল পাওয়া গেছে।

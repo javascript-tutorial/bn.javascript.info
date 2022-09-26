@@ -16,5 +16,9 @@ alert( regexp.test('0132546789AB') ); // মিথ্যা (কোলন নে
 
 alert( regexp.test('01:32:54:67:89') ); // মিথ্যা (৫টি নাম্বার, অবশ্যই ৬টি হতে হবে)
 
+<<<<<<< HEAD
 alert( regexp.test('01:32:54:67:89:ZZ') ) // মিথ্যা (শেষে ZZ)
+=======
+alert( regexp.test('01:32:54:67:89:ZZ') ) // false (ZZ at the end)
+>>>>>>> ff4ef57c8c2fd20f4a6aa9032ad37ddac93aa3c4
 ```
