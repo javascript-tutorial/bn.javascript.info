@@ -6,15 +6,19 @@
 একে "এ্যারো ফাংশন" বলা হয় কারণ এটা দেখতে অনেকটা এই রকমঃ
 
 ```js
-let func = (arg1, arg2, ...argN) => expression
+let func = (arg1, arg2, ..., argN) => expression;
 ```
 
+<<<<<<< HEAD
 এখানে `func` নামে একটা ফাংশন তৈরি করা হয়েছে যা `arg1..argN` আর্গুমেন্ট হিসেবে নিচ্ছে, তারপর ডানপাশের `expression` টি সম্পাদন করে তার যে রেজাল্ট হয় সেটা রিটার্ন করছে।
+=======
+This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 অন্যথায় বলতে গেলে, এটা নিম্নোক্ত কোডটির সংক্ষিপ্ত রূপ।
 
 ```js
-let func = function(arg1, arg2, ...argN) {
+let func = function(arg1, arg2, ..., argN) {
   return expression;
 };
 ```
@@ -34,7 +38,11 @@ let sum = function(a, b) {
 alert( sum(1, 2) ); // 3
 ```
 
+<<<<<<< HEAD
 এখানে আপনি যেমনটি দেখতে পাচ্ছেন, `(a, b) => a + b` ফাংশনটি দুইটা আর্গুমেন্ট নিচ্ছে যথাক্রমে `a` ও `b` এবং সম্পাদনের সময় এটি `a + b` এক্সপ্রেশনটির মান নির্ণয় করছে এবং তার রেজাল্টটি রিটার্ন করছে। 
+=======
+As you can see, `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 - যদি আমাদের কেবল একটি মাত্র আর্গুমেন্ট থাকে তাহলে প্যারামিটারগুলোর দুই পাশে যে প্যারেন্থেসিস বা প্রথম বন্ধনী থাকে সেটি না দিলেও চলে, যেটা কোডটাকে আরও সংক্ষিপ্ত করে নিয়ে আসে। 
 
@@ -49,7 +57,11 @@ alert( sum(1, 2) ); // 3
     alert( double(3) ); // 6
     ```
 
+<<<<<<< HEAD
 - যদি ফাংশনের কোন আর্গুমেন্ট না থাকে তাহলে প্যারেন্থেসিস বা প্রথম বন্ধনীদ্বয় খালি থাকবে (কিন্তু তারা উপস্থিত থাকবে)  
+=======
+- If there are no arguments, parentheses are empty, but they must be present:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
     ```js run
     let sayHi = () => alert("হ্যালো!");
@@ -65,8 +77,13 @@ alert( sum(1, 2) ); // 3
 let age = prompt("আপনার বয়স কত?", 18);
 
 let welcome = (age < 18) ?
+<<<<<<< HEAD
   () => alert('হ্যালো') :
   () => alert("অভিবাদন!");
+=======
+  () => alert('Hello!') :
+  () => alert("Greetings!");
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 welcome();
 ```
@@ -77,9 +94,15 @@ welcome();
 
 ## অনেক লাইনের এ্যারো ফাংশন
 
+<<<<<<< HEAD
 উপড়ের উদাহরণগুলোতে (`=>`) এই চিহ্নের বাম পাশে আর্গুমেন্ট সমূহ নিয়েছে এবং তাদের সাহায্যে ডান পাশের এক্সপ্রেশনটির মান নির্ধারন করেছে।
 
 কিন্তু কখনো সখনো আমাদের এর থেকে কিছুটা বেশি জটিল কাজ করতে হয়, যেমন একের অধিক এক্সপ্রেশন অথবা স্টেটমেন্ট সম্পাদন করা। এটাও সম্ভব, কিন্তু তার জন্য তাদের কার্লি ব্র্যাসেস বা দ্বিতীয় বন্ধনীর ভিতরে লিখতে হবে। তারপর সেখানে একটা সাধারন `return` ব্যবহার করতে হবে।
+=======
+The arrow functions that we've seen so far were very simple. They took arguments from the left of `=>`, evaluated and returned the right-side expression with them.
+
+Sometimes we need a more complex function, with multiple expressions and statements. In that case, we can enclose them in curly braces. The major difference is that curly braces require a `return` within them to return a value (just like a regular function does).
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 অনেকটা এইরকমঃ
 
@@ -87,7 +110,11 @@ welcome();
 let sum = (a, b) => {  // এই কার্লি ব্র্যাসটা শুরু করে একটা বহুলাইন ফাংশনের।
   let result = a + b;
 *!*
+<<<<<<< HEAD
   return result; // যদি আমরা কার্লি ব্র্যাসেস ব্যবহার করি, তাহলে আমাদের আলাদাকরে একটা "return" ব্যবহার করা লাগবে। 
+=======
+  return result; // if we use curly braces, then we need an explicit "return"
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 */!*
 };
 
@@ -107,7 +134,14 @@ alert( sum(1, 2) ); // 3
 ## Summary
 ## মূলকথা
 
+<<<<<<< HEAD
 এ্যারো ফাংশন এক লাইনের কাজের জন্য খুব সুবিধাজনক। এটা দুই প্রকার হতে পারেঃ 
 
 1. কোন কার্লি ব্র্যাসেস ছাড়াঃ `(...args) => expression` -- ডান পাশের অংশটা একটা এক্সপ্রেশন এবং ফাংশনটি এই এক্সপ্রেশনের মান নির্ণয় করে এবং সেটা রিটার্ন করে।
 2. কার্লি ব্র্যাসেস সহঃ `(...args) => { body }` -- বন্ধনীসমূহ ফাংশনের ভিতরে একের অধিক স্ট্যাটমেন্ট লিখতে দিচ্ছে, কিন্তু আমাদের কোন কিছু রিটার্ন করার জন্য আলাদা করে `return` ব্যবহার করতে হবে।
+=======
+Arrow functions are handy for simple actions, especially for one-liners. They come in two flavors:
+
+1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result. Parentheses can be omitted, if there's only a single argument, e.g. `n => n*2`.
+2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
