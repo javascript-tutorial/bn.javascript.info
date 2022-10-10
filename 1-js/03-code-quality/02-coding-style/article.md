@@ -117,7 +117,11 @@ if (
 
     ইন্ডেন্টশনের ক্ষেত্রে ট্যাব চিহ্ন থেকে স্পেস ব্যাবহারের একটি বাড়তি সুবিধা হল এর বেশি ফ্ল্যাক্সিবল কনফিগারেশনের 
 
+<<<<<<< HEAD
     যেমন, এভাবে আমরা আর্গুমেন্টগুলোকে  শুরুর ব্যাকেটের সাথে লম্বভাবে রাখতে পারি :
+=======
+    For instance, we can align the parameters with the opening bracket, like this:
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
     ```js no-beautify
     show(parameters,
@@ -302,11 +306,15 @@ function pow(x, n) {
 
 এখনে কিছু পরিচিত লিন্টারস টুলঃ
 
-- [JSLint](http://www.jslint.com/) -- one of the first linters.
-- [JSHint](http://www.jshint.com/) -- more settings than JSLint.
-- [ESLint](http://eslint.org/) -- probably the newest one.
+- [JSLint](https://www.jslint.com/) -- one of the first linters.
+- [JSHint](https://jshint.com/) -- more settings than JSLint.
+- [ESLint](https://eslint.org/) -- probably the newest one.
 
+<<<<<<< HEAD
 সবগুলিই তাদের কাজ ভালো করে। লেখন ব্যাবহার করেঃ [ESLint](http://eslint.org/).
+=======
+All of them can do the job. The author uses [ESLint](https://eslint.org/).
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 অনেক কোড এডিটরে এটা আগে থেকেই থাকে: শুধুমাত্র প্লাগইন এনেবল করে কোড স্টাইল কনফিগার করলেই হয়।
 
@@ -329,14 +337,18 @@ function pow(x, n) {
   },
   "rules": {
     "no-console": 0,
-    "indent": ["warning", 2]
+    "indent": 2
   }
 }
 ```
 
 এখানে ডিরেক্টিভ `"extends"` মানে সেটিংসে কনফিগারেশনটির বেস "eslint:recommended" সেট করা. এরপর, আমরা আমাদেরটা নির্দিষ্ট করে দেই।
 
+<<<<<<< HEAD
 অয়েব থেকে স্টাইল রুলস ডাউনলোড করে এক্সটেন্ডও করা যায়। আরও জানতে দেখুন <http://eslint.org/docs/user-guide/getting-started> 
+=======
+It is also possible to download style rule sets from the web and extend them instead. See <https://eslint.org/docs/user-guide/getting-started> for more details about installation.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 এছাড়া কিছু IDE তে লিন্টারস বিল্ট-ইন থাকে,যেটা সুবিধাজনক কিন্তু ESLint মত চাহিদা মত পরিবর্তন করতে পারি না।
 

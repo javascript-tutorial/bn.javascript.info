@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 সংখ্যা খুঁজার রেগুলার এক্সপ্রেশন: `pattern:-?\d+(\.\d+)?`। যা আমরা পূর্বের টাস্কে করেছিলাম।
+=======
+A regexp for a number is: `pattern:-?\d+(\.\d+)?`. We created it in the previous task.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 অপারেটর হল `pattern:[-+*/]`. হাইফেন `pattern:-` অবশ্যই ব্রাকেটের শুরুতে হতে হবে, কেননা মাঝে হলে এটি দ্বারা ক্যারাক্টারের রেঞ্জ বুঝায়, এখানে আমরা `-` কে ক্যারাক্টার হিসেবে ব্যবহার করতে চায়।
 
@@ -7,7 +11,14 @@
 আমাদের খুঁজা লাগবে একটি সংখ্যা অতঃপর একটি গাণিতিক চিহ্ন এবং শেষে আরো একটি সংখ্যা এবং তাদের মাঝের অতিরিক্ত স্পেস।
 
 
+<<<<<<< HEAD
 সুতরাং রেগুলার এক্সপ্রেশনটি হবে: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`।
+=======
+It has 3 parts, with `pattern:\s*` between them:
+1. `pattern:-?\d+(\.\d+)?` - the first number,
+2. `pattern:[-+*/]` - the operator,
+3. `pattern:-?\d+(\.\d+)?` - the second number.
+>>>>>>> 18b1314af4e0ead5a2b10bb4bacd24cecbb3f18e
 
 এর ৩টি অংশ আছে, সাথে এটিও `pattern:\s*`:
 ১. `pattern:-?\d+(\.\d+)?` - প্রথম সংখ্যাটি।
@@ -54,4 +65,18 @@ function parse(expr) {
 }
 
 alert( parse("-1.23 * 3.45") );  // -1.23, *, 3.45
+```
+
+As an alternative to using the non-capturing `?:`, we could name the groups, like this:
+
+```js run
+function parse(expr) {
+	let regexp = /(?<a>-?\d+(?:\.\d+)?)\s*(?<operator>[-+*\/])\s*(?<b>-?\d+(?:\.\d+)?)/;
+
+	let result = expr.match(regexp);
+
+	return [result.groups.a, result.groups.operator, result.groups.b];
+}
+
+alert( parse("-1.23 * 3.45") );  // -1.23, *, 3.45;
 ```
