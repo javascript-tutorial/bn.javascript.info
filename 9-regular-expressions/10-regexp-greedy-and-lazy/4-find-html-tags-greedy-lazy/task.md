@@ -12,4 +12,8 @@ let str = '<> <a href="/"> <input type="radio" checked> <b>';
 alert( str.match(regexp) ); // '<a href="/">', '<input type="radio" checked>', '<b>'
 ```
 
+<<<<<<< HEAD
 এখানে কিছুটা সহজের জন্য আমরা ধরে নিয়েছি অ্যাট্রিবিউটের মাঝে এই দুটি বন্ধনী `<` এবং `>` থাকবে না।
+=======
+Here we assume that tag attributes may not contain `<` and `>` (inside quotes too), that simplifies things a bit.
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c

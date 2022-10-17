@@ -20,7 +20,11 @@ alert( str.match(regexp) ); // 'HTML', 'CSS', 'JavaScript'
 
 আমরা ইতোমধ্যে স্কয়ার ব্র্যাকেট দ্বারা এমন সমস্যা সমাধান করেছি। এটি আমাদেরকে একাধিক ক্যারাক্টার নির্বাচন করতে দেয় , যেমন `pattern:gr[ae]y` এটি  `match:gray` বা `match:grey` এর সাথে মিলবে।
 
+<<<<<<< HEAD
 স্কয়ার ব্র্যাকেট শুধুমাত্র ক্যারাক্টার বা ক্যারাক্টার সেট এর জন্য প্রযোজ্য। আর অল্টারনেশন যেকোন এক্সপ্রেশনের জন্য কাজ করে। রেগুলার এক্সপ্রেশটি  `pattern:A|B|C` দ্বারা বুঝায় `A`, `B` বা `C`।
+=======
+Square brackets allow only characters or character classes. Alternation allows any expressions. A regexp `pattern:A|B|C` means one of expressions `A`, `B` or `C`.
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 
 যেমন:
 
@@ -33,7 +37,11 @@ alert( str.match(regexp) ); // 'HTML', 'CSS', 'JavaScript'
 
 ## উদাহরণ: সময়ের জন্য রেগুলার এক্সপ্রেশ
 
+<<<<<<< HEAD
 পূর্ববর্তীতে আমাদের একটি টাস্ক ছিল রেগুলার এক্সপ্রেশ দ্বারা সময় `hh:mm` খুঁজা, যেমন `12:00`। কিন্তু এই প্যাটার্নটি `pattern:\d\d:\d\d` একেবারে নির্ভুল ছিলনা। কেননা এটি `25:99` এর সাথেও মিল খুঁজে পেত(এখানে 25 এবং 99 প্যাটার্নের সাথে মিলে কিন্তু এটি একটি ভুল সময়)।
+=======
+In previous articles there was a task to build a regexp for searching time in the form `hh:mm`, for instance `12:00`. But a simple `pattern:\d\d:\d\d` is too vague. It accepts `25:99` as the time (as 99 minutes match the pattern, but that time is invalid).
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 
 আমরা কিভাবে আরো নির্ভুল প্যাটার্ন লিখতে পারি?
 
@@ -47,7 +55,11 @@ alert( str.match(regexp) ); // 'HTML', 'CSS', 'JavaScript'
 
 এরপর, মিনিট হবে `00` থেকে `59` এর মধ্যে। রেগুলার এক্সপ্রেশনে এটিকে আমরা এভাবে লিখতে পারি `pattern:[0-5]\d`: প্রথম সংখ্যাটি `0-5` এর মধ্যে, এবং এরপর যেকোন অংক।
 
+<<<<<<< HEAD
 এখন ঘন্টা এবং মিনিটকে একত্রে লিখলে প্যাটার্নটি হবে: `pattern:[01]\d|2[0-3]:[0-5]\d`।
+=======
+If we glue hours and minutes together, we get the pattern: `pattern:[01]\d|2[0-3]:[0-5]\d`.
+>>>>>>> bf7d8bb1af3b416d393af1c15b03cb1352da1f9c
 
 আমাদের প্যাটার্ন লেখা প্রায় শেষ, ্কিন্তু এখানে একটি সমস্যা আছে। অল্টারনেশন `pattern:|` দ্বারা বুঝানো হচ্ছে হয় এটি `pattern:[01]\d` অথবা এটি `pattern:2[0-3]:[0-5]\d`।
 
