@@ -27,7 +27,11 @@ alert(user); // {name: "John", age: 30}
 
 ## JSON.stringify
 
+<<<<<<< HEAD
 [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) হল  ভ্যালু বা অবজেক্টকে একটি সাধারণ ফর্মে দেখানোর পদ্ধতি [RFC 4627](http://tools.ietf.org/html/rfc4627)। এটি সর্বপ্রথম জাভাস্ক্রিপ্টের জন্য তৈরি করা হয়েছিল, তবে বর্তমানে অন্যান্য সকল ল্যাংগুয়েজে `JSON` নিয়ে কাজ করার নিজস্ব লাইব্রেরী আছে। তাই এখন ক্লায়েন্ট থেকে সার্ভারের (যেমন পাইথন, রুবি, জাভা, পিএইচপি ইত্যাদির) সাথে সহজেই `JSON` ডাটা আদান-প্রদান করা যায়।
+=======
+The [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 জাভাস্ক্রিপ্টে `JSON` এর দুটি মেথড আছে:
 
@@ -41,7 +45,7 @@ let student = {
   age: 30,
   isAdmin: false,
   courses: ['html', 'css', 'js'],
-  wife: null
+  spouse: null
 };
 
 *!*
@@ -58,7 +62,7 @@ alert(json);
   "age": 30,
   "isAdmin": false,
   "courses": ["html", "css", "js"],
-  "wife": null
+  "spouse": null
 }
 */
 */!*
@@ -103,9 +107,15 @@ JSON ল্যাংগুয়েজের উপর সীমাবদ্ধ ন
 
 সাধারণত:
 
+<<<<<<< HEAD
 - ফাংশন প্রপার্টি (methods)।
 - Symbolic প্রপার্টি।
 - অথবা প্রপার্টির ভ্যালু `undefined` হলে।
+=======
+- Function properties (methods).
+- Symbolic keys and values.
+- Properties that store `undefined`.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 ```js run
 let user = {
@@ -275,6 +285,7 @@ name:         John
 name:         Alice
 place:        [object Object]
 number:       23
+occupiedBy: [object Object]
 */
 ```
 
@@ -327,7 +338,13 @@ alert(JSON.stringify(user, null, 2));
 */
 ```
 
+<<<<<<< HEAD
 `space` প্যারামিটারটি আমরা ব্যবহার করি লগ কে সুন্দর ভাবে দেখাতে।
+=======
+The third argument can also be a string. In this case, the string is used for indentation instead of a number of spaces.
+
+The `space` parameter is used solely for logging and nice-output purposes.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 ## নিজস্ব "toJSON"
 
@@ -447,7 +464,11 @@ let json = `{
 
 এছাড়াও JSON এর মাঝে কমেন্ট গ্রহণযোগ্য না। কমেন্ট সংযুক্তের জন্য JSON ইনভ্যালিড হবে।
 
+<<<<<<< HEAD
 তবে এই ধরণের ইনভ্যালিড JSON কে পার্স করার জন্য একটি লাইব্ররী আছে [JSON5](http://json5.org/), যা single quotes, comments ইত্যাদি প্রপার্টিযুক্ত স্ট্রিংকেও পার্স করতে পারে।
+=======
+There's another format named [JSON5](https://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+>>>>>>> 5dff42ba283bce883428c383c080fa9392b71df8
 
 এটা ভাবার কারণ নেই, JSON এর ডেভলাপাররা অলস বলে এইসব সমস্যার সমাধান করছে না, কারণ এই স্ট্রিক্ট থাকার ফলে পার্সিং অ্যালগরিদমটি অনেক দ্রুত কাজ করে।
 
