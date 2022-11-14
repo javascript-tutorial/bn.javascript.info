@@ -102,7 +102,7 @@ As we can see from `alert` output, in a browser the timer identifier is a number
 
 Again, there is no universal specification for these methods, so that's fine.
 
-For browsers, timers are described in the [timers section](https://www.w3.org/TR/html5/webappapis.html#timers) of HTML5 standard.
+For browsers, timers are described in the [timers section](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) of HTML Living Standard.
 
 ## setInterval
 
@@ -129,7 +129,7 @@ setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
 ```smart header="Time goes on while `alert` is shown"
 In most browsers, including Chrome and Firefox the internal timer continues "ticking" while showing `alert/confirm/prompt`.
 
-So if you run the code above and don't dismiss the `alert` window for some time, then in the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 2 seconds.
+So if you run the code above and don't dismiss the `alert` window for some time, then the next `alert` will be shown immediately as you do it. The actual interval between alerts will be shorter than 2 seconds.
 ```
 
 ## Nested setTimeout
@@ -232,7 +232,7 @@ setTimeout(function() {...}, 100);
 
 For `setInterval` the function stays in memory until `clearInterval` is called.
 
-There's a side-effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+There's a side effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
 ````
 
 ## Zero delay setTimeout
@@ -256,7 +256,7 @@ The first line "puts the call into calendar after 0ms". But the scheduler will o
 There are also advanced browser-related use cases of zero-delay timeout, that we'll discuss in the chapter <info:event-loop>.
 
 ````smart header="Zero delay is in fact not zero (in a browser)"
-In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+In the browser, there's a limitation of how often nested timers can run. The [HTML Living Standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
 
 Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself with zero delay. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
 
@@ -281,7 +281,7 @@ The similar thing happens if we use `setInterval` instead of `setTimeout`: `setI
 
 That limitation comes from ancient times and many scripts rely on it, so it exists for historical reasons.
 
-For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html) for Node.js. So this note is browser-specific.
+For server-side JavaScript, that limitation does not exist, and there exist other ways to schedule an immediate asynchronous job, like [setImmediate](https://nodejs.org/api/timers.html#timers_setimmediate_callback_args) for Node.js. So this note is browser-specific.
 ````
 
 ## Summary
@@ -290,13 +290,13 @@ For server-side JavaScript, that limitation does not exist, and there exist othe
 - To cancel the execution, we should call `clearTimeout/clearInterval` with the value returned by `setTimeout/setInterval`.
 - Nested `setTimeout` calls are a more flexible alternative to `setInterval`, allowing us to set the time *between* executions more precisely.
 - Zero delay scheduling with `setTimeout(func, 0)` (the same as `setTimeout(func)`) is used to schedule the call "as soon as possible, but after the current script is complete".
-- The browser limits the minimal delay for five or more nested call of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
+- The browser limits the minimal delay for five or more nested calls of `setTimeout` or for `setInterval` (after 5th call) to 4ms. That's for historical reasons.
 
 Please note that all scheduling methods do not *guarantee* the exact delay.
 
 For example, the in-browser timer may slow down for a lot of reasons:
 - The CPU is overloaded.
 - The browser tab is in the background mode.
-- The laptop is on battery.
+- The laptop is on battery saving mode.
 
 All that may increase the minimal timer resolution (the minimal delay) to 300ms or even 1000ms depending on the browser and OS-level performance settings.
