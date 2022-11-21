@@ -1,6 +1,10 @@
 # কন্সট্রাকটর এবং "new" অপারেটর
 
+<<<<<<< HEAD
 সাধারণত আমরা `{...}` এর সাহায্যে শুধুমাত্র একটি অবজেক্ট তৈরি করতে পারি। কিন্তু প্রায়সময় আমাদের একই ধরণের অনেক অবজেক্ট তৈরি করা লাগে, যেমন ইউজার বা টিচার অবজেক্ট।
+=======
+The regular `{...}` syntax allows us to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 আমরা এটি করতে পারি কনস্ট্রাকটর ফাংশনের `"new"` অপারেটরের সাহায্যে।
 
@@ -64,13 +68,21 @@ let user = {
 
 কন্সট্রাকটর ব্যবহারের প্রধান উদ্দেশ্যই হল পুনরায় ব্যবহারযোগ্য অবজেক্ট তৈরি সহজ করা।
 
+<<<<<<< HEAD
 একটি ব্যাপার সম্পর্কে পরিষ্কার ধারণা থাকা দরকার। সাধারণত, যে কোন ফাংশনকে আমরা কন্সট্রাকটর ফাংশন হিসেবে ব্যবহার করতে পারি। অর্থাৎ যেকোন ফাংশনকে `new` দ্বারা কল করা হলে এটি কন্সট্রাকটর ফাংশন হিসেবে কাজ করবে। অর্থাৎ আপনি যদি ফাংশনের নামের সব অক্ষর ছোট হাতের ব্যবহার করেন তাও কাজ করবে, তবে কন্সট্রাকটর ফাংশনকে বড় হাতের অক্ষর দিয়ে শুরু করা সার্বজনীন স্বীকৃত, এবং এটি নির্দেশ করে আমাদের ফাংশনটি ডিক্লেয়ার করতে হবে `new` কী-ওয়ার্ড দ্বারা।
 
 ````smart header="new function() { ... }"
 যদি আমাদের একটি কমপ্লেক্স অবজেক্ট শুধুমাত্র একবার তৈরি করা লাগে, তাহলে এটি অ্যানোনিমাস ফাংশন কন্ট্রাকটরের সাহায্যে তৈরি করতে পারি, এভাবে:
+=======
+Let's note once again -- technically, any function (except arrow functions, as they don't have `this`) can be used as a constructor. It can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+
+````smart header="new function() { ... }"
+If we have many lines of code all about creation of a single complex object, we can wrap them in an immediately called constructor function, like this:
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 ```js
-let user = new function() {
+// create a function and immediately call it with new
+let user = new function() { 
   this.name = "John";
   this.isAdmin = false;
 
@@ -80,7 +92,11 @@ let user = new function() {
 };
 ```
 
+<<<<<<< HEAD
 এখানে আমরা কন্সট্রাকটরটিকে পুনরায় কল করতে পারব না, কেননা এটি কোথাও সংরক্ষন করা হয়নি, তৈরি করেই কল করা হয়ে গিয়েছে। এই ধরণের এনক্যাপসুলেশন প্রয়োজন হয় একটি অবজেক্টের জন্য, যা পুনরায় ব্যবহার করা যাবে না।
+=======
+This constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 ````
 
 ## Constructor কিনা যাচাই: new.target
@@ -91,7 +107,11 @@ let user = new function() {
 
 একটি ফাংশনের মধ্যে আমরা চাইলে যাচাই করতে পারি, এটি `new` দ্বারা কল করা হয়েছে নাকি হয়নি, এজন্য একটি বিশেষ প্রপার্টি আছে `new.target`।
 
+<<<<<<< HEAD
 নিচের কোডে আমরা `User` কে `new` দ্বারা কল করলে `new.target` এর মান পাব একটি খালি অবজেক্ট অন্যথায় `undefined`:
+=======
+It is undefined for regular calls and equals the function if called with `new`:
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 ```js run
 function User() {
@@ -169,8 +189,13 @@ alert( new SmallUser().name );  // John
 
 সাধারণত কন্সট্রাকটরে `return` স্টেটমেন্ট ব্যবহার করা হয়না। তারপরও আমরা এটি আলোচনা করেছি যদি ব্যবহার করি তাহলে তা কেমন আচরণ করে তা জানার জন্য।
 
+<<<<<<< HEAD
 ````smart header="প্রথমবন্ধনী ছাড়া কল"
 আমরা new অপারেটর ব্যবহারের সময় `()` ছাড়াও কন্সট্রাকটর ফাংশনকে কল করতে পারি, যদি এতে কোন আর্গুমেন্ট না থাকে:
+=======
+````smart header="Omitting parentheses"
+By the way, we can omit parentheses after `new`:
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 ```js
 let user = new User; // <-- no parentheses

@@ -19,7 +19,12 @@ let str = `
 str = str.replace(regexp, `<h1>Hello</h1>`);
 ```
 
+<<<<<<< HEAD
 এর পর `str` এর মান হবে:
+=======
+After that the value of `str` should be:
+
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 ```html
 <html>
   <body style="height: 200px"><h1>Hello</h1>

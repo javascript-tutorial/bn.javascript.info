@@ -92,6 +92,38 @@ let fruits = [
 "trailing comma" স্ট্যাইল এর জন্য কোন আইটেম সংযোগ বা বাদ দেয়া সহজ হয়।
 ````
 
+## Get last elements with "at"
+
+[recent browser="new"]
+
+Let's say we want the last element of the array.
+
+Some programming languages allow to use negative indexes for the same purpose, like `fruits[-1]`.
+
+Although, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+
+We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+
+A bit cumbersome, isn't it? We need to write the variable name twice.
+
+Luckily, there's a shorter syntax: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// same as fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Plum
+```
+
+In other words, `arr.at(i)`:
+- is exactly the same as `arr[i]`, if `i >= 0`.
+- for negative values of `i`, it steps back from the end of the array.
 
 ## pop/push, shift/unshift মেথডস
 
@@ -121,9 +153,15 @@ let fruits = [
 
 স্ট্যাক LIFO (Last-In-First-Out) প্রিন্সিপাল অনুসারে কাজ করে, অন্যদিকে কিউ  FIFO (First-In-First-Out) অনুসারে কাজ করে।
 
+<<<<<<< HEAD
 জাভাস্ক্রিপ্টে অ্যারের সাহায্যে স্ট্যাক বা কিউ উভয়ই ইমপ্লিমেন্ট করা যায়। কেননা অ্যারেতে সবার শেষে বা শুরুতে কোন আইটেম সংযুক্ত বা বাদ করা যায়।
 
 কম্পিউটার সায়েন্সে এই ধরণের ডাটা স্ট্রাকচার সমূহকে বলা হয় [deque](https://en.wikipedia.org/wiki/Double-ended_queue)ওঁ।
+=======
+Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements, both to/from the beginning or the end.
+
+In computer science, the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 **অ্যারের শেষ এলিমেন্ট নিয়ে কাজ করে মেথডদুটি হল:**
 
@@ -137,6 +175,8 @@ let fruits = [
 
     alert( fruits ); // Apple, Orange
     ```
+
+    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
 
 `push`
 : অ্যারেতে সবার শেষে নতুন একটি এলিমেন্ট যোগ করবে:
@@ -209,7 +249,11 @@ arr.push("Pear"); // modify the array by reference
 alert( fruits ); // Banana, Pear - 2 items now
 ```
 
+<<<<<<< HEAD
 ...তবে ইন্টারনাল রিফ্রেশেন্টেশন অ্যারেকে বিশেষ সুবিধা দেয়। জাভাস্ক্রিপ্ট ইঞ্জিন এলিমেন্ট সমূহকে মেমোরিতে পাশাপাশি ক্রম অনুসারে সংরক্ষণ করে, যার ফলে এদের মধ্যে বিভিন্ন অপারেশন অপ্টিমাইজ করে চালানো যায়, এবং এরা দ্রুত কাজ করে।
+=======
+...But what makes arrays really special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 তবে যদি আমরা কোন একটি অ্যারের "ordered collection" কে নষ্ট করে ফেলি, এবং এদের সাধারণ অবজেক্ট হিসেবে ডিক্লেয়ার করি তাহলে অ্যারের সুবিধাগুলো থেকে আমরা বঞ্চিত হব।
 
@@ -247,7 +291,11 @@ fruits.age = 25; // এবং এখানে কী হিসেবে এক�
 fruits.shift(); // take 1 element from the start
 ```
 
+<<<<<<< HEAD
 এটি শুধুমাত্র অ্যারের `0` নং ইনডেক্স প্রদান করে রিমুভ করে না পাশাপাশি অ্যারের বাকী এলিমেন্ট সমূহকে পুনরায় ইনডেক্সিং করে।
+=======
+It's not enough to take and remove the element with the index `0`. Other elements need to be renumbered as well.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 `shift` অপারেশনে ৩টি ব্যাপার ঘটে:
 
@@ -363,11 +411,19 @@ alert( arr[3] ); // পূর্বের ভ্যালু আর ফেরত
 let arr = *!*new Array*/!*("Apple", "Pear", "etc");
 ```
 
+<<<<<<< HEAD
 এটির ব্যবহার কদাচিৎ, কেননা স্কয়ার ব্রাকেট সংক্ষিপ্ত `[]`। Also there's a tricky feature with it.
+=======
+It's rarely used, because square brackets `[]` are shorter. Also, there's a tricky feature with it.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 `new Array` একটি `number` টাইপ আর্গুমেন্ট নিতে পারে, যদি আমরা `number` প্রদান করি তাহলে অ্যারেটি এভাবে তৈরি হবে: *একটি নির্দিষ্ট length থাকবে তবে  কোন আইটেম থাকবে না*।
 
+<<<<<<< HEAD
 উদাহরণস্বরূপ:
+=======
+Let's see how one can shoot themselves in the foot:
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 ```js run
 let arr = new Array(2); // will it create an array of [2] ?
@@ -377,9 +433,13 @@ alert( arr[0] ); // undefined! no elements.
 alert( arr.length ); // length 2
 ```
 
+<<<<<<< HEAD
 উপরের কোডে, `new Array(number)` এর সকল ইনডেক্স এর মান `undefined` দেখাবে।
 
 এই ধরণের সারপ্রাইজ এড়াতে আমরা স্কয়ার ব্রাকেট ব্যবহার করি।
+=======
+To avoid such surprises, we usually use square brackets, unless we really know what we're doing.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 ## Multidimensional arrays
 
@@ -435,11 +495,19 @@ alert( "1,2" + 1 ); // "1,21"
 
 চলুন পুনরায় অবজেক্ট তুলনার নিয়মগুলো দেখি:
 
+<<<<<<< HEAD
 - দুটি অবজেক্ট `==` সমান হবে যদি তারা একই অবজেক্ট কে রেফারেন্স করে।
 - `==` এর সাহায্যে তুলনা করার সময় যদি একটি অবজেক্ট হয় এবং অন্যটি primitive হয়, তাহলে অবজেক্টটি primitive ভ্যালুতে পরিবর্তন হয়ে যায়, বিস্তারিত এই অধ্যায়ে <info:object-toprimitive>।
 - ...তবে `null` এবং `undefined` এরা সমান হবে `==`।
 
 strict comparison `===` আর সহজবোধ্য, এটি ডাটা টাইপও তুলনা করে।
+=======
+- Two objects are equal `==` only if they're references to the same object.
+- If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
+- ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
+
+The strict comparison `===` is even simpler, as it doesn't convert types.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 সুতরাং আমরা যদি দুটি অ্যারের তুলনা `==` করতে চায়, তাহলে তারা সমান হবে না, যদিনা অ্যারে দুটির রেফারেন্স একই হয়।
 
@@ -459,7 +527,11 @@ alert( 0 == [] ); // true
 alert('0' == [] ); // false
 ```
 
+<<<<<<< HEAD
 এখানে উভয়ই ক্ষেত্রে আমরা একটি primitive ভ্যালু কে একটি অবজেক্টের সাথে তুলনা করছি। সুতরাং অবজেক্টটি `[]` primitive এ পরিবর্তন হয়ে একটি এম্পটি `''` স্ট্রিং এ রুপান্তর হবে।
+=======
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 এবং তুলনাটি দুটি primitive ভ্যালুতে করা হয়, বিস্তারিত এই অধ্যায়ে <info:type-conversions>:
 
@@ -478,22 +550,39 @@ alert('0' == '' ); // false, no type conversion, different strings
 
 অ্যারে হল একটি বিশেষ ধরণের অবজেক্ট, যার সাহায্যে আমরা ডাটা কে উর্ধক্রমে রাখতে পারি।
 
+<<<<<<< HEAD
 - অ্যারে ডিক্লেয়ার করার উপায়:
+=======
+The declaration:
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
-    ```js
-    // square brackets (usual)
-    let arr = [item1, item2...];
+```js
+// square brackets (usual)
+let arr = [item1, item2...];
 
-    // new Array (exceptionally rare)
-    let arr = new Array(item1, item2...);
-    ```
+// new Array (exceptionally rare)
+let arr = new Array(item1, item2...);
+```
 
+<<<<<<< HEAD
     `new Array(number)` এর আর্গুমেন্ট number পাস করলে তাহলে এটি অ্যারের length বুঝায়, তবে কোন এলিমেন্ট থাকবে না।
+=======
+The call to `new Array(number)` creates an array with the given length, but without elements.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 - `length` প্রপার্টি দ্বারা অ্যারের দৈর্ঘ্য বুঝায়, নির্দিষ্ট করে বলতে গেলে শেষ ইনডেক্সে এর সাথে ১ যোগ। অ্যারের মেথড সমূহের জন্য এটি স্বয়ংক্রিয়ভাবে পরিবর্তন হয়।
 - If we shorten `length` manually, the array is truncated.
 
+<<<<<<< HEAD
 আমরা অ্যারেকে deque হিসেবে ব্যবহার করতে পারব, এর জন্য নিম্নোক্ত মেথডসমূহ আছে:
+=======
+Getting the elements:
+
+- we can get element by its index, like `arr[0]`
+- also we can use `at(i)` method that allows negative indexes. For negative values of `i`, it steps back from the end of the array. If `i >= 0`, it works same as `arr[i]`.
+
+We can use an array as a deque with the following operations:
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 - `push(...items)` কালেকশনে সবার শেষে একটি `items` যোগ করে।
 - `pop()` সবার শেষ এলিমেন্টটি রিটার্ন করে এবং অ্যারে হতে এলিমেন্টটি বাদ দেয়।
