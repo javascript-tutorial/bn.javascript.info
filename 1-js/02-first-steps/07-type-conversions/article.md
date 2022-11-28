@@ -11,7 +11,7 @@
 এই অধ্যায়ে, আমরা অবজেক্ট নয় বরং, প্রিমিটিভ বিষয়গূলো জানবো। পরবর্তিতে, অবজেক্টের ধারণা পেলে, আমরা অবজেক্ট রূপান্তর নিয়ে আলোচনা করবো। <info:object-toprimitive>.
 =======
 ```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. For now we'll just be talking about primitives.
+In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
 
 Later, after we learn about objects, in the chapter <info:object-toprimitive> we'll see how objects fit in.
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d:1-js/02-first-steps/07-type-conversions/article.md
@@ -70,12 +70,21 @@ alert(age); // NaN, রূপান্তর হয়নি
 
 সংখ্যা রুপান্তরের নিয়ম:
 
+<<<<<<< HEAD
 | ভ্যালু                                 | পরিবর্তিত রুপ...                                                                                         |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `undefined`                         | `NaN`                                                                                                |
 | `null`                              | `0`                                                                                                  |
 | <code>true&nbsp;ও&nbsp;false</code> | `1` ও `0`                                                                                            |
 | `string`                            | স্ট্রিংয়ের শুরু ও শেষের স্পেস থেকে তা মুছে ফেলা হয়। বাকিটা ফাঁকা স্ট্রিং হলে, তা `0` হবে। নাহয় নাম্বারগুলি স্ট্রিং থেকে নেয়া হয়। এরর হলে `NaN` আসে। |
+=======
+| Value |  Becomes... |
+|-------|-------------|
+|`undefined`|`NaN`|
+|`null`|`0`|
+|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
+| `string` | Whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 Examples:
 
@@ -130,12 +139,21 @@ alert( Boolean(" ") ); // স্পেস, এটাও true (স্ট্রি
 
  রূপান্তর নীতি:
 
+<<<<<<< HEAD
 | ভ্যালু                                 | বদলে যায়...                                                                                                          |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `undefined`                         | `NaN`                                                                                                              |
 | `null`                              | `0`                                                                                                                |
 | <code>true&nbsp;/&nbsp;false</code> | `1 / 0`                                                                                                            |
 | `string`                            | স্ট্রিংয়ে যা তাই আসে, স্ট্রিংয়ের শুরু ও শেষের স্পেস থেকে তা মুছে ফেলা হয়। বাকিটা ফাঁকা স্ট্রিং হলে, তা `0` হবে। নাহয় নাম্বারগুলি স্ট্রিং থেকে নেয়া হয়। এরর হলে `NaN` আসে। |
+=======
+| Value |  Becomes... |
+|-------|-------------|
+|`undefined`|`NaN`|
+|`null`|`0`|
+|<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
+| `string` | The string is read "as is", whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 
 **`বুলিয়ানে রূপান্তর`** -- লজিকাল অপারেশনে হয়। আবার  `Boolean(value)` দিয়েও করা যায।
 

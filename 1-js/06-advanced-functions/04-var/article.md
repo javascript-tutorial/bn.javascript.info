@@ -4,7 +4,11 @@
 ```smart header="This article is for understanding old scripts"
 এই আর্টিকেল এর তথ্য গুলি পুরাতন স্ক্রিপ্ট বোঝার জন্য সাহায্য করবে।
 
+<<<<<<< HEAD
 এভাবে আমরা নতুন কোড লিখি না।
+=======
+That's not how we write new code.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 ```
 
 অধ্যায়ের প্রথম দিকে আমরা উল্লেখ করেছিলাম [variables](info:variables) কে তিন ভাবে ঘোষণা করা যায়।
@@ -77,13 +81,17 @@ if (true) {
 }
 
 *!*
+<<<<<<< HEAD
 alert(test); // এরর: test নির্ধারণ করা নেই
+=======
+alert(test); // ReferenceError: test is not defined
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 */!*
 ```
 
 লুপের ক্ষেত্রেও একই রকমঃ  `var` লুপ অথবা ব্লকের লোকাল হতে পারে নাঃ 
 
-```js
+```js run
 for (var i = 0; i < 10; i++) {
   var one = 1;
   // ...
@@ -111,7 +119,11 @@ function sayHi() {
 }
 
 sayHi();
+<<<<<<< HEAD
 alert(phrase); // এরর: phrase নির্ধারণ করা নেই (ডেভলপার কনসোল চেক করুন)
+=======
+alert(phrase); // ReferenceError: phrase is not defined
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 ```
 
 <<<<<<< HEAD
@@ -205,7 +217,7 @@ sayHi();
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
   var phrase = "Hello";
@@ -270,7 +282,7 @@ The Function Expression is wrapped with parenthesis `(function {...})`, because 
 
 ```js run
 // Tries to declare and immediately call a function
-function() { // <-- Error: Function statements require a function name
+function() { // <-- SyntaxError: Function statements require a function name
 
   var message = "Hello";
 
@@ -295,11 +307,11 @@ There exist other ways besides parentheses to tell JavaScript that we mean a Fun
 ```js run
 // Ways to create IIFE
 
-(function() {
+*!*(*/!*function() {
   alert("Parentheses around the function");
 }*!*)*/!*();
 
-(function() {
+*!*(*/!*function() {
   alert("Parentheses around the whole thing");
 }()*!*)*/!*;
 
@@ -319,10 +331,14 @@ In all the above cases we declare a Function Expression and run it immediately. 
 এখানে দুটি প্রধান পার্থক্য রয়েছে `var` এবং `let/const` এর মধ্যেঃ 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ১। `var` ভেরিয়েবলের কোন ব্লক স্কোপ নেই, এগুলি সর্বনিম্ন ফাংশন লেভেল পর্যন্ত বিদ্যমান থাকে। 
 ২। ফাংশনের শুরুতেই `var` ঘোষিত হয়ে যায়(স্ক্রিপ্ট গ্লোবালের জন্য শুরু হয়)।
 =======
 1. `var` variables have no block scope; their visibility is scoped to current function, or global, if declared outside function.
+=======
+1. `var` variables have no block scope, their visibility is scoped to current function, or global, if declared outside function.
+>>>>>>> 746ad803c878e33182e7fab1578c0d15b9b75ca0
 2. `var` declarations are processed at function start (script start for globals).
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
