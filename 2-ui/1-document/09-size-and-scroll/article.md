@@ -106,7 +106,11 @@
 
 যদি কোন একটি এলিমেন্ট (বা প্যারেন্ট এলিমেন্টে) `display:none` থাকে অথবা এটি DOM এর সাথে সংযুক্ত না হলে, তাহলে সকল জ্যামিতিক প্রপার্টির মান হবে শূন্য (বা `offsetParent` এর জন্য হবে `null`)
 
+<<<<<<< HEAD
 যেমন, যখন কোন একটি এলিমেন্ট তৈরি হয় কিন্তু এলিমেন্টটি DOM এ সংযুক্ত করা হয়নি বা এলিমেন্টের কোন একটি প্যারেন্ট নোডের স্ট্যাইল হল `display:none` তখন এর `offsetParent` হবে `null`, এবং `offsetWidth`, `offsetHeight` হবে `0`।
+=======
+For example, `offsetParent` is `null`, and `offsetWidth`, `offsetHeight` are `0` when we created an element, but haven't inserted it into the document yet, or it (or its ancestor) has `display:none`.
+>>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 
 কোন একটি এলিমেন্ট অদৃশ্য(hidden) অবস্থায় আছে কিনা তা যাচাই করতে পারি, এভাবে:
 
@@ -116,7 +120,11 @@ function isHidden(elem) {
 }
 ```
 
+<<<<<<< HEAD
 দয়া করে নোট করুন যদি কোন একটি এলিমেন্ট UI তে বিদ্যমান থাকে কিন্তু এর সাইজ শূন্য (যেমন একটি এম্পটি `<div>`) এক্ষেত্রে `isHidden` রিটার্ন করবে `true`।
+=======
+Please note that such `isHidden` returns `true` for elements that are on-screen, but have zero sizes.
+>>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
 ````
 
 ## clientTop/Left
