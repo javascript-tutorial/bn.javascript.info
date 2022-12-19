@@ -14,4 +14,8 @@ function checkAge(age) {
 }
 ```
 
+<<<<<<< HEAD
 নোটঃ `age > 18` দুপাশে প্রথম ব্রাকেট প্রয়োজনীয় না। শুধুই বুঝার সুবিধার্থে দেওয়া।
+=======
+Note that the parentheses around `age > 18` are not required here. They exist for better readability.
+>>>>>>> ea7738bb7c3616bb51ff14ae3db2a2747d7888ff
