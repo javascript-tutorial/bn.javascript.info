@@ -55,7 +55,7 @@ rabbit.run(5); // White Rabbit runs with speed 5.
 rabbit.hide(); // White Rabbit hides!
 ```
 
-Object of `Rabbit` class have access to both `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
+Object of `Rabbit` class have access both to `Rabbit` methods, such as `rabbit.hide()`, and also to `Animal` methods, such as `rabbit.run()`.
 
 Internally, `extends` keyword works using the good old prototype mechanics. It sets `Rabbit.prototype.[[Prototype]]` to `Animal.prototype`. So, if a method is not found in `Rabbit.prototype`, JavaScript takes it from `Animal.prototype`.
 
@@ -76,8 +76,8 @@ For instance, a function call that generates the parent class:
 ```js run
 function f(phrase) {
   return class {
-    sayHi() { alert(phrase) }
-  }
+    sayHi() { alert(phrase); }
+  };
 }
 
 *!*
@@ -106,7 +106,7 @@ class Rabbit extends Animal {
 }
 ```
 
-Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+Usually, however, we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 
 Classes provide `"super"` keyword for that.
 
@@ -151,7 +151,7 @@ class Rabbit extends Animal {
 let rabbit = new Rabbit("White Rabbit");
 
 rabbit.run(5); // White Rabbit runs with speed 5.
-rabbit.stop(); // White Rabbit stands still. White rabbit hides!
+rabbit.stop(); // White Rabbit stands still. White Rabbit hides!
 ```
 
 Now `Rabbit` has the `stop` method that calls the parent `super.stop()` in the process.
@@ -160,6 +160,7 @@ Now `Rabbit` has the `stop` method that calls the parent `super.stop()` in the p
 As was mentioned in the chapter <info:arrow-functions>, arrow functions do not have `super`.
 
 If accessed, it's taken from the outer function. For instance:
+
 ```js
 class Rabbit extends Animal {
   stop() {
@@ -175,7 +176,6 @@ The `super` in the arrow function is the same as in `stop()`, so it works as int
 setTimeout(function() { super.stop() }, 1000);
 ```
 ````
-
 
 ## Overriding constructor
 
@@ -280,8 +280,6 @@ alert(rabbit.earLength); // 10
 */!*
 ```
 
-
-
 ### Overriding class fields: a tricky note
 
 ```warn header="Advanced note"
@@ -300,7 +298,7 @@ Consider this example:
 
 ```js run
 class Animal {
-  name = 'animal'
+  name = 'animal';
 
   constructor() {
     alert(this.name); // (*)
@@ -317,13 +315,13 @@ new Rabbit(); // animal
 */!*
 ```
 
-Here, class `Rabbit` extends `Animal` and overrides `name` field with its own value.
+Here, class `Rabbit` extends `Animal` and overrides the `name` field with its own value.
 
 There's no own constructor in `Rabbit`, so `Animal` constructor is called.
 
 What's interesting is that in both cases: `new Animal()` and `new Rabbit()`, the `alert` in the line `(*)` shows `animal`.
 
-**In other words, parent constructor always uses its own field value, not the overridden one.**
+**In other words, the parent constructor always uses its own field value, not the overridden one.**
 
 What's odd about it?
 
@@ -360,9 +358,9 @@ And that's what we naturally expect. When the parent constructor is called in th
 
 ...But for class fields it's not so. As said, the parent constructor always uses the parent field.
 
-Why is there the difference?
+Why is there a difference?
 
-Well, the reason is in the field initialization order. The class field is initialized:
+Well, the reason is the field initialization order. The class field is initialized:
 - Before constructor for the base class (that doesn't extend anything),
 - Immediately after `super()` for the derived class.
 
@@ -370,12 +368,11 @@ In our case, `Rabbit` is the derived class. There's no `constructor()` in it. As
 
 So, `new Rabbit()` calls `super()`, thus executing the parent constructor, and (per the rule for derived classes) only after that its class fields are initialized. At the time of the parent constructor execution, there are no `Rabbit` class fields yet, that's why `Animal` fields are used.
 
-This subtle difference between fields and methods is specific to JavaScript
+This subtle difference between fields and methods is specific to JavaScript.
 
 Luckily, this behavior only reveals itself if an overridden field is used in the parent constructor. Then it may be difficult to understand what's going on, so we're explaining it here.
 
 If it becomes a problem, one can fix it by using methods or getters/setters instead of fields.
-
 
 ## Super: internals, [[HomeObject]]
 
