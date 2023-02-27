@@ -4,7 +4,7 @@
 ```warn header="In-depth language feature"
 This article covers an advanced topic, to understand certain edge-cases better.
 
-It's not important. Many experienced developers live fine without knowing it. Read on if you're  want to know how things work under the hood.
+It's not important. Many experienced developers live fine without knowing it. Read on if you want to know how things work under the hood.
 ```
 
 A dynamically evaluated method call can lose `this`.
@@ -59,7 +59,7 @@ If we put these operations on separate lines, then `this` will be lost for sure:
 let user = {
   name: "John",
   hi() { alert(this.name); }
-}
+};
 
 *!*
 // split getting and calling the method in two lines
@@ -87,13 +87,13 @@ The result of a property access `user.hi` is not a function, but a value of Refe
 (user, "hi", true)
 ```
 
-When parentheses `()` are called on the Reference Type, they receive the full information about the object and its method, and can set the right `this` (`=user` in this case).
+When parentheses `()` are called on the Reference Type, they receive the full information about the object and its method, and can set the right `this` (`user` in this case).
 
 Reference type is a special "intermediary" internal type, with the purpose to pass information from dot `.` to calling parentheses `()`.
 
 Any other operation like assignment `hi = user.hi` discards the reference type as a whole, takes the value of `user.hi` (a function) and passes it on. So any further operation "loses" `this`.
 
-So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). Later in this tutorial, we will learn various ways to solve this problem such as [func.bind()](/bind#solution-2-bind).
+So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). There are various ways to solve this problem such as [func.bind()](/bind#solution-2-bind).
 
 ## Summary
 
