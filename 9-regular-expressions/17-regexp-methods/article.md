@@ -1,30 +1,30 @@
-# Methods of RegExp and String
+# রেগুলার এক্সপ্রেশন এবং স্ট্রিংয়ের মেথড
 
-In this article we'll cover various methods that work with regexps in-depth.
+এই অধ্যায়ে আমরা রেগুলার এক্সপ্রেশনের বিভিন্ন মেথড নিয়ে বিস্তারিত আলোচনা করব।
 
 ## str.match(regexp)
 
-The method `str.match(regexp)` finds matches for `regexp` in the string `str`.
+`str.match(regexp)` মেথডটি `str` স্ট্রিংয়ের মধ্যে এই `regexp` প্যাটার্নটি অনুসন্ধান করবে।
 
-It has 3 modes:
+এটির ৩টি মোড আছে:
 
-1. If the `regexp` doesn't have flag `pattern:g`, then it returns the first match as an array with capturing groups and properties `index` (position of the match), `input` (input string, equals `str`):
+১. যদি `regexp` প্যাটার্নে `pattern:g` ফ্ল্যাগ না থাকে, তাহলে প্রথম ম্যাচটি অ্যারে আকারে রিটার্ন করে। এবং এতে `index` (ম্যাচের পজিশন), `input` (ইনপুট স্ট্রিং অর্থাৎ, `str`) এবং `groups` (প্যারেন্টেসিসের দ্বারা ক্যাপচার করা গ্রুপগুলো) প্রপার্টি থাকে:
 
     ```js run
     let str = "I love JavaScript";
 
     let result = str.match(/Java(Script)/);
 
-    alert( result[0] );     // JavaScript (full match)
-    alert( result[1] );     // Script (first capturing group)
+    alert( result[0] );     // JavaScript (সম্পূর্ন মিলটি)
+    alert( result[1] );     // Script (প্রথম ক্যাপচারিং গ্রুপস)
     alert( result.length ); // 2
 
-    // Additional information:
-    alert( result.index );  // 0 (match position)
-    alert( result.input );  // I love JavaScript (source string)
+    // আরো কিছু প্রপার্টি:
+    alert( result.index );  // 7 (যে অবস্থান হতে মিলটি শুরু হয়)
+    alert( result.input );  // I love JavaScript (সোর্স স্ট্রিং)
     ```
 
-2. If the `regexp` has flag `pattern:g`, then it returns an array of all matches as strings, without capturing groups and other details.
+২. যদি `regexp` প্যাটার্নে `pattern:g` ফ্ল্যাগ থাকে, মিলকৃত স্ট্রিংসমূহকে ক্যাপচারিং গ্রুপ এবং অন্যান্য প্রপার্টিসমূহ ছাড়া অ্যারে আকারে রিটার্ন করে।
     ```js run
     let str = "I love JavaScript";
 
@@ -34,9 +34,9 @@ It has 3 modes:
     alert( result.length ); // 1
     ```
 
-3. If there are no matches, no matter if there's flag `pattern:g` or not, `null` is returned.
+৩. যদি কোন মিল না খুঁজে না পায়, ফ্ল্যাগ `pattern:g` থাক বা না থাক সর্বদা `null` রিটার্ন করে।
 
-    That's an important nuance. If there are no matches, we don't get an empty array, but `null`. It's easy to make a mistake forgetting about it, e.g.:
+    এটি অবশ্যই একটি গুরুত্বপূর্ন বিষয়। যদি কোন মিল না খুঁজে না পায় তাহলে এটি `null` রিটার্ন করে, কোন এমপ্টি অ্যারে রিটার্ন করে না। সুতরাং আমরা যাচাইয়ের সময় ভুল করে ফেলতে পারি, যেমন:
 
     ```js run
     let str = "I love JavaScript";
@@ -44,10 +44,10 @@ It has 3 modes:
     let result = str.match(/HTML/);
 
     alert(result); // null
-    alert(result.length); // Error: Cannot read property 'length' of null
+    alert(result.length); // এটি Error দেখাবে। Error: Cannot read property 'length' of null
     ```
 
-    If we want the result to be an array, we can write like this:
+    যদি কোন মিল খুঁজে না পায় এবং রেজাল্ট অ্যারে আকারে পেতে চাই, তাহলে এভাবে লিখতে পারি:
 
     ```js
     let result = str.match(regexp) || [];
@@ -55,19 +55,17 @@ It has 3 modes:
 
 ## str.matchAll(regexp)
 
-[recent browser="new"]
+`str.matchAll(regexp)` মেথডটি `str.match` এর  "নতুন, আধুনিক" ভার্সন।
 
-The method `str.matchAll(regexp)` is a "newer, improved" variant of `str.match`.
+এটি ব্যবহার করা হয় ফ্ল্যাগ `pattern:g` ব্যবহার করে সকল মিলের রেজাল্ট গ্রুপসহ পেতে।
 
-It's used mainly to search for all matches with all groups.
+`match` এর সাথে এর ৩টি পার্থক্য আছে:
 
-There are 3 differences from `match`:
+1. এটি মিলসমূহকে অ্যারের পরিবর্তে ইটারেবল অবজেক্ট হিসেবে রিটার্ন করে। `Array.from` এর সাহায্যে একে অ্যারেতে কনভার্ট করতে পারি।
+2. প্রতিটি মিলকে ক্যাপচারিং গ্রুপসহ অ্যারে আকারে রিটার্ন করে ( `pattern:g` ফ্ল্যাগ ব্যতীত `str.match` এর মত)।
+3. যদি কোন মিল খুঁজে না পায়, এটি `null` এর পরিবর্তে এম্পটি ইটারেবল অবজেক্ট রিটার্ন করে।
 
-1. It returns an iterable object with matches instead of an array. We can make a regular array from it using `Array.from`.
-2. Every match is returned as an array with capturing groups (the same format as `str.match` without flag `pattern:g`).
-3. If there are no results, it returns not `null`, but an empty iterable object.
-
-Usage example:
+উদাহরণ:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -75,9 +73,9 @@ let regexp = /<(.*?)>/g;
 
 let matchAll = str.matchAll(regexp);
 
-alert(matchAll); // [object RegExp String Iterator], not array, but an iterable
+alert(matchAll); // [object RegExp String Iterator], অ্যারে না, তবে একটি ইটারেবল অবজেক্ট
 
-matchAll = Array.from(matchAll); // array now
+matchAll = Array.from(matchAll); // অ্যারেতে রূপান্তর
 
 let firstMatch = matchAll[0];
 alert( firstMatch[0] );  // <h1>
@@ -86,19 +84,19 @@ alert( firstMatch.index );  // 0
 alert( firstMatch.input );  // <h1>Hello, world!</h1>
 ```
 
-If we use `for..of` to loop over `matchAll` matches, then we don't need `Array.from` any more.
+যদি আমরা `matchAll` এর রেজাল্ট কে `for..of` লুপের সাহায্যে ইটারেট করি তাহলে আমাদের একে অ্যারেতে কনভার্ট করতে হবে না।
 
 ## str.split(regexp|substr, limit)
 
-Splits the string using the regexp (or a substring) as a delimiter.
+রেগুলার এক্সপ্রেশন(বা সাবস্ট্রিং) ব্যবহার করে স্ট্রিংকে আমরা split (টুকরো টুকরো)  করতে পারি।
 
-We can use `split` with strings, like this:
+আমরা স্ট্রিংকে `split` করতে পারি, এভাবে:
 
 ```js run
 alert('12-34-56'.split('-')) // array of [12, 34, 56]
 ```
 
-But we can split by a regular expression, the same way:
+অনূরূপভাবে আমরা রেগুলার এক্সপ্রেশনের সাহায্যেও করতে পারি:
 
 ```js run
 alert('12, 34, 56'.split(/,\s*/)) // array of [12, 34, 56]
@@ -106,77 +104,77 @@ alert('12, 34, 56'.split(/,\s*/)) // array of [12, 34, 56]
 
 ## str.search(regexp)
 
-The method `str.search(regexp)` returns the position of the first match or `-1` if none found:
+`str.search(regexp)` মেথডটি মিল খুঁজে পেলে প্রথম মিলের অবস্থান আর কোন মিল খুঁজে না পেলে `-1` রিটার্ন করে:
 
 ```js run
 let str = "A drop of ink may make a million think";
 
-alert( str.search( /ink/i ) ); // 10 (first match position)
+alert( str.search( /ink/i ) ); // 10 (প্রথম মিলের অবস্থান)
 ```
 
-**The important limitation: `search` only finds the first match.**
+**গুরুত্বপূর্ন সীমাবদ্ধতা: `search` শুধুমাত্র প্রথম মিলের অবস্থান রিটার্ন করে.**
 
-If we need positions of further matches, we should use other means, such as finding them all with `str.matchAll(regexp)`.
+যদি আমাদের আরো বেশি মিল যাচাই করা লাগে, তাহলে আমাদের `str.matchAll(regexp)` এর সাহায্য নিতে হবে।
 
 ## str.replace(str|regexp, str|func)
 
-This is a generic method for searching and replacing, one of most useful ones. The swiss army knife for searching and replacing.  
+অনুসন্ধান করে প্রতিস্থাপনের জন্য এটিই সর্বাধিক ব্যবহৃত মেথড।
 
-We can use it without regexps, to search and replace a substring:
+আমরা রেগুলার এক্সপ্রেশন প্যাটার্ন ছাড়া সাবস্ট্রিংয়ের সাহায্যেও রিপ্লেস করতে পারি:
 
 ```js run
-// replace a dash by a colon
-alert('12-34-56'.replace("-", ":")) // 12:34-56
+// ড্যাশকে কোলনের সাহায্যে রিপ্লেস
+alert('12-34-56'.replace("-", ":")) // 12:34-56, তবে শুধুমাত্র প্রথমটি রিপ্লেস হয়
 ```
 
-There's a pitfall though.
+তবে এটির একটি সীমাবদ্ধতা আছে।
 
-**When the first argument of `replace` is a string, it only replaces the first match.**
+**যখন প্রথম আর্গুমেন্ট দ্বারা আমরা স্ট্রিং কে `replace` করি, এটি শুধুমাত্র প্রথম মিলটিকে রিপ্লেস করে।**
 
-You can see that in the example above: only the first `"-"` is replaced by `":"`.
+উপরের উদাহরণে আমরা এটি দেখেছি: শুধুমাত্র প্রথম `"-"` হাইফেনটি `":"` কোলন দ্বারা রিপ্লেস হয়।
 
-To find all hyphens, we need to use not the string `"-"`, but a regexp `pattern:/-/g`, with the obligatory `pattern:g` flag:
+সকল হাইফেন খুঁজে পেতে, আমরা স্ট্রিংয়ের `"-"` পরিবর্তে প্যাটার্ন ব্যবহার করতে পারি `pattern:/-/g`, এবং অবশ্যই `pattern:g` ফ্ল্যাগটি লাগবে:
 
 ```js run
-// replace all dashes by a colon
+// সকল ড্যাশকে কোলনের সাহায্যে রিপ্লেস
 alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ) )  // 12:34:56
 ```
 
-The second argument is a replacement string. We can use special character in it:
+দ্বিতীয় আর্গুমেন্টটি হল একটি স্ট্রিং যা দ্বারা আমরা রিপ্লেস করব। আমরা এখানে স্পেশাল ক্যারাক্টারও ব্যবহার করতে পারব:
 
-| Symbols | Action in the replacement string |
+| সিম্বলস | রিপ্লসমেন্ট স্ট্রিংয়ে সংগঠিত অ্যাকশন |
 |--------|--------|
-|`$&`|inserts the whole match|
-|<code>$&#096;</code>|inserts a part of the string before the match|
-|`$'`|inserts a part of the string after the match|
-|`$n`|if `n` is a 1-2 digit number, inserts the contents of n-th capturing group, for details see [](info:regexp-groups)|
-|`$<name>`|inserts the contents of the parentheses with the given `name`, for details see [](info:regexp-groups)|
-|`$$`|inserts character `$` |
+|`$&`|পুরো মিলটিকে রিপ্লেস করে|
+|<code>$&#096;</code>|মিলের আগ পর্যন্ত স্ট্রিংকে রিপ্লেস করে|
+|`$'`|মিলের পরের স্ট্রিংকে রিপ্লেস করে|
+|`$n`|যদি `n` ১-২ অঙ্কের সংখ্যা হয়, আমরা প্যারেন্টেসিস দ্বারা করা গ্রুপ সমূহ $n দ্বারা রিপ্লেস করতে পারি। বিস্তারিত এই অধ্যায়ে [](info:regexp-groups)
+|`$<name>`|আমরা প্যারেন্টেসিস দ্বারা করা গ্রুপ সমূহের নামকরণ করলে `name` দ্বারা রিপ্লেস করতে পারি। বিস্তারিত এই অধ্যায়ে [](info:regexp-groups)
+|`$$`| `$` দ্বারা রিপ্লেস হবে |
 
-For instance:
+উদাহরণ:
 
 ```js run
 let str = "John Smith";
 
-// swap first and last name
+// আমরা নামকে অদল বদল করলাম
 alert(str.replace(/(john) (smith)/i, '$2, $1')) // Smith, John
 ```
 
-**For situations that require "smart" replacements, the second argument can be a function.**
+**কিছু কিছু সময় আমাদের রিপ্লেসম্যান্ট আরো "smart" ভাবে করা লাগে, তখন দ্বিতীয় আর্গুমেন্ট হিসেবে একটি ফাংশন পাঠাতে পারি**
 
-It will be called for each match, and the returned value will be inserted as a replacement.
+প্রতিটি ম্যাচের জন্য ফাংশনটি কল হবে, এবং ফাংশনের রিটার্ন ভ্যালু দ্বারা ম্যাচটি রিপ্লেসড হবে।
 
-The function is called with arguments `func(match, p1, p2, ..., pn, offset, input, groups)`:
+ফাংশনটি এর আর্গুমেন্ট সমূহ হবে `func(match, p1, p2, ..., pn, offset, input, groups)`:
 
-1. `match` -- the match,
-2. `p1, p2, ..., pn` -- contents of capturing groups (if there are any),
-3. `offset` -- position of the match,
-4. `input` -- the source string,
-5. `groups` -- an object with named groups.
+1. `match` -- প্রাপ্ত মিলটি,
+2. `p1, p2, ..., pn` -- ক্যাপচারিং গ্রুপসমূহ (if there are any),
+3. `offset` -- মিলের পজিশনটি,
+4. `input` -- সোর্স স্ট্রিং,
+5. `groups` -- groups অবজেক্ট।
 
-If there are no parentheses in the regexp, then there are only 3 arguments: `func(str, offset, input)`.
+যদি রেগুলার এক্সপ্রেশনে গ্রুপ না থাকে, তাহলে ফাংশনের আর্গুমেন্ট হবে ৩টি: `func(str, offset, input)`।
 
-For example, let's uppercase all matches:
+উদাহরণস্বরূপ, সকল মিলকে আমরা ক্যাপিটাল অক্ষরে রূপান্তর করব:
 
 ```js run
 let str = "html and css";
@@ -186,13 +184,13 @@ let result = str.replace(/html|css/gi, str => str.toUpperCase());
 alert(result); // HTML and CSS
 ```
 
-Replace each match by its position in the string:
+ম্যাচ কে তাদের পজিশন দ্বারা রিপ্লেস:
 
 ```js run
 alert("Ho-Ho-ho".replace(/ho/gi, (match, offset) => offset)); // 0-3-6
 ```
 
-In the example below there are two parentheses, so the replacement function is called with 5 arguments: the first is the full match, then 2 parentheses, and after it (not used in the example) the match position and the source string:
+নিচের উদাহরণে আমরা ২টি গ্রুপ করছি, সুতরাং রিপ্লেসম্যান্ট ফাংশনটিতে ৫টি আর্গুম্যান্ট থাকবে: প্রথমটি হবে সম্পূর্ন মিলটি, তারপর ২টি গ্রুপ, এবং শেষে পজিশন এবং সোর্স স্ট্রিং (যদিও উদাহরণে আমরা এটি ব্যবহার করি নি):
 
 ```js run
 let str = "John Smith";
@@ -202,7 +200,7 @@ let result = str.replace(/(\w+) (\w+)/, (match, name, surname) => `${surname}, $
 alert(result); // Smith, John
 ```
 
-If there are many groups, it's convenient to use rest parameters to access them:
+যদি আমাদের একাধিক গ্রুপ থাকে, তাহলে আমরা rest parameters দ্বারা তাদের অ্যাক্সেস করতে পারি:
 
 ```js run
 let str = "John Smith";
@@ -212,7 +210,7 @@ let result = str.replace(/(\w+) (\w+)/, (...match) => `${match[2]}, ${match[1]}`
 alert(result); // Smith, John
 ```
 
-Or, if we're using named groups, then `groups` object with them is always the last, so we can obtain it like this:
+অথবা, যদি আমরা গ্রুপের নামকরণ করি, তাহলে `groups` অবজেক্টটি সবার শেষে থাকবে, সুতরাং একে আমরা এভাবে লিখতে পারি:
 
 ```js run
 let str = "John Smith";
@@ -226,25 +224,25 @@ let result = str.replace(/(?<name>\w+) (?<surname>\w+)/, (...match) => {
 alert(result); // Smith, John
 ```
 
-Using a function gives us the ultimate replacement power, because it gets all the information about the match, has access to outer variables and can do everything.
+রিপ্লেসম্যান্ট আমরা যদি ফাংশন এর সাহায্যে করি তাহলে আমাদের কাছে পূর্ণ স্বাধীনতা থাকবে, কেননা এতে আমরা মিলের সকল ইনফরমেশন পাব, এছাড়াও অন্যান্য ভ্যারিয়েবলগুলোও অ্যাক্সেস করতে পারব।
 
 ## regexp.exec(str)
 
-The method `regexp.exec(str)` method returns a match for `regexp` in the string `str`.  Unlike previous methods, it's called on a regexp, not on a string.
+`regexp.exec(str)` মেথডটি `regexp` দ্বারা `str` এর মধ্যে মিল খুঁজা হয়।  তবে পূর্বেরটির সাথে এর পার্থক্য হল এটি স্ট্রিংয়ের সাথে কাজ করে শুধুমাত্র রেগুলার এক্সপ্রেশন দ্বারা কাজ করে।
 
-It behaves differently depending on whether the regexp has flag `pattern:g`.
+এটি `pattern:g` ফ্ল্যাগের উপর ভিত্তি করে ভিন্ন ভিন্ন আচরণ করে।
 
-If there's no `pattern:g`, then `regexp.exec(str)` returns the first match exactly as  `str.match(regexp)`. This behavior doesn't bring anything new.
+যদি `pattern:g` ফ্ল্যাগ না থাকে, তাহলে `regexp.exec(str)` রিটার্ন করবে প্রথম মিলটি, এটি `str.match(regexp)` এর অনুরূপ।
 
-But if there's flag `pattern:g`, then:
-- A call to `regexp.exec(str)` returns the first match and saves the position immediately after it in the property `regexp.lastIndex`.
-- The next such call starts the search from position `regexp.lastIndex`, returns the next match and saves the position after it in `regexp.lastIndex`.
-- ...And so on.
-- If there are no matches, `regexp.exec` returns `null` and resets `regexp.lastIndex` to `0`.
+কিন্ত যদি `pattern:g` থাকে, তাহলে:
+- `regexp.exec(str)` কল হলে এটি প্রথম মিলটি রিটার্ন করে এবং `regexp.lastIndex` এ এর পরবর্তী অবস্থানটি সংরক্ষণ করে।
+- পরবর্তী কলে `regexp.lastIndex` থেকে অনুসন্ধানটি শুরু হয় এবং এর পরের মিলটি রিটার্ন করে এবং আগের মত `regexp.lastIndex` এ পরবর্তী অবস্থানটি সংরক্ষণ করে।
+- ...এভাবেই চলতে থাকে।
+- আর যদি কোন মিল না হয়, `regexp.exec` রিটার্ন করে `null` এবং `regexp.lastIndex` এর মান `0` তে রিসেট হয়।
 
-So, repeated calls return all matches one after another, using property `regexp.lastIndex` to keep track of the current search position.
+সুতরাং প্রতিবার মেথডটি কল হলে এটি মিলগুলো একটির পর একটি রিটার্ন করে, এবং `regexp.lastIndex` এ অবস্থানটি সংরক্ষণ করে সেখান থেকে অনুসন্ধান চালিয়ে যায়।
 
-In the past, before the method `str.matchAll` was added to JavaScript, calls of `regexp.exec` were used in the loop to get all matches with groups:
+`str.matchAll` মেথডটি জাভাস্ক্রিপ্টে সংযুক্ত হওয়ার পূর্বে লুপে `regexp.exec` চালিয়ে আমরা গ্রুপসহ সকল মিলগুলো খুঁজে বের করতাম:
 
 ```js run
 let str = 'More about JavaScript at https://javascript.info';
@@ -254,56 +252,56 @@ let result;
 
 while (result = regexp.exec(str)) {
   alert( `Found ${result[0]} at position ${result.index}` );
-  // Found JavaScript at position 11, then
-  // Found javascript at position 33
+  // ১১ তম অবস্থানে জাভাস্ক্রিপ্ট, তারপর
+  // ৩৩ তম অবস্থানে জাভাস্ক্রিপ্ট
 }
 ```
 
-This works now as well, although for newer browsers `str.matchAll` is usually more convenient.
+এটিও কাজ করবে, তবে মর্ডান ব্রাউজারে `str.matchAll` আরো বেশি সুবিধা জনক।
 
-**We can use `regexp.exec` to search from a given position by manually setting `lastIndex`.**
+**তবে আমরা`regexp.exec` এ ম্যানুয়ালি `lastIndex` সেট করতে পারি।**
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let str = 'Hello, world!';
 
-let regexp = /\w+/g; // without flag "g", lastIndex property is ignored
-regexp.lastIndex = 5; // search from 5th position (from the comma)
+let regexp = /\w+/g; // "g" ফ্ল্যাগ ছাড়া, lastIndex প্রপার্টি ইগনোর হবে
+regexp.lastIndex = 5; // ৫ম তম অবস্থান হতে অনুসন্ধানটি শুরু হবে (কমা থেকে)
 
 alert( regexp.exec(str) ); // world
 ```
 
-If the regexp has flag `pattern:y`, then the search will be performed exactly at the  position `regexp.lastIndex`, not any further.
+যদি `pattern:y` ফ্ল্যাগটি থাকে, তাহলে এটি শুধুমাত্র `regexp.lastIndex` এ অনুসন্ধানটি চালাবে, এবং এর বেশি চালাবে না।
 
-Let's replace flag `pattern:g` with `pattern:y` in the example above. There will be no matches, as there's no word at position `5`:
+চলুন উপরের উদাহরণটিতে `pattern:g` এর বদলে `pattern:y` ফ্ল্যাগ ব্যবহার করি। এখানে কোন মিল পাবে না, কেননা `5` তম অবস্থানে কোন ওয়ার্ড ক্যারাক্টার নাই:
 
 ```js run
 let str = 'Hello, world!';
 
 let regexp = /\w+/y;
-regexp.lastIndex = 5; // search exactly at position 5
+regexp.lastIndex = 5; // ৫ম তম অবস্থানে অনুসন্ধান চালাবে
 
 alert( regexp.exec(str) ); // null
 ```
 
-That's convenient for situations when we need to "read" something from the string by a regexp at the exact position, not somewhere further.
+এটি আমাদের দরকার পড়ে যখন আমরা একটি নির্দিষ্ট অবস্থানে কোন কিছু "পড়তে" চাই।
 
 ## regexp.test(str)
 
-The method `regexp.test(str)` looks for a match and returns `true/false` whether it exists.
+`regexp.test(str)` মেথডটি কোন একটি স্ট্রিংয়ে মিল পাওয়া না পাওয়ার উপর ভিত্তি করে `true/false` রিটার্ন করে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js run
 let str = "I love JavaScript";
 
-// these two tests do the same
+// এখানে টেস্ট দুটি একই কাজ করে
 alert( *!*/love/i*/!*.test(str) ); // true
 alert( str.search(*!*/love/i*/!*) != -1 ); // true
 ```
 
-An example with the negative answer:
+মিল খুঁজে না পাওয়ার একটি উদাহরণ:
 
 ```js run
 let str = "Bla-bla-bla";
@@ -312,33 +310,33 @@ alert( *!*/love/i*/!*.test(str) ); // false
 alert( str.search(*!*/love/i*/!*) != -1 ); // false
 ```
 
-If the regexp has flag `pattern:g`, then `regexp.test` looks from `regexp.lastIndex` property and updates this property, just like `regexp.exec`.
+যদি `pattern:g` ফ্ল্যাগটি থাকে, তাহলে `regexp.test` মেথডটি `regexp.lastIndex` প্রপার্টি হতে অনুসন্ধান শুরু করে, `regexp.exec` এর মত।
 
-So we can use it to search from a given position:
+সুতরাং আমরা নির্দিষ্ট একটি অবস্থান হতে অনুসন্ধানটি চালাতে পারি:
 
 ```js run
 let regexp = /love/gi;
 
 let str = "I love JavaScript";
 
-// start the search from position 10:
+// ১০ম তম অবস্থান হতে অনুসন্ধানটি শুরু হবে:
 regexp.lastIndex = 10;
 alert( regexp.test(str) ); // false (no match)
 ```
 
-````warn header="Same global regexp tested repeatedly on different sources may fail"
-If we apply the same global regexp to different inputs, it may lead to wrong result, because `regexp.test` call advances `regexp.lastIndex` property, so the search in another string may start from non-zero position.
+````warn header="regexp.test(str) এ একই সোর্স দ্বারা দ্বিতীয়বার যাচাইয়ে ভুল রেজাল্ট আসতে পারে"
+যদি আমরা একই সোর্স দ্বারা দুইবার রেগুলার এক্সপ্রেশন এ যাচাই করি এটি অনাকাংখিত রেজাল্ট দেখাতে পারে, কেননা `regexp.test` এ দ্বিতীয়বার যাচাইয়ে `regexp.lastIndex` এর মান শূন্য নয় এমন অবস্থান থেকে অনুসন্ধান শুরু করে।
 
-For instance, here we call `regexp.test` twice on the same text, and the second time fails:
+উদাহরণস্বরূপ, এখানে আমরা একই সোর্স দ্বারা `regexp.test` এ দুই বার কল করি, এবং দ্বিতীয়বার যাচাইয়ে এটি ভুল false দেখায়:
 
 ```js run
-let regexp = /javascript/g;  // (regexp just created: regexp.lastIndex=0)
+let regexp = /javascript/g;  // (১ম বার regexp.lastIndex=0)
 
-alert( regexp.test("javascript") ); // true (regexp.lastIndex=10 now)
+alert( regexp.test("javascript") ); // true (এখন regexp.lastIndex=10)
 alert( regexp.test("javascript") ); // false
 ```
 
-That's exactly because `regexp.lastIndex` is non-zero in the second test.
+এটিই সঠিক কেননা দ্বিতীয়বার কলে `regexp.lastIndex` এর অবস্থান আর শূন্যতম অবস্থানে নেই।
 
-To work around that, we can set `regexp.lastIndex = 0` before each search. Or instead of calling methods on regexp, use string methods `str.match/search/...`, they don't use `lastIndex`.
+এভাবে কাজ করার সময় আমাদের প্রতিবার যাচাইয়ের আগে `regexp.lastIndex` কে রিসেট করে নিব `regexp.lastIndex = 0` । অথবা আমরা `str.match/search/...` এর মাধ্যমেও যাচাই করতে পারি।
 ````
