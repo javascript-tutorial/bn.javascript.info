@@ -1,46 +1,46 @@
-# Quantifiers +, *, ? and {n}
+# কোয়ান্টিফায়ার +, *, ? এবং {n}
 
-Let's say we have a string like `+7(903)-123-45-67` and want to find all numbers in it. But unlike before, we are interested not in single digits, but full numbers: `7, 903, 123, 45, 67`.
+এখন মনে করন আমাদের এমন একটি `+7(903)-123-45-67` স্ট্রিং আছে এবং আমরা এর সকল নাম্বার খুঁজে পেতে চাই। কিন্ত পূর্বের মত, আমরা একক অঙ্ক চাই না, পূর্ণ সংখ্যাগুলো চাই: `7, 903, 123, 45, 67`।
 
-A number is a sequence of 1 or more digits `pattern:\d`. To mark how many we need, we can append a *quantifier*.
+সংখ্যা হল এক বা একাধিক অঙ্কের একটি সমষ্টি `pattern:\d`। আমাদের প্রয়োজনমত অঙ্কের জন্য আমরা *quantifier* সংযোজন করতে পারি।
 
-## Quantity {n}
+## সংখ্যা {n}
 
-The simplest quantifier is a number in curly braces: `pattern:{n}`.
+সবচেয়ে সহজ কোয়ান্টিফায়ার হল দ্বিতীয় বন্ধনীর মধ্যে একটি সংখ্যা: `pattern:{n}`।
 
-A quantifier is appended to a character (or a character class, or a `[...]` set etc) and specifies how many we need.
+কোয়ান্টিফায়ারে যেকোন ধরণের ক্যারাক্টার (অথবা ক্যারাক্টার ক্লাস, অথবা `[...]` সেট ইত্যাদি) আমাদের প্রয়োজনমত সংযোজন করতে পারি।
 
-It has a few advanced forms, let's see examples:
+এটি ব্যবহারের বিভিন্ন উপায় আছে, চলুন কয়েকটি উদাহরণ দেখি:
 
-The exact count: `pattern:{5}`
-: `pattern:\d{5}` denotes exactly 5 digits, the same as `pattern:\d\d\d\d\d`.
+নির্দিষ্ট সংখ্যা গণনা: `pattern:{5}`
+: `pattern:\d{5}` এটি দ্বারা ৫টি অঙ্ক বুঝায়, যা `pattern:\d\d\d\d\d` এর অনুরূপ।
 
-    The example below looks for a 5-digit number:
+    নিচের উদাহরণে একটি ৫ অঙ্কের সংখ্যা খোঁজা হচ্ছে:
 
     ```js run
     alert( "I'm 12345 years old".match(/\d{5}/) ); //  "12345"
     ```
 
-    We can add `\b` to exclude longer numbers: `pattern:\b\d{5}\b`.
+    আমরা `\b` যুক্ত করে এর চেয়ে বড় অঙ্কের সংখ্যাগুলো বাদ দিতে পারি: `pattern:\b\d{5}\b`।
 
-The range: `pattern:{3,5}`, match 3-5 times
-: To find numbers from 3 to 5 digits we can put the limits into curly braces: `pattern:\d{3,5}`
+রেঞ্জ: `pattern:{3,5}`, ৩-৫ অঙ্কের সংখ্যার সাথে মিল খুঁজে
+: ৩ থেকে ৫ অঙ্কের মধ্যের সংখ্যা গুলো খুঁজতে আমরা দ্বিতীয় বন্ধনীতে সীমা নির্ধারণ করে দিতে পারি: `pattern:\d{3,5}`
 
     ```js run
     alert( "I'm not 12, but 1234 years old".match(/\d{3,5}/) ); // "1234"
     ```
 
-    We can omit the upper limit.
+    আমরা সর্বোচ্চ সীমাটি বাদ দিতে পারি।
 
-    Then a regexp `pattern:\d{3,}` looks for sequences of digits of length `3` or more:
+    এ রেগুলার এক্সপ্রেশনটি `pattern:\d{3,}` ৩ বা ততোধিক অঙ্কের মিল গুলো খোঁজে:
 
     ```js run
     alert( "I'm not 12, but 345678 years old".match(/\d{3,}/) ); // "345678"
     ```
 
-Let's return to the string `+7(903)-123-45-67`.
+এখন আমাদের পূর্বের `+7(903)-123-45-67` স্ট্রিংটি দেখি।
 
-A number is a sequence of one or more digits in a row. So the regexp is `pattern:\d{1,}`:
+সংখ্যা হল এক বা একাধিক অঙ্কের সমষ্টি। সুতরাং রেগুলার এক্সপ্রেশনটি হবে `pattern:\d{1,}`:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -50,14 +50,14 @@ let numbers = str.match(/\d{1,}/g);
 alert(numbers); // 7,903,123,45,67
 ```
 
-## Shorthands
+## সংক্ষিপ্তরূপ
 
-There are shorthands for most used quantifiers:
+কোয়ান্টিফায়ারের কিছু সংক্ষিপ্তরূপ আছে:
 
 `pattern:+`
-: Means "one or more", the same as `pattern:{1,}`.
+: এটি দ্বারা বুঝায় "এক বা ততোধিক", এটি `pattern:{1,}` এর অনুরূপ।
 
-    For instance, `pattern:\d+` looks for numbers:
+    উদাহরণস্বরূপ, `pattern:\d+` প্যাটার্নটি দ্বারা সংখ্যা খোঁজা হয়:
 
     ```js run
     let str = "+7(903)-123-45-67";
@@ -66,11 +66,11 @@ There are shorthands for most used quantifiers:
     ```
 
 `pattern:?`
-: Means "zero or one", the same as `pattern:{0,1}`. In other words, it makes the symbol optional.
+: এটি দ্বারা বুঝায় "শূন্য বা এক", এটি `pattern:{0,1}` এর অনুরূপ। অন্যথায় বলা যায়, এটি ঐচ্ছিক কোয়ান্টিফায়ার।
 
-    For instance, the pattern `pattern:ou?r` looks for `match:o` followed by zero or one `match:u`, and then `match:r`.
+    উদাহরণস্বরূপ, `pattern:ou?r` প্যাটার্নটি `match:o` এর পর শূন্য বা একটি `match:u` এর খুঁজ করে, এবং তারপর `match:r` এর সাথে মিল খুঁজে।
 
-    So, `pattern:colou?r` finds both `match:color` and `match:colour`:
+    সুতরাং, `pattern:colou?r` প্যাটার্নটি দ্বারা `match:color` এবং `match:colour` উভয়ের সাথে মিল হবে:
 
     ```js run
     let str = "Should I write color or colour?";
@@ -79,64 +79,64 @@ There are shorthands for most used quantifiers:
     ```
 
 `pattern:*`
-: Means "zero or more", the same as `pattern:{0,}`. That is, the character may repeat any times or be absent.
+: এটি দ্বারা বুঝায় "শূন্য বা ততোধিক", এটি `pattern:{0,}` এর অনুরূপ। অন্যথায় বলা যায়, ক্যারাক্টারটি একাধিকও থাকতে পারে অথবা নাও থাকতে পারে।
 
-    For example, `pattern:\d0*` looks for a digit followed by any number of zeroes (may be many or none):
+    উদাহরণস্বরূপ, `pattern:\d0*` প্যাটার্নটি দ্বারা শূন্যের খুঁজ করে (একাধিকও থাকতে পারে অথবা নাও থাকতে পারে):
 
     ```js run
     alert( "100 10 1".match(/\d0*/g) ); // 100, 10, 1
     ```
 
-    Compare it with `pattern:+` (one or more):
+    চলুন একে `pattern:+` এর সাথে তুলনা করে দেখি (এক বা ততোধিক):
 
     ```js run
     alert( "100 10 1".match(/\d0+/g) ); // 100, 10
-    // 1 not matched, as 0+ requires at least one zero
+    // 1 এর সাথে মিল পায়নি, যেহেতু 0+ দ্বারা অন্তত একটি শূন্য থাকতে হবে বুঝায়
     ```
 
-## More examples
+## আরো কিছু উদাহরণ
 
-Quantifiers are used very often. They serve as the main "building block" of complex regular expressions, so let's see more examples.
+রেগুলার এক্সপ্রেশনে আমরা প্রায় কোয়ান্টিফায়ার ব্যবহার করি। এরা জটিল রেগুলার এক্সপ্রেশনে প্রধান "বিল্ডিং ব্লক" হিসেবে কাজ করে, চলুন কিছু উদাহরণ দেখি।
 
-**Regexp for decimal fractions (a number with a floating point): `pattern:\d+\.\d+`**
+**দশমিক ভগ্নাংশের জন্য রেগুলার এক্সপ্রেশন (দশমিক সহ সংখ্যা): `pattern:\d+\.\d+`**
 
-In action:
+এটি দেখুন:
 ```js run
 alert( "0 1 12.345 7890".match(/\d+\.\d+/g) ); // 12.345
 ```
 
-**Regexp for an "opening HTML-tag without attributes", such as `<span>` or `<p>`.**
+**"অ্যাট্রিবিউট ছাড়া শুরুর এইচটিএমএল ট্যাগ" এর জন্য রেগুলার এক্সপ্রেশন, যেমন `<span>` অথবা `<p>`.**
 
-1. The simplest one: `pattern:/<[a-z]+>/i`
+1. সাধারণ এই প্যাটার্নটি দেখুন: `pattern:/<[a-z]+>/i`
 
     ```js run
     alert( "<body> ... </body>".match(/<[a-z]+>/gi) ); // <body>
     ```
 
-    The regexp looks for character `pattern:'<'` followed by one or more Latin letters, and then  `pattern:'>'`.
+    রেগুলার এক্সপ্রেশনটি প্রথমে `pattern:'<'` এর সাথে মিলে তারপর এক বা একাধিক লাতিন বর্ণের সাথে মিলে শেষে `pattern:'>'` এর সাথে মিলে।
 
-2. Improved: `pattern:/<[a-z][a-z0-9]*>/i`
+2. উন্নত এই প্যাটার্নটি দেখুন: `pattern:/<[a-z][a-z0-9]*>/i`
 
-    According to the standard, HTML tag name may have a digit at any position except the first one, like `<h1>`.
+    স্ট্যান্ডার্ড  নামানুসারে, এইচটিএমএল ট্যাগে প্রথম ক্যারাক্টারটি বাদে যেকোন পজিশনে অঙ্ক থাকতে পারে, যেমন `<h1>`।
 
     ```js run
     alert( "<h1>Hi!</h1>".match(/<[a-z][a-z0-9]*>/gi) ); // <h1>
     ```
 
-**Regexp "opening or closing HTML-tag without attributes": `pattern:/<\/?[a-z][a-z0-9]*>/i`**
+**"অ্যাট্রিবিউট ছাড়া শুরুর এবং শেষের এইচটিএমএল ট্যাগ" এর জন্য রেগুলার এক্সপ্রেশন: `pattern:/<\/?[a-z][a-z0-9]*>/i`**
 
-We added an optional slash `pattern:/?` near the beginning of the pattern. Had to escape it with a backslash, otherwise JavaScript would think it is the pattern end.
+আমরা প্যাটার্নের শুরুতে একটি ঐচ্ছিক স্লাশ `pattern:/?` দিয়ে শুরু করেছি। এটি ব্যাকস্লাশ দিয়ে বাদ দিতে হবে, অন্যথায় জাভাস্ক্রিপ্ট ইঞ্জিন প্যাটার্ন শেষ হিসেবে ধরে নিবে।
 
 ```js run
 alert( "<h1>Hi!</h1>".match(/<\/?[a-z][a-z0-9]*>/gi) ); // <h1>, </h1>
 ```
 
-```smart header="To make a regexp more precise, we often need make it more complex"
-We can see one common rule in these examples: the more precise is the regular expression -- the longer and more complex it is.
+```smart header="একটি রেগুলার এক্সপ্রেশন কে যথাযথ ব্যবহার করতে, আমরা প্রায় এটিকে জটিল করে তৈরি করি"
+আমরা এই উদাহরণগুলোতে একটি সাধারন নিয়ম দেখতে পারছি: রেগুলার এক্সপ্রেশনটি আরো সুনির্দিষ্ট হচ্ছে -- দীর্ঘতর এবং আরো জটিল হচ্ছে।
 
-For instance, for HTML tags we could use a simpler regexp: `pattern:<\w+>`. But as HTML has stricter restrictions for a tag name, `pattern:<[a-z][a-z0-9]*>` is more reliable.
+উদাহরণস্বরূপ, এইচটিএমএল ট্যাগের জন্য আমরা সহজ এই রেগুলার এক্সপ্রেশনটি: `pattern:<\w+>` ব্যবহার করতে পারি। কিন্তু এইচটিএমএল ট্যাগের নামানুসারে আমরা এই `pattern:<[a-z][a-z0-9]*>` প্যাটার্নটি আরো পঠনযোগ্য করতে পারি।
 
-Can we use `pattern:<\w+>` or we need `pattern:<[a-z][a-z0-9]*>`?
+আমরা কি এটি `pattern:<\w+>` অথবা এটি `pattern:<[a-z][a-z0-9]*>` ব্যবহার করতে পারি?
 
-In real life both variants are acceptable. Depends on how tolerant we can be to "extra" matches and whether it's difficult or not to remove them from the result by other means.
+বাস্তবক্ষেত্রে দুটিই ব্যবহারযোগ্য। এটি নির্ভর করে আমরা কিভাবে "অতিরিক্ত" মিলগুলো ব্যবহার করব এবং অন্যান্য ক্ষেত্রে মিল গুলো থেকে কিভাবে তাদের বাদ দিব তার উপর নির্ভর করে।
 ```
