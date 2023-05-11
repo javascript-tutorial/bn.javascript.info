@@ -1,49 +1,49 @@
 
-# Escaping, special characters
+# এস্কেপিং, স্পেশাল ক্যারাক্টার
 
-As we've seen, a backslash `pattern:\` is used to denote character classes, e.g. `pattern:\d`. So it's a special character in regexps (just like in regular strings).
+আমরা দেখেছি, ব্যকস্ল্যাশ `pattern:\` বিভিন্ন ক্যারাক্টার ক্লাস বুঝাতে ব্যবহার করা হয়, যেমন `pattern:\d`। তাই এটি রেগুলার এক্সপ্রেশনের একটি স্পেশাল ক্যারাক্টার (স্ট্রিংয়ের মত)।
 
-There are other special characters as well, that have special meaning in a regexp. They are used to do more powerful searches. Here's a full list of them: `pattern:[ \ ^ $ . | ? * + ( )`.
+এছাড়াও আরো কিছু স্পেশাল ক্যারাক্টার আছে, যা রেগুলার এক্সপ্রেশনে ভিন্ন অর্থ বুঝায়। এদের সাহায্যে বিভিন্ন জটিল প্যাটার্ন আমরা খুঁজতে পারি। এদের সম্পূর্ন তালিকাটি হল: `pattern:[ \ ^ $ . | ? * + ( )`।
 
-Don't try to remember the list -- soon we'll deal with each of them separately and you'll know them by heart automatically.
+তালিকাটি আপনার মুখস্ত করার দরকার নেই -- খুব তাড়াতাড়ি আমরা প্রত্যেকটি স্পেশাল ক্লাস সম্পর্কে বিস্তারিত জানব, আর তখন আমরা অটোমেটিক প্রত্যেকটি ক্যারাক্টার শিখে যাব।
 
-## Escaping
+## এস্কেপিং
 
-Let's say we want to find literally a dot. Not "any character", but just a dot.
+মনে করুন আমরা একটি ডট খুঁজে পেতে চাই। "যেকোন ক্যারাক্টার" নয় শুধু ডট(যেহেতু রেগুলার এক্সপ্রেশনে ডট দ্বারা যেকোন ক্যারাক্টার বুঝায়)।
 
-To use a special character as a regular one, prepend it with a backslash: `pattern:\.`.
+স্পেশাল ক্যারাক্টার সমূহকে রেগুলার ক্যারাক্টারের মত ব্যবহার করতে চাইলে এর পূর্বে একটি ব্যাকস্ল্যাশ যুক্ত করতে হবে: `pattern:\.`।
 
-That's also called "escaping a character".
+একে বলা হয় "ক্যারাক্টার এস্কেপিং"।
 
-For example:
+যেমন:
 ```js run
 alert( "Chapter 5.1".match(/\d\.\d/) ); // 5.1 (match!)
-alert( "Chapter 511".match(/\d\.\d/) ); // null (looking for a real dot \.)
+alert( "Chapter 511".match(/\d\.\d/) ); // null (এখানে ডট খুঁজা হচ্ছে \.)
 ```
 
-Parentheses are also special characters, so if we want them, we should use `pattern:\(`. The example below looks for a string `"g()"`:
+প্রথম বন্ধনীও স্পেশাল ক্যারাক্টার, তো যদি আমরা এদের খুঁজতে চাই, আমাদের এভাবে লিখা উচিত `pattern:\(`। নিচের উদাহরণটিতে দেখুন আমরা `"g()"` কে খুঁজে পেতে চাই:
 
 ```js run
 alert( "function g()".match(/g\(\)/) ); // "g()"
 ```
 
-If we're looking for a backslash `\`, it's a special character in both regular strings and regexps, so we should double it.
+যদি আমরা ব্যাকস্ল্যাশ `\` খুঁজে পেতে চাই, রেগুলার এক্সপ্রেশন এবং রেগুলার স্ট্রিং উভয়ের মধ্যেই এটি একটি স্পেশাল ক্যারাক্টার, তো ব্যাকস্ল্যাশের জন্য আমাদের দুটি ব্যাকস্ল্যাশ দিতে হবে।
 
 ```js run
 alert( "1\\2".match(/\\/) ); // '\'
 ```
 
-## A slash
+## স্ল্যাশ
 
-A slash symbol `'/'` is not a special character, but in JavaScript it is used to open and close the regexp: `pattern:/...pattern.../`, so we should escape it too.
+যদিও স্ল্যাশ চিহ্ন `'/'` কোন স্পেশাল ক্যারাক্টার না, কিন্তু জাভাস্ক্রিপ্টে এটি দ্বারা রেগুলার এক্সপ্রেশন বুঝায়: `pattern:/...pattern.../`, তাই আমাদের এদেরও স্কেপ করার প্রয়োজন হতে পারে।
 
-Here's what a search for a slash `'/'` looks like:
+আমরা এভাবে স্ল্যাশ `'/'` খুঁজতে পারি:
 
 ```js run
 alert( "/".match(/\//) ); // '/'
 ```
 
-On the other hand, if we're not using `pattern:/.../`, but create a regexp using `new RegExp`, then we don't need to escape it:
+আবার যখন আমরা এভাবে প্যাটার্ন `pattern:/.../` তৈরির বদলে `new RegExp` দিয়ে প্যাটার্ন বানাব, তখন আমাদের এটি স্কেপ করা লাগবে না:
 
 ```js run
 alert( "/".match(new RegExp("/")) ); // finds /
@@ -51,9 +51,9 @@ alert( "/".match(new RegExp("/")) ); // finds /
 
 ## new RegExp
 
-If we are creating a regular expression with `new RegExp`, then we don't have to escape `/`, but need to do some other escaping.
+যদি আমরা `new RegExp` এর মাধ্যমে রেগুলার এক্সপ্রেশন তৈরি করি, আমাদের স্ল্যাশ `/` কে স্কেপ করা লাগবে না, কিন্তু অন্যান্য স্পেশাল ক্যারাক্টারকে স্কেপ করা লাগবে।
 
-For instance, consider this:
+উদাহরণস্বরূপ, এটি দেখুন:
 
 ```js run
 let regexp = new RegExp("\d\.\d");
@@ -61,39 +61,39 @@ let regexp = new RegExp("\d\.\d");
 alert( "Chapter 5.1".match(regexp) ); // null
 ```
 
-The similar search in one of previous examples worked with `pattern:/\d\.\d/`, but `new RegExp("\d\.\d")` doesn't work, why?
+এই প্যাটার্নটি `pattern:/\d\.\d/` আগের উদাহরণে কাজ করছিল, কিন্তু `new RegExp("\d\.\d")` এর সাথে কাজ করছে না কেন?
 
-The reason is that backslashes are "consumed" by a string. As we may recall, regular strings have their own special characters, such as `\n`, and a backslash is used for escaping.
+কেননা রেগুলার স্ট্রিংয়ে ব্যাকস্ল্যাশ "নিজস্ব স্পেশাল ক্যারাক্টারের" জন্য ব্যবহৃত হয় যেমন `\n`, এখানে ব্যাকস্ল্যাশ এস্কেপিংয়ের জন্য ব্যবহৃত হয়।
 
-Here's how "\d\.\d" is preceived:
+এখানে দেখুন "\d\.\d" এর আউটপুট কি দেখায়:
 
 ```js run
 alert("\d\.\d"); // d.d
 ```
 
-String quotes "consume" backslashes and interpret them on their own, for instance:
+স্ট্রিংয়ে ব্যাকস্ল্যাশ স্পেশাল কিছু ক্যারাক্টারের জন্য ব্যবহৃত হয়, উদাহরণস্বরূপ:
 
-- `\n` -- becomes a newline character,
-- `\u1234` -- becomes the Unicode character with such code,
-- ...And when there's no special meaning: like `pattern:\d` or `\z`, then the backslash is simply removed.
+- `\n` -- নিউলাইন ক্যারাক্টার বুঝায়,
+- `\u1234` -- ইউনিকোড বুঝায়,
+- ...এবং যখন কোন বিশেষ ক্যারাক্টার বুঝায় না: যেমন `pattern:\d` বা `\z`, তখন ব্যাকস্ল্যাশ ক্যারাক্টারটি রিমুভ হয়ে যায়।
 
-So `new RegExp` gets a string without backslashes. That's why the search doesn't work!
+সুতরাং `new RegExp` স্ট্রিং হতে ব্যাকস্ল্যাশ রিমুভ হয়ে যায়। এজন্য সার্চ কাজ করে না!
 
-To fix it, we need to double backslashes, because string quotes turn `\\` into `\`:
+এটি ফিক্স করতে আমাদের দুটি ব্যাকস্ল্যাশ ব্যবহার করতে হবে, কেননা `\\` এটির আউটপুট হবে `\`:
 
 ```js run
 *!*
 let regStr = "\\d\\.\\d";
 */!*
-alert(regStr); // \d\.\d (correct now)
+alert(regStr); // \d\.\d (এখন ঠিক আছে)
 
 let regexp = new RegExp(regStr);
 
 alert( "Chapter 5.1".match(regexp) ); // 5.1
 ```
 
-## Summary
+## সারাংশ
 
-- To search for special characters `pattern:[ \ ^ $ . | ? * + ( )` literally, we need to prepend them with a backslash `\` ("escape them").
-- We also need to escape `/` if we're inside `pattern:/.../` (but not inside `new RegExp`).
-- When passing a string `new RegExp`, we need to double backslashes `\\`, cause string quotes consume one of them.
+- সাধারণত স্পেশাল ক্যারাক্টারসমূহ সার্চ করতে `pattern:[ \ ^ $ . | ? * + ( )` আমাদের ব্যাকস্ল্যাশ `\` দ্বারা  ("এস্কেপের জন্য") প্রিপেন্ড করে নিতে হবে।
+- যদি `pattern:/.../` এভাবে প্যাটার্ন ডিক্লেয়ার করি আমাদের `/` কেও এস্কেপ করে নিতে হবে (তবে `new RegExp` এ না)।
+- যখন প্যাটার্নটি `new RegExp` এর মাধ্যমে ডিক্লেয়ার করা হবে, আমাদের দুটি ব্যাকস্ল্যাশ `\\` ব্যবহার করতে হবে, কেননা স্ট্রিংয়ে এটিকে একটি হিসেবে বিবেচনা করা হবে।
