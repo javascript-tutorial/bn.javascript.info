@@ -1,27 +1,27 @@
-There are many ways, for instance:
+অনেকভাবে এটি করা যায়, যেমন:
 
 
-The `<div>` DOM node:
+`<div>` DOM নোড:
 
 ```js
 document.body.firstElementChild
-// or
+// অথবা
 document.body.children[0]
-// or (the first node is space, so we take 2nd)
+// অথবা (প্রথম নোডটি স্পেস হতে পারে, আমরা 2য়টি নিব)
 document.body.childNodes[1]
 ```
 
-The `<ul>` DOM node:
+`<ul>` DOM নোড:
 
 ```js
 document.body.lastElementChild
-// or
+// অথবা
 document.body.children[1]
 ```
 
-The second `<li>` (with Pete):
+দ্বিতীয় `<li>` (Pete টেক্সট সহ):
 
 ```js
-// get <ul>, and then get its last element child
+// প্রথমে <ul>, এবং তারপর শেষ চাইল্ড এলিমেন্ট
 document.body.lastElementChild.lastElementChild
 ```
