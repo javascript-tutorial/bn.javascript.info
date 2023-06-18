@@ -1,8 +1,8 @@
-There's a catch here.
+এখানে লক্ষ্য করুন।
 
-At the time of `<script>` execution the last DOM node is exactly `<script>`, because the browser did not process the rest of the page yet.
+`<script>` টি যখন এক্সিকিউশন হবে শেষ DOM নোডটি হবে `<script>`, কেননা ব্রাউজার সম্পূর্ন পেজটি এক্সিকিউট হয়নি।
 
-So the result is `1` (element node).
+সুতরাং ফলাফল দেখাবে `1` (এলিমেন্ট নোড)।
 
 ```html run height=60
 <html>
