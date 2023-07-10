@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Create a tree from the object
+# অবজেক্ট হতে একটি ট্রি তৈরি করুন
 
-Write a function `createTree` that creates a nested `ul/li` list from the nested object.
+`createTree` নামের একটি ফাংশন লিখুন যেটি একটি নেস্টেড `ul/li` লিস্ট ক্রিয়েট করবে একটি নেস্টেড অবজেক্ট হতে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```js
 let data = {
@@ -28,7 +28,7 @@ let data = {
 };
 ```
 
-The syntax:
+সিন্ট্যাক্সটি:
 
 ```js
 let container = document.getElementById('container');
@@ -37,15 +37,15 @@ createTree(container, data); // creates the tree in the container
 */!*
 ```
 
-The result (tree) should look like this:
+ফলাফলটি দেখতে এমন হবে:
 
 [iframe border=1 src="build-tree-dom"]
 
-Choose one of two ways of solving this task:
+নিচের যে কোন একটি উপায়ে এট সমাধান করুন:
 
-1. Create the HTML for the tree and then assign to `container.innerHTML`.
-2. Create tree nodes and append with DOM methods.
+1. HTML ট্রি নোডটি তৈরি করে `container.innerHTML` এ অ্যাসাইন করুন।
+2. ট্রি নোড তৈরি করে DOM মেথডের সাহায্যে সংযুক্ত করা।
 
-Would be great if you could do both.
+যদি আপনি দুই উপায়েই করতে পারেন এটি আরো ভালো হবে।
 
-P.S. The tree should not have "extra" elements like empty `<ul></ul>` for the leaves.
+বি.দ্র. ট্রি টিতে কোন "অতিরিক্ত" এম্পটি `<ul></ul>` থাকবে না।

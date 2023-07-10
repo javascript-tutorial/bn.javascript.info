@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Insert the HTML in the list
+# লিস্টকে HTML এ লিখা
 
-Write the code to insert `<li>2</li><li>3</li>` between two `<li>` here:
+এই লিস্টকে `<li>2</li><li>3</li>` নিচের দুইটি `<li>` এর মাঝে লিখুন:
 
 ```html
 <ul id="ul">

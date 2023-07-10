@@ -2,16 +2,16 @@ importance: 4
 
 ---
 
-# Create a calendar
+# ক্যালেন্ডার লিখা
 
-Write a function `createCalendar(elem, year, month)`.
+একটি ফাংশন লিখুন `createCalendar(elem, year, month)`।
 
-The call should create a calendar for the given year/month and put it inside `elem`.
+ফাংশন কলে `elem` এর মধ্যে একটি ক্যালেন্ডার তৈরি হবে মাস এবং বছর অনুযায়ী।
 
-The calendar should be a table, where a week is `<tr>`, and a day is `<td>`. The table top should be `<th>` with weekday names: the first day should be Monday, and so on till Sunday.
+ক্যালেন্ডারটি একটি *table* এ হবে, যেখানে সপ্তাহসমূহ হবে `<tr>` এ, এবং দিনগুলো থাকবে `<td>` এ। এবং একদম উপরের রোতে `<th>` সপ্তাহের দিন গুলোর নাম থাকবে: সপ্তাহ শুরু হবে সোমবার দিয়ে, এবং শেষ হবে রবিবারে।
 
-For instance, `createCalendar(cal, 2012, 9)` should generate in element `cal` the following calendar:
+যেমন, `createCalendar(cal, 2012, 9)` এই এলিমেন্টের `cal` জন্য নিচের ক্যালেন্ডারটি বানাবে:
 
 [iframe height=210 src="solution"]
 
-P.S. For this task it's enough to generate the calendar, should not yet be clickable.
+বি.দ্র. এই টাস্কটিতে শুধু ক্যালেন্ডারটি জেনারেট করলেই হবে, অন্য কোন ফাংশনালিটির প্রয়োজন নেই।
