@@ -13,8 +13,13 @@
 
 আমরা রেগুলার এক্সপ্রেশনে `pattern:\w+` এর মাধ্যমে ভ্যারিয়েবলটি খুঁজতে পারি।  প্রকৃতপক্ষে, ভ্যালিড জাভাস্ক্রিপ্ট ভ্যারিয়েবলের নাম যাচাইকরণের জন্য আমাদের আরো জটিল রেগুলার এক্সপ্রেশন লাগে, তবে এখানে আমরা ব্যাপারটি বুঝতে সাধারণ একটি প্যাটার্ন ব্যবহার করছি।
 
+<<<<<<< HEAD
 - `str.match(/\w+/)` এটি এক্সিকিউট হলে আমরা শুধু প্রথম শব্দটি পাব (`var`)। কিন্তু আমরা এটি চাই না।
 - আমরা `pattern:g` ফ্ল্যাগটি ব্যবহার করতে পারি। কিন্তু `str.match(/\w+/g)` এটি টেক্সটের সকল শব্দ অনুসন্ধান করে, যেখানে আমাদের শুধু একটি শব্দ চাই যার অবস্থান শুরু `4` হতে। কিন্তু, এটি দ্বারাও আমাদের সমস্যার সমাধান হবে না।
+=======
+- A call to `str.match(/\w+/)` will find only the first word in the line (`let`). That's not it.
+- We can add the flag `pattern:g`. But then the call `str.match(/\w+/g)` will look for all words in the text, while we need one word at position `4`. Again, not what we need.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 **সুতরাং, আমরা রেগুলার এক্সপ্রেশনের মাধ্যমে কিভাবে কোন একটি নির্দিষ্ট অবস্থানে অনুসন্ধান করতে পারি?**
 
@@ -93,7 +98,11 @@ alert(word); // varName
 
 ...কিন্তু থামুন।
 
+<<<<<<< HEAD
 দয়া করে মনে রাখুন: `regexp.exec` অনুসন্ধান শুরু করে `lastIndex` এর অবস্থান হতে এবং পরবর্তী অবস্থানে যায়। যদি `lastIndex` এ পজিশনে কোন শব্দ না থাকে কিন্তু এরপরে থাকে তাহলে আমরা মিলটি পাব:
+=======
+Please note: the `regexp.exec` call starts searching at position `lastIndex` and then goes further. If there's no word at position `lastIndex`, but it's somewhere after it, then it will be found:
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 ```js run
 let str = 'let varName = "value"';
