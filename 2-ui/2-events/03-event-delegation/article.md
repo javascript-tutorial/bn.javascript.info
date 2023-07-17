@@ -1,10 +1,18 @@
 
 # ইভেন্ট ডেলিগেশন
 
+<<<<<<< HEAD
 Capturing এবং bubbling এর মাধ্যমে ইভেন্ট সমূহকে সহজে হ্যান্ডেল করার একটি উপায় হল  *event delegation*।
+=======
+Capturing and bubbling allow us to implement one of the most powerful event handling patterns called *event delegation*.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 
+<<<<<<< HEAD
 আইডিয়াটি হল যদি আমাদের একই ধরণের অনেক এলিমেন্ট কোন একটি প্যারেন্ট এলিমেন্টের অধীনে থাকে এবং তাদের একইভাবে হ্যান্ডেল করা লাগে তাহলে আমরা একটি হ্যান্ডেলারের মাধ্যমে তাদের হ্যান্ডেল করতে পারি।
+=======
+In the handler we get `event.target` to see where the event actually happened and handle it.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 হ্যান্ডেলারে আমরা `event.target` কে পাব, যার মাধ্যমে আমরা জানতে পারব কোন এলিমেন্টে ইভেন্টটি সংগঠিত হয়েছে এবং তার উপর ভিত্তি করে আমরা এটিকে হ্যান্ডেল করতে পারব।
 

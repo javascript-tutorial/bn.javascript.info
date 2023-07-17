@@ -1,7 +1,11 @@
 
 # ইটারেবলস
 
+<<<<<<< HEAD
 *Iterable* অবজেক্ট হল একধরণের অ্যারের ধারণা। এটি এমন একটি ধারণা যার সাহায্যে আমরা কোন একটি অবজেক্টকে `for..of` লুপের সাহায্যে অ্যাক্সেস করতে পারব।
+=======
+*Iterable* objects are a generalization of arrays. That's a concept that allows us to make any object useable in a `for..of` loop.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 আমরা ইতোমধ্যে জানি অ্যারে ইটারেবল। এছাড়াও আরো বিভিন্ন বিল্ট-ইন ইটারেবল অবজেক্ট আছে। যেমন: স্ট্রিং।
 
@@ -26,12 +30,21 @@ let range = {
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
+<<<<<<< HEAD
 `range` কে ইটারেবল করতে (এবং `for..of` লুপ কে কাজ করাতে) আমাদের একটি মেথড যুক্ত করতে হবে `Symbol.iterator` (একটি বিশেষ বিল্ট-ইন সিম্বল)।
 
 1. যখন `for..of` শুরু হয়, তখন মেথডটিকে একবার কল করে (অথবা না পেলে এরর থ্রো করে)। মেথডটি একটি *iterator* অবজেক্ট রিটার্ন করে -- যার `next` নামের একটি মেথড থাকে।
 2. এরপর, `for..of` কাজ করবে *ঐ রিটার্নকৃত অবজেক্টটি নিয়ে*।
 3. যখন `for..of` পরবর্তী মানটি জানতে চাইবে, তখন এটি ঐ অবজেক্টের `next()` মেথডকে কল করে।
 4. `next()` এর রিটার্নকৃত মান হবে এভাবে `{done: Boolean, value: any}`, যেখানে `done=true` দ্বারা বুঝায় আমাদের ইটারেশনটি সম্পন্ন হয়েছে।
+=======
+To make the `range` object iterable (and thus let `for..of` work) we need to add a method to the object named `Symbol.iterator` (a special built-in symbol just for that).
+
+1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
+2. Onward, `for..of` works *only with that returned object*.
+3. When `for..of` wants the next value, it calls `next()` on that object.
+4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true` means that the loop is finished, otherwise `value` is the next value.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 নিচে `range` অবজেক্টকে আমরা ইটারেবল হিসেবে ইমপ্লিমেন্ট করেছি:
 
@@ -44,8 +57,13 @@ let range = {
 // 1. for..of প্রথমবার এটিকে কল করবে
 range[Symbol.iterator] = function() {
 
+<<<<<<< HEAD
   // ...এটি ইটারেটর অবজেক্ট রিটার্ন করে:
   // 2. এরপর, for..of শুধুমাত্র এই ইটারেটরটি নিয়ে কাজ করবে, এবং পরবর্তী মানটি জানতে চাইবে
+=======
+  // ...it returns the iterator object:
+  // 2. Onward, for..of works only with the iterator object below, asking it for next values
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
   return {
     current: this.from,
     last: this.to,
@@ -140,7 +158,11 @@ for (let char of str) {
 
 ## অন্য ভাবে ইটারেটরকে কল
 
+<<<<<<< HEAD
 ইটারেটর কীভাবে কাজ করে তা আরো গভীরভাবে বুঝতে চলুন অন্যভাবে একটি স্ট্রিংকে ইটারেশন করি।
+=======
+For deeper understanding, let's see how to use an iterator explicitly.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 আমরা একটি স্ট্রিংকে `for..of` এর মত করে ইটারেট করব, তবে সরাসরি কলের মাধ্যমে। নিচে কোডটি একটি স্ট্রিং ইটারেটর তৈরি করবে এবং এর মান আমরা ম্যানুয়ালি ইটারেট করব:
 
@@ -165,12 +187,20 @@ while (true) {
 
 ## ইটারেবলস এবং array-likes [#array-like]
 
+<<<<<<< HEAD
 ইটারেবল এবং অ্যারে দুটিই দেখতে একই, তবে তাদের মধ্যে ভিন্নতা রয়েছে। বিভ্রান্তি এড়াতে নিশ্চিত হন আপনি এদের পার্থক্যটি ভালোভাবে বুঝতে পেরেছেন।
+=======
+Two official terms look similar, but are very different. Please make sure you understand them well to avoid the confusion.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 - *Iterables* একটি অবজেক্ট যার `Symbol.iterator` মেথড আছে।
 - *Array-likes* একটি অবজেক্ট যার প্রপার্টিগুলো নিউমেরিক ইনডেক্স আকারে এবং `length` প্রপার্টি আছে, সুতরাং এটি দেখতে অ্যারের মত।
 
+<<<<<<< HEAD
 বাস্তবক্ষেত্রে জাভাস্ক্রিপ্ট ব্যবহারের সময় আমরা এই ধরণের অবজেক্ট নিয়ে কাজ করি যারা হয়ত ইটারেবল অথবা দেখতে অ্যারের মত, অথবা উভয়ই।
+=======
+When we use JavaScript for practical tasks in a browser or any other environment, we may meet objects that are iterables or array-likes, or both.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 যেমন, স্ট্রিং ইটারেবল আবার এটি দেখতে অ্যারের মতও  (কেননা এর numeric index ও `length` আছে)।
 
@@ -218,8 +248,13 @@ alert(arr.pop()); // World (method works)
 
 ইটারেবলের ক্ষেত্রেও এটি ঘটবে:
 
+<<<<<<< HEAD
 ```js
 // মনে করুন এখানের range একটি ইটারেবল
+=======
+```js run
+// assuming that range is taken from the example above
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (অ্যারে থেকে toString কনভার্শন কাজ করছে)
 ```
@@ -233,8 +268,13 @@ Array.from(obj[, mapFn, thisArg])
 
 উদাহরণস্বরূপ:
 
+<<<<<<< HEAD
 ```js
 // মনে করুন এখানের range ভ্যারিয়েবলটা নেয়া হচ্ছে
+=======
+```js run
+// assuming that range is taken from the example above
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 // প্রতিটি নাম্বারের বর্গ
 let arr = Array.from(range, num => num * num);
@@ -270,7 +310,11 @@ for (let char of str) {
 alert(chars);
 ```
 
+<<<<<<< HEAD
 ...তবে এটি সংক্ষিপ্ত।
+=======
+...But it is shorter.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 আমরা surrogate-pairs এর জন্য `slice` তৈরি করতে পারি:
 
@@ -292,12 +336,21 @@ alert( str.slice(1, 3) ); // garbage (দুটি আলাদা surrogate pai
 
 যেসব অবজেক্টে `for..of` লুপ কাজ করে তাদের বলা হয় *iterable*।
 
+<<<<<<< HEAD
 - ইটারেবল অবজেক্টে `Symbol.iterator` নামের একটি মেথড অবশ্যই থাকা লাগবে।
     - `obj[Symbol.iterator]()` এর ফলে এটি একটি *iterator* কল করবে। এটি অন্যান্য ইটারেশন প্রসেস গুলো হ্যান্ডেল করবে।
     - ইটারেটর অবজেক্টে অবশ্যই `next()` নামের একটি মেথড থাকতে হবে যা রিটার্ন করবে একটি অবজেক্ট `{done: Boolean, value: any}`, এখানে `done:true` দ্বারা বুঝায় ইটারেশন সম্পন্ন হয়েছে, অন্যথায় `value` টি হবে পরবর্তী ভ্যালু।
 - `Symbol.iterator` মেথডটি `for..of` এর জন্য স্বয়ংক্রিয়ভাবে কল হয়, তবে আমরা এটি ম্যানুয়ালিও করতে পারব।
 - বিল্ট ইন ইটারেটর যেমন স্ট্রিং বা অ্যারে এরাও `Symbol.iterator` ইমপ্লিমেন্ট করে।
 - স্ট্রিংয়ের ইটারেটর *surrogate pairs* সম্পর্কে জানে।
+=======
+- Technically, iterables must implement the method named `Symbol.iterator`.
+    - The result of `obj[Symbol.iterator]()` is called an *iterator*. It handles further iteration process.
+    - An iterator must have the method named `next()` that returns an object `{done: Boolean, value: any}`, here `done:true` denotes the end of the iteration process, otherwise the `value` is the next value.
+- The `Symbol.iterator` method is called automatically by `for..of`, but we also can do it directly.
+- Built-in iterables like strings or arrays, also implement `Symbol.iterator`.
+- String iterator knows about surrogate pairs.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 
 যেসব অবজেক্টের প্রপার্টি হল ক্রমিক সংখ্যা এবং `length` প্রপার্টি আছে তাদের বলা হয় *array-like*। যদিও এরা দেখতে অ্যারের মত তারপরও আমরা এদের মধ্যে অ্যারের বিল্ট-ইন মেথড গুলো ব্যবহার করতে পারব না।

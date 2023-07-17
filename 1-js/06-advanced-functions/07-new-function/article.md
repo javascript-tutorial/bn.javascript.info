@@ -92,7 +92,11 @@ getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
 
 সমস্যাটি দেখা দেয় যখন আমরা প্রোডাকশনের জন্য জাভাস্ক্রিপ্টকে *minifier* দ্বারা কম্প্রেসড করি, ফলে আমাদের কোডের অতিরিক্ত কমেন্ট, স্পেসগুলো রিমুভ হয়ে যায়, এছাড়াও লোকাল ভ্যারিয়েবলগুলোর নাম সংক্ষিপ্ত হয়ে যায়।
 
+<<<<<<< HEAD
 যেমন, যদি কোন ফাংশনে একটি ভ্যারিয়েবল থাকে `let userName`, তাহলে মিনিফাই হওয়ার সময় এটি হতে পারে `let a` (অথবা অন্য কোন নাম বা ক্যারেক্টার), এবং এটি ঐ লোকাল স্কোপের সব জায়গায় হয়। এবং এটির জন্য কোন সমস্যা হয় না, কেননা ভ্যারিয়েবলটি লোকাল, ফলে এটি অন্য কোন স্কোপ হতে অ্যাক্সেস হবে না। এবং মিনিফাই এর সময় ঐ ফাংশনের সকল জায়গায় ভ্যারিয়েবলটি প্রতিস্থাপিত হয়। *minifier* যথেষ্ট স্মার্ট, এরা কোড অ্যানালাইজ করে এসব করে, ফলে কোডে কোন ব্রেক হয় না।
+=======
+For instance, if a function has `let userName`, minifier replaces it with `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+>>>>>>> 733ff697c6c1101c130e2996f7eca860b2aa7ab9
 
 সুতরাং যদি `new Function` এর আউটার স্কোপে অ্যাক্সেস থাকে, তাহলে `userName` ভ্যারিয়েবলের নাম পরিবর্তনের ফলে অ্যাক্সেস করতে পারবে না, এবং এরর তৈরি হতে পারে।
 
