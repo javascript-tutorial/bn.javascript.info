@@ -10,7 +10,11 @@ DOM নোড সম্পর্কে আরো বিস্তারিত জ
 
 প্রতিটি DOM নোড সংশ্লিষ্ট বিল্ট ইন ক্লাসের সাথে সম্পর্কিত।
 
+<<<<<<< HEAD
 হায়ার্য়াকি অনুযায়ী রুট ক্লাস হল [EventTarget](https://dom.spec.whatwg.org/#eventtarget), একে ইনহেরিট করে  [Node](http://dom.spec.whatwg.org/#interface-node), এবং অন্যান্য DOM নোড তাদের ইনহেরিট করে।
+=======
+The root of the hierarchy is [EventTarget](https://dom.spec.whatwg.org/#eventtarget), that is inherited by  [Node](https://dom.spec.whatwg.org/#interface-node), and other DOM nodes inherit from it.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 নিচের ছবিটি দেখুন, বিস্তারিত আলোচনা করা হল:
 
@@ -18,6 +22,7 @@ DOM নোড সম্পর্কে আরো বিস্তারিত জ
 
 ক্লাসগুলো হল:
 
+<<<<<<< HEAD
 - [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- এটি রুট "abstract" ক্লাস। এই ক্লাসের অবজেক্ট তৈরি হয়না। এটি বেস ক্লাস হিসেবে কাজ করে, এজন্য আমরা সকল ধরণের DOM নোডের সাথে বিভিন্ন ধরণের "events" পায়, পরবর্তীতে এ সম্পর্কে আরো বিস্তারিত জানব।
 - [Node](http://dom.spec.whatwg.org/#interface-node) -- এটিও একটি DOM নোডের "abstract" ক্লাস হিসেবে কাজ করে। এটির কিছু কোর ফাংশনালটি আছে: `parentNode`, `nextSibling`, `childNodes` ইত্যাদি (এরা getters)। এই ক্লাসেরও অবজেক্ট তৈরি হয়না। তবে কংক্রিট নোড ক্লাস সমূহ এটি থেকে ইনহেরিট হয়। যেমন: টেক্সট নোডের জন্য `Text`, এলিমেন্ট নোডের জন্য `Element` এবং অদ্ভুতুড়ে কমেন্ট নোডের জন্য `Comment`।
 - [Element](http://dom.spec.whatwg.org/#interface-element) -- এটি DOM এলিমেন্টের বেস ক্লাস। এলিমেন্ট সমূহ নেভিগেশনের জন্য `nextElementSibling`, `children` এবং সার্চিংয়ের জন্য `getElementsByTagName`, `querySelector` ইত্যাদি মেথড প্রভাইড করে। ব্রাউজার শুধুমাত্র HTML ছাড়াও XML এবং SVG ও সাপোর্ট করে। `Element` ক্লাস `SVGElement`, `XMLElement` এবং `HTMLElement` এর বেস ক্লাস হিসেবে কাজ করে।
@@ -28,6 +33,41 @@ DOM নোড সম্পর্কে আরো বিস্তারিত জ
     - ...এইরকম, প্রতিটি ট্যাগের স্পেসিফিক নিজস্ব ক্লাস এবং কিছু স্পেসিফিক প্রপার্টি এবং মেথড আছে।
 
 সুতরাং, প্রতিটি নোড তাদের প্যারেন্ট ক্লাস সমূহের এর সকল প্রপার্টি এবং মেথড সমূহও ইনহেরিট করে।
+=======
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- is the root "abstract" class for everything.
+
+    Objects of that class are never created. It serves as a base, so that all DOM nodes support so-called "events", we'll study them later.
+
+- [Node](https://dom.spec.whatwg.org/#interface-node) -- is also an "abstract" class, serving as a base  for DOM nodes.
+
+    It provides the core tree functionality: `parentNode`, `nextSibling`, `childNodes` and so on (they are getters). Objects of `Node` class are never created. But there are other classes that inherit from it (and so inherit the `Node` functionality).
+
+- [Document](https://dom.spec.whatwg.org/#interface-document), for historical reasons often inherited by `HTMLDocument` (though the latest spec doesn't dictate it) -- is a document as a whole.
+
+    The `document` global object belongs exactly to this class. It serves as an entry point to the DOM.
+
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- an "abstract" class, inherited by:
+    - [Text](https://dom.spec.whatwg.org/#interface-text) -- the class corresponding to a text inside elements, e.g. `Hello` in `<p>Hello</p>`.
+    - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- the class for comments. They are not shown, but each comment becomes a member of DOM.
+
+- [Element](https://dom.spec.whatwg.org/#interface-element) -- is the base class for DOM elements.
+
+    It provides element-level navigation like `nextElementSibling`, `children` and searching methods like `getElementsByTagName`, `querySelector`.
+
+    A browser supports not only HTML, but also XML and SVG. So the `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` (we don't need them here) and `HTMLElement`.
+
+- Finally, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) is the basic class for all HTML elements. We'll work with it most of the time.
+
+    It is inherited by concrete HTML elements:
+    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- the class for `<input>` elements,
+    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- the class for `<body>` elements,
+    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- the class for `<a>` elements,
+    - ...and so on.
+
+There are many other tags with their own classes that may have specific properties and methods, while some elements, such as `<span>`, `<section>`, `<article>` do not have any specific properties, so they are instances of `HTMLElement` class.
+
+So, the full set of properties and methods of a given node comes as the result of the chain of inheritance.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 যেমন, DOM এর একটি `<input>` এলিমেন্ট আছে। যেটির ক্লাস হল [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement)।
 
@@ -131,10 +171,17 @@ interface HTMLInputElement: HTMLElement {
   <script>
   let elem = document.body;
 
+<<<<<<< HEAD
   // আসুন এটি কি ধরণের নোড যাচাই করি?
   alert(elem.nodeType); // 1 => element
 
   // এবং এটি হল...
+=======
+  // let's examine: what type of node is in elem?
+  alert(elem.nodeType); // 1 => element
+
+  // and its first child is...
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
   alert(elem.firstChild.nodeType); // 3 => text
 
   // ডকুমেন্ট অবজেক্ট এর মান
@@ -198,7 +245,11 @@ In XML mode the case is kept "as is". Nowadays XML mode is rarely used.
 
 ## innerHTML: কন্টেন্ট
 
+<<<<<<< HEAD
 [innerHTML](https://w3c.github.io/DOM-Parsing/#widl-Element-innerHTML) প্রপার্টিতে এলিমেন্টের কন্টেন্ট স্ট্রিং হিসেবে নেই।
+=======
+The [innerHTML](https://w3c.github.io/DOM-Parsing/#the-innerhtml-mixin) property allows to get the HTML inside the element as a string.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 আমরা এর সাহায্যে কন্টেন্ট পরিবর্তনও করতে পারি। সুতরাং DOM এ পরিবর্তনের অন্যতম উপায় হল এটি।
 

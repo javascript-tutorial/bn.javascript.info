@@ -214,7 +214,11 @@ alert( document.body.previousSibling ); // HTMLHeadElement
 
 ## এলিমেন্ট সমূহ শুধু নেভিগেশন করা যায়
 
+<<<<<<< HEAD
 নেভিগেশন প্রপার্টি সমূহ *সকল* নোডকে রেফার করে। যেমন, `childNodes` এর প্রপার্টিতে আমরা টেক্সট নোড, এলিমেন্ট নোড এমনকি কমেন্ট নোড সমূহ পায়।
+=======
+Navigation properties listed above refer to *all* nodes. For instance, in `childNodes` we can see both text nodes, element nodes, and even comment nodes if they exist.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 কিন্তু বেশিরভাগ ক্ষেত্রে আমাদের টেক্সট বা কমেন্ট নোডের দরকার পড়ে না। বেশিরভাগ ক্ষেত্রে আমরা এলিমেন্ট নোড সমূহকে ম্যানিপুলেট করি।
 
