@@ -51,7 +51,7 @@ HTML এর DOM এর ট্রি স্ট্রাকচারটা হব�
 <div class="domtree"></div>
 
 <script>
-let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n    "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"About elk"}]},{"name":"#text","nodeType":3,"content":"\n  "}]},{"name":"#text","nodeType":3,"content":"\n  "},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk."}]}]}
+let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"About elk"}]},{"name":"#text","nodeType":3,"content":"\n"}]},{"name":"#text","nodeType":3,"content":"\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n"}]}]}
 
 drawHtmlTree(node1, 'div.domtree', 690, 320);
 </script>
@@ -142,8 +142,13 @@ let node4 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,
 drawHtmlTree(node4, 'div.domtree', 690, 360);
 </script>
 
+<<<<<<< HEAD
 ````warn header="Tables এ সর্বদা `<tbody>` থাকবে"
 তবে table এর একটি "স্পেশাল বৈশিষ্ট" আছে। DOM স্পেসিফিকেশন অনুসারে `<table>` এ `<tbody>` থাকবে, তবে আমরা এটি ছাড়াও table লিখতে পারি। তখন ব্রাউজার স্বয়ংক্রিয়ভাবে `<tbody>` সংযুক্ত করে দিবে।
+=======
+````warn header="Tables always have `<tbody>`"
+An interesting "special case" is tables. By DOM specification they must have `<tbody>` tag, but HTML text may omit it. Then the browser creates `<tbody>` in the DOM automatically.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 যেমন:
 
@@ -160,7 +165,11 @@ let node5 = {"name":"TABLE","nodeType":1,"children":[{"name":"TBODY","nodeType":
 drawHtmlTree(node5,  'div.domtree', 600, 200);
 </script>
 
+<<<<<<< HEAD
 দেখলেন? স্বয়ংক্রিয়ভাবে `<tbody>` অবজেক্টটি সংযুক্ত হয়েছে। `<table>` নিয়ে কাজ করার সময় আমাদের এই ব্যাপারটি মনে রাখা উচিত।
+=======
+You see? The `<tbody>` appeared out of nowhere. We should keep this in mind while working with tables to avoid surprises.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 ````
 
 ## অন্যান্য নোড টাইপ
@@ -188,7 +197,7 @@ drawHtmlTree(node5,  'div.domtree', 600, 200);
 <div class="domtree"></div>
 
 <script>
-let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[]},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n    "},{"name":"OL","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n      "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"An elk is a smart"}]},{"name":"#text","nodeType":3,"content":"\n      "},{"name":"#comment","nodeType":8,"content":"comment"},{"name":"#text","nodeType":3,"content":"\n      "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"...and cunning animal!"}]},{"name":"#text","nodeType":3,"content":"\n    "}]},{"name":"#text","nodeType":3,"content":"\n  \n"}]}]};
+let node6 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[]},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n  "},{"name":"OL","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"An elk is a smart"}]},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"#comment","nodeType":8,"content":"comment"},{"name":"#text","nodeType":3,"content":"\n    "},{"name":"LI","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"...and cunning animal!"}]},{"name":"#text","nodeType":3,"content":"\n  "}]},{"name":"#text","nodeType":3,"content":"\n\n\n"}]}]};
 
 drawHtmlTree(node6, 'div.domtree', 690, 500);
 </script>
@@ -199,7 +208,11 @@ drawHtmlTree(node6, 'div.domtree', 690, 500);
 
 **HTML এর সকল কিছুই, এমনকি কমেন্টস হল DOM এর অংশ।**
 
+<<<<<<< HEAD
 এমনকি `<!DOCTYPE...>` ও DOM নোডের অংশ। এটি `<html>` নোডের পূর্বে থাকে। DOM নিয়ে কাজ করার সময় আমরা এর ব্যবহার করি না, তাই উপরোল্লিখিত ডায়াগ্রামে আমরা এটি দেখাইনি, কিন্তু এটিও DOM এর একটি অংশ।
+=======
+Even the `<!DOCTYPE...>` directive at the very beginning of HTML is also a DOM node. It's in the DOM tree right before `<html>`. Few people know about that. We are not going to touch that node, we even don't draw it on diagrams, but it's there.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 `document` অবজেক্ট সমস্ত ডকুমেন্ট কে প্রদর্শন করে,  object that represents the whole document is, formally, a DOM node as well.
 The `document` object that represents the whole document is, formally, a DOM node as well.
@@ -213,7 +226,11 @@ There are [12 node types](https://dom.spec.whatwg.org/#node). In practice we usu
 
 ## আরো বিস্তারিত
 
+<<<<<<< HEAD
 রিয়েল-টাইমে DOM স্ট্রাকচার দেখতে এখানে ভিজিট করুন, [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/)। ডকুমেন্ট এ টাইপ করুন, এটি DOM স্ট্রাকচারটি দেখাবে।
+=======
+To see the DOM structure in real-time, try [Live DOM Viewer](https://software.hixie.ch/utilities/js/live-dom-viewer/). Just type in the document, and it will show up as a DOM at an instant.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 আমরা ব্রাউজারের ডেভটুলেও DOM স্ট্রাকচার দেখতে পারি। আমরা ডেভলাপমেন্টের সময় এভাবেই দেখি।
 
