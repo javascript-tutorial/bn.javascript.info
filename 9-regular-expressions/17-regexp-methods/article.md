@@ -19,9 +19,15 @@
     alert( result[1] );     // Script (প্রথম ক্যাপচারিং গ্রুপস)
     alert( result.length ); // 2
 
+<<<<<<< HEAD
     // আরো কিছু প্রপার্টি:
     alert( result.index );  // 7 (যে অবস্থান হতে মিলটি শুরু হয়)
     alert( result.input );  // I love JavaScript (সোর্স স্ট্রিং)
+=======
+    // Additional information:
+    alert( result.index );  // 7 (match position)
+    alert( result.input );  // I love JavaScript (source string)
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
     ```
 
 ২. যদি `regexp` প্যাটার্নে `pattern:g` ফ্ল্যাগ থাকে, মিলকৃত স্ট্রিংসমূহকে ক্যাপচারিং গ্রুপ এবং অন্যান্য প্রপার্টিসমূহ ছাড়া অ্যারে আকারে রিটার্ন করে।
@@ -65,7 +71,15 @@
 2. প্রতিটি মিলকে ক্যাপচারিং গ্রুপসহ অ্যারে আকারে রিটার্ন করে ( `pattern:g` ফ্ল্যাগ ব্যতীত `str.match` এর মত)।
 3. যদি কোন মিল খুঁজে না পায়, এটি `null` এর পরিবর্তে এম্পটি ইটারেবল অবজেক্ট রিটার্ন করে।
 
+<<<<<<< HEAD
 উদাহরণ:
+=======
+1. It returns an iterable object with matches instead of an array. We can make a regular array from it using `Array.from`.
+2. Every match is returned as an array with capturing groups (the same format as `str.match` without flag `pattern:g`).
+3. If there are no results, it returns an empty iterable object instead of `null`.
+
+Usage example:
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -93,13 +107,13 @@ alert( firstMatch.input );  // <h1>Hello, world!</h1>
 আমরা স্ট্রিংকে `split` করতে পারি, এভাবে:
 
 ```js run
-alert('12-34-56'.split('-')) // array of [12, 34, 56]
+alert('12-34-56'.split('-')) // array of ['12', '34', '56']
 ```
 
 অনূরূপভাবে আমরা রেগুলার এক্সপ্রেশনের সাহায্যেও করতে পারি:
 
 ```js run
-alert('12, 34, 56'.split(/,\s*/)) // array of [12, 34, 56]
+alert('12, 34, 56'.split(/,\s*/)) // array of ['12', '34', '56']
 ```
 
 ## str.search(regexp)
@@ -140,7 +154,11 @@ alert('12-34-56'.replace("-", ":")) // 12:34-56, তবে শুধুমাত
 alert( '12-34-56'.replace( *!*/-/g*/!*, ":" ) )  // 12:34:56
 ```
 
+<<<<<<< HEAD
 দ্বিতীয় আর্গুমেন্টটি হল একটি স্ট্রিং যা দ্বারা আমরা রিপ্লেস করব। আমরা এখানে স্পেশাল ক্যারাক্টারও ব্যবহার করতে পারব:
+=======
+The second argument is a replacement string. We can use special characters in it:
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 | সিম্বলস | রিপ্লসমেন্ট স্ট্রিংয়ে সংগঠিত অ্যাকশন |
 |--------|--------|
@@ -226,9 +244,30 @@ alert(result); // Smith, John
 
 রিপ্লেসম্যান্ট আমরা যদি ফাংশন এর সাহায্যে করি তাহলে আমাদের কাছে পূর্ণ স্বাধীনতা থাকবে, কেননা এতে আমরা মিলের সকল ইনফরমেশন পাব, এছাড়াও অন্যান্য ভ্যারিয়েবলগুলোও অ্যাক্সেস করতে পারব।
 
+## str.replaceAll(str|regexp, str|func)
+
+This method is essentially the same as `str.replace`, with two major differences:
+
+1. If the first argument is a string, it replaces *all occurrences* of the string, while `replace` replaces only the *first occurrence*.
+2. If the first argument is a regular expression without the `g` flag, there'll be an error. With `g` flag, it works the same as `replace`.
+
+The main use case for `replaceAll` is replacing all occurrences of a string.
+
+Like this:
+
+```js run
+// replace all dashes by a colon
+alert('12-34-56'.replaceAll("-", ":")) // 12:34:56
+```
+
+
 ## regexp.exec(str)
 
+<<<<<<< HEAD
 `regexp.exec(str)` মেথডটি `regexp` দ্বারা `str` এর মধ্যে মিল খুঁজা হয়।  তবে পূর্বেরটির সাথে এর পার্থক্য হল এটি স্ট্রিংয়ের সাথে কাজ করে শুধুমাত্র রেগুলার এক্সপ্রেশন দ্বারা কাজ করে।
+=======
+The `regexp.exec(str)` method returns a match for `regexp` in the string `str`.  Unlike previous methods, it's called on a regexp, not on a string.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 এটি `pattern:g` ফ্ল্যাগের উপর ভিত্তি করে ভিন্ন ভিন্ন আচরণ করে।
 

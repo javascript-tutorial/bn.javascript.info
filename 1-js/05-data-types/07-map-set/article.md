@@ -1,19 +1,31 @@
 
 # Map এবং Set
 
+<<<<<<< HEAD
 এ পর্যন্ত আমরা নিম্নোক্ত কমপ্লেক্স ডাটা স্ট্রাকচার সমূহ শিখেছি:
 
 - অবজেক্টস যা একটি কালেকশনকে কী/ভ্যালু আকারে সংরক্ষণ করে।
 - অ্যারে যা একটি কালেকশনকে ইনডেক্সক্রমে সংরক্ষণ করে।
+=======
+Till now, we've learned about the following complex data structures:
+
+- Objects are used for storing keyed collections.
+- Arrays are used for storing ordered collections.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 কিন্তু বাস্তবক্ষেত্রে এরা পর্যাপ্ত না। যার ফলে `Map` এবং `Set` নামের আরো দুটি ডাটা স্ট্রাকচার বিদ্যমান।
 
 ## Map
 
+<<<<<<< HEAD
 [Map](mdn:js/Map) হল `Object` এর মত কী/ভ্যালু আকারের একটি কালেকশন। তবে এর প্রধান পার্থক্যটি হল `Map` এ যেকোন টাইপের কী(Key) রাখা যায়।
+=======
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 এর মেথড এবং প্রপার্টিসমূহ হল:
 
+<<<<<<< HEAD
 - `new Map()` -- নতুন Map তৈরি।
 - `map.set(key, value)` -- Map এ `key` অনুসারে নতুন একটি রেকর্ড সংযুক্ত করবে।
 - `map.get(key)` --  Map এর কোন একটি রেকর্ড রিটার্ন করতে, যদি `key` টি Map এ না থাকে তাহলে `undefined` রিটার্ন করে।
@@ -21,6 +33,15 @@
 - `map.delete(key)` -- Map এ `key` অনুসারে কোন একটি রেকর্ড ডিলিট করবে।
 - `map.clear()` -- সম্পূর্ণ Map কালেকশনকে ডিলিট করবে।
 - `map.size` -- Map এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
+=======
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element (the key/value pair) by the key.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 উদাহরণস্বরূপ:
 
@@ -41,8 +62,13 @@ alert( map.size ); // 3
 
 এখানে আমরা দেখছি এটি কী(Key) কে অবজেক্টের মত স্ট্রিংয়ে রূপান্তর করে না। সুতরাং যেকোন ডাটা টাইপের কী রাখা সম্ভব।
 
+<<<<<<< HEAD
 ```smart header=" `Map` এর মধ্যে `map[key]` ব্যবহার করা উচিত নই"
 যদিও `map[key]` এটি কাজ করে, যেমন আমরা `map[key] = 2` সেট করতে পারি, এক্ষেত্রে ইঞ্জিন `map` কে plain JavaScript object হিসেবে বিবেচনা করে, সুতরাং এভাবে ব্যবহার করা উচিত নয়।
+=======
+```smart header="`map[key]` isn't the right way to use a `Map`"
+Although `map[key]` also works, e.g. we can set `map[key] = 2`, this is treating `map` as a plain JavaScript object, so it implies all corresponding limitations (only string/symbol keys and so on).
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 তার পরিবর্তে আমরা `map` মেথড সমূহঃ `set`, `get` ইত্যাদি ব্যবহার করবো।
 ```
@@ -63,15 +89,21 @@ visitsCountMap.set(john, 123);
 alert( visitsCountMap.get(john) ); // 123
 ```
 
+<<<<<<< HEAD
 `Map` এর অন্যতম গুরুত্বপূর্ন সুবিধা হল আমরা অবজেক্টকে কী(Key) হিসেবে সংরক্ষন করতে পারি। আবার, `Object` এ আমরা কী(Key) হিসেবে একটি অবজেক্টকে সেট করতে পারি, তবে এটি অবজেক্ট কী(Key) হিসেবে কাজ করবে না।
+=======
+Using objects as keys is one of the most notable and important `Map` features. The same does not count for `Object`. String as a key in `Object` is fine, but we can't use another `Object` as a key in `Object`.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 চলুন দেখা যাক:
 
 ```js run
 let john = { name: "John" };
+let ben = { name: "Ben" };
 
 let visitsCountObj = {}; // একটি অবজেক্ট
 
+<<<<<<< HEAD
 visitsCountObj[john] = 123; // কী হিসেবে একটি অবজেক্ট সেট করছি
 
 *!*
@@ -81,6 +113,18 @@ alert( visitsCountObj["[object Object]"] ); // 123
 ```
 
 যেহেতু `visitsCountObj` একটি অবজেক্ট, এটি কোন একটি প্রপার্টি সেট হওয়ার সময় কী(Key) কে স্ট্রিংয়ে রূপান্তর করে নেয়, যেমন `john` অবজেক্টের স্ট্রিং কনভার্শন হবে `"[object Object]"`। যা আমাদের লক্ষ্য নয়।
+=======
+visitsCountObj[ben] = 234; // try to use ben object as the key
+visitsCountObj[john] = 123; // try to use john object as the key, ben object will get replaced
+
+*!*
+// That's what got written!
+alert( visitsCountObj["[object Object]"] ); // 123 
+*/!*
+```
+
+As `visitsCountObj` is an object, it converts all `Object` keys, such as `john` and `ben` above, to same string `"[object Object]"`. Definitely not what we want.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 ```smart header="`Map` কীভাবে কী(Key) যাচাই করে"
 দুটি কী(Key) কে যাচাই করতে, `Map` এই অ্যালগরিদমটি ব্যবহার করে [SameValueZero](https://tc39.github.io/ecma262/#sec-samevaluezero)। এটি অনেকটা `===` এর মত, তবে এটি `NaN` এর ক্ষেত্রে ভিন্ন সাধারণত (`NaN` === `NaN`) এর মান হয় `false` তবে `Map` এ `NaN` কে যাচায় করতে পারে। সুতরাং কী(Key) হিসেবে `NaN` রাখা যাবে।
@@ -98,14 +142,24 @@ map.set('1', 'str1')
 ```
 ````
 
+<<<<<<< HEAD
 
 ## Map এর ইটারেশন
+=======
+## Iteration over Map
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 একটি `map` কে ইটারেট করতে ৩টি মেথড আছে:
 
+<<<<<<< HEAD
 - `map.keys()` -- কালেকশনের কী(Key) এর একটি ইটারেবল রিটার্ন করে।
 - `map.values()` -- কালেকশনের ভ্যালু একটি ইটারেবল রিটার্ন করে।
 - `map.entries()` -- কালেকশনের `[key, value]` এর একটি ইটারেবল রিটার্ন করে।
+=======
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- returns an iterable for keys,
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- returns an iterable for values,
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 উদাহরণস্বরূপ:
 
@@ -160,7 +214,11 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
+<<<<<<< HEAD
 যদি আমরা কোন একটি `Object` হতে `Map` কে ইনিশিয়ালাইজ করতে চায়, সেক্ষেত্রে আমরা এই মেথডটি [Object.entries(obj)](mdn:js/Object/entries) ব্যবহার করতে পারি, কেননা এটি key/value আকারে একটি অ্যারে রিটার্ন করে।
+=======
+If we have a plain object, and we'd like to create a `Map` from it, then we can use built-in method [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) that returns an array of key/value pairs for an object exactly in that format.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 সুতরাং আমরা `Object` হতে `Map` কে এভাবে তৈরি করতে পারি:
 
@@ -231,16 +289,29 @@ let obj = Object.fromEntries(map); // omit .entries()
 
 ## Set
 
+<<<<<<< HEAD
 `Set` একটি বিশেষ কালেকশন - "ভ্যালুর সেট" (কী(Key) ছাড়া), যেখানে একটি ভ্যালু শুধুমাত্র একবার থাকবে।
+=======
+A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) is a special type collection - "set of values" (without keys), where each value may occur only once.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 এটির মেথডগুলো হল:
 
+<<<<<<< HEAD
 - `new Set(iterable)` -- সেট তৈরি, যদি কোন একটি `iterable` (অ্যারেও হতে পারে) আর্গুমেন্ট হিসেবে পাস করা হয়, তাহলে ইটারেবল এর ভ্যালুগুলো সেট এর ভ্যালু হবে।
 - `set.add(value)` -- `value` টি সংযুক্ত করবে, বিদ্যমান সেটকে রিটার্ন করে।
 - `set.delete(value)` -- `value` টি রিমুভ করবে, যদি `value` রিমুভড হয় তাহলে `true` অন্যথায় `false` রিটার্ন করবে।
 - `set.has(value)` -- Set এ `value` বিদ্যমান থাকলে রিটার্ন করবে `true` অন্যথায় `false`।
 - `set.clear()` -- সম্পূর্ণ Set এর কালেকশনকে রিমুভড করে।
 - `set.size` -- Set এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
+=======
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- adds a value, returns the set itself.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- removes everything from the set.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- is the elements count.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 `Set` এর প্রধান সুবিধাটি হল `set.add(value)` এ একই ভ্যালু একের অধিক সংরক্ষন হয় না। যার ফলে `Set` এর প্রতিটি `value` হয় স্বতন্ত্র।
 
@@ -270,7 +341,11 @@ for (let user of set) {
 }
 ```
 
+<<<<<<< HEAD
 একটি ইউনিক অ্যারের জন্য `Set` ব্যবহার করা যেতে পারে, অন্যথায় ডুপ্লিকেট ভ্যালু এড়াতে আমাদের প্রতিবার [arr.find](mdn:js/Array/find) ব্যবহার করা লাগবে। তবে এটির পারফরম্যান্স `Set` এর তুলনায় অনেক খারাপ, কেননা প্রতিবার এলিমেন্ট সংযুক্ত করার আগে আমাদের অ্যারেটিকে ইটারেট করা লাগে এবং যাচাই করা লাগে ভ্যালুটি আছে কিনা। এক্ষেত্রে `Set` ইন্টারনালি ইউনিক ভ্যালু যাচায় করে।
+=======
+The alternative to `Set` could be an array of users, and the code to check for duplicates on every insertion using [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). But the performance would be much worse, because this method walks through the whole array checking every element. `Set` is much better optimized internally for uniqueness checks.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 ## Set এ ইটারেশন
 
@@ -289,20 +364,35 @@ set.forEach((value, valueAgain, set) => {
 
 একটি মজার ব্যাপার লক্ষ্য করুন। কলব্যাকে আমরা ৩টি আর্গুমেন্ট পাস করছি `value`, `valueAgain`, `set` এখানে ২য় আর্গুমেন্ট `valueAgain` টিতে `value` পুনরায় পাস হচ্ছে। আসলে ১ম ও ২য় আর্গুমেন্টের মান একই।
 
+<<<<<<< HEAD
 `Map` এর সাথে সামঞ্জস্য রাখতে `forEach` এর কলব্যাকে ৩টি আর্গুমেন্ট পাস হয়। যদিও দেখতে কিছুটা অদ্ভুত তবে `Map` কে `Set` এ প্রতিস্থাপন করতে এটি সহায়তা করে বা এর উল্টোটা করতে।
+=======
+That's for compatibility with `Map` where the callback passed `forEach` has three arguments. Looks a bit strange, for sure. But this may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 `Map` এর মত `Set` ও কিছু ইটারেটর মেথড সাপোর্ট করে:
 
+<<<<<<< HEAD
 - `set.keys()` -- কালেকশনের ভ্যালু এর একটি ইটারেবল রিটার্ন করে
 - `set.values()` -- `set.keys()` এর মত, `Map` এর সাথে সামঞ্জস্য রাখতে এটি ইমপ্লিমেন্ট করা হয়েছে
 - `set.entries()` -- কালেকশনের `[key, value]` এর একটি ইটারেবল রিটার্ন করে, এটিও `Map` এর সাথে সামঞ্জস্য রাখতে এটি ইমপ্লিমেন্ট করা হয়েছে।
+=======
+- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- returns an iterable object for values,
+- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- same as `set.keys()`, for compatibility with `Map`,
+- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 ## সারাংশ
 
+<<<<<<< HEAD
 `Map` -- হল key/value এর কালেকশন
+=======
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- is a collection of keyed values.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 মেথডস এবং প্রপার্টি:
 
+<<<<<<< HEAD
 - `new Map()` -- নতুন Map তৈরি।
 - `map.set(key, value)` -- Map এ নতুন একটি রেকর্ড সংযুক্ত করতে।
 - `map.get(key)` --  Map এর কোন একটি রেকর্ড রিটার্ন করতে, যদি `key` টি Map এ না থাকে তাহলে `undefined` রিটার্ন করে।
@@ -310,21 +400,43 @@ set.forEach((value, valueAgain, set) => {
 - `map.delete(key)` -- Map এর কোন একটি রেকর্ড ডিলিট করতে।
 - `map.clear()` -- সম্পূর্ণ Map কালেকশনকে ডিলিট করতে।
 - `map.size` -- Map এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
+=======
+- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key, returns the map itself.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 রেগুলার `Object` এর সাথে পার্থক্য:
 
 - যেকোন ডাটা টাইপ কী হতে পারে এমনকি অবজেক্টেও।
 - এছাড়াও অতিরিক্ত কিছু মেথড এবং `size` প্রপার্টি।
 
+<<<<<<< HEAD
 `Set` -- স্বতন্ত্র ভ্যালু এর কালেকশন।
+=======
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- is a collection of unique values.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 মেথডস এবং প্রপার্টি:
 
+<<<<<<< HEAD
 - `new Set(iterable)` -- সেট তৈরি, যদি কোন একটি `iterable` (অ্যারেও হতে পারে) আর্গুমেন্ট হিসেবে পাস করা হয়, তাহলে ইটারেবল এর ভ্যালুগুলো সেট এর ভ্যালু হবে।
 - `set.add(value)` -- `value` টি সংযুক্ত করবে, বিদ্যমান সেটকে রিটার্ন করে।
 - `set.delete(value)` -- `value` টি রিমুভ করবে, যদি `value` রিমুভড হয় তাহলে `true` অন্যথায় `false` রিটার্ন করবে।
 - `set.has(value)` -- Set এ `value` বিদ্যমান থাকলে রিটার্ন করবে `true` অন্যথায় `false`।
 - `set.clear()` -- সম্পূর্ণ সেটের কালেকশনকে রিমুভড করে।
 - `set.size` -- Set এর টোটাল কালেকশন সংখ্যা রিটার্ন করে।
+=======
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- creates the set, with optional `iterable` (e.g. array) of values for initialization.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- adds a value (does nothing if `value` exists), returns the set itself.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- removes everything from the set.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- is the elements count.
+>>>>>>> d694e895efe89922a109702085b6ca1efeffea10
 
 `Map` এবং `Set` সর্বদায় ইনশার্সন অর্ডার অনুযায়ী ইটারেট হবে, সুতরাং আমরা বলতে পারি এই কালেকশন সর্বদা একই ক্রমে থাকে, এবং আমরা এদের সরাসরি পুনরায় সাজাতে পারব না তাদের ক্রমতালিকা অনুযায়ী।
