@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # ক্রোমে ডিবাগিং
+=======
+# Debugging in the browser
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 আরো জটিল জটিল কোড লিখার আগে ডিভাগিং সম্পর্কে জানা যাক -
 
@@ -38,7 +42,11 @@
 
 একটি স্টেটমেন্ট এক্সিকিউট করার পর তার রেজাল্ট নিচেই দেখতে পাবো ।
 
+<<<<<<< HEAD
 উদাহরণ হিসেবে এখানে `1+2` এর রেজাল্ট `3` এবং `hello("debugger")` কিছুই রিটার্ন করে না , সেক্ষেত্রে রেজাল্ট হবে `undefined` :
+=======
+For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ![](chrome-sources-console.svg)
 
@@ -64,12 +72,20 @@
 - ...ইত্যাদি ।
 
 ```smart header="Conditional breakpoints"
+<<<<<<< HEAD
 লাইন নাম্বারে *Right click* করে *conditional* ব্রেক পয়েন্ট তৈরি করা যায় । এটা তখনি ট্রিগ্রার করে যখন এক্সপ্রেশনটি সত্য হয় ।
+=======
+*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এটা আসলেই কার্যকর যখন আমাদের একটি নির্দিষ্ট ভেরিয়বল ভেলুতে থামা দরকার অথবা নির্দিষ্ট ফাংসন প্যারামিটারে ।
 ```
 
+<<<<<<< HEAD
 ## ডিভাগার কমান্ড
+=======
+## The command "debugger"
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 আমরা নিচের মত `debugger` কমান্ড ব্যবহার করেও কোড পজ করতে পারি ঃ
 
@@ -85,7 +101,11 @@ function hello(name) {
 }
 ```
 
+<<<<<<< HEAD
 এটি খুবই সুবিধাজনক যখন আমরা একটি কোড এডিটরে থাকি এবং ব্রেকপয়েন্ট সেট করতে ব্রাউজারের ডেভলপার টুলে যাওয়া লাগে না ।
+=======
+Such command works only when the development tools are open, otherwise the browser ignores it.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ## পজ করুন এবং চারদিকে লক্ষ্য করুন
 
@@ -103,7 +123,11 @@ function hello(name) {
 
 2. **`Call Stack` -- নেস্টেড কল গুলো দেখায়.**
 
+<<<<<<< HEAD
    এই মূহুর্তে ডিভাগার `hello()` কল এর ভিতর রয়েছে , আর এটি `index.html` এর মধ্যে থাকা স্ক্রিপ্ট থেকে কল হয়েছে ( কোন ফাংশন ছিলো না , তাই এটাকে এননিমাউস বলা হয় ) ।
+=======
+    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
    যদি আপনি কল স্ট্যাক থেকে যেকোন স্ট্যাক আইটেম (e.g. "anonymous") ক্লিক করেন তাহলে ডিভাগার ঠিক সেই কোডেই জাম্প করবে এবং থাকা সকল ভেরিয়েবল গুলো পরিক্ষা করে দেখা যাবে।
 
@@ -139,11 +163,20 @@ function hello(name) {
 
 বার বার এটিতে ক্লিক করলে স্টেটমেন্টগুলো একের পর এক এক্সিকিউশান হতে থাকবে ।
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": পরবর্তী কমান্ড চালান তবে ফাংশানে যাবেন না, hotkey `key:F10`.
 
 অনেকটা আগের কমান্ডের "Step" মতই কিন্তু একটু অন্যভাবে আচরন করে যদি পরবর্তি স্টেটমেন্টটি একটি ফাংশন কল হয়ে থাকে ( এটা বিল্ট ইন না `alert` এর মত কিন্তু এটি আমাদের নিজস্ব একটি ফাংশন )
 
 যদি আমরা সেগুলি তুলনা করি, “Step” কমান্ডটি একটি নেস্টেড ফাংশন কলে যায় এবং তার প্রথম লাইনে এক্সিকিউশনকে পজ করে, যখন “Step over” এক্সিকিউট হয় তখন নেস্টেড ফাংশন অদৃশ্যভাবে কল হয়ে থাকে সেই সাথে ফাংশন ইন্টারনাল গুলো এড়িয়ে যায়।
+=======
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+
+    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+
+    The execution is then paused immediately after that function call.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 সেই ফাংশন কলের পরপরই এক্সিকিউশান আবার পজ হয়।
 
@@ -161,11 +194,16 @@ function hello(name) {
 
 <span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable সকল ব্রেক পয়েন্টগুলো
 
+<<<<<<< HEAD
 এই বাটনটি এক্সিকিউশন করে না , শুধুমাত্র ব্রেকপয়েন্টকে অন/অফ করার জন্য ব্যবহার হয় ।
 
 <span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable অটোম্যাটিক পজ হয় যদি কোন ত্রুটি ধরা পড়ে
 
 অন থাকা অবস্থায় এবং ডেভলপার টুল ওপেন থাকলে স্ক্রিপ্ট এক্সিকিউশনের সময় একটি ত্রুটি ধরা পড়লে স্বয়ংক্রিয়ভাবে এটি পজ হয় ৷ তারপর আমরা ডিবাগারে ভেরিয়েবল বিশ্লেষণ করে দেখতে পারি কি ভুল হয়েছে। সুতরাং যদি আমাদের স্ক্রিপ্ট একটি ত্রুটির জন্য এক্সিকিউশান বন্ধ হয়ে যায় তাহলে আমরা ডিবাগার খুলতে পারি এবং এই অপশানটি অন করে পেজ রিলোড দিয়ে দেখতে পারি যে কোথায় এটি বন্ধ হয় এবং বর্তমান অবস্থা কি তা জানতে পারি ।
+=======
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ```smart header="Continue to here"
 একটি লাইনের উপর রাইট ক্লিক করে কন্টেক্সট মেনু ওপেন করলে একটা "Continue to here" অপশান পাবো ।
@@ -198,7 +236,11 @@ for (let i = 0; i < 5; i++) {
 2. `debugger` স্টেটমেন্ট
 3. এরর ( যদি ডেভটুল ওপেন থাকে এবং বাটন <span class="devtools" style="background-position:-90px -146px"></span> অন থাকলে).
 
+<<<<<<< HEAD
 যখন পজ হয় তখন আমরা ডিবাগ করতে পারি - ভেরিয়েবল পরীক্ষা করে এবং কোডটি ট্রেস করে দেখতে পারি যে এক্সিকিউশনটি কোথায় ভুল হয়েছে।
+=======
+When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এখানে আরো অনেক অপশান রয়েছে ডেভটুলসের যা আমরা কভার করিনি । সম্পূর্ণ তথ্য এখানে রয়েছে - <https://developers.google.com/web/tools/chrome-devtools>
 
