@@ -31,17 +31,25 @@ alert( regexp.test("Bad characters: $@#") ); // false
 
 ```js run
 let regexp = /^(\w+\s?)*$/;
-let str = "An input string that takes a long time or even makes this regexp to hang!";
+let str = "An input string that takes a long time or even makes this regexp hang!";
 
 // এটি অনেক সময় নিবে
 alert( regexp.test(str) );
 ```
 
+<<<<<<< HEAD
 কিছু রেগুলার এক্সপ্রেশন ইঞ্জিন এই ধরণের সার্চ করতে পারে, তবে বেশিরভাগই পারেনা। ব্রাউজার ইঞ্জিন সাধারণত হ্যাং হয়ে যায়।
+=======
+To be fair, let's note that some regular expression engines can handle such a search effectively, for example V8 engine version starting from 8.8 can do that (so Google Chrome 88 doesn't hang here), while Firefox browser does hang. 
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ## উদাহরণকে সহজীকরণ
 
+<<<<<<< HEAD
 এখানে কি ঘটছে? কেন রেগুলার এক্সপ্রেশন ইঞ্জিন "হ্যাং" হয়?
+=======
+What's the matter? Why does the regular expression hang?
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এটি বুঝার জন্য, চলুন সহজ একটি উদাহরণ দেখি: স্পেসটি বাদ দেন `pattern:\s?`। সুতরাং এটি হবে `pattern:^(\w+)*$`।
 
@@ -60,7 +68,11 @@ alert( regexp.test(str) );
 
 প্রথমত, আমরা লক্ষ্য করছি আমাদের প্যাটার্নটি `pattern:(\d+)*` কিছুটা অদ্ভুত। কোয়ান্টিফায়ারটি `pattern:*` এখানে অপ্রয়োজনীয় মনে হচ্ছে। যদি আমরা সংখ্যা চাই, আমরা `pattern:\d+` এটি ব্যবহার করতে পারি।
 
+<<<<<<< HEAD
 প্রকৃতপক্ষে, রেগুলার এক্সপ্রেশনটি আর্টিফিশিয়াল, পূর্বের উদাহরণে আমরা এটি দেখেছি। কিন্তু এটি কেন এত ধীরে কাজ করছে। চলুন আগে এটি বুঝি, এবং তারপর আমাদের কাছে উপরের উদাহরণটি আরো সুস্পষ্ট হবে।
+=======
+Indeed, the regexp is artificial; we got it by simplifying the previous example. But the reason why it is slow is the same. So let's understand it, and then the previous example will become obvious.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 `subject:123456789z` এর মধ্যে `pattern:^(\d+)*$` এর দ্বারা অনুসন্ধানে কি ঘটে(সংক্ষিপ্তরূপটি আমাদের বুঝার সুবিধার্তে শেষে আমরা একটি অঙ্ক নয় এমন একটি ক্যারাক্টার `subject:z` সবার শেষে রেখেছি), কেন এটি এত সময় নেয়?
 
@@ -73,7 +85,13 @@ alert( regexp.test(str) );
     (123456789)z
     ```
 
+<<<<<<< HEAD
     সকল অঙ্ক নেয়ার পর, `pattern:\d+` অনুসন্ধানকৃত মানটি (`match:123456789`)।
+=======
+    After all digits are consumed, `pattern:\d+` is considered found (as `match:123456789`).
+
+    Then the star quantifier `pattern:(\d+)*` applies. But there are no more digits in the text, so the star doesn't give anything.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
     এরপর এটি `pattern:(\d+)*` কোয়ান্টিফায়ার প্রয়োগ করবে, কিন্ত এখানে আর কোন অঙ্ক নেই, সুতরাং * কোন কিছু দিবে না।
 
@@ -111,7 +129,11 @@ alert( regexp.test(str) );
     ```
 
 
+<<<<<<< HEAD
 ৪. আবারো কোন মিল খুঁজে পাবে না, সুতরাং ইঞ্জিন আবারো ব্যাকট্রাকিং চালাবে, এবং সংখ্যার পুনরাবৃত্তি কমাবে। ব্যাকট্রাকিং সাধারণত এভাবে কাজ করে: শেষ গ্রীডি কোয়ান্টিফায়ার যত সম্ভব সংখ্যার পুনরাবৃত্তি কমাবে। তারপর এর পূর্ববর্তী কোয়ান্টিফায়ারের জন্য কমাবে, এভাবেই চলতে থাকে।
+=======
+4. There's no match, so the engine will continue backtracking, decreasing the number of repetitions. Backtracking generally works like this: the last greedy quantifier decreases the number of repetitions until it reaches the minimum. Then the previous greedy quantifier decreases, and so on.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
     সকল সম্ভাব্যতা যাচাইয়ের চেষ্টা করবে। যেমন:
 
@@ -160,7 +182,11 @@ alert( regexp.test(str) );
 
 ## পুনরায় শব্দ এবং স্ট্রিং
 
+<<<<<<< HEAD
 একই ব্যাপারটি ঘটে আমাদের প্রথম উদাহরণে, যখন আমরা প্যাটার্নটি দ্বারা `pattern:^(\w+\s?)*$` স্ট্রিংয়ে  `subject:An input that hangs!` শব্দের অনুসন্ধান চালায়।
+=======
+The similar thing happens in our first example, when we look for words by pattern `pattern:^(\w+\s?)*$` in the string `subject:An input that hangs!`.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 কেননা আমরা শব্দকে `pattern:\w+` এক বা একাধিক উপায়ে প্রকাশ করতে পারি:
 
@@ -196,7 +222,7 @@ alert( regexp.test(str) );
 
 ```js run
 let regexp = /^(\w+\s)*\w*$/;
-let str = "An input string that takes a long time or even makes this regex to hang!";
+let str = "An input string that takes a long time or even makes this regex hang!";
 
 alert( regexp.test(str) ); // false
 ```
@@ -220,7 +246,11 @@ alert( regexp.test(str) ); // false
 
 ## প্রিভেন্ট ব্যাকট্রাকিং
 
+<<<<<<< HEAD
 পুনরায় রেগুলার এক্সপ্রেশন লিখা সবসময় সহজ নয়। উপরের উদাহরণে এটি পরিবর্তন করা সহজ ছিল, কিন্তু সবসময় আমাদের কাছে এটি সহজবোধ্য থাকে না।
+=======
+It's not always convenient to rewrite a regexp though. In the example above it was easy, but it's not always obvious how to do it.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এছাড়াও, পুনরায় লিখিত রেগুলার এক্সপ্রেশন আরো জটিল হয়, এবং এটি ভালোও না। এমনিতেও রেগুলার এক্সপ্রেশনসমূহ যথেষ্ট জটিল।
 
@@ -238,15 +268,27 @@ alert( regexp.test(str) ); // false
 (1234)(56789)!
 ```
 
+<<<<<<< HEAD
 এবং আমাদের মূল উদাহারণটিতে `pattern:^(\w+\s?)*$` আমরা চাই ব্যাকট্রাকিংকে বাদ দিতে `pattern:\w+`। সুতরাং: `pattern:\w+` এটি সম্ভাব্য পুরো শব্দের সাথে মিলবে। পুনরাবৃত্তি কে না কমিয়ে আমরা `pattern:\w+` কে `pattern:\w+\w+` দুটি শব্দে বিভক্ত করতে পারি।
+=======
+And in the original example `pattern:^(\w+\s?)*$` we may want to forbid backtracking in `pattern:\w+`. That is: `pattern:\w+` should match a whole word, with the maximal possible length. There's no need to lower the repetitions count in `pattern:\w+` or to split it into two words `pattern:\w+\w+` and so on.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 আধুনিক রেগুলার এক্সপ্রেশ ইঞ্জিন গুলো পসেসিভ কোয়ান্টিফায়ার সমর্থন করে। পসেসিভের কোয়ান্টিফায়ারের জন্য কোয়ান্টিফায়ারের পরে `pattern:+`  যোগ করলে হবে। ব্যাকট্রাকিংকে থামাতে আমরা `pattern:\d+` এর বদলে  `pattern:\d++` লিখব।
 
+<<<<<<< HEAD
 পসেসিভের কোয়ান্টিফায়ার সমূহ আরো সহজ। এরা ব্যাকট্রাকিং ছাড়া যতটা সম্ভব মেলাতে চেষ্টা করে। ব্যাকট্রাকিং ছাড়া এই অনুসন্ধানটি আরো সহজবোধ্য।
+=======
+Possessive quantifiers are in fact simpler than "regular" ones. They just match as many as they can, without any backtracking. The search process without backtracking is simpler.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এদেরকে "এটমিক ক্যাপচারিং গ্রুপও" বলা হয় - প্যারেন্টেসিসের ভিতর ব্যাকট্রাকিংয় রোধের একটি উপায়।
 
+<<<<<<< HEAD
 ...কিন্তু দুর্ভাগ্যবশত, জাভাস্ক্রিপ্টে এটি সাপোর্ট করে না।
+=======
+...But the bad news is that, unfortunately, in JavaScript they are not supported.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 তবে লুকঅ্যাহেডের মাধ্যমে আমরা অনূরূপ কাজ করতে পারি।
 
@@ -254,7 +296,11 @@ alert( regexp.test(str) ); // false
 
 এখন আমরা আমাদের মূল সমস্যাটির আলোচনা করব। আমরা এমন একটি কোয়ান্টিফায়ার চাই, যেমন `pattern:+` যেন ব্যাকট্রাক না করে, কেননা অনেক সময় ব্যাকট্রাকিং কাজে আসে না।
 
+<<<<<<< HEAD
 `pattern:(?=(\w+))\1` প্যাটার্নটি ব্যাকট্রাকিং ছাড়াই সর্বোচ্চ সংখ্যক `pattern:\w` পুনরাবৃত্তিকে ক্যাপচার করে। অবশ্য, আমরা `pattern:\w` এর পরিবর্তে অন্যান্য প্যাটার্নও নিতে পারি।
+=======
+The pattern to take as many repetitions of `pattern:\w` as possible without backtracking is: `pattern:(?=(\w+))\1`. Of course, we could take another pattern instead of `pattern:\w`.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এটি দেখতে যদিও বিদঘুটে, কিন্তু আসলেই এটি সাধারণ একটি পরিবর্তন।
 
@@ -283,7 +329,11 @@ alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
 আমরা `pattern:(?=(\w+))\1` এই প্যাটার্নে `pattern:\w` এর পরিবর্তে আরো জটিল এক্সপ্রেশন রাখতে পারি, যদি আমরা `pattern:+` এর ব্যাকট্রাকিং রোধ করতে চায়।
 
 ```smart
+<<<<<<< HEAD
 পসেসিভ কোয়ান্টফায়ার এবং লুকঅ্যাহেড সম্পর্কে আরো বিস্তারিত জানতে এই আর্টিকেলগুলো দেখুন  [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) এবং [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups)।
+=======
+There's more about the relation between possessive quantifiers and lookahead in articles [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](https://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) and [Mimicking Atomic Groups](https://blog.stevenlevithan.com/archives/mimic-atomic-groups).
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 ```
 
 চলুন আমাদের প্রথম উদাহরণটি লুকঅ্যাহেড এর সাহায্যে আবার লিখি যা ব্যাকট্রাকিং রোধ করে:
@@ -293,7 +343,7 @@ let regexp = /^((?=(\w+))\2\s?)*$/;
 
 alert( regexp.test("A good string") ); // true
 
-let str = "An input string that takes a long time or even makes this regex to hang!";
+let str = "An input string that takes a long time or even makes this regex hang!";
 
 alert( regexp.test(str) ); // ভুল, এবং দ্রুত কাজ করছে!
 ```
@@ -304,7 +354,7 @@ alert( regexp.test(str) ); // ভুল, এবং দ্রুত কাজ ক
 // parentheses are named ?<word>, referenced as \k<word>
 let regexp = /^((?=(?<word>\w+))\k<word>\s?)*$/;
 
-let str = "An input string that takes a long time or even makes this regex to hang!";
+let str = "An input string that takes a long time or even makes this regex hang!";
 
 alert( regexp.test(str) ); // false
 
