@@ -16,7 +16,7 @@ alert( /^Mary/.test(str1) ); // true
 অনুরূপভাবে, আমরা বাক্যটি `snow` দ্বারা শেষ কিনা যাচাই করতে পারি এভাবে `pattern:snow$`:
 
 ```js run
-let str1 = "it's fleece was white as snow";
+let str1 = "its fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 
