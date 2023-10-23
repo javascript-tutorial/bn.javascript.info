@@ -50,23 +50,46 @@
 যেমন:
 
 ```js run
+<<<<<<< HEAD
 alert( 5 % 2 ); // ১, ৫ কে ২ দিয়ে ভাগ করার পর ভাগশেষ
 alert( 8 % 3 ); // ২, ৮ কে ৩ দিয়ে ভাগ করার পর ভাগশেষ
+=======
+alert( 5 % 2 ); // 1, the remainder of 5 divided by 2
+alert( 8 % 3 ); // 2, the remainder of 8 divided by 3
+alert( 8 % 4 ); // 0, the remainder of 8 divided by 4
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 ```
 
 ### সূচক **
 
+<<<<<<< HEAD
 সূচক অপারেটর `a ** b`, `a` কে `b` বার নিজেকে নিজে গুণ করে।
+=======
+The exponentiation operator `a ** b` raises `a` to the power of `b`.
+
+In school maths, we write that as a<sup>b</sup>.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 যেমন:
 
 ```js run
+<<<<<<< HEAD
 alert( 2 ** 2 ); // ৪  (দুইকে দুইবার গুণ)
 alert( 2 ** 3 ); // ৮  (২ * ২ * ২, ৩ বার)
 alert( 2 ** 4 ); // ১৬ (২ * ২ * ২ * ২, ৪ বার)
 ```
 
 গণিতে সূচক নন-ইন্টিজার বা অপূর্ণ সংখ্যার জন্যও প্রযোজ্য। যেমন, বর্গমূল হচ্ছে `১/২` দিয়ে ঘাত করা:
+=======
+alert( 2 ** 2 ); // 2² = 4
+alert( 2 ** 3 ); // 2³ = 8
+alert( 2 ** 4 ); // 2⁴ = 16
+```
+
+Just like in maths, the exponentiation operator is defined for non-integer numbers as well.
+
+For example, a square root is an exponentiation by ½:
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ```js run
 alert( 4 ** (1/2) ); // ২ (কোনো সংখ্যার সূচক ১/২ আর সংখ্যাটির বর্গমূল একই)
@@ -76,7 +99,11 @@ alert( 8 ** (1/3) ); // ২ (কোনো সংখ্যার সূচক ১
 
 ## বাইনারি + দিয়ে স্ট্রিং জোড়া দেয়া
 
+<<<<<<< HEAD
 এবার আমরা জাভাস্ক্রিপ্ট অপারেটরের কিছু বিশেষত্ব দেখি যেগুলো স্কুলের পাটিগণিতের বাইরে।
+=======
+Let's meet the features of JavaScript operators that are beyond school arithmetics.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 সাধারণত, প্লাস অপারেটর `+` সংখ্যা যোগ করে।
 
@@ -104,7 +131,16 @@ alert( 2 + '1' ); // "21"
 alert(2 + 2 + '1' ); // "41", "221" না
 ```
 
+<<<<<<< HEAD
 এখানে অপারেটরগুলো একটির পর আরেকটি কাজ করেছে। প্রথম `+` দুইটি সংখ্যাকে যোগ করেছে, তাই এটা `4` রিটার্ন করে, তারপর পরের `+` এর সাথে স্ট্রিং `1` যোগ করে, তাই `4 + '1' = 41`।
+=======
+Here, operators work one after another. The first `+` sums two numbers, so it returns `4`, then the next `+` adds the string `1` to it, so it's like `4 + '1' = '41'`.
+
+```js run
+alert('1' + 2 + 2); // "122" and not "14"
+```
+Here, the first operand is a string, the compiler treats the other two operands as strings too. The `2` gets concatenated to `'1'`, so it's like `'1' + 2 = "12"` and `"12" + 2 = "122"`.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 বাইনারি `+` ই একমাত্র অপারেটর যেটি স্ট্রিং সাপোর্ট করে। অন্যন্য অপারেটর শুধু সংখ্যা নিয়ে কাজ করে আর সবসময় এর অপারেন্ডগুলোকে সংখ্যায় রূপান্তর করে নেয়।
 
@@ -185,6 +221,7 @@ alert( +apples + +oranges ); // ৫
 | প্রিসিডেন্স | নাম | চিহ্ন |
 |------------|------|------|
 | ... | ... | ... |
+<<<<<<< HEAD
 | ১৭ | ইউনারি প্লাস | `+` |
 | ১৭ | ইউনারি নেগেশন | `-` |
 | ১৬ | সূচক | `**` |
@@ -197,10 +234,28 @@ alert( +apples + +oranges ); // ৫
 | ... | ... | ... |
 
 আমরা দেখতে পাচ্ছি, "ইউনারি প্লাসের" প্রায়োরিটি `১৭` যা যোগের (বাইনারি প্লাস) `১৩` এর চেয়ে বেশি। এজন্য `"+apples + +oranges"` এক্সপ্রেশনে ইউনারি প্লাস বাইনারি প্লাসের আগে কাজ করেছিলো।
+=======
+| 14 | unary plus | `+` |
+| 14 | unary negation | `-` |
+| 13 | exponentiation | `**` |
+| 12 | multiplication | `*` |
+| 12 | division | `/` |
+| 11 | addition | `+` |
+| 11 | subtraction | `-` |
+| ... | ... | ... |
+| 2 | assignment | `=` |
+| ... | ... | ... |
+
+As we can see, the "unary plus" has a priority of `14` which is higher than the `11` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ## অ্যাসাইনমেন্ট
 
+<<<<<<< HEAD
 খেয়াল রাখবেন অ্যাসাইনমেন্টও `=` একটি অপারেটর। এটা প্রিসিডেন্স টেবিলের প্রায় নিচের দিকে খুব কম প্রায়োরিটি `৩` নিয়ে অবস্থান করছে।
+=======
+Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `2`.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 এজন্য যখন আমরা `x = 2 * 2 + 1` এভাবে ভ্যারিয়েবল অ্যাসাইন করি তখন ক্যালকুলেশন আগে করা হয় আর তারপর `=` এর কাজ হয় যা হলো `x` এ ফলাফলটা জমা রাখা।
 
@@ -214,7 +269,11 @@ alert( x ); // ৫
 
 `=` যে একট অপারেটর, কোনো জাদুকরি ল্যাঙ্গুয়েজ কনস্ট্রাকট না, তার একটা মজার প্রমাণ আছে।
 
+<<<<<<< HEAD
 জাভাস্ক্রিপ্টের বেশিরভাগ অপারেটরই একটি ভ্যালু রিটার্ন করে। আমরা `+` আর `-` এর ক্ষেত্রে তো বুঝতেই পারছি, কিন্তু এটা `=` এর জন্যও প্রযোজ্য।
+=======
+All operators in JavaScript return a value. That's obvious for `+` and `-`, but also true for `=`.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 `x = value` এক্সপ্রেশন কল `value` কে `x` এ লিখে *এবং তারপর সেটা রিটার্ন করে*।
 
@@ -294,9 +353,13 @@ alert( n ); // 14
 ```js run
 let n = 2;
 
-n *= 3 + 5;
+n *= 3 + 5; // right part evaluated first, same as n *= 8
 
+<<<<<<< HEAD
 alert( n ); // 16  (ডান অংশ আগে ইভ্যালুয়েট হয়, n *= 8 এর অনুরূপ)
+=======
+alert( n ); // 16
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 ```
 
 ## ইনক্রিমেন্ট/ডিক্রিমেন্ট
@@ -428,7 +491,11 @@ counter++;
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
+<<<<<<< HEAD
 এই অপারেটরগুলো খুব কম ক্ষেত্রে যখন আমাদের সংখ্যা নিয়ে খুব নিচের (বিটওয়াইজ) লেভেলে কাজ করতে হয় তখনই শুধু ব্যবহার হয়। আমাদের এই অপারেটরগুলো এরপর আর দরকার হচ্ছে না, যেহেতু ওয়েব ডেভেলপমেন্টে এদের খুব কম কাজই আছে, কিন্তু বিশেষ কিছু ক্ষেত্র, যেমন ক্রিপ্টোগ্রাফিতে এদের দরকার হবে। আপনি MDN এর [বিটওয়াইজ অপারেটর](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) অধ্যায়টি পড়তে পারেন যখন দরকার পড়বে।
+=======
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) chapter on MDN when a need arises.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ## কমা
 

@@ -2,9 +2,15 @@
 
 একটি HTML পেজের লাইফসাইকেলে তিনটি গুরুত্বপূর্ণ ইভেন্ট আছে:
 
+<<<<<<< HEAD
 - `DOMContentLoaded` -- সকল HTML কন্টেন্ট লোড হয়ে DOM ট্রি বিল্ট হলে এটি ট্রিগার হয়, তবে এক্সটার্নাল রিসোর্স যেমন `<img>` ট্যাগ এর সোর্স বা `<iframe>` সোর্স লোড হওয়ার আগেই এই ইভেন্টটি ট্রিগার হয়।
 - `load` -- HTML কন্টেন্ট লোড এবং সকল এক্সটার্নাল রিসোর্স লোড হওয়ার পর এই ইভেন্টটি ট্রিগার হয়।
 - `beforeunload/unload` -- ইউজার পেজ লিভ করার পূর্বে।
+=======
+- `DOMContentLoaded` -- the browser fully loaded HTML, and the DOM tree is built, but external resources like pictures `<img>` and stylesheets may not yet have loaded.
+- `load` -- not only HTML is loaded, but also all the external resources: images, styles etc.
+- `beforeunload/unload` -- the user is leaving the page.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 নিম্নোক্ত কাজে ইভেন্টসমূহ কাজে আসতে পারে:
 
@@ -45,7 +51,11 @@ document.addEventListener("DOMContentLoaded", ready);
 <img id="img" src="https://en.js.cx/clipart/train.gif?speed=1&cache=0">
 ```
 
+<<<<<<< HEAD
 উপরের উদাহরণে `DOMContentLoaded` হ্যান্ডালার এক্সিকিউট হবে DOM ট্রি বিল্ড হওয়ার পর, সুতরাং আমরা সকল এলিমেন্ট অ্যাক্সেস করতে পারব, এমনকি `<img>` ও।
+=======
+In the example, the `DOMContentLoaded` handler runs when the document is loaded, so it can see all the elements, including `<img>` below.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 কিন্তু এটির সোর্স ডাওনলোড না হওয়ায় সাইজ শূন্য দেখাবে।
 
@@ -88,7 +98,7 @@ document.addEventListener("DOMContentLoaded", ready);
 ```html run
 <link type="text/css" rel="stylesheet" href="style.css">
 <script>
-  // the script doesn't not execute until the stylesheet is loaded
+  // the script doesn't execute until the stylesheet is loaded
   alert(getComputedStyle(document.body).marginTop);
 </script>
 ```
@@ -114,7 +124,11 @@ document.addEventListener("DOMContentLoaded", ready);
 
 ```html run height=200 refresh
 <script>
+<<<<<<< HEAD
   window.onload = function() { // window.addEventListener('load', (event) => { এভাবেও ডিফাইন করতে পারি
+=======
+  window.onload = function() { // can also use window.addEventListener('load', (event) => {
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
     alert('Page loaded');
 
     // image is loaded at this time
@@ -145,7 +159,7 @@ let analyticsData = { /* object with gathered data */ };
 
 window.addEventListener("unload", function() {
   navigator.sendBeacon("/analytics", JSON.stringify(analyticsData));
-};
+});
 ```
 
 - রিকুয়েস্ট মেথডটি হল POST।
@@ -184,6 +198,26 @@ window.onbeforeunload = function() {
 ```
 
 এই ইভেন্টটির মাধ্যমে অনেক ডেভলাপার ইউজার কে বিভিন্ন রকমের মেসেজ দেখিয়ে বিভ্রান্তি করার কারণে এটি পরিবর্তন করা হয়েছে। তবে ব্রাউজারগুলোর পুরনো ভার্সনগুলোতে এটি কাজ করতে পারে, তবে মেসেজটি কাস্টমাইজ করার কোন উপায় নেই।
+
+````warn header="The `event.preventDefault()` doesn't work from a `beforeunload` handler"
+That may sound weird, but most browsers ignore `event.preventDefault()`.
+
+Which means, following code may not work:
+```js run
+window.addEventListener("beforeunload", (event) => {
+  // doesn't work, so this event handler doesn't do anything
+	event.preventDefault();
+});
+```
+
+Instead, in such handlers one should set `event.returnValue` to a string to get the result similar to the code above:
+```js run
+window.addEventListener("beforeunload", (event) => {
+  // works, same as returning from window.onbeforeunload
+	event.returnValue = "There are unsaved changes. Leave now?";
+});
+```
+````
 
 ## readyState
 
@@ -245,7 +279,7 @@ document.addEventListener('readystatechange', () => console.log(document.readySt
 
 <iframe src="iframe.html" onload="log('iframe onload')"></iframe>
 
-<img src="http://en.js.cx/clipart/train.gif" id="img">
+<img src="https://en.js.cx/clipart/train.gif" id="img">
 <script>
   img.onload = () => log('img onload');
 </script>
