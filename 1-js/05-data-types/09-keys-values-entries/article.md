@@ -1,42 +1,42 @@
 
 # Object.keys, values, entries
 
-Let's step away from the individual data structures and talk about the iterations over them.
+চলুন প্রতিটি ডাটা স্ট্রাকচার এবং তাদের ইটারেশন নিয়ে আরো কিছু ব্যাপার জানা যাক।
 
-In the previous chapter we saw methods `map.keys()`, `map.values()`, `map.entries()`.
+পূর্বের অধ্যায়ে আমরা `map.keys()`, `map.values()`, `map.entries()` মেথডসমূহ দেখেছি।
 
-These methods are generic, there is a common agreement to use them for data structures. If we ever create a data structure of our own, we should implement them too.
+এইগুলো জেনেরিক মেথড, অর্থাৎ প্রতিটি ডাটা স্ট্রাকচারের কমন মেথড। যদি আমরা আমাদের নিজস্ব কোন ডাটা স্ট্রাকচারও তৈরি করি তাহলে ঐ ডাটা স্ট্রাকচারেও এই মেথডগুলো ইপ্লিমেন্ট করা উচিত।
 
-They are supported for:
+নিচের ডাটা স্ট্রাকচারগুলোতেও মেথডগুলো আছে:
 
 - `Map`
 - `Set`
 - `Array`
 
-Plain objects also support similar methods, but the syntax is a bit different.
+অবজেক্টেও মেথডগুলো আছে, তবে এর সিনট্যাক্স কিছুটা ভিন্ন।
 
 ## Object.keys, values, entries
 
-For plain objects, the following methods are available:
+অবজেক্টের মেথডসমূহ হল:
 
-- [Object.keys(obj)](mdn:js/Object/keys) -- returns an array of keys.
-- [Object.values(obj)](mdn:js/Object/values) -- returns an array of values.
-- [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of `[key, value]` pairs.
+- [Object.keys(obj)](mdn:js/Object/keys) -- কী এর অ্যারে।
+- [Object.values(obj)](mdn:js/Object/values) -- ভ্যালু এর অ্যারে।
+- [Object.entries(obj)](mdn:js/Object/entries) -- `[key, value]` যুক্ত অ্যারে।
 
-Please note the distinctions (compared to map for example):
+এখানে `Map` এর সাথে `Object` এর মেথডসমূহের পার্থক্য দেখানো হল:
 
 |             | Map              | Object       |
 |-------------|------------------|--------------|
-| Call syntax | `map.keys()`  | `Object.keys(obj)`, but not `obj.keys()` |
-| Returns     | iterable    | "real" Array                     |
+| সিনট্যাক্স | `map.keys()`  | `obj.keys()` নই `Object.keys(obj)` |
+| Return ভ্যালু     | Iterable    | Array                     |
 
-The first difference is that we have to call `Object.keys(obj)`, and not `obj.keys()`.
+প্রথম পার্থক্যটি আমরা দেখেছি অন্যান্য ডাটা স্ট্রাকচারের মত `obj.keys()` এর বদলে `Object.keys(obj)` কল করছি।
 
-Why so? The main reason is flexibility. Remember, objects are a base of all complex structures in JavaScript. So we may have an object of our own like `data` that implements its own `data.values()` method. And we still can call `Object.values(data)` on it.
+এমন কেন? প্রধান কারণ হল সহজযোগ্য করা। কেননা জাভাস্ক্রিপ্টের যে কোন ডাটা স্ট্রাকচার অবজেক্টের উপর ভিত্তি করে তৈরি হয়। তাই আমরা আমাদের নিজস্ব ডাটা স্ট্রাকচারের জন্য `data.values()` মেথড ইমপ্লিমেন্ট করতে পারি। এবং আমরা চাইলে আমাদের বেস অবজেক্টকেও কল করতে পারব`Object.values(data)`।
 
-The second difference is that `Object.*` methods return "real" array objects, not just an iterable. That's mainly for historical reasons.
+দ্বিতীয় পার্থক্যটি হল `Object.*` এর মেথডগুলো অ্যারে রিটার্ন করে।
 
-For instance:
+যেমন:
 
 ```js
 let user = {
@@ -49,7 +49,7 @@ let user = {
 - `Object.values(user) = ["John", 30]`
 - `Object.entries(user) = [ ["name","John"], ["age",30] ]`
 
-Here's an example of using `Object.values` to loop over property values:
+নিচের উদাহরণে, আমরা `Object.values` এর সাহায্যে প্রপার্টিগুলোর ভ্যালু অ্যাক্সেস করি:
 
 ```js run
 let user = {
@@ -63,24 +63,24 @@ for (let value of Object.values(user)) {
 }
 ```
 
-```warn header="Object.keys/values/entries ignore symbolic properties"
-Just like a `for..in` loop, these methods ignore properties that use `Symbol(...)` as keys.
+```warn header="Object.keys/values/entries` মেথড `Symbol(...)` দ্বারা ডিক্লেয়ার প্রপার্টিগুলো ইগনোর করে"
+`for..in` লুপের মত মেথডগুলো `Symbol(...)` দ্বারা ডিক্লেয়ার প্রপার্টিগুলোকে অ্যাক্সেস করে না।
 
-Usually that's convenient. But if we want symbolic keys too, then there's a separate method [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) that returns an array of only symbolic keys. Also, there exist a method [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys.
+এটিই সুবিধাজনক। তবে যদি আমাদের সিম্বলিক প্রপার্টি সমূহ লাগে, তাহলে এর জন্য আরেকটি বিশেষ মেথড আছে [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) যা শুধুমাত্র সিম্বলিক প্রপার্টিগুলো অ্যারে আকারে রিটার্ন করে। এবং সকল প্রপার্টির জন্য আরেকটি [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) মেথড আছে।
 ```
 
 
-## Transforming objects
+## অবজেক্টকে পরিবর্তন
 
-Objects lack many methods that exist for arrays, e.g. `map`, `filter` and others.
+অ্যারের অনেক মেথড আছে যা অবজেক্টে নেই, যেমন `map`, `filter` ইত্যাদি।
 
-If we'd like to apply them, then we can use `Object.entries` followed by `Object.fromEntries`:
+যদি আমরা সেসব মেথড ব্যবহার করতে চাই তাহলে `Object.fromEntries` এ `Object.entries` ব্যবহারের মাধ্যমে করতে পারি:
 
-1. Use `Object.entries(obj)` to get an array of key/value pairs from `obj`.
-2. Use array methods on that array, e.g. `map`.
-3. Use `Object.fromEntries(array)` on the resulting array to turn it back into an object.
+1. `obj` এর মান গুলোকে কী/ভ্যালু অ্যারে হিসেবে পেতে `Object.entries(obj)` কল করি।
+2. এখন ঐ অ্যারেতে মেথডগুলো ব্যবহার করতে পারি, যেমন `map`।
+3. এখন রিটার্নকৃত অ্যারেকে অবজেক্টে রূপান্তর করতে `Object.fromEntries(array)` কল করি।
 
-For example, we have an object with prices, and would like to double them:
+নিচের উদাহরণটি দেখুন:
 
 ```js run
 let prices = {
@@ -90,13 +90,13 @@ let prices = {
 };
 
 *!*
+// prices কে অ্যারেতে কনভার্ট করে তার মধ্যে map অপারেশন চালিয়ে কী/ভ্যালু অ্যারেটিকে অবজেক্টে রূপান্তর
 let doublePrices = Object.fromEntries(
-  // convert to array, map, and then fromEntries gives back the object
   Object.entries(prices).map(([key, value]) => [key, value * 2])
 );
 */!*
 
 alert(doublePrices.meat); // 8
-```   
+```
 
-It may look difficult from the first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way. 
+প্রথমে এটি দুর্বোধ্য লাগতে পারে, তবে কয়েকবার ব্যবহার করলে আপনি সহজেই এটি বুঝে যাবেন। এভাবে আমরা অবজেক্টেও বিভিন্ন ধরণের অপারেশন চালাতে পারি।
