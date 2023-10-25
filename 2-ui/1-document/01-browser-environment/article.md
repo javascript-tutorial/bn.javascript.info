@@ -1,113 +1,113 @@
-# Browser environment, specs
+# ব্রাউজার এনভায়রনমেন্ট, স্পেসিপিকেশন
 
-The JavaScript language was initially created for web browsers. Since then it has evolved and become a language with many uses and platforms.
+শুরুতে জাভাস্ক্রিপ্ট তৈরি করা হয়েছিল ওয়েব ব্রাউজারের জন্য। তবে বর্তমানে এটি বিভিন্ন প্লাটফর্মে ব্যবহার করা হচ্ছে।
 
-A platform may be a browser, or a web-server or another *host*, even a "smart" coffee machine, if it can run JavaScript. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+যদি জাভাস্ক্রিপ্ট রান করা যায় তাহলে প্লাটফর্মসমূহ  হতে পারে ব্রাউজার, সার্ভার, অথবা অন্য কোন *হোস্ট*, এমনকি স্মার্ট কফি মেশিনও। প্রতি ক্ষেত্রে নিজস্ব প্লাটফর্ম অনুযায়ী নিজস্ব কিছু ফাংশনালিটি থাকে। জাভাস্ক্রিপ্টের স্পেসিপিকেশন অনুযায়ী একে বলা হয় *হোস্ট এনভায়রনমেন্ট*।
 
-A host environment provides own objects and functions additional to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
+মূল ল্যাংগুয়েজে স্পেসিপিকেশন(মানে কোর জাভাস্ক্রিপ্ট ফিচারগুলো) এর পাশাপাশি  হোস্ট এনভায়রনমেন্ট এর নিজস্ব একটি অবজেক্ট এবং অতিরিক্ত কিছু ফাংশন সংযুক্ত করে। যেমন ওয়েব ব্রাউজারের মাধ্যমে ওয়েব পেজকে কন্ট্রোল করার বিভিন্ন মেথড প্রদান করে। আবার *Node.js* বিভিন্ন সার্ভার সাইড ফিচার প্রদান করে। এভাবে প্রতিটি এনভায়রনমেন্টের নিজস্ব ফিচার থাকে।
 
-Here's a bird's-eye view of what we have when JavaScript runs in a web browser:
+এখানে ওয়েব ব্রাউজারের জন্য জাভাস্ক্রিপ্টের বিল্ট-ইন বিভিন্ন অবজেক্ট সমূহ দেখুন:
 
 ![](windowObjects.svg)
 
-There's a "root" object called `window`. It has two roles:
+এখানের "root" অবজেক্টটিকে বলা হয় `window`। এটির দুটি বৈশিষ্ট আছে:
 
-1. First, it is a global object for JavaScript code, as described in the chapter <info:global-object>.
-2. Second, it represents the "browser window" and provides methods to control it.
+1. প্রথমত, এটি একটি গ্লোবাল অবজেক্ট, এই অধ্যায়ে বিস্তারিত জানতে পারবেন <info:global-object>।
+2. দ্বিতীয়ত, এটি "browser window" কে রিপ্রেজেন্ট করে এবং ব্রাউজারকে কন্ট্রোল করার বিভিন্ন মেথড প্রদান করে।
 
-For instance, here we use it as a global object:
+যেমন, এখানে আমরা এটিকে গ্লোবাল অবজেক্ট হিসেবে ব্যবহার করেছি:
 
 ```js run
 function sayHi() {
   alert("Hello");
 }
 
-// global functions are methods of the global object:
+// গ্লোবাল ফাংশনসমূহ গ্লোবাল অবজেক্ট এর মেথড:
 window.sayHi();
 ```
 
-And here we use it as a browser window, to see the window height:
+এখানে আমরা এটিকে "browser window" হিসেবে ব্যবহার করছি, window এর height দেখতে:
 
 ```js run
 alert(window.innerHeight); // inner window height
 ```
 
-There are more window-specific methods and properties, we'll cover them later.
+window স্পেসিফিক আরো বিভিন্ন মেথড এবং প্রপার্টি আছে, পরবর্তী অধ্যায়গুলোতে আমরা এদের সম্পর্কে জানব।
 
 ## DOM (Document Object Model)
 
-Document Object Model, or DOM for short, represents all page content as objects that can be modified.
+ডকুমেন্ট অবজেক্ট মডেল (Document Object Model), বা সংক্ষেপে DOM, পেজের সকল কন্টেন্টকে অবজেক্ট হিসেবে দেখায় যা পরিবর্তন করা যায়।
 
-The `document` object is the main "entry point" to the page. We can change or create anything on the page using it.
+`document` অবজেক্ট হল পেজের প্রপার্টি এবং মেথড সমূহের অ্যাক্সেসের "entry point"। আমরা এর সাহায্যে পেজের বিভিন্ন প্রপার্টি মোডিফাই বা সংযুক্ত করতে পারি।
 
-For instance:
+যেমন:
 ```js run
-// change the background color to red
+// ব্যাকগ্রাউন্ড কালার পরিবর্তন
 document.body.style.background = "red";
 
-// change it back after 1 second
+// ১ সেকন্ড পর পূর্বের অবস্থা
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification: [DOM Living Standard](https://dom.spec.whatwg.org).
+এখানে শুধুমাত্র `document.body.style` ব্যবহার করেছি, কিন্তু এছাড়াও আরো অনেক প্রপার্টি এবং মেথড আছে। বিস্তারিত জানতে দেখুন: [DOM Living Standard](https://dom.spec.whatwg.org).
 
-```smart header="DOM is not only for browsers"
-The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use DOM too.
+```smart header="DOM শুধুমাত্র ব্রাউজারের জন্য না"
+নন ব্রাউজার প্লার্টফর্ম সমূহেও DOM ব্যবহার করা যায়। DOM স্পেসিপিকেশনে অবজেক্টের স্ট্রাকচার এবং এর ম্যানিপুলেশন নিয়ে বিস্তারিত আলোচনা করা হয়। তবে ব্রাউজার ব্যতীত অন্য প্লাটফর্মের জন্যও DOM সাপোর্ট করে।
 
-For instance, server-side scripts that download HTML pages and process them can also use DOM. They may support only a part of the specification though.
+যেমন, সার্ভার সাইড স্ক্রিপ্ট HTML পেজসমুহকে ডাউনলোড করে এবং এর সাহায্যে DOM কে প্রসেস করে। তবে এরা স্পেসিপিকেশনের শুধুমাত্র কিছু প্রপার্টি বা মেথড সমর্থন করে।
 ```
 
-```smart header="CSSOM for styling"
-There's also a separate specification, [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/) for CSS rules and stylesheets, that explains how they are represented as objects, and how to read and write them.
+```smart header="CSSOM হল স্ট্যাইল এর জন্য"
+এছাড়াও CSS রুলস এবং স্ট্যাইলশীট এর আলাদা স্পেসিপিকেশন আছে [CSS Object Model (CSSOM)](https://www.w3.org/TR/cssom-1/)। এখানে বর্ণনা করা হয়েছে কিভাবে CSS প্রপার্টি সমূহকে অবজেক্ট হিসেবে দেখানো হয়, এবং এদের অ্যাক্সেস করা যায়।
 
-CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because we rarely need to modify CSS rules from JavaScript (usually we just add/remove CSS classes, not modify their CSS rules), but that's also possible.
+ পেজের বিভিন্ন স্ট্যাইল পরিবর্তনের জন্য একসাথে CSSOM এবং DOM কে ব্যবহার করা হয়। তবে বাস্তবিক ক্ষেত্রে CSSOM কে আমরা খুব কম ব্যবহার করি, কেননা জাভাস্ক্রিপ্টে আমরা সাধারণত স্ট্যাইল পরিবর্তনের জন্য CSS ক্লাস (ADD/REMOVE) ব্যবহার করি, খুব বেশি CSS রুলস পরিবর্তন করি না, তবে এটি চাইলে করা সম্ভব।
 ```
 
 ## BOM (Browser Object Model)
 
-The Browser Object Model (BOM) represents additional objects provided by the browser (host environment) for working with everything except the document.
+ব্রাউজার অবজেক্ট মডেল (Browser Object Model) বা BOM এর মাধ্যমে *document* অবজেক্ট ছাড়া হোস্ট এনভায়রনমেন্টের অন্যান্য প্রপার্টি এবং মেথড নিয়ে কাজ করা যায়।
 
-For instance:
+যেমন:
 
-- The [navigator](mdn:api/Window/navigator) object provides background information about the browser and the operating system. There are many properties, but the two most widely known are: `navigator.userAgent` -- about the current browser, and `navigator.platform` -- about the platform (can help to differ between Windows/Linux/Mac etc).
-- The [location](mdn:api/Window/location) object allows us to read the current URL and can redirect the browser to a new one.
+- [navigator](mdn:api/Window/navigator) অবজেক্ট এর সাহায্যে ব্রাউজার এবং অপারেটিং সিস্টেমের বিভিন্ন তথ্য জানা যায়। এর বিভিন্ন প্রপার্টি আছে, কিন্তু সবচেয়ে দুটি ্বহুল ব্যবহৃত প্রপার্টি হল: `navigator.userAgent` -- ব্রাউজার সম্পর্কে জানতে, এবং `navigator.platform` -- অপারেটিং সিস্টেম সম্পর্কে জানতে(যেমন Windows/Linux/Mac ইত্যাদি)।
+- [location](mdn:api/Window/location) অবজেক্ট এর সাহায্যে পেজের URL জানা যায় এবং নতুন URL এ রিডিরেক্ট করা যায়।
 
-Here's how we can use the `location` object:
+এখানে `location` অবজেক্ট এর ব্যবহার দেখুন:
 
 ```js run
-alert(location.href); // shows current URL
+alert(location.href); // পেজের URL
 if (confirm("Go to Wikipedia?")) {
-  location.href = "https://wikipedia.org"; // redirect the browser to another URL
+  location.href = "https://wikipedia.org"; // নতুন URL এ রিডিরেক্ট
 }
 ```
 
-Functions `alert/confirm/prompt` are also a part of BOM: they are directly not related to the document, but represent pure browser methods of communicating with the user.
+এছাড়াও `alert/confirm/prompt` এরা BOM এর মেথড: এরা সরাসরি document এর সাথে সম্পর্কিত না, তবে এদের সাহায্যে ইউজার ব্রাউজারের সাথে সম্পর্ক স্থাপন করে।
 
-```smart header="Specifications"
-BOM is the part of the general [HTML specification](https://html.spec.whatwg.org).
+```smart header="স্পেসিপিকেশন্স"
+BOM হল [HTML specification](https://html.spec.whatwg.org) এর একটি অংশ।
 
-Yes, you heard that right. The HTML spec at <https://html.spec.whatwg.org> is not only about the "HTML language" (tags, attributes), but also covers a bunch of objects, methods and browser-specific DOM extensions. That's "HTML in broad terms". Also, some parts have additional specs listed at <https://spec.whatwg.org>.
+হ্যাঁ, আপনি সঠিক শুনছেন। HTML স্পেসিপিকেশন্স <https://html.spec.whatwg.org> শুধুমাত্র "HTML language" (tags, attributes) এর মধ্যে সীমাবদ্ধ নয়, এছাড়াও অবজেক্ট, মেথড এবং DOM এর বিভিন্ন অংশ নিয়ে আলোচনা করা হয়। এছাড়াও আরো বিস্তারিত জানতে <https://spec.whatwg.org>।
 ```
 
-## Summary
+## সারাংশ
 
-Talking about standards, we have:
+এখানে আমরা জেনেছি:
 
-DOM specification
-: Describes the document structure, manipulations and events, see <https://dom.spec.whatwg.org>.
+DOM স্পেসিপিকেশন
+: ডকুমেন্ট স্ট্রাকচার, ম্যানিপুলেশন এবং ইভেন্ট সম্পর্কে জানতে, দেখুন <https://dom.spec.whatwg.org>।
 
-CSSOM specification
-: Describes stylesheets and style rules, manipulations with them and their binding to documents, see <https://www.w3.org/TR/cssom-1/>.
+CSSOM স্পেসিপিকেশন
+: স্ট্যাইল শীট এবং স্ট্যাইল রুল, ম্যানিপুলেশন এবং ডকুমেন্টের সাথে এদের বাইন্ডিং জানতে, দেখুন <https://www.w3.org/TR/cssom-1/>।
 
-HTML specification
-: Describes the HTML language (e.g. tags) and also the BOM (browser object model) -- various browser functions: `setTimeout`, `alert`, `location` and so on, see <https://html.spec.whatwg.org>. It takes the DOM specification and extends it with many additional properties and methods.
+HTML স্পেসিপিকেশন
+: HTML ল্যাংগুয়েজ (যেমন ট্যাগ) এবং BOM (browser object model) -- বিভিন্ন ব্রাউজার ফাংশন: `setTimeout`, `alert`, `location` ইত্যাদি সম্পর্কে বিস্তারিত জানতে, দেখুন <https://html.spec.whatwg.org>। এটি DOM স্পেসিপিকেশন সমূহকেও নেয় এবং বিভিন্ন প্রপার্টি এবং মেথডকে এক্সট্যান্ড করে।
 
-Additionally, some classes are described separately at <https://spec.whatwg.org/>.
+এছাড়াও, আরো কিছু ক্লাস সম্পর্কে এখানে আলোচনা হয়েছে <https://spec.whatwg.org/>।
 
-Please note these links, as there's so much stuff to learn it's impossible to cover and remember everything.
+দয়া করে মনে রাখুন, উপরে বর্ণিত অনেক কিছু আছে শিখার, সব কিছু এখানে বিস্তারিত আলোচনা বা মনে রাখা প্রায় অসম্ভব।
 
-When you'd like to read about a property or a method, the Mozilla manual at <https://developer.mozilla.org/en-US/search> is also a nice resource, but the corresponding spec may be better: it's more complex and longer to read, but will make your fundamental knowledge sound and complete.
+এছাড়াও আপনার কোন মেথড বা প্রপার্টি সম্পর্কে জানতে হলে মোজিলা ম্যানুয়ালে <https://developer.mozilla.org/en-US/search> দেখতে পারেন, কিন্তু স্পেসিফিকেশন রিসোর্স থেকে জানতে পারলে আপনার মৌলিক জ্ঞান আরো দৃঢ হবে, যদিও বা এটি পড়া কিছুটা জটিল এবং সময় সাপেক্ষ।
 
-To find something, it's often convenient to use an internet search "WHATWG [term]" or "MDN [term]", e.g <https://google.com?q=whatwg+localstorage>, <https://google.com?q=mdn+localstorage>.
+এছাড়াও কোন ব্যাপারে বিস্তারিত জানতে সার্চ ইঞ্জিনে সার্চ এর সময় এভাবে সার্চ করুন "WHATWG [term]" অথবা "MDN [term]", যেমন <https://google.com?q=whatwg+localstorage>, <https://google.com?q=mdn+localstorage>।
 
-Now we'll get down to learning DOM, because the document plays the central role in the UI.
+এখন আমরা পরবর্তী অধ্যায় গুলোতে ডম সম্পর্কে আরো বিস্তারিত জানব, এবং UI এ বিভিন্ন ধরণের পরীক্ষা নিরীক্ষা চালাব।
