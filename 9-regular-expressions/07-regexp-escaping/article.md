@@ -3,9 +3,15 @@
 
 আমরা দেখেছি, ব্যকস্ল্যাশ `pattern:\` বিভিন্ন ক্যারাক্টার ক্লাস বুঝাতে ব্যবহার করা হয়, যেমন `pattern:\d`। তাই এটি রেগুলার এক্সপ্রেশনের একটি স্পেশাল ক্যারাক্টার (স্ট্রিংয়ের মত)।
 
+<<<<<<< HEAD
 এছাড়াও আরো কিছু স্পেশাল ক্যারাক্টার আছে, যা রেগুলার এক্সপ্রেশনে ভিন্ন অর্থ বুঝায়। এদের সাহায্যে বিভিন্ন জটিল প্যাটার্ন আমরা খুঁজতে পারি। এদের সম্পূর্ন তালিকাটি হল: `pattern:[ \ ^ $ . | ? * + ( )`।
 
 তালিকাটি আপনার মুখস্ত করার দরকার নেই -- খুব তাড়াতাড়ি আমরা প্রত্যেকটি স্পেশাল ক্লাস সম্পর্কে বিস্তারিত জানব, আর তখন আমরা অটোমেটিক প্রত্যেকটি ক্যারাক্টার শিখে যাব।
+=======
+There are other special characters as well, that have special meaning in a regexp, such as `pattern:[ ] { } ( ) \ ^ $ . | ? * +`. They are used to do more powerful searches.
+
+Don't try to remember the list -- soon we'll deal with each of them, and you'll know them by heart automatically.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ## এস্কেপিং
 
@@ -65,7 +71,11 @@ alert( "Chapter 5.1".match(regexp) ); // null
 
 কেননা রেগুলার স্ট্রিংয়ে ব্যাকস্ল্যাশ "নিজস্ব স্পেশাল ক্যারাক্টারের" জন্য ব্যবহৃত হয় যেমন `\n`, এখানে ব্যাকস্ল্যাশ এস্কেপিংয়ের জন্য ব্যবহৃত হয়।
 
+<<<<<<< HEAD
 এখানে দেখুন "\d\.\d" এর আউটপুট কি দেখায়:
+=======
+Here's how "\d\.\d" is perceived:
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
 
 ```js run
 alert("\d\.\d"); // d.d
@@ -94,6 +104,12 @@ alert( "Chapter 5.1".match(regexp) ); // 5.1
 
 ## সারাংশ
 
+<<<<<<< HEAD
 - সাধারণত স্পেশাল ক্যারাক্টারসমূহ সার্চ করতে `pattern:[ \ ^ $ . | ? * + ( )` আমাদের ব্যাকস্ল্যাশ `\` দ্বারা  ("এস্কেপের জন্য") প্রিপেন্ড করে নিতে হবে।
 - যদি `pattern:/.../` এভাবে প্যাটার্ন ডিক্লেয়ার করি আমাদের `/` কেও এস্কেপ করে নিতে হবে (তবে `new RegExp` এ না)।
 - যখন প্যাটার্নটি `new RegExp` এর মাধ্যমে ডিক্লেয়ার করা হবে, আমাদের দুটি ব্যাকস্ল্যাশ `\\` ব্যবহার করতে হবে, কেননা স্ট্রিংয়ে এটিকে একটি হিসেবে বিবেচনা করা হবে।
+=======
+- To search for special characters `pattern:[ \ ^ $ . | ? * + ( )` literally, we need to prepend them with a backslash `\` ("escape them").
+- We also need to escape `/` if we're inside `pattern:/.../` (but not inside `new RegExp`).
+- When passing a string to `new RegExp`, we need to double backslashes `\\`, cause string quotes consume one of them.
+>>>>>>> 285083fc71ee3a7cf55fd8acac9c91ac6f62105c
