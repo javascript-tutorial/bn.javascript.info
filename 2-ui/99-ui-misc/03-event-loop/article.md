@@ -18,7 +18,11 @@
 
 যখন আমরা কোন একটি পেজ ব্রাউজ করা শুরু করি তখনি এটি ইনিশিয়ালাইজ হয়। বেশিরভাগ সময় জাভাস্ক্রিপ্ট ইঞ্জিন কিছু করে না, এটি শুধুমাত্র রান হয় কোন একটি স্ক্রিপ্ট/হ্যান্ডেলার/ইভেন্ট এর কার্যকলাপ ঘটলে।
 
+<<<<<<< HEAD
 কিছু টাস্কের উদাহরণ:
+=======
+That's a formalization of what we see when browsing a page. The JavaScript engine does nothing most of the time, it only runs if a script/handler/event activates.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 - যখন কোন এক্সটার্নাল স্ক্রিপ্ট লোড হয় `<script src="...">`, টাস্ক এটিকে এক্সিকিউট করে।
 - যখন ইউজার মাউস মুভ করবে, টাস্কটি হবে `mousemove` ইভেন্টকে ডিসপ্যাস করা এবং হ্যান্ডেলারটি রান করা।
@@ -29,17 +33,35 @@
 
 ইঞ্জিন ব্যাস্ত থাকার সময় কোন একটি টাস্ক আসলে, এটি enqueued হিসেবে অপেক্ষা করবে।
 
+<<<<<<< HEAD
 টাস্ক queue হিসেবে থাকে যাকে বলা হয় "macrotask queue" (v8 term):
 
 ![](eventLoop.svg)
 
 যেমন, যখন জাভাস্ক্রিপ্ট ইঞ্জিন একটি `script` এক্সিকিউট করতে ব্যস্ত, তখন ইউজার মাউস মুভ করার জন্য `mousemove` ইভেন্ট টাস্ক এবং `setTimeout` ফাংশন ইত্যাদি queue তে অপেক্ষা করবে যা আমরা উপরের ছবিটিতে দেখছি।
+=======
+It may happen that a task comes while the engine is busy, then it's enqueued.
+
+The tasks form a queue, the so-called "macrotask queue" ([v8](https://v8.dev/) term):
+
+![](eventLoop.svg)
+
+For instance, while the engine is busy executing a `script`, a user may move their mouse causing `mousemove`, and `setTimeout` may be due and so on, these tasks form a queue, as illustrated in the picture above.
+
+Tasks from the queue are processed on a "first come – first served" basis. When the engine browser is done with the `script`, it handles `mousemove` event, then `setTimeout` handler, and so on.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 এতদূর আমরা বুঝছি, তাই না?
 
+<<<<<<< HEAD
 আরো দুটি ব্যাপার:
 1. ইঞ্জিন টাস্ক এক্সিকিউশনের সময় কোন পেজে কোন কিছু রেন্ডার হবে না। এখানে টাস্ক এক্সিকিউট হতে অনেক সময় লাগছে কিনা তা বিবেচ্য নয়। মূল কথা DOM এর যে কোন পরিবর্তন ঘটবে টাস্ক এক্সিকিউট হওয়ার পর।
 2. যদি টাস্ক এক্সিকিউট হতে অনেক সময় লাগে, সে সময় ব্রাউজার অন্য কোন টাস্ক এক্সিকিউট করতে পারে না , যেমন ইউজারের ইভেন্ট প্রসেসিং। সুতরাং কিছু সময় পর, এটি এমন একটি অ্যালার্ট দেখাবে "Page Unresponsive", যা আমাদের পুরো পেজকে এক্সিট করতে পরামর্শ দেয়। জটিল গণনা বা কোন ধরণের প্রোগ্রামিং এরর বা ইনফিনিট লুপের জন্য এমন হতে পারে।
+=======
+Two more details:
+1. Rendering never happens while the engine executes a task. It doesn't matter if the task takes a long time. Changes to the DOM are painted only after the task is complete.
+2. If a task takes too long, the browser can't do other tasks, such as processing user events. So after some time, it raises an alert like "Page Unresponsive", suggesting killing the task with the whole page. That happens when there are a lot of complex calculations or a programming error leading to an infinite loop.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 এতক্ষণ আমরা তাত্ত্বিক ব্যপারটা জানলাম। এখন চলুন দেখি কিভাবে এটি প্রাত্যহিক জীবনে ব্যবহার করব।
 
@@ -51,7 +73,11 @@
 
 যখন ইঞ্জিন সিনট্যাক্স হাইলাইটিং প্রসেস করবে, তখন এটি DOM এর অন্য কোন কাজ বা ইউজার ইভেন্ট ইত্যাদি প্রসেস করতে পারবে না। এছাড়াও অনেক সময় ব্রাউজার হ্যাং হয়ে যেতে পারে যা আমরা আশা করি না।
 
+<<<<<<< HEAD
 এইক্ষেত্রে একটি বড় টাস্ককে অসংখ্য ক্ষুদ্র ক্ষুদ্র অংশে ভাগ করে আমরা সমস্যাটি সমাধান করতে পারি। প্রথম ১০০ লাইনকে হাইলাইট করবে তারপর পরের ১০০ লাইন কে শিডিউল `setTimeout` (zero-delay) এভাবে শেষ পর্যন্ত।
+=======
+We can avoid problems by splitting the big task into pieces. Highlight the first 100 lines, then schedule `setTimeout` (with zero-delay) for the next 100 lines, and so on.
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 সমস্যাটি বুঝতে এবং সহজে প্রদর্শনের জন্য সিনট্যাক্স হাইলাইটারের বদলে চলুন `1` থেকে `1000000000` পর্যন্ত গণনা করার একটি ফাংশন লিখি।
 
