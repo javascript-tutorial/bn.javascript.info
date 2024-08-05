@@ -55,7 +55,7 @@ To fully enable all features of modern JavaScript, we should start scripts with 
 
 The directive must be at the top of a script or at the beginning of a function body.
 
-Without `"use strict"`, everything still works, but some features behave in the old-fashion, "compatible" way. We'd generally prefer the modern behavior.
+Without `"use strict"`, everything still works, but some features behave in the old-fashioned, "compatible" way. We'd generally prefer the modern behavior.
 
 Some modern features of the language (like classes that we'll study in the future) enable strict mode implicitly.
 
@@ -103,13 +103,13 @@ More in: <info:variables> and <info:types>.
 
 We're using a browser as a working environment, so basic UI functions will be:
 
-[`prompt(question, [default])`](mdn:api/Window/prompt)
+[`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
 : Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
 
-[`confirm(question)`](mdn:api/Window/confirm)
+[`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
 : Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
 
-[`alert(message)`](mdn:api/Window/alert)
+[`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
 : Output a `message`.
 
 All these functions are *modal*, they pause the code execution and prevent the visitor from interacting with the page until they answer.
@@ -144,7 +144,7 @@ Assignments
 : There is a simple assignment: `a = b` and combined ones like `a *= 2`.
 
 Bitwise
-: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) when they are needed.
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) when they are needed.
 
 Conditional
 : The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
@@ -256,7 +256,7 @@ We covered three ways to create a function in JavaScript:
 3. Arrow functions:
 
     ```js
-    // expression at the right side
+    // expression on the right side
     let sum = (a, b) => a + b;
 
     // or multi-line syntax with { ... }, need return here:
@@ -273,7 +273,7 @@ We covered three ways to create a function in JavaScript:
     ```
 
 
-- Functions may have local variables: those declared inside its body. Such variables are only visible inside the function.
+- Functions may have local variables: those declared inside its body or its parameter list. Such variables are only visible inside the function.
 - Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
 - Functions always return something. If there's no `return` statement, then the result is `undefined`.
 
