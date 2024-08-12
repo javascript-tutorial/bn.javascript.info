@@ -61,7 +61,7 @@ When `pow(x, n)` is called, the execution splits into two branches:
               if n==1  = x
              /
 pow(x, n) =
-             \       
+             \
               else     = x * pow(x, n - 1)
 ```
 
@@ -132,7 +132,7 @@ We can sketch it as:
   </li>
 </ul>
 
-That's when the function starts to execute. The condition `n == 1` is false, so the flow continues into the second branch of `if`:
+That's when the function starts to execute. The condition `n == 1` is falsy, so the flow continues into the second branch of `if`:
 
 ```js run
 function pow(x, n) {
@@ -188,7 +188,7 @@ The new current execution context is on top (and bold), and previous remembered 
 When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
 
 ```smart
-Here in the picture we use the word "line", as our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
+Here in the picture we use the word "line", as in our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
 
 So it would be more precise to say that the execution resumes "immediately after the subcall".
 ```
@@ -285,7 +285,7 @@ The iterative `pow` uses a single context changing `i` and `result` in the proce
 
 **Any recursion can be rewritten as a loop. The loop variant usually can be made more effective.**
 
-...But sometimes the rewrite is non-trivial, especially when function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+...But sometimes the rewrite is non-trivial, especially when a function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
 
 Recursion can give a shorter code, easier to understand and support. Optimizations are not required in every place, mostly we need a good code, that's why it's used.
 
@@ -535,7 +535,7 @@ Terms:
     list = { value, next -> list }
     ```
 
-    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they branch and every branch can have other branches.
+    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they have branches and every branch can have other branches.
 
     Recursive functions can be used to walk them as we've seen in the `sumSalary` example.
 
