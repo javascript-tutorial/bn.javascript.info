@@ -73,7 +73,17 @@ alert('Current scroll from the left: ' + window.pageXOffset);
 
 এগুলো read-only.
 
+<<<<<<< HEAD
 ## স্ক্রলিং: scrollTo, scrollBy, scrollIntoView [#window-scroll]
+=======
+```smart header="Also available as `window` properties `scrollX` and `scrollY`"
+For historical reasons, both properties exist, but they are the same:
+- `window.pageXOffset` is an alias of `window.scrollX`.
+- `window.pageYOffset` is an alias of `window.scrollY`.
+```
+
+## Scrolling: scrollTo, scrollBy, scrollIntoView [#window-scroll]
+>>>>>>> b258d7d5b635c88228f7556e14fbe5e5ca7f736d
 
 ```warn
 পেজের কোন একটি অবস্থানে জাভাস্ক্রিপ্টের সাহায্যে স্ক্রল করতে, তবে এজন্য সম্পূর্ণ DOM বিল্ট হওয়া লাগবে।
