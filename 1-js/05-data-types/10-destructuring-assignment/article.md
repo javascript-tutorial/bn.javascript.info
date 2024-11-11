@@ -2,6 +2,7 @@
 
 জাভাস্ক্রিপ্টে সবচেয়ে বেশি ব্যবহৃত দুটি ডাটা স্ট্রাকচার হল `Object` এবং `Array`।
 
+<<<<<<< HEAD
 সাধারণত অবজেক্ট কী(key) এবং ভ্যালু আকারে এবং অ্যারে ক্রম অনুসারে ডাটা সংরক্ষণ করে।
 
 কিন্তু, অনেক সময় এদের কোন একটি ফাংশনে আর্গুমেন্ট হিসেবে পাঠাতে চাইলে সম্পূর্ণ অবজেক্ট বা অ্যারের পরিবর্তে নির্দিষ্ট অংশ প্রয়োজন হয়।
@@ -15,6 +16,24 @@
 ```js
 // name এবং surname এর একটি অ্যারে আছে
 let arr = ["Ilya", "Kantor"]
+=======
+- Objects allow us to create a single entity that stores data items by key.
+- Arrays allow us to gather data items into an ordered list.
+
+However, when we pass these to a function, we may not need all of it. The function might only require certain elements or properties.
+
+*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient.
+
+Destructuring also works well with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+
+## Array destructuring
+
+Here's an example of how an array is destructured into variables:
+
+```js
+// we have an array with a name and surname
+let arr = ["John", "Smith"]
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 *!*
 // destructuring assignment
@@ -23,20 +42,29 @@ let arr = ["Ilya", "Kantor"]
 let [firstName, surname] = arr;
 */!*
 
-alert(firstName); // Ilya
-alert(surname);  // Kantor
+alert(firstName); // John
+alert(surname);  // Smith
 ```
 
 এখন আমরা অ্যারের আইটেমগুলোর পরিবর্তে ভ্যারিয়েবল নিয়ে কাজ করতে পারি।
 
 এছাড়াও `split` বা যেসব মেথড অ্যারে রিটার্ন করে এদের সাথেও এটি কাজ করে।
 
-```js
-let [firstName, surname] = "Ilya Kantor".split(' ');
+```js run
+let [firstName, surname] = "John Smith".split(' ');
+alert(firstName); // John
+alert(surname);  // Smith
 ```
 
+<<<<<<< HEAD
 ````smart header="\"Destructuring\" দ্বারা \"destructive\" বুঝানো হয় না"
 এটিকে বলা হয় "destructuring assignment", কেননা এটি "destructurizes" এর মাধ্যমে আইটেমকে ভ্যারিয়েবলে রূপান্তর করে। কিন্তু অরিজিনাল অ্যারের কোন পরিবর্তন হয় না।
+=======
+As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples to understand it better.
+
+````smart header="\"Destructuring\" does not mean \"destructive\"."
+It's called "destructuring assignment," because it "destructurizes" by copying items into variables. However, the array itself is not modified.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 আসলে এটি সংক্ষেপে লেখার একটি পদ্ধতি, যেমন:
 ```js
@@ -58,7 +86,11 @@ let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic
 alert( title ); // Consul
 ```
 
+<<<<<<< HEAD
 উপরের কোডে, দ্বিতীয় এলিমেন্টকে উপেক্ষা করা হয়েছে, এবং তৃতীয় এলিমেন্টটি `title` এ সংযুক্ত হয়েছে, এছাড়াও অ্যারের অন্যান্য এলিমেন্টও উপেক্ষা হবে (যেহেতু তাদের জন্য কোন ভ্যারিয়েবলে অ্যাসাইন করা হয়নি)।
+=======
+In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items are also skipped (as there are no variables for them).
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ````
 
 ````smart header="যেকোন ধরণের ইটারেবলের সাথে এই ধরণের অ্যাসাইনমেন্ট কাজ করে"
@@ -69,29 +101,42 @@ alert( title ); // Consul
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-
+That works, because internally a destructuring assignment works by iterating over the right value. It's a kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
 ````
 
 
+<<<<<<< HEAD
 ````smart header="এছাড়াও বাম পাশের প্যাটার্নের কোন কিছুকে অ্যাসাইন করতে পারি"
 
 আমরা বাম পাশের প্যাটার্নের কোন কিছুকে অ্যাসাইন করতে পারি।
+=======
+````smart header="Assign to anything at the left-side"
+We can use any "assignables" on the left side.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 যেমন একটি অবজেক্টের প্রপার্টি হিসেবে:
 ```js run
 let user = {};
-[user.name, user.surname] = "Ilya Kantor".split(' ');
+[user.name, user.surname] = "John Smith".split(' ');
 
-alert(user.name); // Ilya
+alert(user.name); // John
+alert(user.surname); // Smith
 ```
 
 ````
 
+<<<<<<< HEAD
 ````smart header=".entries() লুপ"
 
 পূর্বের অধ্যায়ে আমরা এই মেথডটি দেখেছি [Object.entries(obj)](mdn:js/Object/entries)।
 
 আমরা লুপের মধ্যে অবজেক্টকে keys-values আকারে destructuring করতে পারি:
+=======
+````smart header="Looping with .entries()"
+In the previous chapter, we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+
+We can use it with destructuring to loop over the keys-and-values of an object:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let user = {
@@ -99,7 +144,11 @@ let user = {
   age: 30
 };
 
+<<<<<<< HEAD
 // লুপে keys-and-values
+=======
+// loop over the keys-and-values
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
@@ -107,7 +156,11 @@ for (let [key, value] of Object.entries(user)) {
 }
 ```
 
+<<<<<<< HEAD
 ...অনুরূপ Map এর ক্ষেত্রেও:
+=======
+The similar code for a `Map` is simpler, as it's iterable:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let user = new Map();
@@ -115,6 +168,7 @@ user.set("name", "John");
 user.set("age", "30");
 
 *!*
+// Map iterates as [key, value] pairs, very convenient for destructuring
 for (let [key, value] of user) {
 */!*
   alert(`${key}:${value}`); // name:John, then age:30
@@ -122,19 +176,31 @@ for (let [key, value] of user) {
 ```
 ````
 
+<<<<<<< HEAD
 ```smart header="ভ্যারিয়েবল অদল বদল"
 দুটি ভ্যারিয়েবলের মান অদল বদল(swap) করার শর্টকার্ট পদ্ধতি:
+=======
+````smart header="Swap variables trick"
+There's a well-known trick for swapping values of two variables using a destructuring assignment:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let guest = "Jane";
 let admin = "Pete";
 
+<<<<<<< HEAD
 // দুটি ভ্যারিয়েবলের মান অদল বদল করছি: guest=Pete, admin=Jane
+=======
+// Let's swap the values: make guest=Pete, admin=Jane
+*!*
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 [guest, admin] = [admin, guest];
+*/!*
 
 alert(`${guest} ${admin}`); // Pete Jane (এটি কাজ করছে)
 ```
 
+<<<<<<< HEAD
 এখানে একটি টেম্পোরারি অ্যারের সাহায্যে ভ্যারিয়েবল গুলোকে destructure করে তাদের মধ্যে swap করা হল।
 
 এভাবে আমরা একাধিক ভ্যারিয়েবলকেও swap করতে পারি।
@@ -142,26 +208,64 @@ alert(`${guest} ${admin}`); // Pete Jane (এটি কাজ করছে)
 ### The rest '...'
 
 যদি আমরা শুধুমাত্র প্রথম বা দ্বিতীয় ভ্যালুর পাশাপাশি বাকী কালেকশনকে destructuring করতে চাই, তাহলে আমরা আরো একটি ভ্যারিয়েবলকে `"..."` তিনটি ডট সহ `"...rest"` লিখব, একে বলা হয় "rest", যেমন:
+=======
+Here we create a temporary array of two variables and immediately destructure it in swapped order.
+
+We can swap more than two variables this way.
+````
+
+### The rest '...'
+
+Usually, if the array is longer than the list at the left, the "extra" items are omitted.
+
+For example, here only two items are taken, and the rest is just ignored:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
+
+```js run
+let [name1, name2] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+
+alert(name1); // Julius
+alert(name2); // Caesar
+// Further items aren't assigned anywhere
+```
+
+If we'd like also to gather all that follows -- we can add one more parameter that gets "the rest" using three dots `"..."`:
 
 ```js run
 let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
 
-alert(name1); // Julius
-alert(name2); // Caesar
-
 *!*
+<<<<<<< HEAD
 // নোট `rest` হল একটি অ্যারে।
+=======
+// rest is an array of items, starting from the 3rd one
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 alert(rest[0]); // Consul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 */!*
 ```
 
+<<<<<<< HEAD
 `rest` এর মান হবে অ্যারের অবশিষ্ট এলিমেন্টসমূহের একটি অ্যারে। আমরা ভ্যারিয়েবলটির মান `rest` এর পরিবর্তে যেকোন কিছু দিতে পারি, তবে মনে রাখতে হবে যেন ভ্যারিয়েবলের আগে যেন তিনটি ডট থাকে এবং এটি যেন destructuring এর শেষ এলিমেন্ট হয়।
+=======
+The value of `rest` is the array of the remaining array elements.
+
+We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
+
+```js run
+let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// now titles = ["Consul", "of the Roman Republic"]
+```
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ### ডিফল্ট ভ্যালু
 
+<<<<<<< HEAD
 যদি অ্যারের `length` এর চেয়ে আমাদের অ্যাসাইনমেন্ট ভ্যারিয়েবলের সংখ্যা বেশি হয়, তাহলে কোন এরর থ্রো হবে না। তার পরিবর্তে ভ্যারিয়েবলের মান হবে undefined:
+=======
+If the array is shorter than the list of variables on the left, there will be no errors. Absent values are considered undefined:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 *!*
@@ -186,7 +290,11 @@ alert(surname); // Anonymous (default used)
 
 ডিফল্ট ভ্যালু জটিল এক্সপ্রেশন বা ফাংশন কলের সাথেও কাজ করবে। ডিফল্ট ভ্যালু অ্যাসাইন হবে যদি কোন কারণে মানটি অনুপস্থিত থাকে।
 
+<<<<<<< HEAD
 যেমন, এখানে `prompt` এর সাহায্যে দুটি ডিফল্ট মান অ্যাসাইন করা হচ্ছে। তবে এখানে শুধুমাত্র দ্বিতীয়টির জন্য ডিফল্ট মানটি কাজ করবে:
+=======
+For instance, here we use the `prompt` function for two defaults:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 // শুধুমাত্র surname এর জন্য prompt এক্সিকিউট হবে
@@ -196,7 +304,7 @@ alert(name);    // Julius (from array)
 alert(surname); // prompt এর মান
 ```
 
-
+Please note: the `prompt` will run only for the missing value (`surname`).
 
 ## Object destructuring
 
@@ -208,7 +316,11 @@ destructuring assignment অবজেক্টের সাথেও কাজ �
 let {var1, var2} = {var1:…, var2:…}
 ```
 
+<<<<<<< HEAD
 আমাদের ডান পাশে একটি অবজেক্ট আছে, এর মানকে আমরা ভ্যারিয়েবলে অ্যাসাইন করতে চাই। বাম পাশে প্রপার্টিগুলোর জন্য একটি প্যাটার্ন আছে। সাধারণত `{...}` প্যারেন্টেসিসের মধ্যে অবজেক্টের প্রপার্টিগুলো ভ্যারিয়েবল হিসেবে ডিক্লেয়ার করা হয়।
+=======
+We should have an existing object on the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 যেমন:
 
@@ -228,7 +340,13 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
+<<<<<<< HEAD
 `options.title`, `options.width` এবং `options.height` প্রপার্টিগুলো একই নামের ভ্যারিয়েবলে অ্যাসাইন হবে। এখানে অ্যাসাইন ক্রম মূখ্য নই। এটিও কাজ করবে:
+=======
+Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables.
+
+The order does not matter. This works too:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js
 // let {...} এর মধ্যে ভ্যারিয়েবলের ক্রম পরিবর্তন
@@ -237,7 +355,11 @@ let {height, width, title} = { title: "Menu", height: 200, width: 100 }
 
 বাম পাশের প্যাটার্নটিতে প্রপার্টি এবং ভ্যারিয়েবল আরো জটিল হতে পারে।
 
+<<<<<<< HEAD
 যদি আমরা কোন একটি প্রপার্টিকে অন্য নামে অ্যাসাইন করতে চায়, ধরুন `options.width` কে `w` নামে, তাহলে আমরা কোলন দ্বারা লিখতে পারি, যেমন:
+=======
+If we want to assign a property to a variable with another name, for instance, make `options.width` go into the variable named `w`, then we can set the variable name using a colon:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let options = {
@@ -390,9 +512,15 @@ alert( title ); // Menu
 
 ## Nested destructuring
 
+<<<<<<< HEAD
 নেস্টেড অবজেক্ট বা অ্যারের জন্য আমরা বাম পাশের প্যাটার্নকে আরো জটিল ভাবে ডিক্লেয়ার করতে পারি।
 
 নিচের কোডে `options` অবজেক্টের একটি নেস্টেড অবজেক্ট আছে `size` এবং আরো একটি অ্যারে প্রপার্টি আছে `items`। এক্ষেত্রে আমাদের বামের অ্যাসাইনমেন্ট প্যাটার্নটি ডানের স্ট্রাকচারের মত হতে হবে:
+=======
+If an object or an array contains other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+
+In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern on the left side of the assignment has the same structure to extract values from them:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let options = {
@@ -421,7 +549,11 @@ alert(item1);  // Cake
 alert(item2);  // Donut
 ```
 
+<<<<<<< HEAD
 এখন আমরা `options` অবজেক্টের সকল প্রপার্টিকে(`extra` বাদে ) বাম পাশে অ্যাসাইন করছি:
+=======
+All properties of `options` object except `extra` which is absent in the left part, are assigned to corresponding variables:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ![](destructuring-complex.svg)
 
@@ -431,9 +563,15 @@ alert(item2);  // Donut
 
 ## Smart function parameters
 
+<<<<<<< HEAD
 অনেক সময় আমাদের এমন ফাংশন থাকে, যাদের বেশিরভাগ প্যারামিটার অপশনাল। বিশেষত UI এর ফাংশনের জন্য। মনে করুন আমরা একটি মেনু তৈরি করব। যার width, height, title, items ইত্যাদি প্যারামিটার আছে।
 
 এই ধরণের ফাংশন অনেক সময় এভাবে লিখা হয়, যা bad practice:
+=======
+There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, an item list and so on.
+
+Here's a bad way to write such a function:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js
 function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -441,7 +579,11 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 }
 ```
 
+<<<<<<< HEAD
 বাস্তবিকক্ষেত্রে আমাদের আর্গুমেন্ট মনে রাখা কষ্টসাধ্য। সাধারণত ডকুমেন্টেড কোডের জন্য IDE সহায়ক হতে পারে, কিন্তু তারপরও সমস্যা আছে যদি ফাংশনের বেশিরভাগ প্যারামিটার ডিফল্ট হয় সেক্ষেত্রে কি হবে?
+=======
+In real-life, the problem is how to remember the order of arguments. Usually, IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 যেমন এটি দেখুন।
 
@@ -506,7 +648,11 @@ function({
 })
 ```
 
+<<<<<<< HEAD
 এখানে একটি অবজেক্টকে প্যারামিটার হিসেবে নেয়, এবং `incomingProperty` প্রপার্টিটি `varName` ভ্যারিয়েবল হিসেবে সেট হবে, এবং ডিফল্ট ভ্যালু হবে `defaultValue`।
+=======
+Then, for an object of parameters, there will be a variable `varName` for the property `incomingProperty`, with `defaultValue` by default.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 নোট: মনে করুন আমরা ফাংশন ডিক্লেয়ারেশনে destructuring করেছি এক্ষেত্রে আমাদের অবশ্যই প্যারামিটার হিসেবে একটি এম্পটি অবজেক্ট `{}` পাস করতে হবে, অন্যথায় একটি এরর থ্রো হবে:
 
@@ -533,7 +679,7 @@ showMenu(); // Menu 100 200
 - Destructuring assignment এর সাহায্যে অবজেক্ট বা অ্যারের কালেকশনের কোন একটি বা সম্পূর্ণ অংশকে ভ্যারিয়েবলে রূপান্তর করতে পারি।
 - সিনট্যাক্স:
     ```js
-    let {prop : varName = default, ...rest} = object
+    let {prop : varName = defaultValue, ...rest} = object
     ```
 
     এখানে বুঝানো হচ্ছে `prop` এর ভ্যারিয়েবল হবে `varName` এবং, যদি অবজেক্টে `prop` প্রপার্টি না থাকে তাহলে ডিফল্ট মানটি অ্যাসাইন হবে।
@@ -543,9 +689,13 @@ showMenu(); // Menu 100 200
 - অ্যারের সিনট্যাক্স:
 
     ```js
-    let [item1 = default, item2, ...rest] = array
+    let [item1 = defaultValue, item2, ...rest] = array
     ```
 
+<<<<<<< HEAD
     অ্যারের প্রথম আইটেমটি অ্যাসাইন হবে `item1` এ; অ্যারের দ্বিতীয় আইটেমটি অ্যাসাইন হবে `item2` এ, এবং অবশিষ্ট আইটেম `rest` এ অ্যারে হিসেবে কপি হবে।
+=======
+    The first item goes to `item1`; the second goes into `item2`, and all the rest makes the array `rest`.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 - নেস্টেড arrays/objects কেও এক্সট্রাক্ট করা সম্ভব, এক্ষেত্রে আমাদের বামের প্যাটার্নটি ডানের স্ট্রাকচারের মত হতে হবে।
