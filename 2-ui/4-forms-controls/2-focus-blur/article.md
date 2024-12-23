@@ -90,6 +90,8 @@ If we enter something into the input and then try to use `key:Tab` or click away
 
 Please note that we can't "prevent losing focus" by calling `event.preventDefault()` in `onblur`, because `onblur` works *after* the element lost the focus.
 
+In practice though, one should think well, before implementing something like this, because we generally *should show errors* to the user, but *should not prevent their progress* in filling our form. They may want to fill other fields first.
+
 ```warn header="JavaScript-initiated focus loss"
 A focus loss can occur for many reasons.
 
@@ -104,7 +106,7 @@ The best recipe is to be careful when using these events. If we want to track us
 ```
 ## Allow focusing on any element: tabindex
 
-By default many elements do not support focusing.
+By default, many elements do not support focusing.
 
 The list varies a bit between browsers, but one thing is always correct: `focus/blur` support is guaranteed for elements that a visitor can interact with: `<button>`, `<input>`, `<select>`, `<a>` and so on.
 
@@ -118,7 +120,7 @@ That is: if we have two elements, the first has `tabindex="1"`, and the second h
 
 The switch order is: elements with `tabindex` from `1` and above go first (in the `tabindex` order), and then elements without `tabindex` (e.g. a regular `<input>`).
 
-Elements with matching `tabindex` are switched in the document source order (the default order).
+Elements without matching `tabindex` are switched in the document source order (the default order).
 
 There are two special values:
 
