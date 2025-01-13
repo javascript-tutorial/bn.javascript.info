@@ -8,7 +8,11 @@
 
 ## Event constructor
 
+<<<<<<< HEAD
 DOM ইলিমেন্ট ক্লাসের মত বিল্ট-ইন ইভেন্টের ক্লাস হায়ার্য়াকি আছে। বিল্ট-ইন রুট ইভেন্ট ক্লাস [Event](http://www.w3.org/TR/dom/#event)।
+=======
+Built-in event classes form a hierarchy, similar to DOM element classes. The root is the built-in [Event](https://dom.spec.whatwg.org/#events) class.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 `Event` অবজেক্ট এভাবে তৈরি করি:
 
@@ -210,7 +214,11 @@ UI ইভেন্ট সম্পর্কে আরো বিস্তার�
 
 ## Events-in-events are synchronous
 
+<<<<<<< HEAD
 সাধারণত ইভেন্ট সমূহ কিউ হিসেবে রান হয়। যেমন: ব্রাউজারে `onclick` ইভেন্ট সংগঠিত হওয়ার পর `mousemove` ইভেন্ট সংগঠিত হল, তাহলে `onclick` হ্যান্ডালার প্রসেস হওয়ার পর `mousemove` হ্যান্ডেলার কল হবে।
+=======
+Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then its handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 তবে ব্যতিক্রম হল যখন একটি ইভেন্ট থেকে অন্য একটি ইভেন্ট কল করা হয়, যেমন `dispatchEvent` এর মাধ্যমে। এই ধরণের ইভেন্ট এর হ্যান্ডেলার সাথে সাথে প্রসেসড হয় এবং এটি শেষ হওয়ার পর ঐ হ্যান্ডেলারের বাকী কোড এক্সিকিউট হয়।
 
@@ -266,7 +274,11 @@ UI ইভেন্ট সম্পর্কে আরো বিস্তার�
 </script>
 ```
 
+<<<<<<< HEAD
 এখন `dispatchEvent` অ্যাসিঙ্ক্রোনাসলি কল হবে, সুতরাং `mouse.onclick` সম্পূর্ন প্রসেস হওয়ার পর `menu-open` ইভেন্ট হ্যান্ডেলার কল হবে।
+=======
+Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `menu.onclick`, so event handlers are totally separate.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 আউটপুট হবে: 1 -> 2 -> nested.
 

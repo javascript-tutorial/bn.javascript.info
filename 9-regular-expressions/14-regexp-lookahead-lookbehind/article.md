@@ -1,6 +1,10 @@
 # লুকঅ্যাহেড এবং লুকবিহাইন্ড
 
+<<<<<<< HEAD
 অনেক সময় আমাদের এমন প্যাটার্ন খুঁজা লাগে যা অন্য প্যাটার্নের উপর নির্ভর করে।
+=======
+Sometimes we need to find only those matches for a pattern that are followed or preceded by another pattern.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 এজন্য রেগুলার এক্সপ্রেশনে একটি বিশেষ সিনট্যাক্স আছে "লুকঅ্যাহেড" এবং "লুকবিহাইন্ড", এদের একত্রে বলা হয়  "লুকঅ্যারাউন্ড"।
 
@@ -33,7 +37,11 @@ alert( str.match(/\d+(?=€)/) ); // 30, 1 এর সাথে মিল হব�
 
 এটি অবশ্যই সম্ভব হবে যদি `pattern:Y` এবং `pattern:Z` পরস্পর সাংঘর্ষিক না হয়।
 
+<<<<<<< HEAD
 যেমন, `pattern:\d+(?=\s)(?=.*30)` দ্বারা বুঝায় `pattern:\d+` এরপর একটি স্পেস থাকবে, এবং তারপর যেকোন অবস্থানে `30` থাকবে:
+=======
+For example, `pattern:\d+(?=\s)(?=.*30)` looks for `pattern:\d+` that is followed by a space `pattern:(?=\s)`, and there's `30` somewhere after it `pattern:(?=.*30)`:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let str = "1 turkey costs 30€";
@@ -54,12 +62,24 @@ alert( str.match(/\d+(?=\s)(?=.*30)/) ); // 1
 ```js run
 let str = "2 turkeys cost 60€";
 
+<<<<<<< HEAD
 alert( str.match(/\d+(?!€)/) ); // 2 (দামকে বাদ দেয়া হয়েছে)
+=======
+alert( str.match(/\d+\b(?!€)/g) ); // 2 (the price is not matched)
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ```
 
 ## লুকবিহাইন্ড
 
+<<<<<<< HEAD
 লুকঅ্যাহেড একটি শর্ত আরোপ করে "পরবর্তী অবস্থান"।
+=======
+```warn header="Lookbehind browser compatibility"
+Please Note: Lookbehind is not supported in non-V8 browsers, such as Safari, Internet Explorer.
+```
+
+Lookahead allows to add a condition for "what follows".
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 লুকবিহাইন্ড ও অনুরূপ, কিন্তু এটি পূর্বের অবস্থান খুঁজে। অর্থাৎ এটি মিলবে কেবল প্যাটার্নের পূর্বের কোন একটি প্যাটার্নের সাথে মিললে।
 
@@ -81,7 +101,11 @@ alert( str.match(/(?<=\$)\d+/) ); // 30 (পরিমাণটি বাদ য�
 ```js run
 let str = "2 turkeys cost $60";
 
+<<<<<<< HEAD
 alert( str.match(/(?<!\$)\d+/) ); // 2 (দাম বাদ যাবে)
+=======
+alert( str.match(/(?<!\$)\b\d+/g) ); // 2 (the price is not matched)
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ```
 
 ## ক্যাপচারিং গ্রুপ
