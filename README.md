@@ -1,6 +1,10 @@
 # The Modern JavaScript Tutorial in Bengali
 
+<<<<<<< HEAD
 This repository hosts the translation of <https://javascript.info> in Bengali.
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 
 **That's how you can contribute:**
@@ -17,9 +21,15 @@ Please kindly allow maintainers to review and merge or request changes in your t
 
 If maintainers do not respond, or if you'd like to become a maintainer, write us at the [main repo](https://github.com/javascript-tutorial/en.javascript.info/issues/new).
 
+<<<<<<< HEAD
 **Let others know what you're translating, in message boards or chats in your language. Invite them to join!**
 
 🎉 Thank you!
+=======
+Something's wrong? A topic is missing? Explain it to people, add it as PR 👏
+
+**You can edit the text in any editor.** The tutorial uses an enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Your name and the contribution size will appear in the "About project" page when the translation gets published.
 
@@ -27,9 +37,15 @@ P.S. The full list of languages can be found at <https://javascript.info/transla
 
 ## Structure
 
+<<<<<<< HEAD
 Every chapter, an article or a task resides in its own folder.
 
 The folder is named `N-url`, where `N` – is the number for sorting (articles are ordered), and `url` is the URL-slug on the site.
+=======
+Every chapter, article, or task has its folder.
+
+The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 The folder has one of files:
 
@@ -117,6 +133,7 @@ Some files, usually tasks, have YAML metadata at the top, delimited by `---`:
 ```md
 importance: 5
 
+<<<<<<< HEAD
 ---
 ...
 ```
@@ -138,3 +155,8 @@ Please don't translate or remove the `[#...]` part, it's for URL anchors.
 You can run the tutorial server locally to see how the translation looks.
 
 The server and install instructions are at <https://github.com/javascript-tutorial/server>.
+=======
+---  
+♥  
+Ilya Kantor @iliakan
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
