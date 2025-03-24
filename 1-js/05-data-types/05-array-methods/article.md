@@ -1,6 +1,10 @@
 # অ্যারে মেথডস
 
+<<<<<<< HEAD
 অ্যারের বিল্ট-ইন আরো কিছু মেথড আছে, যার সাহায্যে আমরা সহজে অনেক অপারেশন চালাতে পারি।
+=======
+Arrays provide a lot of methods. To make things easier, in this chapter, they are split into groups.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ## এলিমেন্ট সংযুক্ত করা বা বাদ দেয়া
 
@@ -32,11 +36,19 @@ alert( arr.length ); // 3
 
 যদিওবা আমরা এলিমেন্টটি রিমুভ করেছি তারপরও অ্যারেতে ৩টি এলিমেন্ট আছে, ইতোমধ্যে যা আমরা দেখেছি `arr.length == 3`।
 
+<<<<<<< HEAD
 এটি স্বাভাবিক, কেননা `delete obj.key` এর দ্বারা আমরা `key` এর মান রিমুভ করি। এবং এটি অবজেক্টের জন্য ঠিক আছে। কিন্তু অ্যারের জন্য আমাদের অ্যারেটিকে পুনরায় সাজাতে হবে।
+=======
+That's natural, because `delete obj.key` removes a value by the `key`. It's all it does. Fine for objects. But for arrays we usually want the rest of the elements to shift and occupy the freed place. We expect to have a shorter array now.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 এজন্য, আমরা একটি বিশেষ মেথডের সাহায্য নেব।
 
+<<<<<<< HEAD
 [arr.splice](mdn:js/Array/splice) মেথড যার সাহায্যে অ্যারেতে আমরা বিভিন্ন অপারেশন চালাতে পারি। যেমন: কোন এলিমেন্ট insert, remove বা replace।
+=======
+The [arr.splice](mdn:js/Array/splice) method is a Swiss army knife for arrays. It can do everything: insert, remove and replace elements.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 সিনট্যাক্সটি হল:
 
@@ -62,7 +74,11 @@ alert( arr ); // ["I", "JavaScript"]
 
 সহজ, তাই না? এখানে আমরা ১ নং ইনডেক্স হতে ১ টি এলিমেন্ট ডিলিট করেছি।
 
+<<<<<<< HEAD
 পরবর্তী উদাহরণে আমরা প্রথম ৩টি এলিমেন্ট ডিলিট করব, এবং ঐ ইনডেক্সে নতুন দুটি এলিমেন্ট সংযুক্ত করব:
+=======
+In the next example, we remove 3 elements and replace them with the other two:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let arr = [*!*"I", "study", "JavaScript",*/!* "right", "now"];
@@ -84,7 +100,11 @@ let removed = arr.splice(0, 2);
 alert( removed ); // ডিলিট হওয়া এলিমেন্ট "I", "study"
 ```
 
+<<<<<<< HEAD
 এছাড়াও `splice` এর সাহায্যে আমরা কোন এলিমেন্ট ডিলিট না করে নির্দিষ্ট ইনডেক্সে নতুন এলিমেন্ট সংযুক্ত করতে পারি এক্ষেত্রে আমরা `deleteCount` এর মান `0` সেট করব:
+=======
+The `splice` method is also able to insert the elements without any removals. For that, we need to set `deleteCount` to `0`:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let arr = ["I", "study", "JavaScript"];
@@ -114,7 +134,11 @@ alert( arr ); // 1,2,3,4,5
 
 ### slice
 
+<<<<<<< HEAD
 [arr.slice](mdn:js/Array/slice) মেথড অনেকটা `arr.splice` এর মত।
+=======
+The method [arr.slice](mdn:js/Array/slice) is much simpler than the similar-looking `arr.splice`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 এর সিনট্যাক্স হল:
 
@@ -124,7 +148,11 @@ arr.slice([start], [end])
 
 এটি অ্যারের `start` হতে `end` ইনডেক্স পর্যন্ত এলিমেন্ট সমূহকে অ্যারে হিসেবে রিটার্ন করে। `start` এবং `end` এর ইনডেক্স মান নেগেটিভ হতে পারে, যা দ্বারা রিভার্স কাউন্ট করে।
 
+<<<<<<< HEAD
 এটি `str.slice` এর মত, তবে সাবস্ট্রিংয়ের পরিবর্তে এটি সাবঅ্যারে রিটার্ন করে।
+=======
+It's similar to a string method `str.slice`, but instead of substrings, it makes subarrays.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 যেমন:
 
@@ -206,7 +234,7 @@ alert( arr.concat(arrayLike) ); // 1,2,something,else
 এর সিনট্যাক্স হল:
 ```js
 arr.forEach(function(item, index, array) {
-  // ... do something with item
+  // ... do something with an item
 });
 ```
 
@@ -234,6 +262,7 @@ arr.forEach(function(item, index, array) {
 
 ### indexOf/lastIndexOf and includes
 
+<<<<<<< HEAD
 [arr.indexOf](mdn:js/Array/indexOf), [arr.lastIndexOf](mdn:js/Array/lastIndexOf) এবং [arr.includes](mdn:js/Array/includes) এদের সিনট্যাক্স এবং কাজ স্ট্রিং এর মেথডগুলোর মত, তবে এখানে আর্গুমেন্ট হিসেবে ক্যারাক্টারের পরিবর্তে এলিমেন্ট নেয়:
 
 - `arr.indexOf(item, from)` -- অ্যারেতে `from` ইনডেক্স হতে একটি `item` অনুসন্ধান করে, যদি পাই তাহলে ইনডেক্সটি রিটার্ন করে, অন্যথায় `-1`।
@@ -241,6 +270,16 @@ arr.forEach(function(item, index, array) {
 - `arr.includes(item, from)` -- অ্যারেতে `from` ইনডেক্স হতে একটি `item` অনুসন্ধান করে, যদি পাই তাহলে `true`  রিটার্ন করে।
 
 যেমন:
+=======
+The methods [arr.indexOf](mdn:js/Array/indexOf) and [arr.includes](mdn:js/Array/includes) have the similar syntax and do essentially the same as their string counterparts, but operate on items instead of characters:
+
+- `arr.indexOf(item, from)` -- looks for `item` starting from index `from`, and returns the index where it was found, otherwise `-1`.
+- `arr.includes(item, from)` -- looks for `item` starting from index `from`, returns `true` if found.
+
+Usually, these methods are used with only one argument: the `item` to search. By default, the search is from the beginning.
+
+For instance:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let arr = [1, 0, false];
@@ -252,6 +291,7 @@ alert( arr.indexOf(null) ); // -1
 alert( arr.includes(1) ); // true
 ```
 
+<<<<<<< HEAD
 এরা কম্পারিশনের সময় `===` ব্যবহার করে। সুতরাং , যদি আমরা একটি স্ট্রিং `'0'` খুঁজি, তাহলে এটি এলিমেন্ট ডাটা টাইপ একই না হওয়ায় `-1` রিটার্ন করবে।
 
 যদি অ্যারেতে কোন একটি এলিমেন্ট আছে কিনা নিশ্চিত হতে চায়, তাহলে `arr.includes` ব্যবহার করা শ্রেয়।
@@ -261,12 +301,41 @@ alert( arr.includes(1) ); // true
 ```js run
 const arr = [NaN];
 alert( arr.indexOf(NaN) ); // -1 (0 রিটার্ন করা উচিত, কিন্তু === NaN এর জন্য কাজ করে না)
-alert( arr.includes(NaN) );// true (correct)
+=======
+Please note that `indexOf` uses the strict equality `===` for comparison. So, if we look for `false`, it finds exactly `false` and not the zero.
+
+If we want to check if `item` exists in the array and don't need the index, then `arr.includes` is preferred.
+
+The method [arr.lastIndexOf](mdn:js/Array/lastIndexOf) is the same as `indexOf`, but looks for from right to left.
+
+```js run
+let fruits = ['Apple', 'Orange', 'Apple']
+
+alert( fruits.indexOf('Apple') ); // 0 (first Apple)
+alert( fruits.lastIndexOf('Apple') ); // 2 (last Apple)
 ```
 
+````smart header="The `includes` method handles `NaN` correctly"
+A minor, but noteworthy feature of `includes` is that it correctly handles `NaN`, unlike `indexOf`:
+
+```js run
+const arr = [NaN];
+alert( arr.indexOf(NaN) ); // -1 (wrong, should be 0)
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
+alert( arr.includes(NaN) );// true (correct)
+```
+That's because `includes` was added to JavaScript much later and uses the more up-to-date comparison algorithm internally.
+````
+
+<<<<<<< HEAD
 ### find এবং findIndex
 
 মনে করুন আমাদের অ্যারের এলিমেন্টগুলো অবজেক্ট। কিভাবে কোন একটি নির্দিষ্ট শর্তের জন্য আমরা অবজেক্ট খুঁজতে পারি?
+=======
+### find and findIndex/findLastIndex
+
+Imagine we have an array of objects. How do we find an object with a specific condition?
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 এক্ষেত্রে [arr.find(fn)](mdn:js/Array/find) মেথড ব্যবহার করি।
 
@@ -284,7 +353,11 @@ let result = arr.find(function(item, index, array) {
 - `index` এলিমেন্টের ইনডেক্স
 - `array` অ্যারেটি
 
+<<<<<<< HEAD
 যদি `true` রিটার্ন করে, তাহলে অনুসন্ধানটি বন্ধ হয়ে যাবে, এবং `item` টি রিটার্ন করবে। যদি কোন এলিমেন্ট না পাই, তাহলে `undefined` রিটার্ন করবে।
+=======
+If it returns `true`, the search is stopped, the `item` is returned. If nothing is found, `undefined` is returned.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 যেমন, আমাদের `users` এর একটি অ্যারে আছে, যার প্রপার্টিগুলো হল `id` এবং `name`। এখন চলুন আমরা একটি এলিমেন্ট খুঁজি যার `id` হল `1`, `id == 1`:
 
@@ -300,11 +373,38 @@ let user = users.find(item => item.id == 1);
 alert(user.name); // John
 ```
 
+<<<<<<< HEAD
 বাস্তবিকক্ষেত্রে আমাদের প্রায় সময় অ্যারের অবজেক্ট নিয়ে কাজ করতে হয়, এক্ষেত্রে এই ধরণের অ্যারেতে অবজেক্ট অনুসন্ধানে `find` মেথডটি ব্যবহার করতে পারি।
+=======
+In real life, arrays of objects are a common thing, so the `find` method is very useful.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 নোট: বেশিরভাগক্ষেত্রে কলব্যাক ফাংশনটিতে আমরা শুধুমাত্র একটি আর্গুমেন্ট পাস করি `item => item.id == 1`। অন্যান্য আর্গুমেন্টগুলো তেমন ব্যবহার করিনা।
 
+<<<<<<< HEAD
 [arr.findIndex](mdn:js/Array/findIndex) মেথডটিও অনুরূপ, তবে এটি এলিমেন্টের পরিবর্তে এলিমেন্টের `index` রিটার্ন করে।
+=======
+The [arr.findIndex](mdn:js/Array/findIndex) method has the same syntax but returns the index where the element was found instead of the element itself. The value of `-1` is returned if nothing is found.
+
+The [arr.findLastIndex](mdn:js/Array/findLastIndex) method is like `findIndex`, but searches from right to left, similar to `lastIndexOf`.
+
+Here's an example:
+
+```js run
+let users = [
+  {id: 1, name: "John"},
+  {id: 2, name: "Pete"},
+  {id: 3, name: "Mary"},
+  {id: 4, name: "John"}
+];
+
+// Find the index of the first John
+alert(users.findIndex(user => user.name == 'John')); // 0
+
+// Find the index of the last John
+alert(users.findLastIndex(user => user.name == 'John')); // 3
+```
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ### filter
 
@@ -388,7 +488,12 @@ alert( arr );  // *!*1, 15, 2*/!*
 
 আমাদের নিজস্ব ক্রম অনুযায়ী সাজাতে, `arr.sort()` এ আর্গুমেন্ট হিসেবে একটি ফাংশন পাঠাতে পারি।
 
+<<<<<<< HEAD
 ফাংশনটি দুটি ভ্যালুর মধ্যে তুলনা করে:
+=======
+The function should compare two arbitrary values and return:
+
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```js
 function compare(a, b) {
   if (a > b) return 1; // যদি প্রথম ভ্যালুটি দ্বিতীয়টি থেকে বড় হয়
@@ -417,11 +522,19 @@ alert(arr);  // *!*1, 2, 15*/!*
 
 এখন এটি সঠিকভাবে কাজ করছে।
 
+<<<<<<< HEAD
 চলুন এটি কিভাবে কাজ করছে তা বুঝার চেষ্টা করি। `arr` এর এলিমেন্টগুলো যেকোন ডাটাটাইপের হতে পারে, তাই না? এলিমেন্টগুলো হতে পারে নাম্বার বা স্ট্রিং কিংবা অবজেক্ট অথবা যেকোন কিছু। আমাদের *কিছু এলিমেন্টের* একটি সেট আছে। পুনর্বিন্যাস্ত করার জন্য এলিমেন্টগুলোকে কিভাবে তুলনা করবে তার জন্য একটি *ordering function* লাগবে। যা সাধারণত ডিফল্ট স্ট্রিং হিসাবে পুনর্বিন্যাস্ত হয়।
+=======
+Let's step aside and think about what's happening. The `arr` can be an array of anything, right? It may contain numbers or strings or objects or whatever. We have a set of *some items*. To sort it, we need an *ordering function* that knows how to compare its elements. The default is a string order.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 `arr.sort(fn)` মেথডটি একটি জেনেরিক সর্টিং অ্যালগরিদম ইমপ্লিমেন্ট করে। ইন্টারনালি এটি কিভাবে কাজ করে তা আমাদের জানা লাগবে না ([quicksort](https://en.wikipedia.org/wiki/Quicksort) বা [Timsort](https://en.wikipedia.org/wiki/Timsort))। এটি অ্যারের মধ্যে ইটারেট করবে, প্রদত্ত ফাংশন অনুযায়ী এলিমেন্টগুলোর মধ্যে তুলনা করবে এবং অ্যারেটিকে পুনর্বিন্যস্ত করবে, আমাদের জানা লাগবে আমাদের প্রদত্ত `fn` কিভাবে তুলনা করছে।
 
+<<<<<<< HEAD
 যা হোক, আমরা যদি জানতে চাই কোন এলিমেন্টেগুলোর মধ্যে তুলনা করা হচ্ছে -- তাহলে এভাবে জানতে পারি:
+=======
+By the way, if we ever want to know which elements are compared -- nothing prevents us from alerting them:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 [1, -2, 15, 2, 0, 8].sort(function(a, b) {
@@ -493,7 +606,11 @@ alert( arr ); // 5,4,3,2,1
 
 [str.split(delim)](mdn:js/String/split) মেথড স্ট্রিংকে অ্যারেতে রূপান্তর করে। এটি স্ট্রিংকে কোন একটি ডেলিমিটারের `delim` সাপেক্ষে অ্যারেতে রূপান্তর করে।
 
+<<<<<<< HEAD
 নিচের উদাহরণে আমরা একটি কমা এবং একটি স্পেসের সাপেক্ষে স্ট্রিংকে অ্যারেতে বিভক্ত করব:
+=======
+In the example below, we split by a comma followed by a space:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let names = 'Bilbo, Gandalf, Nazgul';
@@ -560,9 +677,15 @@ let value = arr.reduce(function(accumulator, item, index, array) {
 - `index` -- ইটারেটকৃত এলিমেন্টের পজিশন।
 - `array` -- অ্যারেটি।
 
+<<<<<<< HEAD
 ফাংশন কল হলে, পূর্ববর্তী ফাংশন কলের রিটার্নকৃত মানটি পরবর্তী কলের জন্য প্রথম আর্গুমেন্ট হিসেবে পাস হবে।
 
 সুতরাং, প্রথম আর্গুমেন্টটি মূলত আমাদের পূর্ববর্তী সকল এক্সিকিউশনের মানটি ফলাফল হিসেবে সংরক্ষণ করে। এবং সর্বশেষে এটি `reduce` এর রেজাল্ট হয়।
+=======
+As the function is applied, the result of the previous function call is passed to the next one as the first argument.
+
+So, the first argument is essentially the accumulator that stores the combined result of all previous executions. And at the end, it becomes the result of `reduce`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 জটিল মনে হচ্ছে?
 
@@ -631,8 +754,12 @@ arr.reduce((sum, current) => sum + current);
 
 সুতরাং অনাকাঙ্ক্ষিত এরর এড়াতে সবসময় প্রাথমিক মানটি আর্গুমেন্টে পাস করা উচিত।
 
+<<<<<<< HEAD
 [arr.reduceRight](mdn:js/Array/reduceRight) মেথডটিও একই কাজ করে, তবে এটি অ্যারের উল্টোদিক হতে ইটারেট করে।
 
+=======
+The method [arr.reduceRight](mdn:js/Array/reduceRight) does the same but goes from right to left.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ## Array.isArray
 
@@ -642,7 +769,7 @@ arr.reduce((sum, current) => sum + current);
 
 ```js run
 alert(typeof {}); // object
-alert(typeof []); // same
+alert(typeof []); // object (same)
 ```
 
 ...তবে এর জন্য আমাদের আরেকটি বিশেষ মেথড আছে: [Array.isArray(value)](mdn:js/Array/isArray)। যদি `value` একটি অ্যারে হয় তাহলে `true` রিটার্ন করবে, অন্যথায় `false`।
@@ -657,7 +784,11 @@ alert(Array.isArray([])); // true
 
 বেশিরভাগ অ্যারে মেথড -- যেমন `find`, `filter`, `map` ইত্যাদি আরেকটি অপশনাল আর্গুমেন্ট `thisArg` নিতে পারে।
 
+<<<<<<< HEAD
 উপরে আমরা প্যারামিটারটি সম্পর্কে আলোচনা করিনি, কেননা এটি কদাচিৎ ব্যবহার হয়। তবে আমাদের এটিও জেনে রাখা উচিত।
+=======
+That parameter is not explained in the sections above, because it's rarely used. But for completeness, we have to cover it.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 মেথডগুলোর সিনট্যাক্স হবে:
 
@@ -716,11 +847,19 @@ alert(soldiers[1].age); // 23
   - `slice(start, end)` -- অ্যারের `start` হতে `end` ইনডেক্স পর্যন্ত এলিমেন্ট সমূহকে একটি নতুন অ্যারে হিসেবে রিটার্ন করে।
   - `concat(...items)` -- কোন একটি অ্যারের সাথে আরেকটি নতুন অ্যারে বা নতুন `items` সংযুক্ত করে, এটিও একটি নতুন অ্যারে রিটার্ন করে।
 
+<<<<<<< HEAD
 - এলিমেন্ট অনুসন্ধানের মেথড:
   - `indexOf/lastIndexOf(item, pos)` -- কোন একটি নির্দিষ্ট পজিশন `pos` থেকে একটি `item` অনুসন্ধান করে, এলিমেন্ট পাওয়া গেলে `index` পাওয়া না গেলে `-1` রিটার্ন করে।
   - `includes(value)` -- অ্যারেতে `value` টি থাকলে `true` রিটার্ন করবে, অন্যথায় `false`।
   - `find/filter(func)` -- এলিমেন্ট সমূহকে কাস্টম ফাংশনের উপর ভিত্তি করে অনুসন্ধান চালায়, ফাংশনের `true` রিটার্নের জন্য প্রথম/সকল এলিমেন্ট রিটার্ন করে।
   - `findIndex` -- এটি `find` এর মত, তবে এটি ভ্যালুর পরিবর্তে `index` রিটার্ন করে।
+=======
+- To search among elements:
+  - `indexOf/lastIndexOf(item, pos)` -- look for `item` starting from position `pos`, and return the index or `-1` if not found.
+  - `includes(value)` -- returns `true` if the array has `value`, otherwise `false`.
+  - `find/filter(func)` -- filter elements through the function, return first/all values that make it return `true`.
+  - `findIndex` is like `find`, but returns the index instead of a value.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 - প্রতিটি এলিমেন্ট ইটারেট করতে:
   - `forEach(func)` -- প্রতিটি এলিমেন্টের জন্য একটি `func` কল হয়, কোন কিছু রিটার্ন করে না।
@@ -732,8 +871,13 @@ alert(soldiers[1].age); // 23
   - `split/join` -- স্ট্রিংকে অ্যারেতে আর অ্যারেকে স্ট্রিংয়ে রূপান্তর করতে।
   - `reduce/reduceRight(func, initial)` -- অ্যারের প্রতিটি এলিমেন্টের জন্য `func` কল হবে এবং পূর্বের মানটি সংরক্ষন করে পরবর্তী কলে আগের মানটি প্রদান করে এবং সর্বশেষে একটি ফলাফল রিটার্ন করে।
 
+<<<<<<< HEAD
 - অতিরিক্ত:
   - `Array.isArray(arr)` এটি `arr` কে যাচাই করে অ্যারে কিনা।
+=======
+- Additionally:
+  - `Array.isArray(value)` checks `value` for being an array, if so returns `true`, otherwise `false`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 দয়া করে মনে রাখুন `sort`, `reverse` এবং `splice` অরিজিনাল অ্যারেকে রূপান্তর করে।
 
@@ -741,11 +885,20 @@ alert(soldiers[1].age); // 23
 
 - [arr.some(fn)](mdn:js/Array/some)/[arr.every(fn)](mdn:js/Array/every) অ্যারেটিকে যাচাই করে।
 
+<<<<<<< HEAD
   `fn` ফাংশনটি `map` এর মত সকল এলিমেন্টকে ইটারেট করে। যদি কোন/সকল রেজাল্ট `true` হয়, তাহলে `true` রিটার্ন করবে, অন্যথায় `false`।
 
   মেথডগুলো `||` এবং `&&` অপারেটরের মত কাজ করে: যদি `fn`  কোন একটি এলিমেন্টের জন্য `true` রিটার্ন করে, `arr.some()` সাথে সাথে ইটারেশন থামিয়ে `true` রিটার্ন করবে অর্থাৎ `arr.some()` অ্যারের কোন একটি এলিমেন্টের জন্য শর্ত পূরণ হলে `true` রিটার্ন করে। আবার যদি `fn`  কোন একটি এলিমেন্টের জন্য `false` রিটার্ন করে `arr.every()` সাথে সাথে ইটারেশন থামিয়ে `false` রিটার্ন করবে অর্থাৎ `arr.every()` অ্যারের প্রতিটি এলিমেন্টের জন্য শর্ত পূরণ হলে `true` রিটার্ন করে।
 
   দুটি অ্যারেকে তুলনা করতে ব্যবহার করতে পারি `every` মেথড:
+=======
+  The function `fn` is called on each element of the array similar to `map`. If any/all results are `true`, returns `true`, otherwise `false`.
+
+  These methods behave sort of like `||` and `&&` operators: if `fn` returns a truthy value, `arr.some()` immediately returns `true` and stops iterating over the rest of items; if `fn` returns a falsy value, `arr.every()` immediately returns `false` and stops iterating over the rest of items as well.
+
+  We can use `every` to compare arrays:
+
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
   ```js run
   function arraysEqual(arr1, arr2) {
     return arr1.length === arr2.length && arr1.every((value, index) => value === arr2[index]);
@@ -762,7 +915,11 @@ alert(soldiers[1].age); // 23
 
 অ্যারের সম্পূর্ণ মেথডের তালিকাটি দেখতে, [manual](mdn:js/Array)।
 
+<<<<<<< HEAD
 প্রথম দেখায় মনে হতে পারে অনেক মেথড আছে, এবং এদের মনে রাখা কঠিন। আসলে এটি তেমন কঠিন কিছু না।
+=======
+At first sight, it may seem that there are so many methods, quite difficult to remember. But actually, that's much easier.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 চিটশীটটি আবার লক্ষ্য করুন। তারপর এই অধ্যায়ের সমস্যাগুলো সমাধান করুন, তাহলে মেথডসমূহ সম্পর্কে আপনার ধারণা হবে।
 

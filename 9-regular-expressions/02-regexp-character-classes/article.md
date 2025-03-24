@@ -8,7 +8,11 @@
 
 শুরুতে, চলুন "ডিজিট" ক্লাস সম্পর্কে জানি। এটি লিখা হয় `pattern:\d` দিয়ে এবং এটি যেকোন "একক ডিজিট বা অঙ্কের" সাথে মিলে।
 
+<<<<<<< HEAD
 উদাহরণস্বরূপ, চলুন ফোন নম্বরটিতে প্রথমে ডিজিটটি খুঁজি:
+=======
+For instance, let's find the first digit in the phone number:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -121,7 +125,11 @@ alert( "CS-4".match(regexp) ); // CS-4
 alert( "CS 4".match(regexp) ); // CS 4 (স্পেসও একটি ক্যারাক্টার)
 ```
 
+<<<<<<< HEAD
 অনুগ্রহ করে মনে রাখবেন যদিও ডট দ্বারা "যেকোন ক্যারেক্টার" বুঝায়, কিন্ত "ক্যারাক্টারের অনুপস্থিতি বা শূণ্যস্থান" কে বুঝায় না। মিলের জন্য অবশ্যই একটি ক্যারেক্টার থাকা লাগবে:
+=======
+Please note that a dot means "any character", but not the "absence of a character". There must be a character to match it:
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 alert( "CS4".match(/CS.4/) ); // null, কেননা ডট দ্বারা বুঝাতে কোন ক্যারেক্টার নাই
@@ -145,11 +153,18 @@ alert( "A\nB".match(/A.B/) ); // null (no match)
 alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
 ```
 
+<<<<<<< HEAD
 ````warn header=" Firefox, IE, Edge এ কাজ করে না"
 বর্তমানে যেসব ব্রাউজারে সাপোর্ট করে তা চেক করুন <https://caniuse.com/#search=dotall>। এই লিখাটি লিখার সময় এটি Firefox, IE, Edge এ কাজ করে না।
 
 সৌভাগ্যক্রমে, অন্য একটি উপায় আছে, যা সব জায়গায় কাজ করে।
 আমরা রেগুলার এক্সপ্রেশনে এভাবেও `pattern:[\s\S]` ব্যবহার করতে পারি যা "যেকোন ক্যারেক্টারের " সাথে মিলে।
+=======
+````warn header="Not supported in IE"
+The `pattern:s` flag is not supported in IE.
+
+Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character" (this pattern will be covered in the article <info:regexp-character-sets-and-ranges>).
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ```js run
 alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
@@ -181,7 +196,11 @@ alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, এটিও কাজ করব�
 
 **স্পেসও একটি ক্যারেক্টার। এটি অন্যান্য ক্যারেক্টারের মত গুরুত্বপূর্ণ।**
 
+<<<<<<< HEAD
 রেগুলার এক্সপ্রেশনে স্পেস যোগ বা বাদ দিয়ে সঠিকভাবে কাজ করবে আমরা এই আশা করতে পারিনা।
+=======
+We can't add or remove spaces from a regular expression and expect it to work the same.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 অন্য অর্থে বলা যায়, রেগুলার এক্সপ্রেশনে স্পেসসহ প্রতিটি ক্যারেক্টার তাৎপর্যপূর্ণ।
 ````
@@ -200,6 +219,10 @@ alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, এটিও কাজ করব�
 
 ...কিন্ত এখানেই শেষ নয়!
 
+<<<<<<< HEAD
 ইউনিকোড এনকোডিং, জাভাস্ক্রিপ্টে স্ট্রিংয়ে অন্যান্য বিভিন্ন ক্যারেক্টার যেমনঃ অন্যান্য ভাষার বর্ণ বা চিহ্ন ইত্যাদি ব্যবহৃত হয়।
+=======
+Unicode encoding, used by JavaScript for strings, provides many properties for characters, like: which language the letter belongs to (if it's a letter), is it a punctuation sign, etc.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 আমরা এই ধরণের প্রোপার্টিগুলো দ্বারাও সার্চ করতে পারি। এজন্য এই ফ্ল্যাগটি `pattern:u` প্রয়োজন, যা পরবর্তী অনুচ্ছেদে আমরা জানব।
