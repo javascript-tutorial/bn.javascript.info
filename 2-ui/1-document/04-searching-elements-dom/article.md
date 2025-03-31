@@ -54,8 +54,13 @@ DOM নেভিগেশনসমূহ একই সিব্লিং বা 
 </script>
 ```
 
+<<<<<<< HEAD
 ```warn header="দয়া করে এলিমেন্ট এক্সেস করতে id কে গ্লোবাল ভ্যারিয়েবল হিসেবে ব্যবহার করবেন না"
 আরো বিস্তারিত জানতে [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), সুতরাং এটি স্ট্যান্ডার্ড। কিন্তু এটি *compatibility* সমর্থনের জন্য।
+=======
+```warn header="Please don't use id-named global variables to access elements"
+This behavior is described [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object), but it is supported mainly for compatibility.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ব্রাউজার JS এবং DOM এর ভ্যারিয়েবল সমূহকে মিক্সিং করে আমাদের সহায়তা করে। এটি সাধারণ স্ক্রিপ্ট, ইনলাইন HTML এর জন্য ভালো হতে পারে, কিন্তু আসলেই এটি তেমন কাজের নয়। এখানে ভ্যারিয়েবলের নামের কনফ্লিক্ট হতে পারে। এছাড়াও যখন কেউ জাভাস্ক্রিপ্ট কোড পড়বে এবং ভিউতে HTML থাকবে না, ভ্যারিয়েবলটি কোথা থেকে এসেছে বোধগম্য হবে না।
 
@@ -70,8 +75,13 @@ DOM নেভিগেশনসমূহ একই সিব্লিং বা 
 যদি একই `id` দ্বারা অনেক এলিমেন্ট ডিক্লেয়ার করা হয়, তাহলে মেথডসমূহ অপ্রত্যাশিত কাজ করবে, যেমন `document.getElementById` যেকোন একটি এলেমেন্টকে রিটার্ন করতে পারে। সুতরাং আমাদের অবশ্যই মনে রাখতে হবে `id` হবে স্বতন্ত্র।
 ```
 
+<<<<<<< HEAD
 ```warn header="`anyElem.getElementById` না, শুধু `document.getElementById`"
 `getElementById` মেথডটি শুধুমাত্র `document` অবজেক্টের মেথড। এটি সমস্ত ডকুমেন্ট `id` দ্বারা নির্দেশিত এলিমেন্টটির খোঁজ করবে।
+=======
+```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
+The method `getElementById` can be called only on `document` object. It looks for the given `id` in the whole document.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 ```
 
 ## querySelectorAll [#querySelectorAll]
@@ -116,7 +126,11 @@ CSS সিলেক্টরস সুডো-ক্লাস যেমন `:hove
 
 পূর্ববর্তী মেথড সমূহ DOM এ সার্চ করে।
 
+<<<<<<< HEAD
 [elem.matches(css)](http://dom.spec.whatwg.org/#dom-element-matches) এট কোন এলিমেন্ট রিটার্ন করে না, `elem` এটি কেবল CSS সিলেক্টরস দ্বারা `elem` টি আছে কিনা যাচাই করে। এটি কেবল `true` বা `false` রিটার্ন করে।
+=======
+The [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 মেথডটি কোন কালেকশনে ফিল্টার করতে কাজে আছে।
 
@@ -142,7 +156,11 @@ CSS সিলেক্টরস সুডো-ক্লাস যেমন `:hove
 
 *Ancestors* এলিমেন্ট সমূহ হল: প্যারেন্ট এলিমেন্ট, প্যারেন্ট এলিমেন্টের প্যারেন্ট, পূর্বের এলিমেন্টের প্যারেন্ট এভাবে।  এলিমেন্ট সমূহ দ্বারা এভাবে এলিমেন্ট ট্রি তৈরি করে।
 
+<<<<<<< HEAD
 `elem.closest(css)` তার CSS-selector দ্বারা নিকটতম প্যারেন্ট এলিমেন্ট কে খুঁজে। `elem` নিজেও সার্চিংয়ে অন্তর্ভুক্ত।
+=======
+The method `elem.closest(css)` looks for the nearest ancestor that matches the CSS-selector. The `elem` itself is also included in the search.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 অন্যথায় বলা যায়, `closest` মেথডটি এলিমেন্ট এর নিকটতম প্যারেন্ট এলিমেন্টকে খুঁজে। যদি এটি সিলেক্টরস এর সাথে ম্যাচ করে, তারপর সার্চিংটি থেমে যাবে এবং প্যারেন্ট এলিমেন্টটি রিটার্ন করবে।
 
@@ -154,7 +172,7 @@ CSS সিলেক্টরস সুডো-ক্লাস যেমন `:hove
 <div class="contents">
   <ul class="book">
     <li class="chapter">Chapter 1</li>
-    <li class="chapter">Chapter 1</li>
+    <li class="chapter">Chapter 2</li>
   </ul>
 </div>
 
@@ -363,7 +381,11 @@ DOM এ নোড খুঁজার জন্য প্রধান ৬টি �
 </tbody>
 </table>
 
+<<<<<<< HEAD
 বহুল ব্যবহৃত মেথড হল `querySelector` এবং `querySelectorAll`, কিন্তু অনেক সময় `getElementBy*` ও কাজে আসে অথবা আমরা পুরনো স্ক্রিপ্ট সমূহেও এদের ব্যবহার দেখি।
+=======
+By far the most used are `querySelector` and `querySelectorAll`, but `getElement(s)By*` can be sporadically helpful or found in the old scripts.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 এছাড়াও:
 
