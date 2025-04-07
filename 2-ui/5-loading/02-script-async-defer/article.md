@@ -37,7 +37,11 @@
 
 ## defer
 
+<<<<<<< HEAD
 script এ `defer` অ্যাট্রিবিউট করার ফলে ব্রাউজার script ডাওনলোড হওয়ার জন্য অপেক্ষা করবে না। তার পরিবর্তে এটি DOM কে পার্স করতে থাকবে এবং ব্যাকগ্রাউন্ডে script টি লোড হবে, এবং সম্পূর্ণ DOM বিল্ট হওয়ার পর এটি রান হবে।
+=======
+The `defer` attribute tells the browser not to wait for the script. Instead, the browser will continue to process the HTML, build DOM. The script loads "in the background", and then runs when the DOM is fully built.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 এখানে উপরের উদাহরণটি আবার লিখা হয়েছে, তবে এখানে আমরা `defer` ব্যবহার করেছি:
 
@@ -83,7 +87,11 @@ script এ `defer` অ্যাট্রিবিউট করার ফলে �
 
 পারফরম্যান্সের জন্য ব্রাউজার দুটি স্ক্রিপ্টস সমান্তরালে ডাওনলোড করবে। উপরের উদাহরণে দুটি স্ক্রিপ্টস সমান্তরালে ডাওনলোড হবে এবং সম্ভবত `small.js` এ প্রথমে ডাওনলোড সম্পন্ন করবে, যেহেতু এটির সাইজ কম।
 
+<<<<<<< HEAD
 ...তবে `defer` অ্যাট্রিবিউট DOM পার্সিং ব্লক না করার পাশাপাশি আরো একটি ব্যাপার নিশ্চিত করে তা হল এরা ক্রম অনুসারে এক্সিকিউট হয়। এখানে যদিও `small.js` প্রথমে ডাওনলোড হবে তারপরও এটি এক্সিকিউট হবে `long.js` ডাওনলোড হয়ে এক্সিকিউট হওয়ার পর।
+=======
+...But the `defer` attribute, besides telling the browser "not to block", ensures that the relative order is kept. So even though `small.js` loads first, it still waits and runs after `long.js` executes.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 যখন আমরা কোন একটি জাভাস্ক্রিপ্ট লাইব্রেরী ব্যবহার করি এবং তার উপর অন্য একটি স্ক্রিপ্টস নির্ভর করে তখন এই ব্যাপারটি আমাদের মনে রাখতে হবে।
 
@@ -97,6 +105,7 @@ script এ `defer` অ্যাট্রিবিউট করার ফলে �
 
 `async` অ্যাট্রিবিউট বুঝায় আমাদের script টি সম্পূর্ণ স্বাধীন, অর্থাৎ এটি অন্য script এর উপর নির্ভর করবে না:
 
+<<<<<<< HEAD
 - script এ `async` ব্যবহার করা হলে তা DOM পার্সিং ব্লক করে না (`defer` এর মত)।
 - অন্য script সমূহ `async` script ডাওনলোড হওয়ার জন্য অপেক্ষা করে না, এবং `async` scripts ও অন্য script এর জন্য অপেক্ষা করে না।
 - `DOMContentLoaded` এবং async scripts এক্সিকিউট হওয়ার জন্য একে অন্যের জন্য অপেক্ষা করে না:
@@ -104,6 +113,15 @@ script এ `defer` অ্যাট্রিবিউট করার ফলে �
     - ...অথবা async script এর পর (যদি async script টি ছোট বা HTTP-cache এ থাকে)
 
 অন্য ভাবে বলা যায়, `async` scripts ব্যাকগ্রাউন্ডে লোড হবে এবং ডাওনলোড হওয়ার সাথে সাথে এটি এক্সিকিউট হবে। DOM পার্সিং বা অন্যান্য scripts এর জন্য এর এক্সিকিউশন থেমে থাকে না।
+=======
+- The browser doesn't block on `async` scripts (like `defer`).
+- Other scripts don't wait for `async` scripts, and `async` scripts don't wait for them.
+- `DOMContentLoaded` and async scripts don't wait for each other:
+    - `DOMContentLoaded` may happen both before an async script (if an async script finishes loading after the page is complete)
+    - ...or after an async script (if an async script is short or was in HTTP-cache)
+
+In other words, `async` scripts load in the background and run when ready. The DOM and other scripts don't wait for them, and they don't wait for anything. A fully independent script that runs when loaded. As simple, as it can get, right?
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 নিচে উপরের উদাহরণটি আবার লিখা হল তবে এখানে আমরা `defer` এর বদলে `async` ব্যবহার করেছি।
 
@@ -133,7 +151,16 @@ script এ `defer` অ্যাট্রিবিউট করার ফলে �
 <script async src="https://google-analytics.com/analytics.js"></script>
 ```
 
+```smart header="The `async` attribute is only for external scripts"
+Just like `defer`, the `async` attribute is ignored if the `<script>` tag has no `src`.
+```
+
 ## Dynamic scripts
+<<<<<<< HEAD
+=======
+
+There's one more important way of adding a script to the page.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 আমরা আরো একটি উপায়ে script সংযুক্ত করতে পারি।
 
@@ -188,12 +215,21 @@ loadScript("/article/script-async-defer/small.js");
 | `async` | script সমূহ যেটি আগে লোড হবে সেটি প্রথমে এক্সিকিউট হবে অর্থাৎ *Load-first order* এ এক্সিকিউট হয় |  DOM ট্রি বিল্ড হওয়ার সাথে সাথেই `DOMContentLoaded` ট্রিগার হবে। |
 | `defer` | *Document order* অনুযায়ী অর্থাৎ script সমূহ যে ক্রমে থাকবে সে অনুসারে এক্সিকিউট হয় |  সকল script এক্সিকিউট হওয়ার পর `DOMContentLoaded` ট্রিগার হবে। |
 
+<<<<<<< HEAD
 সাধারণত, `defer` ব্যবহার করা হয় যখন script সমূহ একে অন্যের উপর নির্ভর করে।
+=======
+In practice, `defer` is used for scripts that need the whole DOM and/or their relative execution order is important.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 এবং  `async` ব্যবহার করা হয় যখন কোন script অন্য script এর উপর নির্ভর করে না, যেমন counter বা ads স্ক্রিপ্ট সমূহ।
 
+<<<<<<< HEAD
 ```warn header="script ব্যতীত পেজ কন্টেন্ট সমূহ ব্যবহার করা যায়"
 আমাদের মনে রাখা উচিত: যদি আমরা `defer` বা `async` ব্যবহার করে script লোড করি, তাহলে ইউজার script লোড হওয়ার আগেই পেজের কন্টেন্ট সমূহ দেখবে।
+=======
+```warn header="Page without scripts should be usable"
+Please note: if you're using `defer` or `async`, then user will see the page *before* the script loads.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 এক্ষেত্রে, আমাদের কিছু কম্পোনেট বা এলিমেন্ট থাকতে পারে যারা ঐ script সমূহের উপর নির্ভর করে।
 

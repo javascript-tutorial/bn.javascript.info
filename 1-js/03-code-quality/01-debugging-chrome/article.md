@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # ক্রোমে ডিবাগিং
+=======
+# Debugging in the browser
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 আরো জটিল জটিল কোড লিখার আগে ডিভাগিং সম্পর্কে জানা যাক -
 
@@ -38,7 +42,11 @@
 
 একটি স্টেটমেন্ট এক্সিকিউট করার পর তার রেজাল্ট নিচেই দেখতে পাবো ।
 
+<<<<<<< HEAD
 উদাহরণ হিসেবে এখানে `1+2` এর রেজাল্ট `3` এবং `hello("debugger")` কিছুই রিটার্ন করে না , সেক্ষেত্রে রেজাল্ট হবে `undefined` :
+=======
+For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ![](chrome-sources-console.svg)
 
@@ -64,12 +72,20 @@
 - ...ইত্যাদি ।
 
 ```smart header="Conditional breakpoints"
+<<<<<<< HEAD
 লাইন নাম্বারে *Right click* করে *conditional* ব্রেক পয়েন্ট তৈরি করা যায় । এটা তখনি ট্রিগ্রার করে যখন এক্সপ্রেশনটি সত্য হয় ।
+=======
+*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 এটা আসলেই কার্যকর যখন আমাদের একটি নির্দিষ্ট ভেরিয়বল ভেলুতে থামা দরকার অথবা নির্দিষ্ট ফাংসন প্যারামিটারে ।
 ```
 
+<<<<<<< HEAD
 ## ডিভাগার কমান্ড
+=======
+## The command "debugger"
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 আমরা নিচের মত `debugger` কমান্ড ব্যবহার করেও কোড পজ করতে পারি ঃ
 
@@ -85,9 +101,13 @@ function hello(name) {
 }
 ```
 
+<<<<<<< HEAD
 এটি খুবই সুবিধাজনক যখন আমরা একটি কোড এডিটরে থাকি এবং ব্রেকপয়েন্ট সেট করতে ব্রাউজারের ডেভলপার টুলে যাওয়া লাগে না ।
 
 ## পজ করুন এবং চারদিকে লক্ষ্য করুন
+=======
+Such command works only when the development tools are open, otherwise the browser ignores it.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 আমাদের উদাহরণে পেজ লোডের সময় `hello()` কল করা হয়েছে, তো সবচাইতে সহজ উপায় ডিবাগারটি একটিভ করার জন্য (ব্রেকপয়েন্ট সেট করার পর) পেজটি রিলোড করতে হবে । কিবোর্ড থেকে `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac) প্রেস করুন ।
 
@@ -99,7 +119,11 @@ function hello(name) {
 
 1. **`Watch` -- যেকোনো এক্সপ্রেশনের জন্য বর্তমান মান দেখায় ।**
 
+<<<<<<< HEAD
    আপনি চাইলে প্লাসে `+` ক্লিক করে একটি এক্সপ্রেশন ইনপুট দিতে পারেন । ডিবাগার যেকোনো মুহূর্তে এটির মান দেখাবে এবং অটোম্যাটিক্যালি এক্সিকিশন প্রসেস গুলো পুনরায় ক্যালকুলেট হবে ।
+=======
+    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 2. **`Call Stack` -- নেস্টেড কল গুলো দেখায়.**
 
@@ -133,11 +157,20 @@ function hello(name) {
 
 এক্সিকিউশনটি আবার শুরু হয়েছে এবং অন্য একটি ব্রেকপয়েন্টে `say()` যেয়ে থেমেছে । এখন কল স্ট্যাকে লক্ষ্য করুন এখানে আরেকটি কল বৃদ্ধি পেয়েছে । এখন আমরা `say()` এর মধ্যে ।
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-200px -190px"></span> -- "Step": পরবর্তী কমান্ড চালান, hotkey `key:F9`.
 
 পরবর্তী স্টেটমেন্টটি চালান । যদি আমরা এখন এটি ক্লিক করি তাহলে `alert` দেখাবে ।
 
 বার বার এটিতে ক্লিক করলে স্টেটমেন্টগুলো একের পর এক এক্সিকিউশান হতে থাকবে ।
+=======
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+
+    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+
+    The execution is then paused immediately after that function call.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 <span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": পরবর্তী কমান্ড চালান তবে ফাংশানে যাবেন না, hotkey `key:F10`.
 
@@ -157,6 +190,7 @@ function hello(name) {
 
 <span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": বর্তমান ফাংশন শেষ না হওয়া পর্যন্ত এক্সিকিউশান চালিয়ে যান, hotkey `key:Shift+F11`.
 
+<<<<<<< HEAD
 এক্সিকিউশন চালিয়ে যান এবং বর্তমান ফাংশনের একেবারে শেষ লাইনে এটি বন্ধ করুন। এটি <span class="devtools" style="background-position:-200px -190px"></span> তখন কার্যকর যখন আমরা ভুলবশত একটি নেস্টেড কল ব্যবহার করে প্রবেশ করি । আর এটি আমাদের উপর ইন্টারেস্ট রাখে না যার কারনে আমরা শেষ না হওয়া পর্যন্ত কন্টিনিউ করতে থাকি যত দ্রুত সম্ভব ।
 
 <span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable সকল ব্রেক পয়েন্টগুলো
@@ -166,6 +200,10 @@ function hello(name) {
 <span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable অটোম্যাটিক পজ হয় যদি কোন ত্রুটি ধরা পড়ে
 
 অন থাকা অবস্থায় এবং ডেভলপার টুল ওপেন থাকলে স্ক্রিপ্ট এক্সিকিউশনের সময় একটি ত্রুটি ধরা পড়লে স্বয়ংক্রিয়ভাবে এটি পজ হয় ৷ তারপর আমরা ডিবাগারে ভেরিয়েবল বিশ্লেষণ করে দেখতে পারি কি ভুল হয়েছে। সুতরাং যদি আমাদের স্ক্রিপ্ট একটি ত্রুটির জন্য এক্সিকিউশান বন্ধ হয়ে যায় তাহলে আমরা ডিবাগার খুলতে পারি এবং এই অপশানটি অন করে পেজ রিলোড দিয়ে দেখতে পারি যে কোথায় এটি বন্ধ হয় এবং বর্তমান অবস্থা কি তা জানতে পারি ।
+=======
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```smart header="Continue to here"
 একটি লাইনের উপর রাইট ক্লিক করে কন্টেক্সট মেনু ওপেন করলে একটা "Continue to here" অপশান পাবো ।
@@ -194,9 +232,13 @@ for (let i = 0; i < 5; i++) {
 
 তো আমারা যা দেখলাম এখানে ৩ টি প্রধান উপায় রয়েছে স্ক্রিপ্ট থামানোর জন্য ঃ
 
+<<<<<<< HEAD
 1. ব্রেকপয়েন্ট
 2. `debugger` স্টেটমেন্ট
 3. এরর ( যদি ডেভটুল ওপেন থাকে এবং বাটন <span class="devtools" style="background-position:-90px -146px"></span> অন থাকলে).
+=======
+When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 যখন পজ হয় তখন আমরা ডিবাগ করতে পারি - ভেরিয়েবল পরীক্ষা করে এবং কোডটি ট্রেস করে দেখতে পারি যে এক্সিকিউশনটি কোথায় ভুল হয়েছে।
 
