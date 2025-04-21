@@ -12,7 +12,11 @@
 
 ![prototype](object-prototype-empty.svg)
 
+<<<<<<< HEAD
 যখন আমরা কোন `object` এর প্রপার্টি পড়তে চাই, এবং যদি এটি ঐ `object` এ অনুপস্থিত থাকে, তখন জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে প্রটোটাইপে অনুসন্ধান করে। একে বলা হয় "প্রটোটাইপল ইনহেরিটেন্স"। আমরা বিভিন্ন উদাহরণের সাহায্যে এই ব্যাপারটি শিখব, এছাড়াও আরো অনেক ল্যাংগুয়েজে এই ধরণের ফিচার সাপোর্ট করে।
+=======
+When we read a property from `object`, and it's missing, JavaScript automatically takes it from the prototype. In programming, this is called "prototypal inheritance". And soon we'll study many examples of such inheritance, as well as cooler language features built upon it.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 `[[Prototype]]` এটি অবজেক্টের ইন্টারনাল এবং হিডেন প্রপার্টি, তবে বিভিন্ন ভাবে আমরা একে অ্যাক্সেস করতে পারি।
 
@@ -27,13 +31,19 @@ let rabbit = {
 };
 
 *!*
-rabbit.__proto__ = animal;
+rabbit.__proto__ = animal; // sets rabbit.[[Prototype]] = animal
 */!*
 ```
 
+<<<<<<< HEAD
 এখন আমরা যদি `rabbit` এর কোন প্রপার্টি পড়তে চাই, এবং এটি যদি এর মধ্যে অনুপস্থিত থাকে, তাহলে জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে `animal` এ একে অনুসন্ধান করে।
 
 যেমন:
+=======
+Now if we read a property from `rabbit`, and it's missing, JavaScript will automatically take it from `animal`.
+
+For instance:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 let animal = {
@@ -54,7 +64,11 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ```
 
+<<<<<<< HEAD
 এখানে `(*)` চিহ্নিত লাইনে `animal` কে `rabbit` এর প্রটোটাইপ হিসেবে সেট করা হয়েছে।
+=======
+Here the line `(*)` sets `animal` to be the prototype of `rabbit`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 এবং, যখন আমরা `alert` এ `rabbit.eats` কে পড়তে চাই `(**)` চিহ্নিত লাইনটি দেখুন, এটি দেখে `rabbit` এর মধ্যে এটি এটি অনুপস্থিত, তখন জাভাস্ক্রিপ্ট  `[[Prototype]]` রেফারেন্সের নিয়ম অনুসারে `animal` এর মধ্যে ঐ প্রপার্টি খুঁজে (নিচের ছবিটি দেখুন):
 
@@ -122,14 +136,36 @@ alert(longEar.jumps); // true (rabbit হতে অ্যাক্সেস ক�
 
 ![](proto-animal-rabbit-chain.svg)
 
+<<<<<<< HEAD
 এখন আমরা যদি `longEar` হতে কোন কিছু পড়তে চাই এবং এটি যদি তার মধ্যে অনুপস্থিত থাকে, জাভাস্ক্রিপ্ট প্রথমে `rabbit` এর মধ্যে খুঁজবে এবং তারপর `animal` এ খুঁজবে।
+=======
+Now if we read something from `longEar`, and it's missing, JavaScript will look for it in `rabbit`, and then in `animal`.
+
+There are only two limitations:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 তবে এর দুটি সীমাবদ্ধতা রয়েছে:
 
 1. আমরা রেফারেন্সকে চক্রকারে সেট করতে পারব না। এক্ষেত্রে চক্রকারে `__proto__` এ কোন অবজেক্ট অ্যাসাইন করতে চাইলে জাভাস্ক্রিপ্ট একটি এরর দিবে।
 2. `__proto__` এর মান কেবলমাত্র `null` এবং অবজেক্ট হতে পারবে, অন্য টাইপগুলো ইগনোর হবে।
 
+<<<<<<< HEAD
 যদিও এটি সুস্পষ্ট, কিন্তু এখানে শুধুমাত্র একটি `[[Prototype]]` হতে পারে। একটি অবজেক্ট একই সাথে দুটি অবজেক্টকে ইনহেরিট করতে পারে না।
+=======
+```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
+It's a common mistake of novice developers not to know the difference between these two.
+
+Please note that `__proto__` is *not the same* as the internal `[[Prototype]]` property. It's a getter/setter for `[[Prototype]]`. Later we'll see situations where it matters, for now let's just keep it in mind, as we build our understanding of JavaScript language.
+
+The `__proto__` property is a bit outdated. It exists for historical reasons, modern JavaScript suggests that we should use `Object.getPrototypeOf/Object.setPrototypeOf` functions instead that get/set the prototype. We'll also cover these functions later.
+
+By the specification, `__proto__` must only be supported by browsers. In fact though, all environments including server-side support `__proto__`, so we're quite safe using it.
+
+As the `__proto__` notation is a bit more intuitively obvious, we use it in the examples.
+```
+
+## Writing doesn't use prototype
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 
 ```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
@@ -205,8 +241,13 @@ alert(admin.fullName); // John Smith (*)
 // setter কল হবে!
 admin.fullName = "Alice Cooper"; // (**)
 
+<<<<<<< HEAD
 alert(admin.fullName); // Alice Cooper, পরিবর্তিত admin এর নাম
 alert(user.fullName); // John Smith, অপরিবর্তিত কেননা user এর স্টেট protected
+=======
+alert(admin.fullName); // Alice Cooper, state of admin modified
+alert(user.fullName); // John Smith, state of user protected
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 এখানে `(*)` লাইনে `admin.fullName` হল `user` প্রটোটাইপ এর একটি getter প্রপার্টি, সুতরাং এটি কল হবে। এবং এই `(**)` লাইনে এটি প্রটোটাইপের একটি সেটার প্রপার্টি, তাই এটি কল হবে।
@@ -287,7 +328,11 @@ for(let prop in rabbit) alert(prop); // jumps, then eats
 */!*
 ```
 
+<<<<<<< HEAD
 এছাড়াও যদি আমরা চাই ইনহেরিটেড প্রপার্টিকে বাদ দিতে, তার জন্য একটি বিল্ট-ইন মেথড আছে [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): এটি `obj` এর নিজস্ব প্রপার্টির `key` এর জন্য `true` রিটার্ন করে।
+=======
+If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 সুতরাং আমরা নিম্নোক্তভাবে কোন অবজেক্টকে ফিল্টার করতে পারি:
 
