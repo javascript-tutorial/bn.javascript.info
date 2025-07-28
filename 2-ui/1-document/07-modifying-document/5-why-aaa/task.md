@@ -22,6 +22,10 @@ importance: 1
   alert(table); // the table, as it should be
 
   table.remove();
+<<<<<<< HEAD
   // কেন ডকুমেন্টে "aaa" অবশিষ্ট রয়ে গেল?
+=======
+  // why there's still "aaa" in the document?
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 </script>
 ```
