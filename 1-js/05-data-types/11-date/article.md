@@ -59,10 +59,17 @@
 `new Date(year, month, date, hours, minutes, seconds, ms)`
 : স্থানীয় সময়মান হিসেবে `Date` অবজেক্ট তৈরীর জন্য আমরা উপরের নিয়ম অনুযায়ী কল করতে পারি, এক্ষেত্রে প্রথম দুটি আর্গুমেন্ট অবশ্যই দিতে হবে, শুধুমাত্র একটি আর্গুমেন্ট পাঠালে তখন এটি টাইমস্ট্যাম্প হিসেবে ধরে নিবে।
 
+<<<<<<< HEAD
     - `year` অবশ্যই পূর্ণভাবে লিখতে হবে: `1998` এর বদলে `98` লিখা সঠিক নয়।
     - `month` `0` (Jan) থেকে শুরু হয়, সর্বোচ্চ `11` (Dec)।
     - `date` প্যারামিটার মাসের দিন হিসেব করে, যদি আর্গুমেন্ট পাস করা না হয় ডিফল্ট `1` তারিখ সেট হয়।
     - যদি আর্গুমেন্ট `hours/minutes/seconds/ms` পাস করা না হয় ডিফল্ট `0` সেট হয়।
+=======
+    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is the same as `1998` here, but always using 4 digits is strongly encouraged.
+    - The `month` count starts with `0` (Jan), up to `11` (Dec).
+    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
+    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     উদাহরণস্বরূপ:
 
@@ -351,7 +358,7 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-// run bench(upperSlice) and bench(upperLoop) each 10 times alternating
+// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -379,7 +386,11 @@ for (let i = 0; i < 10; i++) {
 ```warn header="মাইক্রোবেঞ্চমার্কিং এর সময় আরো সতর্ক থাকা উচিত"
 মডার্ন জাভাস্ক্রিপ্ট ইঞ্জিন সমূহ যথেষ্ট অপ্টিমাইজভাবে কাজ করে। এক্ষেত্রে সাধারণ ব্যবহার যোগ্য সমস্যা গুলোর সাথে আর্টিফিশিয়াল টেস্ট এর রেজাল্টে অসামাঞ্জস্য দেখা দিতে পারে, যেমন যদি আমরা একেবারে মাইক্রোবেঞ্চমার্কিং অর্থাৎ একটি অপারেটর কিভাবে কাজ করছে, অথবা বিল্ট-ইন ফাংশন কেমন সময় নিবে। আপনি যদি এমন পারফরম্যন্স সম্পর্কে জানতে আরো বেশি আগ্রহী হন মাইক্রোবেঞ্চমার্কিং না করে জাভাস্ক্রিপ্ট ইঞ্জিন কীভাবে কাজ করে তা বুঝলে হবে।
 
+<<<<<<< HEAD
 V8 ইঞ্জিন সম্পর্কে জানতে এটি একটি দারুন রিসোর্স <http://mrale.ph>।
+=======
+The great pack of articles about V8 can be found at <https://mrale.ph>.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 ## স্ট্রিং হতে সময় বের করার মেথড Date.parse()
@@ -388,10 +399,17 @@ V8 ইঞ্জিন সম্পর্কে জানতে এটি এক�
 
 স্ট্রিংয়ের ফরম্যট হবে: `YYYY-MM-DDTHH:mm:ss.sssZ`, যেখানে:
 
+<<<<<<< HEAD
 - `YYYY-MM-DD` -- তারিখ: year-month-day.
 - ক্যারাক্টার `"T"` ব্যবহার হয় ডেলিমিটার হিসেবে।
 - `HH:mm:ss.sss` -- সময়: hours, minutes, seconds এবং milliseconds.
 - `'Z'` অপশনাল যা টাইমজোনকে নির্দেশ করে `+-hh:mm`, যেমন বাংলাদেশের (UTC+6) জন্য '2020-01-26T13:51:50.417+06:00'। শুধুমাত্র `Z` বুঝায় UTC+0
+=======
+- `YYYY-MM-DD` -- is the date: year-month-day.
+- The character `"T"` is used as the delimiter.
+- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
+- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 এছাড়াও আমরা সংক্ষিপ্তভাবে এদের কল করতে পারি, যেমন `YYYY-MM-DD` বা `YYYY-MM` এমনকি `YYYY`।
 
@@ -428,9 +446,15 @@ alert(date);
 
 ```js run
 alert(`Loading started ${performance.now()}ms ago`);
+<<<<<<< HEAD
 // এটি দেখাবে এমন কিছু: "Loading started 34731.26000000001ms ago"
 // .26 হল মাইক্রোসেকেন্ড (260 microseconds)
 // দশমিকের পর ৩ ঘর পর্যন্ত সঠিক মান দেখাতে পারে
+=======
+// Something like: "Loading started 34731.26000000001ms ago"
+// .26 is microseconds (260 microseconds)
+// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 Node.js এর আছে `microtime` মডুইল। সাধারণত প্রতিটি এনভায়রনমেন্টের নিজস্ব মেথড আছে যা `Date` এর তুলনায় আরো নির্দিষ্ট সময় নির্ভুলভাবে প্রদান করতে পারে।
