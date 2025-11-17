@@ -29,7 +29,11 @@ regexp = /pattern/gmi; // ফ্ল্যাগ সহ g,m and i (এগুল�
 
 এই দুই সিনট্যাক্সের মূল পার্থক্য হল `/.../` এখানে ডাইনামিক্যালি কোন ভেরিয়েবল (যেমনঃ টেমপ্লেট লিটারেলস স্ট্রিং `${...}`) ব্যবহার করতে পারবেন না। এটি পুরোপুরি স্ট্যাটিক।
 
+<<<<<<< HEAD
 বেশিরভাগ ক্ষেত্রে কোড লিখার সময় যখন আমরা রেগুলার এক্সপ্রেশনটি জানি তখন স্ল্যাস ব্যবহার করি। আর `new RegExp` ব্যবহার করি যখন আমাদের প্যাটার্ন জেনারেট করতে হয় ডাইনামিক্যালি। উদাহরণস্বরুপঃ
+=======
+Slashes are used when we know the regular expression at the code writing time -- and that's the most common situation. While `new RegExp` is more often used when we need to create a regexp "on the fly" from a dynamically generated string. For instance:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js
 let tag = prompt("আপনি কোন ট্যাগটি খুঁজতে চাচ্ছেন?", "h2");
@@ -56,7 +60,11 @@ let regexp = new RegExp(`<${tag}>`); // এটি /<h2>/ এর মত যদি
 : "dotall" মোড, নিউলাইন ক্যারেক্টার `\n` কে ডট `pattern:.` দিয়ে খোঁজা যায় (বিস্তারিত এই অধ্যায়ে <info:regexp-character-classes>).
 
 `pattern:u`
+<<<<<<< HEAD
 : ফুল ইউনিকোর্ড সাপোর্ট এনাবল করে। ফ্ল্যাগটি সঠিকভাবে সারোগেটজোড় কে প্রসেসিংয়ের সাপোর্ট দেয়। আরো জানতে পারবেন এই অধ্যায়ে <info:regexp-unicode>।
+=======
+: Enables full Unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter <info:regexp-unicode>.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 `pattern:y`
 : "Sticky" মোডঃ সার্চিং এর সময় টেক্সটে এক্স্যাক্ট পজিশনটি জানা যায় (বিস্তারিত এই অধ্যায়ে <info:regexp-sticky>)
