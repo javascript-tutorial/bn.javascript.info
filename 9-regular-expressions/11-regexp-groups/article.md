@@ -208,9 +208,15 @@ alert(results[0]); // <h1>,h1 (1st tag)
 alert(results[1]); // <h2>,h2 (2nd tag)
 ```
 
+<<<<<<< HEAD
 আমরা দেখছি, প্রথম পার্থক্যটি অনেক গুরত্বপূর্ণ, `(*)` দ্বারা নির্দেশিত লাইনটি খেয়াল করুন। আমরা মিলটিকে `results[0]` এর মধ্যে পায় না, কেননা অবজেক্টটি সুডোঅ্যারে নই। আমরা এটিকে `Array.from` এর মাধ্যমে `Array` তে নিতে পারি। সুডোঅ্যারে এবং ইটারেবল সম্পর্কে বিস্তারিত জানতে পারবেন এই আর্টিকেলে <info:iterable>।
 
 `Array.from` ছাড়াও আমরা লুপের মাধ্যমে রেজাল্ট গুলো দেখতে পারি:
+=======
+As we can see, the first difference is very important, as demonstrated in the line `(*)`. We can't get the match as `results[0]`, because that object is a pseudoarray. We can turn it into a real `Array` using `Array.from`. There are more details about pseudoarrays and iterables in the article <info:iterable>.
+
+There's no need for `Array.from` if we're looping over results:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
@@ -248,7 +254,11 @@ alert( tag1.input ); // <h1> <h2>
 
 সুতরাং, এটি প্রয়োজনমত রেজাল্ট খুঁজে পায়, এর বেশি না।
 
+<<<<<<< HEAD
 যেমন কোন টেক্সটে ১০০ টি ম্যাচ আছে, এবং `for..of` এর মাধ্যমে আমরা ৫টি মিল খুঁজি, তারপর আমরা লুপ হতে `break` এর মাধ্যমে বের হয়ে যেতে পারি। সুতরাং ইঞ্জিনের বাকী ৯৫টি মিল খুঁজার জন্য অতিরিক্ত সময় অতিবাহিত করা লাগবে না।
+=======
+E.g. there are potentially 100 matches in the text, but in a `for..of` loop we found 5 of them, then decided it's enough and made a `break`. Then the engine won't spend time finding other 95 matches.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ## গ্রুপের নামকরণ
@@ -334,7 +344,11 @@ alert( str.replace(regexp, '$<day>.$<month>.$<year>') );
 let str = "Gogogo John!";
 
 *!*
+<<<<<<< HEAD
 // ?: এর দ্বারা 'go' কে ক্যাপচারিং হতে বাদ দিতে পারি
+=======
+// ?: excludes 'go' from capturing
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 let regexp = /(?:go)+ (\w+)/i;
 */!*
 
