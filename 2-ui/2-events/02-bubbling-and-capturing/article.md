@@ -120,27 +120,46 @@ Bubbling একটি সুবিধাজনক উপায়। কোন ধ�
 
 ইভেন্ট প্রসেসিংয়ের আরেকটি ধাপ হল "capturing"। এটি বাস্তবিক ক্ষেত্রে আমরা খুব কমই ব্যবহার করি, কিন্তু অনেক সময় এটি ব্যবহার সুবিধাজনক।
 
+<<<<<<< HEAD
 স্ট্যান্ডার্ড [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) ইভেন্ট চলাকালীন ৩টি ধাপ সম্পন্ন করে:
+=======
+The standard [DOM Events](https://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 1. Capturing phase -- ইভেন্ট DOM রুট হতে নিচের দিকে এলিমেন্ট পর্যন্ত পৌঁছায়।
 2. Target phase -- ইভেন্ট টার্গেট এলিমেন্ট পর্যন্ত পৌঁছায়।
 3. Bubbling phase -- ইভেন্ট টার্গেট *bubble* আকারে উপরের দিকে যায়।
 
+<<<<<<< HEAD
 এখানে *table* এর `<td>` তে ক্লিকে ৩টি ধাপ কিভাবে সম্পন্ন হচ্ছে দেখানো হল:
+=======
+Here's the picture, taken from the specification, of the capturing `(1)`, target `(2)` and bubbling `(3)` phases for a click event on a `<td>` inside a table:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ![](eventflow.svg)
 
 `<td>` তে ক্লিকে (capturing phase) এ DOM এর রুট নোড হতে নিচের দিকে হ্যান্ডেলার এলিমেন্ট পর্যন্ত যায়, তারপর এটি টার্গেট এলিমেন্টে পৌঁছায় এবং (target phase) ট্রিগার হয়, এবং তারপর এটি (bubbling phase) সম্পন্ন করে, এবং হ্যান্ডেলার কল হয়।
 
+<<<<<<< HEAD
 **capturing phase আমরা খুব কমই ব্যবহার করি, তাই উপরে আমরা শুধু bubbling নিয়ে আলোচনা করেছি।**
 
 আমরা `on<event>` এর জন্য অ্যাট্রিবিউট বা প্রপার্টি অথবা `addEventListener(event, handler)` এর মাধ্যমে হ্যান্ডেলার অ্যাসাইন করি যেখানে *Capturing phase* টি রান হয় না, এটি শুধুমাত্র ২য় এবং ৩য় ধাপটি রান করে।
+=======
+Until now, we only talked about bubbling, because the capturing phase is rarely used.
+
+In fact, the capturing phase was invisible for us, because handlers added using `on<event>`-property or using HTML attributes or using two-argument `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ক্যাপচারিং ধাপটির আমাদের আরো একটি অতিরিক্ত প্যারামিটার `capture` এর ভ্যালু `true` পাঠাতে হয়:
 
 ```js
 elem.addEventListener(..., {capture: true})
+<<<<<<< HEAD
 // অথবা শুধুমাত্র true
+=======
+
+// or, just "true" is an alias to {capture: true}
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 elem.addEventListener(..., true)
 ```
 
@@ -180,9 +199,16 @@ elem.addEventListener(..., true)
 
 যদি আপনি `<p>` তে ক্লিক করেন তাহলে, এটি এমন দেখাবে:
 
+<<<<<<< HEAD
 1. `HTML` -> `BODY` -> `FORM` -> `DIV` (প্রথম listener টিতে capturing phase `true`):
 2. `P` (target phase, দুইবার ট্রিগার হবে, যেহেতু আমরা দুটি listener সেট করেছি: capturing and bubbling)
 3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, দ্বিতীয় listener)।
+=======
+1. `HTML` -> `BODY` -> `FORM` -> `DIV -> P` (capturing phase, the first listener):
+2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+
+Please note, the `P` shows up twice, because we've set two listeners: capturing and bubbling. The target triggers at the end of the first and at the beginning of the second phase.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 *event* এর একটি প্রপার্টি আছে `event.eventPhase` যার মাধ্যমে আমরা জানতে পারি কোন ধাপটি সম্পন্ন হচ্ছে। কিন্তু এটি খুব কম ব্যবহার করি কেননা আমরা হ্যান্ডেলারের মাধ্যমেই এটি জানতে পারি।
 
@@ -190,8 +216,13 @@ elem.addEventListener(..., true)
 যদি আমাদের phase এভাবে সেট করি `addEventListener(..., true)`, তাহলে removeEventListener এর জন্যই `removeEventListener(..., true)` লিখতে হবে অন্যথায় এটি কাজ করবে না।
 ```
 
+<<<<<<< HEAD
 ````smart header="একই এলিমেন্ট এবং একই phase এর জন্য Listeners অর্ডার অনুযায়ী কাজ করে"
 যদি আমাদের কোন এলিমেন্টের জন্য একই phase এর জন্য একাধিক হ্যান্ডেলার অ্যাসাইন করি, তাহলে তারা যেই অর্ডারে লিখা হয়েছে সেভাবেই রান হবে:
+=======
+````smart header="Listeners on the same element and same phase run in their set order"
+If we have multiple event handlers on the same phase, assigned to the same element with `addEventListener`, they run in the same order as they are created:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js
 elem.addEventListener("click", e => alert(1)); // এটি প্রথমে রান হবে
@@ -199,14 +230,26 @@ elem.addEventListener("click", e => alert(2));
 ```
 ````
 
+```smart header="The `event.stopPropagation()` during the capturing also prevents the bubbling"
+The `event.stopPropagation()` method and its sibling `event.stopImmediatePropagation()` can also be called on the capturing phase. Then not only the futher capturing is stopped, but the bubbling as well.
+
+In other words, normally the event goes first down ("capturing") and then up ("bubbling"). But if `event.stopPropagation()` is called during the capturing phase, then the event travel stops, no bubbling will occur.
+```
+
 
 ## সারাংশ
 
 যখন কোন ইভেন্ট সংগঠিত হয় -- এটি নেস্টেড যে এলিমেন্ট হতে কল হয় তাকে বলা হয় "target element" (`event.target`)।
 
+<<<<<<< HEAD
 - তারপর এটি document root নোড হতে নিচের দিকে `event.target` পর্যন্ত যায়, যখন হ্যান্ডেলারটি `addEventListener(..., true)` এভাবে কল করা হয় (`{capture: true}` এর সংক্ষিপ্তরূপ `true`)।
 - তারপর "target element" কল হয়।
 - আবার যদি আমরা হ্যান্ডেলারটি ৩য় প্যারামিটারটি ছাড়া অথবা (`{capture: false}`/`true`) এভাবে কল করি তখন এটি bubbles আকারে `event.target` এর উপর হতে document root নোড পর্যন্ত যায়।
+=======
+- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(..., true)` on the way (`true` is a shorthand for `{capture: true}`).
+- Then handlers are called on the target element itself.
+- Then the event bubbles up from `event.target` to the root, calling handlers assigned using `on<event>`, HTML attributes and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 সকল ক্ষেত্রেই আমরা `event` অবজেক্টটি পাব:
 
@@ -216,7 +259,11 @@ elem.addEventListener("click", e => alert(2));
 
 হ্যান্ডেলারে `event.stopPropagation()` কল করার মাধ্যমে আমরা ইভেন্ট কে থামাতে পারি, তবে এই ব্যাপারে আমাদের সতর্ক থাকতে হবে, কেননা এর ফলে আমাদের পরবর্তী মোডিফিকেশন জটিল হয়ে যেতে পারে।
 
+<<<<<<< HEAD
 সাধারণত আমরা ক্যাপচারিং ধাপটি তেমন ব্যবহার করি না, আমরা bubbling এর মধ্যমেই লজিক ঠিক করতে পারি।
+=======
+The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logical explanation for that.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 আমাদের বাস্তবিক ক্ষেত্রে কোন দূর্ঘটনা ঘটলে প্রথমে স্থানীয় কর্তৃপক্ষকে জানায়। কেননা তারাই প্রথমে এটি দেখভাল করতে পারে। তারপর দরকার হলে উর্ধদন কর্তৃপক্ষকে জানায়।
 
