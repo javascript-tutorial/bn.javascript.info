@@ -162,7 +162,11 @@ HTML অ্যাট্রিবিউটসের নিম্নলিখি�
 </script>
 ```
 
+<<<<<<< HEAD
 তবে ব্যতীক্রমও আছে, যেমন `input.value` সিঙ্ক্রোনাইজ হয় শুধুমাত্র অ্যাট্রিবিউট হতে -> প্রপার্টি তে, এর বিপরীত হবে নাহ:
+=======
+But there are exclusions, for instance `input.value` synchronizes only from attribute -> property, but not back:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```html run
 <input>
@@ -298,7 +302,11 @@ DOM প্রপার্টি সর্বদা স্ট্রিং হব�
 </div>
 ```
 
+<<<<<<< HEAD
 কেন ক্লাসের পরিবর্তে অ্যাট্রিবিউট ব্যবহার বেশি উপযোগী `.order-state-new`, `.order-state-pending`, `order-state-canceled`?
+=======
+Why would using an attribute be preferable to having classes like `.order-state-new`, `.order-state-pending`, `.order-state-canceled`?
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 কারণ অ্যাট্রিবিউট ম্যানাজ করা সুবিধাজনক। এর সাহায্যে সহজেই স্টেট ম্যানাজ করতে পারি:
 

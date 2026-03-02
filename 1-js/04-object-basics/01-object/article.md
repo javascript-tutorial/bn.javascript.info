@@ -5,7 +5,11 @@
 
 অন্যদিকে, বিভিন্ন ধরনের ডাটার কালেকশন ও একটু জটিল ধরনের জিনিস রাখার জন্য অবজেক্ট ব্যবহৃত হয়। জাভাস্ক্রিপ্টের প্রতিটি বিষয়ে অবজেক্টের আধিক্য এবং প্রভাব বিদ্যমান। সুতরাং অন্য কিছু নিয়ে গভীরে জানার আগে আমাদের অবশ্যই অবজেক্ট সম্পর্কে জানতে হবে।
 
+<<<<<<< HEAD
 দ্বিতীয় বন্ধনী `{…}` ও তার সাথে একগুচ্ছ ঐচ্ছিক *প্রোপার্টি* এর সাহায্যে একটি অবজেক্ট তৈরি করা যায়। একটি প্রপার্টি "key: value" জোড়ায় হয়ে থাকে, যেখানে `key` একটি স্ট্রিং (একে প্রোপার্টির নামও বলা হয়), এবং `value` হতে পারে যেকোনো কিছু।
+=======
+An object can be created with curly braces `{…}` with an optional list of *properties*. A property is a "key: value" pair, where `key` is a string (also called a "property name"), and `value` can be anything.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 আমরা অবজেক্টকে তুলনা করতে পারি একটি সাইন করা ফাইলের কেবিনেটের সাথে। যেখানে প্রতিটি ফাইল একটি key (ফাইলের নাম) দিয়ে সংরক্ষণ করা আছে। সুতরাং ফাইলের নাম দিয়ে ফাইল খুঁজে বের করা বা নতুন ফাইল যুক্ত করা অথবা মুছে ফেলা খুবই সহজ।
 
@@ -20,7 +24,11 @@ let user = {};  // "অবজেক্ট লিটারেল" সিনট্
 
 ![](object-user-empty.svg)
 
+<<<<<<< HEAD
 অবজেক্ট তৈরিতে সচরাচর দ্বিতীয় বন্ধনী `{...}` ব্যবহৃত হয়। এধরণের ডিক্লারেশনকে বলে "অবজেক্ট লিটারেল"।
+=======
+Usually, the curly braces `{...}` are used. That declaration is called an *object literal*.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## লিটারেল এবং প্রোপার্টি
 
@@ -44,7 +52,11 @@ let user = {     // একটি অবজেক্ট
 
 ![user object](object-user.svg)
 
+<<<<<<< HEAD
 আমরা যেকোনো সময় ফাইল যুক্ত করা, মুছে দেয়া বা পড়তে পারি।
+=======
+We can add, remove and read files from it at any time.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 প্রোপার্টির ভ্যালুগুলো ডট নোটেশন দিয়ে এক্সেস করা যায়ঃ
 
@@ -62,7 +74,11 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
+<<<<<<< HEAD
 কোন একটা প্রোপার্টিকে মুছে দিতে আমরা `delete` অপারেটরটি ব্যবহার করতে পারিঃ
+=======
+To remove a property, we can use the `delete` operator:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 delete user.age;
@@ -93,6 +109,7 @@ let user = {
 একে বলা হয় "ট্রেইলিং" বা "হ্যাঙ্গিং" কমা। এটি এড/রিমুভ এবং পরিবর্তন করা সহজ করে, কারণ সবগুলো লাইন দেখতে একই রকম হয়।
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## তৃতীয় বন্ধনী
 =======
 ````smart header="Object with const can be changed"
@@ -119,6 +136,8 @@ The `const` would give an error only if we try to set `user=...` as a whole.
 There's another way to make constant object properties, we'll cover it later in the chapter <info:property-descriptors>.
 ````
 
+=======
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ## Square brackets
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
@@ -232,11 +251,19 @@ let bag = {
 };
 ```
 
+<<<<<<< HEAD
 তৃতীয় বন্ধনী ডট নোটেশনের চাইতে অনেক বেশী শক্তিশালী। কিন্তু তাদের লেখাটা একটু কষ্টকর।
+=======
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 সুতরাং অধিকাংশ সময়, যখন প্রোপার্টির নাম সহজ এবং আগে থেকেই জানা, ডট নোটেশন ব্যবহৃত হয়। এবং যদি আমাদের জটিল কিছু করতে হয়, তখন আমরা তৃতীয় বন্ধনী ব্যবহার করি।
 
 
+<<<<<<< HEAD
+=======
+In real code, we often use existing variables as values for property names.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ````smart header="সংরক্ষিত শব্দগুলো প্রোপার্টির নাম হিসেবে ব্যবহার করা যায়"
 ভেরিয়েবল এর নাম ভাষা কর্তৃক সংরক্ষিত শব্দ, যেমন "for", "let", "return" ইত্যাদি হতে পারবে না।
@@ -320,7 +347,7 @@ let user = {
 
 ## Property names limitations
 
-As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
 
 But for an object property, there's no such restriction:
 
@@ -402,10 +429,14 @@ alert( "blabla" in user ); // false, user.blabla নেই
 মনে রাখবেন `in` অপারেটরের বাম পাশে অবশ্যই একটি  "প্রোপার্টির নাম" থাকতে হবে। সাধারণত এটিকে উদ্ধৃতি চিহ্নের ভেতর রাখা হয়।
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 উদ্ধৃতি চিহ্ন না দিলে এটিকে একটি ভেরিয়েবল হিসেবে ধরা হবে, এবং ওই ভেরিয়েবলের ভ্যালুর সাথে তুলনা করা হবে। যেমনঃ
 =======
 If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
+=======
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js run
 let user = { age: 30 };
@@ -451,7 +482,11 @@ Situations like this happen very rarely, because `undefined` should not be expli
 
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
 
+<<<<<<< HEAD
 ## "for..in" লুপ
+=======
+## The "for..in" loop [#forin]
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 অবজেক্টের সবগুলো কী এর উপর ভিজিট করার জন্য একটি বিশেষ ধরণের লুপ আছেঃ `for..in`। এটি `for(;;)` এর চাইতে পুরোপুরি আলাদা, যেটি আমরা পূর্বে দেখেছি।
 
@@ -513,7 +548,11 @@ for (let code in codes) {
 */!*
 ```
 
+<<<<<<< HEAD
 এই অবজেক্টটি হয়তো ইউজারকে একটি অপশনের লিস্ট দেখানোর জন্য ব্যবহার করা হবে। যদি সাইটটি মূলত জার্মান ইউজারদের জন্য হয়, তাহলে আমরা চাইব `49` যেন প্রথমেই থাকে।
+=======
+The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 কিন্তু কোড রান করলে আমরা পুরোপুরি অন্যরকম অবস্থা দেখিঃ
 
@@ -525,9 +564,14 @@ for (let code in codes) {
 ````smart header="ইন্টিজার প্রোপার্টি?"
 "ইন্টিজার প্রোপার্টি" হল একটি স্ট্রিং যেটি ইন্টিজার (পূর্ণসংখ্যা) থেকে বা ইন্টিজারে কোন পরিবর্তন ছাড়াই পরিবর্তন করা যায়।
 
+<<<<<<< HEAD
 তাই, "49" একটি ইন্টিজার প্রোপার্টির নাম, কারণ যখন এটিকে ইন্টিজারে পরিবর্তন এবং ইন্টিজার থেকে স্ট্রিং এ পরিবর্তন করা হয় এটি একই থাকে। কিন্তু "+49" এবং "1.2" ইন্টিজার নয়ঃ
+=======
+So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js run
+// Number(...) explicitly converts to a number
 // Math.trunc is a built-in function that removes the decimal part
 alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
 alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
@@ -840,9 +884,15 @@ alert(clone.sizes.width); // 51, অন্য জায়গায় পরিবর
 - প্রোপার্টির কী অবশ্যই স্ট্রিং বা সিম্বল হতে হবে (সাধারণত স্ট্রিং)।
 - ভ্যালু যেকোনো টাইপের হতে পারে।
 
+<<<<<<< HEAD
 একটি প্রোপার্টিকে এক্সেস করতে আমরা ব্যবহার করিঃ
 - ডট নোটেশনঃ `obj.property`.
 - তৃতীয় বন্ধনী `obj["property"]`। তৃতীয় বন্ধনী নোটেশন আমাদের ভেরিয়েবল থেকে কী ব্যবহার করতে দেয়, এভাবে `obj[varWithKey]`।
+=======
+To access a property, we can use:
+- The dot notation: `obj.property`.
+- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 অন্যান্য অপারেটরসমূহঃ
 - প্রোপার্টি মুছে দিতেঃ `delete obj.prop`।

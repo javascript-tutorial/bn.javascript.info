@@ -15,7 +15,7 @@ In JavaScript they are written like this:
 - Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
 - Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
 - Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
-- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+- Not equals: In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
 
 In this article we'll learn more about different types of comparisons, how JavaScript makes them, including important peculiarities.
 
@@ -236,8 +236,16 @@ Why did we go over these examples? Should we remember these peculiarities all th
 
 ## সারাংশ
 
+<<<<<<< HEAD
 - তুলনা করার অপারেটর একটি ভ্যালু রিটার্ন করে।
 - স্ট্রিং তুলনা করা হয় একটি অক্ষরের পর আরেকটি অক্ষরের সাথে। "আভিধানিক" ক্রম অনুসারে।
 - যখন দুটি ভিন্ন টাইপের ভ্যালু এর সাথে তুলনা করা হয় তখন তাদেরকে সংখ্যায় রূপান্তরিত করা হয়। (যথাযথ সমতার `===` ক্ষেত্রে সংখ্যায় রূপান্তর করা হয় না।)
 - `null` এবং `undefined` একে অপরের সমান (`==`)। কিন্তু অন্য কোনো কিছুর সমান নয়।
 - সাবধান! যখন বৃহত্তম ও ক্ষুদ্রতম নির্ণয় করবেন কোনো ভ্যারিয়েবলের সাথে তুলনা করে। যেই ভ্যারিয়েবলের মান `null/undefined` হতে পারে, সেই ভ্যারিয়েবলকে আলাদাভাবে `null/undefined` কিনা তা যাচাই করে নেওয়া ভালো অনুশীলন।
+=======
+- Comparison operators return a boolean value.
+- Strings are compared letter-by-letter in the "dictionary" order.
+- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
+- The values `null` and `undefined` are equal `==` to themselves and each other, but do not equal any other value.
+- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
