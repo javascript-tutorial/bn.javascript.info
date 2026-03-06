@@ -1,21 +1,21 @@
-# Events: change, input, cut, copy, paste
+# ইভেন্টস: change, input, cut, copy, paste
 
-Let's cover various events that accompany data updates.
+চলুন ইনপুট এবং কন্ট্রোলের সাথে সম্পর্কিত ইভেন্টসমূহ জানি।
 
 ## Event: change
 
-The `change` event triggers when the element has finished changing.
+যখন কোন এলিমেন্টের ইনপুট ভ্যালু পরিবর্তন হয় তখন `change` ইভেন্ট সংগঠিত হয়।
 
-For text inputs that means that the event occurs when it loses focus.
+টেক্সট ইনপুটের জন্য যখন এলিমেন্টের ফোকাস হারায় তখন এটি সংগঠিত হয়।
 
-For instance, while we are typing in the text field below -- there's no event. But when we move the focus somewhere else, for instance, click on a button -- there will be a `change` event:
+যেমন, যখন আমরা ইনপুট ফিল্ডে কিছু লিখব তখন কোন ইভেন্ট সংগঠিত হবে না, কিন্তু যখন আমরা ফোকাস অন্য কোথাও সরিয়ে নিব, তখন ইভেন্টটি সংগঠিত হয়, উদাহরণস্বরূপ নিচের কোডে বাটনে ক্লিক করলে `change` ইভেন্টটি সংগঠিত হবে:
 
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
 <input type="button" value="Button">
 ```
 
-For other elements: `select`, `input type=checkbox/radio` it triggers right after the selection changes:
+অন্যান্য এলিমেন্টের জন্য, যেমন `select`, `input type=checkbox/radio` এর জন্য অপশন পরিবর্তন হলে ইভেন্ট সংগঠিত হবে:
 
 ```html autorun height=40 run
 <select onchange="alert(this.value)">
@@ -27,13 +27,13 @@ For other elements: `select`, `input type=checkbox/radio` it triggers right afte
 ```
 
 
-## Event: input
+## ইভেন্ট: input
 
-The `input` event triggers every time after a value is modified by the user.
+এলিমেন্টের ইনপুট ভ্যালু পরিবর্তন হলে `input` ইভেন্ট সংগঠিত হয়।
 
-Unlike keyboard events, it triggers on any value change, even those that does not involve keyboard actions: pasting with a mouse or using speech recognition to dictate the text.
+কী-বোর্ড ইভেন্টের সাথে এটির পার্থক্য হল ইনপুটের ভ্যালু যেকোনভাবে পরিবর্তন হলে যেমন মাউসের মাধ্যমে ডাটা পেস্ট বা স্পিচ রিকনেশনের মাধ্যমে ইনপুট হলেই `input` ইভেন্টটি সংগঠিত হবে।
 
-For instance:
+উদাহরণস্বরূপ:
 
 ```html autorun height=40 run
 <input type="text" id="input"> oninput: <span id="result"></span>
@@ -44,25 +44,25 @@ For instance:
 </script>
 ```
 
-If we want to handle every modification of an `<input>` then this event is the best choice.
+যদি আমরা `<input>` এর প্রতিটি পরিবর্তনের সাথে সাথে কোন ইভেন্ট সংগঠিত করতে চায় তাহলে এটি এই ইভেন্টটি সবচেয়ে বেশি কাজের।
 
-On the other hand, `input` event doesn't trigger on keyboard input and other actions that do not involve value change, e.g. pressing arrow keys `key:⇦` `key:⇨` while in the input.
+তবে, যেসব কী ভ্যালু পরিবর্তন করে না সেসব কী এর জন্য `input` ইভেন্ট সংগঠিত হয় না, যেমন `key:⇦` `key:⇨` কী।
 
-```smart header="Can't prevent anything in `oninput`"
-The `input` event occurs after the value is modified.
+```smart header="`oninput` কে prevent করা যায় না"
+ভ্যালু পরিবর্তনের সাথে সাথেই `input` ইভেন্টটি সংগঠিত হয়।
 
-So we can't use `event.preventDefault()` there -- it's just too late, there would be no effect.
+তাই আমরা চাইলেও `event.preventDefault()` করতে পারব না এবং এটির কোন প্রভাব পড়বে না।
 ```
 
-## Events: cut, copy, paste
+## ইভেন্টস: cut, copy, paste
 
-These events occur on cutting/copying/pasting a value.
+কোন মান cutting/copying/pasting করলেই ইভেন্ট সমূহ সংগঠিত হয়।
 
-They belong to [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class and provide access to the data that is copied/pasted.
+এরা [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) ক্লাসের অন্তর্গত এবং ডাটা copied/pasted করার সুবিধা দেয়।
 
-We also can use `event.preventDefault()` to abort the action, then nothing gets copied/pasted.
+আমরা cut, copy, paste অ্যাকশন সমূহকে বন্ধ করতে পারি `event.preventDefault()` এর মাধ্যমে।
 
-For instance, the code below prevents all such events and shows what we are trying to cut/copy/paste:
+যেমন, নিচের কোডে আমরা cut/copy/paste এর জন্য ডাটা দেখিয়ে অ্যাকশন সমূহকে বন্ধ করি:
 
 ```html autorun height=40 run
 <input type="text" id="input">
@@ -74,20 +74,20 @@ For instance, the code below prevents all such events and shows what we are tryi
 </script>
 ```
 
-Please note, that it's possible to copy/paste not just text, but everything. For instance, we can copy a file in the OS file manager, and paste it.
+দয়া করে নোট করুন, কপি/পেস্ট শুধুমাত্র টেক্সটের জন্য না, আমরা যে কোন কিছু যেমন একটি অপারেটিং সিস্টেমও কপি/পেস্ট করতে পারি।
 
-There's a list of methods [in the specification](https://www.w3.org/TR/clipboard-apis/#dfn-datatransfer) that can work with different data types including files, read/write to the clipboard.
+এখানে ডাটা কপি/পেস্টের বিভিন্ন মেথড নিয়ে আলোচনা করা হল [in the specification](https://www.w3.org/TR/clipboard-apis/#dfn-datatransfer)।
 
-But please note that clipboard is a "global" OS-level thing. Most browsers allow read/write access to the clipboard only in the scope of certain user actions for the safety, e.g. in `onclick` event handlers.
+তবে মনে রাখা উচিত ক্লিপবোর্ড "global" OS-level এর ব্যাপার। বেশিরভাগ ব্রাউজার কিছু নির্দিষ্ট মাধ্যমে ক্লিপবোর্ড অ্যাক্সেস দেয়, যেমন `onclick` হ্যান্ডেলারে।
 
-Also it's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox.
+এছাড়াও ফায়ারফক্স ছাড়া সকল ব্রাউজারে "custom" ক্লিপবোর্ড `dispatchEvent` সাপোর্ট করে না।
 
-## Summary
+## সারাংশ
 
-Data change events:
+ডাটা পরিবর্তনের ইভেন্ট:
 
-| Event | Description | Specials |
+| ইভেন্ট | বর্ণনা | স্পেশাল |
 |---------|----------|-------------|
-| `change`| A value was changed. | For text inputs triggers on focus loss. |
-| `input` | For text inputs on every change. | Triggers immediately unlike `change`. |
-| `cut/copy/paste` | Cut/copy/paste actions. | The action can be prevented. The `event.clipboardData` property gives read/write access to the clipboard. |
+| `change`| কোন ভ্যালু পরিবর্তন হলে | টেক্সট ইনপুটের জন্য ফোকাস হারালে |
+| `input` | টেক্সট ইনপুটের কোন ভ্যালু পরিবর্তন হওয়ার সাথে সাথে | ভ্যালু পরিবর্তনের সাথে সাথে |
+| `cut/copy/paste` | Cut/copy/paste | অ্যাকশন সমূহকে বাধাপ্রাপ্ত করতে পারি। `event.clipboardData` প্রপার্টির সাহায্যে ক্লিপবোর্ডের ডাটা পড়তে ও লিখতে পারি |
