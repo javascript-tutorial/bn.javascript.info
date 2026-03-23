@@ -2,11 +2,19 @@
 নিচের বিষয়গুলি টুকে রাখতে পারেন:
 
 ```js no-beautify
+<<<<<<< HEAD
 function pow(x,n)  // <- আর্গুমেন্টেগুলোর মাঝে ফাঁকা নেই
 {  // <- আলাদা লাইনে ব্যাকেট লিখা
   let result=1;   // <- সমান এর = আগে / পরে ফাঁকা নেই
   for(let i=0;i<n;i++) {result*=x;}   // <- ফাঁকা নেই
   // কন্টেন্ট { ... } আলাদা লাইনে লিখা উচিৎ
+=======
+function pow(x,n)  // <- no space between arguments
+{  // <- curly brace on a separate line
+  let result=1;   // <- no spaces before or after =
+  for(let i=0;i<n;i++) {result*=x;}   // <- no spaces
+  // the contents of { ... } should be on a new line
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
   return result;
 }
 
@@ -20,7 +28,7 @@ if (n<0)  // <- ভেতরে কোন ফাঁকা নেই (n < 0), এ
 let x=prompt("x?",''), n=prompt("n?",'') // <-- technically possible,
 // but better make it 2 lines, also there's no spaces and missing ;
 if (n<=0)  // <- no spaces inside (n <= 0), and should be extra line above it
-{   // <- figure bracket on a separate line
+{   // <- curly brace on a separate line
   // below - long lines can be split into multiple lines for improved readability
 >>>>>>> d6e88647b42992f204f57401160ebae92b358c0d
   alert(`Power ${n} is not supported, please enter an integer number greater than zero`);

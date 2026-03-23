@@ -2,7 +2,7 @@
 
 The `instanceof` operator allows to check whether an object belongs to a certain class. It also takes inheritance into account.
 
-Such a check may be necessary in many cases. Here we'll use it for building a *polymorphic* function, the one that treats arguments differently depending on their type.
+Such a check may be necessary in many cases. For example, it can be used for building a *polymorphic* function, the one that treats arguments differently depending on their type.
 
 ## The instanceof operator [#ref-instanceof]
 
@@ -55,7 +55,7 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     For example:
 
     ```js run
-    // setup instanceOf check that assumes that
+    // set up instanceof check that assumes that
     // anything with canEat property is an animal
     class Animal {
       static [Symbol.hasInstance](obj) {
@@ -68,7 +68,7 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     alert(obj instanceof Animal); // true: Animal[Symbol.hasInstance](obj) is called
     ```
 
-2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceOf Class` checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
+2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceof Class` checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
 
     In other words, compare one after another:
     ```js
@@ -93,7 +93,7 @@ The algorithm of `obj instanceof Class` works roughly as follows:
     alert(rabbit instanceof Animal); // true
     */!*
 
-    // rabbit.__proto__ === Rabbit.prototype
+    // rabbit.__proto__ === Animal.prototype (no match)
     *!*
     // rabbit.__proto__.__proto__ === Animal.prototype (match!)
     */!*

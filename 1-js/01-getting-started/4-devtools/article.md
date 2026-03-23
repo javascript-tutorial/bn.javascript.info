@@ -22,7 +22,7 @@
 
 দেখতে অনেকটা এমন হবে:
 
-![chrome](chrome.png)
+![chrome](chrome.webp)
 
 দেখতে ঠিক কেমন হবে সেটা আপনার ক্রোম ভার্সনের উপর নির্ভর করবে। এটা প্রায়ই বদলায়। তবে কিছুটা এমনই হওয়ার কথা।
 
@@ -49,7 +49,11 @@
 
 সাফারি (ম্যাকের ব্রাউজার, উইন্ডোজ/লিনাক্সে সাপোর্ট করে না) এখানে একটু অন্যরকম। প্রথমে আমাদের "Develop menu" সক্রিয় করতে হবে।
 
+<<<<<<< HEAD
 Preferences খুলে "Advanced" প্যানে যান. নিচের দিকে একটি চেকবক্স আছে:
+=======
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ![safari](safari.png)
 
