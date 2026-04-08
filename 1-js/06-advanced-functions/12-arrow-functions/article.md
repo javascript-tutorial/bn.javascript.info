@@ -1,26 +1,26 @@
-# Arrow functions revisited
+# আবারো অ্যারো ফাংশন
 
-Let's revisit arrow functions.
+চলুন অ্যারো ফাংশন সম্পর্কে আরো কিছু জানা যাক।
 
-Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
+শুধুমাত্র শর্টকাটে লিখার জন্য অ্যারো ফাংশন না। এর আরো কিছু বিশেষ ফিচার আছে।
 
-JavaScript is full of situations where we need to write a small function that's executed somewhere else.
+জাভাস্ক্রিপ্টে অনেক ক্ষেত্রে আমরা কোন একটি ফাংশনকে যথাযথ সম্ভব ছোট করে লিখতে চাই।
 
-For instance:
+যেমন:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
-- ...there are more.
+- `arr.forEach(func)` -- `forEach` আর্গুমেন্ট হিসেবে একটি কলব্যাক ফাংশন নেয়।
+- `setTimeout(func)` -- `setTimeout` ও আর্গুমেন্ট হিসেবে একটি কলব্যাক ফাংশন নেয়।
+- ...এছাড়া আরো অনেক ক্ষেত্রে।
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+অনেক সময় আমাদের কোন ফাংশন লিখ তা অন্য কোন কন্টেক্সে ব্যবহার করতে হয়।
 
-And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
+এবং এসব ক্ষেত্রে আমরা ফাংশনটিকে কারেন্ট কন্টেক্স কল করতে চাই। এক্ষেত্রে অ্যারো ফাংশন আমাদের অনেক সুবিধা দেয়।
 
-## Arrow functions have no "this"
+## অ্যারো ফাংশনের "this" কন্টেক্স নাই
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+এই অধ্যায়ে আমরা দেখেছিলাম <info:object-methods>, অ্যারো ফাংশনের কোন `this` নেই। যদি কোন `this` কে অ্যাক্সেস করে তাহলে তা তার আউটার কন্টেক্স থেকে পাই।
 
-For instance, we can use it to iterate inside an object method:
+উদাহরণস্বরূপ, এখানে আমরা অবজেক্টের একটি মেথড ডিক্লেয়ার করেছি:
 
 ```js run
 let group = {
@@ -39,9 +39,9 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+`forEach` এ আমরা অ্যারো ফাংশন ব্যবহার করেছি, সুতরাং এটি তার আউটার স্কোপ থেকে `this.title` কে অ্যাক্সেস করতে পারবে `showList`। এখানে `this.title` দ্বারা বুঝানো হচ্ছে `group.title`।
 
-If we used a "regular" function, there would be an error:
+কিন্তু আমরা যদি "regular" ফাংশন ব্যবহার করতাম, তাহলে প্রোগ্রামে এরর হত:
 
 ```js run
 let group = {
@@ -61,28 +61,27 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+এক্ষেত্রে `forEach` এর ফাংশনটির ডিফল্ট কন্টেক্স হত `this=undefined`, সুতরাং এটি প্রপার্টিকে এভাবে অ্যাক্সেস করতে চাইত `undefined.title`।
 
-That doesn't affect arrow functions, because they just don't have `this`.
+যেহেতু অ্যারো ফাংশনের `this` নেই, তাই এটি কোন এরর রিটার্ন করবে না।
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+```warn header="`new` এ সাথে অ্যারো ফাংশন রান করে না"
+`this` না থাকার কারণে এর একটি লিমিটেশন আছে: অ্যারো ফাংশনকে আমরা *constructors* হিসেবে ব্যবহার করতে পারব না। কেননা এরা `new` দ্বারা কল হয় না।
 ```
 
 ```smart header="Arrow functions VS bind"
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+অ্যারো ফাংশন `=>` এবং ্রেগুলার ফাংশন `.bind(this)` এর মাঝে একটি পার্থক্য আছে:
 
 - `.bind(this)` creates a "bound version" of the function.
 - The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
 ```
 
-## Arrows have no "arguments"
+## অ্যারো ফাংশনের "arguments" ভ্যারিয়েবল
 
-Arrow functions also have no `arguments` variable.
+অ্যারো ফাংশনে `arguments` ভ্যারিয়েবল নাই।
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
-
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+ডেকোরেটার্সের জন্য এটি দারুণ, যখন আমাদের  `this` এবং `arguments` এর সাহায্যে একটি ফরওয়ার্ড কল করতে হয়।
+যেমন, `defer(f, ms)` একটি ফাংশন প্যারামিটার হিসেবে নেয় এবং তা আরেকটি ফাংশন কলকে রিটার্নে করে যা `ms` মিলিসেকেন্ড পর কল হয়:
 
 ```js run
 function defer(f, ms) {
@@ -99,7 +98,7 @@ let sayHiDeferred = defer(sayHi, 2000);
 sayHiDeferred("John"); // Hello, John after 2 seconds
 ```
 
-The same without an arrow function would look like:
+অ্যারো ফাংশন ছাড়া ডেকোরেটার্সটি দেখতে এমন হত:
 
 ```js
 function defer(f, ms) {
@@ -112,15 +111,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+এখানে আমাদের `setTimeout` ফাংশনের কন্টেক্সট এর জন্য আলাদা দুটি `args` এবং `ctx` ভ্যারিয়েবল লাগছে।
 
-## Summary
+## সারাংশ
 
-Arrow functions:
+অ্যারো ফাংশনে:
 
-- Do not have `this`
-- Do not have `arguments`
-- Can't be called with `new`
-- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
+- এর `this` নাই
+- এর `arguments` নাই
+- `new` দ্বারা কল হয় না
+- এছাড়াও এর `super` নাই, এ ব্যাপারে আমরা এখনো পড়িনি। এই অধ্যায়ে বিস্তারিত জানতে পারব <info:class-inheritance>
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
+এটি দ্বারা বোঝায় অ্যারো ফাংশনের নিজস্ব কোন "context" নাই, তবে "current context" এর সাথে কাজ করে। এধরণের ক্ষেত্রে এরা আসলেই সুবিধাজনক।
