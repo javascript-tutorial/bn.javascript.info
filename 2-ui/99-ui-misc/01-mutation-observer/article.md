@@ -128,13 +128,19 @@ mutationRecords = [{
 ...
 ```
 
+<<<<<<< HEAD
 কোড কে পঠনযোগ্য এবং সুন্দরভাবে দেখাতে, আমরা আমাদের সাইটে একটি সিনট্যাক্স হাইলাইটিং লাইব্রেরী ব্যবহার করছি, যেমন [Prism.js](https://prismjs.com/)। সিনট্যাক্স হাইলাইটিং এর জন্য প্রিজমার একটি ফাংশন `Prism.highlightElem(pre)` কল করতে হয়, যা `pre` এলিমেন্টকে অবজার্ভ করে এবং ঐ এলিমেন্টের কোডের বৈশিষ্ট্যের উপর নির্ভর বিশেষ ট্যাগ এবং স্ট্যাইল সংযুক্ত করে, যেমন উপরের কোডে দেখুন।
 
 এখন প্রশ্ন, কখন `Prism.highlightElem(pre)` মেথডটি কল করব? আমরা চাইলে ফাংশনটি `DOMContentLoaded` ইভেন্ট ট্রিগারে বা পেজের একদম নিচে স্ক্রিপটি সংযুক্ত করতে পারি, তাহল DOM রেডি হওয়ার পর আমরা `pre[class*="language"]` এলিমেন্টগুলো খুঁজে `Prism.highlightElem` কে কল করতে পারি:
+=======
+For better readability and at the same time, to beautify it, we'll be using a JavaScript syntax highlighting library on our site, like [Prism.js](https://prismjs.com/). To get syntax highlighting for above snippet in Prism, `Prism.highlightElement(pre)` is called, which examines the contents of such `pre` elements and adds special tags and styles for colored syntax highlighting into those elements, similar to what you see in examples here, on this page.
+
+When exactly should we run that highlighting method? Well, we can do it on `DOMContentLoaded` event, or put the script at the bottom of the page. The moment our DOM is ready, we can search for elements `pre[class*="language"]` and call `Prism.highlightElement` on them:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 // highlight all code snippets on the page
-document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
+document.querySelectorAll('pre[class*="language"]').forEach(elem => Prism.highlightElement(elem));
 ```
 
 এ পর্যন্ত সব ঠিকঠাক তাই না? আমরা স্নিপেট প্রয়োগ হবে এমন এলিমেন্টগুলো খুঁজে বের করে তাদের জন্য সিনট্যাক্স হাইলাইটার ব্যবহার করব।
@@ -146,9 +152,15 @@ let article = /* fetch new content from server */
 articleElem.innerHTML = article;
 ```
 
+<<<<<<< HEAD
 এখন ধরুন `article` এর কন্টেন্টে কিছু কোড স্নিপেট আছে। যার জন্য আমাদের `Prism.highlightElem` কে কল করতে হবে, অন্যথায় আমরা সিনট্যাক্স হাইলাইটিং দেখব না.
 
 **তাহলে কিভাবে ডায়নামিক্যালি লোড হওয়া আর্টিকেলের জন্য আমরা `Prism.highlightElem` কে কল করব?**
+=======
+The new `article` HTML may contain code snippets. We need to call `Prism.highlightElement` on them, otherwise they won't get highlighted.
+
+**Where and when to call `Prism.highlightElement` for a dynamically loaded article?**
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 আমরা চাইলে আর্টিকেল লোড হওয়ার পর এভাবে সংযুক্ত করতে পারি:
 
@@ -158,7 +170,7 @@ articleElem.innerHTML = article;
 
 *!*
 let snippets = articleElem.querySelectorAll('pre[class*="language-"]');
-snippets.forEach(Prism.highlightElem);
+snippets.forEach(elem => Prism.highlightElement(elem));
 */!*
 ```
 
